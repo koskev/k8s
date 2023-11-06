@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-outer
+  labels:
+    app: web-outer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-outer
+  template:
+    metadata:
+      labels:
+        app: web-outer
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+      - image: nginx
+        name: web-outer
+        command: 
+          - /bin/sh
+          - -c
+          - "echo 'welcome to my web app!' > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"
+      dnsConfig:
+            options:
+              - name: ndots
+                value: "2"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-outer
+  labels:
+    app: web-outer
+spec:
+  selector:
+    app: web-outer
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer
