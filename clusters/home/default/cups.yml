@@ -1,0 +1,85 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: cups-priority
+value: 1000000
+preemptionPolicy: Never
+globalDefault: false
+description: "Prevent eviction"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cups-deployment
+  namespace: default
+  labels:
+    app: cups
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cups
+  template:
+    metadata:
+      labels:
+        app: cups
+    spec:
+      priorityClassName: cups-priority
+      containers:
+      - name: cups
+        image: ydkn/cups:latest
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 631
+          protocol: TCP
+        volumeMounts:
+        - name: cups-etc
+          mountPath: /etc/cups
+        - name: usb
+          mountPath: /dev/bus/usb
+      volumes:
+      - name: cups-etc
+        hostPath:
+          path: /etc/cups
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
+      nodeSelector:
+        cups: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cups-service
+  labels:
+    app: cups
+spec:
+  selector:
+    app: cups
+  ports:
+    - name: cups-http
+      protocol: TCP
+      port: 631
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cups-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: drucker.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cups-service
+                port:
+                  number: 631
+
