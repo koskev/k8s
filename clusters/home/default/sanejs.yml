@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sanejs-deployment
+  namespace: default
+  labels:
+    app: sanejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sanejs
+  template:
+    metadata:
+      labels:
+        app: sanejs
+    spec:
+      containers:
+      - name: sanejs
+        image: sbs20/scanservjs:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: scanned-files
+          mountPath: /app/data/output
+        - name: config
+          mountPath: /app/config
+        env:
+          - name: SANED_NET_HOSTS
+            value: "rpi-cluster-02.lan" # TODO: "saned" does not work. Need to learn why
+      volumes:
+        # TODO: change to pvc
+      - name: scanned-files
+        hostPath:
+          path: /mnt/shared_data/sanejs/images
+      - name: config
+        hostPath:
+          path: /mnt/shared_data/sanejs/config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sanejs-service
+  namespace: default
+  labels:
+    app: sanejs
+spec:
+  selector:
+    app: sanejs
+  ports:
+    - name: sanejs-http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sanejs-ingress
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: scanner.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sanejs-service
+                port:
+                  number: 8080
