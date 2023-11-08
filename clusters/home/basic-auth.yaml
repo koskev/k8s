@@ -1,0 +1,31 @@
+apiVersion: v1
+data:
+    password: ENC[AES256_GCM,data:4Yz/vTMKoqbNEgqC,iv:xG8JPKTmXomuOk2qqeu9RkinyaztrNQWrjEB65LAlM0=,tag:kgsjMzy2vmw8NnftdkrP/Q==,type:str]
+    user: ENC[AES256_GCM,data:pqoRnoBoXPE=,iv:mxPcq+MxbRrTyRardNsrYXeF7LuB5da3ytaaJuVzI1M=,tag:Pscn2bzocMxrQekdnxwSoA==,type:str]
+kind: Secret
+metadata:
+    creationTimestamp: null
+    name: basic-auth
+    namespace: default
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T16:50:48Z"
+    mac: ENC[AES256_GCM,data:hss7Bvov5bJr4YC3fkNU+INGpu9HpUqQnxpHEcaYcT1K/opX8bK6EZRDtJ8Y4DbgL+ju3jt7rVfx44GNzRkfaWH54nHoKjntm5OlWAN3Q39E5UxeAr8PFxYeq4j9/+fQDnXL+WdKgZEcFNpjSJX4yW3GwWU0FfMm6D/wAyQEznY=,iv:fc0aI0zi1xMlflI0Y3GzOPPqHxLwmu5Mz8K99GzXCQc=,tag:FIHjetOg787TI5ABZCWgcg==,type:str]
+    pgp:
+        - created_at: "2023-11-08T16:50:48Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdA1aB5b+8Q5T96vJv1f7thjxvRFovXrkbGV7uH7SVkMiIw
+            fa9b88waPzZYTjcJPM08+l0DJEHb9lUfwPBtXPcm8vv/U85/ZBHunHXMnfGOTqPF
+            0lEB3+lcqDgiyc8Fv9dY1qqvCr+9YiEtcCH923BklYLwXmeGOCLvm4jMClmE/vNs
+            SfrmHP/aaK63gAL+rP9jTj1TzMPMT7mp69I6kR3CXp01IPQ=
+            =YdWq
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
