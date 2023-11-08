@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: signal-bridge-deployment
+  namespace: default
+  labels:
+    app: signal-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: signal-bridge
+  template:
+    metadata:
+      labels:
+        app: signal-bridge
+    spec:
+      containers:
+      - name: signald
+        image: docker.io/signald/signald:0.23.2
+        volumeMounts:
+        - name: signald-data
+          mountPath: /signald
+      - name: signal-bridge
+        image: dock.mau.dev/mautrix/signal:v0.4.3
+        command: ["su-exec"]
+        args: ["$UID:$GID", "python3", "-m", "mautrix_signal", "--no-update", "-c", "/data/config.yaml"]
+        ports:
+        - containerPort: 29328
+          protocol: TCP
+        volumeMounts:
+        - name: signal-bridge-config
+          mountPath: /data
+        - name: signald-data
+          mountPath: /signald
+      nodeSelector:
+        disk: ssd
+      volumes:
+      - name: signal-bridge-config
+        secret:
+          secretName: signal-bridge-config
+      - name: signald-data
+        hostPath:
+          path: /mnt/shared_data/stacks/signal
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: signal-bridge-service
+  namespace: default
+  labels:
+    app: signal-bridge
+spec:
+  selector:
+    app: signal-bridge
+  ports:
+    - name: bridge
+      protocol: TCP
+      port: 29328
+      targetPort: 29328
+  type: ClusterIP
+
