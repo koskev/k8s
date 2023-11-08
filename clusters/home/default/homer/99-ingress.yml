@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: homer-ingress
+    namespace: default
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: ENC[AES256_GCM,data:ms8w49jyxsNWB/VwzQ==,iv:uu0nnK5Mz4Xpr4idj/USNmaVMtxRj0cwE7jo+yWgOkA=,tag:E5iNoZvqu3B9QgtdU6G7nA==,type:str]
+          http:
+            paths:
+                - pathType: Prefix
+                  backend:
+                    service:
+                        name: homer-service
+                        port:
+                            number: 80
+                  path: /
+    tls:
+        - hosts:
+            - ENC[AES256_GCM,data:3hV8LXxgY9xYwLREeA==,iv:2yIQLNXsRl70FBukET6K+TWXoJG2kVjLseKOyKhoUdw=,tag:lf/BNQebGz2e0nicq5yqLA==,type:str]
+          secretName: kokev-wildcard-tls
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T21:23:48Z"
+    mac: ENC[AES256_GCM,data:+Cl2cP15Dyy6KMpcyjKnn7FfErxFUtsfxirYiu1VKjAaQ9WyC/eIC0SoFkoHVRejJCbuYZT04xEZ5NfKArKIjJhN+5y743AckXciZsUw8zyUo4Fe05PRgopMl3UxL0o5kYIYop+V31TLBIw7xcy4w6dIS2k+KvCd+814HS0jh18=,iv:24fVxfI96zVTqRLpExdQFpY0wic7ZGKu7NsoAoPEH8k=,tag:wI5ZuwjVePOL23+kKTkuQA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T21:23:48Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAX3d87BsIYhFkyOH5Q3hAQ+PsxY/wOYSEIyzY7DVwlXAw
+            8xJSqlEnPtTUdW4w9uno6nRK2isry94Xd4T+ydqZU2P2afB+m8qXiV+JHBOOKyAE
+            0lEBNsWh/w+pHUDXg9zWI8m04fn3mPrLlj0C6jAfCzveYpq0EMOVL0Noliyf1i4r
+            cJGhkMDFhPHwmhDGhiuDqigqWRJyK2dWdNi3RQLkqbwEcs0=
+            =MJaD
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
