@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: esphome-deployment
+  namespace: default
+  labels:
+    app: esphome
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: esphome
+  template:
+    metadata:
+      labels:
+        app: esphome
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+      - name: esphome
+        image: ghcr.io/esphome/esphome:2023.10.6
+        volumeMounts:
+        - name: esphome-config
+          mountPath: /config
+        - name: esphome-cache
+          mountPath: /cache
+        env:
+          - name: ESPHOME_DASHBOARD_USE_PING
+            value: "true"
+      volumes:
+      - name: esphome-config
+        hostPath:
+          path: /mnt/shared_data/k8s/esphome/config
+      - name: esphome-cache
+        emptyDir:
+          sizeLimit: 1000Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: esphome-service
+  namespace: default
+  labels:
+    app: esphome
+spec:
+  selector:
+    app: esphome
+  ports:
+    - name: panel
+      protocol: TCP
+      port: 80
+      targetPort: 6052
+  type: LoadBalancer
+
