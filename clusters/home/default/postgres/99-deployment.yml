@@ -27,7 +27,6 @@ spec:
               secretKeyRef:
                 name: postgres-secret
                 key: password
-            value: GiZcATpVt2dVU73Z76uXyIQ9YwWZjmA4k
           - name: LANG
             value: de_DE.utf8
           - name: POSTGRES_INITDB_ARGS
