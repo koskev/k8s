@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: whatsapp-bridge-deployment
+  namespace: default
+  labels:
+    app: whatsapp-bridge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whatsapp-bridge
+  template:
+    metadata:
+      labels:
+        app: whatsapp-bridge
+    spec:
+      containers:
+      - name: whatsapp-bridge
+        image: dock.mau.dev/mautrix/whatsapp:v0.10.3
+        command: ["su-exec"]
+        args: ["$UID:$GID", "/usr/bin/mautrix-whatsapp", "--no-update", "-c", "/data/config.yaml"]
+        ports:
+        - containerPort: 29318
+          protocol: TCP
+        volumeMounts:
+        - name: whatsapp-bridge-config
+          mountPath: /data
+      nodeSelector:
+        disk: ssd
+      volumes:
+      - name: whatsapp-bridge-config
+        secret:
+          secretName: whatsapp-bridge-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whatsapp-bridge-service
+  namespace: default
+  labels:
+    app: whatsapp-bridge
+spec:
+  selector:
+    app: whatsapp-bridge
+  ports:
+    - name: bridge
+      protocol: TCP
+      port: 29318
+      targetPort: 29318
+  type: ClusterIP
+
