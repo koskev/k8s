@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+  namespace: default
+data:
+  mosquitto.conf: |-
+    per_listener_settings true
+    listener 8883
+    certfile /mosquitto/certs/fullchain.pem
+    keyfile /mosquitto/certs/privkey.pem
+    password_file /mosquitto/config/passwords
+    #acl_file /mosquitto/config/ssl.acl
+
+    listener 1883
+    acl_file /mosquitto/config/plaintext.acl
+    password_file /mosquitto/config/passwords
+
+    # For cluster internal communication
+    listener 1884
+    password_file /mosquitto/config/passwords
+
+  plaintext.acl: |-
+    user esphome
+    topic readwrite esphome/#
+    topic readwrite homeassistant/#
+
+    user openwrt
+    topic readwrite collectd/#
+
+    user eq3
+    topic readwrite eq3_radin/#
+    topic readwrite eq3_radout/#
+    topic readwrite homeassistant/#
+
+    user node-red
+    topic readwrite #
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto-deployment
+  namespace: default
+  labels:
+    app: mosquitto
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto
+        ports:
+        - containerPort: 1883
+          protocol: TCP
+        - containerPort: 8883
+          protocol: TCP
+        volumeMounts:
+        - name: mosquitto-config
+          mountPath: /mosquitto/config
+        - name: mqtt-tls
+          mountPath: /mosquitto/certs/fullchain.pem
+          subPath: "tls.crt"
+        - name: mqtt-tls
+          mountPath: /mosquitto/certs/privkey.pem
+          subPath: "tls.key"
+        - name: mqtt-secret
+          mountPath: /mosquitto/config/passwords
+          subPath: "passwords"
+      volumes:
+      - name: mqtt-tls
+        secret:
+          secretName: mqtt-tls
+      - name: mqtt-secret
+        secret:
+          secretName: mqtt-secret
+      - name: mosquitto-config
+        configMap:
+            name: mosquitto-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-service
+  namespace: default
+  labels:
+    app: mosquitto
+spec:
+  selector:
+    app: mosquitto
+  ports:
+    - name: tls
+      protocol: TCP
+      port: 8883
+      targetPort: 8883
+    - name: plain
+      protocol: TCP
+      port: 1883
+      targetPort: 1883
+  loadBalancerIP: 192.168.10.5
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto-internal-service
+  namespace: default
+  labels:
+    app: mosquitto
+spec:
+  selector:
+    app: mosquitto
+  ports:
+    - name: plain
+      protocol: TCP
+      port: 1884
+      targetPort: 1884
+  type: ClusterIP
