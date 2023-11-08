@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: hass
-        image: ghcr.io/home-assistant/home-assistant:2023.10.4
+        image: ghcr.io/home-assistant/home-assistant:2023.11.1
         ports:
         - containerPort: 8123
           protocol: TCP
