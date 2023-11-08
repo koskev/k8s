@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: node-red-deployment
+  namespace: default
+  labels:
+    app: node-red
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-red
+  template:
+    metadata:
+      labels:
+        app: node-red
+    spec:
+      containers:
+      - name: node-red
+        image: nodered/node-red:latest
+        ports:
+        - containerPort: 1880
+          protocol: TCP
+        volumeMounts:
+        - name: node-red-data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 1880
+          initialDelaySeconds: 500
+          periodSeconds: 60
+          timeoutSeconds: 10
+          failureThreshold: 5
+
+      nodeSelector:
+        disk: ssd
+      volumes:
+      - name: node-red-data
+        hostPath:
+          path: /mnt/shared_data/k8s/node-red/data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-red-service
+  namespace: default
+  labels:
+    app: node-red
+spec:
+  selector:
+    app: node-red
+  ports:
+    - name: panel
+      protocol: TCP
+      port: 80
+      targetPort: 1880
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-red-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "kokev-issuer"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: node-red.kokev.de
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: node-red-service
+                port:
+                  number: 80
+            path: /
+  # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+     - hosts:
+       - node-red.kokev.de
+       secretName: node-red-tls
