@@ -1,0 +1,156 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: wg-config
+    namespace: default
+stringData:
+    wg0.conf: ENC[AES256_GCM,data:IvvlyJlA6JX7b3EsU+fnqP4pGWXMDOCVzNbcH+lnvHvKvveIhDNQL3hmnts7GXtyqUQ6BbeEDXmw3/VwCggK3+XPJq3GBwEeN3UwMBOlEQV2WPinDXCCpNZQbPiE8jyDCoevtdvayymEK6aAA2dJgJ5fbHrRiHOo3O+ip8vGePNOIIEPzv77LCyLZTVvl/LX35kj/lhyCYkbvIcmquXMAdUWFQQXBW69cMTcUVkz9qhsz6pKi+QdoYTjr6EO8V9GLc1eNm9MhX9RKZaFGpPayX9JPBfNXjnVo0+YnBtWGL+kDpA2Tf8d66pVLZWGGpynFlXooAW/68ftQLnJnUbgae3l44FDagXE/JXE40GXATyOBh2I3fa3Rj+Cqivna22xS0LXSrbAZv6zDe+3Jxkbci31Ud8+Ev1plzCwST1mgseTJLqY+moLU7m4s+fF2JY4TzwInQaKveGE4aDYpWCj4U9Y4ISvI5tvS6YKl8uI43xGfSbdDoVlFZEgZUGDEw/r9Gww+5XhAM9AKaqk0sLyS/e9z3eA1ivBMPPFAhvD9mvdF9KppxMIN8roM99vYAZhYTsHMtwo0A==,iv:GNJ8pIDi0fQr0U2+e5Iu0hugeQ0GwORvEYAMDBpQOjw=,tag:vn+6uxToPU+vmhrWNt80qA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T23:14:30Z"
+    mac: ENC[AES256_GCM,data:IiCSZrnRlO/zv39R4tyoJQ9+HEymcpiCPEF51vMbYjdl5fDq+zOFZjNXipjn4955dR4UgziRNaj5TfO+v+7xBY59WecYxfK9DlF1R8iI/v3VUYQpi7X/6OA3L7Ug0wVo3/poij1mINZZbMJTGHStuiqRuaYLze/XgB9FNgj0l20=,iv:yYPcRyVGxGiku+vC0wbTVSjYdZ1pZqgHAC/8lxWu5zY=,tag:OX7ZG+T2tI778/AVO/sBdA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T23:14:30Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAiSMOCekD4XleI7F6SMRTgcIUrZ3KtjQYQgyvqgNsuVIw
+            5zOyOnrDYjcbGuBLsNlNh+AA5uMd6NqwOoEk3iAe7KEe46Ctm3Qa2BI4HW8WNce8
+            0lEBFrMnyE4AAn97yoMN2DWEk2xDI0MmTPoVsbpkCyMn4GHpOilcdJGBu0ZbjI9u
+            KiO4KIhaSegAVF4Wn3pipPkwlQH0Tz6MMnXM0fJyVln+xL8=
+            =9URT
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
+---
+kind: Service
+apiVersion: v1
+metadata:
+    name: wireguard-service
+    labels:
+        app: wireguard
+spec:
+    selector:
+        app: wireguard
+    ports:
+        - name: wg
+          protocol: UDP
+          port: 51820
+          targetPort: 51820
+    type: LoadBalancer
+    loadBalancerIP: 192.168.10.10
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T23:14:30Z"
+    mac: ENC[AES256_GCM,data:IiCSZrnRlO/zv39R4tyoJQ9+HEymcpiCPEF51vMbYjdl5fDq+zOFZjNXipjn4955dR4UgziRNaj5TfO+v+7xBY59WecYxfK9DlF1R8iI/v3VUYQpi7X/6OA3L7Ug0wVo3/poij1mINZZbMJTGHStuiqRuaYLze/XgB9FNgj0l20=,iv:yYPcRyVGxGiku+vC0wbTVSjYdZ1pZqgHAC/8lxWu5zY=,tag:OX7ZG+T2tI778/AVO/sBdA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T23:14:30Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAiSMOCekD4XleI7F6SMRTgcIUrZ3KtjQYQgyvqgNsuVIw
+            5zOyOnrDYjcbGuBLsNlNh+AA5uMd6NqwOoEk3iAe7KEe46Ctm3Qa2BI4HW8WNce8
+            0lEBFrMnyE4AAn97yoMN2DWEk2xDI0MmTPoVsbpkCyMn4GHpOilcdJGBu0ZbjI9u
+            KiO4KIhaSegAVF4Wn3pipPkwlQH0Tz6MMnXM0fJyVln+xL8=
+            =9URT
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: wireguard
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: wireguard
+    template:
+        metadata:
+            labels:
+                app: wireguard
+        spec:
+            containers:
+                - name: wireguard
+                  image: lscr.io/linuxserver/wireguard:v1.0.20210914-ls11
+                  env:
+                    - name: PUID
+                      value: "1000"
+                    - name: GUID
+                      value: "1000"
+                    - name: TZ
+                      value: Europe/Berlin
+                  securityContext:
+                    capabilities:
+                        add:
+                            - NET_ADMIN
+                    privileged: true
+                  resources:
+                    requests:
+                        memory: 64Mi
+                        cpu: 100m
+                    limits:
+                        memory: 256Mi
+                  volumeMounts:
+                    - name: wg-config
+                      mountPath: /config/wg_confs
+            volumes:
+                - name: wg-config
+                  secret:
+                    secretName: wg-config
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T23:14:30Z"
+    mac: ENC[AES256_GCM,data:IiCSZrnRlO/zv39R4tyoJQ9+HEymcpiCPEF51vMbYjdl5fDq+zOFZjNXipjn4955dR4UgziRNaj5TfO+v+7xBY59WecYxfK9DlF1R8iI/v3VUYQpi7X/6OA3L7Ug0wVo3/poij1mINZZbMJTGHStuiqRuaYLze/XgB9FNgj0l20=,iv:yYPcRyVGxGiku+vC0wbTVSjYdZ1pZqgHAC/8lxWu5zY=,tag:OX7ZG+T2tI778/AVO/sBdA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T23:14:30Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAiSMOCekD4XleI7F6SMRTgcIUrZ3KtjQYQgyvqgNsuVIw
+            5zOyOnrDYjcbGuBLsNlNh+AA5uMd6NqwOoEk3iAe7KEe46Ctm3Qa2BI4HW8WNce8
+            0lEBFrMnyE4AAn97yoMN2DWEk2xDI0MmTPoVsbpkCyMn4GHpOilcdJGBu0ZbjI9u
+            KiO4KIhaSegAVF4Wn3pipPkwlQH0Tz6MMnXM0fJyVln+xL8=
+            =9URT
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
+---
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T23:14:30Z"
+    mac: ENC[AES256_GCM,data:IiCSZrnRlO/zv39R4tyoJQ9+HEymcpiCPEF51vMbYjdl5fDq+zOFZjNXipjn4955dR4UgziRNaj5TfO+v+7xBY59WecYxfK9DlF1R8iI/v3VUYQpi7X/6OA3L7Ug0wVo3/poij1mINZZbMJTGHStuiqRuaYLze/XgB9FNgj0l20=,iv:yYPcRyVGxGiku+vC0wbTVSjYdZ1pZqgHAC/8lxWu5zY=,tag:OX7ZG+T2tI778/AVO/sBdA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T23:14:30Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAiSMOCekD4XleI7F6SMRTgcIUrZ3KtjQYQgyvqgNsuVIw
+            5zOyOnrDYjcbGuBLsNlNh+AA5uMd6NqwOoEk3iAe7KEe46Ctm3Qa2BI4HW8WNce8
+            0lEBFrMnyE4AAn97yoMN2DWEk2xDI0MmTPoVsbpkCyMn4GHpOilcdJGBu0ZbjI9u
+            KiO4KIhaSegAVF4Wn3pipPkwlQH0Tz6MMnXM0fJyVln+xL8=
+            =9URT
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
