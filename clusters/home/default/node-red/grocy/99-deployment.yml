@@ -17,7 +17,7 @@ spec:
       containers:
       - name: grocy
         imagePullPolicy: Always
-        image: linuxserver/grocy:latest
+        image: linuxserver/grocy:v4.0.3-ls221
         ports:
           - containerPort: 80
         livenessProbe:
