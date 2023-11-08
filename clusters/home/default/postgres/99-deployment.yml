@@ -25,7 +25,7 @@ spec:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: postges-secret
+                name: postgres-secret
                 key: password
             value: GiZcATpVt2dVU73Z76uXyIQ9YwWZjmA4k
           - name: LANG
