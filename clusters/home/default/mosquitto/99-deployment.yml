@@ -9,16 +9,16 @@ data:
     listener 8883
     certfile /mosquitto/certs/fullchain.pem
     keyfile /mosquitto/certs/privkey.pem
-    password_file /mosquitto/config/passwords
+    password_file /mosquitto/passwords
     #acl_file /mosquitto/config/ssl.acl
 
     listener 1883
     acl_file /mosquitto/config/plaintext.acl
-    password_file /mosquitto/config/passwords
+    password_file /mosquitto/passwords
 
     # For cluster internal communication
     listener 1884
-    password_file /mosquitto/config/passwords
+    password_file /mosquitto/passwords
 
   plaintext.acl: |-
     user esphome
@@ -73,7 +73,7 @@ spec:
           mountPath: /mosquitto/certs/privkey.pem
           subPath: "tls.key"
         - name: mqtt-secret
-          mountPath: /mosquitto/config/passwords
+          mountPath: /mosquitto/passwords
           subPath: "passwords"
       volumes:
       - name: mqtt-tls
