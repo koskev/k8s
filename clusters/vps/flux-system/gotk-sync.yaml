@@ -12,6 +12,10 @@ spec:
   secretRef:
     name: flux-system
   url: ssh://git@github.com/koskev/k8s
+  verify:
+    mode: HEAD
+    secretRef:
+      name: git-public-keys
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
