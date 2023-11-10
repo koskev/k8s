@@ -22,5 +22,9 @@ spec:
         ingressClassName: nginx
         hosts:
           - emqx.kokev.de
+      tls:
+          - hosts:
+              - emqx.kokev.de
+            secretName: kokev-wildcard-tls
 
 
