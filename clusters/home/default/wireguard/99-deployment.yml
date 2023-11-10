@@ -4,25 +4,25 @@ metadata:
     name: wg-config
     namespace: default
 stringData:
-    wg0.conf: ENC[AES256_GCM,data:mHsnB3p5Xpz+M0WtunOp8JY21Zccz90XSCnT1UbRN5XhAKUJ7oT0REcH+EAe0qzU6FXDisktk3+o8XD7baF7CyCFeMPqiAkkBbGdDWbRj2uEOl/vwh2/ohGr9e1Wwkgcz9fWAd4QpWk4nUdXmU3NcA2X9B0IoxZV//YLLhBqnlLA7hbdZUnz1WfNTsG8hKvAOLHYsh2mYUVgqC7iIcS6rgT0mZ1FkSqN7g1gMfs9awLisxB3M5qqWM8Z1AtACZO/cHOq6jpMbhZxpeNWsi80RZz7J2ZMo09NNvom6GrU1RSuwxkOZF1Pv565QQsNXK+xcdtJChg7hYf+rb33KGje4uqa3oaJAyhuv+Bsscr+zSishEewxqJTx9Q4Y0m5kkw63mE1hvqOY+lmc2x3jvAjgHEP2B3lexmssW7P40XpkC98+FDlN4SZCn6rBTzJH7KuF8tyIUMU8GfX6HR9DDTohfftUEc6Z84RnyYnG2j7filmYRcx3JU6gY+EePct/8XubSgo2gqgWA+J/C2AlncUEsztsjV2gjbNbkd8/EssRDYew5DiQqKcwnf+YlsaT07aUsVV1epBlQ==,iv:wFSA/qy8poa4d2STJMZzprhyGOdtiUo2b8IZ2aVlpUg=,tag:Z03HQRucFpW5tVIPFUxnJg==,type:str]
+    wg0.conf: ENC[AES256_GCM,data:XWNl4eHxIpXJSLpJDh3zAPqf0gXVTDzDbCJ+MVHB16sC8ks2LCSO9eWHrUK6HEXdvMNpzFIYt8QnqlwPzCTxp9G2u4vAPTzafhU9YM5z6ddBXdVn/RDr3KKK80+npZwY2ehMFY1pp6UjUq5TDU5sfrRxwFoqmtn2bgzoD1PgnnT+ltGskJVOl/JYmzwMv45QDtvXmNuFT44kgFRi73WYNnW7X7Z2m6glA+gBzBRnr9e0MRUbBuCbkQpYaDVJ3PV816HZjO40EerLf7eAbtUSMkw+cX9RzcvL5rKOgOat+Wyprr0x01DVrJbfZxnpvb6szKylySaF+bemp+92MzMweKZGuvHNabqsnyhG0DdAZzAQooDNHDc3PJngobk+ND01b+nZcOjM46/zQx22lKyi0A5X6lE5/tq0PO+NHBIxDvrLTncZenYIiF4qpte88g/Tp2BoJrwH8BoRE3fD0QDcgiq+FS3f3vRygttmVf0Xqfi0eMNf4/aEXecE61HuJgWXKrs9j0MRagsC33OzBojdWak9lUKqVSxLi3NKWP436nf+PyGff/a6cjRUqPDYbpcqVJL5zgrRqg==,iv:lMW+3xr15XoDoLaKtuIQrfrSe098JHASGkzLlAElVVs=,tag:Aq9jaKJlOvGccajIoIlH1Q==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-11-10T19:01:08Z"
-    mac: ENC[AES256_GCM,data:/1E+A4VqkFbv1qwwTzXcacRVWFdtRw2XjEJONVBRxvn9tgSTi1ronNvcYnjip9i6QV/eR28xj22jyI2SXiEEwDeyIxbnB96g/CZcIwXDsB7S5srNIaPOVOrNXpZjd0oWF/b7ayKVBt6Qe0fiVExGjH9yZnXGFC1qCOX+40+z8Vk=,iv:FjW4aQxhCGl+422jX0r4kaG1S4lHIdAO2XMTEYaeiyU=,tag:feZV+UOf2qFPui0PoWLe4g==,type:str]
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
     pgp:
-        - created_at: "2023-11-10T19:01:08Z"
+        - created_at: "2023-11-10T19:03:59Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAu59QsBqrI0O/a6xS9S4cqJOoLSGNjd3DjPad4dSuwSgw
-            qKdRsWWgiqi4hkvXOLCeLHSxKpXHCLWWhsxfuXWor/vj2UP5YbsHG/9NBi0z2oYZ
-            0lEBnfZfkHd71eHYUonGScnbDwMWpLbRwgSbhkcsk8RA/qxaFRYJ79qcg+FHVQ6/
-            F8loI9hnInfHjQl0Inn/aWOBsx7f1vZctKld4XJin97NIVQ=
-            =WDOl
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(data|stringData)$
@@ -32,6 +32,7 @@ kind: Service
 apiVersion: v1
 metadata:
     name: wireguard-service
+    namespace: default
     labels:
         app: wireguard
 spec:
@@ -50,18 +51,18 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-11-10T19:01:08Z"
-    mac: ENC[AES256_GCM,data:/1E+A4VqkFbv1qwwTzXcacRVWFdtRw2XjEJONVBRxvn9tgSTi1ronNvcYnjip9i6QV/eR28xj22jyI2SXiEEwDeyIxbnB96g/CZcIwXDsB7S5srNIaPOVOrNXpZjd0oWF/b7ayKVBt6Qe0fiVExGjH9yZnXGFC1qCOX+40+z8Vk=,iv:FjW4aQxhCGl+422jX0r4kaG1S4lHIdAO2XMTEYaeiyU=,tag:feZV+UOf2qFPui0PoWLe4g==,type:str]
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
     pgp:
-        - created_at: "2023-11-10T19:01:08Z"
+        - created_at: "2023-11-10T19:03:59Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAu59QsBqrI0O/a6xS9S4cqJOoLSGNjd3DjPad4dSuwSgw
-            qKdRsWWgiqi4hkvXOLCeLHSxKpXHCLWWhsxfuXWor/vj2UP5YbsHG/9NBi0z2oYZ
-            0lEBnfZfkHd71eHYUonGScnbDwMWpLbRwgSbhkcsk8RA/qxaFRYJ79qcg+FHVQ6/
-            F8loI9hnInfHjQl0Inn/aWOBsx7f1vZctKld4XJin97NIVQ=
-            =WDOl
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(data|stringData)$
@@ -71,6 +72,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: wireguard
+    namespace: default
 spec:
     replicas: 1
     selector:
@@ -115,18 +117,18 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-11-10T19:01:08Z"
-    mac: ENC[AES256_GCM,data:/1E+A4VqkFbv1qwwTzXcacRVWFdtRw2XjEJONVBRxvn9tgSTi1ronNvcYnjip9i6QV/eR28xj22jyI2SXiEEwDeyIxbnB96g/CZcIwXDsB7S5srNIaPOVOrNXpZjd0oWF/b7ayKVBt6Qe0fiVExGjH9yZnXGFC1qCOX+40+z8Vk=,iv:FjW4aQxhCGl+422jX0r4kaG1S4lHIdAO2XMTEYaeiyU=,tag:feZV+UOf2qFPui0PoWLe4g==,type:str]
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
     pgp:
-        - created_at: "2023-11-10T19:01:08Z"
+        - created_at: "2023-11-10T19:03:59Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAu59QsBqrI0O/a6xS9S4cqJOoLSGNjd3DjPad4dSuwSgw
-            qKdRsWWgiqi4hkvXOLCeLHSxKpXHCLWWhsxfuXWor/vj2UP5YbsHG/9NBi0z2oYZ
-            0lEBnfZfkHd71eHYUonGScnbDwMWpLbRwgSbhkcsk8RA/qxaFRYJ79qcg+FHVQ6/
-            F8loI9hnInfHjQl0Inn/aWOBsx7f1vZctKld4XJin97NIVQ=
-            =WDOl
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(data|stringData)$
@@ -138,18 +140,18 @@ sops:
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-11-10T19:01:08Z"
-    mac: ENC[AES256_GCM,data:/1E+A4VqkFbv1qwwTzXcacRVWFdtRw2XjEJONVBRxvn9tgSTi1ronNvcYnjip9i6QV/eR28xj22jyI2SXiEEwDeyIxbnB96g/CZcIwXDsB7S5srNIaPOVOrNXpZjd0oWF/b7ayKVBt6Qe0fiVExGjH9yZnXGFC1qCOX+40+z8Vk=,iv:FjW4aQxhCGl+422jX0r4kaG1S4lHIdAO2XMTEYaeiyU=,tag:feZV+UOf2qFPui0PoWLe4g==,type:str]
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
     pgp:
-        - created_at: "2023-11-10T19:01:08Z"
+        - created_at: "2023-11-10T19:03:59Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAu59QsBqrI0O/a6xS9S4cqJOoLSGNjd3DjPad4dSuwSgw
-            qKdRsWWgiqi4hkvXOLCeLHSxKpXHCLWWhsxfuXWor/vj2UP5YbsHG/9NBi0z2oYZ
-            0lEBnfZfkHd71eHYUonGScnbDwMWpLbRwgSbhkcsk8RA/qxaFRYJ79qcg+FHVQ6/
-            F8loI9hnInfHjQl0Inn/aWOBsx7f1vZctKld4XJin97NIVQ=
-            =WDOl
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(data|stringData)$
