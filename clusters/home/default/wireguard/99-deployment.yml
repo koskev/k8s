@@ -1,0 +1,158 @@
+kind: Secret
+apiVersion: v1
+metadata:
+    name: wg-config
+    namespace: default
+stringData:
+    wg0.conf: ENC[AES256_GCM,data:XWNl4eHxIpXJSLpJDh3zAPqf0gXVTDzDbCJ+MVHB16sC8ks2LCSO9eWHrUK6HEXdvMNpzFIYt8QnqlwPzCTxp9G2u4vAPTzafhU9YM5z6ddBXdVn/RDr3KKK80+npZwY2ehMFY1pp6UjUq5TDU5sfrRxwFoqmtn2bgzoD1PgnnT+ltGskJVOl/JYmzwMv45QDtvXmNuFT44kgFRi73WYNnW7X7Z2m6glA+gBzBRnr9e0MRUbBuCbkQpYaDVJ3PV816HZjO40EerLf7eAbtUSMkw+cX9RzcvL5rKOgOat+Wyprr0x01DVrJbfZxnpvb6szKylySaF+bemp+92MzMweKZGuvHNabqsnyhG0DdAZzAQooDNHDc3PJngobk+ND01b+nZcOjM46/zQx22lKyi0A5X6lE5/tq0PO+NHBIxDvrLTncZenYIiF4qpte88g/Tp2BoJrwH8BoRE3fD0QDcgiq+FS3f3vRygttmVf0Xqfi0eMNf4/aEXecE61HuJgWXKrs9j0MRagsC33OzBojdWak9lUKqVSxLi3NKWP436nf+PyGff/a6cjRUqPDYbpcqVJL5zgrRqg==,iv:lMW+3xr15XoDoLaKtuIQrfrSe098JHASGkzLlAElVVs=,tag:Aq9jaKJlOvGccajIoIlH1Q==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
+    pgp:
+        - created_at: "2023-11-10T19:03:59Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
+---
+kind: Service
+apiVersion: v1
+metadata:
+    name: wireguard-service
+    namespace: default
+    labels:
+        app: wireguard
+spec:
+    selector:
+        app: wireguard
+    ports:
+        - name: wg
+          protocol: UDP
+          port: 51820
+          targetPort: 51820
+    type: LoadBalancer
+    loadBalancerIP: 192.168.10.10
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
+    pgp:
+        - created_at: "2023-11-10T19:03:59Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: wireguard
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: wireguard
+    template:
+        metadata:
+            labels:
+                app: wireguard
+        spec:
+            containers:
+                - name: wireguard
+                  image: lscr.io/linuxserver/wireguard:v1.0.20210914-ls11
+                  env:
+                    - name: PUID
+                      value: "1000"
+                    - name: GUID
+                      value: "1000"
+                    - name: TZ
+                      value: Europe/Berlin
+                  securityContext:
+                    capabilities:
+                        add:
+                            - NET_ADMIN
+                    privileged: true
+                  resources:
+                    requests:
+                        memory: 64Mi
+                        cpu: 100m
+                    limits:
+                        memory: 256Mi
+                  volumeMounts:
+                    - name: wg-config
+                      mountPath: /config/wg_confs
+            volumes:
+                - name: wg-config
+                  secret:
+                    secretName: wg-config
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
+    pgp:
+        - created_at: "2023-11-10T19:03:59Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
+---
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-10T19:03:59Z"
+    mac: ENC[AES256_GCM,data:J0kJeKTBb52GHvQKjQBtmH4I9j7jzfhUrnjJhg6O5Cl+I1FipBKbLCZhEbqbeXAIgEN/ywyKpzYGXaeZQ+7trTXxT6a0UvclPeZCOWpodpZtcg0w56+nDuQNBv4X4WMwO/OdO2Y4bvwGVeCnCJ0jOdXsvzNrFdMVsRJCkSNR6ss=,iv:jMQIc5UPaeBvfS5ffYp74HzjGxsXsanLGSYCa3vD8XA=,tag:/zg37Sdh20z/KLy2YnBoKQ==,type:str]
+    pgp:
+        - created_at: "2023-11-10T19:03:59Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdA4D9eRo5L/P3X2h8+nE1pj131xGeF8EEnWMosNElfByEw
+            tZLuIrkBj9Qj80IBODsTIPaZCX488pc+cTzoWWmF2VxTX6XVWGLSZcQb4IRIMpI0
+            0lEBRQKKx08NiygxG/sU280YnDraJiI/hqSr37cHkD1Yn8rvO/n69kAuOl2Xm1s0
+            TJq4aLgFGKw+hdrNfFpbixbvY4df/HKj9CA5SDpKyq4w56A=
+            =coxI
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
