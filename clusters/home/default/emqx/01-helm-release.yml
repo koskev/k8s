@@ -16,11 +16,11 @@ spec:
   interval: 1m0s
   values:
     clusterDomain: mqtt.kokev.de
-  ingress:
-    dashboard:
-      enabled: true
-      ingressClassName: nginx
-      hosts:
-        - mqtt.kokev.de
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - mqtt.kokev.de
 
 
