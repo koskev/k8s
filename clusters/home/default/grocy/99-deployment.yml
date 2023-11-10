@@ -16,18 +16,17 @@ spec:
     spec:
       containers:
       - name: grocy
-        imagePullPolicy: Always
         image: linuxserver/grocy:v4.0.3-ls221
         ports:
           - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 500
-          periodSeconds: 60
-          timeoutSeconds: 10
-          failureThreshold: 5
+            #        livenessProbe:
+            #          httpGet:
+            #            path: /
+            #            port: 80
+            #          initialDelaySeconds: 500
+            #          periodSeconds: 60
+            #          timeoutSeconds: 10
+            #          failureThreshold: 5
         volumeMounts:
           - name: db
             mountPath: /config/data/grocy.db
