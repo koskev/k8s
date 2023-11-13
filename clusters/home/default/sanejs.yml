@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: sanejs
-        image: sbs20/scanservjs:v2.27.0
+        image: sbs20/scanservjs:v3.0.2
         ports:
         - containerPort: 8080
           protocol: TCP
