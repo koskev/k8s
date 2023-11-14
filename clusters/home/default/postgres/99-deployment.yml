@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgresql
-        image: postgres:15.4-alpine
+        image: postgres:15.5-alpine
         ports:
         - containerPort: 5432
           protocol: TCP
