@@ -13,7 +13,7 @@ spec:
         app: delegation-nginx
     spec:
       containers:
-      - image: nginx
+      - image: nginx:1.25.3-alpine3.18
         name: nginx
         volumeMounts:
         - name: conf
