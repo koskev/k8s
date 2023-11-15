@@ -44,11 +44,11 @@ spec:
       useExisting: true
       existingName: kokev-wildcard-tls
     extraVolumes:
-      - name: emqx-acl
+      - name: emqx-config
         configMap:
-          name: emqx-acl
+          name: emqx-config
     extraVolumeMounts:
-      - name: emqx-acl
+      - name: emqx-config
         mountPath: /opt/emqx/etc/acl.conf
         subPath: "acl.conf"
     emqxConfig:
