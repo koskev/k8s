@@ -37,11 +37,11 @@ spec:
   interval: 1m0s
   values:
     emqxConfig:
-    EMQX_AUTHENTICATION__1__BACKEND: postgresql
-    EMQX_AUTHENTICATION__1__MECHANISM: password_based
-    EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
-    EMQX_AUTHENTICATION__1__QUERY: "SELECT password_hash FROM mqtt_user where username = ${username} LIMIT 1"
-    EMQX_AUTHENTICATION__1__SERVER: "postgresql-service:5432"
+      EMQX_AUTHENTICATION__1__BACKEND: postgresql
+      EMQX_AUTHENTICATION__1__MECHANISM: password_based
+      EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
+      EMQX_AUTHENTICATION__1__QUERY: "SELECT password_hash FROM mqtt_user where username = ${username} LIMIT 1"
+      EMQX_AUTHENTICATION__1__SERVER: "postgresql-service:5432"
 
     ingress:
       dashboard:
