@@ -38,7 +38,7 @@ spec:
   values:
     service:
       type: LoadBalancer
-      loadBalancerIP: 192.168.10.8
+      loadBalancerIP: 192.168.10.5
     ssl:
       enabled: true
       useExisting: true
