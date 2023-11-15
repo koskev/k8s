@@ -3,26 +3,26 @@ kind: Secret
 metadata:
     name: synapse-delegation-nginx-config
     namespace: default
-data:
-    default.conf: ENC[AES256_GCM,data:0Db1QcSuKXE+m29P/rR+4T+8+3UKyWazEsBhaICrRgTZZad3KyZmXf3NifqMHtg9MvwwyB1WeO51fw681Wqy/59eRCiWjCtlAhMfAWmINK3zx8fOzKD7uBsH300J1m/oIXj2WYswGlJnmvmdQtnIohXbyNpj/rNpCP8KfpN2XHj5DWJMNcI6NdL9I/W5CQ2HIoyqnN7kIgNrdRFyNPfrfG7+Gf+dxf94aZ5t8eOo/+S2ah2lOTCFjQarRl53NuduYAsfZWrHFcEUDhvtCgg+zWHzyoSIOCpXy1hOC/rEGUHfKLhCh+v3pd8xil1lFgUWpjx9RnX6vBJ2k3eujqXkvLoncNyBSFgwBeFShgPXQtdttbLRXbYbX1AfXp4072xE5EE3bcXadsoNOAYVWDXgfIRJDE1DtlOptKFljU1mIx35Bvrydpu9PFylpQZke+vGWYFpszQkeY7CT5hSXTDN9dWbXcw5MV6Eo5/STFj2Og==,iv:jbpK5AyjMqPo0xN3HXEnT7N2az3dkm3jWJtf2WhNFBo=,tag:35C6/Fp9yAsxtBE5nVtXXw==,type:str]
+stringData:
+    default.conf: ENC[AES256_GCM,data:SZU7Nq3wcM83cx2kt1JIarF7S94eXDrWp6rNQpV4pSSmApbcJxLnGIb23xub078fPf3q4xr+KgCH+q2bNFhYpXaWK9RQVnCorItGgsKTxeU1ZtS3NDLu1klIVBBeiashkpjiMZKuG9h5dD6fFgNYTJav//4LlXzAir6UbcYWJRwhlYQPjJaZLNvPzcsnhVIg0IlWZ3diJm5hcjmgCvwlYipnAvaMrouvLBFpBVGyXtDb0BNheyIxSYtIQcrJ6DHi07oYkALCd5dV8AsT02AFAh4NbfAnvlxnH9J40y8PD8FSjXcpNnpgD8fpFGQTlvgp3cAaZMXOqBwfUGJZdJ+zzBPpWmiKhLETEl+/xgznytshYICzIw5fVXkP6u26HibO6duGVrSXbXB2YvB3KlKgWWJKNWImy5/Y+HJB5QwNFukL+jqiwInRPkAgBmK7O1wwP+xxo6e28RmhaA2FRjKivekf5+3uw0e2Fny8AGeWiA==,iv:yflbHSuiUMR446CnOCkqQmo6pAi8U1kr+mTZtwRN96Y=,tag:Iq1R6uv4EDE6hEcwgnD5wg==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-11-15T15:21:01Z"
-    mac: ENC[AES256_GCM,data:3Sn0GctkS5/liA6000DGsD0nn0LuK1r5hacIAcFbfZvq4Ia1VrOlznckL5zc1qE+etgv1Kw2Sb2BdG/LwGfVTmAxcqKwtY+17+eOVsGh3A50XYO9XQH2tyy6YbQ9Vs35ix1XH94RhVLoXNA+/kG5iQ0gAI5Lxb+snGVxOOV2Ul8=,iv:3vu1C+5J1u0kX4VRdgwKgZCg2ntMs0kDL9YnErvMf7E=,tag:myFpFU4qNQBoQA/PLJEcqQ==,type:str]
+    lastmodified: "2023-11-15T15:27:12Z"
+    mac: ENC[AES256_GCM,data:4Yz3PA9g/xowWVh+S6gtPBiqrqAsTgE3YW7WFa64tdqZmoFnDma1kOMuvwUkpbyan6XqA5NDIleh2puMWn8tV7GNrR/tGFdsbbV/gk9n5T9WzQ+jZobQCnTMQFG5MKOcbzj9glcH4Izh1gs/wpxceMq/EXglhEvM9AZaCiB9BYE=,iv:jrmGyb3Mp76vwvY8bzlVhLYBIqhDudvRLH1mujsWSX4=,tag:rKqkzLJKAdFYzjSUSg2kWw==,type:str]
     pgp:
-        - created_at: "2023-11-15T15:21:01Z"
+        - created_at: "2023-11-15T15:27:11Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAIvYv8hKzoO9/nGjo/FOTvQeBpjqJU4bHj/pL0tifCXMw
-            w6Q3qytULhgO1SZtSdpH9UraqFdaU3LvM1xrJX9o7JDvGSWkEN/vVauiH2sEK4tU
-            0lEBWZb7spFnyuu+KVYN2lhKjlil6M8xJ23ueUeUrmc/PdTMgtOn7/9Dfeyksm/B
-            MNTvVeL171wkDHc89E3XFZCSySyfS4LNQDzvvb3QQwJWqD0=
-            =p0GK
+            wV4DJK+IA+cNHtcSAQdAY5xa/NiSYjNTJEe09aGrdvUle2K8ZfXD6grlxMUcUB4w
+            CTEpiM8W4wwehDyfomsAq6sNROMLxn09jCXXZklbclb+p/CYdugbGV9e5VvRLk61
+            0lEBASrIeOjoshkseo1uIpZbgW4mXfqVda1HFrEDkKWb4ocJWe4WKGTz924CFRnI
+            eQ2QENfzPJxiYwWk6HFBCAn+FYJevNVz8EQReBbwKZl1qcA=
+            =TwUD
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(data|stringData)$
