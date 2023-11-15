@@ -39,6 +39,18 @@ spec:
     service:
       type: LoadBalancer
       loadBalancerIP: 192.168.10.8
+    ssl:
+      enabled: true
+      useExisting: true
+      existingName: kokev-wildcard-tls
+    extraVolumes:
+      - name: emqx-acl
+        configMap:
+          name: emqx-acl
+    extraVolumeMounts:
+      - name: emqx-acl
+        mountPath: /opt/emqx/etc/acl.conf
+        subPath: "acl.conf"
     emqxConfig:
       EMQX_AUTHENTICATION__1__BACKEND: postgresql
       EMQX_AUTHENTICATION__1__MECHANISM: password_based

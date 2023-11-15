@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: emqx-config
+  namespace: default
+data:
+  acl.conf: |-
+    {allow, {username, {re, "^dashboard$"}}, subscribe, ["$SYS/#"]}.
+
+    {allow, {ipaddr, "127.0.0.1"}, all, ["$SYS/#", "#"]}.
+
+    {deny, all, subscribe, ["$SYS/#", {eq, "#"}]}.
+
+    {allow, {username, "esphome"}, all, ["esphome/#", "homeassistant/#"]}
+    {allow, {username, "eq3"}, all, ["eq3_radin/#", "eq3_radout/#", "homeassistant/#"]}
+
+    {allow, {username, "node-red"}, all, ["#"]}
+
+    {deny, all}.
