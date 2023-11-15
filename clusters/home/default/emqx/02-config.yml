@@ -11,9 +11,9 @@ data:
 
     {deny, all, subscribe, ["$SYS/#", {eq, "#"}]}.
 
-    {allow, {username, "esphome"}, all, ["esphome/#", "homeassistant/#"]}
-    {allow, {username, "eq3"}, all, ["eq3_radin/#", "eq3_radout/#", "homeassistant/#"]}
+    {allow, {username, "esphome"}, all, ["esphome/#", "homeassistant/#"]}.
+    {allow, {username, "eq3"}, all, ["eq3_radin/#", "eq3_radout/#", "homeassistant/#"]}.
 
-    {allow, {username, "node-red"}, all, ["#"]}
+    {allow, {username, "node-red"}, all, ["#"]}.
 
     {deny, all}.
