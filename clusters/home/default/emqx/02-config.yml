@@ -6,6 +6,7 @@ metadata:
 data:
   acl.conf: |-
     {allow, {username, {re, "^dashboard$"}}, subscribe, ["$SYS/#"]}.
+    {allow, {username, "kevin"}, all, ["#"]}.
 
     {allow, {ipaddr, "127.0.0.1"}, all, ["$SYS/#", "#"]}.
 
