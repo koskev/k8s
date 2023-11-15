@@ -37,6 +37,11 @@ spec:
       containers:
       - image: matrixdotorg/synapse:v1.95.1
         name: synapse
+        command:
+          - "/bin/sh"
+        args:
+          - "-c"
+          - "sleep 3600"
         env:
         - name: SYNAPSE_CONFIG_PATH
           value: "/etc/synapse/homeserver.yaml"
