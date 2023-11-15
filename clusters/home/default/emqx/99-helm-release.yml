@@ -5,6 +5,27 @@ metadata:
   name: emqx
   namespace: default
 spec:
+  valuesFrom:
+    - kind: Secret
+      name: emqx-secret
+      valuesKey: dashboard_username
+      targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_USERNAME
+    - kind: Secret
+      name: emqx-secret
+      valuesKey: dashboard_password
+      targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
+    - kind: Secret
+      name: emqx-secret
+      valuesKey: database
+      targetPath: emqxConfig.EMQX_EMQX_AUTHENTICATION__1__DATABASE
+    - kind: Secret
+      name: emqx-secret
+      valuesKey: database_username
+      targetPath: emqxConfig.EMQX_EMQX_AUTHENTICATION__1__USERNAME
+    - kind: Secret
+      name: emqx-secret
+      valuesKey: database_password
+      targetPath: emqxConfig.EMQX_EMQX_AUTHENTICATION__1__PASSWORD
   chart:
     spec:
       chart: emqx
@@ -16,31 +37,6 @@ spec:
   interval: 1m0s
   values:
     emqxConfig:
-    - name: EMQX_DASHBOARD__DEFAULT_USERNAME
-      valueFrom:
-        secretKeyRef:
-          name: emqx-secret
-          key: dashboard_username
-    - name: EMQX_DASHBOARD__DEFAULT_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: emqx-secret
-          key: dashboard_password
-    - name: EMQX_AUTHENTICATION__1__DATABASE
-      valueFrom:
-        secretKeyRed:
-          name: emqx-secret
-          key: database
-    - name: EMQX_AUTHENTICATION__1__USERNAME
-      valueFrom:
-        secretKeyRed:
-          name: emqx-secret
-          key: database_user
-    - name: EMQX_AUTHENTICATION__1__PASSWORD
-      valueFrom:
-        secretKeyRed:
-          name: emqx-secret
-          key: database_password
     EMQX_AUTHENTICATION__1__BACKEND: postgresql
     EMQX_AUTHENTICATION__1__MECHANISM: password_based
     EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
