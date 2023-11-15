@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: synapse-delegation-nginx-config
+    namespace: default
+data:
+    default.conf: ENC[AES256_GCM,data:mch+vwQz0d/9DaoQ4pAzVBkoe95gHokG/CNo6Kcrai9zQZ/4Ls17pVRrtKGl4fEvlmo+vb5WAqURxTdUkuePLft2TLpHyiM/3m3NsSJ+ivBtGP/H3uWPgJZkKzqArBAK3r30nDXnDv6hhxPZfIbs9RDIXirZ1evtbdIntyVdWkYVl96ZgrOucnqwMhCfgZAwMAx/TXT2ADQF4c2+9y1B5K3Aal0+Wi8VzBkRSMJ0ZJsjKNe9mvsOqnGLhlWoueXe3bXAGolYWkrWbbCyZU+UEfp36NQuemUm+SsSM0S7D6xy+t5VHQkBR5WGwOAO6CnD09fp14qj4FssaCj976JNoGrpTZbLqtzvUMVrLPtrzqRSyOj4LxKu1j1nOLi7r7ejgAEodPayOh6mroXanTG5JpT7r4KZtLEcORiXm6HKrS0WQN8ptJfDDVvgbBCTEDFxbhBmGeoe43fagTfjvY6S7f4a/7UAcwLjDAPwkE8lTg==,iv:s9gPcUS6cOw9z8Fs628nc/AYkZmOnvZPQOVUoKPky5k=,tag:RpknPfiLN3BiKGjuf6M1tA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T19:10:45Z"
+    mac: ENC[AES256_GCM,data:RssaDvV9izJtB/Ix8VtE5uG9CEMjCQUDcdRPvpg+WZDhZ+flQkVMuem/zenuw3zdjkSaKXB4E9FfeUied6PGZPulgLveuXhQuMkyfiV97nMFH4NC3RnpMbRKvk+HkQ0coiDb39Q208zwiIOOHHLpssq53BdwGJdy6PXqBtv+dm4=,iv:ns+toUowAeLtbaVnTF5rhVG40Qiryvkx/5mF7iPcZ/Y=,tag:tW5XngCbh2KkIldPV01mNA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T19:10:45Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAPHNxaEeMbyGfI+l1OAFKfCpQGdMeeS13ia4+y3Gy2lEw
+            Sq8Y58JC9PUTuirHSrGbrYueK9SuUqfn+BFEYFKaM1WUqrgGAC3Zkihbg6mZuGd1
+            0lEB+TaV/vGpR0hVKCi3BYeP83Z0TLwIMCgGzzx5BHj2oOzxvADrKCzGxp1xl9wu
+            o7M8iffvFqnuDV/Kgvp7Y45XeaDWBw08yX+R3ftgbyjbLyg=
+            =4ERh
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
+---
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T19:10:45Z"
+    mac: ENC[AES256_GCM,data:RssaDvV9izJtB/Ix8VtE5uG9CEMjCQUDcdRPvpg+WZDhZ+flQkVMuem/zenuw3zdjkSaKXB4E9FfeUied6PGZPulgLveuXhQuMkyfiV97nMFH4NC3RnpMbRKvk+HkQ0coiDb39Q208zwiIOOHHLpssq53BdwGJdy6PXqBtv+dm4=,iv:ns+toUowAeLtbaVnTF5rhVG40Qiryvkx/5mF7iPcZ/Y=,tag:tW5XngCbh2KkIldPV01mNA==,type:str]
+    pgp:
+        - created_at: "2023-11-08T19:10:45Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAPHNxaEeMbyGfI+l1OAFKfCpQGdMeeS13ia4+y3Gy2lEw
+            Sq8Y58JC9PUTuirHSrGbrYueK9SuUqfn+BFEYFKaM1WUqrgGAC3Zkihbg6mZuGd1
+            0lEB+TaV/vGpR0hVKCi3BYeP83Z0TLwIMCgGzzx5BHj2oOzxvADrKCzGxp1xl9wu
+            o7M8iffvFqnuDV/Kgvp7Y45XeaDWBw08yX+R3ftgbyjbLyg=
+            =4ERh
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1

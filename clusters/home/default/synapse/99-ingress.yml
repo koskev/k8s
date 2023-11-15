@@ -1,0 +1,53 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: synapse-ingress
+    namespace: default
+    annotations:
+        cert-manager.io/cluster-issuer: ENC[AES256_GCM,data:v67L685U9rxXmkJNVl/hZ5A=,iv:gxR5bIBxWBH4iq4Gr1zhHkQAgcaPrjmO7ANqULwL8HU=,tag:lRj3ZLTP73MQGoothPBL0w==,type:str]
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: ENC[AES256_GCM,data:pzQBntc/RjWFwj6ZXGFCYFaS8rR3,iv:zC6byVXiC9tWZnafpfs1S4c+tdQex9fhAKHaTn3b+pg=,tag:VyknS5gqxf/r++KGMrxtFg==,type:str]
+          http:
+            paths:
+                - pathType: Prefix
+                  path: /
+                  backend:
+                    service:
+                        name: synapse-service
+                        port:
+                            number: 80
+                - pathType: Prefix
+                  path: /.well-known/matrix
+                  backend:
+                    service:
+                        name: delegation-service
+                        port:
+                            number: 80
+    tls:
+        - hosts:
+            - ENC[AES256_GCM,data:3so0tvNpqoqTXK6eKcRCdsHzSLlH,iv:0vKw8vbIlGTvVIyEV8MVUKm7HrYZ8dgJeo6iThuroj0=,tag:evlJwkMcC3zComf566Pd9g==,type:str]
+          secretName: synapse-tls
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-08T19:10:40Z"
+    mac: ENC[AES256_GCM,data:eTT1zOrf/vyYv7qHm+7hgE4D1Y/ikajI7MLuVbIEU5U8rVeOCUNhqGZLMLtU799kdwPo3CstIm5FCqgK5cVyrSC5HcMe21zImMSMG8HvBjGe7z6qBWJFiLgckpPUKtbZaANCiPQXEZWDV2c2mporXkLRkCzDxqdqHFmuo7kViUQ=,iv:uCB7UILdiJcCOZZMt2hTPy3Xa2cuE/nBLzRJ150/+Vo=,tag:lqXpcqLn0CCtPnL+YfqyNg==,type:str]
+    pgp:
+        - created_at: "2023-11-08T19:10:40Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAbYclhNcF67xuYePG4lIrmo+I1HUhguDLRnEUigd+WCMw
+            2i8oQwNa9771/fDKiamfMjizEINQjlsfs2BN5MxNzdksrMRGEp5dvqi2mmDPsU2D
+            0lEBPZjsTP+fi7A9HQoDNodt7W9Ho+M7/GbS0Qj5hPcdr+grf5LWxerKkR+/dsp6
+            MRW75WzzkFTbxgmLXz+0poXQSLf5rmqOzU/ygSPV0WHk4n8=
+            =Avv6
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|host|hosts|cert-manager\.io/cluster-issuer)$
+    version: 3.8.1
