@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: desec-http
+  namespace: cert-manager
+spec:
+  interval: 1m0s
+  type: oci
+  url: oci://ghcr.io/irreleph4nt/cert-manager-webhook-desec-http

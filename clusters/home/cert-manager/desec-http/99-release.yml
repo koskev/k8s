@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: desec-http
+  namespace: cert-manager
+spec:
+  chart:
+    spec:
+      chart: desec-http
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: desec-http
+  interval: 1m0s
+  values:
+    groupName: kokev.de
+    secretName:
+    - cert-domain-tls-key-kokev.de
