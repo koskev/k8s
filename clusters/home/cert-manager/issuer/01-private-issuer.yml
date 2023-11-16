@@ -1,0 +1,41 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+    name: private-issuer
+    namespace: cert-manager
+spec:
+    acme:
+        # The ACME server URL
+        server: https://acme-v02.api.letsencrypt.org/directory
+        # Email address used for ACME registration
+        email: ENC[AES256_GCM,data:J350YprfGYyO4LoefpThbFiYpX7n,iv:b1+iyIqvOzXuvBwjLZy0F/F54JkPqRfHfXgXiplWoN8=,tag:9842mIoxkSsnN4ugC29cEg==,type:str]
+        # Name of a secret used to store the ACME account private key
+        privateKeySecretRef:
+            name: private-issuer
+        # Enable the HTTP-01 challenge provider
+        solvers:
+            - http01:
+                ingress:
+                    ingressClassName: nginx
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-11-16T16:21:34Z"
+    mac: ENC[AES256_GCM,data:E7aDCC/SMsyDzEC2lKTKQlYalcdHY5oZJXIZ9sfUMdIZkwB95NU6QWTNttAnYTFzeJYy+XG2yObZitdAWy9jGKLdA/QDVpCN/zjcad3CpIZj4eP5DB0NiiR2322WpDGY9Pn76q0uzrImSjDqdjfkGpPtqBR0YgqbB6usKr+6EPI=,iv:SATbO8IqEg32KQ/B7KuXWo0IaYFjXjEKEGvy9H7K0Lk=,tag:CExKKNiAqyr0X5DfFCHgnQ==,type:str]
+    pgp:
+        - created_at: "2023-11-16T16:21:34Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAthFYLTq7Abx14fpjjrwrKrt68ZsEXG/Bv8OgNFO+Jx0w
+            Ejuh8ShNdlEppe9DgqlsMhfX4pz8yzx7xD/eYZuSjl6BzPbXgEsKcJWOtaEfa0eD
+            0lEB8rZMB09WfkwHi6vbOvHVxP8cFFePh/BfWyiIknfT/Y2dTcTpYgtraFTZgSdt
+            eWfdI6wF540wT2NLQRqbBhRJ2Pt4MnkBzABKhbHTcWfefK4=
+            =D5A9
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(data|stringData|email)$
+    version: 3.8.1
