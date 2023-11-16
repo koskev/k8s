@@ -7,12 +7,12 @@ metadata:
 spec:
   chart:
     spec:
-      chart: jetstack
-      reconcileStrategy: ChartVersion
+      chart: cert-manager
+      version: v1.13.2
       sourceRef:
         kind: HelmRepository
         name: cert-manager
-      version: v1.13.2
+        namespace: cert-manager
   interval: 1m0s
   values:
     installCRDs: true
