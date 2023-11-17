@@ -18,5 +18,7 @@ spec:
     controller:
       service:
         loadBalancerIP: 192.168.10.3
-
+      config:
+        entries:
+          client-max-body-size: "50m"
 
