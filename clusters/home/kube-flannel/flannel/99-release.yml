@@ -5,6 +5,11 @@ metadata:
   name: flannel
   namespace: kube-flannel
 spec:
+  valuesFrom:
+    - kind: Secret
+      name: flannel-secret
+      valuesKey: psk
+      targetPath: flannel.psk
   chart:
     spec:
       chart: flannel
@@ -16,3 +21,5 @@ spec:
   values:
     flannel:
       backend: "vxlan"
+      backendPort: 51830
+      backendPortIPv6: 51831
