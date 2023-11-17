@@ -20,6 +20,6 @@ spec:
   interval: 1m0s
   values:
     flannel:
-      backend: "vxlan"
+      backend: "wireguard"
       backendPort: 51830
       backendPortIPv6: 51831
