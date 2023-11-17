@@ -5,5 +5,5 @@ metadata:
   name: emqx
   namespace: default
 spec:
-  interval: 1m0s
+  interval: 24h
   url: https://repos.emqx.io/charts
