@@ -1,0 +1,358 @@
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+# Grant cert-manager permission to validate using our apiserver
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:domain-solver
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+rules:
+  - apiGroups:
+      - kokev.de
+    resources:
+      - '*'
+    verbs:
+      - 'create'
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+# Grant cert-manager permission to validate using our apiserver
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:flowcontrol-solver
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+rules:
+  - apiGroups:
+      - "flowcontrol.apiserver.k8s.io"
+    resources:
+      - 'prioritylevelconfigurations'
+      - 'flowschemas'
+    verbs:
+      - 'list'
+      - 'watch'
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+# apiserver gets the auth-delegator role to delegate auth decisions to
+# the core apiserver
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:auth-delegator
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: desec-http-cert-manager-webhook-desec-http
+    namespace: cert-manager
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:domain-solver
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: desec-http-cert-manager-webhook-desec-http:domain-solver
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:flowcontrol-solver
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: desec-http-cert-manager-webhook-desec-http:flowcontrol-solver
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: desec-http-cert-manager-webhook-desec-http
+    namespace: "cert-manager"
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:secret-reader
+  namespace: cert-manager
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - "secrets"
+    resourceNames:
+        - cert-domain-tls-key-kokev.de
+    verbs:
+      - "get"
+      - "watch"
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+# Grant the webhook permission to read the ConfigMap containing the Kubernetes
+# apiserver's requestheader-ca-certificate.
+# This ConfigMap is automatically created by the Kubernetes apiserver.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:webhook-authentication-reader
+  namespace: kube-system
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: desec-http-cert-manager-webhook-desec-http
+    namespace: cert-manager
+---
+# Source: cert-manager-webhook-desec-http/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http:secret-reader
+  namespace: cert-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: desec-http-cert-manager-webhook-desec-http:secret-reader
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: desec-http-cert-manager-webhook-desec-http
+    namespace: cert-manager
+---
+# Source: cert-manager-webhook-desec-http/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    app: cert-manager-webhook-desec-http
+    release: desec-http
+---
+# Source: cert-manager-webhook-desec-http/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cert-manager-webhook-desec-http
+      release: desec-http
+  template:
+    metadata:
+      labels:
+        app: cert-manager-webhook-desec-http
+        release: desec-http
+    spec:
+      serviceAccountName: desec-http-cert-manager-webhook-desec-http
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: cert-manager-webhook-desec-http
+          image: "ghcr.io/irreleph4nt/cert-manager-webhook-desec-http:1.0.1"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+          args:
+            - --tls-cert-file=/tls/tls.crt
+            - --tls-private-key-file=/tls/tls.key
+          env:
+            - name: GROUP_NAME
+              value: "kokev.de"
+          ports:
+            - name: https
+              containerPort: 443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /healthz
+              port: https
+          readinessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /healthz
+              port: https
+          volumeMounts:
+            - name: certs
+              mountPath: /tls
+              readOnly: true
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: certs
+          secret:
+            secretName: desec-http-cert-manager-webhook-desec-http-webhook-tls
+---
+# Source: cert-manager-webhook-desec-http/templates/apiservice.yaml
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.kokev.de
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+  annotations:
+    cert-manager.io/inject-ca-from: "cert-manager/desec-http-cert-manager-webhook-desec-http-webhook-tls"
+spec:
+  group: kokev.de
+  groupPriorityMinimum: 1000
+  versionPriority: 15
+  service:
+    name: desec-http-cert-manager-webhook-desec-http
+    namespace: cert-manager
+  version: v1alpha1
+---
+# Source: cert-manager-webhook-desec-http/templates/pki.yaml
+# Generate a CA Certificate used to sign certificates for the webhook
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http-ca
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  secretName: desec-http-cert-manager-webhook-desec-http-ca
+  duration: 43800h0m0s # 5y
+  issuerRef:
+    name: desec-http-cert-manager-webhook-desec-http-selfsign
+  commonName: "ca.cert-manager-webhook-desec-http.cert-manager"
+  isCA: true
+---
+# Source: cert-manager-webhook-desec-http/templates/pki.yaml
+# Finally, generate a serving certificate for the webhook to use
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http-webhook-tls
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  secretName: desec-http-cert-manager-webhook-desec-http-webhook-tls
+  duration: 8760h0m0s # 1y
+  issuerRef:
+    name: desec-http-cert-manager-webhook-desec-http-ca
+  dnsNames:
+    - desec-http-cert-manager-webhook-desec-http
+    - desec-http-cert-manager-webhook-desec-http.cert-manager
+    - desec-http-cert-manager-webhook-desec-http.cert-manager.svc
+---
+# Source: cert-manager-webhook-desec-http/templates/pki.yaml
+# Create a selfsigned Issuer, in order to create a root CA certificate for
+# signing webhook serving certificates
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http-selfsign
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  selfSigned: {}
+---
+# Source: cert-manager-webhook-desec-http/templates/pki.yaml
+# Create an Issuer that uses the above generated CA certificate to issue certs
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: desec-http-cert-manager-webhook-desec-http-ca
+  namespace: "cert-manager"
+  labels:
+    app: cert-manager-webhook-desec-http
+    chart: cert-manager-webhook-desec-http-0.0.0-template
+    release: desec-http
+    heritage: Helm
+spec:
+  ca:
+    secretName: desec-http-cert-manager-webhook-desec-http-ca
