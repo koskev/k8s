@@ -35,7 +35,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: raspberrypi-server
       containers:
-      - image: matrixdotorg/synapse:v1.95.1
+      - image: matrixdotorg/synapse:v1.96.1
         name: synapse
         env:
         - name: SYNAPSE_CONFIG_PATH
