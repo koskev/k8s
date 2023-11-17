@@ -8,16 +8,13 @@ globalDefault: false
 description: "Prevent eviction"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: cups-deployment
   namespace: default
   labels:
     app: cups
 spec:
-  replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: cups
