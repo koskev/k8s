@@ -15,6 +15,9 @@ spec:
       labels:
         app: hass
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - name: hass
         image: ghcr.io/home-assistant/home-assistant:2023.11.2
