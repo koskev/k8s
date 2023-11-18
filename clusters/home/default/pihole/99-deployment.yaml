@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pihole-deployment
+  namespace: default
   labels:
     app: pihole
 spec:
@@ -51,6 +52,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: pihole-service
+  namespace: default
   labels:
     app: pihole
 spec:
