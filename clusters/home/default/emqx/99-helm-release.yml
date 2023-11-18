@@ -63,10 +63,10 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - mqtt.kokev.de
+          - emqx.kokev.de
         tls:
           - hosts:
-            - mqtt.kokev.de
+            - emqx.kokev.de
             secretName: kokev-wildcard-tls
 
 
