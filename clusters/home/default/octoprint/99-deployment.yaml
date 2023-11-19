@@ -1,0 +1,88 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: octoprint-priority
+value: 1000000
+preemptionPolicy: Never
+globalDefault: false
+description: "Prevent eviction"
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: octoprint-deployment
+  namespace: default
+  labels:
+    app: octoprint
+spec:
+  selector:
+    matchLabels:
+      app: octoprint
+  template:
+    metadata:
+      labels:
+        app: octoprint
+    spec:
+      priorityClassName: octoprint-priority
+      containers:
+      - name: octoprint
+        image: octoprint/octoprint:1.9.3
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: octoprint-etc
+          mountPath: /octoprint
+        - name: usb
+          mountPath: /dev/bus/usb
+      volumes:
+      - name: octoprint-etc
+        hostPath:
+          path: /etc/octoprint
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
+      nodeSelector:
+        octoprint: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octoprint-service
+  namespace: default
+  labels:
+    app: octoprint
+spec:
+  selector:
+    app: octoprint
+  ports:
+    - name: octoprint-http
+      protocol: TCP
+      port: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: octoprint-ingress
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: octoprint.kokev.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: octoprint-service
+                port:
+                  number: 80
+
+  tls:
+    - hosts:
+      - octoprint.kokev.de
+      secretName: kokev-wildcard-tls
