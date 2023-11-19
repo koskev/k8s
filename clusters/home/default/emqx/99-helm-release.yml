@@ -70,5 +70,12 @@ spec:
           - hosts:
             - emqx.kokev.de
             secretName: kokev-wildcard-tls
+    resources:
+      #limits:
+      #  cpu: 500m
+      #  memory: 512Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi
 
 
