@@ -1,3 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-service
+  namespace: default
+  labels:
+    app: pihole
+spec:
+  selector:
+    app: pihole
+  ports:
+    - name: dns-usb
+      protocol: UDP
+      port: 53
+      targetPort: 53
+    - name: dns-tcp
+      protocol: TCP
+      port: 53
+      targetPort: 53
+    - name: panel
+      protocol: TCP
+      port: 80
+  type: LoadBalancer
+  loadBalancerIP: 192.168.10.2
+  # This somehow breaks dns for pi ap clients
+  #externalTrafficPolicy: Local
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,7 +33,7 @@ metadata:
   labels:
     app: pihole
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: pihole
@@ -17,7 +44,31 @@ spec:
     spec:
       nodeSelector:
         disk: ssd
+      serviceAccountName: external-dns
+      securityContext:
+        fsGroup: 65534 # For ExternalDNS to be able to read Kubernetes token files
       containers:
+      - name: external-dns
+        image: registry.k8s.io/external-dns/external-dns:v0.14.0
+        # If authentication is disabled and/or you didn't create
+        # a secret, you can remove this block.
+        envFrom:
+        - secretRef:
+            # Change this if you gave the secret a different name
+            name: pihole-secret
+        args:
+        - --source=service
+        - --source=ingress
+        # Pihole only supports A/CNAME records so there is no mechanism to track ownership.
+        # You don't need to set this flag, but if you leave it unset, you will receive warning
+        # logs when ExternalDNS attempts to create TXT records.
+        - --registry=noop
+        # IMPORTANT: If you have records that you manage manually in Pi-hole, set
+        # the policy to upsert-only so they do not get deleted.
+        - --policy=upsert-only
+        - --provider=pihole
+        # Change this to the actual address of your Pi-hole web server
+        - --pihole-server=http://localhost
       - name: pihole
         image: pihole/pihole:2023.10.0
         imagePullPolicy: IfNotPresent
@@ -46,31 +97,3 @@ spec:
         labelSelector:
           matchLabels:
             app: pihole
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: pihole-service
-  namespace: default
-  labels:
-    app: pihole
-spec:
-  selector:
-    app: pihole
-  ports:
-    - name: dns-usb
-      protocol: UDP
-      port: 53
-      targetPort: 53
-    - name: dns-tcp
-      protocol: TCP
-      port: 53
-      targetPort: 53
-    - name: panel
-      protocol: TCP
-      port: 80
-  type: LoadBalancer
-  loadBalancerIP: 192.168.10.2
-  # This somehow breaks dns for pi ap clients
-  #externalTrafficPolicy: Local
