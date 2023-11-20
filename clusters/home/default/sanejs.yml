@@ -29,6 +29,9 @@ spec:
         env:
           - name: SANED_NET_HOSTS
             value: "rpi-cluster-02.lan" # TODO: "saned" does not work. Need to learn why
+        resources:
+          requests:
+            memory: "64Mi"
       volumes:
         # TODO: change to pvc
       - name: scanned-files

@@ -26,6 +26,9 @@ spec:
         volumeMounts:
         - name: whatsapp-bridge-config
           mountPath: /data
+        resources:
+          requests:
+            memory: "64Mi"
       nodeSelector:
         disk: ssd
       volumes:
