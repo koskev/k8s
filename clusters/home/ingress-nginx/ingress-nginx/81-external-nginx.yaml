@@ -1,0 +1,26 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx-external
+  namespace: ingress-nginx
+spec:
+  chart:
+    spec:
+      chart: ingress-nginx
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+      version: 4.8.3
+  interval: 1m0s
+  values:
+    controller:
+      service:
+        loadBalancerIP: 192.168.10.4
+      config:
+        proxy-body-size: "50m"
+      ingressClassResource:
+        name: nginx-external
+        controllerValue: "k8s.io/ingress-nginx-external"
+
