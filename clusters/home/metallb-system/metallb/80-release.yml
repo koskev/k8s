@@ -15,13 +15,13 @@ spec:
   interval: 1m0s
   values:
     controller:
-      priorityClassName: "metallb-priority"
+      priorityClassName: "system-cluster-critical"
       resources:
         limits:
           cpu: 100m
           memory: 100Mi
     speaker:
-      priorityClassName: "metallb-priority"
+      priorityClassName: "system-cluster-critical"
       resources:
         limits:
           cpu: 100m
