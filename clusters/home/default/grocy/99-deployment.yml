@@ -68,7 +68,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "kokev-issuer"
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx-external
   rules:
     - host: grocy.kokev.de
       http:
