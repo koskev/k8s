@@ -32,6 +32,9 @@ spec:
           periodSeconds: 60
           timeoutSeconds: 10
           failureThreshold: 5
+        resources:
+          requests:
+            memory: "256Mi"
 
       nodeSelector:
         disk: ssd

@@ -69,6 +69,9 @@ spec:
         - --provider=pihole
         # Change this to the actual address of your Pi-hole web server
         - --pihole-server=http://localhost
+        resources:
+          requests:
+            memory: "64Mi"
       - name: pihole
         image: pihole/pihole:2023.10.0
         imagePullPolicy: IfNotPresent
@@ -89,6 +92,9 @@ spec:
             value: "192.168.1.1"
           - name: DNSMASQ_LISTENING
             value: "all"
+        resources:
+          requests:
+            memory: "128Mi"
       topologySpreadConstraints:
       # Prevent launching on the same host
       - maxSkew: 1

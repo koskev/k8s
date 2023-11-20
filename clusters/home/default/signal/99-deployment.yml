@@ -21,6 +21,9 @@ spec:
         volumeMounts:
         - name: signald-data
           mountPath: /signald
+        resources:
+          requests:
+            memory: "256Mi"
       - name: signal-bridge
         image: dock.mau.dev/mautrix/signal:v0.4.3
         command: ["su-exec"]
@@ -33,6 +36,9 @@ spec:
           mountPath: /data
         - name: signald-data
           mountPath: /signald
+        resources:
+          requests:
+            memory: "128Mi"
       nodeSelector:
         disk: ssd
       volumes:

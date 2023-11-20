@@ -72,6 +72,9 @@ spec:
             containerPort: 21027
           - name: data
             containerPort: 22000
+        resources:
+          requests:
+            memory: "256Mi"
         volumeMounts:
         - name: syncthing-config
           mountPath: /var/syncthing

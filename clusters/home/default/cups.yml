@@ -37,6 +37,9 @@ spec:
           mountPath: /etc/cups
         - name: usb
           mountPath: /dev/bus/usb
+        resources:
+          requests:
+            memory: "32Mi"
       volumes:
       - name: cups-etc
         hostPath:
