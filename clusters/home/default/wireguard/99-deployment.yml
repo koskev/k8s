@@ -1,32 +1,3 @@
-kind: Secret
-apiVersion: v1
-metadata:
-    name: wg-config
-    namespace: default
-stringData:
-    wg0.conf: ENC[AES256_GCM,data:oh0OysSn3iHz4K4jXur1phETeXfKJyvdZo3LqModATYS5Ho3QCRVkbiEPbxZ1vimRj6XYSbKOqL8/31cU6wmKtoudXtny9PitibD+Gqjo2KTU5VNzwGbrI6phsR8HK/ugsJUYbzowxolLnfAYyAaJWyh9GLD8M6nxRTx8aReU+m5KMCYrYCfMWtPh9X+wHGsVENMH2f+d6JsyHecDCYJFG+1St5k0usnZ6SWjZZFQMcJT+u/YYdlHBQ9JYc9WhkhP1/xPoy7W4Em7DgSNdZSOzA0kBshpSHGVBXvSGwy3JLlecT8CFGEYik+c3x3V/luWMSnHoZw32IZjuRI4i6uSf55q/tZyXPtf+lAk7KuZ4DNvMm5Ca5qXIkRoeuwib1FmRiENEz8DFWYLX8oButT56X7RDCq8gF1whyW7FoRBvm5EEukLftgn1tHZ8t6IhK3KJ3CvnJXyG3PzSj7mq+Rr2UVUEY8gJMMtvOasKgBwt/YlBICawemCM/YjXLJZyH39BLMcc76I41UBw5P8H7HM3RGvoEyZ30obEMiYhYfepv647HW/r85aPpJFvtfifKcY0Vzr3FNlQ==,iv:EZ57z6s0AkACG+Bm11xsmUWofNH2HuDRPqMoO2SKRUY=,tag:8d67cp8UVfmkKsa1Lt6L8w==,type:str]
-sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age: []
-    lastmodified: "2023-11-10T19:57:46Z"
-    mac: ENC[AES256_GCM,data:t3qjqZFyl1XFpc36y7QgRrW8zJQthFVqBYA8314O46f/2J++8S4cEtJF96yxG2dcESJSQE6q8wJ0XGE0GwOE6qhqTMn/n2SQvrFZV0b0ztzCeiM19oSG0BKisva5tS9vjpL7TP7+zbSI/v+8Jl/iwg2ezGvyeQK8pbDZRK6zdz8=,iv:vTdYgaJnQdgUPoW1goMPaUW60ZX43Yxl3w4WwxORduM=,tag:90FXGlcwxydiRyglOaeYdw==,type:str]
-    pgp:
-        - created_at: "2023-11-10T19:57:45Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            wV4DJK+IA+cNHtcSAQdAG9ESP8Omx/UQVLnLZOtcHw2APnnDrCY97/2xDw/DMBkw
-            ms7zPUcCcEhquK4xShGu9s0+mAhriWMLUrDVHMI1G+4I6YmhvVXHgEDfLr7bGNbt
-            0lEBIKEUhN/Dwzii4VKcO6TM9IjnCiNvLSO6c0G3VNxAKW+FnCmpp7meZbxSlbrr
-            wIPwZyVeCDxjB0a0PWM5ZbRgU3tMoVINENX9P7tu/9irqfs=
-            =1jA9
-            -----END PGP MESSAGE-----
-          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
-    encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
 ---
 kind: Service
 apiVersion: v1
@@ -45,28 +16,6 @@ spec:
           targetPort: 51820
     type: LoadBalancer
     loadBalancerIP: 192.168.10.10
-sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age: []
-    lastmodified: "2023-11-10T19:57:46Z"
-    mac: ENC[AES256_GCM,data:t3qjqZFyl1XFpc36y7QgRrW8zJQthFVqBYA8314O46f/2J++8S4cEtJF96yxG2dcESJSQE6q8wJ0XGE0GwOE6qhqTMn/n2SQvrFZV0b0ztzCeiM19oSG0BKisva5tS9vjpL7TP7+zbSI/v+8Jl/iwg2ezGvyeQK8pbDZRK6zdz8=,iv:vTdYgaJnQdgUPoW1goMPaUW60ZX43Yxl3w4WwxORduM=,tag:90FXGlcwxydiRyglOaeYdw==,type:str]
-    pgp:
-        - created_at: "2023-11-10T19:57:45Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            wV4DJK+IA+cNHtcSAQdAG9ESP8Omx/UQVLnLZOtcHw2APnnDrCY97/2xDw/DMBkw
-            ms7zPUcCcEhquK4xShGu9s0+mAhriWMLUrDVHMI1G+4I6YmhvVXHgEDfLr7bGNbt
-            0lEBIKEUhN/Dwzii4VKcO6TM9IjnCiNvLSO6c0G3VNxAKW+FnCmpp7meZbxSlbrr
-            wIPwZyVeCDxjB0a0PWM5ZbRgU3tMoVINENX9P7tu/9irqfs=
-            =1jA9
-            -----END PGP MESSAGE-----
-          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
-    encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -111,25 +60,3 @@ spec:
                 - name: wg-config
                   secret:
                     secretName: wg-config
-sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age: []
-    lastmodified: "2023-11-10T19:57:46Z"
-    mac: ENC[AES256_GCM,data:t3qjqZFyl1XFpc36y7QgRrW8zJQthFVqBYA8314O46f/2J++8S4cEtJF96yxG2dcESJSQE6q8wJ0XGE0GwOE6qhqTMn/n2SQvrFZV0b0ztzCeiM19oSG0BKisva5tS9vjpL7TP7+zbSI/v+8Jl/iwg2ezGvyeQK8pbDZRK6zdz8=,iv:vTdYgaJnQdgUPoW1goMPaUW60ZX43Yxl3w4WwxORduM=,tag:90FXGlcwxydiRyglOaeYdw==,type:str]
-    pgp:
-        - created_at: "2023-11-10T19:57:45Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
-
-            wV4DJK+IA+cNHtcSAQdAG9ESP8Omx/UQVLnLZOtcHw2APnnDrCY97/2xDw/DMBkw
-            ms7zPUcCcEhquK4xShGu9s0+mAhriWMLUrDVHMI1G+4I6YmhvVXHgEDfLr7bGNbt
-            0lEBIKEUhN/Dwzii4VKcO6TM9IjnCiNvLSO6c0G3VNxAKW+FnCmpp7meZbxSlbrr
-            wIPwZyVeCDxjB0a0PWM5ZbRgU3tMoVINENX9P7tu/9irqfs=
-            =1jA9
-            -----END PGP MESSAGE-----
-          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
-    encrypted_regex: ^(data|stringData)$
-    version: 3.8.1
