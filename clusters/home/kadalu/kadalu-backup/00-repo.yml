@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: kadalu-backup
+  namespace: kadalu
+spec:
+  interval: 1m0s
+  url: https://koskev.github.io/kadalu-backup
