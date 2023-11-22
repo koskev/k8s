@@ -1,3 +1,28 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sanejs-data
+spec:
+  storageClassName: kadalu.arbiter-pool
+  accessModes:
+    - ReadWriteOnce # You can also provide 'ReadWriteMany' here
+  resources:
+    requests:
+      storage: 500Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sanejs-config
+spec:
+  storageClassName: kadalu.arbiter-pool
+  accessModes:
+    - ReadWriteOnce # You can also provide 'ReadWriteMany' here
+  resources:
+    requests:
+      storage: 50Mi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +48,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: scanned-files
-          mountPath: /app/data/output
+          mountPath: /var/lib/scanservjs/output
         - name: config
           mountPath: /app/config
         env:
@@ -35,11 +60,11 @@ spec:
       volumes:
         # TODO: change to pvc
       - name: scanned-files
-        hostPath:
-          path: /mnt/shared_data/sanejs/images
+        persistentVolumeClaim:
+          claimName: sanejs-data
       - name: config
-        hostPath:
-          path: /mnt/shared_data/sanejs/config
+        persistentVolumeClaim:
+          claimName: sanejs-config
 ---
 apiVersion: v1
 kind: Service
