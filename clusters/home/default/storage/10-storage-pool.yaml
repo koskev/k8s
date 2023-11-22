@@ -1,0 +1,15 @@
+---
+apiVersion: kadalu-operator.storage/v1alpha1
+kind: KadaluStorage
+metadata:
+  # This will be used as name of PV Hosting Volume
+  name: arbiter-pool
+spec:
+  type: Arbiter
+  storage:
+    - node: raspberrypi-server
+      device: /dev/mapper/kadalu_crypt
+    - node: kevin-laptop
+      device: /dev/mapper/kadalu_crypt
+    - node: rpi-cluster-01
+      device: /data/kadalu.img
