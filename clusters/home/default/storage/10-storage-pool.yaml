@@ -4,6 +4,7 @@ kind: KadaluStorage
 metadata:
   # This will be used as name of PV Hosting Volume
   name: arbiter-pool
+  namespace: default
 spec:
   type: Arbiter
   storage:
