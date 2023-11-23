@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sanejs-data
-  namespace: default
 spec:
   storageClassName: kadalu.arbiter-pool
   accessModes:
@@ -16,7 +15,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: sanejs-config
-  namespace: default
 spec:
   storageClassName: kadalu.arbiter-pool
   accessModes:
