@@ -13,7 +13,7 @@ spec:
     - kind: Secret
       name: hostapd-secret
       valuesKey: password
-      targetPath: hostapd.password
+      targetPath: hostapd.wpa_passphrase
   chart:
     spec:
       chart: hostapd
@@ -22,3 +22,9 @@ spec:
         kind: HelmRepository
         name: hostapd
   interval: 1m0s
+  values:
+    hostapd:
+      mobility_domain: "1234"
+      ft_psk_generate_local: 1
+      # Not sure if this key even exists
+      ieee80211r: 1
