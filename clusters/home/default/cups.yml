@@ -49,6 +49,11 @@ spec:
           path: /dev/bus/usb
       nodeSelector:
         cups: "true"
+      tolerations:
+      - operator: "Exists"
+        effect: "NoSchedule"
+      - operator: "Exists"
+        effect: "PreferNoSchedule"
 ---
 apiVersion: v1
 kind: Service
