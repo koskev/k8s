@@ -12,7 +12,7 @@
       "fileMatch": ["\\.ya?ml$"],
       "datasourceTemplate": "docker",
       "matchStrings": [
-        "repository:\\s?(?<depName>.*?)\\s?tag:\\s?(?<currentValue>.*?)"
+        "repository:\\s?(?<depName>.*?)\\s?tag:\\s?(?<currentValue>[\\w+\\.\\-]*)"
       ]
     }
   ]
