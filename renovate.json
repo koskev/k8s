@@ -12,6 +12,7 @@
       "fileMatch": ["\\.ya?ml$"],
       "matchStrings": [
         "repository:\\s?(?<depName>.*?)\\s?tag:\\s?(?<currentValue>.*?)"
-      ],
+      ]
     }
+  ]
 }
