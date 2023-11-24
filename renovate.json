@@ -10,6 +10,7 @@
     {
       "customType": "regex",
       "fileMatch": ["\\.ya?ml$"],
+      "datasourceTemplate": "docker",
       "matchStrings": [
         "repository:\\s?(?<depName>.*?)\\s?tag:\\s?(?<currentValue>.*?)"
       ]
