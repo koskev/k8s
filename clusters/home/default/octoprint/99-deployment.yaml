@@ -1,11 +1,3 @@
-apiVersion: scheduling.k8s.io/v1
-kind: PriorityClass
-metadata:
-  name: octoprint-priority
-value: 1000000
-preemptionPolicy: Never
-globalDefault: false
-description: "Prevent eviction"
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -23,7 +15,9 @@ spec:
       labels:
         app: octoprint
     spec:
-      priorityClassName: octoprint-priority
+      # Set to the highest priority as the worst case would be to evict the node during a print job
+      # It is more critical than cluster critical pods
+      priorityClassName: system-node-critical
       containers:
       - name: octoprint
         image: octoprint/octoprint:1.9.3
