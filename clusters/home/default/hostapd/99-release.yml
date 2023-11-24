@@ -23,6 +23,9 @@ spec:
         name: hostapd
   interval: 1m0s
   values:
+    image:
+      repository: ghcr.io/koskev/hostapd-image
+      tage: 2023.11.20
     hostapd:
       mobility_domain: "1234"
       ft_psk_generate_local: 1

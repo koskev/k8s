@@ -1,9 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "kubernetes": {
-    "fileMatch": ["\\.yaml$", "\\.yml$"]
+    "fileMatch": ["\\.ya?ml$"]
   },
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
-  }
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.ya?ml$"],
+      "matchStrings": [
+        "repository:\\s?(?<depName>.*?)\\s?tag:\\s?(?<currentValue>.*?)"
+      ],
+    }
 }
