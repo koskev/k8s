@@ -8,7 +8,7 @@ globalDefault: false
 description: "Prevent eviction"
 ---
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: cups-deployment
   namespace: default
