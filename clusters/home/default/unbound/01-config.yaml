@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unbound-config
+  namespace: default
+data:
+  unbound.conf: |-
+    server:
+      directory: "/etc/unbound"
+      username: unbound
+      chroot: "/etc/unbound"
+
+      access-control: 10.0.0.0/8 allow
+      interface: 0.0.0.0
+      do-ip4: yes
+      do-udp: yes
+      do-tcp: yes
