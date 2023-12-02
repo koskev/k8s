@@ -80,9 +80,6 @@ spec:
           mountPath: /var/syncthing
         - name: syncthing-data
           mountPath: /data
-
-      nodeSelector:
-        disk: ssd
       volumes:
       - name: syncthing-config
         hostPath:
