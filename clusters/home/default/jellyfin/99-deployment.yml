@@ -15,12 +15,20 @@ spec:
       labels:
         app: jellyfin
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        supplementalGroups:
+          # Render group
+          - 989
+      nodeSelector:
+        # Pin to laptop for hardware support
+        kubernetes.io/hostname: kevin-laptop
       containers:
       - name: jellyfin
         image:  docker.io/jellyfin/jellyfin:10.8.13
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000
+          privileged: true
         ports:
         - containerPort: 8096
           protocol: TCP
@@ -29,6 +37,8 @@ spec:
           mountPath: /config
         - name: jellyfin-media
           mountPath: /media
+        - name: "render-device"
+          mountPath: "/dev/dri/renderD128"
         livenessProbe:
           httpGet:
             path: /
@@ -40,10 +50,7 @@ spec:
         resources:
           requests:
             cpu: "1000m"
-            memory: "2Gi"
-
-      nodeSelector:
-        disk: ssd
+            memory: "3Gi"
       volumes:
       - name: jellyfin-config
         hostPath:
@@ -51,6 +58,9 @@ spec:
       - name: jellyfin-media
         hostPath:
           path: /mnt/shared_data/k8s/jellyfin/media
+      - name: render-device
+        hostPath:
+          path: /dev/dri/renderD128
 
 ---
 apiVersion: v1
