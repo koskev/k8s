@@ -4,6 +4,6 @@ metadata:
   name: nginx-config
   namespace: ingress-nginx
 data:
-  proxy-body-size: "50m"
+  client-max-body-size: "50m"
   use-forwarded-headers: "true"
   use-proxy-protocol: "true"
