@@ -79,4 +79,3 @@ spec:
       port: 80
       targetPort: 8096
   type: NodePort
-  externalTrafficPolicy: Local
