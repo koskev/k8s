@@ -20,6 +20,7 @@ spec:
         loadBalancerIP: 192.168.10.4
       config:
         proxy-body-size: "50m"
+        allow-snippet-annotations: "true"
       ingressClassResource:
         name: nginx-external
         controllerValue: "k8s.io/ingress-nginx-external"
