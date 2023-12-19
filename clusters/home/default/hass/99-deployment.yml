@@ -41,10 +41,13 @@ spec:
         resources:
           requests:
             memory: "512Mi"
+
+      nodeSelector:
+        disk: ssd
       volumes:
       - name: hass-config
-        persistentVolumeClaim:
-          claimName: hass-claim
+        hostPath:
+          path: /mnt/shared_data/k8s/hass/config
 
 ---
 apiVersion: v1
