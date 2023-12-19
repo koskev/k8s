@@ -1,0 +1,13 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: hass-storage
+spec:
+  # Add 'kadalu.' to name from KadaluStorage kind
+  storageClassName: kadalu.ssd-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
