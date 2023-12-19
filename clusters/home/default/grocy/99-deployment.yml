@@ -29,12 +29,10 @@ spec:
           timeoutSeconds: 10
           failureThreshold: 5
         volumeMounts:
-          - name: storage
+          - name: db
             mountPath: /config/data/grocy.db
-            subPath: grocy.db
-          - name: storage
+          - name: config
             mountPath: /config/data/config.php
-            subPath: config.php
         env:
           - name: PUID
             value: "1000"
@@ -46,9 +44,12 @@ spec:
           requests:
             memory: "64Mi"
       volumes:
-      - name: storage
-        persistentVolumeClaim:
-          claimName: grocy-storage
+      - name: db
+        hostPath:
+          path: /mnt/shared_data/k8s/grocy/grocy.db
+      - name: config
+        hostPath:
+          path: /mnt/shared_data/k8s/grocy/config.php
 ---
 apiVersion: v1
 kind: Service
