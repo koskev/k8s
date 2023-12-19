@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: unbound
-        image: ghcr.io/koskev/unbound:2023.11.25
+        image: ghcr.io/koskev/unbound:2023.12.19
         resources:
           requests:
             memory: "32Mi"
