@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hass-service
+  namespace: default
+  labels:
+    app: hass
+spec:
+  selector:
+    app: hass
+  ports:
+    - name: panel
+      protocol: TCP
+      port: 80
+      targetPort: 8123
+  type: ClusterIP

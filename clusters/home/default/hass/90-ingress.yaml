@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hass-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "kokev-issuer"
+spec:
+  ingressClassName: nginx-external
+  rules:
+    - host: hass.kokev.de
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: hass-service
+                port:
+                  number: 80
+            path: /
+  # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+    - hosts:
+      - hass.kokev.de
+      secretName: hass-tls

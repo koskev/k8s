@@ -7,6 +7,7 @@ metadata:
     app: hass
 spec:
   replicas: 1
+  serviceName: hass-service
   selector:
     matchLabels:
       app: hass
@@ -48,48 +49,3 @@ spec:
       - name: hass-config
         hostPath:
           path: /mnt/shared_data/k8s/hass/config
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: hass-service
-  namespace: default
-  labels:
-    app: hass
-spec:
-  selector:
-    app: hass
-  ports:
-    - name: panel
-      protocol: TCP
-      port: 80
-      targetPort: 8123
-  type: ClusterIP
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hass-ingress
-  namespace: default
-  annotations:
-    cert-manager.io/cluster-issuer: "kokev-issuer"
-spec:
-  ingressClassName: nginx-external
-  rules:
-    - host: hass.kokev.de
-      http:
-        paths:
-          - pathType: Prefix
-            backend:
-              service:
-                name: hass-service
-                port:
-                  number: 80
-            path: /
-  # This section is only required if TLS is to be enabled for the Ingress
-  tls:
-    - hosts:
-      - hass.kokev.de
-      secretName: hass-tls
