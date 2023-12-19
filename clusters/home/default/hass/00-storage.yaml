@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: hass-storage
+  namespace: default
 spec:
   # Add 'kadalu.' to name from KadaluStorage kind
   storageClassName: kadalu.ssd-storage
