@@ -30,6 +30,6 @@ spec:
       mobility_domain: "1234"
       ft_psk_generate_local: 1
       hw_mode: a
-      channel: 37
+      channel: 44
     nodeSelector:
       hostapd50: "true"
