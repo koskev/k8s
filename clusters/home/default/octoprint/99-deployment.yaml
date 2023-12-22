@@ -43,16 +43,11 @@ spec:
         ports:
         - containerPort: 80
           protocol: TCP
-        env:
-          - name: ENABLE_MJPG_STREAMER
-            value: "true"
         volumeMounts:
         - name: octoprint-etc
           mountPath: /octoprint
         - name: usb
           mountPath: /dev/bus/usb
-        - name: camera
-          mountPath: /dev/video0
       volumes:
       - name: octoprint-etc
         hostPath:
@@ -60,9 +55,6 @@ spec:
       - name: usb
         hostPath:
           path: /dev/bus/usb
-      - name: camera
-        hostPath:
-          path: /dev/video0
 
       nodeSelector:
         kubernetes.io/hostname: rpi-drucker
