@@ -59,6 +59,9 @@ spec:
       EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: bcrypt
       EMQX_AUTHENTICATION__1__QUERY: "SELECT password_hash FROM mqtt_user where username = ${username} LIMIT 1"
       EMQX_AUTHENTICATION__1__SERVER: "postgresql-service:5432"
+      EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__CERTFILE: /tmp/ssl/tls.crt
+      EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__KEYFILE: /tmp/ssl/tls.key
+
 
     ingress:
       dashboard:
