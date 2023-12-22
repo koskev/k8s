@@ -15,6 +15,7 @@ spec:
       labels:
         app: esphome
     spec:
+      hostNetwork: true
       nodeSelector:
         disk: ssd
       containers:
@@ -25,9 +26,6 @@ spec:
           mountPath: /config
         - name: esphome-cache
           mountPath: /cache
-        env:
-          - name: ESPHOME_DASHBOARD_USE_PING
-            value: "true"
       volumes:
       - name: esphome-config
         hostPath:
@@ -35,22 +33,3 @@ spec:
       - name: esphome-cache
         emptyDir:
           sizeLimit: 1000Mi
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: esphome-service
-  namespace: default
-  labels:
-    app: esphome
-spec:
-  selector:
-    app: esphome
-  ports:
-    - name: panel
-      protocol: TCP
-      port: 80
-      targetPort: 6052
-  type: LoadBalancer
-
