@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: hostapd
+  namespace: default
+spec:
+  valuesFrom:
+    - kind: Secret
+      name: hostapd-secret
+      valuesKey: ssid
+      targetPath: hostapd.ssid
+    - kind: Secret
+      name: hostapd-secret
+      valuesKey: password
+      targetPath: hostapd.wpa_passphrase
+  chart:
+    spec:
+      chart: hostapd
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: hostapd
+  interval: 1m0s
+  values:
+    image:
+      repository: ghcr.io/koskev/hostapd-image
+      tag: 2023.11.25
+    hostapd:
+      mobility_domain: "1234"
+      ft_psk_generate_local: 1
+      hw_mode: b
+      channel: 7
+    nodeSelector:
+      hostapd24: "true"
