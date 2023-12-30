@@ -20,7 +20,7 @@ spec:
         disk: ssd
       containers:
       - name: esphome
-        image: ghcr.io/esphome/esphome:2023.12.3
+        image: ghcr.io/esphome/esphome:2023.12.5
         volumeMounts:
         - name: esphome-config
           mountPath: /config
