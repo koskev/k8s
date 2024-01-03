@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: papermc-deployment
+  namespace: default
+  labels:
+    app: papermc
+spec:
+  replicas: 1
+  serviceName: papermc-service
+  selector:
+    matchLabels:
+      app: papermc
+  template:
+    metadata:
+      labels:
+        app: papermc
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+      - name: papermc
+        image: ghcr.io/koskev/lazypaper:2023.12.26
+        imagePullPolicy: "Always"
+        volumeMounts:
+        - name: papermc-data
+          mountPath: /papermc
+        env:
+          - name: EULA
+            value: "true"
+        resources:
+          requests:
+            memory: "2500Mi"
+      volumes:
+      - name: papermc-data
+        hostPath:
+          path: /mnt/shared_data/k8s/papermc
