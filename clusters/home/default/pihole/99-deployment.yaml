@@ -71,7 +71,7 @@ spec:
           requests:
             memory: "64Mi"
       - name: pihole
-        image: pihole/pihole:2023.11.0
+        image: pihole/pihole:2024.01.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
