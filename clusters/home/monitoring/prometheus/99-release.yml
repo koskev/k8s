@@ -31,7 +31,7 @@ spec:
             secretName: grafana-tls
     prometheus:
       prometheusSpec:
-        additionalScrapeConfigs:
-          - job_name: OpenWrt
-            static_configs:
-              - targets: ['openwrt.lan:9100']
+        additionalScrapeConfigsSecret:
+          enabled: true
+          name: prometheus-secret
+          key: server_config
