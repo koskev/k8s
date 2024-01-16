@@ -19,6 +19,8 @@ spec:
       ingress:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "kokev-issuer"
         paths:
           - /
         hosts:
@@ -26,7 +28,7 @@ spec:
         tls:
           - hosts:
             - grafana.kokev.de
-            secretName: kokev-wildcard-tls
+            secretName: grafana-tls
     prometheus:
       prometheusSpec:
         additionalScrapeConfigs:
