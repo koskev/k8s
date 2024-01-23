@@ -19,5 +19,6 @@ spec:
     config:
       targets:
         - 202.61.194.167
+        - 192.168.1.1
       dns:
         nameserver: 192.168.10.2
