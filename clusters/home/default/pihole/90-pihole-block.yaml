@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pihole-blacklist
+  namespace: default
+data:
+  blacklist.txt: |
+    *.life360.com
+

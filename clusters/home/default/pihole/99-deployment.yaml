@@ -93,6 +93,14 @@ spec:
         resources:
           requests:
             memory: "128Mi"
+        volumeMounts:
+          - mountPath: /etc/pihole/blacklist.txt
+            name: blacklist
+            subPath: blacklist.txt
+      volumes:
+        - name: blacklist
+          configMap:
+            name: pihole-blacklist
       topologySpreadConstraints:
       # Prevent launching on the same host
       - maxSkew: 1
