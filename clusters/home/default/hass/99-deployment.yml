@@ -21,7 +21,7 @@ spec:
         runAsGroup: 1000
       containers:
       - name: hass
-        image: ghcr.io/home-assistant/home-assistant:2024.1.5
+        image: ghcr.io/home-assistant/home-assistant:2024.1.6
         ports:
         - containerPort: 8123
           protocol: TCP
