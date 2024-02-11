@@ -15,6 +15,9 @@ spec:
     metadata:
       labels:
         app: papermc
+      # Only x64 image and would probably not run on a pi
+      nodeSelector:
+        kubernetes.io/hostname: kevin-laptop
     spec:
       securityContext:
         runAsUser: 1000
