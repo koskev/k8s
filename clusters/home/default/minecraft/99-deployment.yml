@@ -15,13 +15,13 @@ spec:
     metadata:
       labels:
         app: papermc
-      # Only x64 image and would probably not run on a pi
-      nodeSelector:
-        kubernetes.io/hostname: kevin-laptop
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
+      # Only x64 image and would probably not run on a pi
+      nodeSelector:
+        kubernetes.io/hostname: kevin-laptop
       containers:
       - name: papermc
         image: ghcr.io/koskev/lazypaper:2023.12.26
