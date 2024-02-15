@@ -16,7 +16,7 @@ spec:
             - name: renovate
               # Update this to the latest available and then enable Renovate on
               # the manifest
-              image: renovate/renovate:37.173.1
+              image: renovate/renovate:37.192.1
               args:
                 - koskev/k8s
               # Environment Variables
