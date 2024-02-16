@@ -26,8 +26,6 @@ spec:
         volumeMounts:
         - name: signal-bridge-config
           mountPath: /data
-        - name: signald-data
-          mountPath: /signald
         resources:
           requests:
             memory: "128Mi"
@@ -35,9 +33,6 @@ spec:
       - name: signal-bridge-config
         secret:
           secretName: signal-bridge-config
-      - name: signald-data
-        hostPath:
-          path: /mnt/shared_data/stacks/signal
 ---
 apiVersion: v1
 kind: Service
