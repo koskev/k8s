@@ -24,7 +24,7 @@ spec:
         kubernetes.io/hostname: kevin-laptop
       containers:
       - name: papermc
-        image: ghcr.io/koskev/lazypaper:2024.02.12
+        image: ghcr.io/koskev/lazypaper:2024.02.16
         imagePullPolicy: "Always"
         volumeMounts:
         - name: papermc-data
