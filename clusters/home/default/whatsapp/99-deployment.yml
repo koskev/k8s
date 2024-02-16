@@ -36,20 +36,4 @@ spec:
         secret:
           secretName: whatsapp-bridge-config
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: whatsapp-bridge-service
-  namespace: default
-  labels:
-    app: whatsapp-bridge
-spec:
-  selector:
-    app: whatsapp-bridge
-  ports:
-    - name: bridge
-      protocol: TCP
-      port: 29318
-      targetPort: 29318
-  type: ClusterIP
 

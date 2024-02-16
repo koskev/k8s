@@ -34,20 +34,4 @@ spec:
         secret:
           secretName: signal-bridge-config
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: signal-bridge-service
-  namespace: default
-  labels:
-    app: signal-bridge
-spec:
-  selector:
-    app: signal-bridge
-  ports:
-    - name: bridge
-      protocol: TCP
-      port: 29328
-      targetPort: 29328
-  type: ClusterIP
 
