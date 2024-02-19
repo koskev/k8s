@@ -69,6 +69,8 @@ kind: Ingress
 metadata:
   name: octoprint-ingress
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "kokev-issuer"
 spec:
   ingressClassName: nginx
   rules:
@@ -86,4 +88,4 @@ spec:
   tls:
     - hosts:
       - octoprint.kokev.de
-      secretName: kokev-wildcard-tls
+      secretName: kokev-octoprint-tls
