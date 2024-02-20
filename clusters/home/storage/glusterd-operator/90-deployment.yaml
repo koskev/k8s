@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glusterd-operator-deployment
+  namespace: storage
+  labels:
+    app: glusterd-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glusterd-operator
+  template:
+    metadata:
+      labels:
+        app: glusterd-operator
+    spec:
+      serviceAccountName: glusterd-operator
+      containers:
+      - name: glusterd-operator
+        imagePullPolicy: Always
+        image: ghcr.io/koskev/glusterd-operator:2024.02.19
+        resources:
+          requests:
+            memory: "64Mi"

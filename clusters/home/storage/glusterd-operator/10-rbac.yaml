@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: glusterd-operator
+  namespace: storage
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: glusterd-operator
+  namespace: storage
+rules:
+  - apiGroups:
+      - glusterd-operator.storage
+    resources:
+      - glusterdstorages
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - statefulsets
+    verbs:
+      - list
+      - create
+      - delete
+      - get
+      - patch
+
+  - apiGroups:
+    - ""
+    resources:
+      - services
+    verbs:
+      - list
+      - create
+      - delete
+      - get
+      - patch
+  - apiGroups:
+    - ""
+    resources:
+      - pods
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+    - ""
+    resources:
+      - pods/exec
+    verbs:
+      - create
+      - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: glusterd-operator
+  namespace: storage
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: glusterd-operator
+subjects:
+- kind: ServiceAccount
+  name: glusterd-operator
+  namespace: storage
+---
