@@ -1,0 +1,17 @@
+---
+apiVersion: glusterd-operator.storage/v1
+kind: GlusterdStorage
+metadata:
+  name: database-storage
+  namespace: storage
+spec:
+  type: Arbiter
+  options:
+    - group db-workload
+  nodes:
+    - name: kevin-laptop
+      path: "/data/glusterfs/database-storage"
+    - name: rpi-server2
+      path: "/data/glusterfs/database-storage"
+    - name: raspberrypi-server
+      path: "/data/glusterfs/database-storage-arbiter"
