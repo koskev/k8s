@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mumble-deployment
   namespace: default
@@ -7,7 +7,6 @@ metadata:
     app: mumble
 spec:
   replicas: 1
-  serviceName: mumble-service
   selector:
     matchLabels:
       app: mumble
