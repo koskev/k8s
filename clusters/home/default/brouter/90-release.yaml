@@ -34,5 +34,5 @@ spec:
     brouter_web:
       image:
         repository: ghcr.io/koskev/brouter-web
-        pullPolicy: IfNotPresent
+        pullPolicy: Always
         tag: "2024.03.06"
