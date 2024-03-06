@@ -19,7 +19,7 @@ spec:
       containers:
       - name: glusterd-operator
         imagePullPolicy: Always
-        image: ghcr.io/koskev/glusterd-operator:2024.02.26
+        image: ghcr.io/koskev/glusterd-operator:2024.03.04
         resources:
           requests:
             memory: "64Mi"
