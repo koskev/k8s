@@ -19,6 +19,13 @@ spec:
               image: renovate/renovate:37.229.5
               args:
                 - koskev/k8s
+                - koskev/brouter-web
+                - koskev/brouter
+                - koskev/brouter-chart
+                - koskev/swayautonames
+                - koskev/rufaco
+                - koskev/borg-helper
+                - koskev/PushToTalk
               # Environment Variables
               env:
                 - name: LOG_LEVEL
