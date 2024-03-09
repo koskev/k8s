@@ -20,7 +20,7 @@ spec:
               args:
                 - koskev/k8s
                 - koskev/brouter-web
-                - koskev/brouter
+                - koskev/brouter-react
                 - koskev/brouter-chart
                 - koskev/swayautonames
                 - koskev/rufaco
