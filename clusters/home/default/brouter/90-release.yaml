@@ -23,16 +23,10 @@ spec:
         issuer: "kokev-issuer"
         secret: brouter-tls
     brouter:
-      image:
-        repository: ghcr.io/koskev/brouter
-        pullPolicy: IfNotPresent
-        tag: "2024.03.07"
+      enabled: true
       volumes:
         - name: segments
           hostPath:
             path: /mnt/shared_data/k8s/brouter/segments4
     brouter_web:
-      image:
-        repository: ghcr.io/koskev/brouter-web
-        pullPolicy: Always
-        tag: "2024.03.06"
+      enabled: true
