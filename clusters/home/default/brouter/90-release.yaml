@@ -28,5 +28,10 @@ spec:
         - name: segments
           hostPath:
             path: /mnt/shared_data/k8s/brouter/segments4
-    brouter_web:
+    brouter_react:
       enabled: true
+      image:
+        repository: ghcr.io/koskev/brouter-react
+        pullPolicy: Always
+        tag: "2024.03.12"
+
