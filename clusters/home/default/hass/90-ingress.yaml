@@ -7,7 +7,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "kokev-issuer"
 spec:
-  ingressClassName: nginx-external
+  ingressClassName: nginx
   rules:
     - host: hass.kokev.de
       http:
