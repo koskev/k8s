@@ -32,15 +32,15 @@ spec:
             secretName: grafana-tls
     prometheus:
       prometheusSpec:
-        disableMountSubPath: true
-        volumeClaimTemplate:
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            volumeName: prometheus-db
-            storageClassName: local
-            resources:
-              requests:
-                storage: 10Gi
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              volumeName: prometheus-db
+              storageClassName: local
+              resources:
+                requests:
+                  storage: 10Gi
         additionalScrapeConfigsSecret:
           enabled: true
           name: prometheus-secret
