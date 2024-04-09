@@ -71,12 +71,14 @@ spec:
       dashboard:
         enabled: true
         ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "kokev-issuer"
         hosts:
           - emqx.kokev.de
         tls:
           - hosts:
             - emqx.kokev.de
-            secretName: kokev-wildcard-tls
+            secretName: emqx-tls
     resources:
       #limits:
       #  cpu: 500m
