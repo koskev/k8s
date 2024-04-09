@@ -29,7 +29,7 @@ spec:
             value: "esphome"
           - name: MQTT_ADDRESS
             value: "emqx.default"
-          - name: MQTT_USER
+          - name: MQTT_USERNAME
             value: mqtt-exporter
           - name: MQTT_PASSWORD
             valueFrom:
