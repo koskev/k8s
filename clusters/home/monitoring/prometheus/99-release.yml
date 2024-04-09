@@ -17,6 +17,12 @@ spec:
   values:
     namespaceOverride: monitoring
     grafana:
+      persistence:
+        type: sts
+        enabled: true
+        storageClassName: "local"
+        selectorLabels:
+          storage: grafana
       ingress:
         enabled: true
         ingressClassName: nginx
