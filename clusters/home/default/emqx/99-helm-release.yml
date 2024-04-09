@@ -78,7 +78,7 @@ spec:
         tls:
           - hosts:
             - emqx.kokev.de
-            secretName: emqx-tls
+            secretName: emqx-dashboard-tls
     resources:
       #limits:
       #  cpu: 500m
