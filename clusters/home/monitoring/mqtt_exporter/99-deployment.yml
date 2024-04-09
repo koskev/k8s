@@ -25,6 +25,8 @@ spec:
         - containerPort: 9000
           protocol: TCP
         env:
+          - name: ESPHOME_TOPIC_PREFIXES
+            value: "esphome"
           - name: MQTT_ADDRESS
             value: "emqx.default"
           - name: MQTT_USER
