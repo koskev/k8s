@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: victoria-metrics-deployment
+  namespace: monitoring
+  labels:
+    app: victoria-metrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: victoria-metrics
+  template:
+    metadata:
+      labels:
+        app: victoria-metrics
+    spec:
+      containers:
+      - name: victoria-metrics
+        image: victoriametrics/victoria-metrics:v1.100.0
+        args:
+          - "-retentionPeriod=100y"
+        volumeMounts:
+        - name: victoria-data
+          mountPath: /victoria-metrics-data
+        resources:
+          requests:
+            memory: "512Mi"
+      volumes:
+      - name: victoria-data
+        hostPath:
+          path: /mnt/shared_data/k8s/victoria-metrics/data
