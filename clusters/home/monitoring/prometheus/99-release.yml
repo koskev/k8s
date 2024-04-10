@@ -17,8 +17,9 @@ spec:
   values:
     namespaceOverride: monitoring
     grafana:
-      server:
-        root_url: "https://grafana.kokev.de"
+      grafana.ini:
+        server:
+          root_url: "https://grafana.kokev.de"
       persistence:
         type: sts
         enabled: true
