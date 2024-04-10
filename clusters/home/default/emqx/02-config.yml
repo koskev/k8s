@@ -16,6 +16,7 @@ data:
     {allow, {username, "eq3"}, all, ["eq3_radin/#", "eq3_radout/#", "homeassistant/#"]}.
     {allow, {username, "hass"}, all, ["#"]}.
     {allow, {username, "mqtt-exporter"}, all, ["#"]}.
+    {allow, {username, "telegraf"}, all, ["esphome/#", "homeassistant/#"]}.
 
     {allow, {username, "node-red"}, all, ["#"]}.
 
