@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: victoria-metrics
-        image: victoriametrics/victoria-metrics:v1.100.0
+        image: victoriametrics/victoria-metrics:v1.100.1
         args:
           - "-retentionPeriod=100y"
         volumeMounts:
