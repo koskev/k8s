@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chhoto-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "kokev-issuer"
+spec:
+  ingressClassName: nginx-external
+  rules:
+    - host: s.kokev.de
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: chhoto
+                port:
+                  number: 4567
+            path: /
+  # This section is only required if TLS is to be enabled for the Ingress
+  tls:
+    - hosts:
+      - s.kokev.de
+      secretName: chhoto-tls

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chhoto-deployment
+  namespace: default
+  labels:
+    app: chhoto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chhoto
+  template:
+    metadata:
+      labels:
+        app: chhoto
+    spec:
+      containers:
+      - name: chhoto
+        image: sintan1729/chhoto-url:5.2.5
+        env:
+          - name: db_url
+            value: /data/urls.sqlite
+          - name: site_url
+            value: https://s.kokev.de
+          - name: password
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: chhoto-secret
+        volumeMounts:
+        - name: chhoto-data
+          mountPath: /data
+      volumes:
+      - name: chhoto-data
+        hostPath:
+          path: /mnt/shared_data/k8s/chhoto/data
