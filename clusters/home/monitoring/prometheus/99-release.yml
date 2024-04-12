@@ -5,6 +5,15 @@ metadata:
   name: prometheus
   namespace: monitoring
 spec:
+  valuesFrom:
+    - kind: Secret
+      name: prometheus-secret
+      valuesKey: smtp_user
+      targetPath: grafana.grafana\.ini.smtp.user
+    - kind: Secret
+      name: prometheus-secret
+      valuesKey: smtp_password
+      targetPath: grafana.grafana\.ini.smtp.password
   chart:
     spec:
       chart: kube-prometheus-stack
@@ -20,6 +29,10 @@ spec:
       grafana.ini:
         server:
           root_url: "https://grafana.kokev.de"
+        smtp:
+          enabled: true
+          host: mail.kokev.de:465
+          from_address: grafana@kokev.de
       persistence:
         type: sts
         enabled: true
