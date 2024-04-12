@@ -19,8 +19,8 @@ spec:
     grafana:
       smtp:
         existingSecret: prometheus-secret
-        user: "smtp_user"
-        password: "smtp_password"
+        userKey: "smtp_user"
+        passwordKey: "smtp_password"
       grafana.ini:
         server:
           root_url: "https://grafana.kokev.de"
