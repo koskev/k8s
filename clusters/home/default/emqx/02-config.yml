@@ -17,6 +17,8 @@ data:
     {allow, {username, "hass"}, all, ["#"]}.
     {allow, {username, "mqtt-exporter"}, all, ["#"]}.
     {allow, {username, "telegraf"}, all, ["esphome/#", "homeassistant/#"]}.
+    {allow, {username, "zigbee2mqtt"}, all, ["zigbee2mqtt/#", "homeassistant/#"]}.
+    {allow, {username, "hms"}, all, ["hms800wt2/#", "homeassistant/#"]}.
 
     {allow, {username, "node-red"}, all, ["#"]}.
 
