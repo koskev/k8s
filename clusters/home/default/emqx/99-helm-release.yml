@@ -67,6 +67,8 @@ spec:
       EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__KEYFILE: /tmp/ssl/tls.key
 
 
+    metrics:
+      enabled: true
     ingress:
       dashboard:
         enabled: true
