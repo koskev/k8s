@@ -21,9 +21,6 @@ spec:
         supplementalGroups:
           # Render group
           - 989
-      nodeSelector:
-        # Pin to laptop for hardware support
-        kubernetes.io/hostname: kevin-laptop
       containers:
       - name: jellyfin
         image:  docker.io/jellyfin/jellyfin:10.8.13
