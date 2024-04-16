@@ -26,6 +26,7 @@ spec:
                 - koskev/rufaco
                 - koskev/borg-helper
                 - koskev/PushToTalk
+                - koskev/hms-mqtt-publisher
               # Environment Variables
               env:
                 - name: LOG_LEVEL
