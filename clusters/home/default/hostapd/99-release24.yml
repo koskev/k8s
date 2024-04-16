@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/koskev/hostapd-image
-      tag: 2024.04.08
+      tag: 2024.04.15
     hostapd:
       mobility_domain: "1234"
       ft_psk_generate_local: 1
