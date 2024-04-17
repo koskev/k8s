@@ -90,6 +90,8 @@ spec:
             value: "192.168.1.1"
           - name: DNSMASQ_LISTENING
             value: "all"
+          - name: "FTLCONF_RATE_LIMIT"
+            value: "0/0"
         resources:
           requests:
             memory: "128Mi"
