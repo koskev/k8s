@@ -36,11 +36,6 @@ spec:
     hms_mqtt:
       inverter_hosts:
         - solar.lan
-      simple_mqtt:
-        host: emqx
-        port: 1883
-        username: hms
-
       mqtt:
         host: emqx
         port: 1883
