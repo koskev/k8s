@@ -12,10 +12,6 @@ spec:
       targetPath: hms_mqtt.mqtt.password
     - kind: Secret
       name: hms-secrets
-      valuesKey: mqtt_password
-      targetPath: hms_mqtt.simple_mqtt.password
-    - kind: Secret
-      name: hms-secrets
       valuesKey: alias_serial
       targetPath: hms_mqtt.mqtt.serial_aliases[0].serial
     - kind: Secret
