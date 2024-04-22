@@ -19,6 +19,7 @@ data:
     {allow, {username, "telegraf"}, all, ["#"]}.
     {allow, {username, "zigbee2mqtt"}, all, ["zigbee2mqtt/#", "homeassistant/#"]}.
     {allow, {username, "hms"}, all, ["hms800wt2/#", "homeassistant/#"]}.
+    {allow, {username, "octoprint"}, all, ["zigbee2mqtt/#", "octoPrint/#"]}.
 
     {allow, {username, "node-red"}, all, ["#"]}.
 
