@@ -35,6 +35,7 @@ spec:
           email_claim: sub
           key_file: /jwt/jwt.pub
           url_login: true
+          auto_sign_up: true
       persistence:
         type: sts
         enabled: true
