@@ -47,7 +47,7 @@ spec:
         resources:
           requests:
             cpu: "1000m"
-            memory: "3Gi"
+            memory: "500Mi"
       volumes:
       - name: jellyfin-config
         hostPath:
