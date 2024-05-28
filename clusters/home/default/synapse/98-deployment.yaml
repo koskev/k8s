@@ -33,7 +33,7 @@ spec:
         app: synapse
     spec:
       containers:
-      - image: matrixdotorg/synapse:v1.107.0
+      - image: matrixdotorg/synapse:v1.108.0
         name: synapse
         env:
         - name: SYNAPSE_CONFIG_PATH
