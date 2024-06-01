@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: chhoto
-        image: sintan1729/chhoto-url:5.2.6
+        image: sintan1729/chhoto-url:5.4.0
         env:
           - name: db_url
             value: /data/urls.sqlite
