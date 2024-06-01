@@ -16,7 +16,7 @@ spec:
             - name: renovate
               # Update this to the latest available and then enable Renovate on
               # the manifest
-              image: renovate/renovate:37.377.5
+              image: renovate/renovate:37.385.0
               args:
                 - koskev/k8s
                 - koskev/brouter-react
