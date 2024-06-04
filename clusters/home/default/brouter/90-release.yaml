@@ -33,5 +33,4 @@ spec:
       image:
         repository: ghcr.io/koskev/brouter-react
         pullPolicy: Always
-        tag: "2024.03.12"
 
