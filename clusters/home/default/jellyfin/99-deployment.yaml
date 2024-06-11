@@ -23,7 +23,7 @@ spec:
           - 989
       containers:
       - name: jellyfin
-        image:  docker.io/jellyfin/jellyfin:10.9.4
+        image:  docker.io/jellyfin/jellyfin:10.9.6
         securityContext:
           privileged: true
         ports:
