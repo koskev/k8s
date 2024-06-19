@@ -21,6 +21,15 @@ spec:
         supplementalGroups:
           # Render group
           - 989
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - rpi-server2
       containers:
       - name: jellyfin
         image:  docker.io/jellyfin/jellyfin:10.9.6
