@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus
-      version: 59.1.0
+      version: 60.3.0
   interval: 1m0s
   values:
     namespaceOverride: monitoring
