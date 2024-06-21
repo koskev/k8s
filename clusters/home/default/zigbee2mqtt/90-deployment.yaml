@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zigbee2mqtt-deployment
+  namespace: default
+  labels:
+    app: zigbee2mqtt
+spec:
+  replicas: 1
+  serviceName: zigbee2mqtt
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      nodeSelector:
+        zigbee: "true"
+      containers:
+      - name: zigbee2mqtt
+        image: koenkk/zigbee2mqtt:1.38.0
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        - name: usb
+          mountPath: /dev/bus/usb
+        resources:
+          requests:
+            memory: "512Mi"
+      volumes:
+      - name: data
+        hostPath:
+          path: /mnt/shared_data/k8s/zigbee2mqtt
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
