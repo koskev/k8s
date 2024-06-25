@@ -21,7 +21,7 @@ spec:
         runAsGroup: 1000
       # Only x64 image and would probably not run on a pi
       nodeSelector:
-        kubernetes.io/hostname: kevin-laptop
+        kubernetes.io/arch: amd64
       containers:
       - name: papermc
         image: ghcr.io/koskev/lazypaper:2024.04.15

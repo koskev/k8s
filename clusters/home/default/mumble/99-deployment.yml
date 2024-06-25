@@ -17,7 +17,7 @@ spec:
     spec:
       # Only x64 image :/
       nodeSelector:
-        kubernetes.io/hostname: kevin-laptop
+        kubernetes.io/arch: amd64
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
