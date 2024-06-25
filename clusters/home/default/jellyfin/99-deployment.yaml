@@ -32,7 +32,7 @@ spec:
                   - rpi-server2
       containers:
       - name: jellyfin
-        image:  docker.io/jellyfin/jellyfin:10.9.6
+        image:  docker.io/jellyfin/jellyfin:10.9.7
         securityContext:
           privileged: true
         ports:
