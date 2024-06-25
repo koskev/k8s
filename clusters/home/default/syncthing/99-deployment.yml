@@ -95,6 +95,8 @@ kind: Ingress
 metadata:
   name: syncthing-ingress
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "kokev-issuer"
 spec:
   ingressClassName: nginx
   rules:
@@ -112,4 +114,4 @@ spec:
   tls:
     - hosts:
       - syncthing.kokev.de
-      secretName: kokev-wildcard-tls
+      secretName: syncthing-tls
