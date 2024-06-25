@@ -29,7 +29,7 @@ spec:
               - key: kubernetes.io/hostname
                 operator: In
                 values:
-                  - rpi-server2
+                  - optiplex
       containers:
       - name: jellyfin
         image:  docker.io/jellyfin/jellyfin:10.9.6
