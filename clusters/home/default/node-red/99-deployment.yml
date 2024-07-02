@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: node-red
-        image: nodered/node-red:4.0.1-18
+        image: nodered/node-red:4.0.2-18
         ports:
         - containerPort: 1880
           protocol: TCP
