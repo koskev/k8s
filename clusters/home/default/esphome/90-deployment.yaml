@@ -28,11 +28,15 @@ spec:
       containers:
       - name: esphome
         image: ghcr.io/esphome/esphome:2024.6.4
+        securityContext:
+          privileged: true
         volumeMounts:
         - name: esphome-config
           mountPath: /config
         - name: esphome-cache
           mountPath: /cache
+        - name: usb
+          mountPath: /dev/bus/usb
       volumes:
       - name: esphome-config
         hostPath:
@@ -40,3 +44,6 @@ spec:
       - name: esphome-cache
         emptyDir:
           sizeLimit: 1000Mi
+      - name: usb
+        hostPath:
+          path: /dev/bus/usb
