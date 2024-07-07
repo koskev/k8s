@@ -6,6 +6,7 @@ metadata:
   labels:
     app: node-red
 spec:
+  serviceName: node-red-service
   replicas: 1
   selector:
     matchLabels:
@@ -44,46 +45,3 @@ spec:
           path: /mnt/shared_data/k8s/node-red/data
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: node-red-service
-  namespace: default
-  labels:
-    app: node-red
-spec:
-  selector:
-    app: node-red
-  ports:
-    - name: panel
-      protocol: TCP
-      port: 80
-      targetPort: 1880
-  type: ClusterIP
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: node-red-ingress
-  namespace: default
-  annotations:
-    cert-manager.io/cluster-issuer: "kokev-issuer"
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: node-red.kokev.de
-      http:
-        paths:
-          - pathType: Prefix
-            backend:
-              service:
-                name: node-red-service
-                port:
-                  number: 80
-            path: /
-  # This section is only required if TLS is to be enabled for the Ingress
-  tls:
-     - hosts:
-       - node-red.kokev.de
-       secretName: node-red-tls
