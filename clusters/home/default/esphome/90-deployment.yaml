@@ -28,6 +28,11 @@ spec:
       containers:
       - name: esphome
         image: ghcr.io/esphome/esphome:2024.6.6
+        command:
+          - "bash"
+        args:
+          - "-c"
+          - "esphome dashboard ."
         securityContext:
           privileged: true
         volumeMounts:
