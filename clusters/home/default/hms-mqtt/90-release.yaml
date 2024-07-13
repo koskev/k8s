@@ -40,5 +40,4 @@ spec:
     image:
       repository: ghcr.io/koskev/hms-mqtt-publisher
       pullPolicy: Always
-      tag: "2024.04.19"
 
