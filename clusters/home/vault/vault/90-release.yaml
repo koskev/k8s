@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vault
+  namespace: vault
+spec:
+  chart:
+    spec:
+      chart: vault
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: vault
+  interval: 1m0s
+  values:
+    server:
+      dataStorage:
+        storageClass: vault-storage
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "kokev-issuer"
+        hosts:
+          - host: vault.kokev.de
+        tls:
+          - hosts:
+            - vault.kokev.de
+            secretName: vault-tls
+
