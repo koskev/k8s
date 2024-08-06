@@ -47,7 +47,7 @@ spec:
           exec:
             command:
               - cat
-              - /mnt/shared_data/new
+              - /var/lib/influxdb2/mount
       volumes:
       - name: influx-data
         hostPath:
