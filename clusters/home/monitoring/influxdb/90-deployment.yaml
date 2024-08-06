@@ -43,6 +43,11 @@ spec:
         resources:
           requests:
             memory: "512Mi"
+        livenessProbe:
+          exec:
+            command:
+              - cat
+              - /mnt/shared_data/new
       volumes:
       - name: influx-data
         hostPath:
