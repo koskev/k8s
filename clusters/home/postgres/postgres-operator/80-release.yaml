@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: postgres-operator-release
+  namespace: postgres
+spec:
+  valuesFrom:
+    - kind: Secret
+      name: cluster-admin-secret
+      valuesKey: username
+      targetPath: postgres.user
+    - kind: Secret
+      name: cluster-admin-secret
+      valuesKey: password
+      targetPath: postgres.password
+  chart:
+    spec:
+      chart: ext-postgres-operator
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: postgres-operator-repo
+      version: 1.2.6
+  interval: 1m0s
+  values:
+    postgres:
+      host: cluster-main-rw.postgres
+
