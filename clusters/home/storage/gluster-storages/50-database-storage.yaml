@@ -9,7 +9,7 @@ spec:
   options:
     - group db-workload
   nodes:
-    - name: kevin-laptop
+    - name: optiplex
       storagePath: "/mnt/hdd_gluster/database-storage"
     - name: raspberrypi-server
       storagePath: "/mnt/hdd_gluster/database-storage"

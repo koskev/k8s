@@ -1,0 +1,15 @@
+---
+apiVersion: glusterd-operator.storage/v1
+kind: GlusterdStorage
+metadata:
+  name: hdd-storage
+  namespace: storage
+spec:
+  type: Arbiter
+  nodes:
+    - name: optiplex
+      storagePath: "/mnt/hdd_gluster/hdd-storage"
+    - name: raspberrypi-server
+      storagePath: "/mnt/hdd_gluster/hdd-storage"
+    - name: rpi-server2
+      storagePath: "/data/glusterfs/hdd-storage-arbiter"
