@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-main
+  namespace: postgres
+spec:
+  instances: 3
+  storage:
+    size: 1Gi
+    storageClass: kadalu.database
+  monitoring:
+    enablePodMonitor: true
+  managed:
+    roles:
+      - name: admin
+        ensure: present
+        comment: superuser
+        login: true
+        superuser: true
+        passwordSecret:
+          name: cluster-admin-secret
