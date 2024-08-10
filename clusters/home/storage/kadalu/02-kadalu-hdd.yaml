@@ -1,0 +1,12 @@
+apiVersion: kadalu-operator.storage/v1alpha1
+kind: KadaluStorage
+metadata:
+  name: hdd
+  namespace: kadalu
+spec:
+  type: External
+  details:
+    # gluster_hosts: [ gluster1.kadalu.io, gluster2.kadalu.io ]
+    gluster_hosts: [glusterd-service-optiplex.storage, glusterd-service-raspberrypi-server.storage, glusterd-service-rpi-server2.storage]
+    gluster_volname: hdd-storage
+    gluster_options: log-level=INFO
