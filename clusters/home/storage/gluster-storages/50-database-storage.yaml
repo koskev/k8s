@@ -10,8 +10,8 @@ spec:
     - group db-workload
   nodes:
     - name: kevin-laptop
-      path: "/data/glusterfs/database-storage"
-    - name: rpi-server2
-      path: "/data/glusterfs/database-storage"
+      storagePath: "/mnt/hdd_gluster/database-storage"
     - name: raspberrypi-server
-      path: "/data/glusterfs/database-storage-arbiter"
+      storagePath: "/mnt/hdd_gluster/database-storage"
+    - name: rpi-server2
+      storagePath: "/data/glusterfs/database-storage-arbiter"
