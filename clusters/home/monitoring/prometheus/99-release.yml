@@ -63,6 +63,10 @@ spec:
             secretName: grafana-tls
     prometheus:
       prometheusSpec:
+        podMonitorSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
         storageSpec:
           volumeClaimTemplate:
             spec:
