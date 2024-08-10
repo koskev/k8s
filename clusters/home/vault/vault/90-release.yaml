@@ -15,11 +15,13 @@ spec:
   interval: 1m0s
   values:
     server:
+      dataStorage:
+        enabled: false
       volumes:
         - name: storage-config
           secret:
             defaultMode: 420
-            secretName: vault-storage-secret
+            secretName: vault-storage-secret-vault-db-user
       volumeMounts:
         - name: storage-config
           mountPath: '/vault/userconfig/vault-storage-config'
