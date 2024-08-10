@@ -15,8 +15,16 @@ spec:
   interval: 1m0s
   values:
     server:
-      dataStorage:
-        storageClass: vault-storage
+      volumes:
+        - name: storage-config
+          secret:
+            defaultMode: 420
+            secretName: vault-storage-secret
+      volumeMounts:
+        - name: storage-config
+          mountPath: '/vault/userconfig/vault-storage-config'
+          readOnly: true
+      extraArgs: '-config=/vault/userconfig/vault-storage-config/config.hcl'
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -28,4 +36,3 @@ spec:
           - hosts:
             - vault.kokev.de
             secretName: vault-tls
-
