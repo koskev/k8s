@@ -28,6 +28,9 @@ spec:
         volumeMounts:
         - name: hass-config
           mountPath: /config
+        - name: db-config
+          mountPath: /config/database.yaml
+          subPath: database.yaml
         env:
           - name: DISABLE_JEMALLOC
             value: "true"
@@ -42,10 +45,10 @@ spec:
         resources:
           requests:
             memory: "512Mi"
-
-      nodeSelector:
-        disk: ssd
       volumes:
       - name: hass-config
         hostPath:
           path: /mnt/shared_data/k8s/hass/config
+      - name: db-config
+        secret:
+          secretName: hass-db-secret-hass
