@@ -32,7 +32,7 @@ spec:
                   - optiplex
       containers:
       - name: jellyfin
-        image:  docker.io/jellyfin/jellyfin:10.9.9
+        image:  docker.io/jellyfin/jellyfin:10.9.10
         securityContext:
           privileged: true
         ports:
