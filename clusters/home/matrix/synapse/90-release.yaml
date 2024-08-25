@@ -1,0 +1,59 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: synapse
+  namespace: matrix
+spec:
+  valuesFrom:
+    - kind: Secret
+      name: synapse-db-user-synapse-db-user
+      valuesKey: HOST
+      targetPath: externalPostgresql.host
+    - kind: Secret
+      name: synapse-db-user-synapse-db-user
+      valuesKey: DATABASE_NAME
+      targetPath: externalPostgresql.database
+    - kind: Secret
+      name: synapse-db-user-synapse-db-user
+      valuesKey: ROLE
+      targetPath: externalPostgresql.username
+    - kind: Secret
+      name: synapse-db-user-synapse-db-user
+      valuesKey: PASSWORD
+      targetPath: externalPostgresql.password
+  chart:
+    spec:
+      chart: matrix-synapse
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: synapse
+  interval: 1m0s
+  values:
+    serverName: matrix.kokev.de
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: "kokev-issuer"
+      tls:
+        - secretName: kokev-matrix-tls
+          hosts:
+            - matrix.kokev.de
+      className: nginx-external
+
+    wellknown:
+      enabled: true
+    postgresql:
+      enabled: false # Internal postgres
+    persistence:
+      storageClass: kadalu.hdd
+      accessMode: ReadWriteMany
+    redis:
+      auth:
+        existingSecret: redis-secret
+    extraEnv:
+      - name: DISABLE_JEMALLOC
+        value: "true"
+    workers:
+      appservice:
+        enabled: true
