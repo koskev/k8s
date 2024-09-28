@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus
-      version: 61.9.0
+      version: 63.1.0
   interval: 1m0s
   values:
     namespaceOverride: monitoring
@@ -63,10 +63,14 @@ spec:
             secretName: grafana-tls
     prometheus:
       prometheusSpec:
-        podMonitorSelectorNilUsesHelmValues: false
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
+        podMonitorSelector:
+          matchLabels: null
+        ruleSelector:
+          matchLabels: null
+        serviceMonitorSelector:
+          matchLabels: null
+        probeSelector:
+          matchLabels: null
         storageSpec:
           volumeClaimTemplate:
             spec:
