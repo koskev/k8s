@@ -18,7 +18,7 @@ data:
     {allow, {username, "mqtt-exporter"}, all, ["#"]}.
     {allow, {username, "telegraf"}, all, ["#"]}.
     {allow, {username, "zigbee2mqtt"}, all, ["zigbee2mqtt/#", "homeassistant/#", "solar/#"]}.
-    {allow, {username, "hms"}, all, ["hms800wt2/#", "homeassistant/#"]}.
+    {allow, {username, "hms"}, all, ["hms800wt2/#", "homeassistant/#", "solar/#"]}.
     {allow, {username, "octoprint"}, all, ["zigbee2mqtt/#", "octoPrint/#"]}.
 
     {allow, {username, "node-red"}, all, ["#"]}.
