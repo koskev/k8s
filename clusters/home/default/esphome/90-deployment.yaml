@@ -27,7 +27,7 @@ spec:
       hostNetwork: true
       containers:
       - name: esphome
-        image: ghcr.io/esphome/esphome:2024.10.3
+        image: ghcr.io/esphome/esphome:2024.11.2
         command:
           - "bash"
         args:
