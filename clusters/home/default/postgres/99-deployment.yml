@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgresql
-        image: postgres:15.8-alpine@sha256:8b963ea3038c3b32182ee7f592ccde21242fa7c5fd9d1b72aa333c27f1bfc809
+        image: postgres:15.10-alpine@sha256:c915779ea590d6bd81220bb5e1c08b670b12952f2a7beb60ba048d78a4ad5f24
         ports:
         - containerPort: 5432
           protocol: TCP
