@@ -5,13 +5,13 @@ metadata:
     namespace: default
     annotations:
       # Inject jellyscrub
-      nginx.ingress.kubernetes.io/configuration-snippet: |
-          proxy_set_header Accept-Encoding "";
-          sub_filter
-          '</body>'
-          '<script plugin="Jellyscrub" version="1.0.0.0" src="/Trickplay/ClientScript"></script>
-          </body>';
-          sub_filter_once on;
+      #nginx.ingress.kubernetes.io/configuration-snippet: |
+      #    proxy_set_header Accept-Encoding "";
+      #    sub_filter
+      #    '</body>'
+      #    '<script plugin="Jellyscrub" version="1.0.0.0" src="/Trickplay/ClientScript"></script>
+      #    </body>';
+      #    sub_filter_once on;
       cert-manager.io/cluster-issuer: "kokev-issuer"
 spec:
     ingressClassName: nginx
