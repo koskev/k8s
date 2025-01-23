@@ -14,19 +14,19 @@ spec:
       valuesObject:
         global:
           domain: argocd.kokev.de
-      configs:
-        params:
-          server.insecure: true
-      server:
-        ingress:
-          enabled: true
-          ingressClassName: nginx
-          annotations:
-            cert-manager.io/cluster-issuer: "kokev-issuer"
-          extraTls:
-            - hosts:
-                - argocd.kokev.de
-              secretName: argocd-tls
+        configs:
+          params:
+            server.insecure: true
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: "kokev-issuer"
+            extraTls:
+              - hosts:
+                  - argocd.kokev.de
+                secretName: argocd-tls
 
   destination:
     server: "https://kubernetes.default.svc"
