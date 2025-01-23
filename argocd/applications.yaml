@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name: applications
 spec:
   destination:
-    namespace: argocd
+    namespace: applications
     server: https://kubernetes.default.svc
   source:
     path: argocd/applications
