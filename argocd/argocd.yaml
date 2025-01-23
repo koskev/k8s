@@ -17,7 +17,6 @@ spec:
         configs:
           params:
             server.insecure: true
-            application.namespaces: "applications"
         server:
           ingress:
             enabled: true
