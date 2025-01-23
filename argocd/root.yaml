@@ -10,8 +10,6 @@ spec:
     path: argocd
     repoURL: https://github.com/koskev/k8s
     targetRevision: HEAD
-    directory:
-      recurse: false
   project: default
   syncPolicy:
     syncOptions:
