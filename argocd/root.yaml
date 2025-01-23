@@ -11,7 +11,7 @@ spec:
     repoURL: https://github.com/koskev/k8s
     targetRevision: HEAD
     directory:
-      recurse: true
+      recurse: false
   project: default
   syncPolicy:
     syncOptions:
