@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+spec:
+  destination:
+    name: ""
+    namespace: applications
+    server: https://kubernetes.default.svc
+  source:
+    path: argocd
+    repoURL: https://github.com/koskev/k8s
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
