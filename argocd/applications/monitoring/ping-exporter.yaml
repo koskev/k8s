@@ -17,7 +17,7 @@ spec:
             - 202.61.194.167
             - 192.168.1.1
           dns:
-            - 192.168.10.2
+            nameserver: 192.168.10.2
 
   destination:
     server: "https://kubernetes.default.svc"
