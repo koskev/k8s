@@ -23,7 +23,7 @@ spec:
         proxy-body-size: "50m"
         compute-full-forwarded-for: "true"
         use-forwarded-headers: "true"
+        strict-validate-path-type: "false"
       ingressClassResource:
         name: nginx
         controllerValue: "k8s.io/ingress-nginx"
-

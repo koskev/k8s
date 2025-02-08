@@ -21,7 +21,7 @@ spec:
         loadBalancerIP: 192.168.10.4
       config:
         proxy-body-size: "50m"
+        strict-validate-path-type: "false"
       ingressClassResource:
         name: nginx-external
         controllerValue: "k8s.io/ingress-nginx-external"
-
