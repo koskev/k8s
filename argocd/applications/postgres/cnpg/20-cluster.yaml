@@ -7,7 +7,7 @@ spec:
   instances: 3
   storage:
     size: 3Gi
-    storageClass: local
+    storageClass: postgres-local
   monitoring:
     enablePodMonitor: true
   managed:
