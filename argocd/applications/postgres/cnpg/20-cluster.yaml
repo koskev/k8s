@@ -6,8 +6,8 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 1Gi
-    storageClass: kadalu.database
+    size: 3Gi
+    storageClass: local
   monitoring:
     enablePodMonitor: true
   managed:
