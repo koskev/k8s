@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: synapse
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: matrix-synapse
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 3.11.2
+    helm:
+      releaseName: synapse
+      valuesObject:
+        serverName: matrix.kokev.de
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: "kokev-issuer"
+          tls:
+            - secretName: kokev-matrix-tls
+              hosts:
+                - matrix.kokev.de
+          className: nginx-external
+
+        wellknown:
+          enabled: true
+        postgresql:
+          enabled: false # Internal postgres
+        externalPostgresql:
+          host: cluster-main-rw.postgres
+          username: synapse-c3WD9F
+          database: synapse-db
+          existingSecret: synapse-db-user
+          existingSecretPasswordKey: password
+        persistence:
+          storageClass: kadalu.hdd
+          accessMode: ReadWriteMany
+        redis:
+          auth:
+            existingSecret: redis-secret
+        extraEnv:
+          - name: DISABLE_JEMALLOC
+            value: "true"
+        workers:
+          appservice:
+            enabled: true
+        extraConfig:
+          ip_range_whitelist:
+            - "192.168.0.0/20"
+
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: matrix
