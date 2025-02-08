@@ -15,6 +15,7 @@ metadata:
   labels:
     app: cups
 spec:
+  replicas: 0
   selector:
     matchLabels:
       app: cups
@@ -25,35 +26,35 @@ spec:
     spec:
       priorityClassName: cups-priority
       containers:
-      - name: cups
-        image: ydkn/cups:latest
-        securityContext:
-          privileged: true
-        ports:
-        - containerPort: 631
-          protocol: TCP
-        volumeMounts:
-        - name: cups-etc
-          mountPath: /etc/cups
-        - name: usb
-          mountPath: /dev/bus/usb
-        resources:
-          requests:
-            memory: "32Mi"
+        - name: cups
+          image: ydkn/cups:latest
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 631
+              protocol: TCP
+          volumeMounts:
+            - name: cups-etc
+              mountPath: /etc/cups
+            - name: usb
+              mountPath: /dev/bus/usb
+          resources:
+            requests:
+              memory: "32Mi"
       volumes:
-      - name: cups-etc
-        hostPath:
-          path: /etc/cups
-      - name: usb
-        hostPath:
-          path: /dev/bus/usb
+        - name: cups-etc
+          hostPath:
+            path: /etc/cups
+        - name: usb
+          hostPath:
+            path: /dev/bus/usb
       nodeSelector:
         cups: "true"
       tolerations:
-      - operator: "Exists"
-        effect: "NoSchedule"
-      - operator: "Exists"
-        effect: "PreferNoSchedule"
+        - operator: "Exists"
+          effect: "NoSchedule"
+        - operator: "Exists"
+          effect: "PreferNoSchedule"
 ---
 apiVersion: v1
 kind: Service
@@ -89,4 +90,3 @@ spec:
                 name: cups-service
                 port:
                   number: 631
-
