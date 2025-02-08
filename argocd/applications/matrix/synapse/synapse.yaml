@@ -28,7 +28,7 @@ spec:
           enabled: false # Internal postgres
         externalPostgresql:
           host: cluster-main-rw.postgres
-          username: synapse-c3WD9F
+          username: synapse-ONJAAw
           database: synapse-db
           existingSecret: synapse-db-user-synapse-db-user
           existingSecretPasswordKey: password
