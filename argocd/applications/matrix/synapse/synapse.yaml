@@ -30,7 +30,7 @@ spec:
           host: cluster-main-rw.postgres
           username: synapse-c3WD9F
           database: synapse-db
-          existingSecret: synapse-db-user
+          existingSecret: synapse-db-user-synapse-db-user
           existingSecretPasswordKey: password
         persistence:
           storageClass: kadalu.hdd
