@@ -1,0 +1,15 @@
+apiVersion: db.movetokube.com/v1alpha1
+kind: PostgresUser
+metadata:
+  name: synapse-db-user
+  namespace: matrix
+spec:
+  role: synapse
+  database: synapse-db # This references the Postgres CR
+  secretName: synapse-db-user
+  privileges: OWNER # Can be OWNER/READ/WRITE
+  secretTemplate:
+    username: "{{.Role}}"
+    password: "{{.Password}}"
+    database: "{{.Database}}"
+    host: "{{.Host}}"
