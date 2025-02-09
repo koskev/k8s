@@ -12,11 +12,6 @@
         server: 'https://kubernetes.default.svc',
       },
       source: {
-        directory: {
-          jsonnet: {
-            libs: ['lib'],
-          },
-        },
       },
       project: 'default',
       syncPolicy: {
@@ -27,6 +22,11 @@
   applicationRepo(name, targetnamespace, path, url, revision='HEAD'):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
+        directory: {
+          jsonnet: {
+            libs: ['lib'],
+          },
+        },
         path: path,
         repoURL: url,
         targetRevision: revision,
