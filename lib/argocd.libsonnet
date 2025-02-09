@@ -25,7 +25,7 @@
         directory: {
           recurse: recurse,
           jsonnet: {
-            libs: ['lib'],
+            libs: ['lib', 'argocd'],
           },
         },
         path: path,
