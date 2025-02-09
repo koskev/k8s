@@ -1,4 +1,4 @@
-local argocd = import 'lib/argocd.libsonnet';
+local argocd = import 'argocd.libsonnet';
 argocd.applicationHelm(
   name='argocd',
   namespace='argocd',
