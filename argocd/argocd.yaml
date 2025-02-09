@@ -17,7 +17,7 @@ spec:
         redis:
           image:
             repository: valkey/valkey
-            tag: 8.0.2
+            tag: 8.0.2-alpine
         configs:
           params:
             server.insecure: true
