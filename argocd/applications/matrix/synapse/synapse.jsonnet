@@ -18,6 +18,7 @@ local storage = import 'storage.libsonnet';
     chartVersion='3.11.2',
     releaseName='synapse',
     values={
+      argoCD: true,
       serverName: 'matrix.kokev.de',
       ingress: {
         annotations: {
