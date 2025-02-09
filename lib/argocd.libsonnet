@@ -25,8 +25,8 @@
     },
   },
   applicationRepo(name, targetnamespace, path, url, revision='HEAD'):: self.application(name, targetnamespace) + {
-    spec: {
-      source: {
+    spec+: {
+      source+: {
         path: path,
         repoURL: url,
         targetRevision: revision,
@@ -34,8 +34,8 @@
     },
   },
   applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values):: self.application(name, targetnamespace) + {
-    spec: {
-      source: {
+    spec+: {
+      source+: {
         chart: chart,
         repoURL: chartUrl,
         targetRevision: chartVersion,
