@@ -1,14 +1,14 @@
 local argocd = import 'argocd.libsonnet';
 argocd.applicationHelm(
   name='argocd',
-  namespace='argocd',
+  targetnamespace='argocd',
   chart='argo-cd',
   chartUrl='https://argoproj.github.io/argo-helm',
   chartVersion='7.7.16',
   releaseName='argocd',
   values={
     global: {
-      domain: argocd.kokev.de,
+      domain: 'argocd.kokev.de',
     },
     redis: {
       image: {
