@@ -19,6 +19,11 @@ local storage = import 'storage.libsonnet';
     releaseName='synapse',
     values={
       argoCD: true,
+      signingkey: {
+        job: {
+          enabled: false,
+        },
+      },
       serverName: 'matrix.kokev.de',
       ingress: {
         annotations: {
