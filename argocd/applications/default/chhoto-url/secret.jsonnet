@@ -8,7 +8,7 @@
   spec: {
     refreshInterval: '1h',
     secretStoreRef: {
-      kind: 'SecretStore',
+      kind: 'ClusterSecretStore',
       name: 'vault-secrets',
     },
     target: {
