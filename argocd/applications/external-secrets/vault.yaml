@@ -1,13 +1,13 @@
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
-  name: vault-backend
+  name: vault-secrets
   namespace: external-secrets
 spec:
   provider:
     vault:
       server: "http://openbao.openbao:8200"
-      path: "secret"
+      path: "secrets"
       version: "v2"
       auth:
         # Authenticate against Vault using a Kubernetes ServiceAccount
