@@ -6,7 +6,7 @@ local storage = import 'storage.libsonnet';
   storage.localPersistentVolume(
     name='synapse-media-data',
     namespace='matrix',
-    sizeGB='20',
+    sizeGB=20,
     path='/mnt/shared_data/k8s/matrix/data',
     storageclass='local-synapse'
   ),
