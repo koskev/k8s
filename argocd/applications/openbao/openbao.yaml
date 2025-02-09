@@ -28,10 +28,10 @@ spec:
               }
 
               service_registration "kubernetes" {}
-        extraSecretEnvironmentVars:
-          - envName: BAO_PG_CONNECTION_URL
-            secretKey: POSTGRES_URL_NO_SSL
-            secretName: openbao-openbao
+          extraSecretEnvironmentVars:
+            - envName: BAO_PG_CONNECTION_URL
+              secretKey: POSTGRES_URL_NO_SSL
+              secretName: openbao-openbao
 
   destination:
     server: "https://kubernetes.default.svc"
