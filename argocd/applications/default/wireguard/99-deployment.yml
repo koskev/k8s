@@ -34,29 +34,29 @@ spec:
         spec:
             containers:
                 - name: wireguard
-                  image: lscr.io/linuxserver/wireguard:v1.0.20210914-ls11
+                  image: lscr.io/linuxserver/wireguard:1.0.20210914-r4-ls68
                   env:
-                    - name: PUID
-                      value: "1000"
-                    - name: GUID
-                      value: "1000"
-                    - name: TZ
-                      value: Europe/Berlin
+                      - name: PUID
+                        value: "1000"
+                      - name: GUID
+                        value: "1000"
+                      - name: TZ
+                        value: Europe/Berlin
                   securityContext:
-                    capabilities:
-                        add:
-                            - NET_ADMIN
-                    privileged: true
+                      capabilities:
+                          add:
+                              - NET_ADMIN
+                      privileged: true
                   resources:
-                    requests:
-                        memory: 64Mi
-                        cpu: 100m
-                    limits:
-                        memory: 256Mi
+                      requests:
+                          memory: 64Mi
+                          cpu: 100m
+                      limits:
+                          memory: 256Mi
                   volumeMounts:
-                    - name: wg-config
-                      mountPath: /config/wg_confs
+                      - name: wg-config
+                        mountPath: /config/wg_confs
             volumes:
                 - name: wg-config
                   secret:
-                    secretName: wg-config
+                      secretName: wg-config
