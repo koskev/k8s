@@ -1,5 +1,5 @@
 {
-  localPersistentVolume(name, namespace, sizeGB, path, hostname=null):: {
+  localPersistentVolume(name, namespace, sizeGB, path, storageclass, hostname=null):: {
     apiVersion: 'v1',
     kind: 'PersistentVolume',
     metadata: {
@@ -14,7 +14,7 @@
       'local': {
         path: path,
       },
-      storageClassName: 'postgres-local',
+      storageClassName: storageclass,
     } + if hostname == null then {} else {
       nodeAffinity: {
         required: {
