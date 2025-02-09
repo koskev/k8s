@@ -25,10 +25,12 @@
     },
   },
   applicationRepo(name, targetnamespace, path, url, revision='HEAD'):: self.application(name, targetnamespace) + {
-    source: {
-      path: path,
-      repoURL: url,
-      targetRevision: revision,
+    spec: {
+      source: {
+        path: path,
+        repoURL: url,
+        targetRevision: revision,
+      },
     },
   },
   applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values):: self.application(name, targetnamespace) + {
