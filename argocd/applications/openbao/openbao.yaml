@@ -13,6 +13,17 @@ spec:
       releaseName: openbao
       valuesObject:
         server:
+          ingress:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: "kokev-issuer"
+            ingressClassName: nginx
+            hosts:
+              - host: vault.kokev.de
+            tls:
+              - secretName: vault-tls
+                hosts:
+                  - vault.kokev.de
           ha:
             enabled: true
             config: |
