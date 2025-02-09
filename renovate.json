@@ -3,6 +3,9 @@
   "kubernetes": {
     "fileMatch": ["\\.ya?ml$"]
   },
+  "argocd": {
+    "fileMatch": ["\\.ya?ml$"]
+  },
   "flux": {
     "fileMatch": ["\\.ya?ml$"]
   },
