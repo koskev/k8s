@@ -7,6 +7,10 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   source:
+    directory:
+      jsonnet:
+        libs:
+          - lib
     path: argocd
     repoURL: https://github.com/koskev/k8s
     targetRevision: HEAD
@@ -14,7 +18,3 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-  directory:
-    jsonnet:
-      libs:
-        - lib
