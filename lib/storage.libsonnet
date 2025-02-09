@@ -11,11 +11,16 @@
       capacity: {
         storage: '%dGi' % sizeGB,
       },
+      storageClassName: storageclass,
+    } + if hostname == null then {
+      hostPath: {
+        path: path,
+        type: 'DirectoryOrCreate',
+      },
+    } else {
       'local': {
         path: path,
       },
-      storageClassName: storageclass,
-    } + if hostname == null then {} else {
       nodeAffinity: {
         required: {
           nodeSelectorTerms: [{
