@@ -14,3 +14,7 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+  directory:
+    jsonnet:
+      libs:
+        - lib
