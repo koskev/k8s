@@ -19,10 +19,11 @@
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url, revision='HEAD'):: self.application(name, targetnamespace) + {
+  applicationRepo(name, targetnamespace, path, url, revision='HEAD', recurse=false):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
         directory: {
+          recurse: recurse,
           jsonnet: {
             libs: ['lib'],
           },

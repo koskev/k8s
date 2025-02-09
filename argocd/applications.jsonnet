@@ -3,5 +3,6 @@ argocd.applicationRepo(
   name='applications',
   targetnamespace='argocd',
   path='argocd/applications',
-  url='https://github.com/koskev/k8s'
+  url='https://github.com/koskev/k8s',
+  recurse=true
 )
