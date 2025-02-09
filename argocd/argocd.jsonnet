@@ -1,10 +1,12 @@
 local argocd = import 'argocd.libsonnet';
+local chart = (import 'images.libsonnet').helm.argocd;
+
 argocd.applicationHelm(
   name='argocd',
   targetnamespace='argocd',
-  chart='argo-cd',
-  chartUrl='https://argoproj.github.io/argo-helm',
-  chartVersion='7.7.16',
+  chart=chart.chart,
+  chartUrl=chart.chartUrl,
+  chartVersion=chart.chartVersion,
   releaseName='argocd',
   values={
     global: {

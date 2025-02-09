@@ -1,5 +1,7 @@
 local argocd = import 'argocd.libsonnet';
 local storage = import 'storage.libsonnet';
+local chart = (import 'images.libsonnet').helm.registry;
+
 [
   storage.localStorageClass('local-registry'),
   storage.localPersistentVolume(
@@ -12,9 +14,9 @@ local storage = import 'storage.libsonnet';
   argocd.applicationHelm(
     name='registry',
     targetnamespace='registry',
-    chart='docker-registry',
-    chartUrl='https://helm.twun.io',
-    chartVersion='2.2.3',
+    chart=chart.chart,
+    chartUrl=chart.chartUrl,
+    chartVersion=chart.chartVersion,
     releaseName='registry',
     values={
       persistence: {

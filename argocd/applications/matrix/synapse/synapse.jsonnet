@@ -1,5 +1,6 @@
 local argocd = import 'argocd.libsonnet';
 local storage = import 'storage.libsonnet';
+local chart = (import 'images.libsonnet').helm.synapse;
 
 [
   storage.localStorageClass(name='local-synapse'),
@@ -13,9 +14,9 @@ local storage = import 'storage.libsonnet';
   argocd.applicationHelm(
     name='synapse',
     targetnamespace='matrix',
-    chart='matrix-synapse',
-    chartUrl='https://ananace.gitlab.io/charts',
-    chartVersion='3.11.2',
+    chart=chart.chart,
+    chartUrl=chart.chartUrl,
+    chartVersion=chart.chartVersion,
     releaseName='synapse',
     values={
       argoCD: true,
