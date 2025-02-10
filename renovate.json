@@ -17,6 +17,14 @@
       "matchStrings": [
         "image:\\s*repository:\\s?(?<depName>.*?)\\s*tag:\\s?(?<currentValue>[\\w+\\.\\-]*)"
       ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["images.libsonnet"],
+      "datasourceTemplate": "helm",
+      "matchStrings": [
+        "chart:\\s?(?<depName>.*?)\\s*chartUrl:\\s?(?<registryUrl>.*?)\\s*chartVersion:\\s?(?<currentValue>[\\w+\\.\\-]*)"
+      ]
     }
   ]
 }
