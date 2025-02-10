@@ -1,7 +1,7 @@
 local secret = import 'secret.libsonnet';
 
 secret.externalSecretExtract(
-  name='chhoto',
+  name='chhoto-secret',
   namespace='default',
   key='chhoto'
 )

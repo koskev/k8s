@@ -1,10 +1,11 @@
 {
-  externalSecretExtract(name, namespace, key):: {
+  externalSecretExtract(name, namespace, key, labels={}):: {
     apiVersion: 'external-secrets.io/v1beta1',
     kind: 'ExternalSecret',
     metadata: {
       name: name,
       namespace: namespace,
+      labels: labels,
     },
     spec: {
       refreshInterval: '1h',
