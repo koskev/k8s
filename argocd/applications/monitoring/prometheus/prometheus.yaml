@@ -60,6 +60,7 @@ spec:
                 secretName: grafana-tls
         prometheus:
           prometheusSpec:
+            podMonitorSelectorNilUseHelmValues: false
             podMonitorSelector:
               matchLabels: null
             ruleSelector:
