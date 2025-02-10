@@ -3,7 +3,7 @@
     argocd: {
       chart: 'argo-cd',
       chartUrl: 'https://argoproj.github.io/argo-helm',
-      chartVersion: '7.7.16',
+      chartVersion: '7.8.2',
     },
     synapse: {
       chart: 'matrix-synapse',
