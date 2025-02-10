@@ -11,7 +11,8 @@ spec:
     targetRevision: 66.6.0
     helm:
       releaseName: prometheus
-      valuesObject:
+      # Due to a bug we can't use valuesObject here: https://github.com/argoproj/argo-cd/issues/16312
+      values: |
         namespaceOverride: monitoring
         grafana:
           smtp:
@@ -61,13 +62,13 @@ spec:
         prometheus:
           prometheusSpec:
             podMonitorSelector:
-              matchlabels: {}
+              matchLabels: null
             ruleSelector:
-              matchlabels: {}
+              matchLabels: null
             serviceMonitorSelector:
-              matchlabels: {}
+              matchLabels: null
             probeSelector:
-              matchlabels: {}
+              matchLabels: null
             storageSpec:
               volumeClaimTemplate:
                 spec:
