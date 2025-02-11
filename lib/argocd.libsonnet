@@ -34,16 +34,16 @@
       },
     },
   },
-  applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values):: self.application(name, targetnamespace) + {
+  applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values, valuesToString=false):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
         chart: chart,
         repoURL: chartUrl,
         targetRevision: chartVersion,
         helm: {
-          releaseName: releaseName,
-          valuesObject: values,
-        },
+                releaseName: releaseName,
+              } +
+              if valuesToString then { values: std.manifestJson(values) } else { valuesObject: values },
       },
     },
   },

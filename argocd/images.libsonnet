@@ -15,5 +15,10 @@
       chartUrl: 'https://helm.twun.io',
       chartVersion: '2.2.3',
     },
+    kube_prometheus: {
+      chart: 'kube-prometheus-stack',
+      chartUrl: 'https://prometheus-community.github.io/helm-charts',
+      chartVersion: '66.7.1',
+    },
   },
 }
