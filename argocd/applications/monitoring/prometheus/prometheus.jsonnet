@@ -11,6 +11,11 @@ argocd.applicationHelm(
   valuesToString=true,
   values={
     namespaceOverride: 'monitoring',
+    crds: {
+      upgradeJob: {
+        enabled: true,
+      },
+    },
     grafana: {
       smtp: {
         existingSecret: 'prometheus-secret',
