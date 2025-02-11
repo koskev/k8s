@@ -18,7 +18,7 @@
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
       chartUrl: 'https://prometheus-community.github.io/helm-charts',
-      chartVersion: '67.11.0',
+      chartVersion: '68.5.0',
     },
   },
 }
