@@ -20,5 +20,10 @@
       chartUrl: 'https://prometheus-community.github.io/helm-charts',
       chartVersion: '68.5.0',
     },
+    cert_manager: {
+      chart: 'cert-manager',
+      repoURL: 'https://charts.jetstack.io',
+      targetRevision: 'v1.17.0',
+    },
   },
 }
