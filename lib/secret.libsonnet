@@ -1,5 +1,5 @@
 {
-  externalSecretExtract(name, namespace, key, labels={}):: {
+  externalSecretExtract(name, namespace, key=name, labels={}):: {
     apiVersion: 'external-secrets.io/v1beta1',
     kind: 'ExternalSecret',
     metadata: {

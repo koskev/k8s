@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.10.0"
+  required_version = "~> 1.9.0"
   required_providers {
     sops = {
       source = "carlpett/sops"
@@ -47,7 +47,7 @@ resource "vault_kubernetes_auth_backend_role" "example" {
 
 
 data "sops_file" "secrets" {
-  for_each = fileset(path.module, "secrets/*.json")
+  for_each = fileset(path.module, "secrets/*.{json,yaml}")
   source_file = each.value
 }
 

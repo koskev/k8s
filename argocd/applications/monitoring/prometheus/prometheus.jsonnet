@@ -1,119 +1,122 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.kube_prometheus;
+local secret = import 'secret.libsonnet';
+local storage = import 'storage.libsonnet';
 
-argocd.applicationHelm(
-  name='kube-prometheus',
-  targetnamespace='monitoring',
-  chart=chart,
-  releaseName='prometheus',
-  valuesToString=true,
-  values={
-    namespaceOverride: 'monitoring',
-    crds: {
-      upgradeJob: {
-        enabled: true,
-      },
-    },
-    grafana: {
-      smtp: {
-        existingSecret: 'prometheus-secret',
-        userKey: 'smtp_user',
-        passwordKey: 'smtp_password',
-      },
-      'grafana.ini': {
-        server: {
-          root_url: 'https://grafana.kokev.de',
+[
+  storage.localPersistentVolume(
+    name='grafana-pv',
+    namespace='monitoring',
+    sizeGB=10,
+    path='/mnt/shared_data/k8s/prometheus/grafana_data',
+    storageClass='local'
+  ),
+  storage.localPersistentVolume(
+    name='prometheus-db',
+    namespace='monitoring',
+    sizeGB=10,
+    path='/mnt/shared_data/k8s/prometheus/prometheus_data',
+    storageClass='local'
+  ),
+
+  secret.externalSecretExtract('prometheus-secret', 'monitoring'),
+
+  argocd.applicationHelm(
+    name='kube-prometheus',
+    targetnamespace='monitoring',
+    chart=chart,
+    releaseName='prometheus',
+    valuesToString=true,
+    values={
+      namespaceOverride: 'monitoring',
+      crds: {
+        upgradeJob: {
+          enabled: true,
         },
+      },
+      grafana: {
         smtp: {
-          enabled: true,
-          host: 'mail.kokev.de:465',
-          from_address: 'grafana@kokev.de',
+          existingSecret: 'prometheus-secret',
+          userKey: 'smtp_user',
+          passwordKey: 'smtp_password',
         },
-        'auth.jwt': {
-          enabled: true,
-          header_name: 'X-AUTH-TOKEN',
-          username_claim: 'sub',
-          email_claim: 'sub',
-          key_file: '/jwt/jwt.pub',
-          url_login: true,
-          auto_sign_up: true,
-        },
-      },
-      persistence: {
-        type: 'sts',
-        enabled: true,
-        storageClassName: 'local',
-        selectorLabels: {
-          storage: 'grafana',
-        },
-      },
-      extraSecretMounts: [
-        {
-          name: 'jwt-key',
-          mountPath: '/jwt',
-          secretName: 'jwt-secret',
-          readOnly: true,
-          subpath: 'jwt.pub',
-        },
-      ],
-      ingress: {
-        enabled: true,
-        ingressClassName: 'nginx',
-        annotations: {
-          'cert-manager.io/cluster-issuer': 'kokev-issuer',
-        },
-        paths: [
-          '/',
-        ],
-        hosts: [
-          'grafana.kokev.de',
-        ],
-        tls: [
-          {
-            hosts: [
-              'grafana.kokev.de',
-            ],
-            secretName: 'grafana-tls',
+        'grafana.ini': {
+          server: {
+            root_url: 'https://grafana.kokev.de',
           },
-        ],
-      },
-    },
-    prometheus: {
-      prometheusSpec: {
-        podMonitorSelector: {
-          matchLabels: null,
+          smtp: {
+            enabled: true,
+            host: 'mail.kokev.de:465',
+            from_address: 'grafana@kokev.de',
+          },
         },
-        ruleSelector: {
-          matchLabels: null,
+        persistence: {
+          type: 'sts',
+          enabled: true,
+          storageClassName: 'local',
+          selectorLabels: {
+            storage: 'grafana',
+          },
         },
-        serviceMonitorSelector: {
-          matchLabels: null,
-        },
-        probeSelector: {
-          matchLabels: null,
-        },
-        storageSpec: {
-          volumeClaimTemplate: {
-            spec: {
-              accessModes: [
-                'ReadWriteOnce',
+        ingress: {
+          enabled: true,
+          ingressClassName: 'nginx',
+          annotations: {
+            'cert-manager.io/cluster-issuer': 'kokev-issuer',
+          },
+          paths: [
+            '/',
+          ],
+          hosts: [
+            'grafana.kokev.de',
+          ],
+          tls: [
+            {
+              hosts: [
+                'grafana.kokev.de',
               ],
-              volumeName: 'prometheus-db',
-              storageClassName: 'local',
-              resources: {
-                requests: {
-                  storage: '10Gi',
+              secretName: 'grafana-tls',
+            },
+          ],
+        },
+      },
+      prometheus: {
+        prometheusSpec: {
+          podMonitorSelector: {
+            matchLabels: null,
+          },
+          ruleSelector: {
+            matchLabels: null,
+          },
+          serviceMonitorSelector: {
+            matchLabels: null,
+          },
+          probeSelector: {
+            matchLabels: null,
+          },
+          storageSpec: {
+            volumeClaimTemplate: {
+              spec: {
+                accessModes: [
+                  'ReadWriteOnce',
+                ],
+                volumeName: 'prometheus-db',
+                storageClassName: 'local',
+                resources: {
+                  requests: {
+                    storage: '10Gi',
+                  },
                 },
               },
             },
           },
-        },
-        additionalScrapeConfigsSecret: {
-          enabled: true,
-          name: 'prometheus-secret',
-          key: 'server_config',
+          additionalScrapeConfigsSecret: {
+            enabled: true,
+            name: 'prometheus-secret',
+            key: 'server_config',
+          },
         },
       },
-    },
-  }
-)
+    }
+  ),
+]
