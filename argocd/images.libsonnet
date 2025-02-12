@@ -22,13 +22,13 @@
     },
     cert_manager: {
       chart: 'cert-manager',
-      repoURL: 'https://charts.jetstack.io',
-      targetRevision: 'v1.17.0',
+      chartUrl: 'https://charts.jetstack.io',
+      chartVersion: 'v1.17.0',
     },
     external_secrets: {
       chart: 'external-secrets',
-      repoURL: 'https://charts.external-secrets.io',
-      targetRevision: '0.14.1',
+      chartUrl: 'https://charts.external-secrets.io',
+      chartVersion: '0.14.1',
     },
   },
 }
