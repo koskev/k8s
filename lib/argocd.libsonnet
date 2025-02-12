@@ -34,7 +34,7 @@
       },
     },
   },
-  applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values, valuesToString=false):: self.application(name, targetnamespace) + {
+  applicationHelm(name, targetnamespace, chart, chartUrl, chartVersion, releaseName, values={}, valuesToString=false):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
         chart: chart,
