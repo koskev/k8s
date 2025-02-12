@@ -30,6 +30,11 @@
       repoURL: 'https://charts.external-secrets.io',
       targetRevision: '0.14.1',
     },
+    external_postgres_operator: {
+      chart: 'ext-postgres-operator',
+      repoURL: 'https://movetokube.github.io/postgres-operator',
+      targetRevision: '1.2.6',
+    },
     cnpg: {
       chart: 'cloudnative-pg',
       repoURL: 'https://cloudnative-pg.github.io/charts',
