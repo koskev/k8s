@@ -20,35 +20,35 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
-      - name: hass
-        image: ghcr.io/home-assistant/home-assistant:2025.2.1
-        ports:
-        - containerPort: 8123
-          protocol: TCP
-        volumeMounts:
-        - name: hass-config
-          mountPath: /config
-        - name: db-config
-          mountPath: /config/database.yaml
-          subPath: database.yaml
-        env:
-          - name: DISABLE_JEMALLOC
-            value: "true"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8123
-          initialDelaySeconds: 500
-          periodSeconds: 60
-          timeoutSeconds: 10
-          failureThreshold: 5
-        resources:
-          requests:
-            memory: "512Mi"
+        - name: hass
+          image: ghcr.io/home-assistant/home-assistant:2025.2.2
+          ports:
+            - containerPort: 8123
+              protocol: TCP
+          volumeMounts:
+            - name: hass-config
+              mountPath: /config
+            - name: db-config
+              mountPath: /config/database.yaml
+              subPath: database.yaml
+          env:
+            - name: DISABLE_JEMALLOC
+              value: "true"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8123
+            initialDelaySeconds: 500
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 5
+          resources:
+            requests:
+              memory: "512Mi"
       volumes:
-      - name: hass-config
-        hostPath:
-          path: /mnt/shared_data/k8s/hass/config
-      - name: db-config
-        secret:
-          secretName: hass-db-secret-hass
+        - name: hass-config
+          hostPath:
+            path: /mnt/shared_data/k8s/hass/config
+        - name: db-config
+          secret:
+            secretName: hass-db-secret-hass
