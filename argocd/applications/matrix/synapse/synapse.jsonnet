@@ -14,9 +14,7 @@ local chart = (import 'images.libsonnet').helm.synapse;
   argocd.applicationHelm(
     name='synapse',
     targetnamespace='matrix',
-    chart=chart.chart,
-    chartUrl=chart.chartUrl,
-    chartVersion=chart.chartVersion,
+    chart=chart,
     releaseName='synapse',
     values={
       argoCD: true,

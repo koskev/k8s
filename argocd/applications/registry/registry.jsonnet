@@ -14,9 +14,7 @@ local chart = (import 'images.libsonnet').helm.registry;
   argocd.applicationHelm(
     name='registry',
     targetnamespace='registry',
-    chart=chart.chart,
-    chartUrl=chart.chartUrl,
-    chartVersion=chart.chartVersion,
+    chart=chart,
     releaseName='registry',
     values={
       persistence: {

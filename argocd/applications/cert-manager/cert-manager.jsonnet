@@ -4,9 +4,7 @@ local chart = (import 'images.libsonnet').helm.cert_manager;
 argocd.applicationHelm(
   name='cert-manager',
   targetnamespace='cert-manager',
-  chart=chart.chart,
-  chartUrl=chart.chartUrl,
-  chartVersion=chart.chartVersion,
+  chart=chart,
   releaseName='cert-manager',
   values={
     installCRDs: true,

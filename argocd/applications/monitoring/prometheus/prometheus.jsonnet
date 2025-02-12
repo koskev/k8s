@@ -4,9 +4,7 @@ local chart = (import 'images.libsonnet').helm.kube_prometheus;
 argocd.applicationHelm(
   name='kube-prometheus',
   targetnamespace='monitoring',
-  chart=chart.chart,
-  chartUrl=chart.chartUrl,
-  chartVersion=chart.chartVersion,
+  chart=chart,
   releaseName='prometheus',
   valuesToString=true,
   values={

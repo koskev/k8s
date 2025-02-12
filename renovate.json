@@ -23,7 +23,7 @@
       "fileMatch": ["images.libsonnet"],
       "datasourceTemplate": "helm",
       "matchStrings": [
-        "chart:\\s?'(?<depName>.*?)',\\s*chartUrl:\\s?'(?<registryUrl>.*?)',\\s*chartVersion:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
       ]
     }
   ]

@@ -4,9 +4,7 @@ local chart = (import 'images.libsonnet').helm.argocd;
 argocd.applicationHelm(
   name='argocd',
   targetnamespace='argocd',
-  chart=chart.chart,
-  chartUrl=chart.chartUrl,
-  chartVersion=chart.chartVersion,
+  chart=chart,
   releaseName='argocd',
   values={
     global: {

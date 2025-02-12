@@ -37,13 +37,10 @@
   applicationHelm(
     name,
     targetnamespace,
-    chart='',
-    chartUrl='',
-    chartVersion='',
+    chart,
     releaseName,
     values={},
     valuesToString=false,
-    chartObject={ chartUrl: chartUrl, chartVersion: chartVersion, chart: chart }
   ):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
@@ -51,7 +48,7 @@
                 releaseName: releaseName,
               } +
               if valuesToString then { values: std.manifestJson(values) } else { valuesObject: values },
-      } + chartObject,
+      } + chart,
     },
   },
 }
