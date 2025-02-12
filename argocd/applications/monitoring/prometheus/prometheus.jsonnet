@@ -9,14 +9,14 @@ local storage = import 'storage.libsonnet';
     namespace='monitoring',
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/grafana_data',
-    storageClass='local'
+    storageclass='local'
   ),
   storage.localPersistentVolume(
     name='prometheus-db',
     namespace='monitoring',
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/prometheus_data',
-    storageClass='local'
+    storageclass='local'
   ),
 
   secret.externalSecretExtract('prometheus-secret', 'monitoring'),
