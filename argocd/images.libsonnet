@@ -18,7 +18,7 @@
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
       repoURL: 'https://prometheus-community.github.io/helm-charts',
-      targetRevision: '68.5.0',
+      targetRevision: '69.2.4',
     },
     cert_manager: {
       chart: 'cert-manager',
