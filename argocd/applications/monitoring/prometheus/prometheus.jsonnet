@@ -9,7 +9,10 @@ local storage = import 'storage.libsonnet';
     namespace='monitoring',
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/grafana_data',
-    storageclass='local'
+    storageclass='local',
+    labels={
+      storage: 'grafana',
+    },
   ),
   storage.localPersistentVolume(
     name='prometheus-db',

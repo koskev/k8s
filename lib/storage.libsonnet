@@ -1,10 +1,11 @@
 {
-  localPersistentVolume(name, namespace, sizeGB, path, storageclass, hostname=null):: {
+  localPersistentVolume(name, namespace, sizeGB, path, storageclass, hostname=null, labels={}):: {
     apiVersion: 'v1',
     kind: 'PersistentVolume',
     metadata: {
       name: name,
       namespace: namespace,
+      labels: labels,
     },
     spec: {
       accessModes: ['ReadWriteOnce'],
