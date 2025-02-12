@@ -30,5 +30,10 @@
       repoURL: 'https://charts.external-secrets.io',
       targetRevision: '0.14.1',
     },
+    cnpg: {
+      chart: 'cloudnative-pg',
+      repoURL: 'https://cloudnative-pg.github.io/charts',
+      targetRevision: '0.23.0',
+    },
   },
 }

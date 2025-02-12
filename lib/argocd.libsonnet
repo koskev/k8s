@@ -38,7 +38,7 @@
     name,
     targetnamespace,
     chart,
-    releaseName,
+    releaseName=name,
     values={},
     valuesToString=false,
   ):: self.application(name, targetnamespace) + {
