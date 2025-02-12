@@ -3,35 +3,38 @@ local chart = (import 'images.libsonnet').helm.kube_prometheus;
 local secret = import 'secret.libsonnet';
 local storage = import 'storage.libsonnet';
 
+
+local namespace = 'monitoring';
+local storageclass = 'local';
 [
   storage.localPersistentVolume(
     name='grafana-pv',
-    namespace='monitoring',
+    namespace=namespace,
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/grafana_data',
-    storageclass='local',
+    storageclass=storageclass,
     labels={
       storage: 'grafana',
     },
   ),
   storage.localPersistentVolume(
     name='prometheus-db',
-    namespace='monitoring',
+    namespace=namespace,
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/prometheus_data',
-    storageclass='local'
+    storageclass=storageclass
   ),
 
-  secret.externalSecretExtract('prometheus-secret', 'monitoring'),
+  secret.externalSecretExtract('prometheus-secret', namespace),
 
   argocd.applicationHelm(
     name='kube-prometheus',
-    targetnamespace='monitoring',
+    targetnamespace=namespace,
     chart=chart,
     releaseName='prometheus',
     valuesToString=true,
     values={
-      namespaceOverride: 'monitoring',
+      namespaceOverride: namespace,
       crds: {
         upgradeJob: {
           enabled: true,
@@ -56,7 +59,7 @@ local storage = import 'storage.libsonnet';
         persistence: {
           type: 'sts',
           enabled: true,
-          storageClassName: 'local',
+          storageClassName: storageclass,
           selectorLabels: {
             storage: 'grafana',
           },
@@ -104,7 +107,7 @@ local storage = import 'storage.libsonnet';
                   'ReadWriteOnce',
                 ],
                 volumeName: 'prometheus-db',
-                storageClassName: 'local',
+                storageClassName: storageclass,
                 resources: {
                   requests: {
                     storage: '10Gi',
