@@ -40,5 +40,10 @@
       repoURL: 'https://cloudnative-pg.github.io/charts',
       targetRevision: '0.23.0',
     },
+    emqx: {
+      chart: 'emqx',
+      repoURL: 'https://repos.emqx.io/charts',
+      targetRevision: '5.8.4',
+    },
   },
 }
