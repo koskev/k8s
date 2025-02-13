@@ -17,7 +17,7 @@ local apps = [
 
 [
   argocd.applicationRepo(
-    name=app,
+    name='%s-app' % app,
     targetnamespace='argocd',
     path='argocd/applications/%s' % app,
     url='https://github.com/koskev/k8s',
