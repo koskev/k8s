@@ -15,7 +15,7 @@ local chart = (import 'images.libsonnet').helm.registry;
     name='registry',
     targetnamespace='registry',
     chart=chart,
-    releaseName='registry',
+    releaseName='registry-chart',
     values={
       persistence: {
         storageClass: 'local-registry',
