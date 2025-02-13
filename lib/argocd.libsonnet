@@ -23,11 +23,10 @@
     spec+: {
       source+: {
         directory: {
-          recurse: recurse,
           jsonnet: {
             libs: ['lib', 'argocd'],
           },
-        },
+        } + if recurse then { recurse: recurse } else {},
         path: path,
         repoURL: url,
         targetRevision: revision,
