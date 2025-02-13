@@ -45,5 +45,10 @@
       repoURL: 'https://repos.emqx.io/charts',
       targetRevision: '5.8.4',
     },
+    hms: {
+      chart: 'hms-mqtt-chart',
+      repoURL: 'https://koskev.github.io/hms-mqtt-publisher',
+      targetRevision: '0.1.6',
+    },
   },
 }
