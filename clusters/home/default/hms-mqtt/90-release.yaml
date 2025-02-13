@@ -23,7 +23,7 @@ spec:
     spec:
       chart: hms-mqtt-chart
       reconcileStrategy: ChartVersion
-      version: 0.1.5
+      version: 0.1.6
       sourceRef:
         kind: HelmRepository
         name: hms-mqtt-chart
