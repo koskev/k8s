@@ -51,4 +51,10 @@
       targetRevision: '0.1.6',
     },
   },
+  container: {
+    renovate: {
+      image: 'renovate/renovate',
+      tag: '39.169.3',
+    },
+  },
 }

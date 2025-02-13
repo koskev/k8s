@@ -25,6 +25,14 @@
       "matchStrings": [
         "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
       ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["images.libsonnet"],
+      "datasourceTemplate": "docker",
+      "matchStrings": [
+        "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+      ]
     }
   ]
 }
