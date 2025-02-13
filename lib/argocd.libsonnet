@@ -19,7 +19,7 @@
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url, revision='HEAD', recurse=false):: self.application(name, targetnamespace) + {
+  applicationRepo(name, targetnamespace, path, url='https://github.com/koskev/k8s', revision='HEAD', recurse=false):: self.application(name, targetnamespace) + {
     spec+: {
       source+: {
         directory: {
