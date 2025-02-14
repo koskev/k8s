@@ -60,6 +60,11 @@
       repoURL: 'https://openbao.github.io/openbao-helm',
       targetRevision: '0.8.1',
     },
+    ping_exporter: {
+      chart: 'ping-exporter',
+      repoURL: 'https://raw.githubusercontent.com/czerwonk/ping_exporter/main/dist/charts',
+      targetRevision: '1.1.0',
+    },
   },
   container: {
     renovate: {
