@@ -71,7 +71,7 @@ local cluster = {
     },
     key='cnpg-cluster-admin',
     data={
-      POSTGRES_HOST: '%s-rw.postgres' % clusterName,
+      POSTGRES_HOST: '%s-rw' % clusterName,
       POSTGRES_USER: '{{ .username }}',
       POSTGRES_PASS: '{{ .password }}',
       POSTGRES_URI_ARGS: '',
