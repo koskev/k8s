@@ -55,6 +55,11 @@
       repoURL: 'https://metallb.github.io/metallb',
       targetRevision: '0.14.9',
     },
+    openbao: {
+      chart: 'openbao',
+      repoURL: 'https://openbao.github.io/openbao-helm',
+      targetRevision: '0.8.1',
+    },
   },
   container: {
     renovate: {
