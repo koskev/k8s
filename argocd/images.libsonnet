@@ -65,6 +65,11 @@
       repoURL: 'https://raw.githubusercontent.com/czerwonk/ping_exporter/main/dist/charts',
       targetRevision: '1.1.0',
     },
+    brouter: {
+      chart: 'brouter',
+      repoURL: 'https://koskev.github.io/brouter-chart',
+      targetRevision: '0.1.23',
+    },
   },
   container: {
     renovate: {
