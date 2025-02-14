@@ -50,6 +50,11 @@
       repoURL: 'https://koskev.github.io/hms-mqtt-publisher',
       targetRevision: '0.1.6',
     },
+    metallb: {
+      chart: 'metallb',
+      repoURL: 'https://metallb.github.io/metallb',
+      targetRevision: '0.14.9',
+    },
   },
   container: {
     renovate: {
