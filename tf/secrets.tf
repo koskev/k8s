@@ -9,11 +9,18 @@ terraform {
       source = "hashicorp/vault"
       version = "~> 4.6.0"
     }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.35.1"
+    }
   }
 }
 
 provider "vault" {}
 provider "sops" {}
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+}
 
 resource "vault_auth_backend" "kubernetes" {
   type = "kubernetes"
@@ -45,9 +52,13 @@ resource "vault_kubernetes_auth_backend_role" "example" {
   token_policies                   = ["external-secrets"]
 }
 
-
 data "sops_file" "secrets" {
-  for_each = fileset(path.module, "secrets/*.{json,yaml}")
+  for_each = fileset("${path.module}/secrets", "*/*.{json,yaml}")
+  source_file = "secrets/${each.value}"
+}
+
+data "sops_file" "openbao_secrets" {
+  for_each = fileset(path.module, "openbao_secrets/*.{json,yaml}")
   source_file = each.value
 }
 
@@ -60,8 +71,17 @@ resource "vault_mount" "secrets" {
 }
 
 resource "vault_kv_secret_v2" "secrets" {
-  for_each = data.sops_file.secrets
+  for_each = data.sops_file.openbao_secrets
   mount                      = vault_mount.secrets.path
   name                       = split(".", basename(each.key))[0]
   data_json                  =  jsonencode(each.value.data)
+}
+
+resource "kubernetes_secret" "secrets" {
+  for_each = data.sops_file.secrets
+  metadata {
+    name                       = split(".", basename(each.key))[0]
+    namespace = dirname(each.key)
+  }
+  data = each.value.data
 }

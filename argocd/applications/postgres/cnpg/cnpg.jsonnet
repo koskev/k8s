@@ -63,22 +63,4 @@ local cluster = {
   ),
   cluster,
   storage.localStorageClass(storageClass),
-  secret.externalSecretTemplate(
-    name=secretName,
-    namespace='postgres',
-    labels={
-      'cnpg.io/reload': 'true',
-    },
-    key='cnpg-cluster-admin',
-    data={
-      POSTGRES_HOST: '%s-rw.postgres' % clusterName,
-      POSTGRES_USER: '{{ .username }}',
-      POSTGRES_PASS: '{{ .password }}',
-      POSTGRES_URI_ARGS: '',
-      POSTGRES_CLOUD_PROVIDER: '',
-      POSTGRES_DEFAULT_DATABASE: 'postgres',
-      username: '{{ .username }}',
-      password: '{{ .password }}',
-    }
-  ),
 ] + pvs
