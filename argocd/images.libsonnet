@@ -90,5 +90,9 @@
       image: 'dock.mau.dev/mautrix/signal',
       tag: 'v0.7.5',
     },
+    yqgo: {
+      image: 'mikefarah/yq',
+      tag: '4.45.1',
+    },
   },
 }

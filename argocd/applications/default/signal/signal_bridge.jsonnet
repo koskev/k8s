@@ -1,5 +1,6 @@
 local secret = import 'secret.libsonnet';
 local image = (import 'images.libsonnet').container.signal_bridge;
+local yqgo = (import 'images.libsonnet').container.yqgo;
 local k8s = import 'k8s.libsonnet';
 
 local name = 'signal-bridge';
@@ -9,11 +10,15 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
   k8s.secret.externalSecretExtract(
-    name=name,
+    name='%s-database-uri' % name,
     namespace=namespace,
     key='%s-%s' % [name, name],
     templateData={
-      uri: '{{ .POSTGRES_URL }}?sslmode=disable',
+      'config.yaml':
+        |||
+          database:
+            uri: '{{ .POSTGRES_URL }}?sslmode=disable'
+        |||,
     },
     secretStoreRef={
       name: name,
@@ -44,6 +49,29 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
           },
         },
         spec: {
+          initContainers: [{
+            name: 'prepare-config',
+            image: '%s:%s' % [yqgo.image, yqgo.tag],
+            command: ['/bin/sh'],
+            args: [
+              '-c',
+              "yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/config.yaml /db/config.yaml > /out/config.yaml",
+            ],
+            volumeMounts: [
+              {
+                name: 'signal-bridge-config',
+                mountPath: '/out/',
+              },
+              {
+                name: 'signal-bridge-config-secret',
+                mountPath: '/data',
+              },
+              {
+                name: 'signal-bridge-database-uri',
+                mountPath: '/db',
+              },
+            ],
+          }],
           containers: [
             {
               name: name,
@@ -67,6 +95,10 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
               volumeMounts: [
                 {
                   name: 'signal-bridge-config',
+                  mountPath: '/new_data',
+                },
+                {
+                  name: 'signal-bridge-config-secret',
                   mountPath: '/data',
                 },
               ],
@@ -80,8 +112,18 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
           volumes: [
             {
               name: 'signal-bridge-config',
+              emptyDir: {},
+            },
+            {
+              name: 'signal-bridge-config-secret',
               secret: {
                 secretName: 'signal-bridge-config',
+              },
+            },
+            {
+              name: 'signal-bridge-database-uri',
+              secret: {
+                secretName: 'signal-bridge-database-uri',
               },
             },
           ],
