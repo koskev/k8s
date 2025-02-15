@@ -98,5 +98,9 @@
       image: 'mikefarah/yq',
       tag: '4.45.1',
     },
+    nginx: {
+      image: 'nginx',
+      tag: '1.25.4-alpine3.18',
+    },
   },
 }
