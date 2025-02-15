@@ -90,6 +90,10 @@
       image: 'dock.mau.dev/mautrix/signal',
       tag: 'v0.7.5',
     },
+    whatsapp_bridge: {
+      image: 'dock.mau.dev/mautrix/whatsapp',
+      tag: 'v0.10.9',
+    },
     yqgo: {
       image: 'mikefarah/yq',
       tag: '4.45.1',
