@@ -1,11 +1,14 @@
-local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.emqx;
-local secret = import 'secret.libsonnet';
+local k8s = import 'k8s.libsonnet';
 
 local secretName = 'emqx-secret';
 [
-  secret.externalSecretExtract(secretName, 'default'),
-  argocd.applicationHelm(
+  k8s.db.database('emqx', 'default'),
+  k8s.db.user('emqx', 'default', secretTemplate={
+    EMQX_AUTHENTICATION__1__SERVER: '{{ .Host }}:{{ .Port }}',
+  }),
+  k8s.secret.externalSecretExtract(secretName, 'default'),
+  k8s.argocd.applicationHelm(
     name='emqx',
     targetnamespace='default',
     chart=chart,
