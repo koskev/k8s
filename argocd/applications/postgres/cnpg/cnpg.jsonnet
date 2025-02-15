@@ -3,30 +3,27 @@ local secret = import 'secret.libsonnet';
 local storage = import 'storage.libsonnet';
 local chart = (import 'images.libsonnet').helm.cnpg;
 
-local storageClass = 'postgres-local';
-local clusterName = 'cluster-main';
-local secretName = 'cluster-admin-secret';
-
+local config = import 'config.libsonnet';
 
 local pvs = [
-  storage.localPersistentVolume('postgres-db-optiplex', 'postgres', 10, '/mnt/hdd_gluster/postgres_data', storageClass, 'optiplex'),
-  storage.localPersistentVolume('postgres-db-server', 'postgres', 10, '/mnt/hdd_gluster/postgres_data', storageClass, 'raspberrypi-server'),
-  storage.localPersistentVolume('postgres-db-server2', 'postgres', 10, '/mnt/glusterfs/postgres_data', storageClass, 'rpi-server2'),
+  storage.localPersistentVolume('postgres-db-optiplex', config.namespace, 10, '/mnt/hdd_gluster/postgres_data', config.storageClass, 'optiplex'),
+  storage.localPersistentVolume('postgres-db-server', config.namespace, 10, '/mnt/hdd_gluster/postgres_data', config.storageClass, 'raspberrypi-server'),
+  storage.localPersistentVolume('postgres-db-server2', config.namespace, 10, '/mnt/glusterfs/postgres_data', config.storageClass, 'rpi-server2'),
 ];
 
 local cluster = {
   apiVersion: 'postgresql.cnpg.io/v1',
   kind: 'Cluster',
   metadata: {
-    name: clusterName,
-    namespace: 'postgres',
+    name: config.clusterName,
+    namespace: config.namespace,
   },
   spec:
     {
       instances: 3,
       storage: {
         size: '3Gi',
-        storageClass: storageClass,
+        storageClass: config.storageClass,
       },
       monitoring: {
         enablePodMonitor: true,
@@ -42,7 +39,7 @@ local cluster = {
                 login: true,
                 superuser: true,
                 passwordSecret: {
-                  name: secretName,
+                  name: config.secretName,
                 },
               },
             ],
@@ -53,7 +50,7 @@ local cluster = {
 [
   argocd.applicationHelm(
     name='cloudnative-pg',
-    targetnamespace='postgres',
+    targetnamespace=config.namespace,
     chart=chart,
     values={
       monitoring: {
@@ -62,5 +59,5 @@ local cluster = {
     }
   ),
   cluster,
-  storage.localStorageClass(storageClass),
+  storage.localStorageClass(config.storageClass),
 ] + pvs

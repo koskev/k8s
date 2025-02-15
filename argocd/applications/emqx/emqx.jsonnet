@@ -1,6 +1,8 @@
 local chart = (import 'images.libsonnet').helm.emqx;
 local k8s = import 'k8s.libsonnet';
 
+local cnpgConfig = import 'applications/postgres/cnpg/config.libsonnet';
+
 local name = 'emqx';
 local namespace = 'emqx';
 
@@ -13,7 +15,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
     secretName,
     namespace,
     templateData={
-      EMQX_AUTHENTICATION__1__SERVER: '{{ .HOST }}',
+      EMQX_AUTHENTICATION__1__SERVER: cnpgConfig.host.readOnly,
       EMQX_AUTHENTICATION__1__DATABASE: '{{ .DATABASE_NAME }}',
       EMQX_AUTHENTICATION__1__PASSWORD: '{{ .PASSWORD }}',
       EMQX_AUTHENTICATION__1__USERNAME: '{{ .ROLE }}',
@@ -76,7 +78,6 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
         EMQX_AUTHENTICATION__1__MECHANISM: 'password_based',
         EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: 'bcrypt',
         EMQX_AUTHENTICATION__1__QUERY: 'SELECT password_hash FROM mqtt_user where username = ${username} LIMIT 1',
-        EMQX_AUTHENTICATION__1__SERVER: 'postgresql-service.default:5432',
         EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__CERTFILE: '/tmp/ssl/tls.crt',
         EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__KEYFILE: '/tmp/ssl/tls.key',
       },
