@@ -9,7 +9,7 @@ local secret = import 'secret.libsonnet';
     targetnamespace='postgres',
     chart=chart,
     values={
-      existingSecret: 'cluster-admin-secret',
+      existingSecret: 'cnpg-cluster-admin',
     },
   ),
 ]

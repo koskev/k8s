@@ -3,7 +3,7 @@
   clusterName: 'cluster-main',
   namespace: 'postgres',
   storageClass: 'postgres-local',
-  secretName: 'cluster-admin-secret',
+  secretName: 'cnpg-cluster-admin',
 
   host: {
     local getHost(type) = '%s-%s.%s' % [selfConfig.clusterName, type, selfConfig.namespace],
