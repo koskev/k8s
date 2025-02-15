@@ -14,6 +14,7 @@ local apps = [
   'registry',
   'storage',
   'emqx',
+  'reloader',
 ];
 
 [

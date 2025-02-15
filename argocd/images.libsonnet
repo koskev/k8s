@@ -70,6 +70,11 @@
       repoURL: 'https://koskev.github.io/brouter-chart',
       targetRevision: '0.1.23',
     },
+    reloader: {
+      chart: 'reloader',
+      repoURL: 'https://stakater.github.io/stakater-charts',
+      targetRevision: '1.2.1',
+    },
   },
   container: {
     renovate: {
