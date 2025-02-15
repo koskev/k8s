@@ -22,7 +22,7 @@
       },
       spec: {
         role: role,
-        database: namespace,
+        database: database,
         secretName: secretName,
         privileges: privileges,
       } + if secretTemplate != null then { secretTemplate: secretTemplate } else {},

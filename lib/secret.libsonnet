@@ -91,7 +91,7 @@
       },
     },
   ],
-  externalSecretExtract(name, namespace, key=name, labels={}, additionalDataFrom=[], templateData={}):: {
+  externalSecretExtract(name, namespace, key=name, labels={}, additionalDataFrom=[], templateData={}, secretStoreRef={ kind: 'ClusterSecretStore', name: 'vault-secrets' }):: {
     apiVersion: 'external-secrets.io/v1beta1',
     kind: 'ExternalSecret',
     metadata: {
@@ -101,10 +101,7 @@
     },
     spec: {
       refreshInterval: '1h',
-      secretStoreRef: {
-        kind: 'ClusterSecretStore',
-        name: 'vault-secrets',
-      },
+      secretStoreRef: secretStoreRef,
       target: {
         template: {
           engineVersion: 'v2',

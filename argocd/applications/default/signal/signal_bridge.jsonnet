@@ -1,14 +1,31 @@
 local secret = import 'secret.libsonnet';
 local image = (import 'images.libsonnet').container.signal_bridge;
+local k8s = import 'k8s.libsonnet';
 
 local name = 'signal-bridge';
+local namespace = 'default';
+k8s.secret.secretStoreKubernetes(name, namespace) +
 [
+  k8s.db.database(name, namespace),
+  k8s.db.user(name, namespace),
+  k8s.secret.externalSecretExtract(
+    name=name,
+    namespace=namespace,
+    key='%s-%s' % [name, name],
+    templateData={
+      uri: '{{ .POSTGRES_URL }}?sslmode=disable',
+    },
+    secretStoreRef={
+      name: name,
+      kind: 'SecretStore',
+    }
+  ),
   {
     apiVersion: 'apps/v1',
     kind: 'StatefulSet',
     metadata: {
       name: name,
-      namespace: 'default',
+      namespace: namespace,
       labels: {
         app: name,
       },
@@ -77,7 +94,7 @@ local name = 'signal-bridge';
     kind: 'Service',
     metadata: {
       name: 'signal-bridge-service',
-      namespace: 'default',
+      namespace: namespace,
       labels: {
         app: name,
       },
@@ -103,5 +120,5 @@ local name = 'signal-bridge';
       type: 'ClusterIP',
     },
   },
-  secret.externalSecretExtract('signal-bridge-config', 'default'),
+  secret.externalSecretExtract('signal-bridge-config', namespace),
 ]
