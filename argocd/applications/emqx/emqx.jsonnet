@@ -1,16 +1,19 @@
 local chart = (import 'images.libsonnet').helm.emqx;
 local k8s = import 'k8s.libsonnet';
 
+local name = 'emqx';
+local namespace = 'emqx';
+
 local secretName = 'emqx-secret';
 [
-  k8s.db.database('emqx', 'default'),
-  k8s.db.user('emqx', 'default', secretTemplate={
+  k8s.db.database('emqx', namespace),
+  k8s.db.user('emqx', namespace, secretTemplate={
     EMQX_AUTHENTICATION__1__SERVER: '{{ .Host }}:{{ .Port }}',
   }),
-  k8s.secret.externalSecretExtract(secretName, 'default'),
+  k8s.secret.externalSecretExtract(secretName, namespace),
   k8s.argocd.applicationHelm(
     name='emqx',
-    targetnamespace='default',
+    targetnamespace=namespace,
     chart=chart,
     releaseName='emqx',
     values={
@@ -51,7 +54,7 @@ local secretName = 'emqx-secret';
         EMQX_AUTHENTICATION__1__MECHANISM: 'password_based',
         EMQX_AUTHENTICATION__1__PASSWORD_HASH_ALGORITHM__NAME: 'bcrypt',
         EMQX_AUTHENTICATION__1__QUERY: 'SELECT password_hash FROM mqtt_user where username = ${username} LIMIT 1',
-        EMQX_AUTHENTICATION__1__SERVER: 'postgresql-service:5432',
+        EMQX_AUTHENTICATION__1__SERVER: 'postgresql-service.default:5432',
         EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__CERTFILE: '/tmp/ssl/tls.crt',
         EMQX_LISTENERS__SSL__DEFAULT__SSL_OPTIONS__KEYFILE: '/tmp/ssl/tls.key',
       },

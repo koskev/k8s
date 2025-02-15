@@ -13,6 +13,7 @@ local apps = [
   'postgres',
   'registry',
   'storage',
+  'emqx',
 ];
 
 [

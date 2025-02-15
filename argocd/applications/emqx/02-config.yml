@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: emqx-config
-  namespace: default
+  namespace: emqx
 data:
   acl.conf: |-
     {allow, {username, {re, "^dashboard$"}}, subscribe, ["$SYS/#"]}.
