@@ -5,6 +5,7 @@ local cnpgConfig = import 'applications/postgres/cnpg/config.libsonnet';
 
 local name = 'emqx';
 local namespace = 'emqx';
+local configName = 'emqx-config';
 
 local secretName = 'emqx-secret';
 k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
@@ -60,15 +61,15 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
       },
       extraVolumes: [
         {
-          name: 'emqx-config',
+          name: configName,
           configMap: {
-            name: 'emqx-config',
+            name: configName,
           },
         },
       ],
       extraVolumeMounts: [
         {
-          name: 'emqx-config',
+          name: configName,
           mountPath: '/opt/emqx/etc/acl.conf',
           subPath: 'acl.conf',
         },
@@ -121,4 +122,36 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 
     },
   ),
+  {
+    apiVersion: 'v1',
+    kind: 'ConfigMap',
+    metadata: {
+      name: configName,
+      namespace: namespace,
+    },
+    data: {
+      'acl.conf':
+        |||
+          {allow, {username, {re, "^dashboard$"}}, subscribe, ["$SYS/#"]}.
+          {allow, {username, "kevin"}, all, ["#"]}.
+
+          {allow, {ipaddr, "127.0.0.1"}, all, ["$SYS/#", "#"]}.
+
+          {deny, all, subscribe, ["$SYS/#", {eq, "#"}]}.
+
+          {allow, {username, "esphome"}, all, ["esphome/#", "homeassistant/#"]}.
+          {allow, {username, "eq3"}, all, ["eq3_radin/#", "eq3_radout/#", "homeassistant/#"]}.
+          {allow, {username, "hass"}, all, ["#"]}.
+          {allow, {username, "mqtt-exporter"}, all, ["#"]}.
+          {allow, {username, "telegraf"}, all, ["#"]}.
+          {allow, {username, "zigbee2mqtt"}, all, ["zigbee2mqtt/#", "homeassistant/#", "solar/#"]}.
+          {allow, {username, "hms"}, all, ["hms800wt2/#", "homeassistant/#", "solar/#"]}.
+          {allow, {username, "octoprint"}, all, ["zigbee2mqtt/#", "octoPrint/#"]}.
+
+          {allow, {username, "node-red"}, all, ["#"]}.
+
+          {deny, all}.
+        |||,
+    },
+  },
 ]
