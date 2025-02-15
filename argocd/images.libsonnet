@@ -102,5 +102,9 @@
       image: 'nginx',
       tag: '1.25.4-alpine3.18',
     },
+    synapse: {
+      image: 'matrixdotorg/synapse',
+      tag: 'v1.124.0',
+    },
   },
 }
