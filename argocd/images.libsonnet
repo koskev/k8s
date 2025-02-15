@@ -86,5 +86,9 @@
       image: 'renovate/renovate',
       tag: '39.169.3',
     },
+    signal_bridge: {
+      image: 'dock.mau.dev/mautrix/signal',
+      tag: 'v0.7.5',
+    },
   },
 }
