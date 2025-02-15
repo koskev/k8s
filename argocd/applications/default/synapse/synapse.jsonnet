@@ -1,14 +1,36 @@
 local synapse = (import 'images.libsonnet').container.synapse;
+local yqgo = (import 'images.libsonnet').container.yqgo;
 local k8s = import 'k8s.libsonnet';
 
 local name = 'synapse';
 local namespace = 'default';
 local configName = 'synapse-config';
 
+k8s.secret.secretStoreKubernetes(name, namespace) +
 [
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
   k8s.secret.externalSecretExtract(configName, namespace),
+  k8s.secret.externalSecretExtract(
+    name='%s-database-uri' % name,
+    namespace=namespace,
+    key='%s-%s' % [name, name],
+    templateData={
+      'config.yaml':
+        |||
+          database:
+            args:
+              user: {{ .ROLE }}
+              password: {{ .PASSWORD }}
+              database: {{ .DATABASE_NAME }}
+              host: {{ .HOST }}
+        |||,
+    },
+    secretStoreRef={
+      name: name,
+      kind: 'SecretStore',
+    }
+  ),
   {
     apiVersion: 'v1',
     kind: 'Service',
@@ -58,6 +80,29 @@ local configName = 'synapse-config';
           },
         },
         spec: {
+          initContainers: [{
+            name: 'prepare-config',
+            image: '%s:%s' % [yqgo.image, yqgo.tag],
+            command: ['/bin/sh'],
+            args: [
+              '-c',
+              "cp -rL /data/* /out/ && yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/homeserver.yaml /db/config.yaml > /out/homeserver.yaml",
+            ],
+            volumeMounts: [
+              {
+                name: name,
+                mountPath: '/out/',
+              },
+              {
+                name: configName,
+                mountPath: '/data',
+              },
+              {
+                name: '%s-database-uri' % name,
+                mountPath: '/db',
+              },
+            ],
+          }],
           containers: [
             {
               image: '%s:%s' % [synapse.image, synapse.tag],
@@ -78,7 +123,7 @@ local configName = 'synapse-config';
               ],
               volumeMounts: [
                 {
-                  name: configName,
+                  name: name,
                   mountPath: '/etc/synapse',
                 },
                 {
@@ -119,6 +164,16 @@ local configName = 'synapse-config';
               name: configName,
               secret: {
                 secretName: configName,
+              },
+            },
+            {
+              name: name,
+              emptyDir: {},
+            },
+            {
+              name: '%s-database-uri' % name,
+              secret: {
+                secretName: '%s-database-uri' % name,
               },
             },
           ],
