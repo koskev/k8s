@@ -75,6 +75,11 @@
       repoURL: 'https://stakater.github.io/stakater-charts',
       targetRevision: '1.2.1',
     },
+    ingress_nginx: {
+      chart: 'ingress-nginx',
+      repoURL: 'https://kubernetes.github.io/ingress-nginx',
+      targetRevision: '4.12.0',
+    },
   },
   container: {
     renovate: {
