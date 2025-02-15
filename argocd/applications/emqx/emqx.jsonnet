@@ -9,19 +9,31 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 [
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
-  k8s.secret.externalSecretExtract(secretName, namespace, additionalDataFrom=[
-    {
-      extract: {
-        key: '%s-%s' % [name, name],
-      },
-      sourceRef: {
-        storeRef: {
-          name: '%s-store' % name,
-          kind: 'SecretStore',
+  k8s.secret.externalSecretExtract(
+    secretName,
+    namespace,
+    templateData={
+      EMQX_AUTHENTICATION__1__SERVER: '{{ .HOST }}',
+      EMQX_AUTHENTICATION__1__DATABASE: '{{ .DATABASE_NAME }}',
+      EMQX_AUTHENTICATION__1__PASSWORD: '{{ .PASSWORD }}',
+      EMQX_AUTHENTICATION__1__USERNAME: '{{ .ROLE }}',
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: '{{ .EMQX_DASHBOARD__DEFAULT_PASSWORD }}',
+      EMQX_DASHBOARD__DEFAULT_USERNAME: '{{ .EMQX_DASHBOARD__DEFAULT_USERNAME }}',
+    },
+    additionalDataFrom=[
+      {
+        extract: {
+          key: '%s-%s' % [name, name],
+        },
+        sourceRef: {
+          storeRef: {
+            name: '%s-store' % name,
+            kind: 'SecretStore',
+          },
         },
       },
-    },
-  ]),
+    ]
+  ),
   k8s.argocd.applicationHelm(
     name=name,
     targetnamespace=namespace,
