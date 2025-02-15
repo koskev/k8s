@@ -95,10 +95,6 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
               volumeMounts: [
                 {
                   name: 'signal-bridge-config',
-                  mountPath: '/new_data',
-                },
-                {
-                  name: 'signal-bridge-config-secret',
                   mountPath: '/data',
                 },
               ],
