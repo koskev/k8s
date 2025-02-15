@@ -92,7 +92,7 @@
     },
     whatsapp_bridge: {
       image: 'dock.mau.dev/mautrix/whatsapp',
-      tag: 'v0.10.9',
+      tag: 'v0.11.2',
     },
     yqgo: {
       image: 'mikefarah/yq',
