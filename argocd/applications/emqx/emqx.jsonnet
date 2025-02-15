@@ -7,14 +7,25 @@ local namespace = 'emqx';
 local secretName = 'emqx-secret';
 k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 [
-  k8s.db.database('emqx', namespace),
-  k8s.db.user('emqx', namespace),
-  k8s.secret.externalSecretExtract(secretName, namespace),
+  k8s.db.database(name, namespace),
+  k8s.db.user(name, namespace),
+  k8s.secret.externalSecretExtract(secretName, namespace, additionalDataFrom=[
+    {
+      extract: {
+        key: '%s-%s' % [name, name],
+      },
+      sourceRef: {
+        storeRef: {
+          name: '%s-store' % name,
+          kind: 'SecretStore',
+        },
+      },
+    },
+  ]),
   k8s.argocd.applicationHelm(
-    name='emqx',
+    name=name,
     targetnamespace=namespace,
     chart=chart,
-    releaseName='emqx',
     values={
       service: {
         type: 'LoadBalancer',

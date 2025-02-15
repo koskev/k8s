@@ -91,7 +91,7 @@
       },
     },
   ],
-  externalSecretExtract(name, namespace, key=name, labels={}):: {
+  externalSecretExtract(name, namespace, key=name, labels={}, additionalDataFrom=[], templateData={}):: {
     apiVersion: 'external-secrets.io/v1beta1',
     kind: 'ExternalSecret',
     metadata: {
@@ -106,6 +106,10 @@
         name: 'vault-secrets',
       },
       target: {
+        template: {
+          engineVersion: 'v2',
+          data: templateData,
+        },
         name: name,
         creationPolicy: 'Owner',
       },
@@ -113,7 +117,7 @@
         extract: {
           key: key,
         },
-      }],
+      }] + additionalDataFrom,
     },
   },
   // TODO: support multiple sources
