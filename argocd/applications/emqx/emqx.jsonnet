@@ -5,11 +5,10 @@ local name = 'emqx';
 local namespace = 'emqx';
 
 local secretName = 'emqx-secret';
+k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 [
   k8s.db.database('emqx', namespace),
-  k8s.db.user('emqx', namespace, secretTemplate={
-    EMQX_AUTHENTICATION__1__SERVER: '{{ .Host }}:{{ .Port }}',
-  }),
+  k8s.db.user('emqx', namespace),
   k8s.secret.externalSecretExtract(secretName, namespace),
   k8s.argocd.applicationHelm(
     name='emqx',

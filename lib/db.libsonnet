@@ -12,7 +12,7 @@
         dropOnDelete: dropOnDelete,
       },
     },
-  user(name, namespace, database=name, secretTemplate={}, privileges='OWNER', secretName=name, role=name)::
+  user(name, namespace, database=name, secretTemplate=null, privileges='OWNER', secretName=name, role=name)::
     {
       apiVersion: 'db.movetokube.com/v1alpha1',
       kind: 'PostgresUser',
@@ -25,8 +25,7 @@
         database: namespace,
         secretName: secretName,
         privileges: privileges,
-        secretTemplate: secretTemplate,
-      },
+      } + if secretTemplate != null then { secretTemplate: secretTemplate } else {},
     },
 
 }

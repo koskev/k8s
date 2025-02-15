@@ -1,5 +1,96 @@
 {
-
+  secretStoreKubernetes(name, namespace):: [
+    {
+      apiVersion: 'rbac.authorization.k8s.io/v1',
+      kind: 'Role',
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      rules: [
+        {
+          apiGroups: [
+            '',
+          ],
+          resources: [
+            'secrets',
+          ],
+          verbs: [
+            'list',
+            'get',
+            'watch',
+          ],
+        },
+        {
+          apiGroups: [
+            'authorization.k8s.io',
+          ],
+          resources: [
+            'selfsubjectrulesreviews',
+          ],
+          verbs: [
+            'create',
+          ],
+        },
+      ],
+    },
+    {
+      apiVersion: 'v1',
+      kind: 'ServiceAccount',
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+    },
+    {
+      apiVersion: 'rbac.authorization.k8s.io/v1',
+      kind: 'RoleBinding',
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      subjects: [
+        {
+          kind: 'ServiceAccount',
+          name: name,
+          namespace: namespace,
+        },
+      ],
+      roleRef: {
+        kind: 'Role',
+        name: name,
+        apiGroup: 'rbac.authorization.k8s.io',
+      },
+    },
+    {
+      apiVersion: 'external-secrets.io/v1beta1',
+      kind: 'SecretStore',
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      spec: {
+        provider: {
+          kubernetes: {
+            remoteNamespace: namespace,
+            server: {
+              caProvider: {
+                type: 'ConfigMap',
+                name: 'kube-root-ca.crt',
+                key: 'ca.crt',
+              },
+            },
+            auth: {
+              serviceAccount: {
+                name: name,
+                namespace: namespace,
+              },
+            },
+          },
+        },
+      },
+    },
+  ],
   externalSecretExtract(name, namespace, key=name, labels={}):: {
     apiVersion: 'external-secrets.io/v1beta1',
     kind: 'ExternalSecret',
