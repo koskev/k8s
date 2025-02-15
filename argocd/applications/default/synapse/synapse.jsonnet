@@ -1,19 +1,27 @@
 local synapse = (import 'images.libsonnet').container.synapse;
+local k8s = import 'k8s.libsonnet';
+
+local name = 'synapse';
+local namespace = 'default';
+local configName = 'synapse-config';
 
 [
+  k8s.db.database(name, namespace),
+  k8s.db.user(name, namespace),
+  k8s.secret.externalSecretExtract(configName, namespace),
   {
     apiVersion: 'v1',
     kind: 'Service',
     metadata: {
       name: 'synapse-service',
-      namespace: 'default',
+      namespace: namespace,
       labels: {
-        app: 'synapse',
+        app: name,
       },
     },
     spec: {
       selector: {
-        app: 'synapse',
+        app: name,
       },
       ports: [
         {
@@ -31,29 +39,29 @@ local synapse = (import 'images.libsonnet').container.synapse;
     kind: 'StatefulSet',
     metadata: {
       name: 'synapse-deployment',
-      namespace: 'default',
+      namespace: namespace,
       labels: {
-        app: 'synapse',
+        app: name,
       },
     },
     spec: {
       serviceName: 'synapse-service',
       selector: {
         matchLabels: {
-          app: 'synapse',
+          app: name,
         },
       },
       template: {
         metadata: {
           labels: {
-            app: 'synapse',
+            app: name,
           },
         },
         spec: {
           containers: [
             {
               image: '%s:%s' % [synapse.image, synapse.tag],
-              name: 'synapse',
+              name: name,
               env: [
                 {
                   name: 'SYNAPSE_CONFIG_PATH',
@@ -70,7 +78,7 @@ local synapse = (import 'images.libsonnet').container.synapse;
               ],
               volumeMounts: [
                 {
-                  name: 'synapse-config',
+                  name: configName,
                   mountPath: '/etc/synapse',
                 },
                 {
@@ -108,9 +116,9 @@ local synapse = (import 'images.libsonnet').container.synapse;
               },
             },
             {
-              name: 'synapse-config',
+              name: configName,
               secret: {
-                secretName: 'synapse-config',
+                secretName: configName,
               },
             },
           ],
