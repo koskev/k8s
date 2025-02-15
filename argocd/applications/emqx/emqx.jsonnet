@@ -8,7 +8,7 @@ local secretName = 'emqx-secret';
 k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 [
   k8s.db.database(name, namespace),
-  k8s.db.user(name, namespace),
+  k8s.db.user(name, namespace, privileges='READ'),
   k8s.secret.externalSecretExtract(
     secretName,
     namespace,
