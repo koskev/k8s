@@ -106,5 +106,9 @@
       image: 'matrixdotorg/synapse',
       tag: 'v1.124.0',
     },
+    navidrome: {
+      image: 'ghcr.io/navidrome/navidrome',
+      tag: '0.54.4',
+    },
   },
 }

@@ -15,6 +15,7 @@ local apps = [
   'storage',
   'emqx',
   'reloader',
+  'navidrome',
 ];
 
 [
