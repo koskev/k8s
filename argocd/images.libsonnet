@@ -106,5 +106,9 @@
       image: 'matrixdotorg/synapse',
       tag: 'v1.124.0',
     },
+    mealie: {
+      image: 'ghcr.io/mealie-recipes/mealie',
+      tag: 'v2.6.0',
+    },
   },
 }
