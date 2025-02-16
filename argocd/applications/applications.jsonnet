@@ -15,7 +15,6 @@ local apps = [
   'storage',
   'emqx',
   'reloader',
-  'mealie',
 ];
 
 [
