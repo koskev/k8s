@@ -108,7 +108,7 @@
     },
     navidrome: {
       image: 'ghcr.io/navidrome/navidrome',
-      tag: '0.54.4',
+      tag: '0.54.5',
     },
   },
 }
