@@ -19,8 +19,9 @@
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url='https://github.com/koskev/k8s', revision='HEAD', recurse=false):: self.application(name, targetnamespace) + {
+  applicationRepo(name, targetnamespace, path, url='https://github.com/koskev/k8s', revision='HEAD', recurse=false, project='gpg'):: self.application(name, targetnamespace) + {
     spec+: {
+      project: project,
       source+: {
         directory: {
           jsonnet: {
@@ -48,6 +49,37 @@
               } +
               if valuesToString then { values: std.manifestJson(values) } else { valuesObject: values },
       } + chart,
+    },
+  },
+  appProject(name, keys=[]):: {
+    apiVersion: 'argoproj.io/v1alpha1',
+    kind: 'AppProject',
+    metadata: {
+      name: name,
+      namespace: 'argocd',
+    },
+    spec: {
+      clusterResourceWhitelist: [
+        {
+          group: '*',
+          kind: '*',
+        },
+      ],
+      destinations: [
+        {
+          namespace: '*',
+          server: '*',
+        },
+      ],
+      signatureKeys: [
+        {
+          keyID: id,
+        }
+        for id in keys
+      ],
+      sourceRepos: [
+        '*',
+      ],
     },
   },
 }
