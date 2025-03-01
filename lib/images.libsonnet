@@ -120,6 +120,11 @@
       repoURL: 'ghcr.io/immich-app/immich-charts',
       targetRevision: '0.12.0',
     },
+    authentik: {
+      chart: 'authentik',
+      repoURL: 'https://charts.goauthentik.io',
+      targetRevision: '2026.5.0',
+    },
   },
   container: {
     renovate: {
