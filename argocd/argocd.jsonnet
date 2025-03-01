@@ -8,6 +8,9 @@ local chart = (import 'images.libsonnet').helm.argocd;
     chart=chart,
     releaseName='argocd',
     values={
+      dex: {
+        enabled: false,
+      },
       global: {
         domain: 'argocd.kokev.de',
       },
