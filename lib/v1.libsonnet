@@ -16,6 +16,7 @@
         ports:
           [
             {
+              name: '%d-tcp' % port,
               protocol: 'TCP',
               port: port,
               targetPort: port,
@@ -24,6 +25,8 @@
           ] +
           [
             {
+              // TODO: support name in parameter
+              name: '%d-udp' % port,
               protocol: 'UDP',
               port: port,
               targetPort: port,
