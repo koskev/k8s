@@ -80,11 +80,6 @@
       repoURL: 'https://kubernetes.github.io/ingress-nginx',
       targetRevision: '4.12.0',
     },
-    teleport: {
-      chart: 'teleport-cluster',
-      repoURL: 'https://charts.releases.teleport.dev',
-      targetRevision: '17.3.0',
-    },
   },
   container: {
     renovate: {
