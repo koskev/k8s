@@ -8,6 +8,10 @@ local namespace = 'trivy';
     name=name,
     targetnamespace=namespace,
     chart=chart,
-    values={},
+    values={
+      serviceMonitor: {
+        enabled: true,
+      },
+    }
   ),
 ]
