@@ -116,7 +116,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
         {
           maxSkew: 1,
           topologyKey: 'kubernetes.io/hostname',
-          whenUnsatisfiable: 'ScheduleAnyway',
+          whenUnsatisfiable: 'DoNotSchedule',
         },
       ],
 
