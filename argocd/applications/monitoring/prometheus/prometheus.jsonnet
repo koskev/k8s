@@ -50,12 +50,46 @@ local storageclass = 'local';
         },
       },
       grafana: {
+        envValueFrom: {
+          POSTGRES_HOST: {
+            secretKeyRef: {
+              name: 'grafana-grafana',
+              key: 'HOST',
+            },
+          },
+          POSTGRES_DATABASE: {
+            secretKeyRef: {
+              name: 'grafana-grafana',
+              key: 'DATABASE_NAME',
+            },
+          },
+          POSTGRES_USER: {
+            secretKeyRef: {
+              name: 'grafana-grafana',
+              key: 'LOGIN',
+            },
+          },
+          POSTGRES_PASSWORD: {
+            secretKeyRef: {
+              name: 'grafana-grafana',
+              key: 'PASSWORD',
+            },
+          },
+        },
         smtp: {
           existingSecret: 'prometheus-secret',
           userKey: 'smtp_user',
           passwordKey: 'smtp_password',
         },
         'grafana.ini': {
+          database: {
+            type: 'postgres',
+            host: '$__env{POSTGRES_HOST}',
+            name: '$__env{POSTGRES_DATABASE}',
+            user: '$__env{POSTGRES_USER}',
+            password: '$__env{POSTGRES_PASSWORD}',
+            ssl_mode: 'disable',
+          },
           server: {
             root_url: 'https://grafana.kokev.de',
           },
