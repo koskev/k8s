@@ -80,11 +80,6 @@
       repoURL: 'https://kubernetes.github.io/ingress-nginx',
       targetRevision: '4.12.0',
     },
-    authentik: {
-      chart: 'authentik',
-      repoURL: 'https://charts.goauthentik.io',
-      targetRevision: '2025.2.1',
-    },
   },
   container: {
     renovate: {
