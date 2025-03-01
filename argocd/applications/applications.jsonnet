@@ -12,7 +12,7 @@ local apps = [
   'openbao',
   'postgres',
   'registry',
-  'storage',
+  //  'storage',
   'emqx',
   'reloader',
   'navidrome',
