@@ -16,7 +16,6 @@ local apps = [
   'emqx',
   'reloader',
   'navidrome',
-  'authelia',
 ];
 
 [

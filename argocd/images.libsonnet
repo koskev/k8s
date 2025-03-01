@@ -80,11 +80,6 @@
       repoURL: 'https://kubernetes.github.io/ingress-nginx',
       targetRevision: '4.12.0',
     },
-    authelia: {
-      chart: 'authelia',
-      repoURL: 'https://charts.authelia.com',
-      targetRevision: '0.9.16',
-    },
   },
   container: {
     renovate: {
