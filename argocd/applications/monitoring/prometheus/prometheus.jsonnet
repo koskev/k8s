@@ -2,6 +2,7 @@ local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.kube_prometheus;
 local secret = import 'secret.libsonnet';
 local storage = import 'storage.libsonnet';
+local k8s = import 'k8s.libsonnet';
 
 
 local namespace = 'monitoring';
@@ -26,6 +27,14 @@ local storageclass = 'local';
   ),
 
   secret.externalSecretExtract('prometheus-secret', namespace),
+  k8s.db.database(
+    name='grafana',
+    namespace=namespace
+  ),
+  k8s.db.user(
+    name='grafana',
+    namespace=namespace,
+  ),
 
   argocd.applicationHelm(
     name='kube-prometheus',
