@@ -1,17 +1,31 @@
-local argocd = import 'argocd.libsonnet';
-local storage = import 'storage.libsonnet';
+local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.synapse;
 
+local namespace = 'matrix';
 [
-  storage.localStorageClass(name='local-synapse'),
-  storage.localPersistentVolume(
+  k8s.db.database('synapse-db', namespace=namespace),
+  k8s.db.user(
+    name='synapse-db-user',
+    namespace=namespace,
+    database='synapse-db',
+    role='synapse',
+    secretTemplate={
+      username: '{{.Role}}',
+      password: '{{.Password}}',
+      database: '{{.Database}}',
+      host: '{{.Host}}',
+    },
+  ),
+  k8s.secret.externalSecretExtract('redis-secret', 'matrix', 'synapse-redis-secret'),
+  k8s.storage.localStorageClass(name='local-synapse'),
+  k8s.storage.localPersistentVolume(
     name='synapse-media-data',
     namespace='matrix',
     sizeGB=20,
     path='/mnt/shared_data/k8s/matrix/data',
     storageclass='local-synapse'
   ),
-  argocd.applicationHelm(
+  k8s.argocd.applicationHelm(
     name='synapse',
     targetnamespace='matrix',
     chart=chart,
