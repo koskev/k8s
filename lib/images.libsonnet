@@ -127,5 +127,9 @@
       image: 'ghcr.io/home-assistant/home-assistant',
       tag: '2025.2.5',
     },
+    grocy: {
+      image: 'linuxserver/grocy',
+      tag: 'v4.0.3-ls221',
+    },
   },
 }
