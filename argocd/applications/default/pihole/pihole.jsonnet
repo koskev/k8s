@@ -37,6 +37,7 @@ externalDNS.permissions() +
     name=name,
     namespace=namespace,
     replicas=3,
+    maxUnavailable=1,
     spec={
       serviceAccountName: 'external-dns',
       securityContext: {

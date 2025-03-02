@@ -1,5 +1,5 @@
 {
-  deployment(name, namespace, spec, replicas=1):: {
+  deployment(name, namespace, spec, replicas=1, maxUnavailable='25%'):: {
     apiVersion: 'apps/v1',
     kind: 'Deployment',
     metadata: {
@@ -10,6 +10,12 @@
       },
     },
     spec: {
+      strategy: {
+        type: 'RollingUpdate',
+        rollingUpdate: {
+          maxUnavailable: maxUnavailable,
+        },
+      },
       replicas: replicas,
       selector: {
         matchLabels: {
