@@ -9,6 +9,9 @@ local namespace = 'trivy';
     targetnamespace=namespace,
     chart=chart,
     values={
+      operator: {
+        metricsVulnIdEnabled: true,
+      },
       serviceMonitor: {
         enabled: true,
       },
