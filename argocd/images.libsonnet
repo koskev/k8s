@@ -119,5 +119,9 @@
       image: 'mumblevoip/mumble-server',
       tag: 'v1.5.634',
     },
+    unbound: {
+      image: 'ghcr.io/koskev/unbound',
+      tag: '2025.03.01',
+    },
   },
 }

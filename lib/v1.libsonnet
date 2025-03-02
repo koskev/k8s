@@ -1,5 +1,5 @@
 {
-  service(name, namespace, app=name, ports=[], udpPorts=[], annotations={}, type='ClusterIP')::
+  service(name, namespace, app=name, ports=[], udpPorts=[], annotations={}, type='ClusterIP', loadBalancerIP=null)::
     {
       apiVersion: 'v1',
       kind: 'Service',
@@ -33,7 +33,7 @@
             }
             for port in udpPorts
           ],
-      },
+      } + if loadBalancerIP == null then {} else { loadBalancerIP: loadBalancerIP },
     },
   namespace(name):: {
     apiVersion: 'v1',
