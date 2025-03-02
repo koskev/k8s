@@ -123,5 +123,9 @@
       image: 'ghcr.io/koskev/unbound',
       tag: '2025.03.01',
     },
+    hass: {
+      image: 'ghcr.io/home-assistant/home-assistant',
+      tag: '2025.2.5',
+    },
   },
 }

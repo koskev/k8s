@@ -1,5 +1,5 @@
 {
-  database(name, namespace, dropOnDelete=false)::
+  database(name, namespace, dropOnDelete=false, databaseName=name)::
     {
       apiVersion: 'db.movetokube.com/v1alpha1',
       kind: 'Postgres',
@@ -8,7 +8,7 @@
         namespace: namespace,
       },
       spec: {
-        database: name,
+        database: databaseName,
         dropOnDelete: dropOnDelete,
       },
     },
