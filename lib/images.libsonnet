@@ -167,5 +167,9 @@
       image: 'ydkn/cups',
       tag: 'latest',
     },
+    syncthing: {
+      image: 'syncthing/syncthing',
+      tag: '1.29',
+    },
   },
 }
