@@ -48,7 +48,7 @@
     hms: {
       chart: 'hms-mqtt-chart',
       repoURL: 'https://koskev.github.io/hms-mqtt-publisher',
-      targetRevision: '0.1.6',
+      targetRevision: '0.1.7',
     },
     metallb: {
       chart: 'metallb',
