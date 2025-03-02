@@ -131,5 +131,9 @@
       image: 'linuxserver/grocy',
       tag: 'v4.0.3-ls221',
     },
+    jellyfin: {
+      image: 'docker.io/jellyfin/jellyfin',
+      tag: '10.10.6',
+    },
   },
 }
