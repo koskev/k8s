@@ -6,6 +6,7 @@
       name: name,
       namespace: namespace,
       annotations: {
+      } + if issuer == null then {} else {
         'cert-manager.io/cluster-issuer': issuer,
       },
     },
@@ -32,6 +33,7 @@
           },
         },
       ],
+    } + if issuer == null then {} else {
       tls: [
         {
           hosts: [

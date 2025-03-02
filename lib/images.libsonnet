@@ -159,5 +159,9 @@
       image: 'registry.k8s.io/external-dns/external-dns',
       tag: 'v0.15.1',
     },
+    sanejs: {
+      image: 'sbs20/scanservjs',
+      tag: 'v3.0.3',
+    },
   },
 }
