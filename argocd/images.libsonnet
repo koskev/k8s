@@ -117,7 +117,7 @@
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
-      tag: 'v1.4.230-6',
+      tag: 'v1.5.634',
     },
   },
 }
