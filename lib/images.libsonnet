@@ -143,5 +143,9 @@
       image: 'ghcr.io/esphome/esphome',
       tag: '2025.2.1',
     },
+    chhoto: {
+      image: 'sintan1729/chhoto-url',
+      tag: '5.6.1',
+    },
   },
 }
