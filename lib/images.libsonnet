@@ -163,5 +163,9 @@
       image: 'sbs20/scanservjs',
       tag: 'v3.0.3',
     },
+    cups: {
+      image: 'ydkn/cups',
+      tag: 'latest',
+    },
   },
 }
