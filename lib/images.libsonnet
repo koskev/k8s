@@ -38,7 +38,7 @@
     cnpg: {
       chart: 'cloudnative-pg',
       repoURL: 'https://cloudnative-pg.github.io/charts',
-      targetRevision: '0.23.1',
+      targetRevision: '0.23.2',
     },
     emqx: {
       chart: 'emqx',
