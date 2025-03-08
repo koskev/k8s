@@ -24,7 +24,6 @@ local apps = [
     name='%s-app' % app,
     targetnamespace='argocd',
     path='argocd/applications/%s' % app,
-    url='https://github.com/koskev/k8s',
     recurse=true
   )
   for app in apps

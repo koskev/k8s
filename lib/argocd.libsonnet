@@ -1,3 +1,4 @@
+local globals = import 'globals.libsonnet';
 {
   application(name, targetnamespace):: {
     apiVersion: 'argoproj.io/v1alpha1',
@@ -19,7 +20,7 @@
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url='https://github.com/koskev/k8s', revision='HEAD', recurse=false, project='gpg'):: self.application(name, targetnamespace) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg'):: self.application(name, targetnamespace) + {
     spec+: {
       project: project,
       source+: {
