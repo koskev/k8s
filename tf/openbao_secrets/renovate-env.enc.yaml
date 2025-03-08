@@ -1,29 +1,29 @@
 # You can set RENOVATE_AUTODISCOVER to true to run Renovate on all repos you have push access to
-RENOVATE_AUTODISCOVER: ENC[AES256_GCM,data:PhvcWLY=,iv:znSNY9U4eAKxuzNFWqJ8H1VT85YAMrb05xYbr8BpXHc=,tag:bY+7LTnC8sAEvo9hE6+ihQ==,type:str]
+RENOVATE_AUTODISCOVER: ENC[AES256_GCM,data:Hu7rk5M=,iv:o5yITZ2OCulWWmNfDIqYmkSn1MB0xgqouYIcBeZAwHQ=,tag:kGNPwPpbFBNLW6/dGdoS/Q==,type:str]
 #RENOVATE_ENDPOINT: 'https://github.company.com/api/v3'
-RENOVATE_GIT_AUTHOR: ENC[AES256_GCM,data:lmNZIPfMLuYQPs6u2aN6/4+PUNdnT4wYS3cqzxiTPD6h4g==,iv:idtPU29v/B4esGUV3oEiaVSeAK5WiHkZljbBNvT5Ymc=,tag:zOhLJhsV5UNoqIewM4ej7A==,type:str]
-RENOVATE_PLATFORM: ENC[AES256_GCM,data:uRAuDSst,iv:88IsroIKcWSdtzXlYG5Psq0l7hL4kvxcFhaRMvdbsFg=,tag:I4+/5OEAxpBq8pEcPg/SaA==,type:str]
-RENOVATE_TOKEN: ENC[AES256_GCM,data:VepuNqGVEgBkc09Qr6tKOFeJgkHK0y6vDyhpJg/rjEGdY7H9DUVOfQ==,iv:y9NFCLpEcegA6k6AHltf9XXpi6DrrHJuRME2/HYOgYI=,tag:oVUGwXawtGJc/wpOpJEigQ==,type:str]
-RENOVATE_GIT_PRIVATE_KEY: ENC[AES256_GCM,data:qaGRSrOuuhyy9ddVPjh74Mh48RAeJvDrFPtpnOhbTRiDbxHih6g5uLSw6bTGSczoXREF0R+LbL/yWn1LW6Qbzb51QSM+qlGSnQ0iUPsuMa/KH7JlgRAjs+rmCVAx0fnKGqficZgndNaZNrO6m8ovLY0+R7DMqqnm+EifQPVz2BOpPsHEZwZ7NM6mRAK2AkhW6+DfGk2KOHLqRetpjE3SrrEi0li39mrf/RNaPShqefNLw+RBItwq7HO8mFOSxCvCOcYZH+MshHVargNGXobVaJ3/fRXXwp8wRn4Wkwg4ebkQqZ264VKqfGNcLOL4oMd7ca8S+EJ6EK4I6wZQ8UDZlUyYUWLBCFq9LDiOqcOG86W5s/fOPKqisFxWQCBLWkezjwLnBWZcSvkjsDMml2jsmeO93ftGHmXbLCkneKJ/TBnOwI4NdSQn5QjBdmbOXuMf6usUvbiSTx0kmmbOwJIgYhwzX38b2aCK+e7j+G5XAa2neiI3RbdVHH/W1tf4qQ/QTe+mwZetux+0OerciwvrwR6R1ErYRpiNAcUFtj3PMAtfcFwc9MIAqU4XtelWql0L06OgBG6X5Ibm+a+10XfG4SbPAnvDUZ5I/5mTDwk=,iv:pOb3jkxX249smr+m9Wa+Xx1r84QZlsFK3V2VYKiAKJ8=,tag:MsOESdZNzoyIaNF2NahFTQ==,type:str]
+RENOVATE_GIT_AUTHOR: ENC[AES256_GCM,data:+so/tUK16DeHjPG9MO5bq4AYZnqvrfUcnIAYEKuJol4=,iv:WuMLDfGYFNe2cG8eWO7BrngGRV0NXLRdyaFU9h1zYaU=,tag:sppJq+Wp0Ut+oQL3B63Z0Q==,type:str]
+RENOVATE_PLATFORM: ENC[AES256_GCM,data:VcZWeQrN,iv:7hBmWN/Rn+bPV9uC2VZP3T49yYs8vD5t2AHGwCBN5FA=,tag:01dCw7ujSsDG1tH7zmEEcA==,type:str]
+RENOVATE_TOKEN: ENC[AES256_GCM,data:4Lqr3jdnsH4C9cuN12Y9z0+LMAIhlCh7Xg2kuvm1DGYXtXqNunXR5w==,iv:CrmMLu/1hZ21fM23MhwOwqyPQCcECSSf9xZljZoNSdY=,tag:+eLavrCcVG7j/ROy0w6ezg==,type:str]
+RENOVATE_GIT_PRIVATE_KEY: ENC[AES256_GCM,data:poZLueQtTlpMYbB8Jx/i4hoeZnESxcEi3wPZ5TH8fYKVli5Jti8A09QbbhXCzdCaqBP3YTBeOr0lmaUqFJJaU4D7SObPBNQVox5qtl0gnUqmtufwDbPja7Wsu8ifBPTm36PhI2H7wFRDEWoR69NCioon8bbEQ2xKpG6d0JGMn7eoYB08gCmUafuLhRyKjG+pZRlvp0Vhu6mhLPfszgRw3TUhiSNdYRw9msoDM37HV0X7P1QcyGjptQnD8mDG3GCe8YO8vnIZw1A827SVPuMBWu5xsImgt0u+Mg32g7pgxfpTBdaJ6JUvbaS5gNVhnRHdI1qjqNyBduTGf5UFInPgnAe5aud21ETEVrsq0uh2OQBOTROvEJ7PMS/l6ygqAbypymOzN1n/GAXuh2PTCLIxfZqWolDop/S60aYrK0CTKUVhQXycVa7+NViEK7xvhmybEFaO9WKboHcP+szGorVki8RoDlLysiLogLeBDuTnHkiMpHzmsX7nPYdvbMWsEcAKYMZgHNaKi6jVM/eS2PgG/Ly2gX6ABw9IyOnqPPLGV7Pu2Wc9MttscJVxnRZc82VhQJ8K+JKGNyPxH99FLDtgeNhJBrV1jTc=,iv:Qa2jHeMXFELo3/9Ta21yr58pCKZMlk6RsRTzeouP1Ug=,tag:ToNcSdqGPXvS8v5Bw8LQ3w==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2025-02-13T19:15:29Z"
-    mac: ENC[AES256_GCM,data:kngpjM1UC8iIfhBWcncuzVeTMn2iL+zMSHtPzNWfEUs+MglreaW4zvatkQZPvw/J+dQY2pQvlY743plNHA+BTdoRRkfqsrgHV+StktSxcapMTadr/F0opz8rT/9hZoYIwJsZas8SQ67mn+wv6ZRDPh8KXwhqxIA3krtPHaeze0k=,iv:/c0/CP0jehHJuTl2479QowpOE470QnDsAc6az6llrG0=,tag:4x6CRGeORZzFab0xyfZWIQ==,type:str]
+    lastmodified: "2025-03-08T09:43:21Z"
+    mac: ENC[AES256_GCM,data:rtLO/BzOwOrVHVFsZIEl7hCMOL9h3PtV8ha0ehL7AKooUVLbHN+ZKliRDyWpDFNQzS4qTgo1cVe1gD/Nlt7fWq3Ws79yNoaAs5RJwFXDStCwyCaRIzE1JkM66ZM0aIvYo7zxFTT01IANj9rk8Ni078GN2ZiRdiyHs1pYujBeM6c=,iv:wd6dfw19xL71oMksaSPNazvNeBJQGfYRCdqF1sjP1N4=,tag:J8RmmrdlkyGZPU5F0+LwQA==,type:str]
     pgp:
-        - created_at: "2025-02-13T19:15:29Z"
+        - created_at: "2025-03-08T09:43:21Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            wV4DJK+IA+cNHtcSAQdAKlB6EvOP11ZD9nskAZZJfucW3gz0fIPaxBUEAuMdfz8w
-            I/ruBwhySMBsBG1eYasBCndjRDtII38UCc5uWluP2pY8xxHYPy8OvYNdbXkOhfmp
-            0lEBNEOP6P+95P85tnhE8nu3o6vruZueEyajm6Uq9HzPubLoiEC+dWimSv+iPmHh
-            L/jaege6R+f+Zf9YAjXFy9ipy7E6VNsOaFxPEKhUQ8tcVHk=
-            =0Obb
+            wV4DJK+IA+cNHtcSAQdAeG6BzdO3G2UzhpXWK8X3nj8cFYHBfvlmfabtb2xzVgEw
+            LfN6adOzJgt0YDI3dtfhdqf+DuZy6aAYqZ8sRXd8H+U0lqQGpbDX9eyDv544l7t0
+            0lEBabfBGQscjJt5eozKsrhVVwzZYnVE0susQZuQX2XSqR32wwu1v+HvrceAp4CZ
+            SwtW/vy5CSBLKPf6K01Ji8VGhkcOBtw0AALxoesvipfEnXc=
+            =beS9
             -----END PGP MESSAGE-----
           fp: 7ED71373082E0FE0F90239710233D0893BBB9872
     encrypted_regex: ^(.*)$
-    version: 3.9.1
+    version: 3.9.4
