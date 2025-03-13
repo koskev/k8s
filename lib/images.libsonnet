@@ -171,5 +171,9 @@
       image: 'syncthing/syncthing',
       tag: '1.29',
     },
+    brouter_react: {
+      image: 'ghcr.io/koskev/brouter-react',
+      tag: '2025.03.10',
+    },
   },
 }

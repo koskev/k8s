@@ -1,5 +1,6 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.brouter;
+local image = (import 'images.libsonnet').container.brouter_react;
 
 
 argocd.applicationHelm(
@@ -31,7 +32,8 @@ argocd.applicationHelm(
     brouter_react: {
       enabled: true,
       image: {
-        repository: 'ghcr.io/koskev/brouter-react',
+        repository: image.image,
+        tag: image.tag,
         pullPolicy: 'Always',
       },
     },
