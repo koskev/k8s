@@ -1,5 +1,10 @@
 {
   deployment(name, namespace, spec, replicas=1, maxUnavailable='25%'):: {
+    assert std.isString(name),
+    assert std.isString(namespace),
+    assert std.isObject(spec),
+    assert std.isNumber(replicas),
+    assert std.isString(maxUnavailable),
     apiVersion: 'apps/v1',
     kind: 'Deployment',
     metadata: {
@@ -33,6 +38,11 @@
     },
   },
   statefulSet(name, namespace, spec, serviceName=name, replicas=1):: {
+    assert std.isString(name),
+    assert std.isString(namespace),
+    assert std.isObject(spec),
+    assert std.isString(serviceName),
+    assert std.isNumber(replicas),
     apiVersion: 'apps/v1',
     kind: 'StatefulSet',
     metadata: {
