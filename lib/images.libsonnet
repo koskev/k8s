@@ -93,7 +93,7 @@
     },
     signal_bridge: {
       image: 'dock.mau.dev/mautrix/signal',
-      tag: 'v0.8.0',
+      tag: 'v0.8.1',
     },
     whatsapp_bridge: {
       image: 'dock.mau.dev/mautrix/whatsapp',
