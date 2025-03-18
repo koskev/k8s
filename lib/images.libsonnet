@@ -173,7 +173,7 @@
     },
     brouter_react: {
       image: 'ghcr.io/koskev/brouter-react',
-      tag: '2025.03.10',
+      tag: '2025.03.17',
     },
   },
 }
