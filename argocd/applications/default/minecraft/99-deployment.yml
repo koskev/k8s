@@ -24,7 +24,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: papermc
-        image: ghcr.io/koskev/lazypaper:2025.03.10
+        image: ghcr.io/koskev/lazypaper:2025.03.17
         imagePullPolicy: "Always"
         volumeMounts:
         - name: papermc-data
