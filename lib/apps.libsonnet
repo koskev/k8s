@@ -4,7 +4,7 @@
     assert std.isString(namespace),
     assert std.isObject(spec),
     assert std.isNumber(replicas),
-    assert std.isString(maxUnavailable),
+    assert std.isString(maxUnavailable) || std.isNumber(maxUnavailable),
     apiVersion: 'apps/v1',
     kind: 'Deployment',
     metadata: {
