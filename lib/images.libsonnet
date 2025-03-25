@@ -43,7 +43,7 @@
     emqx: {
       chart: 'emqx',
       repoURL: 'https://repos.emqx.io/charts',
-      targetRevision: '5.8.5',
+      targetRevision: '5.8.6',
     },
     hms: {
       chart: 'hms-mqtt-chart',
