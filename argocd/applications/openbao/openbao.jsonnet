@@ -40,6 +40,7 @@ local chart = (import 'images.libsonnet').helm.openbao;
         enabled: true,
       },
       server: {
+        updateStrategyType: 'RollingUpdate',
         ingress: {
           enabled: true,
           annotations: {
