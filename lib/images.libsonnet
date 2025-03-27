@@ -8,7 +8,7 @@
     synapse: {
       chart: 'matrix-synapse',
       repoURL: 'https://ananace.gitlab.io/charts',
-      targetRevision: '3.11.6',
+      targetRevision: '3.11.7',
     },
     registry: {
       chart: 'docker-registry',
