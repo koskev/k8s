@@ -16,7 +16,7 @@ local apps = {
   emqx: false,
   reloader: false,
   navidrome: false,
-
+  trivy: false,
 };
 
 [
