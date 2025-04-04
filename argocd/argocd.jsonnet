@@ -1,10 +1,12 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.argocd;
+local k8s = import 'k8s.libsonnet';
 
+local namespace = 'argocd';
 [
   argocd.applicationHelm(
     name='argocd',
-    targetnamespace='argocd',
+    targetnamespace=namespace,
     chart=chart,
     releaseName='argocd',
     values={
@@ -13,6 +15,10 @@ local chart = (import 'images.libsonnet').helm.argocd;
       },
       global: {
         domain: 'argocd.kokev.de',
+      },
+      redisSecretInit: {
+        // Disable and get from bao due to infinite job bug
+        enabled: false,
       },
       redis: {
         image: {
@@ -66,4 +72,5 @@ local chart = (import 'images.libsonnet').helm.argocd;
     }
   ),
   argocd.appProject('gpg', ['BE449B7420CD3C60']),
+  k8s.secret.externalSecretExtract('argocd-redis', namespace),
 ]
