@@ -177,7 +177,7 @@
     },
     valkey: {
       image: 'valkey/valkey',
-      tag: '8.0.2-alpine',
+      tag: '8.1.0-alpine',
     },
   },
 }
