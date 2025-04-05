@@ -1,5 +1,6 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.argocd;
+local valkey = (import 'images.libsonnet').container.valkey;
 local k8s = import 'k8s.libsonnet';
 
 local namespace = 'argocd';
@@ -22,8 +23,8 @@ local namespace = 'argocd';
       },
       redis: {
         image: {
-          repository: 'valkey/valkey',
-          tag: '8.0.2-alpine',
+          repository: valkey.image,
+          tag: valkey.tag,
         },
       },
       configs: {

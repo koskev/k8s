@@ -175,5 +175,9 @@
       image: 'ghcr.io/koskev/brouter-react',
       tag: '2025.03.31',
     },
+    valkey: {
+      image: 'valkey/valkey',
+      tag: '8.0.2-alpine',
+    },
   },
 }
