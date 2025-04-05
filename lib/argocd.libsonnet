@@ -46,7 +46,8 @@ local globals = import 'globals.libsonnet';
     releaseName=name,
     values={},
     valuesToString=false,
-  ):: self.application(name, targetnamespace) + {
+    autosync=false,
+  ):: self.application(name, targetnamespace, autosync=autosync) + {
     spec+: {
       source+: {
         helm: {

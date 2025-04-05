@@ -19,8 +19,10 @@ local chart = (import 'images.libsonnet').helm.registry;
     values={
       fullnameOverride: 'registry',
       persistence: {
+        enabled: true,
         storageClass: 'local-registry',
       },
-    }
+    },
+    autosync=true,
   ),
 ]
