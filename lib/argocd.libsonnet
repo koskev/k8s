@@ -88,4 +88,25 @@ local globals = import 'globals.libsonnet';
       ],
     },
   },
+  appSettings(name, autosync=true, recursive=true):: {
+    assert std.isString(name),
+    assert std.isBoolean(autosync),
+    assert std.isBoolean(recursive),
+    name: name,
+    autosync: autosync,
+    recursive: recursive,
+  },
+  addApps(appSettings):: [
+    assert std.objectHas(app, 'name');
+    assert std.objectHas(app, 'autosync');
+    assert std.objectHas(app, 'recursive');
+    self.applicationRepo(
+      name='%s-app' % app.name,
+      targetnamespace='argocd',
+      path='argocd/applications/%s' % app.name,
+      recurse=app.recursive,
+      autosync=app.autosync,
+    )
+    for app in appSettings
+  ],
 }
