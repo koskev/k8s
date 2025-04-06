@@ -195,5 +195,9 @@
       image: 'lscr.io/linuxserver/wireguard',
       tag: '1.0.20210914-r4-ls68',
     },
+    papermc: {
+      image: 'ghcr.io/koskev/lazypaper',
+      tag: '2025.03.17',
+    },
   },
 }
