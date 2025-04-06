@@ -1,6 +1,6 @@
 local globals = import 'globals.libsonnet';
 {
-  application(name, targetnamespace, autosync=false):: {
+  application(name, targetnamespace, autosync=true):: {
     apiVersion: 'argoproj.io/v1alpha1',
     kind: 'Application',
     metadata: {
@@ -24,7 +24,7 @@ local globals = import 'globals.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg', autosync=false):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg', autosync=true):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
@@ -46,7 +46,7 @@ local globals = import 'globals.libsonnet';
     releaseName=name,
     values={},
     valuesToString=false,
-    autosync=false,
+    autosync=true,
   ):: self.application(name, targetnamespace, autosync=autosync) + {
     spec+: {
       source+: {
