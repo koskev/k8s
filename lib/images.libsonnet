@@ -179,5 +179,13 @@
       image: 'valkey/valkey',
       tag: '8.1.0-alpine',
     },
+    telegraf: {
+      image: 'telegraf',
+      tag: '1.34.1-alpine',
+    },
+    influxdb: {
+      image: 'influxdb',
+      tag: '2.7.11-alpine',
+    },
   },
 }
