@@ -187,5 +187,9 @@
       image: 'influxdb',
       tag: '2.7.11-alpine',
     },
+    octoprint: {
+      image: 'octoprint/octoprint',
+      tag: '1.10.3',
+    },
   },
 }
