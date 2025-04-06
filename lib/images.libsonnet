@@ -191,5 +191,9 @@
       image: 'octoprint/octoprint',
       tag: '1.10.3',
     },
+    wireguard: {
+      image: 'lscr.io/linuxserver/wireguard',
+      tag: '1.0.20210914-r4-ls68',
+    },
   },
 }
