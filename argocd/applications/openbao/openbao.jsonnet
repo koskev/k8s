@@ -1,37 +1,24 @@
-local argocd = import 'argocd.libsonnet';
+local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.openbao;
 
+local name = 'openbao';
+local namespace = 'openbao';
+
+local host = 'vault.kokev.de';
+
 [
-  {
-    apiVersion: 'db.movetokube.com/v1alpha1',
-    kind: 'Postgres',
-    metadata: {
-      name: 'openbao',
-      namespace: 'openbao',
+  k8s.db.database(
+    name=name,
+    namespace=namespace,
+  ),
+  k8s.db.user(
+    name=name,
+    namespace=namespace,
+    secretTemplate={
+      POSTGRES_URL_NO_SSL: 'postgresql://{{.Role}}:{{.Password}}@{{.Host}}/{{.Database}}?sslmode=disable',
     },
-    spec: {
-      database: 'openbao',
-      dropOnDelete: false,
-    },
-  },
-  {
-    apiVersion: 'db.movetokube.com/v1alpha1',
-    kind: 'PostgresUser',
-    metadata: {
-      name: 'openbao',
-      namespace: 'openbao',
-    },
-    spec: {
-      role: 'openbao',
-      database: 'openbao',
-      secretName: 'openbao',
-      privileges: 'OWNER',
-      secretTemplate: {
-        POSTGRES_URL_NO_SSL: 'postgresql://{{.Role}}:{{.Password}}@{{.Host}}/{{.Database}}?sslmode=disable',
-      },
-    },
-  },
-  argocd.applicationHelm(
+  ),
+  k8s.argocd.applicationHelm(
     name='openbao',
     targetnamespace='openbao',
     chart=chart,
@@ -49,14 +36,14 @@ local chart = (import 'images.libsonnet').helm.openbao;
           ingressClassName: 'nginx',
           hosts: [
             {
-              host: 'vault.kokev.de',
+              host: host,
             },
           ],
           tls: [
             {
               secretName: 'vault-tls',
               hosts: [
-                'vault.kokev.de',
+                host,
               ],
             },
           ],
@@ -83,7 +70,7 @@ local chart = (import 'images.libsonnet').helm.openbao;
           {
             envName: 'BAO_PG_CONNECTION_URL',
             secretKey: 'POSTGRES_URL_NO_SSL',
-            secretName: 'openbao-openbao',
+            secretName: '%s-%s' % [name, name],
           },
         ],
       },
