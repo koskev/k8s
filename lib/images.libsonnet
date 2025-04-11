@@ -199,5 +199,9 @@
       image: 'ghcr.io/koskev/lazypaper',
       tag: '2025.03.17',
     },
+    paperless: {
+      image: 'ghcr.io/paperless-ngx/paperless-ngx',
+      tag: '2.15.1',
+    },
   },
 }
