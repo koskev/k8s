@@ -1,7 +1,8 @@
 local chart = (import 'images.libsonnet').helm.emqx;
 local k8s = import 'k8s.libsonnet';
+local globals = import 'globals.libsonnet';
 
-local cnpgConfig = import 'applications/postgres/cnpg/config.libsonnet';
+local cnpgConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
 
 local name = 'emqx';
 local namespace = 'emqx';
@@ -44,7 +45,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
     values={
       service: {
         type: 'LoadBalancer',
-        loadBalancerIP: '192.168.10.5',
+        loadBalancerIP: globals.ips.emqx,
         annotations: {
           'external-dns.alpha.kubernetes.io/hostname': 'mqtt.kokev.de',
         },

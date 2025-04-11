@@ -30,7 +30,7 @@ local globals = import 'globals.libsonnet';
       source+: {
         directory: {
           jsonnet: {
-            libs: ['lib', 'argocd'],
+            libs: ['lib', 'argocd', '.'],
           },
         } + if recurse then { recurse: recurse } else {},
         path: path,

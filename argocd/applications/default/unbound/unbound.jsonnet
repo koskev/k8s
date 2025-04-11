@@ -1,5 +1,6 @@
 local image = (import 'images.libsonnet').container.unbound;
 local k8s = import 'k8s.libsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'unbound';
 local namespace = 'default';
@@ -33,7 +34,7 @@ local namespace = 'default';
     app=name,
     udpPorts=[53],
     type='LoadBalancer',
-    loadBalancerIP='192.168.10.6',
+    loadBalancerIP=globals.ips.unbound,
   ),
   k8s.apps.deployment(
     name=name,

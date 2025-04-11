@@ -1,5 +1,6 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.wireguard;
+local globals = import 'globals.libsonnet';
 
 local name = 'wireguard';
 local namespace = 'default';
@@ -12,7 +13,7 @@ local port = 51820;
     namespace=namespace,
     udpPorts=[port],
     type='LoadBalancer',
-    loadBalancerIP='192.168.10.10',
+    loadBalancerIP=globals.ips.wireguard,
   ),
   k8s.apps.deployment(
     name=name,
