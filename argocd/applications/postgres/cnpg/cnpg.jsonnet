@@ -1,5 +1,4 @@
 local argocd = import 'argocd.libsonnet';
-local secret = import 'secret.libsonnet';
 local storage = import 'storage.libsonnet';
 local chart = (import 'images.libsonnet').helm.cnpg;
 

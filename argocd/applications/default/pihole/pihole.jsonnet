@@ -1,6 +1,7 @@
 local externalDNS = import './externaldns.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.pihole;
+local globals = import 'globals.libsonnet';
 
 local name = 'pihole';
 local namespace = 'default';
@@ -26,7 +27,7 @@ externalDNS.permissions() +
     ports=[53, 80],
     udpPorts=[53],
     type='LoadBalancer',
-    loadBalancerIP='192.168.10.2',
+    loadBalancerIP=globals.ips.pihole,
   ),
   k8s.secret.externalSecretExtract(
     name='pihole-secret',

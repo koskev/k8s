@@ -1,5 +1,6 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.ingress_nginx;
+local globals = import 'globals.libsonnet';
 
 argocd.applicationHelm(
   name='ingress-nginx-external',
@@ -9,7 +10,7 @@ argocd.applicationHelm(
     controller: {
       allowSnippetAnnotations: true,
       service: {
-        loadBalancerIP: '192.168.10.4',
+        loadBalancerIP: globals.ips.ingress_nginx_external,
       },
       config: {
         'proxy-body-size': '50m',
