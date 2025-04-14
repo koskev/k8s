@@ -201,7 +201,7 @@
     },
     paperless: {
       image: 'ghcr.io/paperless-ngx/paperless-ngx',
-      tag: '2.15.1',
+      tag: '2.15.2',
     },
   },
 }
