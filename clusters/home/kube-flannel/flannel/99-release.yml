@@ -17,7 +17,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: flannel
-      version: v0.26.6
+      version: v0.26.7
   interval: 1m0s
   values:
     flannel:
