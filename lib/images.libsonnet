@@ -181,7 +181,7 @@
     },
     telegraf: {
       image: 'telegraf',
-      tag: '1.34.1-alpine',
+      tag: '1.34.2-alpine',
     },
     influxdb: {
       image: 'influxdb',
