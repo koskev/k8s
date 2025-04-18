@@ -11,6 +11,9 @@ argocd.applicationHelm(
       allowSnippetAnnotations: true,
       service: {
         loadBalancerIP: globals.ips.ingress_nginx,
+        annotations: {
+          'metallb.io/allow-shared-ip': 'nginx',
+        },
       },
       config: {
         'proxy-body-size': '50m',

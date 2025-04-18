@@ -17,6 +17,7 @@ local apps = [
   argocd.appSettings(name='navidrome'),
   argocd.appSettings(name='trivy'),
   argocd.appSettings(name='paperless'),
+  argocd.appSettings(name='forgejo'),
 ];
 
 argocd.addApps(apps)

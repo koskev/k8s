@@ -85,6 +85,11 @@
       repoURL: 'https://aquasecurity.github.io/helm-charts/',
       targetRevision: '0.27.0',
     },
+    forgejo: {
+      chart: 'forgejo',
+      repoURL: 'code.forgejo.org/forgejo-helm',
+      targetRevision: '12.0.0',
+    },
   },
   container: {
     renovate: {
