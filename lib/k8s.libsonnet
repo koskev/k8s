@@ -6,4 +6,5 @@
   apps:: import 'apps.libsonnet',
   v1:: import 'v1.libsonnet',
   networking:: import 'networking.libsonnet',
+  builder:: import 'builder/builder.libsonnet',
 }

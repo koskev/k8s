@@ -18,6 +18,7 @@ local apps = [
   argocd.appSettings(name='trivy'),
   argocd.appSettings(name='paperless'),
   argocd.appSettings(name='forgejo'),
+  argocd.appSettings(name='automation'),
 ];
 
 argocd.addApps(apps)
