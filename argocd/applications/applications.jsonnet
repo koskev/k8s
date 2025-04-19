@@ -11,7 +11,6 @@ local apps = [
   argocd.appSettings(name='monitoring'),
   argocd.appSettings(name='openbao'),
   argocd.appSettings(name='postgres'),
-  argocd.appSettings(name='registry'),
   argocd.appSettings(name='emqx'),
   argocd.appSettings(name='reloader'),
   argocd.appSettings(name='navidrome'),
