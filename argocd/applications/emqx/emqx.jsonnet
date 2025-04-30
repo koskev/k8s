@@ -123,7 +123,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 
     },
   ),
-  k8s.v1.configmap(name, namespace, data={
+  k8s.v1.configmap(configName, namespace, data={
     'acl.conf':
       |||
         {allow, {username, {re, "^dashboard$"}}, subscribe, ["$SYS/#"]}.
