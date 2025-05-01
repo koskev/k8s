@@ -130,7 +130,7 @@
     },
     hass: {
       image: 'ghcr.io/home-assistant/home-assistant',
-      tag: '2025.4.3',
+      tag: '2025.4.4',
     },
     grocy: {
       image: 'linuxserver/grocy',
