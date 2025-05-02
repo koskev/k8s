@@ -1,0 +1,3 @@
+{
+  service:: import 'service.libsonnet',
+}

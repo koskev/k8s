@@ -1,5 +1,4 @@
 {
-  container:: import 'container.libsonnet',
-  volume:: import 'volume.libsonnet',
-  deployment:: import 'deployment.libsonnet',
+  core:: import 'core.libsonnet',
+  apps:: import 'apps.libsonnet',
 }

@@ -1,6 +1,8 @@
 {
   new(name, image, tag):: {
     assert std.isString(name),
+    assert std.isString(image),
+    assert std.isString(tag),
     name: name,
     image: '%s:%s' % [image, tag],
 
@@ -40,6 +42,7 @@
     withMount(name, path, subPath=''):: self {
       assert std.isString(name),
       assert std.isString(path),
+      assert std.isString(subPath),
       volumeMounts+: [{
         name: name,
         mountPath: path,
@@ -48,6 +51,7 @@
     },
 
     withRessources(requestMemory):: self {
+      assert std.isString(requestMemory),
       resources: {
         requests: {
           memory: requestMemory,
@@ -55,10 +59,9 @@
       },
     },
     withImagePullPolicy(policy):: self {
+      assert std.isString(policy),
       assert policy == 'Always' || policy == 'IfNotPresent',
       imagePullPolicy: policy,
     },
-
-    build():: self,
   },
 }

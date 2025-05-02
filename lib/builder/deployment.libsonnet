@@ -1,18 +1,25 @@
+local definition = import 'definition.libsonnet';
 {
-  new(name, namespace):: {
-    assert std.isString(name),
-    assert std.isString(namespace),
-    local data = self,
-    _name: name,
-    _namespace: namespace,
-    _spec: {},
-    _env: [],
-
+  new(name, namespace):: definition.new(name=name, namespace=namespace, kind='Deployment', apiVersion='apps/v1') {
+    spec+: {
+      selector+: {
+        matchLabels+: {
+          app: name,
+        },
+      },
+      template+: {
+        metadata+: {
+          labels+: {
+            app: name,
+          },
+        },
+      },
+    },
 
     withReplicas(replicas)::
       assert std.isNumber(replicas);
       self {
-        _spec: data._spec {
+        spec+: {
           replicas: replicas,
         },
       },
@@ -20,7 +27,7 @@
     withTemplateSpec(spec)::
       assert std.isObject(spec);
       self {
-        _spec: data._spec {
+        spec+: {
           template+: {
             spec+: spec,
           },
@@ -31,7 +38,7 @@
     withMaxUnavailable(maxUnavailable)::
       assert std.isString(maxUnavailable) || std.isNumber(maxUnavailable);
       self {
-        _spec: data._spec {
+        spec+: {
           strategy: {
             type: 'RollingUpdate',
             rollingUpdate: {
@@ -43,6 +50,8 @@
 
     withContainer(container):: self.withTemplateSpec({
       assert std.isObject(container),
+      assert std.objectHas(container, 'name'),
+      assert std.objectHas(container, 'image'),
       containers+: [container],
     }),
 
@@ -50,31 +59,5 @@
       assert std.isObject(volume),
       volumes+: [volume],
     }),
-
-    build():: {
-      apiVersion: 'apps/v1',
-      kind: 'Deployment',
-      metadata: {
-        name: data._name,
-        namespace: data._namespace,
-        labels: {
-          app: data._name,
-        },
-      },
-      spec: data._spec {
-        selector+: {
-          matchLabels+: {
-            app: data._name,
-          },
-        },
-        template+: {
-          metadata+: {
-            labels+: {
-              app: data._name,
-            },
-          },
-        },
-      },
-    },
   },
 }
