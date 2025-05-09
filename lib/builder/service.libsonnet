@@ -1,6 +1,6 @@
 local definition = import 'definition.libsonnet';
 {
-  new(name, namespace, app):: definition.new('v1', 'Service', name, namespace) {
+  new(name, namespace, app=name):: definition.new('v1', 'Service', name, namespace) {
     spec: {
       selector: {
         app: app,
@@ -8,11 +8,20 @@ local definition = import 'definition.libsonnet';
     },
 
     withClusterIP(ip):: self {
-      assert std.isNumber(ip) || ip == 'None',
+      assert std.isString(ip),
       spec+: {
         clusterIP: ip,
         type: 'ClusterIP',
       },
+    },
+
+    withLoadBalancerIP(ip):: self {
+      assert std.isString(ip),
+      spec+: {
+        loadBalancerIP: ip,
+        type: 'LoadBalancer',
+      },
+
     },
 
     withPort(port, targetPort=port, protocol='TCP', name=null):: self {

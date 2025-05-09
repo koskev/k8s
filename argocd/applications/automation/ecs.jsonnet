@@ -5,13 +5,11 @@ local name = 'ecs';
 local namespace = 'automation';
 
 [
-  k8s.builder.deployment
+  k8s.builder.apps.deployment
   .new(name, namespace)
   .withContainer(
-    k8s.builder.container
+    k8s.builder.apps.container
     .new(name, image.image, image.tag)
     .withImagePullPolicy('Always')
-    .build()
-  )
-  .build(),
+  ),
 ]
