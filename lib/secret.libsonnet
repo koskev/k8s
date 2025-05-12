@@ -97,7 +97,7 @@
     metadata: {
       name: name,
       namespace: namespace,
-      labels: labels,
+      [if labels != {} then 'labels']: labels,
     },
     spec: {
       refreshInterval: '1h',
@@ -124,7 +124,7 @@
     metadata: {
       name: name,
       namespace: namespace,
-      labels: labels,
+      [if labels != {} then 'labels']: labels,
     },
     spec: {
       refreshInterval: '1h',
