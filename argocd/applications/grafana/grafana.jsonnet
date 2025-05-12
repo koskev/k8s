@@ -52,4 +52,14 @@ local namespace = 'grafana';
     },
     json: importstr './dashboards/cloudnative_pg.json',
   }),
+  k8s.builder.definition.new('grafana.integreatly.org/v1beta1', 'GrafanaDashboard', 'solar', namespace)
+  .withSpec({
+    resyncPeriod: '30s',
+    instanceSelector: {
+      matchLabels: {
+        app: 'grafana',
+      },
+    },
+    json: importstr './dashboards/solar.json',
+  }),
 ]
