@@ -40,6 +40,9 @@ local cluster = {
                 passwordSecret: {
                   name: config.secretName,
                 },
+                // These are needed for ArgoCD 3.0
+                connectionLimit: -1,
+                inherit: true,
               },
             ],
         },

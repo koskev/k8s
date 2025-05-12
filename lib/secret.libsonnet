@@ -112,6 +112,10 @@
       },
       dataFrom: [{
         extract: {
+          // Needed for argoCD 3.0
+          conversionStrategy: 'Default',
+          decodingStrategy: 'None',
+          metadataPolicy: 'None',
           key: key,
         },
       }] + additionalDataFrom,
@@ -142,6 +146,10 @@
       },
       dataFrom: [{
         extract: {
+          // Needed for argoCD 3.0
+          conversionStrategy: 'Default',
+          decodingStrategy: 'None',
+          metadataPolicy: 'None',
           key: key,
         },
       }],

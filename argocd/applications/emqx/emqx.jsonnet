@@ -27,6 +27,10 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
     additionalDataFrom=[
       {
         extract: {
+          // Needed for argoCD 3.0
+          conversionStrategy: 'Default',
+          decodingStrategy: 'None',
+          metadataPolicy: 'None',
           key: '%s-%s' % [name, name],
         },
         sourceRef: {
