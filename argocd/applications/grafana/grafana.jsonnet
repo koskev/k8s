@@ -5,6 +5,7 @@ local name = 'grafana-operator';
 local namespace = 'grafana';
 
 [
+  k8s.secret.externalSecretExtract('grafana-admin', namespace),
   k8s.builder.argocd.helm.new(
     name=name,
     targetnamespace=namespace,
@@ -15,16 +16,45 @@ local namespace = 'grafana';
   .withServerSideApply(),
   k8s.builder.definition.new('grafana.integreatly.org/v1beta1', 'Grafana', 'grafana', namespace)
   .withSpec({
+    deployment: {
+      spec: {
+        template: {
+          spec: {
+            containers: [
+              {
+                name: 'grafana',
+                env: [
+                  {
+                    name: 'GF_SECURITY_ADMIN_USER',
+                    valueFrom: {
+                      secretKeyRef: {
+                        key: 'user',
+                        name: 'grafana-admin',
+                      },
+                    },
+                  },
+                  {
+                    name: 'GF_SECURITY_ADMIN_PASSWORD',
+                    valueFrom: {
+                      secretKeyRef: {
+                        key: 'password',
+                        name: 'grafana-admin',
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
+    },
     config: {
       log: {
         mode: 'console',
       },
       auth: {
         disable_login_form: 'false',
-      },
-      security: {
-        admin_user: 'root',
-        admin_password: 'secret',
       },
     },
   }),
