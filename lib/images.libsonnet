@@ -90,6 +90,11 @@
       repoURL: 'code.forgejo.org/forgejo-helm',
       targetRevision: '12.0.0',
     },
+    grafana: {
+      chart: 'grafana-operator',
+      repoURL: 'ghcr.io/grafana/helm-charts',
+      targetRevision: 'v5.17.1',
+    },
   },
   container: {
     renovate: {

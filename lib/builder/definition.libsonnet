@@ -18,8 +18,16 @@
       metadata+: metadata,
     },
 
+    withWave(wave):: self.withMetadata({
+      assert std.isNumber(wave),
+      annotations+: {
+        'argocd.argoproj.io/sync-wave': '%d' % wave,
+      },
+    }),
+
     withSpec(spec):: self {
       spec+: spec,
     },
+
   },
 }

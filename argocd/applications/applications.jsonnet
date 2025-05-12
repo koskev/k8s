@@ -18,6 +18,7 @@ local apps = [
   argocd.appSettings(name='paperless'),
   argocd.appSettings(name='forgejo'),
   argocd.appSettings(name='automation'),
+  argocd.appSettings(name='grafana', exclude='dashboards/*'),
 ];
 
 argocd.addApps(apps)

@@ -16,7 +16,7 @@ local globals = import 'globals.libsonnet';
       },
       project: 'default',
       syncPolicy: {
-        syncOptions: ['CreateNamespace=true'],
+        syncOptions: ['CreateNamespace=true', 'ServerSideApply=true'],
         [if autosync then 'automated']: {
           prune: true,
           selfHeal: true,
@@ -24,15 +24,21 @@ local globals = import 'globals.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg', autosync=true):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg', autosync=true, exclude=''):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
-        directory: {
-          jsonnet: {
-            libs: ['lib', 'argocd', '.'],
-          },
-        } + if recurse then { recurse: recurse } else {},
+        directory:
+          {
+            jsonnet: {
+              libs: ['lib', 'argocd', '.'],
+            },
+          }
+          +
+          (if recurse then { recurse: recurse } else {})
+          +
+          (if std.length(exclude) > 0 then { exclude: exclude } else {})
+        ,
         path: path,
         repoURL: url,
         targetRevision: revision,
@@ -88,13 +94,15 @@ local globals = import 'globals.libsonnet';
       ],
     },
   },
-  appSettings(name, autosync=true, recursive=true):: {
+  appSettings(name, autosync=true, recursive=true, exclude=''):: {
     assert std.isString(name),
     assert std.isBoolean(autosync),
     assert std.isBoolean(recursive),
+    assert std.isString(exclude),
     name: name,
     autosync: autosync,
     recursive: recursive,
+    exclude: exclude,
   },
   addApps(appSettings, folder='')::
     local uniqueApps = std.uniq(appSettings, keyF=function(key) key.name);
@@ -103,6 +111,7 @@ local globals = import 'globals.libsonnet';
       assert std.objectHas(app, 'name');
       assert std.objectHas(app, 'autosync');
       assert std.objectHas(app, 'recursive');
+      assert std.objectHas(app, 'exclude');
       local basePath = 'argocd/applications';
       local path = if std.length(folder) > 0 then '%s/%s/%s' % [basePath, folder, app.name] else '%s/%s' % [basePath, app.name];
       self.applicationRepo(
@@ -111,6 +120,7 @@ local globals = import 'globals.libsonnet';
         path=path,
         recurse=app.recursive,
         autosync=app.autosync,
+        exclude=app.exclude,
       )
       for app in appSettings
     ],
