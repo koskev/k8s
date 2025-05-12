@@ -150,7 +150,7 @@
     },
     chhoto: {
       image: 'sintan1729/chhoto-url',
-      tag: '5.8.0',
+      tag: '6.0.1',
     },
     nodered: {
       image: 'nodered/node-red',
