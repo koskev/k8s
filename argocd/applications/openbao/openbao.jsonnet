@@ -7,6 +7,7 @@ local namespace = 'openbao';
 local host = 'vault.kokev.de';
 
 [
+  k8s.v1.namespace(namespace),
   k8s.db.database(
     name=name,
     namespace=namespace,

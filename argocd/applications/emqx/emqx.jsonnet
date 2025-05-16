@@ -11,6 +11,7 @@ local configName = 'emqx-config';
 local secretName = 'emqx-secret';
 k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
 [
+  k8s.v1.namespace(namespace),
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace, privileges='READ'),
   k8s.secret.externalSecretExtract(
