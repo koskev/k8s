@@ -62,7 +62,7 @@ externalDNS.permissions() +
             '--policy=upsert-only',
             '--provider=pihole',
             '--pihole-server=http://localhost',
-            '--pihole-api-version="6"',
+            '--pihole-api-version="5"',
           ],
           resources: {
             requests: {
@@ -100,6 +100,16 @@ externalDNS.permissions() +
               name: 'TZ',
               value: 'Europe/Berlin',
             },
+            // OLD Config
+            {
+              name: 'PIHOLE_DNS_',
+              value: '192.168.1.1',
+            },
+            {
+              name: 'DNSMASQ_LISTENING',
+              value: 'all',
+            },
+            // New Config
             {
               name: 'FTLCONF_dns_upstreams',
               value: '192.168.1.1',
