@@ -95,6 +95,12 @@
       repoURL: 'ghcr.io/grafana/helm-charts',
       targetRevision: 'v5.17.1',
     },
+    flannel: {
+      chart: 'flannel',
+      repoURL: 'https://flannel-io.github.io/flannel',
+      targetRevision: 'v0.26.7',
+    },
+
   },
   container: {
     renovate: {
