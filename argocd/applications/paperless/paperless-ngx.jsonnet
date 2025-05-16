@@ -12,6 +12,7 @@ local valkeyName = '%s-valkey' % name;
 local valkeyPort = 6379;
 
 [
+  k8s.v1.namespace(namespace),
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace, secretTemplate={
     PAPERLESS_DBENGINE: 'postgres',

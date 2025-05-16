@@ -5,6 +5,7 @@ local name = 'ecs';
 local namespace = 'automation';
 
 [
+  k8s.v1.namespace(namespace),
   k8s.builder.apps.deployment
   .new(name, namespace)
   .withContainer(
