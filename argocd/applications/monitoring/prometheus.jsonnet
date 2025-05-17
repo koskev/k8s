@@ -131,18 +131,10 @@ local storageclass = 'local';
       },
       prometheus: {
         prometheusSpec: {
-          podMonitorSelector: {
-            matchLabels: null,
-          },
-          ruleSelector: {
-            matchLabels: null,
-          },
-          serviceMonitorSelector: {
-            matchLabels: null,
-          },
-          probeSelector: {
-            matchLabels: null,
-          },
+          podMonitorSelectorNilUsesHelmValues: false,
+          ruleSelectorNilUsesHelmValues: false,
+          serviceMonitorSelectorNilUsesHelmValues: false,
+          probeSelectorNilUsesHelmValues: false,
           storageSpec: {
             volumeClaimTemplate: {
               spec: {
