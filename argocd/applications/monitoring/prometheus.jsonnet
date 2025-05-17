@@ -6,14 +6,17 @@ local k8s = import 'k8s.libsonnet';
 
 
 local namespace = 'monitoring';
-local storageclass = 'local';
+local storageclassGrafana = 'local-grafana';
+local storageclassPrometheus = 'local-prometheus';
 [
+  k8s.storage.localStorageClass(storageclassGrafana),
+  k8s.storage.localStorageClass(storageclassPrometheus),
   storage.localPersistentVolume(
     name='grafana-pv',
     namespace=namespace,
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/grafana_data',
-    storageclass=storageclass,
+    storageclass=storageclassGrafana,
     labels={
       storage: 'grafana',
     },
@@ -23,7 +26,7 @@ local storageclass = 'local';
     namespace=namespace,
     sizeGB=10,
     path='/mnt/shared_data/k8s/prometheus/prometheus_data',
-    storageclass=storageclass
+    storageclass=storageclassPrometheus
   ),
 
   secret.externalSecretExtract('prometheus-secret', namespace),
@@ -102,7 +105,7 @@ local storageclass = 'local';
         persistence: {
           type: 'sts',
           enabled: true,
-          storageClassName: storageclass,
+          storageClassName: storageclassGrafana,
           selectorLabels: {
             storage: 'grafana',
           },
@@ -142,7 +145,7 @@ local storageclass = 'local';
                   'ReadWriteOnce',
                 ],
                 volumeName: 'prometheus-db',
-                storageClassName: storageclass,
+                storageClassName: storageclassPrometheus,
                 resources: {
                   requests: {
                     storage: '10Gi',
