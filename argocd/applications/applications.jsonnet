@@ -19,6 +19,7 @@ local apps = [
   argocd.appSettings(name='forgejo'),
   argocd.appSettings(name='automation'),
   argocd.appSettings(name='grafana', exclude='dashboards/*'),
+  argocd.appSettings(name='kube-system'),
 ];
 
 argocd.addApps(apps)

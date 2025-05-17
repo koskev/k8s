@@ -100,7 +100,11 @@
       repoURL: 'https://flannel-io.github.io/flannel',
       targetRevision: 'v0.26.7',
     },
-
+    metrics_server: {
+      chart: 'metrics-server',
+      repoURL: 'https://kubernetes-sigs.github.io/metrics-server',
+      targetRevision: '3.12.2',
+    },
   },
   container: {
     renovate: {
