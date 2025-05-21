@@ -9,7 +9,7 @@ local chart = (import 'images.libsonnet').helm.external_secrets;
     releaseName='external-secrets',
   ),
   {
-    apiVersion: 'external-secrets.io/v1beta1',
+    apiVersion: 'external-secrets.io/v1',
     kind: 'ClusterSecretStore',
     metadata: {
       name: 'vault-secrets',
