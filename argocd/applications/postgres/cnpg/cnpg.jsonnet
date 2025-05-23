@@ -6,7 +6,7 @@ local config = import 'config.libsonnet';
 
 local pvs = [
   storage.localPersistentVolume('postgres-db-optiplex', config.namespace, 10, '/mnt/hdd_gluster/postgres_data', config.storageClass, 'optiplex'),
-  storage.localPersistentVolume('postgres-db-server', config.namespace, 10, '/mnt/hdd_gluster/postgres_data', config.storageClass, 'raspberrypi-server'),
+  storage.localPersistentVolume('postgres-db-server', config.namespace, 10, '/var/lib/postgres', config.storageClass, 'rpi-server'),
   storage.localPersistentVolume('postgres-db-server2', config.namespace, 10, '/data/glusterfs/postgres_data', config.storageClass, 'rpi-server2'),
 ];
 
