@@ -1,0 +1,2 @@
+/dev/mapper/crypted  / ext4 defaults,noatime          0 1
+/dev/sda1  /boot vfat defaults,noatime          0 1

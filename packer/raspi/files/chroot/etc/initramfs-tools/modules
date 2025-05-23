@@ -1,0 +1,11 @@
+algif_skcipher
+xchacha20
+adiantum
+aes_arm
+sha256
+nhpoly1305
+dm-crypt
+aes_generic
+chacha_generic
+nhpoly1350
+xts

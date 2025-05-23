@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ntpd -gq > /dev/null
+
+TOKEN=$(curl -X PUT -H "X-Vault-Request: true" -d "{\"role_id\":\"${ROLE_ID}\",\"secret_id\":\"${SECRET_ID}\"}" "${VAULT_ADDR}"/v1/auth/approle/login | jq -r ".auth.client_token")
+
+KEY=$(curl -H "X-Vault-Request: true" -H "X-Vault-Token: $TOKEN" "${VAULT_ADDR}"/v1/luks/data/"${NAME}" | jq -r ".data.data.key")
+
+echo -n "$KEY"
