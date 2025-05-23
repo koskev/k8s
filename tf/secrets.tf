@@ -109,7 +109,7 @@ resource "vault_policy" "luks" {
   for_each = data.sops_file.luks
   name                       = split(".", basename(each.key))[0]
   policy = <<EOT
-  path "luks/data/rpi-server*" {
+  path "luks/data/${split(".", basename(each.key))[0]}*" {
     capabilities = ["read", "list"]
   }
   EOT
