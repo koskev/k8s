@@ -17,6 +17,7 @@ local namespace = 'matrix';
     },
   ),
   k8s.secret.externalSecretExtract('redis-secret', 'matrix', 'synapse-redis-secret'),
+  k8s.secret.externalSecretExtract('synapse-signingkey', 'matrix'),
   k8s.storage.localStorageClass(name='local-synapse'),
   k8s.storage.localPersistentVolume(
     name='synapse-media-data',
