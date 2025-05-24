@@ -3,7 +3,7 @@
     argocd: {
       chart: 'argo-cd',
       repoURL: 'https://argoproj.github.io/argo-helm',
-      targetRevision: '8.0.6',
+      targetRevision: '8.0.9',
     },
     synapse: {
       chart: 'matrix-synapse',
