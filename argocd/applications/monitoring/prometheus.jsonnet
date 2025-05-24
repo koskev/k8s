@@ -49,7 +49,7 @@ local storageclassPrometheus = 'local-prometheus';
       namespaceOverride: namespace,
       crds: {
         upgradeJob: {
-          enabled: true,
+          enabled: false,
         },
       },
       grafana: {
