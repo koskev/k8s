@@ -57,7 +57,7 @@ local namespace = 'matrix';
       },
       externalPostgresql: {
         host: 'cluster-main-rw.postgres',
-        username: 'synapse-c3WD9F',
+        username: 'synapse-e09fPD',
         database: 'synapse-db',
         existingSecret: 'synapse-db-user-synapse-db-user',
         existingSecretPasswordKey: 'password',
