@@ -11,9 +11,17 @@ local namespace = 'trivy';
     values={
       operator: {
         metricsVulnIdEnabled: true,
+        scanJobsConcurrentLimit: 2,
       },
       serviceMonitor: {
         enabled: true,
+      },
+      trivy: {
+        resources: {
+          request: {
+            cpu: '500m',
+          },
+        },
       },
     }
   ),
