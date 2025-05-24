@@ -1,12 +1,12 @@
 {
   variables: {
-    vm_name: 'debian-arm64',
+    vm_name: 'debian-arm64-{{ env `NAME` }}',
     iso_url: 'https://download.grml.org/grml-small-2025.05-arm64.iso',
     iso_checksum: 'file:https://download.grml.org/SHA256SUMS-2025.05',
     ssh_username: 'root',
     ssh_password: 'packer',
     ssh_timeout: '6h',
-    output_directory: './output-qemu',
+    output_directory: './build/{{ env `NAME` }}',
     disk_size: '8G',
     VAULT_ADDR: '{{ env `VAULT_ADDR` }}',
     NAME: '{{ env `NAME` }}',
