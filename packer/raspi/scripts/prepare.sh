@@ -25,6 +25,9 @@ echo "crypted UUID=$UUID none luks,initramfs,keyscript=/root/getKey.sh" > /mnt/e
 ORIGNAL_HOSTNAME=$(cat /mnt/etc/hostname)
 sed -i "s/$ORIGNAL_HOSTNAME/$HOSTNAME/g" /mnt/etc/hostname
 sed -i "s/$ORIGNAL_HOSTNAME/$HOSTNAME/g" /mnt/etc/hosts
+echo "PasswordAuthentication no" >> /mnt/etc/sshd/sshd_config
+# Weird create a user message
+rm /mnt/etc/ssh/sshd_config.d/rename_user.conf
 
 mount --bind /dev /mnt/dev
 mount --bind /dev/pts /mnt/dev/pts
