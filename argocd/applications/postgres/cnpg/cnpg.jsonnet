@@ -15,7 +15,7 @@ local pool() = {
   kind: 'Pooler',
   metadata: {
     name: '%s-pool-rw' % config.clusterName,
-    namesapce: config.namespace,
+    namespace: config.namespace,
   },
   spec: {
     cluster: {
