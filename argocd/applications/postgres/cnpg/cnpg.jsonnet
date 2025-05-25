@@ -19,6 +19,11 @@ local cluster = {
   },
   spec:
     {
+      postgresql: {
+        parameters: {
+          max_connections: '200',
+        },
+      },
       instances: 3,
       storage: {
         size: '3Gi',
