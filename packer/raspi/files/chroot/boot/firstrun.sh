@@ -3,6 +3,7 @@ set +e
 
 #/usr/lib/raspberrypi-sys-mods/imager_custom enable_ssh
 #/usr/lib/raspberrypi-sys-mods/regenerate_ssh_host_keys
+echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 
 rm -f /boot/firstrun.sh
 sed -i 's| systemd.run.*||g' /boot/cmdline.txt

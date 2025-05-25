@@ -1,13 +1,13 @@
 #!/bin/bash
 
-set -x
+set -xe
 
 KEY=$(/tmp/chroot/root/getKey.sh)
 
 parted --script /dev/sda mklabel gpt mkpart primary 1MiB 1000MiB mkpart primary 1000MiB 100% set 1 boot on
 # Extract here to give the system enough time for the partitions to appear
 unxz /tmp/pi_image.img.xz
-echo "$KEY" | cryptsetup -q luksFormat -c xchacha20,aes-adiantum-plain64 --pbkdf-memory 512000 --pbkdf-parallel=1 /dev/sda2
+echo "$KEY" | cryptsetup -q luksFormat -c "${ENCRYPTION_FORMAT}" --pbkdf-memory "${ENCRYPTION_MEMORY_KB}" --pbkdf-parallel=1 /dev/sda2
 echo "$KEY" | cryptsetup open /dev/sda2 crypted
 losetup -Pf /tmp/pi_image.img
 dd if=/dev/loop1p1 of=/dev/sda1 bs=1M
@@ -25,8 +25,7 @@ echo "crypted UUID=$UUID none luks,initramfs,keyscript=/root/getKey.sh" > /mnt/e
 ORIGNAL_HOSTNAME=$(cat /mnt/etc/hostname)
 sed -i "s/$ORIGNAL_HOSTNAME/$HOSTNAME/g" /mnt/etc/hostname
 sed -i "s/$ORIGNAL_HOSTNAME/$HOSTNAME/g" /mnt/etc/hosts
-echo "PasswordAuthentication no" >> /mnt/etc/sshd/sshd_config
-# Weird create a user message
+# Remove weird "create a user" message
 rm /mnt/etc/ssh/sshd_config.d/rename_user.conf
 
 mount --bind /dev /mnt/dev
