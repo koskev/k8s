@@ -21,6 +21,7 @@ local pool(clusterName, poolName, namespace, type='rw', instances=3, maxConnecti
     },
   },
   getName():: '%s-%s-pool-%s' % [clusterName, poolName, type],
+  getHost():: '%s.%s' % [self.getName(), namespace],
 };
 
 {

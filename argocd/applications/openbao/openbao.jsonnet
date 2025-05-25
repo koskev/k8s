@@ -6,6 +6,8 @@ local namespace = 'openbao';
 
 local host = 'vault.kokev.de';
 
+local psqlConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
+
 [
   k8s.v1.namespace(namespace),
   k8s.db.database(
@@ -16,7 +18,7 @@ local host = 'vault.kokev.de';
     name=name,
     namespace=namespace,
     secretTemplate={
-      POSTGRES_URL_NO_SSL: 'postgresql://{{.Role}}:{{.Password}}@{{.Host}}/{{.Database}}?sslmode=disable',
+      POSTGRES_URL_NO_SSL: 'postgresql://{{.Role}}:{{.Password}}@%s/{{.Database}}?sslmode=disable' % psqlConfig.pools.default.getHost(),
     },
   ),
   k8s.argocd.applicationHelm(
