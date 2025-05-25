@@ -105,6 +105,11 @@
       repoURL: 'https://kubernetes-sigs.github.io/metrics-server',
       targetRevision: '3.12.2',
     },
+    vault_unsealer: {
+      chart: 'vault-unsealer',
+      repoURL: 'ghcr.io/koskev/helm-charts',
+      targetRevision: '0.3.4',
+    },
   },
   container: {
     renovate: {

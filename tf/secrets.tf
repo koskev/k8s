@@ -52,6 +52,29 @@ resource "vault_kubernetes_auth_backend_role" "example" {
   token_policies                   = ["external-secrets"]
 }
 
+resource "vault_policy" "unsealer" {
+  name = "vault-unsealer"
+
+  policy = <<EOT
+path "system/+/unseal-keys" {
+  capabilities = ["read"]
+}
+# allow access to read the mounts (used to check the kv version of the secret engine)
+path "sys/mounts" {
+  capabilities = ["read"]
+}
+EOT
+}
+
+resource "vault_kubernetes_auth_backend_role" "unsealer" {
+  backend                          = vault_auth_backend.kubernetes.path
+  role_name                        = "vault-unsealer"
+  bound_service_account_names      = ["openbao-unsealer-vault-unsealer"]
+  bound_service_account_namespaces = ["openbao"]
+  token_ttl                        = 3600
+  token_policies                   = ["vault-unsealer"]
+}
+
 data "sops_file" "secrets" {
   for_each = fileset("${path.module}/secrets", "*/*.{json,yaml}")
   source_file = "secrets/${each.value}"
@@ -64,6 +87,11 @@ data "sops_file" "openbao_secrets" {
 
 data "sops_file" "luks" {
   for_each = fileset(path.module, "luks/*.{json,yaml}")
+  source_file = each.value
+}
+
+data "sops_file" "system" {
+  for_each = fileset(path.module, "system/*.{json,yaml}")
   source_file = each.value
 }
 
@@ -89,6 +117,20 @@ resource "kubernetes_secret" "secrets" {
     namespace = dirname(each.key)
   }
   data = each.value.data
+}
+
+resource "vault_mount" "system" {
+  path        = "system"
+  type        = "kv"
+  options     = { version = "2" }
+  description = "Luks encryption keys"
+}
+
+resource "vault_kv_secret_v2" "system" {
+  for_each = data.sops_file.system
+  mount                      = vault_mount.system.path
+  name                       = split(".", basename(each.key))[0]
+  data_json                  =  jsonencode(each.value.data)
 }
 
 resource "vault_mount" "luks" {

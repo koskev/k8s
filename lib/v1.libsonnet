@@ -51,8 +51,16 @@
       namespace: namespace,
     },
     data: data,
-
-
+  },
+  secret(name, namespace, data, labels={}):: {
+    apiVersion: 'v1',
+    kind: 'Secret',
+    metadata: {
+      name: name,
+      namespace: namespace,
+      labels: labels,
+    },
+    stringData: data,
   },
 
 }
