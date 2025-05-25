@@ -11,6 +11,7 @@ local chart = (import 'images.libsonnet').helm.vault_unsealer;
       releaseName='%s-unsealer' % name,
     )
     .withValues({
+      replicas: 3,
       image: {
         repository: 'ghcr.io/koskev/vault-unsealer',
         tag: '0.3.4',
