@@ -78,7 +78,6 @@ local cluster = {
 };
 
 [
-  pool(),
   argocd.applicationHelm(
     name='cloudnative-pg',
     targetnamespace=config.namespace,
@@ -91,4 +90,6 @@ local cluster = {
   ),
   cluster,
   storage.localStorageClass(config.storageClass),
-] + pvs
+]
++ pvs
++ std.objectValues(config.pools)
