@@ -33,7 +33,7 @@
     external_postgres_operator: {
       chart: 'ext-postgres-operator',
       repoURL: 'https://movetokube.github.io/postgres-operator',
-      targetRevision: '1.2.7',
+      targetRevision: '2.0.0',
     },
     cnpg: {
       chart: 'cloudnative-pg',
