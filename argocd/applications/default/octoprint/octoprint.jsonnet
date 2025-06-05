@@ -3,7 +3,7 @@ local image = (import 'images.libsonnet').container.octoprint;
 
 local name = 'octoprint';
 local namespace = 'default';
-local port = 80;
+local port = 5000;
 [
   k8s.v1.service(
     name=name,
@@ -31,8 +31,14 @@ local port = 80;
           },
           ports: [
             {
-              containerPort: 80,
+              containerPort: port,
               protocol: 'TCP',
+            },
+          ],
+          env: [
+            {
+              name: 'OCTOPRINT_PORT',
+              value: '%d' % port,
             },
           ],
           volumeMounts: [
