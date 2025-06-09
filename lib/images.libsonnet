@@ -13,7 +13,7 @@
     registry: {
       chart: 'docker-registry',
       repoURL: 'https://helm.twun.io',
-      targetRevision: '2.2.3',
+      targetRevision: '2.3.0',
     },
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
