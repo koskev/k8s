@@ -48,7 +48,7 @@
     metallb: {
       chart: 'metallb',
       repoURL: 'https://metallb.github.io/metallb',
-      targetRevision: '0.14.9',
+      targetRevision: '0.15.2',
     },
     openbao: {
       chart: 'openbao',
