@@ -10,11 +10,6 @@
       repoURL: 'https://ananace.gitlab.io/charts',
       targetRevision: '3.12.2',
     },
-    registry: {
-      chart: 'docker-registry',
-      repoURL: 'https://helm.twun.io',
-      targetRevision: '2.2.3',
-    },
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
       repoURL: 'https://prometheus-community.github.io/helm-charts',
