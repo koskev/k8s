@@ -227,5 +227,9 @@
       image: 'forgejo.kokev.de/kevin/ecs-automation',
       tag: 'latest',
     },
+    fittrackee: {
+      image: 'ghcr.io/samr1/fittrackee',
+      tag: 'v0.10.3',
+    },
   },
 }

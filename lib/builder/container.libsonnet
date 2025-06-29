@@ -14,6 +14,34 @@
       }],
     },
 
+    withEnvValueFromSecret(name, secretName, secretKey):: self {
+      assert std.isString(name),
+      assert std.isString(secretName),
+      assert std.isString(secretKey),
+      env+: [{
+        name: name,
+        valueFrom: {
+          secretKeyRef: {
+            name: secretName,
+            key: secretKey,
+          },
+        },
+      }],
+    },
+
+    withEnvFromSecret(secretName):: self {
+      assert std.isString(secretName),
+      envFrom+: [
+        {
+          secretRef: {
+            name: secretName,
+          },
+
+        },
+      ],
+
+    },
+
     withImage(image, tag):: self {
       assert std.isString(image),
       assert std.isString(tag),
@@ -63,5 +91,7 @@
       assert policy == 'Always' || policy == 'IfNotPresent',
       imagePullPolicy: policy,
     },
+
+    withExtraSpec(spec):: self + spec,
   },
 }

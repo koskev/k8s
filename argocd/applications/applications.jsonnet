@@ -20,6 +20,7 @@ local apps = [
   argocd.appSettings(name='automation'),
   argocd.appSettings(name='grafana', exclude='dashboards/*'),
   argocd.appSettings(name='kube-system'),
+  argocd.appSettings(name='fittrackee'),
 ];
 
 argocd.addApps(apps)
