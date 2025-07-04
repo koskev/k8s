@@ -64,7 +64,7 @@ externalDNS.permissions() +
             '--policy=upsert-only',
             '--provider=pihole',
             '--pihole-server=http://localhost',
-            '--pihole-api-version="%d"' % pihole_version,
+            '--pihole-api-version=%d' % pihole_version,
           ],
           resources: {
             requests: {
