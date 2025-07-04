@@ -20,8 +20,20 @@ local role = {
       ],
       resources: [
         'services',
-        'endpoints',
         'pods',
+      ],
+      verbs: [
+        'get',
+        'watch',
+        'list',
+      ],
+    },
+    {
+      apiGroups: [
+        'discovery.k8s.io',
+      ],
+      resources: [
+        'endpointslices',
       ],
       verbs: [
         'get',
