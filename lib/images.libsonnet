@@ -18,7 +18,7 @@
     cert_manager: {
       chart: 'cert-manager',
       repoURL: 'https://charts.jetstack.io',
-      targetRevision: 'v1.18.1',
+      targetRevision: 'v1.18.2',
     },
     external_secrets: {
       chart: 'external-secrets',
