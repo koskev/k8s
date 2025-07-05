@@ -116,6 +116,11 @@ externalDNS.permissions() +
               name: 'FTLCONF_dns_upstreams',
               value: '192.168.1.1',
             },
+            // Empty domain to remove "lan" from the setting and allow pihole to forward the request
+            {
+              name: 'FTLCONF_dns_domains',
+              value: '',
+            },
             {
               name: 'FTLCONF_dns_listeningMode',
               value: 'all',
