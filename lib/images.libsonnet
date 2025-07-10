@@ -189,7 +189,7 @@
     },
     syncthing: {
       image: 'syncthing/syncthing',
-      tag: '1.29',
+      tag: '1.30',
     },
     brouter_react: {
       image: 'ghcr.io/koskev/brouter-react',
