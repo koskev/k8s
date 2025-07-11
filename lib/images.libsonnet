@@ -68,7 +68,7 @@
     reloader: {
       chart: 'reloader',
       repoURL: 'https://stakater.github.io/stakater-charts',
-      targetRevision: '2.1.4',
+      targetRevision: '2.1.5',
     },
     ingress_nginx: {
       chart: 'ingress-nginx',
