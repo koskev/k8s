@@ -169,7 +169,7 @@
     },
     nodered: {
       image: 'nodered/node-red',
-      tag: '4.0.9-18',
+      tag: '4.1.0-18',
     },
     pihole: {
       image: 'pihole/pihole',
