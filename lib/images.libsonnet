@@ -133,7 +133,7 @@
     },
     navidrome: {
       image: 'ghcr.io/navidrome/navidrome',
-      tag: '0.57.0',
+      tag: '0.58.0',
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
