@@ -73,7 +73,7 @@
     ingress_nginx: {
       chart: 'ingress-nginx',
       repoURL: 'https://kubernetes.github.io/ingress-nginx',
-      targetRevision: '4.13.0',
+      targetRevision: '4.13.1',
     },
     trivy: {
       chart: 'trivy-operator',
