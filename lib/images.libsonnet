@@ -193,7 +193,7 @@
     },
     brouter_react: {
       image: 'ghcr.io/koskev/brouter-react',
-      tag: '2025.08.18',
+      tag: '2025.08.25',
     },
     valkey: {
       image: 'valkey/valkey',
