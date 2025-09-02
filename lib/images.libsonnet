@@ -177,7 +177,7 @@
     },
     externaldns: {
       image: 'registry.k8s.io/external-dns/external-dns',
-      tag: 'v0.18.0',
+      tag: 'v0.19.0',
     },
     sanejs: {
       image: 'sbs20/scanservjs',
