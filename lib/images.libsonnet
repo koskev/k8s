@@ -229,7 +229,7 @@
     },
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
-      tag: 'v0.12.0',
+      tag: 'v0.12.1',
     },
   },
 }
