@@ -105,6 +105,11 @@
       repoURL: 'ghcr.io/koskev/helm-charts',
       targetRevision: '0.3.4',
     },
+    anubis: {
+      chart: 'ingress-anubis',
+      repoURL: 'ghcr.io/jaredallard/helm-charts',
+      targetRevision: '1.9.0',
+    },
   },
   container: {
     renovate: {
@@ -230,6 +235,10 @@
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
       tag: 'v0.12.0',
+    },
+    anubis: {
+      image: 'ghcr.io/techarohq/anubis',
+      tag: 'v1.21.3',
     },
   },
 }

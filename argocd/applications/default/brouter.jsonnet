@@ -10,7 +10,7 @@ argocd.applicationHelm(
   values={
     ingress: {
       enabled: true,
-      ingress_class: 'nginx-external',
+      ingress_class: 'anubis',
       host: 'brouter.kokev.de',
       tls: {
         enabled: true,
