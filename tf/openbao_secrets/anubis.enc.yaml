@@ -1,0 +1,17 @@
+anubis-key: ENC[AES256_GCM,data:nsxqP34m2mi7+AKoCrz6l37bSM/q9DwSocU8VFcUcK7JAJ9+fXzbqBeXfIfTrZqZaDdY5upaRgS7altpDcAjuA==,iv:S4VpW2Ix+lBP4ZLLMmLgtZwDmv36TucUhNXBggyYqyc=,tag:0h0qNl2jhco7KzZYjD2b1w==,type:str]
+sops:
+    lastmodified: "2025-09-05T16:50:10Z"
+    mac: ENC[AES256_GCM,data:fz2aQs/tTY3dnTuiZJiwObFkQf2MXNYfo7HyDcW7dKYYH5Z6q2ZGbGyF4N/FDFF5jSvRvk0syA3c3WNTBICBqSyJSgbwGBKDNFhwdoUEhoX7lzW/lur97x15BROnXOk/sT0NeHwI0mFO0gYUBhqEP2NztH1WLm2UBcXZ6Axn1uo=,iv:h330yo3iE6xFAq8p9lFvCB4yVONETO7pMB+fAzOBZdA=,tag:d68x7dZj/49JYPkszd0VVw==,type:str]
+    pgp:
+        - created_at: "2025-09-05T16:50:10Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+            wV4DJK+IA+cNHtcSAQdAEVzIt7SiuG3Cd+XTfQrzXsSzHu8p1fbh71YXzxEQ81Yw
+            08Sxfe9qJj+NbnMEtWEam23y6IF/rWG6N3AV3FyQdIzW93CDE+GgRBF/pf6ComEw
+            0lEBG5HOB4HdVXSXoFJ6EwqiH35M13gbP90fLXShcPjYAwhyQjsTIPYizxNPu2CB
+            zSgvFOh0pBnsuvuvpW5ORQ1dCz7r2gIZ/ObsIGZaMinQnlo=
+            =IuFW
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(.*)$
+    version: 3.10.2
