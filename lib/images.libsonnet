@@ -105,6 +105,12 @@
       repoURL: 'ghcr.io/koskev/helm-charts',
       targetRevision: '0.3.4',
     },
+    ingress_traefik: {
+      chart: 'traefik',
+      repoURL: 'https://traefik.github.io/charts',
+      targetRevision: '37.1.0',
+    },
+
   },
   container: {
     renovate: {
@@ -230,6 +236,10 @@
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
       tag: 'v0.12.1',
+    },
+    anubis: {
+      image: 'ghcr.io/techarohq/anubis',
+      tag: 'v1.22.0-pre2',
     },
   },
 }
