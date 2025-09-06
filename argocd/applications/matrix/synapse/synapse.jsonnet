@@ -47,7 +47,7 @@ local namespace = 'matrix';
           secretName: 'kokev-matrix-tls',
           hosts: ['matrix.kokev.de'],
         }],
-        className: 'nginx-external',
+        className: 'traefik-external',
       },
       wellknown: {
         enabled: true,
