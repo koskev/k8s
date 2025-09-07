@@ -61,6 +61,8 @@ local addressPool(name, addresses, autoAssign=true) =
       },
       speaker: {
         priorityClassName: 'system-cluster-critical',
+        //  Since most nodes are cp nodes, this needs to be true
+        ignoreExcludeLB: true,
         resources: {
           limits: {
             cpu: '100m',
