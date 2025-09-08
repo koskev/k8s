@@ -187,7 +187,7 @@
     },
     sanejs: {
       image: 'sbs20/scanservjs',
-      tag: 'v3.0.3',
+      tag: 'v3.0.4',
     },
     cups: {
       image: 'ydkn/cups',
