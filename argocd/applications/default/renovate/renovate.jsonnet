@@ -26,6 +26,7 @@ local secret = import 'secret.libsonnet';
                   image: '%s:%s' % [image.image, image.tag],
                   args: [
                     'koskev/k8s',
+                    'koskev/dotfiles',
                     'koskev/brouter-react',
                     'koskev/brouter-chart',
                     'koskev/swayautonames',
