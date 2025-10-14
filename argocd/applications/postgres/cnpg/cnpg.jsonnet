@@ -10,29 +10,6 @@ local pvs = [
   storage.localPersistentVolume('postgres-db-server2', config.namespace, 10, '/var/lib/postgres', config.storageClass, 'rpi-server2'),
 ];
 
-local pool() = {
-  apiVersion: 'postgresql.cnpg.io/v1',
-  kind: 'Pooler',
-  metadata: {
-    name: '%s-pool-rw' % config.clusterName,
-    namespace: config.namespace,
-  },
-  spec: {
-    cluster: {
-      name: config.clusterName,
-    },
-    instances: 3,
-    type: 'rw',
-    pgbouncer: {
-      poolMode: 'session',
-      parameters: {
-        max_client_conn: '1000',
-        default_pool_size: '10',
-      },
-    },
-  },
-};
-
 local cluster = {
   apiVersion: 'postgresql.cnpg.io/v1',
   kind: 'Cluster',
@@ -45,6 +22,7 @@ local cluster = {
       postgresql: {
         parameters: {
           max_connections: '200',
+          max_slot_wal_keep_size: '10GB',
         },
       },
       instances: 3,
