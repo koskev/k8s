@@ -143,7 +143,7 @@
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
-      tag: 'v1.5.735',
+      tag: 'v1.5.857',
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
