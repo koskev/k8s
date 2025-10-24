@@ -123,7 +123,7 @@
     },
     whatsapp_bridge: {
       image: 'dock.mau.dev/mautrix/whatsapp',
-      tag: 'v0.12.4',
+      tag: 'v0.2510.0',
     },
     yqgo: {
       image: 'mikefarah/yq',
