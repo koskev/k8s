@@ -11,6 +11,9 @@ local namespace = 'ingress-traefik-external';
     targetnamespace=namespace,
     chart=chart,
     values={
+      deployment: {
+        replicas: 3,
+      },
       service: {
         spec: {
           loadBalancerIP: globals.ips.ingress_traefik_external,
