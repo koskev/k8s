@@ -227,7 +227,7 @@
     },
     paperless: {
       image: 'ghcr.io/paperless-ngx/paperless-ngx',
-      tag: '2.19.2',
+      tag: '2.19.5',
     },
     ecs: {
       image: 'forgejo.kokev.de/kevin/ecs-automation',
