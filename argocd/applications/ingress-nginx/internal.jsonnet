@@ -8,6 +8,7 @@ argocd.applicationHelm(
   chart=chart,
   values={
     controller: {
+      replicaCount: 3,
       allowSnippetAnnotations: true,
       service: {
         loadBalancerIP: globals.ips.ingress_nginx,
