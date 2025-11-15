@@ -3,6 +3,9 @@ local k8s = import 'k8s.libsonnet';
 
 local name = 'hass';
 local namespace = 'default';
+
+local service_name = '%s-service' % name;
+
 [
   k8s.db.database(
     name='%s-db' % name,
@@ -21,7 +24,7 @@ local namespace = 'default';
     secretName='%s-db-secret' % name,
   ),
   k8s.v1.service(
-    name='%s-service' % name,
+    name=service_name,
     namespace=namespace,
     app='%s-deployment' % name,
     ports=[8123],
@@ -30,7 +33,7 @@ local namespace = 'default';
     name='%s-ingress' % name,
     namespace=namespace,
     host='hass.kokev.de',
-    serviceName='%s-service' % name,
+    serviceName=service_name,
     servicePort=8123,
     issuer='kokev-issuer',
     ingressClass='nginx',
@@ -38,7 +41,7 @@ local namespace = 'default';
   k8s.apps.statefulSet(
     name='%s-deployment' % name,
     namespace=namespace,
-    serviceName='%s-service' % name,
+    serviceName=service_name,
     spec={
       securityContext: {
         runAsUser: 1000,

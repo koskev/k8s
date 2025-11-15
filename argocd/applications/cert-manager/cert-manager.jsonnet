@@ -1,13 +1,16 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.cert_manager;
 
+local name = 'cert-manager';
+local namespace = 'cert-manager';
+
 argocd.applicationHelm(
-  name='cert-manager',
-  targetnamespace='cert-manager',
+  name=name,
+  targetnamespace=namespace,
   chart=chart,
-  releaseName='cert-manager',
+  releaseName=name,
   values={
     installCRDs: true,
-    namespace: 'cert-manager',
+    namespace: namespace,
   },
 )

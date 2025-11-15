@@ -1,17 +1,20 @@
+local name = 'external-dns';
+local namespace = 'default';
+
 local sa = {
   apiVersion: 'v1',
   kind: 'ServiceAccount',
   metadata: {
-    name: 'external-dns',
-    namespace: 'default',
+    name: name,
+    namespace: namespace,
   },
 };
 local role = {
   apiVersion: 'rbac.authorization.k8s.io/v1',
   kind: 'ClusterRole',
   metadata: {
-    name: 'external-dns',
-    namespace: 'default',
+    name: name,
+    namespace: namespace,
   },
   rules: [
     {
@@ -75,18 +78,18 @@ local binding =
     kind: 'ClusterRoleBinding',
     metadata: {
       name: 'external-dns-viewer',
-      namespace: 'default',
+      namespace: namespace,
     },
     roleRef: {
       apiGroup: 'rbac.authorization.k8s.io',
       kind: 'ClusterRole',
-      name: 'external-dns',
+      name: name,
     },
     subjects: [
       {
         kind: 'ServiceAccount',
-        name: 'external-dns',
-        namespace: 'default',
+        name: name,
+        namespace: namespace,
       },
     ],
   };

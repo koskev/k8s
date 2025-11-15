@@ -17,7 +17,7 @@ local host = 'navidrome.kokev.de';
     },
     containers: [
       {
-        name: 'navidrome',
+        name: name,
         image: '%s:%s' % [navidrome.image, navidrome.tag],
         ports: [
           {

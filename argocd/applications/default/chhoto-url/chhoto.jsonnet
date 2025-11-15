@@ -29,7 +29,7 @@ local domain = 's.kokev.de';
     spec={
       containers: [
         {
-          name: 'chhoto',
+          name: name,
           image: '%s:%s' % [image.image, image.tag],
           env: [
             {
