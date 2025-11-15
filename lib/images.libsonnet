@@ -239,7 +239,7 @@
     },
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
-      tag: 'v1.22.0-pre2',
+      tag: 'v1.23.0-pre2',
     },
   },
 }
