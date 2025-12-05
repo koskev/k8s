@@ -8,7 +8,7 @@
     synapse: {
       chart: 'matrix-synapse',
       repoURL: 'https://ananace.gitlab.io/charts',
-      targetRevision: '3.12.14',
+      targetRevision: '3.12.16',
     },
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
