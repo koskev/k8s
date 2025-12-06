@@ -3,6 +3,7 @@ local k8s = import 'k8s.libsonnet';
 
 local name = 'grafana-operator';
 local namespace = 'grafana';
+local grafana_name = 'grafana';
 
 [
   k8s.secret.externalSecretExtract('grafana-admin', namespace),
@@ -14,7 +15,7 @@ local namespace = 'grafana';
   )
   .withAutoSync()
   .withServerSideApply(),
-  k8s.builder.definition.new('grafana.integreatly.org/v1beta1', 'Grafana', 'grafana', namespace)
+  k8s.builder.definition.new('grafana.integreatly.org/v1beta1', 'Grafana', grafana_name, namespace)
   .withSpec({
     deployment: {
       spec: {
@@ -22,7 +23,7 @@ local namespace = 'grafana';
           spec: {
             containers: [
               {
-                name: 'grafana',
+                name: grafana_name,
                 env: [
                   {
                     name: 'GF_SECURITY_ADMIN_USER',
@@ -62,7 +63,7 @@ local namespace = 'grafana';
   .withSpec({
     instanceSelector: {
       matchLabels: {
-        app: 'grafana',
+        app: grafana_name,
       },
     },
     datasource: {
@@ -77,7 +78,7 @@ local namespace = 'grafana';
     resyncPeriod: '30s',
     instanceSelector: {
       matchLabels: {
-        app: 'grafana',
+        app: grafana_name,
       },
     },
     json: importstr './dashboards/cloudnative_pg.json',
@@ -87,7 +88,7 @@ local namespace = 'grafana';
     resyncPeriod: '30s',
     instanceSelector: {
       matchLabels: {
-        app: 'grafana',
+        app: grafana_name,
       },
     },
     json: importstr './dashboards/solar.json',

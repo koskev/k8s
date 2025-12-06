@@ -1,5 +1,3 @@
-local k8s = import 'k8s.libsonnet';
-
 local name = 'signal-bridge';
 local namespace = 'default';
 local image = (import 'images.libsonnet').container.signal_bridge;

@@ -16,19 +16,19 @@ local namespace = 'matrix';
       host: '{{.Host}}',
     },
   ),
-  k8s.secret.externalSecretExtract('redis-secret', 'matrix', 'synapse-redis-secret'),
-  k8s.secret.externalSecretExtract('synapse-signingkey', 'matrix'),
+  k8s.secret.externalSecretExtract('redis-secret', namespace, 'synapse-redis-secret'),
+  k8s.secret.externalSecretExtract('synapse-signingkey', namespace),
   k8s.storage.localStorageClass(name='local-synapse'),
   k8s.storage.localPersistentVolume(
     name='synapse-media-data',
-    namespace='matrix',
+    namespace=namespace,
     sizeGB=20,
     path='/mnt/shared_data/k8s/matrix/data',
     storageclass='local-synapse'
   ),
   k8s.argocd.applicationHelm(
     name='synapse',
-    targetnamespace='matrix',
+    targetnamespace=namespace,
     chart=chart,
     releaseName='synapse',
     values={

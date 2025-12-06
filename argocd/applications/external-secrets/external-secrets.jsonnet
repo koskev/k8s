@@ -1,10 +1,13 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.external_secrets;
 
+local name = 'external-secrets';
+local namespace = 'external-secrets';
+
 [
   argocd.applicationHelm(
-    name='external-secrets',
-    targetnamespace='external-secrets',
+    name=name,
+    targetnamespace=namespace,
     chart=chart,
     releaseName='external-secrets',
   ),
@@ -25,8 +28,8 @@ local chart = (import 'images.libsonnet').helm.external_secrets;
               mountPath: 'kubernetes',
               role: 'external-secrets-role',
               serviceAccountRef: {
-                name: 'external-secrets',
-                namespace: 'external-secrets',
+                name: name,
+                namespace: namespace,
               },
             },
           },
