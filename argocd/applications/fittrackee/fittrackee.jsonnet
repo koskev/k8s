@@ -42,7 +42,9 @@ local port = 5000;
     .withEnvValueFromSecret('APP_SECRET_KEY', 'fittrackee-secret-key', 'key')
     .withEnvValueFromSecret('DATABASE_URL', '%s-%s' % [name, name], 'POSTGRES_URL')
     .withCommand(['sh', 'docker-entrypoint.sh'])
-  ),
+  )
+  // We need to add https://cloudnative-pg.io/documentation/1.25/postgis/ for fittrackee to work
+  .withReplicas(0),
 
 
 ]
