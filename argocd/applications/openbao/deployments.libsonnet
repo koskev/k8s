@@ -26,6 +26,8 @@ local chart = (import 'images.libsonnet').helm.openbao;
         },
         server: {
           [if rollingUpdate then 'updateStrategyType']: 'RollingUpdate',
+          // The chart changes that to OrderedReady but the field is immutable
+          podManagementPolicy: 'Parallel',
           ingress: {
             enabled: true,
             annotations: {
