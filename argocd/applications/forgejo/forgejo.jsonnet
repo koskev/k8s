@@ -53,12 +53,12 @@ local host = 'forgejo.kokev.de';
           secretName: '%s-tls' % name,
         }],
       },
-      'redis-cluster': {
+      'valkey-cluster': {
         enabled: false,
       },
-      redis: {
+      valkey: {
         enabled: true,
-        master: {
+        primary: {
           persistence: {
             enabled: false,
           },
