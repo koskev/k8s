@@ -1,18 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "kubernetes": {
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
   },
   "argocd": {
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
   },
   "flux": {
-    "fileMatch": ["\\.ya?ml$"]
+    "fileMatch": [
+      "\\.ya?ml$"
+    ]
   },
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["\\.ya?ml$"],
+      "fileMatch": [
+        "\\.ya?ml$"
+      ],
       "datasourceTemplate": "docker",
       "matchStrings": [
         "image:\\s*repository:\\s?(?<depName>.*?)\\s*tag:\\s?(?<currentValue>[\\w+\\.\\-]*)"
@@ -20,7 +28,9 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["images.libsonnet"],
+      "fileMatch": [
+        "images.libsonnet"
+      ],
       "datasourceTemplate": "helm",
       "matchStrings": [
         "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
@@ -28,7 +38,19 @@
     },
     {
       "customType": "regex",
-      "fileMatch": ["images.libsonnet"],
+      "fileMatch": [
+        "images.libsonnet"
+      ],
+      "datasourceTemplate": "docker",
+      "matchStrings": [
+        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+      ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "images.libsonnet"
+      ],
       "datasourceTemplate": "docker",
       "matchStrings": [
         "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
