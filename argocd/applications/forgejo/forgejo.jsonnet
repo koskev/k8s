@@ -28,6 +28,10 @@ local host = 'forgejo.kokev.de';
     targetnamespace=namespace,
     chart=chart,
     values={
+      strategy: {
+        // Otherwise the valkey lock cannot be aquired
+        type: 'Recreate',
+      },
       service: {
         ssh: {
           type: 'LoadBalancer',
