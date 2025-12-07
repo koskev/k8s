@@ -27,24 +27,27 @@
       ]
     },
     {
+      "description": "Helm repos for all strings that start with 'https'",
       "customType": "regex",
       "fileMatch": [
         "images.libsonnet"
       ],
       "datasourceTemplate": "helm",
       "matchStrings": [
-        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
       ]
     },
     {
+      "description": "Helm OCI repos for all strings that do not contain a ':'",
       "customType": "regex",
       "fileMatch": [
         "images.libsonnet"
       ],
       "datasourceTemplate": "docker",
       "matchStrings": [
-        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
-      ]
+        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>[^:].*)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+      ],
+      "packageNameTemplate": "{{registryUrl}}/{{depName}}"
     },
     {
       "customType": "regex",
