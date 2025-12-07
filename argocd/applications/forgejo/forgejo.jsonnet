@@ -1,9 +1,13 @@
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.forgejo;
 local globals = import 'globals.libsonnet';
+local valkey = import 'valkey.libsonnet';
 
 local name = 'forgejo';
 local namespace = 'forgejo';
+
+local valkey_name = '%s-valkey' % name;
+local valkey_port = 6379;
 
 local storageclass = 'local-%s' % name;
 local host = 'forgejo.kokev.de';
@@ -57,12 +61,7 @@ local host = 'forgejo.kokev.de';
         enabled: false,
       },
       valkey: {
-        enabled: true,
-        primary: {
-          persistence: {
-            enabled: false,
-          },
-        },
+        enabled: false,
       },
       posgresql: {
         enabled: false,
@@ -75,6 +74,19 @@ local host = 'forgejo.kokev.de';
         storageClass: storageclass,
       },
       gitea: {
+        local valkey_url = 'redis://%s:%d' % [valkey_name, valkey_port],
+        queue: {
+          TYPE: 'redis',
+          CONN_STR: 'redis://%s/0?' % valkey_url,
+        },
+        cache: {
+          ADAPTER: 'redis',
+          HOST: 'redis://%s/1' % valkey_url,
+        },
+        session: {
+          PROVIDER: 'redis',
+          PROVIDER_CONFIG: 'redis://%s/2' % valkey_url,
+        },
         config: {
           database: {
             DB_TYPE: 'postgres',
@@ -117,4 +129,4 @@ local host = 'forgejo.kokev.de';
       },
     },
   ),
-]
+] + valkey.new(valkey_name, namespace, valkey_port)
