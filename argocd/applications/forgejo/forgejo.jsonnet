@@ -57,12 +57,6 @@ local host = 'forgejo.kokev.de';
           secretName: '%s-tls' % name,
         }],
       },
-      'valkey-cluster': {
-        enabled: false,
-      },
-      valkey: {
-        enabled: false,
-      },
       posgresql: {
         enabled: false,
       },
