@@ -46,6 +46,12 @@ externalDNS.permissions() +
       securityContext: {
         fsGroup: 65534,
       },
+      dnsPolicy: 'None',
+      dnsConfig: {
+        nameservers: [
+          '192.168.1.1',
+        ],
+      },
       containers: [
         {
           name: 'external-dns',
