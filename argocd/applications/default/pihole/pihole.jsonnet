@@ -122,6 +122,10 @@ externalDNS.permissions() +
               value: '',
             },
             {
+              name: 'FTLCONF_dns_revServers',
+              value: 'true,192.168.0.0/16,192.168.1.1,lan',
+            },
+            {
               name: 'FTLCONF_dns_listeningMode',
               value: 'all',
             },
