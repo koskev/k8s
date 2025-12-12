@@ -1,9 +1,10 @@
 {
-  deployment(name, namespace, spec, replicas=1, maxUnavailable='25%'):: {
+  deployment(name, namespace, spec, replicas=1, maxUnavailable='25%', minReadySeconds=0):: {
     assert std.isString(name),
     assert std.isString(namespace),
     assert std.isObject(spec),
     assert std.isNumber(replicas),
+    assert std.isNumber(minReadySeconds),
     assert std.isString(maxUnavailable) || std.isNumber(maxUnavailable),
     apiVersion: 'apps/v1',
     kind: 'Deployment',
@@ -15,6 +16,7 @@
       },
     },
     spec: {
+      minReadySeconds: minReadySeconds,
       strategy: {
         type: 'RollingUpdate',
         rollingUpdate: {
