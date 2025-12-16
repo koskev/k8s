@@ -88,7 +88,7 @@
     grafana: {
       chart: 'grafana-operator',
       repoURL: 'ghcr.io/grafana/helm-charts',
-      targetRevision: 'v5.17.1',
+      targetRevision: 'v5.20.0',
     },
     flannel: {
       chart: 'flannel',
