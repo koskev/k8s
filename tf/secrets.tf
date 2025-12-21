@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.13.0"
+  required_version = "~> 1.10.0"
   required_providers {
     sops = {
       source = "carlpett/sops"
@@ -11,7 +11,7 @@ terraform {
     }
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = "2.38.0"
+      version = "3.0.0"
     }
   }
 }
@@ -110,7 +110,7 @@ resource "vault_kv_secret_v2" "secrets" {
   data_json                  =  jsonencode(each.value.data)
 }
 
-resource "kubernetes_secret" "secrets" {
+resource "kubernetes_secret_v1" "secrets" {
   for_each = data.sops_file.secrets
   metadata {
     name                       = split(".", basename(each.key))[0]
