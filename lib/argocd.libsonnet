@@ -33,6 +33,10 @@ local globals = import 'globals.libsonnet';
           {
             jsonnet: {
               libs: ['lib', 'argocd', '.'],
+              extVars: [{
+                name: 'ARGOCD_BRANCH',
+                value: '$ARGOCD_APP_SOURCE_TARGET_REVISION',
+              }],
             },
           }
           +
