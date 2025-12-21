@@ -25,7 +25,7 @@ local globals = import 'globals.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='HEAD', recurse=false, project='gpg', autosync=true, exclude=''):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='main', recurse=false, project='gpg', autosync=true, exclude=''):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
