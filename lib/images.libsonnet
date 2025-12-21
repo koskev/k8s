@@ -173,7 +173,7 @@
     },
     esphome: {
       image: 'ghcr.io/esphome/esphome',
-      tag: '2025.11.4',
+      tag: '2025.12.1',
     },
     chhoto: {
       image: 'sintan1729/chhoto-url',
