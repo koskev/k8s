@@ -17,8 +17,9 @@ local globals = import 'globals.libsonnet';
       project: 'default',
       syncPolicy: {
         syncOptions: ['CreateNamespace=true', 'ServerSideApply=true'],
-        [if autosync then 'automated']: {
-          prune: true,
+        automated: {
+          enabled: autosync,
+          prune: false,
           selfHeal: true,
         },
       },
