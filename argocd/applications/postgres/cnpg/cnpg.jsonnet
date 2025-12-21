@@ -1,6 +1,7 @@
 local argocd = import 'argocd.libsonnet';
 local storage = import 'storage.libsonnet';
 local chart = (import 'images.libsonnet').helm.cnpg;
+local postgres_operator = import 'lib/postgres-operator.jsonnet';
 
 local config = import 'config.libsonnet';
 
@@ -68,6 +69,7 @@ local cluster = {
   ),
   cluster,
   storage.localStorageClass(config.storageClass),
+  postgres_operator.new('postgres-operator', 'cnpg-cluster-admin', ''),
 ]
 + pvs
 + std.objectValues(config.pools)

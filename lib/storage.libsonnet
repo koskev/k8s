@@ -45,5 +45,21 @@
     volumeBindingMode: 'WaitForFirstConsumer',
     allowVolumeExpansion: true,
   },
-  localPvc():: {},
+  localPvc(name, namespace, storageclass, sizeGB):: {
+    apiVersion: 'v1',
+    kind: 'PersistentVolumeClaim',
+    metadata: {
+      name: name,
+      namespace: namespace,
+    },
+    spec: {
+      accessModes: ['ReadWriteOnce'],
+      storageClassName: storageclass,
+      resources: {
+        requests: {
+          storage: '%dGi' % sizeGB,
+        },
+      },
+    },
+  },
 }

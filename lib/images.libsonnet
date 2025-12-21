@@ -110,6 +110,12 @@
       repoURL: 'https://traefik.github.io/charts',
       targetRevision: '37.4.0',
     },
+    immich: {
+      chart: 'immich',
+      repoURL: 'ghcr.io/immich-app/immich-charts',
+      targetRevision: '0.10.3',
+    },
+
 
   },
   container: {
@@ -240,6 +246,14 @@
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
       tag: 'v1.23.0-pre2',
+    },
+    cnpg_vectorchord: {
+      image: 'ghcr.io/tensorchord/cloudnative-vectorchord',
+      tag: '17.6-0.5.3',
+    },
+    immich: {
+      image: 'ghcr.io/immich-app/immich-server',
+      tag: 'v2.4.1',
     },
   },
 }
