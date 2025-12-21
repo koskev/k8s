@@ -19,7 +19,8 @@ local globals = import 'globals.libsonnet';
         syncOptions: ['CreateNamespace=true', 'ServerSideApply=true'],
         automated: {
           enabled: autosync,
-          prune: false,
+          // Another "nice" argocd feature. Leads to inifinite syncs. Probably due to a "omitempty"...
+          //prune: false,
           selfHeal: true,
         },
       },
