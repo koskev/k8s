@@ -71,6 +71,15 @@ local immich_storage_size_gb = 20;
         },
       },
       server: {
+        persistence: {
+          external: {
+            enabled: true,
+            type: 'hostPath',
+            hostPath: '/mnt/shared_data/k8s/immich_external',
+           //  XXX: Hardcoded to be the same as the hostpath...
+            //mountPath: '/external',
+          },
+        },
         ingress: {
           main: {
             ingressClassName: 'nginx',
