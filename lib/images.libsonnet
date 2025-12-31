@@ -255,5 +255,9 @@
       image: 'ghcr.io/immich-app/immich-server',
       tag: 'v2.4.1',
     },
+    borg_server: {
+      image: 'horaceworblehat/borg-server',
+      tag: '2.6.22',
+    },
   },
 }

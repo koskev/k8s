@@ -23,6 +23,7 @@ local apps = [
   argocd.appSettings(name='kube-system'),
   argocd.appSettings(name='fittrackee'),
   argocd.appSettings(name='immich'),
+  argocd.appSettings(name='borg'),
 ];
 
 argocd.addApps(apps)
