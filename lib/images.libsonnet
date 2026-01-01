@@ -8,7 +8,7 @@
     synapse: {
       chart: 'matrix-synapse',
       repoURL: 'https://ananace.gitlab.io/charts',
-      targetRevision: '3.12.16',
+      targetRevision: '3.12.17',
     },
     kube_prometheus: {
       chart: 'kube-prometheus-stack',
@@ -68,7 +68,7 @@
     reloader: {
       chart: 'reloader',
       repoURL: 'https://stakater.github.io/stakater-charts',
-      targetRevision: '2.2.5',
+      targetRevision: '2.2.7',
     },
     ingress_nginx: {
       chart: 'ingress-nginx',
@@ -125,11 +125,11 @@
     },
     signal_bridge: {
       image: 'dock.mau.dev/mautrix/signal',
-      tag: 'v0.2511.0',
+      tag: 'v0.2512.0',
     },
     whatsapp_bridge: {
       image: 'dock.mau.dev/mautrix/whatsapp',
-      tag: 'v0.2511.0',
+      tag: 'v0.2512.0',
     },
     yqgo: {
       image: 'mikefarah/yq',
@@ -157,7 +157,7 @@
     },
     hass: {
       image: 'ghcr.io/home-assistant/home-assistant',
-      tag: '2025.12.3',
+      tag: '2025.12.5',
     },
     grocy: {
       image: 'linuxserver/grocy',
@@ -165,7 +165,7 @@
     },
     jellyfin: {
       image: 'docker.io/jellyfin/jellyfin',
-      tag: '10.11.4',
+      tag: '10.11.5',
     },
     zigbee2mqtt: {
       image: 'koenkk/zigbee2mqtt',

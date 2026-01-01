@@ -14,6 +14,13 @@ local configStorageClass = '%s-config' % storageClass;
 
 local size = 3 * 1000;
 
+
+local getAuthorizedKeysLine(name, key) = 'restrict,command="borg serve  --restrict-to-path /home/borg/backups/%s" %s' % [name, key];
+
+local authorized_keys = {
+  desktop: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf',
+};
+
 [
   k8s.v1.namespace(namespace),
   k8s.storage.localStorageClass(storageClass),
@@ -24,7 +31,16 @@ local size = 3 * 1000;
   k8s.storage.localPersistentVolume(configPvcName, namespace, 1, '%s/config' % mountPath, configStorageClass, 'optiplex'),
   k8s.storage.localPvc(configPvcName, namespace, configStorageClass, 1),
 
-  k8s.secret.externalSecretExtract('borg', namespace),
+  k8s.v1.configmap('borg-authorized-keys', namespace, {
+    authorized_keys:
+      std.join(
+        '\n',
+        [
+          getAuthorizedKeysLine(key.key, key.value)
+          for key in std.objectKeysValues(authorized_keys)
+        ]
+      ),
+  }),
   k8s.builder.apps.deployment.new(name, namespace)
   .withVolume({
     name: pvcName,
@@ -38,11 +54,17 @@ local size = 3 * 1000;
       claimName: configPvcName,
     },
   })
+  .withVolume({
+    name: 'authorized-keys',
+    configMap: {
+      name: 'borg-authorized-keys',
+    },
+  })
   .withContainer(
     k8s.builder.apps.container.new(name, image.image, image.tag)
     .withMount(pvcName, '/home/borg/backups')
     .withMount(configPvcName, '/var/lib/docker-borg')
-    .withEnvFromSecret('borg')
+    .withMount('authorized-keys', '/home/borg/.ssh/authorized_keys', 'authorized_keys')
     .withPort(sshPort)
     .withEnv('BORG_UID', '1000')
     .withEnv('BORG_GID', '1000')
