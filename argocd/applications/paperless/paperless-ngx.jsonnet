@@ -117,7 +117,7 @@ local volumes = [
 +
 backup.new(name, namespace)
 .withVolumes(volumes)
-.withRepository('ssh://borg@borg.kokev.de/./backups/paperless/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
+.withRepository('ssh://borg@borg-backup.borg/./backups/paperless/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
 .withDirectory('/data')
 .withDirectory('/media')
 .withExclude('**/classification_model.pickle')  // The model can be reconstructed from the other data

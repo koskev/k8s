@@ -115,7 +115,7 @@ local immich_storage_size_gb = 20;
 +
 backup.new(name, namespace)
 .withClaim(name, 'data')
-.withRepository('ssh://borg@borg.kokev.de/./backups/immich/data', 'backup-immich', globals.backup.kokev.knownHost)
+.withRepository('ssh://borg@borg-backup.borg/./backups/immich/data', 'backup-immich', globals.backup.kokev.knownHost)
 .withDirectory('/data/library')
 .withDirectory('/data/upload')
 .withDirectory('/data/profile')
