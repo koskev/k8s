@@ -77,14 +77,11 @@ local k8s = import 'k8s.libsonnet';
                   name: name,
                   image: '%s:%s' % [image.image, image.tag],
                   command: [
-                    'su-exec',
+                    'bash',
+                    '-c',
                   ],
                   args: [
-                    '$UID:$GID',
-                    '/usr/bin/%s' % binaryName,
-                    '--no-update',
-                    '-c',
-                    '/data/config.yaml',
+                    'su-exec $UID:$GID /usr/bin/%s --no-update -c /data/config.yaml' % binaryName,
                   ],
                   ports: [
                     {
