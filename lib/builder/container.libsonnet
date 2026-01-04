@@ -31,7 +31,7 @@
     },
 
     withEnvFromSecret(secretName):: self {
-      assert std.isString(secretName),
+      assert std.isString(secretName) : 'The secretName is not a string',
       envFrom+: [
         {
           secretRef: {

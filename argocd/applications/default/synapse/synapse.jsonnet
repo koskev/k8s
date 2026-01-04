@@ -1,10 +1,27 @@
 local synapse = (import 'images.libsonnet').container.synapse;
 local yqgo = (import 'images.libsonnet').container.yqgo;
 local k8s = import 'k8s.libsonnet';
+local backup = import 'utils/backup.jsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'synapse';
 local namespace = 'default';
 local configName = 'synapse-config';
+
+local volumes = [
+  {
+    name: 'datadir',
+    hostPath: {
+      path: '/mnt/shared_data/k8s/synapse/data',
+    },
+  },
+  {
+    name: 'logdir',
+    hostPath: {
+      path: '/mnt/shared_data/k8s/synapse/log',
+    },
+  },
+];
 
 k8s.secret.secretStoreKubernetes(name, namespace) +
 [
@@ -147,19 +164,7 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
               },
             },
           ],
-          volumes: [
-            {
-              name: 'datadir',
-              hostPath: {
-                path: '/mnt/shared_data/k8s/synapse/data',
-              },
-            },
-            {
-              name: 'logdir',
-              hostPath: {
-                path: '/mnt/shared_data/k8s/synapse/log',
-              },
-            },
+          volumes: volumes + [
             {
               name: configName,
               secret: {
@@ -182,3 +187,13 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
     },
   },
 ]
++
+backup.new(name, namespace)
+.withVolumes(volumes)
+.withSchedule('@daily')
+.withRepository('ssh://borg@borg-backup.borg/./backups/synapse/data', 'backup-synapse', globals.backup.kokev.knownHost)
+.withPostgresDatabase('whatsapp-bridge-whatsapp-bridge', 'default')
+.withPostgresDatabase('signal-bridge-signal-bridge', 'default')
+.withPostgresDatabase('synapse-synapse')
+.withDirectory('/datadir')
+.build()

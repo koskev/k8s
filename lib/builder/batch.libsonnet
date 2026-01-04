@@ -58,15 +58,15 @@ local definition = import 'definition.libsonnet';
 
       withInitContainer(container):: self.withTemplateSpec({
         assert std.isObject(container),
-        assert std.objectHas(container, 'name'),
-        assert std.objectHas(container, 'image'),
+        assert std.objectHas(container, 'name') : 'The container is missing a name',
+        assert std.objectHas(container, 'image') : 'The container is missing an image',
         initContainers+: [container],
       }),
 
       withContainer(container):: self.withTemplateSpec({
         assert std.isObject(container),
-        assert std.objectHas(container, 'name'),
-        assert std.objectHas(container, 'image'),
+        assert std.objectHas(container, 'name') : 'The container is missing a name',
+        assert std.objectHas(container, 'image') : 'The container is missing an image',
         containers+: [container],
       }),
 

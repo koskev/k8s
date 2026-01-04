@@ -75,9 +75,13 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       volumes+: volumes,
     },
 
-    withPostgresDatabase(secretName):: self {
-      assert std.isString(secretName) : 'The secretName needs to be a string!',
-      databaseSecrets+: [secretName],
+    withPostgresDatabase(secretName, secretNamespace=namespace):: self {
+      assert std.isString(secretName) : 'The secretName must be a string!',
+      assert std.isString(secretNamespace) : 'The secretNameSpace must be a string!',
+      databaseSecrets+: [{
+        name: secretName,
+        namespace: secretNamespace,
+      }],
     },
 
     buildCMD()::
@@ -93,17 +97,32 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         'borg prune %(args)s --keep-hourly=%(hourly)d --keep-daily=%(daily)d --keep-weekly=%(weekly)d --keep-monthly=%(monthly)d --keep-yearly=%(yearly)d %(repo)s' % (self.prune { repo: repo, args: outerSelf.prune_arguments }),
       ]),
 
-    buildPostgresDumpContainers():: [
-      k8s.builder.apps.container.new('%s-psql-dump' % self.name, psql_image.image, psql_image.tag)
-      .withCommand([
-        'bash',
-        '-c',
-        'pg_dump --dbname=${POSTGRES_URL} > /postgres/${DATABASE_NAME}.bak',
-      ])
-      .withEnvFromSecret(secret)
-      .withMount('postgres', '/postgres')
-      for secret in outerSelf.databaseSecrets
-    ],
+    buildPostgresDumpContainers():: std.flattenArrays(
+      std.map(
+        function(secret) [
+          k8s.builder.apps.container.new('%s-psql-dump' % secret.name, psql_image.image, psql_image.tag)
+          .withCommand([
+            'bash',
+            '-c',
+            'pg_dump --dbname=${POSTGRES_URL} > /postgres/${DATABASE_NAME}.bak && echo "Dumped data" && ls -l /postgres/${DATABASE_NAME}.bak',
+          ])
+          .withEnvFromSecret(secret.name)
+          .withMount('postgres', '/postgres'),
+        ] + (
+          if secret.namespace != namespace
+          then
+            local secretStoreName = '%s-%s-psql-backup';
+            [
+              // Add a secret store to get the secret of the other namespace
+              k8s.secret.secretStoreKubernetes('%s-%s-psql-backup', secret.name, secret.namespace),
+              k8s.secret.externalSecretExtract(secret.name, namespace, secretStoreRef={ name: secretStoreName, kind: 'SecretStore' }),
+            ]
+          else []
+        ),
+        outerSelf.databaseSecrets
+      )
+    )
+    ,
 
 
     build():: [
