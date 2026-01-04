@@ -3,6 +3,8 @@ local chart = (import 'images.libsonnet').helm.immich;
 local immich_image = (import 'images.libsonnet').container.immich;
 local cnpg = import 'lib/cnpg.libsonnet';
 local postgres_operator = import 'lib/postgres-operator.jsonnet';
+local backup = import 'utils/backup.jsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'immich';
 local namespace = 'immich';
@@ -76,7 +78,7 @@ local immich_storage_size_gb = 20;
             enabled: true,
             type: 'hostPath',
             hostPath: '/mnt/shared_data/k8s/immich_external',
-           //  XXX: Hardcoded to be the same as the hostpath...
+            //  XXX: Hardcoded to be the same as the hostpath...
             //mountPath: '/external',
           },
         },
@@ -110,3 +112,11 @@ local immich_storage_size_gb = 20;
     }
   ),
 ]
++
+backup.new(name, namespace)
+.withClaim(name, 'data')
+.withRepository('ssh://borg@borg.kokev.de/./backups/immich/data', 'backup-immich', globals.backup.kokev.knownHost)
+.withDirectory('/data/library')
+.withDirectory('/data/upload')
+.withDirectory('/data/profile')
+.build()
