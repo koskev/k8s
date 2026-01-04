@@ -17,7 +17,6 @@ local size = 3 * 1000;
 
 local getAuthorizedKeysLine(name, key) = 'restrict,command="borg serve  --restrict-to-path /home/borg/backups/%s" %s' % [name, key];
 
-// TODO: Reloader annotation
 local authorized_keys = {
   desktop: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf',
   immich: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHxeafp9VvH6YgfQuDjZk4yp8P/upoQQoDUiJOqe0ptI',
@@ -45,6 +44,7 @@ local authorized_keys = {
       ),
   }),
   k8s.builder.apps.deployment.new(name, namespace)
+  .withReloaderAnnotation()
   .withVolume({
     name: pvcName,
     persistentVolumeClaim: {

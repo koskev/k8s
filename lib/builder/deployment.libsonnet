@@ -59,5 +59,13 @@ local definition = import 'definition.libsonnet';
       assert std.isObject(volume),
       volumes+: [volume],
     }),
+
+    withReloaderAnnotation():: self {
+      metadata+: {
+        annotations+: {
+          'reloader.stakater.com/auto': 'true',
+        },
+      },
+    },
   },
 }
