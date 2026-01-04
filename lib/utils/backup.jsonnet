@@ -97,7 +97,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       k8s.builder.apps.container.new('%s-psql-dump' % self.name, psql_image.image, psql_image.tag)
       .withCommand([
         'bash',
-        '-xc',
+        '-c',
         'pg_dump --dbname=${POSTGRES_URL} > /postgres/${DATABASE_NAME}.bak',
       ])
       .withEnvFromSecret(secret)
