@@ -121,5 +121,6 @@ backup.new(name, namespace)
 .withDirectory('/data')
 .withDirectory('/media')
 .withExclude('**/classification_model.pickle')  // The model can be reconstructed from the other data
+.withExclude('**/data/log/*')  // We don't really need the logs in the backup
 .withPostgresDatabase('%s-%s' % [name, name])
 .build()
