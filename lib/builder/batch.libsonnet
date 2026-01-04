@@ -51,6 +51,18 @@ local definition = import 'definition.libsonnet';
         volumes+: [volume],
       }),
 
+      withInitContainers(containers):: self.withTemplateSpec({
+        assert std.isArray(containers) : 'Containers has to be an array of containers',
+        initContainers+: containers,
+      }),
+
+      withInitContainer(container):: self.withTemplateSpec({
+        assert std.isObject(container),
+        assert std.objectHas(container, 'name'),
+        assert std.objectHas(container, 'image'),
+        initContainers+: [container],
+      }),
+
       withContainer(container):: self.withTemplateSpec({
         assert std.isObject(container),
         assert std.objectHas(container, 'name'),

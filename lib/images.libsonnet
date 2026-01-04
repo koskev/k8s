@@ -261,5 +261,9 @@
       image: 'ghcr.io/borgmatic-collective/borgmatic',
       tag: '2.0.12',
     },
+    postgres: {
+      image: 'postgres',
+      tag: '17.7-alpine',
+    },
   },
 }

@@ -1,5 +1,5 @@
 {
-  secretStoreKubernetes(name, namespace):: [
+  secretStoreKubernetes(name, namespace, targetNamespace=namespace):: [
     {
       apiVersion: 'rbac.authorization.k8s.io/v1',
       kind: 'Role',
@@ -72,7 +72,7 @@
       spec: {
         provider: {
           kubernetes: {
-            remoteNamespace: namespace,
+            remoteNamespace: targetNamespace,
             server: {
               caProvider: {
                 type: 'ConfigMap',
