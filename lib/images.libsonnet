@@ -255,7 +255,7 @@
     },
     borg_server: {
       image: 'horaceworblehat/borg-server',
-      tag: '2.6.22',
+      tag: '2.8.0',
     },
     borgmatic: {
       image: 'ghcr.io/borgmatic-collective/borgmatic',
