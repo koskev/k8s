@@ -1,6 +1,8 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.paperless;
 local valkeyImage = (import 'images.libsonnet').container.valkey;
+local backup = import 'utils/backup.jsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'paperless-ngx';
 local namespace = 'paperless';
@@ -11,6 +13,20 @@ local port = 8000;
 local valkeyName = '%s-valkey' % name;
 local valkeyPort = 6379;
 
+local volumes = [
+  {
+    name: 'data',
+    hostPath: {
+      path: '/mnt/shared_data/k8s/paperless/data',
+    },
+  },
+  {
+    name: 'media',
+    hostPath: {
+      path: '/mnt/shared_data/k8s/paperless/media',
+    },
+  },
+];
 [
   k8s.v1.namespace(namespace),
   k8s.db.database(name, namespace),
@@ -80,20 +96,7 @@ local valkeyPort = 6379;
         }],
       },
     ],
-    volumes: [
-      {
-        name: 'data',
-        hostPath: {
-          path: '/mnt/shared_data/k8s/paperless/data',
-        },
-      },
-      {
-        name: 'media',
-        hostPath: {
-          path: '/mnt/shared_data/k8s/paperless/media',
-        },
-      },
-    ],
+    volumes: volumes,
   }),
   k8s.v1.service(valkeyName, namespace, ports=[valkeyPort]),
   k8s.apps.deployment(valkeyName, namespace, spec={
@@ -111,3 +114,11 @@ local valkeyPort = 6379;
   }),
   k8s.networking.ingress(name, namespace, hostname, servicePort=port),
 ]
++
+backup.new(name, namespace)
+.withVolumes(volumes)
+.withRepository('ssh://borg@borg.kokev.de/./backups/paperless/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
+.withDirectory('/data')
+.withDirectory('/media')
+.withPostgresDatabase('%s-%s' % [name, name])
+.build()

@@ -21,6 +21,7 @@ local getAuthorizedKeysLine(name, key) = 'restrict,command="borg serve  --restri
 local authorized_keys = {
   desktop: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/TBxpOVXoWVtMV77vC8nUBsG0GpBj6ydjc4P59mChf',
   immich: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHxeafp9VvH6YgfQuDjZk4yp8P/upoQQoDUiJOqe0ptI',
+  paperless: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF23GaxX2yHM5GG1ch0RjKW38ZolI+GCA6oJpEP0wWJu',
 };
 
 [

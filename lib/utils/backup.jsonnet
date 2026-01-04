@@ -17,6 +17,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
     directories: [],
     excludes: [],
     databaseSecrets: [],
+    volumes: [],
     repository: {
       path: '',
       passwordPath: '',
@@ -68,6 +69,10 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         claimName: claimName,
         mountName: mountName,
       }],
+    },
+
+    withVolumes(volumes):: self {
+      volumes+: volumes,
     },
 
     withPostgresDatabase(secretName):: self {
@@ -125,8 +130,18 @@ local psql_image = (import 'images.libsonnet').container.postgres;
             for claim in outerSelf.claims
           ],
         })
+        .withExtraSpec({
+          volumeMounts+: [
+            {
+              name: volume.name,
+              mountPath: '%s/%s' % [mount_prefix, volume.name],
+            }
+            for volume in outerSelf.volumes
+          ],
+        })
       )
       .withInitContainers(outerSelf.buildPostgresDumpContainers())
+      .withVolumes(outerSelf.volumes)
       .withVolumes([
         {
           name: claim.claimName,
