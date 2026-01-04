@@ -215,7 +215,7 @@
     },
     influxdb: {
       image: 'influxdb',
-      tag: '2.7.12-alpine',
+      tag: '2.8.0-alpine',
     },
     octoprint: {
       image: 'octoprint/octoprint',
