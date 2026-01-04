@@ -120,5 +120,6 @@ backup.new(name, namespace)
 .withRepository('ssh://borg@borg.kokev.de/./backups/paperless/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
 .withDirectory('/data')
 .withDirectory('/media')
+.withExclude('**/classification_model.pickle')  // The model can be reconstructed from the other data
 .withPostgresDatabase('%s-%s' % [name, name])
 .build()
