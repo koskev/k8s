@@ -84,7 +84,6 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       local repo = self.repository.path;
       std.join(' && ', [
         'echo "%s" >> ~/.ssh/known_hosts' % self.repository.knownHost,
-        'set -x',
         'borg create %(args)s %(repo)s::{hostname}-{now} %(excludes)s %(dirs)s /postgres' % {
           args: outerSelf.create_arguments,
           repo: repo,
