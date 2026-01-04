@@ -247,7 +247,7 @@
     },
     cnpg_vectorchord: {
       image: 'ghcr.io/tensorchord/cloudnative-vectorchord',
-      tag: '17.6-0.5.3',
+      tag: '18.0-0.5.3',
     },
     immich: {
       image: 'ghcr.io/immich-app/immich-server',
