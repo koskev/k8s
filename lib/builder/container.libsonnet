@@ -6,6 +6,7 @@
     name: name,
     image: '%s:%s' % [image, tag],
 
+    // Adds an environment variable to the container
     withEnv(name, value):: self {
       assert std.isString(name),
       env+: [{
@@ -67,13 +68,14 @@
       }],
     },
 
-    withMount(name, path, subPath=''):: self {
+    withMount(name, path, subPath='', readonly=false):: self {
       assert std.isString(name),
       assert std.isString(path),
       assert std.isString(subPath),
       volumeMounts+: [{
         name: name,
         mountPath: path,
+        [if readonly then 'readOnly']: readonly,
         [if std.length(subPath) > 0 then 'subPath']: subPath,
       }],
     },

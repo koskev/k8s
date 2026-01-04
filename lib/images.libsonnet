@@ -115,8 +115,6 @@
       repoURL: 'ghcr.io/immich-app/immich-charts',
       targetRevision: '0.10.3',
     },
-
-
   },
   container: {
     renovate: {
@@ -258,6 +256,10 @@
     borg_server: {
       image: 'horaceworblehat/borg-server',
       tag: '2.6.22',
+    },
+    borgmatic: {
+      image: 'ghcr.io/borgmatic-collective/borgmatic',
+      tag: '2.0.12',
     },
   },
 }
