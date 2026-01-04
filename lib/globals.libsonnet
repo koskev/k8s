@@ -11,7 +11,7 @@
   },
   backup: {
     kokev: {
-      knownHost: 'borg-backup.borg ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9k3PeqhT6K3G+piKPCPfz5bLhVTQCPz+w3Efjs8TTj',
+      knownHost: 'borg-backup.borg ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAZKpVGwlYrOwYZ+QSd89RJopO+Iv9f0aIVYgf0tYr0i',
     },
   },
 }
