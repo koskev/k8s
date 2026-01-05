@@ -19,6 +19,7 @@ local authorized_keys = {
   immich: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHxeafp9VvH6YgfQuDjZk4yp8P/upoQQoDUiJOqe0ptI',
   paperless: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF23GaxX2yHM5GG1ch0RjKW38ZolI+GCA6oJpEP0wWJu',
   synapse: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKnFyiJ1z2BKw29guPAZGiBMXTFqOAFs0K19H6DwEVj',
+  zigbee2mqtt: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/GAn6oX9x2TnhdcRln/sR3M5MMSiTYpY+38lwgzirG',
 };
 
 [

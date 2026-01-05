@@ -1,10 +1,19 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.zigbee2mqtt;
+local backup = import 'utils/backup.jsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'zigbee2mqtt';
 local namespace = 'default';
 local domain = 'zigbee2mqtt.kokev.de';
 local port = 8080;
+
+local volumes = [{
+  name: 'data',
+  hostPath: {
+    path: '/mnt/shared_data/k8s/zigbee2mqtt',
+  },
+}];
 
 [
   k8s.v1.service(
@@ -55,13 +64,7 @@ local port = 8080;
           },
         },
       ],
-      volumes: [
-        {
-          name: 'data',
-          hostPath: {
-            path: '/mnt/shared_data/k8s/zigbee2mqtt',
-          },
-        },
+      volumes: volumes + [
         {
           name: 'usb',
           hostPath: {
@@ -72,3 +75,9 @@ local port = 8080;
     },
   ),
 ]
++
+backup.new(name, namespace)
+.withVolumes(volumes)
+.withRepository('ssh://borg@borg-backup.borg/./backups/zigbee2mqtt/data', 'backup-zigbee2mqtt', globals.backup.kokev.knownHost)
+.withDirectory('/data')
+.build()
