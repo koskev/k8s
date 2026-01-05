@@ -88,7 +88,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       local repo = self.repository.path;
       std.join(' && ', [
         'echo "%s" >> ~/.ssh/known_hosts' % self.repository.knownHost,
-        'borg info %(repo)s 2>&1 | grep "does not exist" && borg init -e repokey-blake2 %(repo)s' % { repo: repo },
+        'if [ $(borg info %(repo)s 2>&1 | grep "does not exist") ]; then borg init -e repokey-blake2 %(repo)s; fi' % { repo: repo },
         'borg create %(args)s %(repo)s::{hostname}-{now} %(excludes)s %(dirs)s /postgres' % {
           args: outerSelf.create_arguments,
           repo: repo,
