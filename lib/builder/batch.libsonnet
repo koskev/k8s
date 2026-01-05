@@ -35,11 +35,13 @@ local definition = import 'definition.libsonnet';
         },
 
 
-      withRestartPolicy(policy):: self.withTemplateSpec(
-        {
-          restartPolicy: policy,
-        }
-      ),
+      withRestartPolicy(policy)::
+        assert std.member(['Never', 'OnFailure'], policy) : 'Invalid policy name';
+        self.withTemplateSpec(
+          {
+            restartPolicy: policy,
+          }
+        ),
 
       withVolumes(volumes):: self.withTemplateSpec({
         assert std.isArray(volumes),

@@ -130,6 +130,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       .withSchedule(self.schedule)
       .withTerminationGracePeriod(30 * 60)
       .withConcurrencyPolicy('Forbid')
+      .withRestartPolicy('Never')
       .withContainer(
         k8s.builder.apps.container.new(self.name, image.image, image.tag)
         .withEnvValueFromSecret('BORG_PASSPHRASE', self.repository.passwordPath, 'BORG_PASSPHRASE')
