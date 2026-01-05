@@ -81,7 +81,7 @@
     },
 
     withRessources(requestMemory):: self {
-      assert std.isString(requestMemory),
+      assert std.isString(requestMemory) : 'The memory needs to be string like 256Mi',
       resources: {
         requests: {
           memory: requestMemory,

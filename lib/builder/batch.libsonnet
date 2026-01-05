@@ -71,7 +71,7 @@ local definition = import 'definition.libsonnet';
       }),
 
       withTerminationGracePeriod(seconds):: self.withTemplateSpec({
-        assert std.isNumber(seconds),
+        assert std.isNumber(seconds) : 'The grace period needs to be a number',
         terminationGracePeriodSeconds: seconds,
       }),
 

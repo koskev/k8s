@@ -108,7 +108,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         ])
         .withEnvFromSecret(secret.name)
         .withMount('postgres', '/postgres')
-        .withRessources(256),
+        .withRessources('256Mi'),
       ] + (
         if secret.namespace != namespace
         then
