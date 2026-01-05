@@ -18,6 +18,8 @@ local host = 'immich.kokev.de';
 local storageclass = 'local-%s' % name;
 local storageclassDB = 'local-db-%s' % name;
 
+local external_host_path = '/mnt/shared_data/k8s/immich_external';
+
 local immich_storage_size_gb = 20;
 [
   k8s.v1.namespace(namespace),
@@ -77,7 +79,7 @@ local immich_storage_size_gb = 20;
           external: {
             enabled: true,
             type: 'hostPath',
-            hostPath: '/mnt/shared_data/k8s/immich_external',
+            hostPath: external_host_path,
             //  XXX: Hardcoded to be the same as the hostpath...
             //mountPath: '/external',
           },
@@ -115,9 +117,16 @@ local immich_storage_size_gb = 20;
 +
 backup.new(name, namespace)
 .withClaim(name, 'data')
+.withVolumes([{
+  name: 'external',
+  hostPath: {
+    path: external_host_path,
+  },
+}])
 .withRepository('ssh://borg@borg-backup.borg/./backups/immich/data', 'backup-immich', globals.backup.kokev.knownHost)
 .withDirectory('/data/library')
 .withDirectory('/data/upload')
 .withDirectory('/data/profile')
+.withDirectory('/external')
 .withPostgresDatabase('immich-immich')
 .build()
