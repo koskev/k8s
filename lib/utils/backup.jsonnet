@@ -104,7 +104,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         .withCommand([
           'bash',
           '-c',
-          'pg_dump --dbname=${POSTGRES_URL} > /postgres/${DATABASE_NAME}.bak && echo "Dumped data" && ls -l /postgres/${DATABASE_NAME}.bak',
+          'pg_dump --dbname=${POSTGRES_URL} > /postgres/${DATABASE_NAME}.bak && echo "Dumped data" && ls -hl /postgres/${DATABASE_NAME}.bak',
         ])
         .withEnvFromSecret(secret.name)
         .withMount('postgres', '/postgres')
