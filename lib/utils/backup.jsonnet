@@ -128,6 +128,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       // Add cronjob with secret mount as BORG_PASSPRASE
       k8s.builder.batch.cronjob.new(self.name, self.namespace)
       .withSchedule(self.schedule)
+      .withTerminationGracePeriod(30 * 60)
       .withConcurrencyPolicy('Forbid')
       .withContainer(
         k8s.builder.apps.container.new(self.name, image.image, image.tag)

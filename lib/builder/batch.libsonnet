@@ -70,13 +70,17 @@ local definition = import 'definition.libsonnet';
         containers+: [container],
       }),
 
+      withTerminationGracePeriod(seconds):: self.withTemplateSpec({
+        assert std.isNumber(seconds),
+        terminationGracePeriodSeconds: seconds,
+      }),
+
       withConcurrencyPolicy(policy):: self {
         assert std.isString(policy),
         assert std.member(['Allow', 'Forbid', 'Replace'], policy) : 'Invalid policy name',
         spec+: {
           concurrencyPolicy: policy,
         },
-
       },
     },
   },
