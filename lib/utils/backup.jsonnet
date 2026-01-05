@@ -135,7 +135,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       .withContainer(
         k8s.builder.apps.container.new(self.name, image.image, image.tag)
         .withEnvValueFromSecret('BORG_PASSPHRASE', self.repository.passwordPath, 'BORG_PASSPHRASE')
-        .withCommand(['bash', '-c'])
+        .withCommand(['bash', '-cx'])
         .withArgs([self.buildCMD()])
         // TODO: Change to not be root
         .withMount('ssh', '/root/.ssh/id_ed25519', 'id_ed25519', readonly=true)
