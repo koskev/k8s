@@ -2,6 +2,7 @@ local k8s = import 'k8s.libsonnet';
 
 local image = (import 'images.libsonnet').container.borgmatic;
 local psql_image = (import 'images.libsonnet').container.postgres;
+local influx_image = (import 'images.libsonnet').container.influxdb;
 
 {
   new(name, namespace):: {
@@ -17,6 +18,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
     directories: [],
     excludes: [],
     databaseSecrets: [],
+    influxDatabaseSecrets: [],
     volumes: [],
     repository: {
       path: '',
@@ -84,12 +86,21 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       }],
     },
 
+    withInfluxDatabase(secretName, secretNamespace=namespace):: self {
+      assert std.isString(secretName) : 'The secretName must be a string!',
+      assert std.isString(secretNamespace) : 'The secretNameSpace must be a string!',
+      influxDatabaseSecrets+: [{
+        name: secretName,
+        namespace: secretNamespace,
+      }],
+    },
+
     buildCMD()::
       local repo = self.repository.path;
       std.join(' && ', [
         'echo "%s" >> ~/.ssh/known_hosts' % self.repository.knownHost,
-        'if [ $(borg info %(repo)s 2>&1 | grep "does not exist") ]; then borg init -e repokey-blake2 %(repo)s; fi' % { repo: repo },
-        'borg create %(args)s %(repo)s::{hostname}-{now} %(excludes)s %(dirs)s /postgres' % {
+        'if [ "$(borg info %(repo)s 2>&1 | grep "does not exist")" ]; then borg init -e repokey-blake2 %(repo)s; fi' % { repo: repo },
+        'borg create %(args)s %(repo)s::{hostname}-{now} %(excludes)s %(dirs)s /postgres /influx' % {
           args: outerSelf.create_arguments,
           repo: repo,
           excludes: std.join(' ', std.map(function(exclude) '--exclude %s' % exclude, outerSelf.excludes)),
@@ -97,6 +108,21 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         },
         'borg prune %(args)s --keep-hourly=%(hourly)d --keep-daily=%(daily)d --keep-weekly=%(weekly)d --keep-monthly=%(monthly)d --keep-yearly=%(yearly)d %(repo)s' % (self.prune { repo: repo, args: outerSelf.prune_arguments }),
       ]),
+
+    buildInfluxDumpContainers():: std.flatMap(
+      function(secret) [
+        k8s.builder.apps.container.new('%s-influx-dump' % secret.name, influx_image.image, influx_image.tag)
+        .withCommand([
+          'bash',
+          '-c',
+          'influx backup /influx/%(name)s && echo "Dumped data" && ls -hl /influx/%(name)s' % { name: secret.name },
+        ])
+        .withEnvFromSecret(secret.name)
+        .withMount('influx', '/influx')
+        .withRessources('256Mi'),
+      ],
+      outerSelf.influxDatabaseSecrets,
+    ),
 
     buildPostgresDumpContainers():: std.flatMap(
       function(secret) [
@@ -139,6 +165,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         // TODO: Change to not be root
         .withMount('ssh', '/root/.ssh/id_ed25519', 'id_ed25519', readonly=true)
         .withMount('postgres', '/postgres')
+        .withMount('influx', '/influx')
         .withExtraSpec({
           volumeMounts+: [
             {
@@ -159,6 +186,7 @@ local psql_image = (import 'images.libsonnet').container.postgres;
         })
       )
       .withInitContainers(outerSelf.buildPostgresDumpContainers())
+      .withInitContainers(outerSelf.buildInfluxDumpContainers())
       .withVolumes(outerSelf.volumes)
       .withVolumes([
         {
@@ -180,6 +208,10 @@ local psql_image = (import 'images.libsonnet').container.postgres;
       )
       .withVolume({
         name: 'postgres',
+        emptyDir: {},
+      })
+      .withVolume({
+        name: 'influx',
         emptyDir: {},
       }),
     ],

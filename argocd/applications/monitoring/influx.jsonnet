@@ -1,5 +1,7 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.influxdb;
+local backup = import 'utils/backup.jsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'influxdb';
 local namespace = 'monitoring';
@@ -97,3 +99,9 @@ local port = 8086;
     },
   ),
 ]
++
+backup.new(name, namespace)
+.withInfluxDatabase('influxdb-secret')
+.withRepository('ssh://borg@borg-backup.borg/./backups/influxdb/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
+.withSchedule('@daily')
+.build()
