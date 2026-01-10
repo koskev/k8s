@@ -119,7 +119,7 @@
   container: {
     renovate: {
       image: 'renovate/renovate',
-      tag: '42.74.5',
+      tag: '42.76.4',
     },
     signal_bridge: {
       image: 'dock.mau.dev/mautrix/signal',
