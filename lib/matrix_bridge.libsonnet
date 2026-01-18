@@ -3,6 +3,8 @@ local yqgo = (import 'images.libsonnet').container.yqgo;
 local k8s = import 'k8s.libsonnet';
 
 
+local configName(name) = '%s-config' % name;
+
 {
   createMatrixBridge(name, namespace, image, binaryName, port)::
     k8s.secret.secretStoreKubernetes(name, namespace) +
@@ -59,7 +61,7 @@ local k8s = import 'k8s.libsonnet';
                 ],
                 volumeMounts: [
                   {
-                    name: '%s-config' % name,
+                    name: configName(name),
                     mountPath: '/out/',
                   },
                   {
@@ -91,7 +93,7 @@ local k8s = import 'k8s.libsonnet';
                   ],
                   volumeMounts: [
                     {
-                      name: '%s-config' % name,
+                      name: configName(name),
                       mountPath: '/data',
                     },
                   ],
@@ -104,7 +106,7 @@ local k8s = import 'k8s.libsonnet';
               ],
               volumes: [
                 {
-                  name: '%s-config' % name,
+                  name: configName(name),
                   emptyDir: {},
                 },
                 {
@@ -155,6 +157,6 @@ local k8s = import 'k8s.libsonnet';
           type: 'ClusterIP',
         },
       },
-      secret.externalSecretExtract('%s-config' % name, namespace),
+      secret.externalSecretExtract(configName(name), namespace),
     ],
 }

@@ -111,6 +111,7 @@ local globals = import 'globals.libsonnet';
     exclude: exclude,
   },
   addApps(appSettings, folder='')::
+    // nolint
     local uniqueApps = std.uniq(appSettings, keyF=function(key) key.name);
     assert std.length(appSettings) == std.length(uniqueApps) : 'Duplicate app entry';
     [
