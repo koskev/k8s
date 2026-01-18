@@ -151,7 +151,7 @@
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
-      tag: '2025.03.01',
+      tag: '2026.01.17',
     },
     hass: {
       image: 'ghcr.io/home-assistant/home-assistant',
