@@ -13,3 +13,11 @@ jobs:
         with:
           entrypoint: grustonnet-lint
           args: -j lib argocd lib
+  tofu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://ghcr.io/terraform-linters/tflint
+        with:
+          entrypoint: tflint
+          args: --chdir tf
