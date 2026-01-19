@@ -163,7 +163,7 @@
     },
     jellyfin: {
       image: 'docker.io/jellyfin/jellyfin',
-      tag: '10.11.5',
+      tag: '10.11.6',
     },
     zigbee2mqtt: {
       image: 'koenkk/zigbee2mqtt',
