@@ -219,7 +219,7 @@
     },
     octoprint: {
       image: 'octoprint/octoprint',
-      tag: '1.11.5',
+      tag: '1.11.6',
     },
     wireguard: {
       image: 'lscr.io/linuxserver/wireguard',
