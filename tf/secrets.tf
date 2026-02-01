@@ -166,3 +166,35 @@ resource "vault_approle_auth_backend_role" "luks" {
   backend         = vault_auth_backend.approle.path
   token_policies  = [vault_policy.luks[each.key].id]
 }
+
+data "sops_file" "glusterfs_pki_root_ca" {
+  source_file = "pki/glusterfs_root_ca.pem.enc"
+  input_type = "raw"
+}
+
+data "sops_file" "glusterfs_pki_int_ca" {
+  source_file = "pki/glusterfs_int_ca.pem.enc"
+  input_type = "raw"
+}
+
+resource "vault_mount" "glusterfs_pki" {
+  path = "glusterfs_pki"
+  type = "pki"
+}
+
+resource "vault_pki_secret_backend_config_ca" "glusterfs_root_ca" {
+  backend    = vault_mount.glusterfs_pki.path
+  pem_bundle = data.sops_file.glusterfs_pki_root_ca.raw
+}
+
+resource "vault_pki_secret_backend_config_ca" "glusterfs_int_ca" {
+  backend    = vault_mount.glusterfs_pki.path
+  pem_bundle = data.sops_file.glusterfs_pki_int_ca.raw
+}
+
+
+resource "vault_pki_secret_backend_config_issuers" "config" {
+  backend    = vault_mount.glusterfs_pki.path
+  # TODO: Get from data source
+  default    = "5099e2cf-1263-31c4-1c00-6a10f712cb62"
+}
