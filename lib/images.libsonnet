@@ -239,7 +239,7 @@
     },
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
-      tag: 'v1.1.0',
+      tag: 'v1.1.1',
     },
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
