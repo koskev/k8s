@@ -167,7 +167,7 @@
     },
     zigbee2mqtt: {
       image: 'koenkk/zigbee2mqtt',
-      tag: '2.7.2',
+      tag: '2.8.0',
     },
     esphome: {
       image: 'ghcr.io/esphome/esphome',
