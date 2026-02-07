@@ -5,11 +5,11 @@ on:
   pull_request:
 
 jobs:
-  grustonnet:
+  jsonnet:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: docker://ghcr.io/koskev/grustonnet-ls:v0.1.0
+      - uses: docker://ghcr.io/koskev/grustonnet-ls:v0.2.0
         with:
           entrypoint: grustonnet-lint
           args: -j lib argocd lib
