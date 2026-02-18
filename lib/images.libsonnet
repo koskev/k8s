@@ -259,7 +259,7 @@
     },
     borgmatic: {
       image: 'ghcr.io/borgmatic-collective/borgmatic',
-      tag: '2.1.1',
+      tag: '2.1.2',
     },
     postgres: {
       image: 'postgres',
