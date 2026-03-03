@@ -57,8 +57,8 @@
     },
     ping_exporter: {
       chart: 'ping-exporter',
-      repoURL: 'https://raw.githubusercontent.com/czerwonk/ping_exporter/main/dist/charts',
-      targetRevision: '1.1.1',
+      repoURL: 'https://czerwonk.github.io/ping_exporter',
+      targetRevision: '1.2.0',
     },
     brouter: {
       chart: 'brouter',
