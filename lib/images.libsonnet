@@ -139,7 +139,7 @@
     },
     synapse: {
       image: 'matrixdotorg/synapse',
-      tag: 'v1.147.1',
+      tag: 'v1.148.0',
     },
     navidrome: {
       image: 'ghcr.io/navidrome/navidrome',
