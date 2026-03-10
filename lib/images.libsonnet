@@ -183,7 +183,7 @@
     },
     pihole: {
       image: 'pihole/pihole',
-      tag: '2025.11.1',
+      tag: '2026.02.0',
     },
     externaldns: {
       image: 'registry.k8s.io/external-dns/external-dns',
