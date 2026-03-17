@@ -83,7 +83,7 @@
     forgejo: {
       chart: 'forgejo',
       repoURL: 'code.forgejo.org/forgejo-helm',
-      targetRevision: '16.2.0',
+      targetRevision: '16.2.1',
     },
     grafana: {
       chart: 'grafana-operator',
