@@ -131,7 +131,7 @@
     },
     yqgo: {
       image: 'mikefarah/yq',
-      tag: '4.52.4',
+      tag: '4.52.5',
     },
     nginx: {
       image: 'nginx',
