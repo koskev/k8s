@@ -113,7 +113,7 @@
     immich: {
       chart: 'immich',
       repoURL: 'ghcr.io/immich-app/immich-charts',
-      targetRevision: '0.10.3',
+      targetRevision: '0.11.1',
     },
   },
   container: {
