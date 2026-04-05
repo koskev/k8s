@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.10.0"
+  required_version = "~> 1.14.0"
   backend "kubernetes" {
     secret_suffix = "state"
     config_path      = "~/.kube/config"
