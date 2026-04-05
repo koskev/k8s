@@ -18,7 +18,6 @@ local domain = 'grocy.kokev.de';
     serviceName=name,
     servicePort=80,
     issuer='kokev-issuer',
-    ingressClass='nginx',
   ),
   k8s.apps.statefulSet(
     name=name,

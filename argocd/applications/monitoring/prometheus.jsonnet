@@ -3,6 +3,7 @@ local chart = (import 'images.libsonnet').helm.kube_prometheus;
 local secret = import 'secret.libsonnet';
 local storage = import 'storage.libsonnet';
 local k8s = import 'k8s.libsonnet';
+local globals = import 'globals.libsonnet';
 
 
 local namespace = 'monitoring';
@@ -112,7 +113,7 @@ local storageclassPrometheus = 'local-prometheus';
         },
         ingress: {
           enabled: true,
-          ingressClassName: 'nginx',
+          ingressClassName: globals.ingress.internal.name,
           annotations: {
             'cert-manager.io/cluster-issuer': 'kokev-issuer',
           },

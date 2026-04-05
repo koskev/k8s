@@ -2,6 +2,7 @@ local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.argocd;
 local valkey = (import 'images.libsonnet').container.valkey;
 local k8s = import 'k8s.libsonnet';
+local globals = import 'globals.libsonnet';
 
 local config = import 'config.libsonnet';
 
@@ -46,7 +47,7 @@ local namespace = 'argocd';
       server: {
         ingress: {
           enabled: true,
-          ingressClassName: 'nginx',
+          ingressClassName: globals.ingress.internal.name,
           annotations: {
             'cert-manager.io/cluster-issuer': 'kokev-issuer',
           },
