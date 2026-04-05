@@ -1,5 +1,9 @@
 terraform {
   required_version = "~> 1.10.0"
+  backend "kubernetes" {
+    secret_suffix = "state"
+    config_path      = "~/.kube/config"
+  }
   required_providers {
     sops = {
       source = "carlpett/sops"
