@@ -207,7 +207,7 @@
     },
     valkey: {
       image: 'valkey/valkey',
-      tag: '8.1.6-alpine',
+      tag: '9.0.3-alpine',
     },
     telegraf: {
       image: 'telegraf',
