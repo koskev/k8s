@@ -1,6 +1,7 @@
 local psqlConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.openbao;
+local globals = import 'globals.libsonnet';
 
 {
   deplyoment(name, namespace, host, rollingUpdate=false, transit=null):: [
@@ -33,7 +34,7 @@ local chart = (import 'images.libsonnet').helm.openbao;
             annotations: {
               'cert-manager.io/cluster-issuer': 'kokev-issuer',
             },
-            ingressClassName: 'nginx',
+            ingressClassName: globals.ingress.internal.name,
             hosts: [
               {
                 host: host,

@@ -95,7 +95,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
       ingress: {
         dashboard: {
           enabled: true,
-          ingressClassName: 'nginx',
+          ingressClassName: globals.ingress.internal.name,
           annotations: {
             'cert-manager.io/cluster-issuer': 'kokev-issuer',
           },

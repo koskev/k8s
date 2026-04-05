@@ -1,5 +1,6 @@
+local globals = import 'globals.libsonnet';
 {
-  ingress(name, namespace, host, servicePort, serviceName=name, issuer='kokev-issuer', ingressClass='nginx'):: {
+  ingress(name, namespace, host, servicePort, serviceName=name, issuer='kokev-issuer', ingressClass=globals.ingress.internal.name):: {
     apiVersion: 'networking.k8s.io/v1',
     kind: 'Ingress',
     metadata: {

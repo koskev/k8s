@@ -35,15 +35,15 @@ local host = 'forgejo.kokev.de';
       service: {
         ssh: {
           type: 'LoadBalancer',
-          loadBalancerIP: globals.ips.ingress_nginx,
+          loadBalancerIP: globals.ips.ingress_traefik_internal,
           annotations: {
-            'metallb.io/allow-shared-ip': 'nginx',
+            'metallb.io/allow-shared-ip': 'traefik-internal',
           },
         },
       },
       ingress: {
         enabled: true,
-        className: 'nginx',
+        className: globals.ingress.internal.name,
         annotations: {
           'cert-manager.io/cluster-issuer': 'kokev-issuer',
         },
