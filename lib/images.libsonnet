@@ -263,7 +263,7 @@
     },
     postgres: {
       image: 'postgres',
-      tag: '17.9-alpine',
+      tag: '18.3-alpine',
     },
   },
 }
