@@ -86,7 +86,7 @@ local immich_storage_size_gb = 20;
         },
         ingress: {
           main: {
-            ingressClassName: 'nginx',
+            ingressClassName: globals.ingress.internal.name,
             enabled: true,
             annotations: {
               'cert-manager.io/cluster-issuer': 'kokev-issuer',

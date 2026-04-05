@@ -1,5 +1,6 @@
 local image = (import 'images.libsonnet').container.hass;
 local k8s = import 'k8s.libsonnet';
+local globals = import 'globals.libsonnet';
 
 local name = 'hass';
 local namespace = 'default';
@@ -36,7 +37,7 @@ local service_name = '%s-service' % name;
     serviceName=service_name,
     servicePort=8123,
     issuer='kokev-issuer',
-    ingressClass='nginx',
+    ingressClass=globals.ingress.internal.name,
   ),
   k8s.apps.statefulSet(
     name='%s-deployment' % name,

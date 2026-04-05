@@ -3,8 +3,8 @@ local chart = (import 'images.libsonnet').helm.ingress_traefik;
 local globals = import 'globals.libsonnet';
 
 
-local name = 'ingress-traefik-external';
-local namespace = 'ingress-traefik-external';
+local name = 'ingress-traefik-internal';
+local namespace = 'ingress-traefik-internal';
 [
   k8s.argocd.applicationHelm(
     name=name,
@@ -16,11 +16,14 @@ local namespace = 'ingress-traefik-external';
       },
       service: {
         spec: {
-          loadBalancerIP: globals.ips.ingress_traefik_external,
+          loadBalancerIP: globals.ips.ingress_traefik_internal,
+        },
+        annotations: {
+          'metallb.io/allow-shared-ip': globals.ingress.internal.name,
         },
       },
       ingressClass: {
-        name: globals.ingress.external.name,
+        name: globals.ingress.internal.name,
       },
       providers: {
         kubernetesGateway: {
