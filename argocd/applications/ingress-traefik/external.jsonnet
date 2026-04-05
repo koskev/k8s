@@ -1,56 +1,12 @@
-local k8s = import 'k8s.libsonnet';
-local chart = (import 'images.libsonnet').helm.ingress_traefik;
 local globals = import 'globals.libsonnet';
+local ingress = import 'ingress.libsonnet';
 
 
 local name = 'ingress-traefik-external';
 local namespace = 'ingress-traefik-external';
-[
-  k8s.argocd.applicationHelm(
-    name=name,
-    targetnamespace=namespace,
-    chart=chart,
-    values={
-      deployment: {
-        replicas: 3,
-      },
-      service: {
-        spec: {
-          loadBalancerIP: globals.ips.ingress_traefik_external,
-        },
-      },
-      ingressClass: {
-        name: globals.ingress.external.name,
-        isDefaultClass: false,
-      },
-      providers: {
-        kubernetesGateway: {
-          enabled: true,
-        },
-        kubernetesIngress: {
-          ingressClass: globals.ingress.external.name,
-        },
-      },
-      gatewayClass: {
-        name: globals.ingress.external.name,
-      },
-      gateway: {
-        name: globals.ingress.external.name,
-        listeners: {
-          web: {
-            namespacePolicy: {
-              from: 'All',
-            },
-          },
-        },
-      },
-    }
-  ),
-  {
-    kind: 'Namespace',
-    apiVersion: 'v1',
-    metadata: {
-      name: namespace,
-    },
-  },
-]
+ingress.traefik(
+  name,
+  namespace,
+  globals.ips.ingress_traefik_external,
+  globals.ingress.external.name
+)
