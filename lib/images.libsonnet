@@ -119,151 +119,155 @@
   container: {
     renovate: {
       image: 'renovate/renovate',
-      tag: '43.104.6',
+      tag: '43.104.6@sha256:47b481eb21edf0047ef90c93fd0e728758676c974c496c01221699bd3f3e8d77',
     },
     signal_bridge: {
       image: 'dock.mau.dev/mautrix/signal',
-      tag: 'v26.02.2',
+      tag: 'v26.02.2@sha256:577e37ad5f41bfd72a236e6ab4a1b1b2d4f960890ff0767ed3b0b7cbb6817c29',
     },
     whatsapp_bridge: {
       image: 'dock.mau.dev/mautrix/whatsapp',
-      tag: 'v0.2603.0',
+      tag: 'v0.2603.0@sha256:b49009312361d9ea0d7090716fd09f2323f477b32bd119648c6ca2d558a3e236',
     },
     yqgo: {
       image: 'mikefarah/yq',
-      tag: '4.52.5',
+      tag: '4.52.5@sha256:603ebff15eb308a05f1c5b8b7613179cad859aed3ec9fdd04f2ef5d32345950e',
     },
     nginx: {
       image: 'nginx',
-      tag: '1.25.4-alpine3.18',
+      tag: '1.25.4-alpine3.18@sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742',
     },
     synapse: {
       image: 'matrixdotorg/synapse',
-      tag: 'v1.150.0',
+      tag: 'v1.150.0@sha256:cba0969087ca70a3ec72ebcd1491a6c8391a7da2c0b92738231dd9c7ad55df4d',
     },
     navidrome: {
       image: 'ghcr.io/navidrome/navidrome',
-      tag: '0.61.1',
+      tag: '0.61.1@sha256:1e1660054a856cc09f227d6929252e45a519fdb16004b464dd637f7294ca3ec1',
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
-      tag: 'v1.6.870',
+      tag: 'v1.6.870@sha256:b9fb72d772eb52b5c7d4c402054c183886ecde07efc59c829c53001542365a81',
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
-      tag: '2026.01.17',
+      tag: '2026.01.17@sha256:3f322467ceb36299b258dc91775783bf9930e4e3d2c6d941596777636dd38086',
     },
     hass: {
       image: 'ghcr.io/home-assistant/home-assistant',
-      tag: '2026.4.1',
+      tag: '2026.4.1@sha256:8848691147f01a6eee7753de2ade21b04d6168fcd2e2a7089f6f84e3b7b86960',
     },
     grocy: {
       image: 'linuxserver/grocy',
-      tag: 'v4.0.3-ls221',
+      tag: 'v4.0.3-ls221@sha256:96ab10ee33a40261f57c2622ad85434289cdf07cfa19e8bab4e1fc76f420d66f',
     },
     jellyfin: {
       image: 'docker.io/jellyfin/jellyfin',
-      tag: '10.11.8',
+      tag: '10.11.8@sha256:1694ff069f0c9dafb283c36765175606866769f5d72f2ed56b6a0f1be922fc37',
     },
     zigbee2mqtt: {
       image: 'koenkk/zigbee2mqtt',
-      tag: '2.9.2',
+      tag: '2.9.2@sha256:2a21bbf7a664a149024bbe1f776e3151f28ed9db15948270dcbffb89544a41f0',
     },
     esphome: {
       image: 'ghcr.io/esphome/esphome',
-      tag: '2026.3.2',
+      tag: '2026.3.2@sha256:7edfba9d31b11e3852863fca788e3cff729e43e5af68446604aea875e65f684d',
     },
     chhoto: {
       image: 'sintan1729/chhoto-url',
-      tag: '6.5.9',
+      tag: '6.5.9@sha256:7b0e2e8aa9d58c111f5614e44ba3bf5cfe46a99126ebe31d5278268c20347a31',
     },
     nodered: {
       image: 'nodered/node-red',
-      tag: '4.1.8-18',
+      tag: '4.1.8-18@sha256:d7a40bd2a1ae8078a8223d5c8b3cb3ba60e64d8d7ced583ae00f46ddc60f1dd7',
     },
     pihole: {
       image: 'pihole/pihole',
-      tag: '2026.04.0',
+      tag: '2026.04.0@sha256:300cc8f9e966b00440358aafef21f91b32dfe8887e8bd9a6193ed1c4328655d4',
     },
     externaldns: {
       image: 'registry.k8s.io/external-dns/external-dns',
-      tag: 'v0.20.0',
+      tag: 'v0.20.0@sha256:ddc7f4212ed09a21024deb1f470a05240837712e74e4b9f6d1f2632ff10672e7',
     },
     sanejs: {
       image: 'sbs20/scanservjs',
-      tag: 'v3.0.4',
+      tag: 'v3.0.4@sha256:e42263444a8dd5d533ead7d9eb2ef5fd9ca7a4a80569a6f9c14b7a3c21b9c7ca',
     },
     cups: {
       image: 'ydkn/cups',
-      tag: 'latest',
+      tag: 'latest@sha256:76eb4fcc9bfce7573787938d9257cfced5dd21064559eae4ce112aa6a9d13ac2',
     },
     syncthing: {
       image: 'syncthing/syncthing',
-      tag: '2.0',
+      tag: '2.0@sha256:37c0e031d9f5559dfa416f0f9157509277d97a24abd0ad27590bd92a91616ecc',
     },
     brouter_react: {
       image: 'ghcr.io/koskev/brouter-react',
-      tag: '2025.09.08',
+      tag: '2025.09.08@sha256:f6f80910ee63be60386496a8951fa30cca23ecf2c2f269731c14cc86ec25dda6',
     },
     valkey: {
       image: 'valkey/valkey',
-      tag: '8.1.6-alpine',
+      tag: '8.1.6-alpine@sha256:1cb6b20b70d927560cc4cc5397b5f045e74aa603ff7696274778880bb6fadc75',
     },
     telegraf: {
       image: 'telegraf',
-      tag: '1.38.2-alpine',
+      tag: '1.38.2-alpine@sha256:811335001118729cd2bdbcf0aaa88fae62102ab85745bf5f4a0ed60cba56de4e',
     },
     influxdb: {
       image: 'influxdb',
-      tag: '2.8.0-alpine',
+      tag: '2.8.0-alpine@sha256:f15dfc604753f53b180364a331b46c2f4bc5c08a665d025982b301efa69bc2f7',
     },
     octoprint: {
       image: 'octoprint/octoprint',
-      tag: '1.11.7',
+      tag: '1.11.7@sha256:49bea4ebfd0cefa9289f058574e7eda6d2de201f1b74309e0c10019e5ec58f04',
     },
     wireguard: {
       image: 'lscr.io/linuxserver/wireguard',
-      tag: '1.0.20210914-r4-ls68',
+      tag: '1.0.20210914-r4-ls68@sha256:c095b08123345cefa1a8a589a417c56690c046ba925d292f4657f3fefcce1dfd',
     },
     papermc: {
       image: 'ghcr.io/koskev/lazypaper',
-      tag: '2025.03.17',
+      tag: '2025.03.17@sha256:893f3032a57c4947ad0b03283442a781e2c154ff5692cdafdfd696504687c854',
     },
     paperless: {
       image: 'ghcr.io/paperless-ngx/paperless-ngx',
-      tag: '2.20.13',
+      tag: '2.20.13@sha256:4b05bcd28e6923768000b5d247cbf2c66fd49bdc3f3b05955bd4f6790a638b01',
     },
     ecs: {
       image: 'forgejo.kokev.de/kevin/ecs-automation',
-      tag: 'latest',
+      tag: 'latest@sha256:9205773e6564bcec0afef292d8499622e5d7e10ff6cc40ddfcaf819a4ecaddf1',
     },
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
-      tag: 'v1.2.1',
+      tag: 'v1.2.1@sha256:cf250d7ac5e44f0ae77690f34e67782732a37d22796ce0c2e5eb30a6d1466f47',
     },
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
-      tag: 'v1.23.0-pre2',
+      tag: 'v1.23.0-pre2@sha256:6989825add462d64e70b34f84e816c4c2bcb06351f90b36fb9454ad7966be38c',
     },
     cnpg_vectorchord: {
       image: 'ghcr.io/tensorchord/cloudnative-vectorchord',
-      tag: '17.6-0.5.3',
+      tag: '17.6-0.5.3@sha256:ef3bf2e3abe76c3939b994afbde46cb9f24d2fbdf7ff2026a03aefa84d9a2a23',
     },
     immich: {
       image: 'ghcr.io/immich-app/immich-server',
-      tag: 'v2.6.3',
+      tag: 'v2.6.3@sha256:0cc1f82953d9598eb9e9dd11cbde1f50fe54f9c46c4506b089e8ad7bfc9d1f0c',
+    },
+    immich_machine_learning: {
+      image: 'ghcr.io/immich-app/immich-machine-learning',
+      tag: 'v2.6.3@sha256:33b17015c3d14f2565e9b8cd36b48a70027b14b5cd20da7fbfff21a370b0309c',
     },
     borg_server: {
       image: 'horaceworblehat/borg-server',
-      tag: '2.8.5',
+      tag: '2.8.5@sha256:9ecf168b56984461f317a0cd30e36140c61e7148a22a115ac7e65b307c9a13b2',
     },
     borgmatic: {
       image: 'ghcr.io/borgmatic-collective/borgmatic',
-      tag: '2.1.3',
+      tag: '2.1.3@sha256:529ef5f19838b650e07de2cdf91e0f403d849cf83636baacc6ec8a55e2a76f79',
     },
     postgres: {
       image: 'postgres',
-      tag: '17.9-alpine',
+      tag: '17.9-alpine@sha256:6f30057d31f5861b66f3545d4821f987aacf1dd920765f0acadea0c58ff975b1',
     },
   },
 }

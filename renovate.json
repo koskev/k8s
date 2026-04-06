@@ -50,13 +50,14 @@
       "packageNameTemplate": "{{registryUrl}}/{{depName}}"
     },
     {
+      "description": "Matches docker images with an optional pinned hash",
       "customType": "regex",
       "fileMatch": [
         "images.libsonnet"
       ],
       "datasourceTemplate": "docker",
       "matchStrings": [
-        "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+        "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',"
       ]
     }
   ]

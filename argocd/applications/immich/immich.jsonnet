@@ -1,6 +1,7 @@
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.immich;
 local immich_image = (import 'images.libsonnet').container.immich;
+local immich_machine_learning_image = (import 'images.libsonnet').container.immich_machine_learning;
 local cnpg = import 'lib/cnpg.libsonnet';
 local postgres_operator = import 'lib/postgres-operator.jsonnet';
 local backup = import 'utils/backup.jsonnet';
@@ -51,13 +52,24 @@ local immich_storage_size_gb = 20;
       valkey: {
         enabled: true,
       },
+      'machine-learning': {
+        controllers: {
+          main: {
+            containers: {
+              main: {
+                image: {
+                  repository: immich_machine_learning_image.image,
+                  tag: immich_machine_learning_image.tag,
+                },
+              },
+            },
+          },
+        },
+      },
       controllers: {
         main: {
           containers: {
             main: {
-              image: {
-                tag: immich_image.tag,
-              },
               envFrom: [{
                 secretRef: {
                   name: 'immich-immich',
@@ -75,6 +87,18 @@ local immich_storage_size_gb = 20;
         },
       },
       server: {
+        controllers: {
+          main: {
+            containers: {
+              main: {
+                image: {
+                  repository: immich_image.image,
+                  tag: immich_image.tag,
+                },
+              },
+            },
+          },
+        },
         persistence: {
           external: {
             enabled: true,
