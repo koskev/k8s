@@ -53,7 +53,7 @@
     openbao: {
       chart: 'openbao',
       repoURL: 'https://openbao.github.io/openbao-helm',
-      targetRevision: '0.26.2',
+      targetRevision: '0.27.1',
     },
     ping_exporter: {
       chart: 'ping-exporter',
