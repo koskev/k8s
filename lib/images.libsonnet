@@ -267,7 +267,7 @@
     },
     postgres: {
       image: 'postgres',
-      tag: '17.9-alpine@sha256:6f30057d31f5861b66f3545d4821f987aacf1dd920765f0acadea0c58ff975b1',
+      tag: '17.9-alpine@sha256:778d0b486d6daa02b77434d0358ec57a1b21fd8b6d22ac2eef56a33e816928f6',
     },
   },
 }
