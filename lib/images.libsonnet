@@ -151,7 +151,7 @@
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
-      tag: '2026.01.17@sha256:3f322467ceb36299b258dc91775783bf9930e4e3d2c6d941596777636dd38086',
+      tag: '2026.04.19@sha256:32758478a926241d43ca8626546cef5f26257087cede9203282e37061cff9d99',
     },
     hass: {
       image: 'ghcr.io/home-assistant/home-assistant',
