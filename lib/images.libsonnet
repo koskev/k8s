@@ -255,7 +255,7 @@
     },
     immich_machine_learning: {
       image: 'ghcr.io/immich-app/immich-machine-learning',
-      tag: 'v2.6.3@sha256:33b17015c3d14f2565e9b8cd36b48a70027b14b5cd20da7fbfff21a370b0309c',
+      tag: 'v2.7.5@sha256:a2501141440f10516d329fdfba2c68082e19eb9ba6016c061ac80d23beadf7f3',
     },
     borg_server: {
       image: 'horaceworblehat/borg-server',
