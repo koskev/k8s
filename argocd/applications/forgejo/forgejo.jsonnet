@@ -1,7 +1,7 @@
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.forgejo;
 local globals = import 'globals.libsonnet';
-local valkey = import 'valkey.libsonnet';
+local valkey = import 'utils/valkey.libsonnet';
 
 local name = 'forgejo';
 local namespace = 'forgejo';

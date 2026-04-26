@@ -4,6 +4,6 @@ local image = (import 'images.libsonnet').container.signal_bridge;
 local binaryName = 'mautrix-signal';
 local port = 29328;
 
-local bridge = import 'matrix_bridge.libsonnet';
+local bridge = import 'utils/matrix_bridge.libsonnet';
 
 bridge.createMatrixBridge(name, namespace, image, binaryName, port)

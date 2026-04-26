@@ -4,6 +4,6 @@ local image = (import 'images.libsonnet').container.whatsapp_bridge;
 local binaryName = 'mautrix-whatsapp';
 local port = 29318;
 
-local bridge = import 'matrix_bridge.libsonnet';
+local bridge = import 'utils/matrix_bridge.libsonnet';
 
 bridge.createMatrixBridge(name, namespace, image, binaryName, port)

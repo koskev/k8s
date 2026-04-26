@@ -1,7 +1,7 @@
 local argocd = import 'argocd.libsonnet';
 local storage = import 'storage.libsonnet';
 local chart = (import 'images.libsonnet').helm.cnpg;
-local postgres_operator = import 'lib/postgres-operator.jsonnet';
+local postgres_operator = import 'database/postgres-operator.jsonnet';
 
 local config = import 'config.libsonnet';
 

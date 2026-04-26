@@ -2,8 +2,8 @@ local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.immich;
 local immich_image = (import 'images.libsonnet').container.immich;
 local immich_machine_learning_image = (import 'images.libsonnet').container.immich_machine_learning;
-local cnpg = import 'lib/cnpg.libsonnet';
-local postgres_operator = import 'lib/postgres-operator.jsonnet';
+local cnpg = import 'database/cnpg.libsonnet';
+local postgres_operator = import 'database/postgres-operator.jsonnet';
 local backup = import 'utils/backup.jsonnet';
 local globals = import 'globals.libsonnet';
 

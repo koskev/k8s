@@ -1,5 +1,5 @@
-local anubis = import 'lib/anubis.libsonnet';
-local k8s = import 'lib/k8s.libsonnet';
+local k8s = import 'k8s.libsonnet';
+local anubis = import 'utils/anubis.libsonnet';
 
 local name = 'anubis';
 local namespace = 'anubis';
