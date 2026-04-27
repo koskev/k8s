@@ -32,6 +32,7 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
           conversionStrategy: 'Default',
           decodingStrategy: 'None',
           metadataPolicy: 'None',
+          nullBytePolicy: 'Ignore',
           key: '%s-%s' % [name, name],
         },
         sourceRef: {

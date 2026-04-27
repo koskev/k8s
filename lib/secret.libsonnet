@@ -116,6 +116,7 @@
           conversionStrategy: 'Default',
           decodingStrategy: 'None',
           metadataPolicy: 'None',
+          nullBytePolicy: 'Ignore',
           key: key,
         },
       }] + additionalDataFrom,
