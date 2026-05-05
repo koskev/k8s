@@ -171,7 +171,7 @@
     },
     esphome: {
       image: 'ghcr.io/esphome/esphome',
-      tag: '2026.4.2@sha256:a2784bc539dcf7529241bfe4425d645f1076031f9bf9ce07f5d59d1c45e9ff22',
+      tag: '2026.4.4@sha256:1ac1a78313c9e2fba74f5d720f31dda4d997a1db9d44d9c407ec776a9903d0b3',
     },
     chhoto: {
       image: 'sintan1729/chhoto-url',
