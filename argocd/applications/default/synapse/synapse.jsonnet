@@ -27,6 +27,66 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
 [
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
+  k8s.secret.externalSecretExtract(
+    'synapse-ingress',
+    namespace,
+    templateFrom=[
+      {
+        literal: std.toString({
+          ingressClassName: 'traefik-external',
+          rules: [
+            {
+              host: '{{ .host }}',
+              http: {
+                paths: [
+                  {
+                    pathType: 'Prefix',
+                    path: '/',
+                    backend: {
+                      service: {
+                        name: 'synapse-service',
+                        port: {
+                          number: 80,
+                        },
+                      },
+                    },
+                  },
+                  {
+                    pathType: 'Prefix',
+                    path: '/.well-known/matrix',
+                    backend: {
+                      service: {
+                        name: 'delegation-service',
+                        port: {
+                          number: 80,
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+          tls: [
+            {
+              hosts: [
+                '{{ .host }}',
+              ],
+              secretName: 'synapse-tls',
+            },
+          ],
+        }),
+        target: 'spec',
+      },
+    ],
+    manifest={
+      apiVersion: 'networking.k8s.io/v1',
+      kind: 'Ingress',
+    },
+    annotations={
+      'cert-manager.io/issuer': 'private-issuer',
+    },
+  ),
   k8s.secret.externalSecretExtract(configName, namespace),
   k8s.secret.externalSecretExtract(
     name='%s-database-uri' % name,

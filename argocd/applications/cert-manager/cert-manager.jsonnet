@@ -38,6 +38,37 @@ local secretName = 'cert-domain-tls-key-kokev';
     secretName,
     namespace,
   ),
+
+  k8s.secret.externalSecretExtract(
+    'private-issuer',
+    'default',
+    templateFrom=[
+      {
+        literal: std.toString({
+          acme: {
+            server: 'https://acme-v02.api.letsencrypt.org/directory',
+            email: '{{ .email }}',
+            privateKeySecretRef: {
+              name: 'private-issuer-generated',
+            },
+            solvers: [{
+              http01: {
+                ingress: {
+                  ingressClassName: 'traefik-external',
+                },
+              },
+            }],
+          },
+        }),
+        target: 'spec',
+      },
+    ],
+    manifest={
+      apiVersion: 'cert-manager.io/v1',
+      kind: 'Issuer',
+    }
+  ),
+
   {
     apiVersion: 'cert-manager.io/v1',
     kind: 'ClusterIssuer',

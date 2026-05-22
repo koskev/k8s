@@ -1,0 +1,18 @@
+host: ENC[AES256_GCM,data:3+VAk+Ul3MRaFuQZkxGU2nrBEx/M,iv:73VvCbtKgf7xNlRnrk+jTJk0ucbM3phtqp/nUqQ1hKM=,tag:bGXF94GOAvi0ZvWMcSFwXA==,type:str]
+sops:
+    encrypted_regex: ^(.*)$
+    lastmodified: "2026-05-24T22:05:06Z"
+    mac: ENC[AES256_GCM,data:dUoXLfnPCuWuurer3dNBM9cYqqKxAPf+DLWpQsleZWXCaaSRKtW9xAk4mgmF8fhQECif1nUPLcl4cRB88C3+6m2yv0Y0BlAnRlhxtF5NtLsMuelc+o8+RJfxKeSTORB6c2fMv7MWcp69TvlAdSDqOBhKhcTv8N6vtl/S3DWcLvw=,iv:9pq9WyE79RUBiETm0BSk4NmB1mSb5+BWrpJBIs9e5zA=,tag:B8aI1DvKMKKTdwL+vo686w==,type:str]
+    pgp:
+        - created_at: "2026-05-24T22:04:56Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAAX1MuivG9ZSGT7PcmtI7PPIwSy63wnvVTiR8+VRyHCow
+            oI334VyNY0i27WFhOfIdOs2BXSzno6jpHtUEjFzvdEx+W3OZpC7Y4NyJw5tVVXZp
+            0lEBZ1o8l+Nvoxh1MkoVVWh4JisP+HgPgKiLpiwY2yhHpU+MaKQkn8hMxsU6UGSq
+            dQ/x95ig6uD4n0SkYJRLwn0LDV9lp+f8ceJWze2JvNE4I6U=
+            =kdGL
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    version: 3.13.1

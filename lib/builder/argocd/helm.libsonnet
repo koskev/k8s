@@ -7,8 +7,8 @@ local app = import 'app.libsonnet';
       assert std.isString(name),
       assert std.isString(targetnamespace),
       assert std.isString(releaseName),
-      assert std.isString(namespace),
-      assert std.isObject(chart) && std.objectHas(chart, 'chart') && std.objectHas(chart, 'repoURL') && std.objectHas(chart, 'targetRevision'),
+      assert std.isString(namespace) : 'namespace is not a string',
+      assert std.isObject(chart) && std.objectHas(chart, 'chart') && std.objectHas(chart, 'repoURL') && std.objectHas(chart, 'targetRevision') : 'Chart is invalid',
       spec+: {
         destination+: {
           namespace: targetnamespace,
@@ -23,7 +23,7 @@ local app = import 'app.libsonnet';
     },
 
     withValues(values, valuesToString=false):: self {
-      assert std.isObject(values),
+      assert std.isObject(values) : 'Values is not an object',
       spec+: {
         source+: {
           helm+: {} + if valuesToString then { values: std.manifestJson(values) } else { valuesObject: values },

@@ -91,7 +91,7 @@
       },
     },
   ],
-  externalSecretExtract(name, namespace, key=name, labels={}, additionalDataFrom=[], templateData={}, secretStoreRef={ kind: 'ClusterSecretStore', name: 'vault-secrets' }):: {
+  externalSecretExtract(name, namespace, key=name, labels={}, additionalDataFrom=[], templateData={}, secretStoreRef={ kind: 'ClusterSecretStore', name: 'vault-secrets' }, manifest=null, templateFrom=[], annotations={}):: {
     apiVersion: 'external-secrets.io/v1',
     kind: 'ExternalSecret',
     metadata: {
@@ -106,9 +106,14 @@
         template: {
           engineVersion: 'v2',
           data: templateData,
+          [if templateFrom != [] then 'templateFrom']: templateFrom,
+          [if annotations != {} then 'metadata']: {
+            annotations: annotations,
+          },
         },
         name: name,
         creationPolicy: 'Owner',
+        [if manifest != null then 'manifest']: manifest,
       },
       dataFrom: [{
         extract: {
@@ -123,7 +128,7 @@
     },
   },
   // TODO: support multiple sources
-  externalSecretTemplate(name, namespace, key, labels={}, data={}):: {
+  externalSecretTemplate(name, namespace, key, labels={}, data={}, manifest=null):: {
     apiVersion: 'external-secrets.io/v1',
     kind: 'ExternalSecret',
     metadata: {
@@ -144,6 +149,7 @@
         },
         name: name,
         creationPolicy: 'Owner',
+        [if manifest != null then 'manifest']: manifest,
       },
       dataFrom: [{
         extract: {

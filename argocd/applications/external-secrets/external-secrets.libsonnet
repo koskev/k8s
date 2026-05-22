@@ -1,4 +1,4 @@
-local argocd = import 'argocd.libsonnet';
+local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.external_secrets;
 local tf = import 'tf/tf.libsonnet';
 
@@ -6,12 +6,32 @@ local name = 'external-secrets';
 local namespace = 'external-secrets';
 
 [
-  argocd.applicationHelm(
-    name=name,
-    targetnamespace=namespace,
-    chart=chart,
-    releaseName='external-secrets',
-  ),
+  k8s.builder.argocd.helm.new(
+    name,
+    namespace,
+    chart,
+    name,
+  )
+  .withServerSideApply()
+  .withAutoSync()
+  .withValues({
+    genericTargets: {
+      enabled: true,
+      resources: [
+        {
+          apiGroup: 'cert-manager.io',
+          resources: ['issuers'],
+          verbs: ['get', 'list', 'watch', 'create', 'update', 'patch', 'delete'],
+        },
+        {
+          apiGroup: 'networking.k8s.io',
+          resources: ['ingresses'],
+          verbs: ['get', 'list', 'watch', 'create', 'update', 'patch', 'delete'],
+        },
+      ],
+    },
+  })
+  ,
   {
     apiVersion: 'external-secrets.io/v1',
     kind: 'ClusterSecretStore',
