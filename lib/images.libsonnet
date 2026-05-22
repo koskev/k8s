@@ -115,6 +115,11 @@
       repoURL: 'ghcr.io/immich-app/immich-charts',
       targetRevision: '0.11.1',
     },
+    vault_webhooks: {
+      repoURL: 'ghcr.io/bank-vaults/helm-charts',
+      chart: 'vault-secrets-webhook',
+      targetRevision: '1.22.2',
+    },
   },
   container: {
     renovate: {

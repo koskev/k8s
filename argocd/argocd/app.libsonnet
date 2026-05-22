@@ -36,6 +36,7 @@ local namespace = 'argocd';
           'resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration': "jqPathExpressions:\n- '.webhooks[]?.clientConfig.caBundle'\n",
           // In metallb crd
           'resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition': "jqPathExpressions:\n- '.spec.conversion.webhook.clientConfig.caBundle'\n",
+          'controller.diff.server.side': 'true',
         },
         params: {
           'server.insecure': true,
