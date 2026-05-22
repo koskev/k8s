@@ -115,6 +115,7 @@
       repoURL: 'ghcr.io/immich-app/immich-charts',
       targetRevision: '0.11.1',
     },
+
   },
   container: {
     renovate: {
@@ -268,6 +269,10 @@
     postgres: {
       image: 'postgres',
       tag: '17.9-alpine@sha256:c7526c0f6c3f30260a563d7bcf8ad778effac59a44f8ffa86678c35418338609',
+    },
+    ksops: {
+      image: 'viaductoss/ksops',
+      tag: 'v4.5.1@sha256:4def9fdd4e2f850265740ebe9592c5455d19b76891e88e602df8b52d74b95334',
     },
   },
 }

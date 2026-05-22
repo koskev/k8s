@@ -1,0 +1,20 @@
+# created: 2026-05-22T20:17:28+02:00
+# public key: age19egxupcpg2fmst5ken0u3wzl6jc2rsgkffzzjc6syxt33kr924nsagjc5n
+age.key: ENC[AES256_GCM,data:fjVFEwIjtV+8E4aPDy16QqVDiMrYlOiJWT1ObL4ttDJZmOESpe1mNPBKMS1x2dzprhBApz0cb5P7/J//tVMUwMurnxcRBK+HMl4=,iv:/6aYoj1UDI6k8L4E7xb//bPtm8yYIls/AVDFsEXkzXE=,tag:YDd/Z3LRMVgF+aOS95eiPA==,type:str]
+sops:
+    lastmodified: "2026-05-22T18:18:36Z"
+    mac: ENC[AES256_GCM,data:UQ7kUoB16nleDSN4BPqg2hYXhSd9HneoI3nC0GFf62pNIKfy4MrtJA1nksZw1I1O4kHOfX9KraSeuHdwNTvQxAvAWg7r1xuQAh4OlqwTXuJfQ08aVyEWG/Djws72NiSM3k8aTfqdnCjDVsDmScWEiAzUPLg9h+u4yEYA/O7C4do=,iv:ZEfoHqB/W55tOUJQpU4DkkeJVhNrDh0GR4ke5MtUNuM=,tag:pXEdVhz61TMWKGl3r/xKJw==,type:str]
+    pgp:
+        - created_at: "2026-05-22T18:18:36Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAh5iJPCITrrq5CpFyJoNELWy/gdy2PFiqQB9QuViCnTow
+            kRKxkoF9dnuF8KmiufD26fDvJxs67Ats9ysD0rwuThHKlbAVvQhiMaaNRCeBYZRG
+            0lEBfgDHc6TOmmhnBtuelys8j+iWHT+pqkfLtzgMjRGYiXqIiurP1jI75dGdBAfW
+            oDbXMtzKGHmDuxi7vssBXjuxVB24LYehQHUE/sWbIQIpIgM=
+            =MaDR
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(.*)$
+    version: 3.10.2

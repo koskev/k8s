@@ -1,0 +1,8 @@
+creation_rules:
+  - path_regex: argocd/*
+    encrypted_regex: ^(.*)$
+    pgp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    age: age19egxupcpg2fmst5ken0u3wzl6jc2rsgkffzzjc6syxt33kr924nsagjc5n
+  - path_regex: .*
+    encrypted_regex: ^(.*)$
+    pgp: 7ED71373082E0FE0F90239710233D0893BBB9872
