@@ -7,35 +7,37 @@ local name = 'authentik';
 local namespace = 'authentik';
 local domain = 'auth.kokev.de';
 
+local secretName = '%s-%s' % [name, name];
+
 local secret_envs = [
   {
     name: 'AUTHENTIK_POSTGRESQL__NAME',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'DATABASE_NAME',
   },
   {
     name: 'AUTHENTIK_POSTGRESQL__USER',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'ROLE',
   },
   {
     name: 'AUTHENTIK_POSTGRESQL__PASSWORD',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'PASSWORD',
   },
   {
     name: 'AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__NAME',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'DATABASE_NAME',
   },
   {
     name: 'AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__USER',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'ROLE',
   },
   {
     name: 'AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__PASSWORD',
-    secret: '%s-%s' % [name, name],
+    secret: secretName,
     key: 'PASSWORD',
   },
   {
