@@ -61,5 +61,6 @@ local namespace = 'argocd';
     }
   ),
   argocd.appProject('gpg', std.objectFields(config.gpg_keys)),
+  argocd.appProject('default'),
   k8s.secret.externalSecretExtract('%s-redis' % name, namespace),
 ]

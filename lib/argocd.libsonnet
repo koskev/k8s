@@ -89,7 +89,7 @@ local globals = import 'globals.libsonnet';
           server: '*',
         },
       ],
-      signatureKeys: [
+      [if std.length(keys) > 0 then 'signatureKeys']: [
         {
           keyID: id,
         }
