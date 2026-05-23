@@ -20,6 +20,11 @@
       repoURL: 'https://charts.jetstack.io',
       targetRevision: 'v1.20.2',
     },
+    cert_manager_desec_http: {
+      chart: 'cert-manager-webhook-desec-http',
+      repoURL: 'ghcr.io/koskev/charts',
+      targetRevision: '1.1.0',
+    },
     external_secrets: {
       chart: 'external-secrets',
       repoURL: 'https://charts.external-secrets.io',
@@ -268,6 +273,10 @@
     postgres: {
       image: 'postgres',
       tag: '17.10-alpine@sha256:979c4379dd698aba0b890599a6104e082035f98ef31d9b9291ec22f2b13059ca',
+    },
+    desec_http: {
+      image: 'ghcr.io/koskev/cert-manager-webhook-desec-http',
+      tag: 'v1.1.0@sha256:31105d46208e3ca5965078d22f6baacbf86f85f4b4b50c95d055c197c61ca20b',
     },
   },
 }

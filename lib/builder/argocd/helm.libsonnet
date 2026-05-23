@@ -3,7 +3,7 @@ local app = import 'app.libsonnet';
 {
   helm:: {
 
-    new(name, targetnamespace, releaseName, chart, namespace='argocd'):: self + app.application.new(name, targetnamespace, namespace) {
+    new(name, targetnamespace, chart, releaseName=name, namespace='argocd'):: self + app.application.new(name, targetnamespace, namespace) {
       assert std.isString(name),
       assert std.isString(targetnamespace),
       assert std.isString(releaseName),
