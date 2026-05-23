@@ -65,6 +65,13 @@ local globals = import 'globals.libsonnet';
                 }
 
                 service_registration "kubernetes" {}
+                audit "file" "to-stdout" {
+                  description = "This audit device should never fail."
+                  options {
+                    file_path = "/dev/stdout"
+                    log_raw = "true"
+                  }
+                }
               |||,
           },
           extraSecretEnvironmentVars: [
