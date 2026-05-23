@@ -61,7 +61,7 @@ local secretName = 'cert-domain-tls-key-kokev';
                 config: {
                   apiUrl: 'https://desec.io/api/v1',
                   domainName: 'kokev.de',
-                  secretName: 'cert-domain-tls-key-kokev.de',
+                  secretName: secretName,
                   secretKeyName: 'desec-token',
                 },
               },
