@@ -217,7 +217,7 @@
     },
     valkey: {
       image: 'valkey/valkey',
-      tag: '8.1.7-alpine@sha256:b027235326507cfdade9b6684056ec1d0b0c0757412e628245129b5d7b788618',
+      tag: '9.1.0-alpine@sha256:a35428eba9043cc0b79dbe54100f0c92784f2de00ad09b01182bfb1c5c83d1bd',
     },
     telegraf: {
       image: 'telegraf',
