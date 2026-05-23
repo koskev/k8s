@@ -202,3 +202,38 @@ resource "vault_pki_secret_backend_config_issuers" "config" {
   # TODO: Get from data source
   default    = "5099e2cf-1263-31c4-1c00-6a10f712cb62"
 }
+
+resource "vault_policy" "admin" {
+  name = "admin"
+    policy = <<EOT
+path "*" {
+  capabilities = ["read", "create", "list", "update", "patch", "update", "sudo"]
+}
+EOT
+  
+}
+
+resource "vault_jwt_auth_backend" "oidc_config" {
+  path             = "oidc"
+  oidc_discovery_url  = "https://auth.kokev.de/application/o/openbao/"
+  oidc_client_id      = "openbao"
+  oidc_client_secret  = data.sops_file.openbao_secrets["openbao_secrets/oidc.enc.yaml"].data["openbao"]
+  default_role        = "admin"
+  type = "oidc"
+}
+
+resource "vault_jwt_auth_backend_role" "example" {
+  backend         = vault_jwt_auth_backend.oidc_config.path
+  role_name       = "admin"
+  token_policies  = ["admin"]
+  bound_audiences = ["openbao"]
+  oidc_scopes = ["oidc", "profile", "email"]
+  allowed_redirect_uris = [
+    "https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback",
+    "https://vault.kokev.de/oidc/callback",
+    "http://localhost:8250/oidc/callback",
+  ]
+  user_claim      = "sub"
+  groups_claim = "groups"
+  bound_claims={"groups":"authentik Admins"}
+}

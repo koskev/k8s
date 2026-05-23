@@ -1,0 +1,18 @@
+openbao: ENC[AES256_GCM,data:YNezELx1h/AtJXSok2/uoFqBhK2oRvnyA3e0fB26LWa2mVSiPICozhapCY6oHc3xArmUSMJiq9TqEElqBbMRlsJPIXKwyp8iEB7EJx4FRnXJSnFpnUQNsr7pFxDYf71l5jORDi2FDcAYCbj1FnMTVEo1+AXJHYp2PhQsTwClo10=,iv:9ojY9rThfUqBl+pO2/JFqYT93YD/r4uq+WaBy6Z3KVE=,tag:95xv3L4dr51UydXnQwRIpw==,type:str]
+sops:
+    lastmodified: "2026-05-23T16:14:54Z"
+    mac: ENC[AES256_GCM,data:dful1qoLIt9E+O+seQNENPRSd9ZiXQi2tbapibTaPhwTrclMd4txrRtz0x3oJpch2njv4VaofB2K3KS78kKRC0VMecEJLztKt94UwVdj7a5vFIvnGVKEhiML2h0IY+HayaSmV+cTDyVOodJSbm1GG6JMTOl6NTziVCVzIq1RxaA=,iv:5Og3jj+7UJ2+zcVJlWxCfUOGDkA6FQE5ZbhVtJc2mf8=,tag:B2xDXLDp7Hho2aHb0y5UJg==,type:str]
+    pgp:
+        - created_at: "2026-05-23T16:14:42Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAlrYZdQgf8oyyzjyhQwbHP1Bf6QTmFkEY35bmTp3PN3kw
+            KOHn5D9kpargUO/FtR4P5z/1eHxd5xr9DStg8r4iHZU3szA7d9gsMhG27yYSY0Pu
+            0lEBdcat8C7esYk1mBavGZijfqMUx7x5SXXmtXKMxljElbbPQnzsC/BruSNtq2PC
+            rcY3uJwGg4UCYczNYSsKyEOwOIZ/Ns2H/hmVCJ6ZfD0FiPI=
+            =/PVl
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(.*)$
+    version: 3.10.2
