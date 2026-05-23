@@ -1,9 +1,0 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: hostapd
-  namespace: default
-spec:
-  interval: 24h
-  url: https://koskev.github.io/hostapd-image
