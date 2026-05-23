@@ -1,0 +1,18 @@
+secret-key: ENC[AES256_GCM,data:CrwCeLgUchoGkDBFfEmy0NiN+/nBa55AFLNf1AYmtpqEiQd6nda5+kX5nYxSabQrc6PKSGJ2X7yWmxKZSTLby2QfSZID/9VK0AWeYfGI/pqhLhy/szJX3BPncIqmpoKD+qKN2HEke10yttQt8GCkqDp4LwER3w/3LEy0dkauKaI=,iv:wTscd4mfvtZCU4uCkkNUhjh+3MC+gssofnwNFOeMb0c=,tag:kMdhS2LwtW5/8QwSwccrGQ==,type:str]
+sops:
+    lastmodified: "2026-05-23T08:48:40Z"
+    mac: ENC[AES256_GCM,data:S+OF5tF/OjrPjzAy+nZkIJfocbCJQQglwWk4OoOiWjwLLXb3GH4swm68ot4bXk/d/7xa8iAMxYDgte7nYZtoP6wxLM9UcqM1PQaqyQW/F6YD5fktMFNalElc7YS8RzSjerYcNQqPJY4YsKhYKkgivzCrC94UAqQi8a39EBO2fEs=,iv:g4RX18Tac17q+Yim/aUUoBDB+S3jThmIo4nN0Q7//Vc=,tag:y0Uz6tf33O+hzyAJq7T6pw==,type:str]
+    pgp:
+        - created_at: "2026-05-23T08:47:59Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAeYxUlvgWxUkDngrWAKey+VikgrTqeTEpR4bvVWWFdwkw
+            ltuP8FEUsYSHC1N1leIroKlGAhsbbC706KRj5ZWNhdLdrKRaB7uWYv3qwGrLitTZ
+            0lEBwGwWrSkvmvzo4eeYg4qQQAuaMHvjE87voLi4qgiyZ29C9BjpU+O28WbaC5aY
+            0Rd38jpMJtNlHc9twZgP4WLHd7jH1M+lgQxQNTOoIFrgfyw=
+            =LTnJ
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    encrypted_regex: ^(.*)$
+    version: 3.10.2

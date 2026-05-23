@@ -16,7 +16,7 @@ local namespace = 'argocd';
     releaseName=name,
     values={
       dex: {
-        enabled: false,
+        enabled: true,
       },
       global: {
         domain: config.hostname,
@@ -36,12 +36,43 @@ local namespace = 'argocd';
           'resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration': "jqPathExpressions:\n- '.webhooks[]?.clientConfig.caBundle'\n",
           // In metallb crd
           'resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition': "jqPathExpressions:\n- '.spec.conversion.webhook.clientConfig.caBundle'\n",
+          'dex.config': std.toString({
+            connectors: [
+              {
+                config: {
+                  issuer: 'https://auth.kokev.de/application/o/argocd/',
+                  clientID: 'argocd',
+                  clientSecret: '$dex.authentik.clientSecret',
+                  insecureEnableGroups: true,
+                  scopes: [
+                    'openid',
+                    'profile',
+                    'email',
+                  ],
+                  claimMapping: {
+                    name: 'username',
+                  },
+                },
+                name: 'authentik',
+                type: 'oidc',
+                id: 'authentik',
+              },
+            ],
+          }),
         },
         params: {
           'server.insecure': true,
         },
         gpg: {
           keys: config.gpg_keys,
+        },
+        secret: {
+          createSecret: false,
+        },
+        rbac: {
+          'policy.csv': |||
+            g, ArgoCD Admins, role:admin
+          |||,
         },
       },
       server: {
@@ -63,4 +94,5 @@ local namespace = 'argocd';
   argocd.appProject('gpg', std.objectFields(config.gpg_keys)),
   argocd.appProject('default'),
   k8s.secret.externalSecretExtract('%s-redis' % name, namespace),
+  k8s.secret.externalSecretExtract('argocd-secret', namespace),
 ]
