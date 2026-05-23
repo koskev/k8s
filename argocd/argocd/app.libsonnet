@@ -57,6 +57,25 @@ local namespace = 'argocd';
                 type: 'oidc',
                 id: 'authentik',
               },
+              {
+                name: 'authelia',
+                type: 'oidc',
+                id: 'authelia',
+                config: {
+                  issuer: 'https://authelia.kokev.de',
+                  clientID: 'argocd-authelia',
+                  clientSecret: 'insecure_secret',
+                  insecureEnableGroups: true,
+                  getUserInfo: true,
+                  scopes: [
+                    'openid',
+                    'email',
+                    'profile',
+                    'groups',
+                  ],
+                },
+              },
+
             ],
           }),
         },
@@ -72,6 +91,7 @@ local namespace = 'argocd';
         rbac: {
           'policy.csv': |||
             g, ArgoCD Admins, role:admin
+            g, admins, role:admin
           |||,
         },
       },

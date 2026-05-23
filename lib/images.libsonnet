@@ -125,6 +125,11 @@
       repoURL: 'https://charts.goauthentik.io',
       targetRevision: '2026.5.0',
     },
+    authelia: {
+      chart: 'authelia',
+      repoURL: 'https://charts.authelia.com',
+      targetRevision: '0.11.5',
+    },
   },
   container: {
     renovate: {

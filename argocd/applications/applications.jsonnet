@@ -25,6 +25,7 @@ local apps = [
   argocd.appSettings(name='immich'),
   argocd.appSettings(name='borg'),
   argocd.appSettings(name='authentik'),
+  argocd.appSettings(name='authelia'),
 ];
 
 argocd.addApps(apps)
