@@ -1,8 +1,10 @@
 local nginx = (import 'images.libsonnet').container.nginx;
 
 local builder = import 'builder/builder.libsonnet';
+local k8s = import 'k8s.libsonnet';
 
 [
+  k8s.secret.externalSecretExtract('synapse-delegation-nginx-config', 'default', 'synapse-config'),
   builder.apps.deployment
   .new('delegation-nginx', 'default')
   .withReplicas(1)
@@ -31,3 +33,4 @@ local builder = import 'builder/builder.libsonnet';
   .withClusterIP('None')
   .withPort(port=80, name='http'),
 ]
+
