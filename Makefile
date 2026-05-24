@@ -20,18 +20,18 @@ tf-%: login
 
 
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
-TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,-,$(ENTRYPOINTS:.jsonnet=.tf.json)))
-SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,-,$(ENTRYPOINTS:.jsonnet=.sh)))
+TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
+SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
 
 .PHONY: FORCE
 FORCE:
 
 .SECONDEXPANSION:
-$(BUILD_DIR)/%.tf.json : $$(shell echo $$* | tr '-' '/').jsonnet FORCE
+$(BUILD_DIR)/%.tf.json : $$(shell echo $$* | tr '__' '/').jsonnet FORCE
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --tla-str type="tf" $< | jq -e 'select((. | length) > 0)' > $@ || rm $@
 
-$(BUILD_DIR)/%.sh : $$(shell echo $$* | tr '-' '/').jsonnet FORCE
+$(BUILD_DIR)/%.sh : $$(shell echo $$* | tr '__' '/').jsonnet FORCE
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --tla-str type="script" $< | jq -e -r 'select((. | length) > 0) | .[]' > $@ || rm $@
 
@@ -45,7 +45,7 @@ login:
 	bao token lookup || bao login -method=oidc 
 
 .PHONY: apply
-apply: apply-openbao
+apply: build tf-apply
 
 .PHONY: plan
 plan: build tf-plan
