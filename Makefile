@@ -21,6 +21,7 @@ tf-%: login
 
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
 TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,-,$(ENTRYPOINTS:.jsonnet=.tf.json)))
+SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,-,$(ENTRYPOINTS:.jsonnet=.sh)))
 
 .PHONY: FORCE
 FORCE:
@@ -28,14 +29,16 @@ FORCE:
 .SECONDEXPANSION:
 $(BUILD_DIR)/%.tf.json : $$(shell echo $$* | tr '-' '/').jsonnet FORCE
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="tf" -o $@ $<
+	jsonnet -J . -J lib --tla-str type="tf" $< | jq -e 'select((. | length) > 0)' > $@ || rm $@
 
-$(BUILD_DIR)/%:
-	cp ./tf/openbao/secrets.tf $(BUILD_DIR)/$*
+$(BUILD_DIR)/%.sh : $$(shell echo $$* | tr '-' '/').jsonnet FORCE
+	@mkdir -p $(dir $@)
+	jsonnet -J . -J lib --tla-str type="script" $< | jq -e -r 'select((. | length) > 0) | .[]' > $@ || rm $@
 
 .PHONY: build
-build: $(TF_JSON_FILES) 
-	ln -sf $$(pwd)/tf/openbao/* ./build/
+build: $(TF_JSON_FILES) $(SCRIPT_FILES)
+	ln -sf $$(pwd)/tf/openbao/* $(BUILD_DIR)
+	sh $(BUILD_DIR)/*.sh
 
 .PHONY: login
 login:

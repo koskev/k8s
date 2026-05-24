@@ -1,5 +1,6 @@
 local images = import 'images.libsonnet';
 local k8s = import 'k8s.libsonnet';
+local script = import 'script.libsonnet';
 
 local name = 'authelia';
 local namespace = name;
@@ -270,7 +271,7 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
       },
     },
   }),
-] + [
-  k8s.secret.externalSecretExtract('oidc-%s' % app, namespace, key='oidc/%s' % app)
-  for app in std.objectFields(apps)
-]
+] + std.flatMap(function(app) [
+  k8s.secret.externalSecretExtract('oidc-%s' % app, namespace, key='oidc/%s' % app),
+  script.oidcSecret(app),
+], std.objectFields(apps))
