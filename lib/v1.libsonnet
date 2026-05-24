@@ -36,6 +36,7 @@
       } + if loadBalancerIP == null then {} else { loadBalancerIP: loadBalancerIP },
     },
   namespace(name):: {
+    _type:: 'argocd',
     apiVersion: 'v1',
     kind: 'Namespace',
     metadata: {

@@ -1,5 +1,6 @@
-AUTHENTIK_TF_FILE=tf/authentik/main.tf.json
-VAULT_ADDR?="https://vault.kokev.de"
+AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
+VAULT_ADDR ?= "https://vault.kokev.de"
+BUILD_DIR ?= build
 
 .PHONY: all
 all: apply
@@ -14,6 +15,28 @@ apply-authentik: build-authentik login
 %-openbao: login
 	tofu -chdir=tf/openbao $*
 
+tf-%: login
+	tofu -chdir=$(BUILD_DIR) $*
+
+
+ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
+TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,-,$(ENTRYPOINTS:.jsonnet=.tf.json)))
+
+.PHONY: FORCE
+FORCE:
+
+.SECONDEXPANSION:
+$(BUILD_DIR)/%.tf.json : $$(shell echo $$* | tr '-' '/').jsonnet FORCE
+	@mkdir -p $(dir $@)
+	jsonnet -J . -J lib --tla-str type="tf" -o $@ $<
+
+$(BUILD_DIR)/%:
+	cp ./tf/openbao/secrets.tf $(BUILD_DIR)/$*
+
+.PHONY: build
+build: $(TF_JSON_FILES) 
+	ln -sf $$(pwd)/tf/openbao/* ./build/
+
 .PHONY: login
 login:
 	bao token lookup || bao login -method=oidc 
@@ -22,12 +45,15 @@ login:
 apply: apply-openbao
 
 .PHONY: plan
-plan: plan-openbao
+plan: build tf-plan
+
+.PHONY: init
+init: build tf-init
 
 
 .PHONY: clean
 clean:
-	rm $(AUTHENTIK_TF_FILE)
+	rm -r $(BUILD_DIR)
 
 .PHONY: test
 test:

@@ -2,6 +2,9 @@ local psqlConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.openbao;
 local globals = import 'globals.libsonnet';
+local tf = import 'tf/tf.libsonnet';
+
+local adminUser = 'admin';
 
 {
   deplyoment(name, namespace, host, rollingUpdate=false, transit=null):: [
@@ -77,5 +80,36 @@ local globals = import 'globals.libsonnet';
         },
       },
     ),
+    tf.resource('vault_jwt_auth_backend', 'oidc_config', {
+      path: 'oidc',
+      oidc_discovery_url: 'https://auth.kokev.de',
+      oidc_client_id: 'openbao',
+      oidc_client_secret: '${data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]}',
+      default_role: adminUser,
+      type: 'oidc',
+    }),
+    tf.resource('vault_jwt_auth_backend_role', 'example', {
+      backend: '${vault_jwt_auth_backend.oidc_config.path}',
+      role_name: adminUser,
+      token_policies: [adminUser],
+      bound_audiences: ['openbao'],
+      oidc_scopes: ['openid', 'profile', 'email', 'groups'],
+      allowed_redirect_uris: [
+        'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
+        'https://vault.kokev.de/oidc/callback',
+        'http://localhost:8250/oidc/callback',
+      ],
+      user_claim: 'sub',
+      groups_claim: 'groups',
+      bound_claims: { groups: 'admins' },
+    }),
+    tf.resource('vault_policy', adminUser, {
+      name: adminUser,
+      policy: |||
+        path "*" {
+          capabilities = ["read", "create", "list", "update", "patch", "update", "delete", "sudo"]
+        }
+      |||,
+    }),
   ],
 }

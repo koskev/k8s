@@ -2,6 +2,7 @@
   local outerSelf = self,
   local tf = self,
   base(type, resource, name, body):: {
+    _type:: 'tf',
     [type]+: {
       [resource]+: { [name]: [body] },
     },

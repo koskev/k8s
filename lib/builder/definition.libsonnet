@@ -4,6 +4,7 @@
     assert std.isString(kind),
     assert std.isString(name),
     assert std.isString(namespace),
+    _type:: 'argocd',
     apiVersion: apiVersion,
     kind: kind,
     metadata: {
