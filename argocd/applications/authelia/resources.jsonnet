@@ -9,6 +9,27 @@ local secretNameUsers = 'authelia-users';
 
 local secretNamePsql = '%s-%s' % [name, name];
 
+local apps = {
+  argocd: {
+    redirects: [
+      'https://argocd.kokev.de/api/dex/callback',
+      'https://localhost:8085/auth/callback',
+    ],
+  },
+  openbao: {
+    redirects: [
+      'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
+      'https://vault.kokev.de/oidc/callback',
+      'http://localhost:8250/oidc/callback',
+    ],
+  },
+  paperless: {
+    redirects: [
+      'https://paperless.kokev.de/accounts/oidc/authelia/login/callback/',
+    ],
+  },
+};
+
 local secret_envs = [
   {
     name: 'POSTGRES_HOST',
@@ -30,22 +51,15 @@ local secret_envs = [
     secret: secretNamePsql,
     key: 'LOGIN',
   },
+] + [
   {
-    name: 'OIDC_ARGOCD',
-    secret: 'oidc-argocd',
+    name: 'OIDC_%s' % std.asciiUpper(app),
+    secret: 'oidc-%s' % app,
     key: 'digest',
-  },
-  {
-    name: 'OIDC_OPENBAO',
-    secret: 'oidc-openbao',
-    key: 'digest',
-  },
-  {
-    name: 'OIDC_PAPERLESS',
-    secret: 'oidc-paperless',
-    key: 'digest',
-  },
-];
+  }
+  for app in std.objectFields(apps)
+]
+;
 
 local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[]) =
   {
@@ -81,9 +95,6 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
   k8s.secret.externalSecretExtract(secretName, namespace),
-  k8s.secret.externalSecretExtract('oidc-argocd', namespace, key='oidc/argocd'),
-  k8s.secret.externalSecretExtract('oidc-openbao', namespace, key='oidc/openbao'),
-  k8s.secret.externalSecretExtract('oidc-paperless', namespace, key='oidc/paperless'),
   k8s.secret.externalSecretExtract(secretNameUsers, namespace, templateData={
     'users_database.yaml': std.strReplace(std.toString({
       users: {
@@ -221,18 +232,8 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
             },
           }],
           clients: [
-            authenticApplication('argocd', redirects=[
-              'https://argocd.kokev.de/api/dex/callback',
-              'https://localhost:8085/auth/callback',
-            ]),
-            authenticApplication('openbao', redirects=[
-              'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
-              'https://vault.kokev.de/oidc/callback',
-              'http://localhost:8250/oidc/callback',
-            ]),
-            authenticApplication('paperless', redirects=[
-              'https://paperless.kokev.de/accounts/oidc/authelia/login/callback/',
-            ]),
+            authenticApplication(app.key, redirects=app.value.redirects)
+            for app in std.objectKeysValues(apps)
           ],
         },
       },
@@ -247,4 +248,7 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
       },
     },
   }),
+] + [
+  k8s.secret.externalSecretExtract('oidc-%s' % app, namespace, key='oidc/%s' % app)
+  for app in std.objectFields(apps)
 ]
