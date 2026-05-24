@@ -215,7 +215,7 @@ EOT
 
 resource "vault_jwt_auth_backend" "oidc_config" {
   path             = "oidc"
-  oidc_discovery_url  = "https://auth.kokev.de/application/o/openbao/"
+  oidc_discovery_url  = "https://authelia.kokev.de"
   oidc_client_id      = "openbao"
   oidc_client_secret  = data.sops_file.openbao_secrets["openbao_secrets/oidc.enc.yaml"].data["openbao"]
   default_role        = "admin"
@@ -227,7 +227,7 @@ resource "vault_jwt_auth_backend_role" "example" {
   role_name       = "admin"
   token_policies  = ["admin"]
   bound_audiences = ["openbao"]
-  oidc_scopes = ["oidc", "profile", "email"]
+  oidc_scopes = ["openid", "profile", "email", "groups"]
   allowed_redirect_uris = [
     "https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback",
     "https://vault.kokev.de/oidc/callback",
@@ -235,5 +235,5 @@ resource "vault_jwt_auth_backend_role" "example" {
   ]
   user_claim      = "sub"
   groups_claim = "groups"
-  bound_claims={"groups":"authentik Admins"}
+  bound_claims={"groups":"admins"}
 }

@@ -30,7 +30,47 @@ local secret_envs = [
     secret: secretNamePsql,
     key: 'LOGIN',
   },
+  {
+    name: 'OIDC_ARGOCD',
+    secret: 'oidc',
+    key: 'argocd',
+  },
+  {
+    name: 'OIDC_OPENBAO',
+    secret: 'oidc',
+    key: 'openbao',
+  },
 ];
+
+local authenticApplication(name, env, redirects=[]) =
+  {
+    client_id: name,
+    client_name: name,
+    client_secret: '$plaintext${{ env "%s"}}' % env,
+    public: false,
+    authorization_policy: 'one_factor',
+    require_pkce: false,
+    pkce_challenge_method: '',
+    redirect_uris: redirects,
+    scopes: [
+      'openid',
+      'email',
+      'profile',
+      'groups',
+    ],
+    response_types: [
+      'code',
+    ],
+    grant_types: [
+      'authorization_code',
+    ],
+    access_token_signed_response_alg: 'none',
+    userinfo_signed_response_alg: 'none',
+    token_endpoint_auth_method: 'client_secret_basic',
+    consent_mode: 'implicit',
+  }
+;
+
 [
   k8s.v1.namespace(namespace),
   k8s.db.database(name, namespace),
@@ -60,10 +100,6 @@ local secret_envs = [
     pod: {
       kind: 'Deployment',
       env: [
-        {
-          name: 'OIDC_ARGOCD',
-          value: 'insecure_secret',
-        },
         {
           name: 'AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE',
           value: '/authelia-psql-secret/PASSWORD',
@@ -175,35 +211,15 @@ local secret_envs = [
             },
           }],
           clients: [
-            {
-              client_id: 'argocd-authelia',
-              client_name: 'Argo CD',
-              client_secret: '$plaintext${{ env "OIDC_ARGOCD"}}',
-              public: false,
-              authorization_policy: 'one_factor',
-              require_pkce: false,
-              pkce_challenge_method: '',
-              redirect_uris: [
-                'https://argocd.kokev.de/api/dex/callback',
-              ],
-              scopes: [
-                'openid',
-                'email',
-                'profile',
-                'groups',
-              ],
-              response_types: [
-                'code',
-              ],
-              grant_types: [
-                'authorization_code',
-              ],
-              access_token_signed_response_alg: 'none',
-              userinfo_signed_response_alg: 'none',
-              token_endpoint_auth_method: 'client_secret_basic',
-              consent_mode: 'implicit',
-
-            },
+            authenticApplication('argocd', 'OIDC_ARGOCD', [
+              'https://argocd.kokev.de/api/dex/callback',
+              'https://localhost:8085/auth/callback',
+            ]),
+            authenticApplication('openbao', 'OIDC_OPENBAO', redirects=[
+              'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
+              'https://vault.kokev.de/oidc/callback',
+              'http://localhost:8250/oidc/callback',
+            ]),
           ],
         },
       },

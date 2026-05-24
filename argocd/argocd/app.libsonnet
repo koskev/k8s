@@ -39,32 +39,13 @@ local namespace = 'argocd';
           'dex.config': std.toString({
             connectors: [
               {
-                config: {
-                  issuer: 'https://auth.kokev.de/application/o/argocd/',
-                  clientID: 'argocd',
-                  clientSecret: '$dex.authentik.clientSecret',
-                  insecureEnableGroups: true,
-                  scopes: [
-                    'openid',
-                    'profile',
-                    'email',
-                  ],
-                  claimMapping: {
-                    name: 'username',
-                  },
-                },
-                name: 'authentik',
-                type: 'oidc',
-                id: 'authentik',
-              },
-              {
                 name: 'authelia',
                 type: 'oidc',
                 id: 'authelia',
                 config: {
                   issuer: 'https://authelia.kokev.de',
-                  clientID: 'argocd-authelia',
-                  clientSecret: 'insecure_secret',
+                  clientID: 'argocd',
+                  clientSecret: '$dex.authentik.clientSecret',
                   insecureEnableGroups: true,
                   getUserInfo: true,
                   scopes: [
