@@ -6,6 +6,7 @@ local k8s = import 'k8s.libsonnet';
 local globals = import 'globals.libsonnet';
 
 
+local name = 'grafana';
 local namespace = 'monitoring';
 local storageclassGrafana = 'local-grafana';
 local storageclassPrometheus = 'local-prometheus';
@@ -19,7 +20,7 @@ local storageclassPrometheus = 'local-prometheus';
     path='/mnt/shared_data/k8s/prometheus/grafana_data',
     storageclass=storageclassGrafana,
     labels={
-      storage: 'grafana',
+      storage: name,
     },
   ),
   storage.localPersistentVolume(
@@ -32,13 +33,14 @@ local storageclassPrometheus = 'local-prometheus';
 
   secret.externalSecretExtract('prometheus-secret', namespace),
   k8s.db.database(
-    name='grafana',
+    name=name,
     namespace=namespace
   ),
   k8s.db.user(
-    name='grafana',
+    name=name,
     namespace=namespace,
   ),
+  k8s.secret.externalSecretExtract('oidc-grafana', namespace, key='oidc/grafana'),
 
   argocd.applicationHelm(
     name='kube-prometheus',
@@ -79,6 +81,12 @@ local storageclassPrometheus = 'local-prometheus';
               key: 'PASSWORD',
             },
           },
+          OIDC_SECRET: {
+            secretKeyRef: {
+              name: 'oidc-grafana',
+              key: 'password',
+            },
+          },
         },
         smtp: {
           existingSecret: 'prometheus-secret',
@@ -101,6 +109,22 @@ local storageclassPrometheus = 'local-prometheus';
             enabled: true,
             host: 'mail.kokev.de:465',
             from_address: 'grafana@kokev.de',
+          },
+          'auth.generic_oauth': {
+            name: 'authelia',
+            enabled: true,
+            client_id: name,
+            client_secret: '$__env{OIDC_SECRET}',
+            scopes: 'openid profile email groups',
+            auth_url: '%s/api/oidc/authorization' % globals.urls.auth,
+            token_url: '%s/api/oidc/token' % globals.urls.auth,
+            api_url: '%s/api/oidc/userinfo' % globals.urls.auth,
+            // Optionally map user entitlements to Grafana roles
+            // FIXME: Role assignment does not work. Even if hardcoding Admin
+            role_attribute_path: "contains(groups[*], 'admin') && 'GrafanaAdmin' || contains(groups[*], 'editor') && 'Editor' || 'Viewer'",
+            allow_assign_grafana_admin: true,
+            groups_attribute_path: 'groups',
+            auth_style: 'InHeader',
           },
         },
         persistence: {

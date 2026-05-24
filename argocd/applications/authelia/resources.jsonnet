@@ -28,6 +28,14 @@ local apps = {
       'https://paperless.kokev.de/accounts/oidc/authelia/login/callback/',
     ],
   },
+  grafana: {
+    redirects: [
+      'https://grafana.kokev.de/login/generic_oauth',
+    ],
+    policy: {
+      id_token: ['email', 'name', 'groups', 'preferred_username'],
+    },
+  },
 };
 
 local secret_envs = [
@@ -61,7 +69,7 @@ local secret_envs = [
 ]
 ;
 
-local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[]) =
+local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[], additionalData={}, policy=null) =
   {
     client_id: name,
     client_name: name,
@@ -87,7 +95,8 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
     userinfo_signed_response_alg: 'none',
     token_endpoint_auth_method: 'client_secret_basic',
     consent_mode: 'implicit',
-  }
+    [if policy != null then 'claims_policy']: policy,
+  } + additionalData
 ;
 
 [
@@ -223,6 +232,14 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
       identity_providers: {
         oidc: {
           enabled: true,
+          claims_policies: std.foldl(
+            function(acc, val) acc + val,
+            std.map(function(app) {
+                      [app.key]: app.value.policy,
+                    },
+                    std.filter(function(app) std.get(app.value, 'policy') != null, std.objectKeysValues(apps))),
+            {}
+          ),
           jwks: [{
             key_id: 'default',
             algorithm: 'RS256',
@@ -232,7 +249,12 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
             },
           }],
           clients: [
-            authenticApplication(app.key, redirects=app.value.redirects)
+            authenticApplication(
+              app.key,
+              redirects=app.value.redirects,
+              additionalData=std.get(app.value, 'additionalData', {}),
+              policy=if std.get(app.value, 'policy') != null then app.key else null,
+            )
             for app in std.objectKeysValues(apps)
           ],
         },
