@@ -1,4 +1,5 @@
 {
+  local outerSelf = self,
   repository: 'https://github.com/koskev/k8s',
   ips: {
     pihole: '192.168.10.2',
@@ -22,4 +23,7 @@
     },
   },
   domain: 'kokev.de',
+  urls: {
+    auth: 'https://auth.%s' % outerSelf.domain,
+  },
 }

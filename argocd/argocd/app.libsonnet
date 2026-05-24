@@ -43,7 +43,7 @@ local namespace = 'argocd';
                 type: 'oidc',
                 id: 'authelia',
                 config: {
-                  issuer: 'https://authelia.kokev.de',
+                  issuer: globals.urls.auth,
                   clientID: 'argocd',
                   clientSecret: '$dex.authentik.clientSecret',
                   insecureEnableGroups: true,

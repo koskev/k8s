@@ -196,7 +196,7 @@ local authenticApplication(name, env, redirects=[]) =
       session: {
         cookies: [{
           domain: 'kokev.de',
-          subdomain: 'authelia',
+          subdomain: 'auth',
         }],
       },
       identity_providers: {

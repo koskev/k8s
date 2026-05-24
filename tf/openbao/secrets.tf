@@ -215,7 +215,7 @@ EOT
 
 resource "vault_jwt_auth_backend" "oidc_config" {
   path             = "oidc"
-  oidc_discovery_url  = "https://authelia.kokev.de"
+  oidc_discovery_url  = "https://auth.kokev.de"
   oidc_client_id      = "openbao"
   oidc_client_secret  = data.sops_file.openbao_secrets["openbao_secrets/oidc.enc.yaml"].data["openbao"]
   default_role        = "admin"
