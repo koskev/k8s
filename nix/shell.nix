@@ -4,12 +4,15 @@ _: {
     {
       devShells.default = pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
-          jsonnet
+          go-jsonnet
+          jq
           yq
           opentofu
           tofu-ls
           openbao
           sops
+          authelia
+          gnumake
         ];
       };
     };
