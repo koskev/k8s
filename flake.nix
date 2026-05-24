@@ -10,6 +10,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    nix-actions.url = "github:koskev/nix-actions";
   };
 
   outputs =
