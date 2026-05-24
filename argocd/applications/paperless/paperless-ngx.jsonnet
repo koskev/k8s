@@ -40,6 +40,27 @@ local volumes = [
 
   }),
   k8s.v1.service(name, namespace, ports=[port]),
+  k8s.secret.externalSecretExtract('oidc-paperless', namespace, key='oidc/paperless', templateData={
+    PAPERLESS_SOCIALACCOUNT_PROVIDERS: std.toString({
+      openid_connect: {
+        SCOPE: ['openid', 'profile', 'email'],
+        OAUTH_PKCE_ENABLED: true,
+        APPS: [
+          {
+            provider_id: 'authelia',
+            name: 'Authelia',
+            client_id: 'paperless',
+            secret: '{{ .password }}',
+            settings: {
+              server_url: globals.urls.auth,
+              token_auth_method: 'client_secret_basic',
+            },
+          },
+        ],
+      },
+
+    }),
+  }),
   k8s.apps.statefulSet(name, namespace, spec={
     containers: [
       {
@@ -87,6 +108,19 @@ local volumes = [
           {
             name: 'PAPERLESS_REDIS',
             value: 'redis://%s:%d' % [valkeyName, valkeyPort],
+          },
+          {
+            name: 'PAPERLESS_APPS',
+            value: 'allauth.socialaccount.providers.openid_connect',
+          },
+          {
+            name: 'PAPERLESS_SOCIALACCOUNT_PROVIDERS',
+            valueFrom: {
+              secretKeyRef: {
+                name: 'oidc-paperless',
+                key: 'PAPERLESS_SOCIALACCOUNT_PROVIDERS',
+              },
+            },
           },
         ],
         envFrom: [{
