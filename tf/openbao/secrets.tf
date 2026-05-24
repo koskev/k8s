@@ -85,7 +85,7 @@ data "sops_file" "secrets" {
 }
 
 data "sops_file" "openbao_secrets" {
-  for_each = fileset(path.module, "openbao_secrets/*.{json,yaml}")
+  for_each = fileset(path.module, "openbao_secrets/**/*.{json,yaml}")
   source_file = each.value
 }
 
@@ -110,7 +110,7 @@ resource "vault_mount" "secrets" {
 resource "vault_kv_secret_v2" "secrets" {
   for_each = data.sops_file.openbao_secrets
   mount                      = vault_mount.secrets.path
-  name                       = split(".", basename(each.key))[0]
+  name                       = split(".", trimprefix(each.key, "openbao_secrets/"))[0]
   data_json                  =  jsonencode(each.value.data)
 }
 
@@ -207,7 +207,7 @@ resource "vault_policy" "admin" {
   name = "admin"
     policy = <<EOT
 path "*" {
-  capabilities = ["read", "create", "list", "update", "patch", "update", "sudo"]
+  capabilities = ["read", "create", "list", "update", "patch", "update", "delete", "sudo"]
 }
 EOT
   
@@ -217,7 +217,7 @@ resource "vault_jwt_auth_backend" "oidc_config" {
   path             = "oidc"
   oidc_discovery_url  = "https://auth.kokev.de"
   oidc_client_id      = "openbao"
-  oidc_client_secret  = data.sops_file.openbao_secrets["openbao_secrets/oidc.enc.yaml"].data["openbao"]
+  oidc_client_secret  = data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]
   default_role        = "admin"
   type = "oidc"
 }

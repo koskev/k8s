@@ -32,13 +32,13 @@ local secret_envs = [
   },
   {
     name: 'OIDC_ARGOCD',
-    secret: 'oidc',
-    key: 'argocd',
+    secret: 'oidc-argocd',
+    key: 'digest',
   },
   {
     name: 'OIDC_OPENBAO',
-    secret: 'oidc',
-    key: 'openbao',
+    secret: 'oidc-openbao',
+    key: 'digest',
   },
 ];
 
@@ -46,7 +46,7 @@ local authenticApplication(name, env, redirects=[]) =
   {
     client_id: name,
     client_name: name,
-    client_secret: '$plaintext${{ env "%s"}}' % env,
+    client_secret: '$pbkdf2-sha512${{ env "%s"}}' % env,
     public: false,
     authorization_policy: 'one_factor',
     require_pkce: false,
@@ -76,7 +76,8 @@ local authenticApplication(name, env, redirects=[]) =
   k8s.db.database(name, namespace),
   k8s.db.user(name, namespace),
   k8s.secret.externalSecretExtract(secretName, namespace),
-  k8s.secret.externalSecretExtract('oidc', namespace),
+  k8s.secret.externalSecretExtract('oidc-argocd', namespace, key='oidc/argocd'),
+  k8s.secret.externalSecretExtract('oidc-openbao', namespace, key='oidc/openbao'),
   k8s.secret.externalSecretExtract(secretNameUsers, namespace, templateData={
     'users_database.yaml': std.strReplace(std.toString({
       users: {
@@ -98,6 +99,9 @@ local authenticApplication(name, env, redirects=[]) =
   )
   .withValues({
     pod: {
+      annotations: {
+        'reloader.stakater.com/auto': 'true',
+      },
       kind: 'Deployment',
       env: [
         {
