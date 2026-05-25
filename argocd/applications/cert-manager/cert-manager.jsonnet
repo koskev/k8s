@@ -68,38 +68,29 @@ local secretName = 'cert-domain-tls-key-kokev';
       kind: 'Issuer',
     }
   ),
-
-  {
-    apiVersion: 'cert-manager.io/v1',
-    kind: 'ClusterIssuer',
-    metadata: {
-      name: 'kokev-issuer',
-      namespace: 'cert-manager',
-    },
-    spec: {
-      acme: {
-        email: 'letsencrypt@kokev.de',
-        server: 'https://acme-v02.api.letsencrypt.org/directory',
-        privateKeySecretRef: {
-          name: 'cert-manager-desec-http-secret',
-        },
-        solvers: [
-          {
-            dns01: {
-              webhook: {
-                groupName: 'kokev.de',
-                solverName: 'desec-http',
-                config: {
-                  apiUrl: 'https://desec.io/api/v1',
-                  domainName: 'kokev.de',
-                  secretName: secretName,
-                  secretKeyName: 'desec-token',
-                },
+  k8s.builder.definition.new('cert-manager.io/v1', 'ClusterIssuer', 'kokev-issuer', namespace).withSpec({
+    acme: {
+      email: 'letsencrypt@kokev.de',
+      server: 'https://acme-v02.api.letsencrypt.org/directory',
+      privateKeySecretRef: {
+        name: 'cert-manager-desec-http-secret',
+      },
+      solvers: [
+        {
+          dns01: {
+            webhook: {
+              groupName: 'kokev.de',
+              solverName: 'desec-http',
+              config: {
+                apiUrl: 'https://desec.io/api/v1',
+                domainName: 'kokev.de',
+                secretName: secretName,
+                secretKeyName: 'desec-token',
               },
             },
           },
-        ],
-      },
+        },
+      ],
     },
-  },
+  }),
 ]
