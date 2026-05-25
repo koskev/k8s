@@ -52,11 +52,11 @@ local definition = import 'definition.libsonnet';
         },
       },
 
-    withContainer(container):: self.withTemplateSpec({
+    withContainer(container, init=false):: self.withTemplateSpec({
       assert std.isObject(container),
       assert std.objectHas(container, 'name'),
       assert std.objectHas(container, 'image'),
-      containers+: [container],
+      [if init then 'initContainers' else 'containers']+: [container],
     }),
 
     withVolume(volume):: self.withTemplateSpec({

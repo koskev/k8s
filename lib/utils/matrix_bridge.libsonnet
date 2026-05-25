@@ -27,73 +27,47 @@ local configName(name) = '%s-config' % name;
           kind: 'SecretStore',
         }
       ),
-      {
-        apiVersion: 'apps/v1',
-        kind: 'StatefulSet',
-        metadata: {
-          name: name,
-          namespace: namespace,
-          labels: {
-            app: name,
-          },
+      k8s.builder.apps.deployment.new(name, namespace)
+      .asStatefulSet()
+      .withReplicas(1)
+      .withContainer(
+        k8s.builder.apps.container.new('prepare-config', yqgo.image, yqgo.tag)
+        .withCommand(['/bin/sh'])
+        .withArgs([
+          '-c',
+          "yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/config.yaml /db/config.yaml > /out/config.yaml",
+        ])
+        .withMount(configName(name), '/out/')
+        .withMount('%s-config-secret' % name, '/data')
+        .withMount('%s-database-uri' % name, '/db'),
+        true
+      )
+      .withContainer(
+        k8s.builder.apps.container.new(name, image.image, image.tag)
+        .withCommand(['bash', '-c'])
+        .withArgs([
+          'su-exec $UID:$GID /usr/bin/%s --no-update -c /data/config.yaml' % binaryName,
+        ])
+        .withPort(port)
+        .withMount(configName(name), '/data')
+        .withRessources('128Mi')
+      )
+      .withVolume({
+        name: configName(name),
+        emptyDir: {},
+      })
+      .withVolume({
+        name: '%s-config-secret' % name,
+        secret: {
+          secretName: '%s-config' % name,
         },
-        spec: {
-          replicas: 1,
-          selector: {
-            matchLabels: {
-              app: name,
-            },
-          },
-          template: {
-            metadata: {
-              labels: {
-                app: name,
-              },
-            },
-            spec: {
-              initContainers: [
-                k8s.builder.apps.container.new('prepare-config', yqgo.image, yqgo.tag)
-                .withCommand(['/bin/sh'])
-                .withArgs([
-                  '-c',
-                  "yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/config.yaml /db/config.yaml > /out/config.yaml",
-                ])
-                .withMount(configName(name), '/out/')
-                .withMount('%s-config-secret' % name, '/data')
-                .withMount('%s-database-uri' % name, '/db'),
-              ],
-              containers: [
-                k8s.builder.apps.container.new(name, image.image, image.tag)
-                .withCommand(['bash', '-c'])
-                .withArgs([
-                  'su-exec $UID:$GID /usr/bin/%s --no-update -c /data/config.yaml' % binaryName,
-                ])
-                .withPort(port)
-                .withMount(configName(name), '/data')
-                .withRessources('128Mi'),
-              ],
-              volumes: [
-                {
-                  name: configName(name),
-                  emptyDir: {},
-                },
-                {
-                  name: '%s-config-secret' % name,
-                  secret: {
-                    secretName: '%s-config' % name,
-                  },
-                },
-                {
-                  name: '%s-database-uri' % name,
-                  secret: {
-                    secretName: '%s-database-uri' % name,
-                  },
-                },
-              ],
-            },
-          },
+      })
+      .withVolume({
+        name: '%s-database-uri' % name,
+        secret: {
+          secretName: '%s-database-uri' % name,
         },
-      },
+      }),
       k8s.builder.core.service.new('%s-service' % name, namespace, name)
       .withPort(port, name='bridge')
       .withPort(9090, name='metrics')
