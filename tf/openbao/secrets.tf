@@ -1,31 +1,3 @@
-terraform {
-  required_version = ">= 1.10.0"
-  backend "kubernetes" {
-    secret_suffix = "state"
-    config_path      = "~/.kube/config"
-  }
-  required_providers {
-    sops = {
-      source = "carlpett/sops"
-      version = "~> 1.0"
-    }
-    vault = {
-      source = "hashicorp/vault"
-      version = "~> 5.9.0"
-    }
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-      version = "3.1.0"
-    }
-  }
-}
-
-provider "vault" {}
-provider "sops" {}
-provider "kubernetes" {
-  config_path    = "~/.kube/config"
-}
-
 resource "vault_auth_backend" "kubernetes" {
   type = "kubernetes"
 }

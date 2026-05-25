@@ -17,7 +17,7 @@ local compiler = import 'utils/compile.libsonnet';
       to: new,
     }],
   },
-  provider(name, body):: {
+  provider(name, body={}):: {
     _type:: compiler.types.tf,
     provider+: { [name]: body },
   },

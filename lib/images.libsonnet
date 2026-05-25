@@ -289,4 +289,18 @@
       tag: 'v1.1.0@sha256:31105d46208e3ca5965078d22f6baacbf86f85f4b4b50c95d055c197c61ca20b',
     },
   },
+  tf: {
+    sops: {
+      source: 'carlpett/sops',
+      version: '~> 1.0',
+    },
+    vault: {
+      source: 'hashicorp/vault',
+      version: '~> 5.9.0',
+    },
+    kubernetes: {
+      source: 'hashicorp/kubernetes',
+      version: '3.1.0',
+    },
+  },
 }
