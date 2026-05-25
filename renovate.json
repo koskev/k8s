@@ -60,6 +60,18 @@
       "matchStrings": [
         "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',"
       ]
+    },
+    {
+      "description": "Terraform dependencies",
+      "customType": "regex",
+      "fileMatch": [
+        "images.libsonnet"
+      ],
+      "datasourceTemplate": "terraform-provider",
+      "versioningTemplate": "hashicorp",
+      "matchStrings": [
+        "source:\\s?'(?<depName>.*?)',\\s*version:\\s?'(?<currentValue>.*?)',"
+      ]
     }
   ],
   "packageRules": [
