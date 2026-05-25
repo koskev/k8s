@@ -1,5 +1,5 @@
 {
-  new(apiVersion, kind, name, namespace):: {
+  new(apiVersion, kind, name, namespace=''):: {
     assert std.isString(apiVersion),
     assert std.isString(kind),
     assert std.isString(name),
@@ -9,7 +9,7 @@
     kind: kind,
     metadata: {
       name: name,
-      namespace: namespace,
+      [if std.length(namespace) > 0 then 'namespace']: namespace,
       labels: {
         app: name,
       },
