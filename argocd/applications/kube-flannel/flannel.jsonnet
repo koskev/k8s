@@ -18,4 +18,7 @@ local namespace = 'kube-flannel';
       backendPortIPv6: 51831,
     },
   }),
+  k8s.builder.core.namespace.new(namespace)
+  .withPrivileged()
+  .withLabel('k8s-app', 'flannel'),
 ]

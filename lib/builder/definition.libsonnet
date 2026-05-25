@@ -30,5 +30,13 @@
       spec+: spec,
     },
 
+    withLabel(key, value):: self {
+      metadata+: {
+        labels+: {
+          [key]: value,
+        },
+      },
+    },
+
   },
 }

@@ -54,6 +54,6 @@ local chart = (import 'images.libsonnet').helm.ingress_traefik;
         },
       }
     ),
-    k8s.builder.definition.new('v1', 'Namespace', namespace),
+    k8s.builder.core.namespace.new(namespace),
   ],
 }

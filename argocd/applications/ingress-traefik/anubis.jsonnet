@@ -29,25 +29,10 @@ local namespace = 'anubis';
 
   ),
   anubis.anubisPasswordSecret(name, namespace),
-  {
-    apiVersion: 'traefik.io/v1alpha1',
-    kind: 'Middleware',
-    metadata: {
-      name: 'anubis-auth',
-      namespace: namespace,
+  k8s.builder.definition.new('traefik.io/v1alpha1', 'Middleware', 'anubis-auth', namespace).withSpec({
+    forwardAuth: {
+      address: 'http://%s.%s:8080/.within.website/x/cmd/anubis/api/check' % [name, namespace],
     },
-    spec: {
-      forwardAuth: {
-        address: 'http://%s.%s:8080/.within.website/x/cmd/anubis/api/check' % [name, namespace],
-      },
-    },
-  },
-  {
-    kind: 'Namespace',
-    apiVersion: 'v1',
-    metadata: {
-      name: 'anubis',
-    },
-  },
-
+  }),
+  k8s.builder.core.namespace.new('anubis'),
 ]
