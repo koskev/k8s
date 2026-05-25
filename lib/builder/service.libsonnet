@@ -7,10 +7,10 @@ local definition = import 'definition.libsonnet';
       },
     },
 
-    withClusterIP(ip):: self {
-      assert std.isString(ip),
+    withClusterIP(ip=null):: self {
+      assert std.isString(ip) || ip == null,
       spec+: {
-        clusterIP: ip,
+        [if ip != null then 'clusterIP']: ip,
         type: 'ClusterIP',
       },
     },

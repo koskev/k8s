@@ -16,6 +16,10 @@ local definition = import 'definition.libsonnet';
       },
     },
 
+    asStatefulSet():: self {
+      kind: 'StatefulSet',
+    },
+
     withReplicas(replicas)::
       assert std.isNumber(replicas);
       self {

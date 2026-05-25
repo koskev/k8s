@@ -51,58 +51,26 @@ local configName(name) = '%s-config' % name;
               },
             },
             spec: {
-              initContainers: [{
-                name: 'prepare-config',
-                image: '%s:%s' % [yqgo.image, yqgo.tag],
-                command: ['/bin/sh'],
-                args: [
+              initContainers: [
+                k8s.builder.apps.container.new('prepare-config', yqgo.image, yqgo.tag)
+                .withCommand(['/bin/sh'])
+                .withArgs([
                   '-c',
                   "yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/config.yaml /db/config.yaml > /out/config.yaml",
-                ],
-                volumeMounts: [
-                  {
-                    name: configName(name),
-                    mountPath: '/out/',
-                  },
-                  {
-                    name: '%s-config-secret' % name,
-                    mountPath: '/data',
-                  },
-                  {
-                    name: '%s-database-uri' % name,
-                    mountPath: '/db',
-                  },
-                ],
-              }],
+                ])
+                .withMount(configName(name), '/out/')
+                .withMount('%s-config-secret' % name, '/data')
+                .withMount('%s-database-uri' % name, '/db'),
+              ],
               containers: [
-                {
-                  name: name,
-                  image: '%s:%s' % [image.image, image.tag],
-                  command: [
-                    'bash',
-                    '-c',
-                  ],
-                  args: [
-                    'su-exec $UID:$GID /usr/bin/%s --no-update -c /data/config.yaml' % binaryName,
-                  ],
-                  ports: [
-                    {
-                      containerPort: port,
-                      protocol: 'TCP',
-                    },
-                  ],
-                  volumeMounts: [
-                    {
-                      name: configName(name),
-                      mountPath: '/data',
-                    },
-                  ],
-                  resources: {
-                    requests: {
-                      memory: '128Mi',
-                    },
-                  },
-                },
+                k8s.builder.apps.container.new(name, image.image, image.tag)
+                .withCommand(['bash', '-c'])
+                .withArgs([
+                  'su-exec $UID:$GID /usr/bin/%s --no-update -c /data/config.yaml' % binaryName,
+                ])
+                .withPort(port)
+                .withMount(configName(name), '/data')
+                .withRessources('128Mi'),
               ],
               volumes: [
                 {
@@ -126,37 +94,11 @@ local configName(name) = '%s-config' % name;
           },
         },
       },
-      {
-        apiVersion: 'v1',
-        kind: 'Service',
-        metadata: {
-          name: '%s-service' % name,
-          namespace: namespace,
-          labels: {
-            app: name,
-          },
-        },
-        spec: {
-          selector: {
-            app: name,
-          },
-          ports: [
-            {
-              name: 'bridge',
-              protocol: 'TCP',
-              port: port,
-              targetPort: port,
-            },
-            {
-              name: 'metrics',
-              protocol: 'TCP',
-              port: 9090,
-              targetPort: 9090,
-            },
-          ],
-          type: 'ClusterIP',
-        },
-      },
+      k8s.builder.core.service.new('%s-service' % name, namespace, name)
+      .withPort(port, name='bridge')
+      .withPort(9090, name='metrics')
+      .withClusterIP()
+      ,
       secret.externalSecretExtract(configName(name), namespace),
     ],
 }
