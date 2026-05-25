@@ -17,18 +17,18 @@ tf-%: login
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
 TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
 SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
+JSONNET_FILES := $(shell find ./argocd -name '*.*sonnet')
 
 .PHONY: FORCE
 FORCE:
 
-.SECONDEXPANSION:
-$(BUILD_DIR)/%.tf.json : $$(shell echo $$* | tr '__' '/').jsonnet FORCE
+$(BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="tf" $< | jq -e 'select((. | length) > 0)' > $@ || rm $@
+	jsonnet -J . -J lib --tla-str type="tf" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
-$(BUILD_DIR)/%.sh : $$(shell echo $$* | tr '__' '/').jsonnet FORCE
+$(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="script" $< | jq -e -r 'select((. | length) > 0) | .[]' > $@ || rm $@
+	jsonnet -J . -J lib --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
 .PHONY: build
 build: $(TF_JSON_FILES) $(SCRIPT_FILES)
