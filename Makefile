@@ -2,21 +2,16 @@ AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
 VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build
 
+LOCKFILE_LOCATION ?= ./tf/openbao/
+
 .PHONY: all
 all: apply
 
-build-authentik:
-	jsonnet ./tf/authentik/main.jsonnet -J tf/authentik -J lib > $(AUTHENTIK_TF_FILE)
-
-apply-authentik: build-authentik login
-	tofu -chdir=tf/authentik init
-	tofu -chdir=tf/authentik apply
-
-%-openbao: login
-	tofu -chdir=tf/openbao $*
-
+# Terraform is so nice that it just blindly overrides symlinks AND hardlinks....
+# Therefore we just copy it back to have any changes in git
 tf-%: login
 	tofu -chdir=$(BUILD_DIR) $*
+	cp $(BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
 
 
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
