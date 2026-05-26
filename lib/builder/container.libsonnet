@@ -80,11 +80,35 @@
       }],
     },
 
-    withRessources(requestMemory):: self {
+    withMemoryRequest(requestMemory):: self {
       assert std.isString(requestMemory) : 'The memory needs to be string like 256Mi',
-      resources: {
-        requests: {
-          memory: requestMemory,
+      resources+: {
+        requests+: {
+          memory+: requestMemory,
+        },
+      },
+    },
+    withCpuRequest(requestCpu):: self {
+      assert std.isString(requestCpu) : 'The cpu needs to be string like 100m',
+      resources+: {
+        requests+: {
+          cpu: requestCpu,
+        },
+      },
+    },
+    withMemoryLimit(limitMemory):: self {
+      assert std.isString(limitMemory) : 'The memory needs to be string like 256Mi',
+      resources+: {
+        limits+: {
+          memory: limitMemory,
+        },
+      },
+    },
+    withCpuLimit(limitCpu):: self {
+      assert std.isString(limitCpu) : 'The cpu needs to be string like 100m',
+      resources+: {
+        limits+: {
+          cpu: limitCpu,
         },
       },
     },
@@ -95,5 +119,9 @@
     },
 
     withExtraSpec(spec):: self + spec,
+
+    withLivenessProbe(probe):: self {
+      livenessProbe: probe,
+    },
   },
 }

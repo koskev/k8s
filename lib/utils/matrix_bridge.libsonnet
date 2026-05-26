@@ -50,7 +50,7 @@ local configName(name) = '%s-config' % name;
         ])
         .withPort(port)
         .withMount(configName(name), '/data')
-        .withRessources('128Mi')
+        .withMemoryRequest('128Mi')
       )
       .withVolume({
         name: configName(name),

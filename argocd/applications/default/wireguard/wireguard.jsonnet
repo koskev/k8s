@@ -15,61 +15,31 @@ local port = 51820;
     type='LoadBalancer',
     loadBalancerIP=globals.ips.wireguard,
   ),
-  k8s.apps.deployment(
-    name=name,
-    namespace=namespace,
-    spec={
-      containers: [
-        {
-          name: 'wireguard',
-          image: '%s:%s' % [image.image, image.tag],
-          env: [
-            {
-              name: 'PUID',
-              value: '1000',
-            },
-            {
-              name: 'GUID',
-              value: '1000',
-            },
-            {
-              name: 'TZ',
-              value: 'Europe/Berlin',
-            },
-          ],
-          securityContext: {
-            capabilities: {
-              add: [
-                'NET_ADMIN',
-              ],
-            },
-            privileged: true,
-          },
-          resources: {
-            requests: {
-              memory: '64Mi',
-              cpu: '100m',
-            },
-            limits: {
-              memory: '256Mi',
-            },
-          },
-          volumeMounts: [
-            {
-              name: 'wg-config',
-              mountPath: '/config/wg_confs',
-            },
+  k8s.builder.apps.deployment.new(name, namespace)
+  .withContainer(
+    k8s.builder.apps.container.new('wireguard', image.image, image.tag)
+    .withEnv('PUID', '1000')
+    .withEnv('GUID', '1000')
+    .withEnv('TZ', 'Europe/Berlin')
+    .withMount('wg-config', '/config/wg_confs')
+    .withExtraSpec({
+      securityContext: {
+        capabilities: {
+          add: [
+            'NET_ADMIN',
           ],
         },
-      ],
-      volumes: [
-        {
-          name: 'wg-config',
-          secret: {
-            secretName: 'wg-config',
-          },
-        },
-      ],
+        privileged: true,
+      },
+    })
+    .withMemoryRequest('64Mi')
+    .withCpuRequest('100m')
+    .withMemoryLimit('256Mi')
+  )
+  .withVolume({
+    name: 'wg-config',
+    secret: {
+      secretName: 'wg-config',
     },
-  ),
+  }),
 ]

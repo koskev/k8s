@@ -23,49 +23,18 @@ local domain = 's.kokev.de';
     host=domain,
     servicePort=port,
   ),
-  k8s.apps.deployment(
-    name=name,
-    namespace=namespace,
-    spec={
-      containers: [
-        {
-          name: name,
-          image: '%s:%s' % [image.image, image.tag],
-          env: [
-            {
-              name: 'db_url',
-              value: '/data/urls.sqlite',
-            },
-            {
-              name: 'site_url',
-              value: 'https://s.kokev.de',
-            },
-            {
-              name: 'password',
-              valueFrom: {
-                secretKeyRef: {
-                  key: 'password',
-                  name: 'chhoto-secret',
-                },
-              },
-            },
-          ],
-          volumeMounts: [
-            {
-              name: 'chhoto-data',
-              mountPath: '/data',
-            },
-          ],
-        },
-      ],
-      volumes: [
-        {
-          name: 'chhoto-data',
-          hostPath: {
-            path: '/mnt/shared_data/k8s/chhoto/data',
-          },
-        },
-      ],
-    }
-  ),
+  k8s.builder.apps.deployment.new(name, namespace)
+  .withContainer(
+    k8s.builder.apps.container.new(name, image.image, image.tag)
+    .withEnv('db_url', '/data/urls.sqlite')
+    .withEnv('site_url', 'https://s.kokev.de')
+    .withEnvValueFromSecret('password', 'chhoto-secret', 'password')
+    .withMount('chhoto-data', '/data')
+  )
+  .withVolume({
+    name: 'chhoto-data',
+    hostPath: {
+      path: '/mnt/shared_data/k8s/chhoto/data',
+    },
+  }),
 ]

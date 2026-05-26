@@ -12,7 +12,7 @@ local k8s = import 'k8s.libsonnet';
     builder.apps.container
     .new('nginx', nginx.image, nginx.tag)
     .withMount('conf', '/etc/nginx/conf.d/default.conf', 'default.conf')
-    .withRessources('16Mi')
+    .withMemoryRequest('16Mi')
   )
   .withVolume(
     {
@@ -33,4 +33,3 @@ local k8s = import 'k8s.libsonnet';
   .withClusterIP('None')
   .withPort(port=80, name='http'),
 ]
-

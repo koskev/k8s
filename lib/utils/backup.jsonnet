@@ -119,7 +119,7 @@ local influx_image = (import 'images.libsonnet').container.influxdb;
         ])
         .withEnvFromSecret(secret.name)
         .withMount('influx', '/influx')
-        .withRessources('256Mi'),
+        .withMemoryRequest('256Mi'),
       ],
       outerSelf.influxDatabaseSecrets,
     ),
@@ -134,7 +134,7 @@ local influx_image = (import 'images.libsonnet').container.influxdb;
         ])
         .withEnvFromSecret(secret.name)
         .withMount('postgres', '/postgres')
-        .withRessources('256Mi'),
+        .withMemoryRequest('256Mi'),
       ] + (
         if secret.namespace != namespace
         then
