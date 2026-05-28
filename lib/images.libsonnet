@@ -123,7 +123,7 @@
     authentik: {
       chart: 'authentik',
       repoURL: 'https://charts.goauthentik.io',
-      targetRevision: '2026.5.0',
+      targetRevision: '2026.5.2',
     },
     authelia: {
       chart: 'authelia',
