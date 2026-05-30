@@ -20,7 +20,7 @@ local domain = 'grocy.%s' % (import 'globals.libsonnet').domain;
     issuer='kokev-issuer',
   ),
   k8s.builder.apps.deployment.new(name, namespace)
-  .asStatefulSet()
+  .asStatefulSet(name)
   .withContainer(
     k8s.builder.apps.container.new('grocy', image.image, image.tag)
     .withPort(80)

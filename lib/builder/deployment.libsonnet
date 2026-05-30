@@ -16,8 +16,11 @@ local definition = import 'definition.libsonnet';
       },
     },
 
-    asStatefulSet():: self {
+    asStatefulSet(serviceName=null):: self {
       kind: 'StatefulSet',
+      [if serviceName != null then 'spec']+: {
+        serviceName: serviceName,
+      },
     },
 
     withReplicas(replicas)::
