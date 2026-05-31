@@ -2,8 +2,8 @@ local definition = import 'builder/definition.libsonnet';
 
 {
   application:: {
-    new(name, targetnamespace, namespace='argocd'):: self + definition.new('argoproj.io/v1alpha1', 'Application', name, namespace) {
-      spec: {
+    new(name, targetnamespace, namespace='argocd'):: self.withServerSideApply().withAutoSync() + definition.new('argoproj.io/v1alpha1', 'Application', name, namespace) {
+      spec+: {
         project: 'default',
         destination: {
           namespace: targetnamespace,
@@ -12,15 +12,17 @@ local definition = import 'builder/definition.libsonnet';
       },
     },
 
-    withAutoSync():: self.withSpec({
-      syncPolicy+: {
-        syncOptions+: ['CreateNamespace=true'],
-        automated+: {
-          prune: true,
-          selfHeal: true,
+    withAutoSync():: self {
+      spec+: {
+        syncPolicy+: {
+          syncOptions+: ['CreateNamespace=true'],
+          automated+: {
+            prune: true,
+            selfHeal: true,
+          },
         },
       },
-    }),
+    },
 
     withProject(name):: self {
       assert std.isString(name),
