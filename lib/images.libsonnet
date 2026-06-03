@@ -206,7 +206,7 @@
     },
     sanejs: {
       image: 'sbs20/scanservjs',
-      tag: 'v3.0.4@sha256:e42263444a8dd5d533ead7d9eb2ef5fd9ca7a4a80569a6f9c14b7a3c21b9c7ca',
+      tag: '3.1.0@sha256:9436a0a7297bc7493484990ab0ff6b3c5bd23ea26d9c289ebef05be5d84f586a',
     },
     cups: {
       image: 'ydkn/cups',
