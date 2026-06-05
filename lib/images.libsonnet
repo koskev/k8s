@@ -274,7 +274,7 @@
     },
     borg_server: {
       image: 'horaceworblehat/borg-server',
-      tag: '2.8.5@sha256:9ecf168b56984461f317a0cd30e36140c61e7148a22a115ac7e65b307c9a13b2',
+      tag: '2.8.6@sha256:98da306210ea51915ba606bed35fba99a83e6a06f4434a031fa0f4c67f7d1bbb',
     },
     borgmatic: {
       image: 'ghcr.io/borgmatic-collective/borgmatic',
