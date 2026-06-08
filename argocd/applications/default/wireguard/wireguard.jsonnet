@@ -16,6 +16,7 @@ local port = 51820;
     loadBalancerIP=globals.ips.wireguard,
   ),
   k8s.builder.apps.deployment.new(name, namespace)
+  .withReloaderAnnotation()
   .withContainer(
     k8s.builder.apps.container.new('wireguard', image.image, image.tag)
     .withEnv('PUID', '1000')
