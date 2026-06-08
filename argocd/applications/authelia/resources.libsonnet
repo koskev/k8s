@@ -70,7 +70,7 @@ local secret_envs = [
 ]
 ;
 
-local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[], additionalData={}, policy=null) =
+local autheliaApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[], additionalData={}, policy=null) =
   {
     client_id: name,
     client_name: name,
@@ -250,7 +250,7 @@ local authenticApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects
             },
           }],
           clients: [
-            authenticApplication(
+            autheliaApplication(
               app.key,
               redirects=app.value.redirects,
               additionalData=std.get(app.value, 'additionalData', {}),
