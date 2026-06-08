@@ -1,3 +1,4 @@
+local globals = import 'globals.libsonnet';
 local images = import 'images.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local script = import 'script.libsonnet';
@@ -13,25 +14,25 @@ local secretNamePsql = '%s-%s' % [name, name];
 local apps = {
   argocd: {
     redirects: [
-      'https://argocd.kokev.de/api/dex/callback',
+      'https://argocd.%s/api/dex/callback' % globals.domain,
       'https://localhost:8085/auth/callback',
     ],
   },
   openbao: {
     redirects: [
-      'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
-      'https://vault.kokev.de/oidc/callback',
+      'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
+      'https://vault.%s/oidc/callback' % globals.domain,
       'http://localhost:8250/oidc/callback',
     ],
   },
   paperless: {
     redirects: [
-      'https://paperless.kokev.de/accounts/oidc/authelia/login/callback/',
+      'https://paperless.%s/accounts/oidc/authelia/login/callback/' % globals.domain,
     ],
   },
   grafana: {
     redirects: [
-      'https://grafana.kokev.de/login/generic_oauth',
+      'https://grafana.%s/login/generic_oauth' % globals.domain,
     ],
     policy: {
       id_token: ['email', 'name', 'groups', 'preferred_username'],
@@ -226,7 +227,7 @@ local autheliaApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=
       },
       session: {
         cookies: [{
-          domain: 'kokev.de',
+          domain: globals.domain,
           subdomain: 'auth',
         }],
       },

@@ -13,7 +13,7 @@ local namespace = 'immich';
 local database_name = 'immich-db';
 local database_admin_secret = 'cnpg-immich-cluster-admin';
 
-local host = 'immich.kokev.de';
+local host = 'immich.%s' % globals.domain;
 
 
 local storageclass = 'local-%s' % name;

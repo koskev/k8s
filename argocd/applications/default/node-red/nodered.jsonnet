@@ -1,10 +1,11 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.nodered;
+local globals = import 'globals.libsonnet';
 
 local name = 'node-red';
 local namespace = 'default';
 local port = 1880;
-local domain = 'node-red.kokev.de';
+local domain = 'node-red.%s' % globals.domain;
 
 [
   k8s.v1.service(

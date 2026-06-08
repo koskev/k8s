@@ -1,10 +1,11 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.fittrackee;
+local globals = import 'globals.libsonnet';
 
 local name = 'fittrackee';
 local namespace = 'fittrackee';
 
-local host = 'fittrackee.kokev.de';
+local host = 'fittrackee.%s' % globals.domain;
 local port = 5000;
 
 [

@@ -1,6 +1,7 @@
 local argocd = import 'argocd.libsonnet';
 local chart = (import 'images.libsonnet').helm.brouter;
 local image = (import 'images.libsonnet').container.brouter_react;
+local globals = import 'globals.libsonnet';
 
 
 argocd.applicationHelm(
@@ -11,7 +12,7 @@ argocd.applicationHelm(
     ingress: {
       enabled: true,
       ingress_class: 'traefik-external',
-      host: 'brouter.kokev.de',
+      host: 'brouter.%s' % globals.domain,
       tls: {
         enabled: true,
         issuer: 'kokev-issuer',

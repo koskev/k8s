@@ -6,7 +6,7 @@ local globals = import 'globals.libsonnet';
 
 local name = 'paperless-ngx';
 local namespace = 'paperless';
-local hostname = 'paperless.kokev.de';
+local hostname = 'paperless.%s' % globals.domain;
 
 local port = 8000;
 

@@ -33,7 +33,7 @@ local service_name = '%s-service' % name;
   k8s.networking.ingress(
     name='%s-ingress' % name,
     namespace=namespace,
-    host='hass.kokev.de',
+    host='hass.%s' % globals.domain,
     serviceName=service_name,
     servicePort=8123,
     issuer='kokev-issuer',

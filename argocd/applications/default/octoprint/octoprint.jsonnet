@@ -1,5 +1,6 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.octoprint;
+local globals = import 'globals.libsonnet';
 
 local name = 'octoprint';
 local namespace = 'default';
@@ -13,7 +14,7 @@ local port = 5000;
   k8s.networking.ingress(
     name=name,
     namespace=namespace,
-    host='octoprint.kokev.de',
+    host='octoprint.%s' % globals.domain,
     servicePort=port,
   ),
   k8s.apps.statefulSet(

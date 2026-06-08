@@ -1,3 +1,4 @@
+local globals = import 'globals.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local chart = (import 'images.libsonnet').helm.synapse;
 
@@ -38,14 +39,14 @@ local namespace = 'matrix';
           enabled: false,
         },
       },
-      serverName: 'matrix.kokev.de',
+      serverName: 'matrix.%s' % globals.domain,
       ingress: {
         annotations: {
           'cert-manager.io/cluster-issuer': 'kokev-issuer',
         },
         tls: [{
           secretName: 'kokev-matrix-tls',
-          hosts: ['matrix.kokev.de'],
+          hosts: ['matrix.%s' % globals.domain],
         }],
         className: 'traefik-external',
       },

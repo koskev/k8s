@@ -10,7 +10,7 @@ local valkey_name = '%s-valkey' % name;
 local valkey_port = 6379;
 
 local storageclass = 'local-%s' % name;
-local host = 'forgejo.kokev.de';
+local host = 'forgejo.%s' % globals.domain;
 
 [
   k8s.storage.localStorageClass(storageclass),

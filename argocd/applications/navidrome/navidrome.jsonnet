@@ -1,10 +1,12 @@
 local k8s = import 'k8s.libsonnet';
 local navidrome = (import 'images.libsonnet').container.navidrome;
+local globals = import 'globals.libsonnet';
+
 
 local name = 'navidrome';
 local namespace = 'navidrome';
 local port = 4533;
-local host = 'navidrome.kokev.de';
+local host = 'navidrome.%s' % globals.domain;
 
 [
   k8s.v1.namespace(name),

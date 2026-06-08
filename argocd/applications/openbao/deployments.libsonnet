@@ -82,7 +82,7 @@ local adminUser = 'admin';
     ),
     tf.resource('vault_jwt_auth_backend', 'oidc_config', {
       path: 'oidc',
-      oidc_discovery_url: 'https://auth.kokev.de',
+      oidc_discovery_url: 'https://auth.%s' % globals.domain,
       oidc_client_id: 'openbao',
       oidc_client_secret: '${data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]}',
       default_role: adminUser,
@@ -95,8 +95,8 @@ local adminUser = 'admin';
       bound_audiences: ['openbao'],
       oidc_scopes: ['openid', 'profile', 'email', 'groups'],
       allowed_redirect_uris: [
-        'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
-        'https://vault.kokev.de/oidc/callback',
+        'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
+        'https://vault.%s/oidc/callback' % globals.domain,
         'http://localhost:8250/oidc/callback',
       ],
       user_claim: 'sub',

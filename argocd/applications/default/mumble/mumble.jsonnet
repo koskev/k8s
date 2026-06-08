@@ -1,4 +1,5 @@
 local image = (import 'images.libsonnet').container.mumble;
+local globals = import 'globals.libsonnet';
 local k8s = import 'k8s.libsonnet';
 
 local name = 'mumble';
@@ -12,7 +13,7 @@ local namespace = 'default';
     ports=[64738],
     udpPorts=[64738],
     annotations={
-      'external-dns.alpha.kubernetes.io/hostname': 'mumble.kokev.de',
+      'external-dns.alpha.kubernetes.io/hostname': 'mumble.%s' % globals.domain,
     },
     type='LoadBalancer'
   ),

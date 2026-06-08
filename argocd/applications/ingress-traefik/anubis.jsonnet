@@ -1,10 +1,12 @@
+local globals = import 'globals.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local anubis = import 'utils/anubis.libsonnet';
+
 
 local name = 'anubis';
 local namespace = 'anubis';
 [
-  k8s.networking.ingress(name, namespace, host='anubis.kokev.de', servicePort=8080, ingressClass='traefik-external'),
+  k8s.networking.ingress(name, namespace, host='anubis.%s' % globals.domain, servicePort=8080, ingressClass='traefik-external'),
   k8s.builder.core.service.new(name, namespace).withPort(port=8080, name=name),
   k8s.builder.apps.deployment.new(name, namespace).withContainer(
     anubis.anubisContainer(name, port=8080, extraEnv=[
@@ -19,11 +21,11 @@ local namespace = 'anubis';
       //},
       {
         name: 'PUBLIC_URL',
-        value: 'https://anubis.kokev.de',
+        value: 'https://anubis.%s' % globals.domain,
       },
       {
         name: 'COOKIE_DOMAIN',
-        value: 'kokev.de',
+        value: globals.domain,
       },
     ])
 

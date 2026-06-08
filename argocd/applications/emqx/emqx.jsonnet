@@ -7,6 +7,7 @@ local cnpgConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
 local name = 'emqx';
 local namespace = 'emqx';
 local configName = 'emqx-config';
+local domain = 'emqx.%s' % globals.domain;
 
 local secretName = 'emqx-secret';
 k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
@@ -53,14 +54,14 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
         type: 'LoadBalancer',
         loadBalancerIP: globals.ips.emqx,
         annotations: {
-          'external-dns.alpha.kubernetes.io/hostname': 'mqtt.kokev.de',
+          'external-dns.alpha.kubernetes.io/hostname': 'mqtt.%s' % globals.domain,
         },
       },
       ssl: {
         enabled: true,
         useExisting: false,
         dnsnames: [
-          'mqtt.kokev.de',
+          'mqtt.%s' % globals.domain,
         ],
         issuer: {
           name: 'kokev-issuer',
@@ -101,12 +102,12 @@ k8s.secret.secretStoreKubernetes('%s-store' % name, namespace) +
             'cert-manager.io/cluster-issuer': 'kokev-issuer',
           },
           hosts: [
-            'emqx.kokev.de',
+            domain,
           ],
           tls: [
             {
               hosts: [
-                'emqx.kokev.de',
+                domain,
               ],
               secretName: 'emqx-dashboard-tls',
             },

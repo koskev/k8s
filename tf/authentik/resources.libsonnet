@@ -1,3 +1,4 @@
+local globals = import 'globals.libsonnet';
 local tf = import 'tf/tf.libsonnet';
 
 [
@@ -16,22 +17,22 @@ local tf = import 'tf/tf.libsonnet';
 ]
 +
 [
-  tf.provider('authentik', { url: 'https://auth.kokev.de' }),
+  tf.provider('authentik', { url: 'https://auth.%s' % globals.domain }),
   tf.provider('sops', {}),
 ]
 +
 tf.authentik.addApplication(
   'argocd',
   redirect_uris=[
-    'https://argocd.kokev.de/api/dex/callback',
+    'https://argocd.%s/api/dex/callback' % globals.domain,
     'https://localhost:8085/auth/callback',
   ],
   secret_ref='${data.sops_file.argocd_secret.data["dex.authentik.clientSecret"]}',
 )
 +
 tf.authentik.addApplication('openbao', redirect_uris=[
-  'https://vault.kokev.de/ui/vault/auth/oidc/oidc/callback',
-  'https://vault.kokev.de/oidc/callback',
+  'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
+  'https://vault.%s/oidc/callback' % globals.domain,
   'http://localhost:8250/oidc/callback',
 ])
 +

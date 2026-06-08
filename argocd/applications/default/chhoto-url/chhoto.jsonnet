@@ -1,10 +1,11 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.chhoto;
+local globals = import 'globals.libsonnet';
 
 local name = 'chhoto';
 local namespace = 'default';
 local port = 4567;
-local domain = 's.kokev.de';
+local domain = 's.%s' % globals.domain;
 
 [
   k8s.secret.externalSecretExtract(
@@ -27,7 +28,7 @@ local domain = 's.kokev.de';
   .withContainer(
     k8s.builder.apps.container.new(name, image.image, image.tag)
     .withEnv('db_url', '/data/urls.sqlite')
-    .withEnv('site_url', 'https://s.kokev.de')
+    .withEnv('site_url', 'https://%s' % domain)
     .withEnvValueFromSecret('password', 'chhoto-secret', 'password')
     .withMount('chhoto-data', '/data')
   )

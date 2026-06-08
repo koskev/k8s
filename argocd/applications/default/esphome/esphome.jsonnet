@@ -1,10 +1,11 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.esphome;
+local globals = import 'globals.libsonnet';
 
 local name = 'esphome';
 local namespace = 'default';
 local port = 6052;
-local domain = 'esphome.kokev.de';
+local domain = 'esphome.%s' % globals.domain;
 
 [
   k8s.v1.service(

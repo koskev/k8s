@@ -1,3 +1,4 @@
+local globals = import 'globals.libsonnet';
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.borg_server;
 
@@ -74,6 +75,6 @@ local authorized_keys = {
   ,
   k8s.secret.externalSecretExtract(name, namespace, 'borg-server'),
   k8s.v1.service(name, namespace, ports=[sshPort], type='LoadBalancer', annotations={
-    'external-dns.alpha.kubernetes.io/hostname': 'borg.kokev.de',
+    'external-dns.alpha.kubernetes.io/hostname': 'borg.%s' % globals.domain,
   }),
 ]

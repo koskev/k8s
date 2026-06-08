@@ -5,7 +5,7 @@ local globals = import 'globals.libsonnet';
 
 local name = 'authentik';
 local namespace = 'authentik';
-local domain = 'auth.kokev.de';
+local domain = 'auth.%s' % globals.domain;
 
 local secretName = '%s-%s' % [name, name];
 
@@ -74,7 +74,7 @@ local envs = [
   },
   {
     name: 'AUTHENTIK_BOOTSTRAP_EMAIL',
-    value: 'akadmin@kokev.de',
+    value: 'akadmin@%s' % globals.domain,
   },
   {
     name: 'AUTHENTIK_INSECURE',

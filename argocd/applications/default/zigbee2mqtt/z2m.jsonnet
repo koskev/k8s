@@ -5,7 +5,7 @@ local globals = import 'globals.libsonnet';
 
 local name = 'zigbee2mqtt';
 local namespace = 'default';
-local domain = 'zigbee2mqtt.kokev.de';
+local domain = 'zigbee2mqtt.%s' % globals.domain;
 local port = 8080;
 
 local volumes = [{

@@ -1,9 +1,10 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.syncthing;
+local globals = import 'globals.libsonnet';
 
 local name = 'syncthing';
 local namespace = 'default';
-local domain = 'syncthing.kokev.de';
+local domain = 'syncthing.%s' % globals.domain;
 
 local uiport = 8384;
 

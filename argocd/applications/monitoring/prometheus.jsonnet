@@ -103,12 +103,12 @@ local storageclassPrometheus = 'local-prometheus';
             ssl_mode: 'disable',
           },
           server: {
-            root_url: 'https://grafana.kokev.de',
+            root_url: 'https://grafana.%s' % globals.domain,
           },
           smtp: {
             enabled: true,
-            host: 'mail.kokev.de:465',
-            from_address: 'grafana@kokev.de',
+            host: 'mail.%s:465' % globals.domain,
+            from_address: 'grafana@%s' % globals.domain,
           },
           'auth.generic_oauth': {
             name: 'authelia',
@@ -145,12 +145,12 @@ local storageclassPrometheus = 'local-prometheus';
             '/',
           ],
           hosts: [
-            'grafana.kokev.de',
+            'grafana.%s' % globals.domain,
           ],
           tls: [
             {
               hosts: [
-                'grafana.kokev.de',
+                'grafana.%s' % globals.domain,
               ],
               secretName: 'grafana-tls',
             },

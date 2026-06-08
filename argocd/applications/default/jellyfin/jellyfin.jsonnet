@@ -1,10 +1,11 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.jellyfin;
+local globals = import 'globals.libsonnet';
 
 local name = 'jellyfin';
 local namespace = 'default';
 
-local domain = 'jellyfin.kokev.de';
+local domain = 'jellyfin.%s' % globals.domain;
 local port = 8096;
 
 [
