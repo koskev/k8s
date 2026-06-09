@@ -1,6 +1,6 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.zigbee2mqtt;
-local backup = import 'utils/backup.jsonnet';
+local backup = import 'utils/backup.libsonnet';
 local globals = import 'globals.libsonnet';
 
 local name = 'zigbee2mqtt';

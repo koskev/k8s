@@ -1,6 +1,6 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.influxdb;
-local backup = import 'utils/backup.jsonnet';
+local backup = import 'utils/backup.libsonnet';
 local globals = import 'globals.libsonnet';
 
 local name = 'influxdb';

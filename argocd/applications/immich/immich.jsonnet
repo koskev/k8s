@@ -4,7 +4,7 @@ local immich_image = (import 'images.libsonnet').container.immich;
 local immich_machine_learning_image = (import 'images.libsonnet').container.immich_machine_learning;
 local cnpg = import 'database/cnpg.libsonnet';
 local postgres_operator = import 'database/postgres-operator.jsonnet';
-local backup = import 'utils/backup.jsonnet';
+local backup = import 'utils/backup.libsonnet';
 local globals = import 'globals.libsonnet';
 
 local name = 'immich';

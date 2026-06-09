@@ -1,7 +1,7 @@
 local synapse = (import 'images.libsonnet').container.synapse;
 local yqgo = (import 'images.libsonnet').container.yqgo;
 local k8s = import 'k8s.libsonnet';
-local backup = import 'utils/backup.jsonnet';
+local backup = import 'utils/backup.libsonnet';
 local globals = import 'globals.libsonnet';
 
 local name = 'synapse';

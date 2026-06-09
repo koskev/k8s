@@ -1,7 +1,7 @@
 local k8s = import 'k8s.libsonnet';
 local image = (import 'images.libsonnet').container.paperless;
 local valkeyImage = (import 'images.libsonnet').container.valkey;
-local backup = import 'utils/backup.jsonnet';
+local backup = import 'utils/backup.libsonnet';
 local globals = import 'globals.libsonnet';
 
 local name = 'paperless-ngx';
