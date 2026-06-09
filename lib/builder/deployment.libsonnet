@@ -83,9 +83,13 @@ local globals = import 'globals.libsonnet';
       [if init then 'initContainers' else 'containers']+: [container],
     }),
 
-    withVolume(volume):: self.withTemplateSpec({
-      assert std.isObject(volume),
-      volumes+: [volume],
+    withVolume(volume)::
+      assert std.isObject(volume);
+      self.withVolumes([volume]),
+
+    withVolumes(volumes):: self.withTemplateSpec({
+      assert std.isArray(volumes),
+      volumes+: volumes,
     }),
 
     withReloaderAnnotation():: self {

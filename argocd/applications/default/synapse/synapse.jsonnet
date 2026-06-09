@@ -108,144 +108,70 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
       kind: 'SecretStore',
     }
   ),
-  {
-    apiVersion: 'v1',
-    kind: 'Service',
-    metadata: {
-      name: 'synapse-service',
-      namespace: namespace,
-      labels: {
-        app: name,
+  k8s.builder.core.service.new('%s-service' % name, namespace, name)
+  .withPort(80, 8008, 'TCP', 'panel'),
+  k8s.builder.apps.deployment.new(name, namespace)
+  .asStatefulSet('%s-service' % name)
+  .withContainer(
+    k8s.builder.apps.container.new(
+      'prepare-config',
+      yqgo.image,
+      yqgo.tag
+    )
+    .withCommand(['/bin/sh'])
+    .withArgs([
+      '-c',
+      "cp -rL /data/* /out/ && yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/homeserver.yaml /db/config.yaml > /out/homeserver.yaml",
+    ])
+    .withMount(name, '/out/')
+    .withMount(configName, '/data')
+    .withMount('%s-database-uri' % name, '/db')
+    ,
+    init=true
+  )
+  .withContainer(
+    k8s.builder.apps.container.new(name, synapse.image, synapse.tag)
+    .withEnv(
+      'SYNAPSE_CONFIG_PATH',
+      '/etc/synapse/homeserver.yaml',
+    )
+    .withEnv(
+      'UID',
+      '198',
+    )
+    .withEnv(
+      'GID',
+      '198',
+    )
+    .withMount(name, '/etc/synapse')
+    .withMount('datadir', '/DATADIR')
+    .withMount('logdir', '/var/log/synapse')
+    .withPort(8008)
+    .withMemoryRequest('512Mi')
+  )
+  .withVolumes(volumes)
+  .withVolume(
+    {
+      name: configName,
+      secret: {
+        secretName: configName,
       },
     },
-    spec: {
-      selector: {
-        app: name,
-      },
-      ports: [
-        {
-          name: 'panel',
-          protocol: 'TCP',
-          port: 80,
-          targetPort: 8008,
-        },
-      ],
-      type: 'ClusterIP',
+  )
+  .withVolume(
+    {
+      name: name,
+      emptyDir: {},
     },
-  },
-  {
-    apiVersion: 'apps/v1',
-    kind: 'StatefulSet',
-    metadata: {
-      name: 'synapse-deployment',
-      namespace: namespace,
-      labels: {
-        app: name,
+  )
+  .withVolume(
+    {
+      name: '%s-database-uri' % name,
+      secret: {
+        secretName: '%s-database-uri' % name,
       },
     },
-    spec: {
-      serviceName: 'synapse-service',
-      selector: {
-        matchLabels: {
-          app: name,
-        },
-      },
-      template: {
-        metadata: {
-          labels: {
-            app: name,
-          },
-        },
-        spec: {
-          initContainers: [{
-            name: 'prepare-config',
-            image: '%s:%s' % [yqgo.image, yqgo.tag],
-            command: ['/bin/sh'],
-            args: [
-              '-c',
-              "cp -rL /data/* /out/ && yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' /data/homeserver.yaml /db/config.yaml > /out/homeserver.yaml",
-            ],
-            volumeMounts: [
-              {
-                name: name,
-                mountPath: '/out/',
-              },
-              {
-                name: configName,
-                mountPath: '/data',
-              },
-              {
-                name: '%s-database-uri' % name,
-                mountPath: '/db',
-              },
-            ],
-          }],
-          containers: [
-            {
-              image: '%s:%s' % [synapse.image, synapse.tag],
-              name: name,
-              env: [
-                {
-                  name: 'SYNAPSE_CONFIG_PATH',
-                  value: '/etc/synapse/homeserver.yaml',
-                },
-                {
-                  name: 'UID',
-                  value: '198',
-                },
-                {
-                  name: 'GID',
-                  value: '198',
-                },
-              ],
-              volumeMounts: [
-                {
-                  name: name,
-                  mountPath: '/etc/synapse',
-                },
-                {
-                  name: 'datadir',
-                  mountPath: '/DATADIR',
-                },
-                {
-                  name: 'logdir',
-                  mountPath: '/var/log/synapse',
-                },
-              ],
-              ports: [
-                {
-                  containerPort: 8008,
-                },
-              ],
-              resources: {
-                requests: {
-                  memory: '512Mi',
-                },
-              },
-            },
-          ],
-          volumes: volumes + [
-            {
-              name: configName,
-              secret: {
-                secretName: configName,
-              },
-            },
-            {
-              name: name,
-              emptyDir: {},
-            },
-            {
-              name: '%s-database-uri' % name,
-              secret: {
-                secretName: '%s-database-uri' % name,
-              },
-            },
-          ],
-        },
-      },
-    },
-  },
+  ),
 ]
 +
 backup.new(name, namespace)
