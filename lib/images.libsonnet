@@ -113,7 +113,7 @@
     ingress_traefik: {
       chart: 'traefik',
       repoURL: 'https://traefik.github.io/charts',
-      targetRevision: '39.0.9',
+      targetRevision: '40.3.0',
     },
     immich: {
       chart: 'immich',
