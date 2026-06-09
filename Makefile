@@ -10,7 +10,7 @@ all: apply
 # Terraform is so nice that it just blindly overrides symlinks AND hardlinks....
 # Therefore we just copy it back to have any changes in git
 tf-%: login
-	tofu -chdir=$(BUILD_DIR) $*
+	VAULT_ADDR=$(VAULT_ADDR) tofu -chdir=$(BUILD_DIR) $*
 	cp $(BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
 
 
@@ -37,7 +37,7 @@ build: $(TF_JSON_FILES) $(SCRIPT_FILES)
 
 .PHONY: login
 login:
-	bao token lookup || bao login -method=oidc 
+	VAULT_ADDR=$(VAULT_ADDR) bao token lookup || VAULT_ADDR=$(VAULT_ADDR) bao login -method=oidc
 
 .PHONY: apply
 apply: build tf-apply
