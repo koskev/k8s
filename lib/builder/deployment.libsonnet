@@ -1,4 +1,5 @@
 local definition = import 'definition.libsonnet';
+local globals = import 'globals.libsonnet';
 {
   new(name, namespace):: definition.new(name=name, namespace=namespace, kind='Deployment', apiVersion='apps/v1') {
     spec+: {
@@ -16,12 +17,32 @@ local definition = import 'definition.libsonnet';
       },
     },
 
-    asStatefulSet(serviceName=null):: self {
+    asStatefulSet(serviceName=null, withAntiAffinity=true):: self {
       kind: 'StatefulSet',
       [if serviceName != null then 'spec']+: {
         serviceName: serviceName,
       },
-    },
+    } + if withAntiAffinity then {
+      spec+: {
+        template+: {
+          spec+: {
+            affinity+: {
+              nodeAffinity+: {
+                requiredDuringSchedulingIgnoredDuringExecution+: {
+                  nodeSelectorTerms+: [{
+                    matchExpressions+: [{
+                      key: 'kubernetes.io/hostname',
+                      operator: 'NotIn',
+                      values: globals.instable_nodes,
+                    }],
+                  }],
+                },
+              },
+            },
+          },
+        },
+      },
+    } else {},
 
     withReplicas(replicas)::
       assert std.isNumber(replicas);

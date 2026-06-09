@@ -26,4 +26,6 @@
   urls: {
     auth: 'https://auth.%s' % outerSelf.domain,
   },
+  // Nodes that are somehow instable and should not host stateful sets
+  instable_nodes: ['rpi-server'],
 }
