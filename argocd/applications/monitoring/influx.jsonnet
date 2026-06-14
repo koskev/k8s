@@ -15,89 +15,47 @@ local port = 8086;
     namespace=namespace,
     ports=[port],
   ),
-  k8s.apps.statefulSet(
-    name=name,
-    namespace=namespace,
-    serviceName=name,
-    spec={
-      containers: [
-        {
-          name: name,
-          image: '%s:%s' % [image.image, image.tag],
-          ports: [
-            {
-              containerPort: port,
-              protocol: 'TCP',
-            },
-          ],
-          env: [
-            {
-              name: 'DOCKER_INFLUXDB_INIT_MODE',
-              value: 'setup',
-            },
-            {
-              name: 'DOCKER_INFLUXDB_INIT_USERNAME',
-              value: 'admin',
-            },
-            {
-              name: 'DOCKER_INFLUXDB_INIT_PASSWORD',
-              valueFrom: {
-                secretKeyRef: {
-                  name: 'influxdb-secret',
-                  key: 'password',
-                },
-              },
-            },
-            {
-              name: 'DOCKER_INFLUXDB_INIT_ORG',
-              value: 'k8s',
-            },
-            {
-              name: 'DOCKER_INFLUXDB_INIT_BUCKET',
-              value: 'k8s',
-            },
-          ],
-          volumeMounts: [
-            {
-              name: 'influx-data',
-              mountPath: '/var/lib/influxdb2',
-            },
-            {
-              name: 'influx-config',
-              mountPath: '/etc/influxdb2',
-            },
-          ],
-          resources: {
-            requests: {
-              memory: '512Mi',
-            },
-          },
-          livenessProbe: {
-            exec: {
-              command: [
-                'cat',
-                '/var/lib/influxdb2/mount',
-              ],
-            },
-          },
-        },
-      ],
-      volumes: [
-        {
-          name: 'influx-data',
-          hostPath: {
-            path: '/mnt/shared_data/k8s/influx/data',
-          },
-        },
-        {
-          name: 'influx-config',
-          hostPath: {
-            path: '/mnt/shared_data/k8s/influx/config',
-          },
-        },
-      ],
+  k8s.builder.apps.deployment.new(name, namespace)
+  .asStatefulSet(name)
+  .withReplicas(1)
+  .withContainer(
+    k8s.builder.apps.container.new(name, image.image, image.tag)
+    .withPort(port)
+    .withEnv('DOCKER_INFLUXDB_INIT_MODE', 'setup')
+    .withEnv('DOCKER_INFLUXDB_INIT_USERNAME', 'admin')
+    .withEnvValueFromSecret('DOCKER_INFLUXDB_INIT_PASSWORD', 'influxdb-secret', 'password')
+    .withEnv('DOCKER_INFLUXDB_INIT_ORG', 'k8s')
+    .withEnv('DOCKER_INFLUXDB_INIT_BUCKET', 'k8s')
+    .withMount('influx-data', '/var/lib/influxdb2')
+    .withMount('influx-config', '/etc/influxdb2')
+    .withMemoryRequest('512Mi')
+    .withLivenessProbe({
+      exec: {
+        command: [
+          'cat',
+          '/var/lib/influxdb2/mount',
+        ],
+      },
+    })
+  )
+  .withVolume(
+    {
+      name: 'influx-data',
+      hostPath: {
+        path: '/mnt/shared_data/k8s/influx/data',
+      },
     },
+  )
+  .withVolume(
+    {
+      name: 'influx-config',
+      hostPath: {
+        path: '/mnt/shared_data/k8s/influx/config',
+      },
+    },
+
   ),
+
 ]
 +
 backup.new(name, namespace)
