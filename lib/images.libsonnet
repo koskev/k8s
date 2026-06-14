@@ -103,7 +103,7 @@
     metrics_server: {
       chart: 'metrics-server',
       repoURL: 'https://kubernetes-sigs.github.io/metrics-server',
-      targetRevision: '3.13.0',
+      targetRevision: '3.13.1',
     },
     vault_unsealer: {
       chart: 'vault-unsealer',
