@@ -132,3 +132,11 @@ resource "vault_pki_secret_backend_config_issuers" "config" {
   # TODO: Get from data source
   default    = "5099e2cf-1263-31c4-1c00-6a10f712cb62"
 }
+
+resource "vault_pki_secret_backend_role" "glusterfs" {
+  name = "glusterfs_role"
+  backend = vault_mount.glusterfs_pki.path
+  allowed_domains = ["*.lan"]
+  allow_glob_domains = true
+  max_ttl = "43800h" # 5 Years
+}
