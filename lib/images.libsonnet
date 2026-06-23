@@ -162,7 +162,7 @@
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
-      tag: 'v1.6.870@sha256:b9fb72d772eb52b5c7d4c402054c183886ecde07efc59c829c53001542365a81',
+      tag: 'v1.6.870@sha256:1b8164bf736369fae8b65858eb1868212b6ff03aa34f45b427a7b6556f7671e5',
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
