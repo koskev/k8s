@@ -18,7 +18,7 @@
     cert_manager: {
       chart: 'cert-manager',
       repoURL: 'https://charts.jetstack.io',
-      targetRevision: 'v1.20.2',
+      targetRevision: 'v1.20.3',
     },
     cert_manager_desec_http: {
       chart: 'cert-manager-webhook-desec-http',
