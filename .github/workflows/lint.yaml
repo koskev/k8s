@@ -13,15 +13,26 @@ jobs:
       with:
         args: -j lib argocd lib
         entrypoint: grustonnet-lint
+  nix:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+    - name: Install nix
+      uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix flake check
   tflint:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
-    - uses: docker://ghcr.io/terraform-linters/tflint@sha256:b835d64d66abfdbc146694b918eb3cd733ec772465ad511464d4e8bebbdd6732
+    - name: Install nix
+      uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15
       with:
-        args: --chdir tf
-        entrypoint: tflint
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix develop . --command make lint-tf
 name: Lint
 'on':
   pull_request: {}

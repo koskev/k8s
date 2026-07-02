@@ -4,7 +4,6 @@ let
 
   container = {
     grustonnet = "docker://ghcr.io/koskev/grustonnet-ls:v0.6.3@sha256:f160447c45d184d660954b3b4e186e2d35bb1a4307321cdd043f6d83cd132d41";
-    tflint = "docker://ghcr.io/terraform-linters/tflint@sha256:b835d64d66abfdbc146694b918eb3cd733ec772465ad511464d4e8bebbdd6732";
   };
 in
 {
@@ -39,6 +38,13 @@ in
           pull_request = { };
         };
         jobs = {
+          nix.steps = [
+            steps.checkout
+            steps.installNix
+            {
+              run = "nix flake check";
+            }
+          ];
           jsonnet.steps = [
             steps.checkout
             {
@@ -51,12 +57,9 @@ in
           ];
           tflint.steps = [
             steps.checkout
+            steps.installNix
             {
-              uses = container.tflint;
-              "with" = {
-                entrypoint = "tflint";
-                args = "--chdir tf";
-              };
+              run = "nix develop . --command make lint-tf";
             }
           ];
         };

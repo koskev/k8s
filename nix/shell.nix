@@ -2,18 +2,33 @@ _: {
   perSystem =
     { pkgs, ... }:
     {
-      devShells.default = pkgs.mkShell {
-        nativeBuildInputs = with pkgs; [
-          go-jsonnet
-          jq
-          yq
-          opentofu
-          tofu-ls
-          openbao
-          sops
-          authelia
-          gnumake
-        ];
-      };
+      devShells =
+        let
+          sharedDeps = with pkgs; [
+            go-jsonnet
+            gnumake
+            tflint
+            jq
+            gnused
+          ];
+        in
+        {
+          default = pkgs.mkShell {
+            nativeBuildInputs =
+              with pkgs;
+              [
+                yq
+                opentofu
+                tofu-ls
+                openbao
+                sops
+                authelia
+              ]
+              ++ sharedDeps;
+          };
+          test = pkgs.mkShell {
+            nativeBuildInputs = sharedDeps;
+          };
+        };
     };
 }

@@ -39,6 +39,10 @@ build: $(TF_JSON_FILES) $(SCRIPT_FILES)
 login:
 	VAULT_ADDR=$(VAULT_ADDR) bao token lookup || VAULT_ADDR=$(VAULT_ADDR) bao login -method=oidc
 
+.PHONY: lint-tf
+lint-tf: build
+	tflint --chdir $(BUILD_DIR)
+
 .PHONY: apply
 apply: build tf-apply
 
