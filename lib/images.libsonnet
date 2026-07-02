@@ -28,7 +28,7 @@
     external_secrets: {
       chart: 'external-secrets',
       repoURL: 'https://charts.external-secrets.io',
-      targetRevision: '2.6.0',
+      targetRevision: '2.7.0',
     },
     external_postgres_operator: {
       chart: 'ext-postgres-operator',
