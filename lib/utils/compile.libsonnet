@@ -9,7 +9,7 @@
     local array_of_types = std.prune(
       std.filter(
         function(res)
-          std.get(res, '_type', fallback_type) == type, resources
+          std.get(res, '_type', fallback_type) == type, std.flattenDeepArray(resources)
       )
     );
     if type == outerSelf.types.tf then
