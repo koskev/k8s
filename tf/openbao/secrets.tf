@@ -1,14 +1,3 @@
-resource "vault_auth_backend" "kubernetes" {
-  type = "kubernetes"
-}
-
-resource "vault_kubernetes_auth_backend_config" "example" {
-  backend                = vault_auth_backend.kubernetes.path
-  kubernetes_host        = "https://kubernetes.default.svc"
-  issuer                 = "api"
-  disable_iss_validation = "true"
-}
-
 data "sops_file" "secrets" {
   for_each = fileset("${path.module}/secrets", "*/*.{json,yaml}")
   source_file = "secrets/${each.value}"

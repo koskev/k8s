@@ -80,17 +80,23 @@ local adminUser = 'admin';
         },
       },
     ),
+    tf.providers.vault.resource.vaultAuthBackend.new('kubernetes', 'kubernetes'),
+    tf.providers.vault.resource.vaultKubernetesAuthBackendConfig.new('example', 'https://kubernetes.default.svc')
+    .withBackend(tf.providers.vault.resource.vaultAuthBackend.ref('kubernetes').fields.path())
+    .withIssuer('api')
+    .withDisableIssValidation('true')
+    ,
     tf.providers.vault.resource.vaultJwtAuthBackend.new('oidc_config')
     .withPath('oidc')
     .withOidcDiscoveryUrl('https://auth.%s' % globals.domain)
     .withOidcClientId('openbao')
-    .withOidcClientSecret('${data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]}')
+    .withOidcClientSecret(tf.providers.sops.data.sopsFile.ref('openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"]').fields.data('["password"]'))
     .withDefaultRole(adminUser)
     .withType('oidc')
     ,
     tf.providers.vault.resource.vaultJwtAuthBackendRole
     .new('example', adminUser, 'sub')
-    .withBackend('${vault_jwt_auth_backend.oidc_config.path}')
+    .withBackend(tf.providers.vault.resource.vaultJwtAuthBackend.ref('oidc_config').fields.path())
     .withTokenPolicies([adminUser])
     .withBoundAudiences(['openbao'])
     .withOidcScopes(['openid', 'profile', 'email', 'groups'])
