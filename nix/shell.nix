@@ -1,6 +1,6 @@
 _: {
   perSystem =
-    { pkgs, ... }:
+    { pkgs, inputs', ... }:
     {
       devShells =
         let
@@ -23,6 +23,8 @@ _: {
                 openbao
                 sops
                 authelia
+
+                inputs'.terraform-jsonnet-gen.packages.default
               ]
               ++ sharedDeps;
           };

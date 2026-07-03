@@ -11,6 +11,10 @@
       };
     };
     nix-actions.url = "github:koskev/nix-actions";
+    terraform-jsonnet-gen = {
+      url = "github:koskev/terraform-jsonnet-gen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
