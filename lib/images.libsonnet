@@ -118,7 +118,7 @@
     immich: {
       chart: 'immich',
       repoURL: 'ghcr.io/immich-app/immich-charts',
-      targetRevision: '0.12.0',
+      targetRevision: '0.13.1',
     },
     authentik: {
       chart: 'authentik',
