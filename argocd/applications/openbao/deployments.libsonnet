@@ -80,36 +80,37 @@ local adminUser = 'admin';
         },
       },
     ),
-    tf.resource('vault_jwt_auth_backend', 'oidc_config', {
-      path: 'oidc',
-      oidc_discovery_url: 'https://auth.%s' % globals.domain,
-      oidc_client_id: 'openbao',
-      oidc_client_secret: '${data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]}',
-      default_role: adminUser,
-      type: 'oidc',
-    }),
-    tf.resource('vault_jwt_auth_backend_role', 'example', {
-      backend: '${vault_jwt_auth_backend.oidc_config.path}',
-      role_name: adminUser,
-      token_policies: [adminUser],
-      bound_audiences: ['openbao'],
-      oidc_scopes: ['openid', 'profile', 'email', 'groups'],
-      allowed_redirect_uris: [
-        'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
-        'https://vault.%s/oidc/callback' % globals.domain,
-        'http://localhost:8250/oidc/callback',
-      ],
-      user_claim: 'sub',
-      groups_claim: 'groups',
-      bound_claims: { groups: 'admins' },
-    }),
-    tf.resource('vault_policy', adminUser, {
-      name: adminUser,
-      policy: |||
+    tf.providers.vault.resource.vaultJwtAuthBackend.new('oidc_config')
+    .withPath('oidc')
+    .withOidcDiscoveryUrl('https://auth.%s' % globals.domain)
+    .withOidcClientId('openbao')
+    .withOidcClientSecret('${data.sops_file.openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"].data["password"]}')
+    .withDefaultRole(adminUser)
+    .withType('oidc')
+    ,
+    tf.providers.vault.resource.vaultJwtAuthBackendRole
+    .new('example', 'sub', adminUser)
+    .withBackend('${vault_jwt_auth_backend.oidc_config.path}')
+    .withTokenPolicies([adminUser])
+    .withBoundAudiences(['openbao'])
+    .withOidcScopes(['openid', 'profile', 'email', 'groups'])
+    .withAllowedRedirectUris([
+      'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
+      'https://vault.%s/oidc/callback' % globals.domain,
+      'http://localhost:8250/oidc/callback',
+    ])
+    .withGroupsClaim('groups')
+    .withBoundClaims({ groups: 'admins' })
+    ,
+    tf.providers.vault.resource.vaultPolicy.new(
+      adminUser,
+      policy=
+      |||
         path "*" {
           capabilities = ["read", "create", "list", "update", "patch", "update", "delete", "sudo"]
         }
       |||,
-    }),
+      name=adminUser,
+    ),
   ],
 }

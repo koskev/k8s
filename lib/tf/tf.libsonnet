@@ -2,6 +2,8 @@ local compiler = import 'utils/compile.libsonnet';
 {
   local outerSelf = self,
   local tf = self,
+
+  providers:: (import 'vendor/modules.libsonnet'),
   base(type, resource, name, body):: {
     _type:: compiler.types.tf,
     [type]+: {
