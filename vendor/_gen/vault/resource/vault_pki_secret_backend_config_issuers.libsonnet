@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
     withBackend(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDefault': { 'function': { help: |||
+    '#withDefault':: { 'function': { help: |||
       Specifies the default issuer by ID. 
     ||| } },
     withDefault(value):: self {
@@ -22,7 +22,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { default: value } },
       },
     },
-    '#withDefaultFollowsLatestIssuer': { 'function': { help: |||
+    '#withDefaultFollowsLatestIssuer':: { 'function': { help: |||
       Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer. 
     ||| } },
     withDefaultFollowsLatestIssuer(value):: self {
@@ -35,7 +35,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

@@ -7,7 +7,7 @@
         serial: serial,
       } },
     },
-    '#withCertMetadata': { 'function': { help: |||
+    '#withCertMetadata':: { 'function': { help: |||
       The metadata returned from Vault 
     ||| } },
     withCertMetadata(value):: self {
@@ -15,7 +15,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { cert_metadata: value } },
       },
     },
-    '#withExpiration': { 'function': { help: |||
+    '#withExpiration':: { 'function': { help: |||
       The certificate expiration as a Unix-style timestamp. 
     ||| } },
     withExpiration(value):: self {
@@ -28,7 +28,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuerId': { 'function': { help: |||
+    '#withIssuerId':: { 'function': { help: |||
       ID of the issuer. 
     ||| } },
     withIssuerId(value):: self {
@@ -36,7 +36,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { issuer_id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
     withPath(value):: self {
@@ -52,7 +52,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       The role that issued the certificate 
     ||| } },
     withRole(value):: self {
@@ -60,7 +60,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSerial': { 'function': { help: |||
+    '#withSerial':: { 'function': { help: |||
       Specifies the serial of the certificate whose metadata to read. 
     ||| } },
     withSerial(value):: self {
@@ -68,7 +68,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { serial: value } },
       },
     },
-    '#withSerialNumber': { 'function': { help: |||
+    '#withSerialNumber':: { 'function': { help: |||
       The certificate serial number 
     ||| } },
     withSerialNumber(value):: self {

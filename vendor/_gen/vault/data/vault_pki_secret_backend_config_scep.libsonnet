@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withAllowedDigestAlgorithms': { 'function': { help: |||
+    '#withAllowedDigestAlgorithms':: { 'function': { help: |||
       List of allowed digest algorithms for SCEP requests 
     ||| } },
     withAllowedDigestAlgorithms(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { allowed_digest_algorithms: value } },
       },
     },
-    '#withAllowedEncryptionAlgorithms': { 'function': { help: |||
+    '#withAllowedEncryptionAlgorithms':: { 'function': { help: |||
       List of allowed encryption algorithms for SCEP requests 
     ||| } },
     withAllowedEncryptionAlgorithms(value):: self {
@@ -22,7 +22,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { allowed_encryption_algorithms: value } },
       },
     },
-    '#withAuthenticators': { 'function': { help: |||
+    '#withAuthenticators':: { 'function': { help: |||
       Lists the mount accessors SCEP should delegate authentication requests towards 
     ||| } },
     withAuthenticators(value):: self {
@@ -30,7 +30,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { authenticators: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Path where PKI engine is mounted 
     ||| } },
     withBackend(value):: self {
@@ -38,7 +38,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDefaultPathPolicy': { 'function': { help: |||
+    '#withDefaultPathPolicy':: { 'function': { help: |||
       Specifies the policy to be used for non-role-qualified SCEP requests; valid values are 'sign-verbatim', or "role:<role_name>" to specify a role to use as this policy. 
     ||| } },
     withDefaultPathPolicy(value):: self {
@@ -46,7 +46,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { default_path_policy: value } },
       },
     },
-    '#withEnabled': { 'function': { help: |||
+    '#withEnabled':: { 'function': { help: |||
       Specifies whether SCEP is enabled 
     ||| } },
     withEnabled(value):: self {
@@ -54,7 +54,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { enabled: value } },
       },
     },
-    '#withExternalValidation': { 'function': { help: |||
+    '#withExternalValidation':: { 'function': { help: |||
       Lists the 3rd party validation of SCEP requests 
     ||| } },
     withExternalValidation(value):: self {
@@ -67,7 +67,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLastUpdated': { 'function': { help: |||
+    '#withLastUpdated':: { 'function': { help: |||
       A read-only timestamp representing the last time the configuration was updated 
     ||| } },
     withLastUpdated(value):: self {
@@ -75,7 +75,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { last_updated: value } },
       },
     },
-    '#withLogLevel': { 'function': { help: |||
+    '#withLogLevel':: { 'function': { help: |||
       The level of logging verbosity, affects only SCEP logs on this mount 
     ||| } },
     withLogLevel(value):: self {
@@ -83,7 +83,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { log_level: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -91,7 +91,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRestrictCaChainToIssuer': { 'function': { help: |||
+    '#withRestrictCaChainToIssuer':: { 'function': { help: |||
       If true, only return the issuer CA, otherwise the entire CA certificate chain will be returned if available from the PKI mount 
     ||| } },
     withRestrictCaChainToIssuer(value):: self {

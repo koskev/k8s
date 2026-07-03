@@ -10,7 +10,7 @@
         kubernetes_token_request_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withToken': { 'function': { help: |||
+    '#withToken':: { 'function': { help: |||
       Token is the opaque bearer token. 
     ||| } },
     withToken(value):: self {

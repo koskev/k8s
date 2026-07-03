@@ -7,7 +7,7 @@
         key_name: key_name,
       } },
     },
-    '#withAllowedClientId': { 'function': { help: |||
+    '#withAllowedClientId':: { 'function': { help: |||
       Role Client ID allowed to use the key for signing. 
     ||| } },
     withAllowedClientId(value):: self {
@@ -20,7 +20,7 @@
         vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyName': { 'function': { help: |||
+    '#withKeyName':: { 'function': { help: |||
       Name of the key. 
     ||| } },
     withKeyName(value):: self {
@@ -28,7 +28,7 @@
         vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { key_name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

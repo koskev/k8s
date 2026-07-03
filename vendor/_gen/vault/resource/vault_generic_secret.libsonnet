@@ -7,7 +7,7 @@
         path: path,
       } },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       Map of strings read from Vault. 
     ||| } },
     withData(value):: self {
@@ -15,7 +15,7 @@
         vault_generic_secret+: { [terraformName]+: { data: value } },
       },
     },
-    '#withDataJson': { 'function': { help: |||
+    '#withDataJson':: { 'function': { help: |||
       JSON-encoded secret data to write. 
     ||| } },
     withDataJson(value):: self {
@@ -23,7 +23,7 @@
         vault_generic_secret+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withDeleteAllVersions': { 'function': { help: |||
+    '#withDeleteAllVersions':: { 'function': { help: |||
       Only applicable for kv-v2 stores. If set, permanently deletes all versions for the specified key. 
     ||| } },
     withDeleteAllVersions(value):: self {
@@ -31,7 +31,7 @@
         vault_generic_secret+: { [terraformName]+: { delete_all_versions: value } },
       },
     },
-    '#withDisableRead': { 'function': { help: |||
+    '#withDisableRead':: { 'function': { help: |||
       Don't attempt to read the token from Vault if true; drift won't be detected. 
     ||| } },
     withDisableRead(value):: self {
@@ -44,7 +44,7 @@
         vault_generic_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -52,7 +52,7 @@
         vault_generic_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Full path where the generic secret will be written. 
     ||| } },
     withPath(value):: self {

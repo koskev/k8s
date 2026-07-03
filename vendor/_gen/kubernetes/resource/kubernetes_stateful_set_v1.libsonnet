@@ -10,7 +10,7 @@
         kubernetes_stateful_set_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withWaitForRollout': { 'function': { help: |||
+    '#withWaitForRollout':: { 'function': { help: |||
       Wait for the rollout of the stateful set to complete. Defaults to true. 
     ||| } },
     withWaitForRollout(value):: self {

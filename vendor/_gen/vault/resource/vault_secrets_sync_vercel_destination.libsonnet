@@ -9,7 +9,7 @@
         project_id: project_id,
       } },
     },
-    '#withAccessToken': { 'function': { help: |||
+    '#withAccessToken':: { 'function': { help: |||
       Vercel API access token with the permissions to manage environment variables. 
     ||| } },
     withAccessToken(value):: self {
@@ -17,7 +17,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { access_token: value } },
       },
     },
-    '#withAllowedIpv4Addresses': { 'function': { help: |||
+    '#withAllowedIpv4Addresses':: { 'function': { help: |||
       Set of allowed IPv4 addresses in CIDR notation (e.g., 192.168.1.1/32) for outbound connections from Vault to the destination. If not set, all IPv4 addresses are allowed. 
     ||| } },
     withAllowedIpv4Addresses(value):: self {
@@ -25,7 +25,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ipv4_addresses: value } },
       },
     },
-    '#withAllowedIpv6Addresses': { 'function': { help: |||
+    '#withAllowedIpv6Addresses':: { 'function': { help: |||
       Set of allowed IPv6 addresses in CIDR notation (e.g., 2001:db8::1/128) for outbound connections from Vault to the destination. If not set, all IPv6 addresses are allowed. 
     ||| } },
     withAllowedIpv6Addresses(value):: self {
@@ -33,7 +33,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ipv6_addresses: value } },
       },
     },
-    '#withAllowedPorts': { 'function': { help: |||
+    '#withAllowedPorts':: { 'function': { help: |||
       Set of allowed ports for outbound connections from Vault to the destination. If not set, all ports are allowed. 
     ||| } },
     withAllowedPorts(value):: self {
@@ -41,7 +41,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ports: value } },
       },
     },
-    '#withDeploymentEnvironments': { 'function': { help: |||
+    '#withDeploymentEnvironments':: { 'function': { help: |||
       Deployment environments where the environment variables are available. Accepts 'development', 'preview' & 'production'. 
     ||| } },
     withDeploymentEnvironments(value):: self {
@@ -49,7 +49,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { deployment_environments: value } },
       },
     },
-    '#withDisableStrictNetworking': { 'function': { help: |||
+    '#withDisableStrictNetworking':: { 'function': { help: |||
       If set to true, disables strict networking enforcement for this destination. When disabled, Vault will not enforce allowed IP addresses and ports. 
     ||| } },
     withDisableStrictNetworking(value):: self {
@@ -57,7 +57,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { disable_strict_networking: value } },
       },
     },
-    '#withGranularity': { 'function': { help: |||
+    '#withGranularity':: { 'function': { help: |||
       Determines what level of information is synced as a distinct resource at the destination. Can be 'secret-path' or 'secret-key' 
     ||| } },
     withGranularity(value):: self {
@@ -70,7 +70,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Unique name of the Vercel destination. 
     ||| } },
     withName(value):: self {
@@ -78,7 +78,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -86,7 +86,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withProjectId': { 'function': { help: |||
+    '#withProjectId':: { 'function': { help: |||
       Project ID where to manage environment variables. 
     ||| } },
     withProjectId(value):: self {
@@ -94,7 +94,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { project_id: value } },
       },
     },
-    '#withSecretNameTemplate': { 'function': { help: |||
+    '#withSecretNameTemplate':: { 'function': { help: |||
       Template describing how to generate external secret names. 
     ||| } },
     withSecretNameTemplate(value):: self {
@@ -102,7 +102,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { secret_name_template: value } },
       },
     },
-    '#withTeamId': { 'function': { help: |||
+    '#withTeamId':: { 'function': { help: |||
       Team ID the project belongs to. 
     ||| } },
     withTeamId(value):: self {
@@ -110,7 +110,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { team_id: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Type of secrets destination. 
     ||| } },
     withType(value):: self {

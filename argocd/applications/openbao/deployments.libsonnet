@@ -89,7 +89,7 @@ local adminUser = 'admin';
     .withType('oidc')
     ,
     tf.providers.vault.resource.vaultJwtAuthBackendRole
-    .new('example', 'sub', adminUser)
+    .new('example', adminUser, 'sub')
     .withBackend('${vault_jwt_auth_backend.oidc_config.path}')
     .withTokenPolicies([adminUser])
     .withBoundAudiences(['openbao'])

@@ -4,7 +4,7 @@ _type:: 'tf',
 resource+: {
 kubernetes_certificate_signing_request_v1+: { [terraformName]+: {
 }}},
-'#withAutoApprove': { 'function': { help: |||
+'#withAutoApprove':: { 'function': { help: |||
  Automatically approve the CertificateSigningRequest 
 ||| } },
 withAutoApprove(value):: self {
@@ -12,7 +12,7 @@ resource+: {
             kubernetes_certificate_signing_request_v1+: { [terraformName]+: { 'auto_approve': value } },
         },
 },
-'#withCertificate': { 'function': { help: |||
+'#withCertificate':: { 'function': { help: |||
  certificate is populated with an issued certificate by the signer after an Approved condition is present. This field is set via the /status subresource. Once populated, this field is immutable.
 
 If the certificate signing request is denied, a condition of type "Denied" is added and this field remains empty. If the signer cannot issue the certificate, a condition of type "Failed" is added and this field remains empty.

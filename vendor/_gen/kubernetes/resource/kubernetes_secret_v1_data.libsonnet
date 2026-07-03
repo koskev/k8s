@@ -6,7 +6,7 @@
         data: data,
       } },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       Data to be stored in the Kubernetes Secret. 
     ||| } },
     withData(value):: self {
@@ -14,7 +14,7 @@
         kubernetes_secret_v1_data+: { [terraformName]+: { data: value } },
       },
     },
-    '#withFieldManager': { 'function': { help: |||
+    '#withFieldManager':: { 'function': { help: |||
       Set the name of the field manager for the specified labels 
     ||| } },
     withFieldManager(value):: self {
@@ -22,7 +22,7 @@
         kubernetes_secret_v1_data+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce': { 'function': { help: |||
+    '#withForce':: { 'function': { help: |||
       Flag to force updates to the Kubernetes Secret. 
     ||| } },
     withForce(value):: self {

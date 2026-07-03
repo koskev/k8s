@@ -8,7 +8,7 @@
         labels: labels,
       } },
     },
-    '#withApiVersion': { 'function': { help: |||
+    '#withApiVersion':: { 'function': { help: |||
       The apiVersion of the resource to label. 
     ||| } },
     withApiVersion(value):: self {
@@ -16,7 +16,7 @@
         kubernetes_labels+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withFieldManager': { 'function': { help: |||
+    '#withFieldManager':: { 'function': { help: |||
       Set the name of the field manager for the specified labels. 
     ||| } },
     withFieldManager(value):: self {
@@ -24,7 +24,7 @@
         kubernetes_labels+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce': { 'function': { help: |||
+    '#withForce':: { 'function': { help: |||
       Force overwriting labels that were created or edited outside of Terraform. 
     ||| } },
     withForce(value):: self {
@@ -37,7 +37,7 @@
         kubernetes_labels+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKind': { 'function': { help: |||
+    '#withKind':: { 'function': { help: |||
       The kind of the resource to label. 
     ||| } },
     withKind(value):: self {
@@ -45,7 +45,7 @@
         kubernetes_labels+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withLabels': { 'function': { help: |||
+    '#withLabels':: { 'function': { help: |||
       A map of labels to apply to the resource. 
     ||| } },
     withLabels(value):: self {

@@ -6,7 +6,7 @@
         max_ttl: max_ttl,
       } },
     },
-    '#withId': { 'function': { help: |||
+    '#withId':: { 'function': { help: |||
       The resource ID. 
     ||| } },
     withId(value):: self {
@@ -14,7 +14,7 @@
         vault_config_control_group+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl': { 'function': { help: |||
+    '#withMaxTtl':: { 'function': { help: |||
       The maximum ttl for a control group wrapping token. This can be provided in seconds or duration (for example, 2h). 
     ||| } },
     withMaxTtl(value):: self {
@@ -22,7 +22,7 @@
         vault_config_control_group+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

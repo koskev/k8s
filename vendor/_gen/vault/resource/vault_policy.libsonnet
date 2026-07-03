@@ -7,7 +7,7 @@
         policy: policy,
       } },
     },
-    '#withAllowOverwrite': { 'function': { help: |||
+    '#withAllowOverwrite':: { 'function': { help: |||
       Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes. 
     ||| } },
     withAllowOverwrite(value):: self {
@@ -20,7 +20,7 @@
         vault_policy+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the policy 
     ||| } },
     withName(value):: self {
@@ -28,7 +28,7 @@
         vault_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_policy+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicy': { 'function': { help: |||
+    '#withPolicy':: { 'function': { help: |||
       The policy document 
     ||| } },
     withPolicy(value):: self {

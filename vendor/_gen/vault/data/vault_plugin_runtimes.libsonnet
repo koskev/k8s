@@ -5,7 +5,7 @@
       vault_plugin_runtimes+: { [terraformName]+: {
       } },
     },
-    '#withId': { 'function': { help: |||
+    '#withId':: { 'function': { help: |||
       Unique identifier for this data source. 
     ||| } },
     withId(value):: self {
@@ -13,7 +13,7 @@
         vault_plugin_runtimes+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -21,7 +21,7 @@
         vault_plugin_runtimes+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRuntimes': { 'function': { help: |||
+    '#withRuntimes':: { 'function': { help: |||
       List of plugin runtimes. 
     ||| } },
     withRuntimes(value):: self {
@@ -29,7 +29,7 @@
         vault_plugin_runtimes+: { [terraformName]+: { runtimes: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Specifies the plugin runtime type to list. Currently only `container` is supported. 
     ||| } },
     withType(value):: self {

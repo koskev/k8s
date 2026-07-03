@@ -6,7 +6,7 @@
         source: source,
       } },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       Decrypted data 
     ||| } },
     withData(value):: self {
@@ -14,7 +14,7 @@
         sops_external+: { [terraformName]+: { data: value } },
       },
     },
-    '#withId': { 'function': { help: |||
+    '#withId':: { 'function': { help: |||
       Unique identifier for this data source 
     ||| } },
     withId(value):: self {
@@ -22,7 +22,7 @@
         sops_external+: { [terraformName]+: { id: value } },
       },
     },
-    '#withInputType': { 'function': { help: |||
+    '#withInputType':: { 'function': { help: |||
       `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data. 
     ||| } },
     withInputType(value):: self {
@@ -30,7 +30,7 @@
         sops_external+: { [terraformName]+: { input_type: value } },
       },
     },
-    '#withRaw': { 'function': { help: |||
+    '#withRaw':: { 'function': { help: |||
       Raw decrypted content 
     ||| } },
     withRaw(value):: self {
@@ -38,7 +38,7 @@
         sops_external+: { [terraformName]+: { raw: value } },
       },
     },
-    '#withSource': { 'function': { help: |||
+    '#withSource':: { 'function': { help: |||
       A string with sops-encrypted data 
     ||| } },
     withSource(value):: self {

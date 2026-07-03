@@ -13,7 +13,7 @@
         vault_plugin_pinned_version+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the plugin. 
     ||| } },
     withName(value):: self {
@@ -21,7 +21,7 @@
         vault_plugin_pinned_version+: { [terraformName]+: { name: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Type of plugin; one of "auth", "secret", or "database". 
     ||| } },
     withType(value):: self {
@@ -29,7 +29,7 @@
         vault_plugin_pinned_version+: { [terraformName]+: { type: value } },
       },
     },
-    '#withVersion': { 'function': { help: |||
+    '#withVersion':: { 'function': { help: |||
       Semantic pinned plugin version. 
     ||| } },
     withVersion(value):: self {

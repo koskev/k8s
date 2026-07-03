@@ -6,7 +6,7 @@
         name: name,
       } },
     },
-    '#withAllowedClientIds': { 'function': { help: |||
+    '#withAllowedClientIds':: { 'function': { help: |||
       The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed. 
     ||| } },
     withAllowedClientIds(value):: self {
@@ -14,7 +14,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { allowed_client_ids: value } },
       },
     },
-    '#withHttpsEnabled': { 'function': { help: |||
+    '#withHttpsEnabled':: { 'function': { help: |||
       Set to true if the issuer endpoint uses HTTPS. 
     ||| } },
     withHttpsEnabled(value):: self {
@@ -27,7 +27,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuer': { 'function': { help: |||
+    '#withIssuer':: { 'function': { help: |||
       Specifies what will be used as the 'scheme://host:port' component for the 'iss' claim of ID tokens.This value is computed using the issuer_host and https_enabled fields. 
     ||| } },
     withIssuer(value):: self {
@@ -35,7 +35,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { issuer: value } },
       },
     },
-    '#withIssuerHost': { 'function': { help: |||
+    '#withIssuerHost':: { 'function': { help: |||
       The host for the issuer. Can be either host or host:port. 
     ||| } },
     withIssuerHost(value):: self {
@@ -43,7 +43,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { issuer_host: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the provider. 
     ||| } },
     withName(value):: self {
@@ -51,7 +51,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -59,7 +59,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withScopesSupported': { 'function': { help: |||
+    '#withScopesSupported':: { 'function': { help: |||
       The scopes available for requesting on the provider. 
     ||| } },
     withScopesSupported(value):: self {

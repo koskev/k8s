@@ -5,7 +5,7 @@
       kubernetes_default_service_account_v1+: { [terraformName]+: {
       } },
     },
-    '#withAutomountServiceAccountToken': { 'function': { help: |||
+    '#withAutomountServiceAccountToken':: { 'function': { help: |||
       Enable automatic mounting of the service account token 
     ||| } },
     withAutomountServiceAccountToken(value):: self {

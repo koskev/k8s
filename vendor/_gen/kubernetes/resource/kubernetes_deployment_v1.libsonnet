@@ -10,7 +10,7 @@
         kubernetes_deployment_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withWaitForRollout': { 'function': { help: |||
+    '#withWaitForRollout':: { 'function': { help: |||
       Wait for the rollout of the deployment to complete. Defaults to true. 
     ||| } },
     withWaitForRollout(value):: self {

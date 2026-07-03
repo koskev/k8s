@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The path of the PKI secret backend the resource belongs to. 
     ||| } },
     withBackend(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_config_urls+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCrlDistributionPoints': { 'function': { help: |||
+    '#withCrlDistributionPoints':: { 'function': { help: |||
       Specifies the URL values for the CRL Distribution Points field. 
     ||| } },
     withCrlDistributionPoints(value):: self {
@@ -22,7 +22,7 @@
         vault_pki_secret_backend_config_urls+: { [terraformName]+: { crl_distribution_points: value } },
       },
     },
-    '#withEnableTemplating': { 'function': { help: |||
+    '#withEnableTemplating':: { 'function': { help: |||
       Specifies that templating of AIA fields is allowed. 
     ||| } },
     withEnableTemplating(value):: self {
@@ -35,7 +35,7 @@
         vault_pki_secret_backend_config_urls+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuingCertificates': { 'function': { help: |||
+    '#withIssuingCertificates':: { 'function': { help: |||
       Specifies the URL values for the Issuing Certificate field. 
     ||| } },
     withIssuingCertificates(value):: self {
@@ -43,7 +43,7 @@
         vault_pki_secret_backend_config_urls+: { [terraformName]+: { issuing_certificates: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -51,7 +51,7 @@
         vault_pki_secret_backend_config_urls+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOcspServers': { 'function': { help: |||
+    '#withOcspServers':: { 'function': { help: |||
       Specifies the URL values for the OCSP Servers field. 
     ||| } },
     withOcspServers(value):: self {

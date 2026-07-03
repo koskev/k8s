@@ -9,7 +9,7 @@
         secret_wo_version: secret_wo_version,
       } },
     },
-    '#withAliasMetadata': { 'function': { help: |||
+    '#withAliasMetadata':: { 'function': { help: |||
       A map of string to string that will be set as metadata on the identity alias 
     ||| } },
     withAliasMetadata(value):: self {
@@ -17,7 +17,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withDialTimeout': { 'function': { help: |||
+    '#withDialTimeout':: { 'function': { help: |||
       Number of seconds to wait for a backend connection before timing out. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
     ||| } },
     withDialTimeout(value):: self {
@@ -25,7 +25,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { dial_timeout: value } },
       },
     },
-    '#withHost': { 'function': { help: |||
+    '#withHost':: { 'function': { help: |||
       The RADIUS server to connect to. Examples: `radius.myorg.com`, `127.0.0.1`. 
     ||| } },
     withHost(value):: self {
@@ -33,7 +33,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { host: value } },
       },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       Path of the enabled RADIUS auth backend mount to configure. 
     ||| } },
     withMount(value):: self {
@@ -41,7 +41,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -49,7 +49,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNasIdentifier': { 'function': { help: |||
+    '#withNasIdentifier':: { 'function': { help: |||
       The NAS-Identifier attribute of the RADIUS request. This is a read-only field returned by Vault. 
     ||| } },
     withNasIdentifier(value):: self {
@@ -57,7 +57,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { nas_identifier: value } },
       },
     },
-    '#withNasPort': { 'function': { help: |||
+    '#withNasPort':: { 'function': { help: |||
       The NAS-Port attribute of the RADIUS request. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
     ||| } },
     withNasPort(value):: self {
@@ -65,7 +65,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { nas_port: value } },
       },
     },
-    '#withPort': { 'function': { help: |||
+    '#withPort':: { 'function': { help: |||
       The UDP port where the RADIUS server is listening on. Defaults to `1812`. 
     ||| } },
     withPort(value):: self {
@@ -73,7 +73,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { port: value } },
       },
     },
-    '#withReadTimeout': { 'function': { help: |||
+    '#withReadTimeout':: { 'function': { help: |||
       Number of seconds to wait for a response from the RADIUS server. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
     ||| } },
     withReadTimeout(value):: self {
@@ -81,7 +81,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { read_timeout: value } },
       },
     },
-    '#withSecretWo': { 'function': { help: |||
+    '#withSecretWo':: { 'function': { help: |||
       The RADIUS shared secret. This is a write-only field and will not be read back from Vault. 
     ||| } },
     withSecretWo(value):: self {
@@ -89,7 +89,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { secret_wo: value } },
       },
     },
-    '#withSecretWoVersion': { 'function': { help: |||
+    '#withSecretWoVersion':: { 'function': { help: |||
       Version counter for the write-only `secret_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the secret changes. Increment this value whenever you update `secret_wo` so Terraform detects the change and applies an update. 
     ||| } },
     withSecretWoVersion(value):: self {
@@ -97,7 +97,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { secret_wo_version: value } },
       },
     },
-    '#withTokenBoundCidrs': { 'function': { help: |||
+    '#withTokenBoundCidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token 
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -105,7 +105,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl': { 'function': { help: |||
+    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds 
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -113,7 +113,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl': { 'function': { help: |||
+    '#withTokenMaxTtl':: { 'function': { help: |||
       The maximum lifetime of the generated token 
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -121,7 +121,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy': { 'function': { help: |||
+    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens 
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -129,7 +129,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses': { 'function': { help: |||
+    '#withTokenNumUses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited 
     ||| } },
     withTokenNumUses(value):: self {
@@ -137,7 +137,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod': { 'function': { help: |||
+    '#withTokenPeriod':: { 'function': { help: |||
       Generated Token's Period 
     ||| } },
     withTokenPeriod(value):: self {
@@ -145,7 +145,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies': { 'function': { help: |||
+    '#withTokenPolicies':: { 'function': { help: |||
       Generated Token's Policies 
     ||| } },
     withTokenPolicies(value):: self {
@@ -153,7 +153,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl': { 'function': { help: |||
+    '#withTokenTtl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds 
     ||| } },
     withTokenTtl(value):: self {
@@ -161,7 +161,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType': { 'function': { help: |||
+    '#withTokenType':: { 'function': { help: |||
       The type of token to generate, service or batch 
     ||| } },
     withTokenType(value):: self {
@@ -169,7 +169,7 @@
         vault_radius_auth_backend+: { [terraformName]+: { token_type: value } },
       },
     },
-    '#withUnregisteredUserPolicies': { 'function': { help: |||
+    '#withUnregisteredUserPolicies':: { 'function': { help: |||
       A set of policies to be granted to unregistered users. 
     ||| } },
     withUnregisteredUserPolicies(value):: self {

@@ -5,7 +5,7 @@
       vault_policy_document+: { [terraformName]+: {
       } },
     },
-    '#withHcl': { 'function': { help: |||
+    '#withHcl':: { 'function': { help: |||
       The above arguments serialized as a standard Vault HCL policy document. 
     ||| } },
     withHcl(value):: self {
@@ -18,7 +18,7 @@
         vault_policy_document+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

@@ -5,7 +5,7 @@
       vault_auth_backends+: { [terraformName]+: {
       } },
     },
-    '#withAccessors': { 'function': { help: |||
+    '#withAccessors':: { 'function': { help: |||
       The accessors of the auth backends. 
     ||| } },
     withAccessors(value):: self {
@@ -18,7 +18,7 @@
         vault_auth_backends+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -26,7 +26,7 @@
         vault_auth_backends+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPaths': { 'function': { help: |||
+    '#withPaths':: { 'function': { help: |||
       The auth backend mount points. 
     ||| } },
     withPaths(value):: self {
@@ -34,7 +34,7 @@
         vault_auth_backends+: { [terraformName]+: { paths: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       The type of the auth backend. 
     ||| } },
     withType(value):: self {

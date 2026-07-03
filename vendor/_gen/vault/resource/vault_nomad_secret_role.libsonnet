@@ -7,7 +7,7 @@
         role: role,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The mount path for the Nomad backend. 
     ||| } },
     withBackend(value):: self {
@@ -15,7 +15,7 @@
         vault_nomad_secret_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withGlobal': { 'function': { help: |||
+    '#withGlobal':: { 'function': { help: |||
       Specifies if the token should be global. 
     ||| } },
     withGlobal(value):: self {
@@ -28,7 +28,7 @@
         vault_nomad_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_nomad_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Comma separated list of Nomad policies the token is going to be created against. These need to be created beforehand in Nomad. 
     ||| } },
     withPolicies(value):: self {
@@ -44,7 +44,7 @@
         vault_nomad_secret_role+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRole(value):: self {
@@ -52,7 +52,7 @@
         vault_nomad_secret_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Specifies the type of token to create when using this role. Valid values are "client" or "management". 
     ||| } },
     withType(value):: self {

@@ -7,7 +7,7 @@
         scope: scope,
       } },
     },
-    '#withForce': { 'function': { help: |||
+    '#withForce':: { 'function': { help: |||
       Force deletion even if there are managed objects in the scope 
     ||| } },
     withForce(value):: self {
@@ -20,7 +20,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -28,7 +28,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path where KMIP backend is mounted 
     ||| } },
     withPath(value):: self {
@@ -36,7 +36,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { path: value } },
       },
     },
-    '#withScope': { 'function': { help: |||
+    '#withScope':: { 'function': { help: |||
       Name of the scope 
     ||| } },
     withScope(value):: self {

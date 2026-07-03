@@ -7,7 +7,7 @@
         kind: kind,
       } },
     },
-    '#withApiVersion': { 'function': { help: |||
+    '#withApiVersion':: { 'function': { help: |||
       The resource apiVersion. 
     ||| } },
     withApiVersion(value):: self {
@@ -15,7 +15,7 @@
         kubernetes_resources+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withFieldSelector': { 'function': { help: |||
+    '#withFieldSelector':: { 'function': { help: |||
       A selector to restrict the list of returned objects by their fields. 
     ||| } },
     withFieldSelector(value):: self {
@@ -23,7 +23,7 @@
         kubernetes_resources+: { [terraformName]+: { field_selector: value } },
       },
     },
-    '#withKind': { 'function': { help: |||
+    '#withKind':: { 'function': { help: |||
       The resource kind. 
     ||| } },
     withKind(value):: self {
@@ -31,7 +31,7 @@
         kubernetes_resources+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withLabelSelector': { 'function': { help: |||
+    '#withLabelSelector':: { 'function': { help: |||
       A selector to restrict the list of returned objects by their labels. 
     ||| } },
     withLabelSelector(value):: self {
@@ -39,7 +39,7 @@
         kubernetes_resources+: { [terraformName]+: { label_selector: value } },
       },
     },
-    '#withLimit': { 'function': { help: |||
+    '#withLimit':: { 'function': { help: |||
       Limit is a maximum number of responses to return for a list call. 
     ||| } },
     withLimit(value):: self {
@@ -47,7 +47,7 @@
         kubernetes_resources+: { [terraformName]+: { limit: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       The resource namespace. 
     ||| } },
     withNamespace(value):: self {
@@ -55,7 +55,7 @@
         kubernetes_resources+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withObjects': { 'function': { help: |||
+    '#withObjects':: { 'function': { help: |||
       The response from the API server. 
     ||| } },
     withObjects(value):: self {

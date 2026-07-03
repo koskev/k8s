@@ -5,7 +5,7 @@
       vault_token+: { [terraformName]+: {
       } },
     },
-    '#withClientToken': { 'function': { help: |||
+    '#withClientToken':: { 'function': { help: |||
       The client token. 
     ||| } },
     withClientToken(value):: self {
@@ -13,7 +13,7 @@
         vault_token+: { [terraformName]+: { client_token: value } },
       },
     },
-    '#withDisplayName': { 'function': { help: |||
+    '#withDisplayName':: { 'function': { help: |||
       The display name of the token. 
     ||| } },
     withDisplayName(value):: self {
@@ -21,7 +21,7 @@
         vault_token+: { [terraformName]+: { display_name: value } },
       },
     },
-    '#withExplicitMaxTtl': { 'function': { help: |||
+    '#withExplicitMaxTtl':: { 'function': { help: |||
       The explicit max TTL of the token. 
     ||| } },
     withExplicitMaxTtl(value):: self {
@@ -34,7 +34,7 @@
         vault_token+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseDuration': { 'function': { help: |||
+    '#withLeaseDuration':: { 'function': { help: |||
       The token lease duration. 
     ||| } },
     withLeaseDuration(value):: self {
@@ -42,7 +42,7 @@
         vault_token+: { [terraformName]+: { lease_duration: value } },
       },
     },
-    '#withLeaseStarted': { 'function': { help: |||
+    '#withLeaseStarted':: { 'function': { help: |||
       The token lease started on. 
     ||| } },
     withLeaseStarted(value):: self {
@@ -50,7 +50,7 @@
         vault_token+: { [terraformName]+: { lease_started: value } },
       },
     },
-    '#withMetadata': { 'function': { help: |||
+    '#withMetadata':: { 'function': { help: |||
       Metadata to be associated with the token. 
     ||| } },
     withMetadata(value):: self {
@@ -58,7 +58,7 @@
         vault_token+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -66,7 +66,7 @@
         vault_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNoDefaultPolicy': { 'function': { help: |||
+    '#withNoDefaultPolicy':: { 'function': { help: |||
       Flag to disable the default policy. 
     ||| } },
     withNoDefaultPolicy(value):: self {
@@ -74,7 +74,7 @@
         vault_token+: { [terraformName]+: { no_default_policy: value } },
       },
     },
-    '#withNoParent': { 'function': { help: |||
+    '#withNoParent':: { 'function': { help: |||
       Flag to create a token without parent. 
     ||| } },
     withNoParent(value):: self {
@@ -82,7 +82,7 @@
         vault_token+: { [terraformName]+: { no_parent: value } },
       },
     },
-    '#withNumUses': { 'function': { help: |||
+    '#withNumUses':: { 'function': { help: |||
       The number of allowed uses of the token. 
     ||| } },
     withNumUses(value):: self {
@@ -90,7 +90,7 @@
         vault_token+: { [terraformName]+: { num_uses: value } },
       },
     },
-    '#withPeriod': { 'function': { help: |||
+    '#withPeriod':: { 'function': { help: |||
       The period of the token. 
     ||| } },
     withPeriod(value):: self {
@@ -98,7 +98,7 @@
         vault_token+: { [terraformName]+: { period: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       List of policies. 
     ||| } },
     withPolicies(value):: self {
@@ -106,7 +106,7 @@
         vault_token+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withRenewIncrement': { 'function': { help: |||
+    '#withRenewIncrement':: { 'function': { help: |||
       The renew increment. 
     ||| } },
     withRenewIncrement(value):: self {
@@ -114,7 +114,7 @@
         vault_token+: { [terraformName]+: { renew_increment: value } },
       },
     },
-    '#withRenewMinLease': { 'function': { help: |||
+    '#withRenewMinLease':: { 'function': { help: |||
       The minimum lease to renew token. 
     ||| } },
     withRenewMinLease(value):: self {
@@ -122,7 +122,7 @@
         vault_token+: { [terraformName]+: { renew_min_lease: value } },
       },
     },
-    '#withRenewable': { 'function': { help: |||
+    '#withRenewable':: { 'function': { help: |||
       Flag to allow the token to be renewed 
     ||| } },
     withRenewable(value):: self {
@@ -130,7 +130,7 @@
         vault_token+: { [terraformName]+: { renewable: value } },
       },
     },
-    '#withRoleName': { 'function': { help: |||
+    '#withRoleName':: { 'function': { help: |||
       The token role name. 
     ||| } },
     withRoleName(value):: self {
@@ -138,7 +138,7 @@
         vault_token+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       The TTL period of the token. 
     ||| } },
     withTtl(value):: self {
@@ -146,7 +146,7 @@
         vault_token+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withWrappedToken': { 'function': { help: |||
+    '#withWrappedToken':: { 'function': { help: |||
       The client wrapped token. 
     ||| } },
     withWrappedToken(value):: self {
@@ -154,7 +154,7 @@
         vault_token+: { [terraformName]+: { wrapped_token: value } },
       },
     },
-    '#withWrappingAccessor': { 'function': { help: |||
+    '#withWrappingAccessor':: { 'function': { help: |||
       The client wrapping accessor. 
     ||| } },
     withWrappingAccessor(value):: self {
@@ -162,7 +162,7 @@
         vault_token+: { [terraformName]+: { wrapping_accessor: value } },
       },
     },
-    '#withWrappingTtl': { 'function': { help: |||
+    '#withWrappingTtl':: { 'function': { help: |||
       The TTL period of the wrapped token. 
     ||| } },
     withWrappingTtl(value):: self {

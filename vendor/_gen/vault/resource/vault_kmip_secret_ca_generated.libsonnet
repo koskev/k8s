@@ -9,7 +9,7 @@
         path: path,
       } },
     },
-    '#withCaPem': { 'function': { help: |||
+    '#withCaPem':: { 'function': { help: |||
       CA certificate in PEM format. 
     ||| } },
     withCaPem(value):: self {
@@ -17,7 +17,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { ca_pem: value } },
       },
     },
-    '#withKeyBits': { 'function': { help: |||
+    '#withKeyBits':: { 'function': { help: |||
       CA key bits. Valid values depend on key_type: For rsa: 2048, 3072, 4096. For ec: 224, 256, 384, 521. 
     ||| } },
     withKeyBits(value):: self {
@@ -25,7 +25,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { key_bits: value } },
       },
     },
-    '#withKeyType': { 'function': { help: |||
+    '#withKeyType':: { 'function': { help: |||
       CA key type (rsa or ec). 
     ||| } },
     withKeyType(value):: self {
@@ -33,7 +33,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name to identify the CA. 
     ||| } },
     withName(value):: self {
@@ -41,7 +41,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -49,7 +49,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path where KMIP backend is mounted. 
     ||| } },
     withPath(value):: self {
@@ -57,7 +57,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { path: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       CA TTL in seconds. Defaults to 365 days. 
     ||| } },
     withTtl(value):: self {

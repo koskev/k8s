@@ -8,7 +8,7 @@
         name: name,
       } },
     },
-    '#withCanonicalId': { 'function': { help: |||
+    '#withCanonicalId':: { 'function': { help: |||
       ID of the group to which this is an alias. 
     ||| } },
     withCanonicalId(value):: self {
@@ -21,7 +21,7 @@
         vault_identity_group_alias+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountAccessor': { 'function': { help: |||
+    '#withMountAccessor':: { 'function': { help: |||
       Mount accessor to which this alias belongs to. 
     ||| } },
     withMountAccessor(value):: self {
@@ -29,7 +29,7 @@
         vault_identity_group_alias+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the group alias. 
     ||| } },
     withName(value):: self {
@@ -37,7 +37,7 @@
         vault_identity_group_alias+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

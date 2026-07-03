@@ -5,7 +5,7 @@
       kubernetes_service_account+: { [terraformName]+: {
       } },
     },
-    '#withAutomountServiceAccountToken': { 'function': { help: |||
+    '#withAutomountServiceAccountToken':: { 'function': { help: |||
       True to enable automatic mounting of the service account token 
     ||| } },
     withAutomountServiceAccountToken(value):: self {
@@ -23,7 +23,7 @@
         kubernetes_service_account+: { [terraformName]+: { id: value } },
       },
     },
-    '#withImagePullSecret': { 'function': { help: |||
+    '#withImagePullSecret':: { 'function': { help: |||
       A list of references to secrets in the same namespace to use for pulling any images in pods that reference this Service Account. More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod 
     ||| } },
     withImagePullSecret(value):: self {
@@ -31,7 +31,7 @@
         kubernetes_service_account+: { [terraformName]+: { image_pull_secret: value } },
       },
     },
-    '#withSecret': { 'function': { help: |||
+    '#withSecret':: { 'function': { help: |||
       A list of secrets allowed to be used by pods running using this Service Account. More info: https://kubernetes.io/docs/concepts/configuration/secret 
     ||| } },
     withSecret(value):: self {

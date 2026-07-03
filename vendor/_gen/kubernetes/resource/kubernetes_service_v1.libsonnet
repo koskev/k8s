@@ -15,7 +15,7 @@
         kubernetes_service_v1+: { [terraformName]+: { status: value } },
       },
     },
-    '#withWaitForLoadBalancer': { 'function': { help: |||
+    '#withWaitForLoadBalancer':: { 'function': { help: |||
       Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created. 
     ||| } },
     withWaitForLoadBalancer(value):: self {

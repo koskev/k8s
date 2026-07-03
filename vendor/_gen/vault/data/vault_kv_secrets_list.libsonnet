@@ -11,7 +11,7 @@
         vault_kv_secrets_list+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNames': { 'function': { help: |||
+    '#withNames':: { 'function': { help: |||
       List of all secret names. 
     ||| } },
     withNames(value):: self {
@@ -19,7 +19,7 @@
         vault_kv_secrets_list+: { [terraformName]+: { names: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -27,7 +27,7 @@
         vault_kv_secrets_list+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Full KV-V1 path where secrets will be listed. 
     ||| } },
     withPath(value):: self {

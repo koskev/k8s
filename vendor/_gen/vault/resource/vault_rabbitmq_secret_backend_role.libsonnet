@@ -7,7 +7,7 @@
         name: name,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The path of the Rabbitmq Secret Backend the role belongs to. 
     ||| } },
     withBackend(value):: self {
@@ -20,7 +20,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Unique name for the role. 
     ||| } },
     withName(value):: self {
@@ -28,7 +28,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTags': { 'function': { help: |||
+    '#withTags':: { 'function': { help: |||
       Specifies a comma-separated RabbitMQ management tags. 
     ||| } },
     withTags(value):: self {

@@ -6,7 +6,7 @@
         name: name,
       } },
     },
-    '#withDescription': { 'function': { help: |||
+    '#withDescription':: { 'function': { help: |||
       The scope's description. 
     ||| } },
     withDescription(value):: self {
@@ -19,7 +19,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the scope. The openid scope name is reserved. 
     ||| } },
     withName(value):: self {
@@ -27,7 +27,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -35,7 +35,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTemplate': { 'function': { help: |||
+    '#withTemplate':: { 'function': { help: |||
       The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON. 
     ||| } },
     withTemplate(value):: self {

@@ -6,7 +6,7 @@
         role_id: role_id,
       } },
     },
-    '#withAccessor': { 'function': { help: |||
+    '#withAccessor':: { 'function': { help: |||
       The accessor for the token. 
     ||| } },
     withAccessor(value):: self {
@@ -14,7 +14,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { accessor: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
     withBackend(value):: self {
@@ -22,7 +22,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withClientToken': { 'function': { help: |||
+    '#withClientToken':: { 'function': { help: |||
       The token. 
     ||| } },
     withClientToken(value):: self {
@@ -35,7 +35,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseDuration': { 'function': { help: |||
+    '#withLeaseDuration':: { 'function': { help: |||
       How long the token is valid for. 
     ||| } },
     withLeaseDuration(value):: self {
@@ -43,7 +43,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { lease_duration: value } },
       },
     },
-    '#withLeaseStarted': { 'function': { help: |||
+    '#withLeaseStarted':: { 'function': { help: |||
       The timestamp the lease started on, as determined by the machine running Terraform. 
     ||| } },
     withLeaseStarted(value):: self {
@@ -51,7 +51,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { lease_started: value } },
       },
     },
-    '#withMetadata': { 'function': { help: |||
+    '#withMetadata':: { 'function': { help: |||
       Metadata associated with the token. 
     ||| } },
     withMetadata(value):: self {
@@ -59,7 +59,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +67,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies set on the token. 
     ||| } },
     withPolicies(value):: self {
@@ -75,7 +75,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withRenewable': { 'function': { help: |||
+    '#withRenewable':: { 'function': { help: |||
       Whether the token is renewable or not. 
     ||| } },
     withRenewable(value):: self {
@@ -83,7 +83,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { renewable: value } },
       },
     },
-    '#withRoleId': { 'function': { help: |||
+    '#withRoleId':: { 'function': { help: |||
       The RoleID to log in with. 
     ||| } },
     withRoleId(value):: self {
@@ -91,7 +91,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { role_id: value } },
       },
     },
-    '#withSecretId': { 'function': { help: |||
+    '#withSecretId':: { 'function': { help: |||
       The SecretID to log in with. Required unless `bind_secret_id` is set to false on the role. 
     ||| } },
     withSecretId(value):: self {
@@ -99,7 +99,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { secret_id: value } },
       },
     },
-    '#withSecretIdWo': { 'function': { help: |||
+    '#withSecretIdWo':: { 'function': { help: |||
       The SecretID to log in with. Write-only attribute that can accept ephemeral values. Required unless `bind_secret_id` is set to false on the role. 
     ||| } },
     withSecretIdWo(value):: self {
@@ -107,7 +107,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { secret_id_wo: value } },
       },
     },
-    '#withSecretIdWoVersion': { 'function': { help: |||
+    '#withSecretIdWoVersion':: { 'function': { help: |||
       Version counter for the write-only secret_id field. Increment this to trigger re-authentication with a new SecretID. 
     ||| } },
     withSecretIdWoVersion(value):: self {

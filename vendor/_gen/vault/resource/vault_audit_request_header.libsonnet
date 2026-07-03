@@ -6,7 +6,7 @@
         name: name,
       } },
     },
-    '#withHmac': { 'function': { help: |||
+    '#withHmac':: { 'function': { help: |||
       Whether this header's value should be HMAC'd in the audit logs. 
     ||| } },
     withHmac(value):: self {
@@ -19,7 +19,7 @@
         vault_audit_request_header+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the request header to audit. 
     ||| } },
     withName(value):: self {
@@ -27,7 +27,7 @@
         vault_audit_request_header+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

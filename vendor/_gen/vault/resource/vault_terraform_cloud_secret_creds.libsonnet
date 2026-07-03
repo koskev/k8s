@@ -7,7 +7,7 @@
         role: role,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Terraform Cloud secret backend to generate tokens from 
     ||| } },
     withBackend(value):: self {
@@ -20,7 +20,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseId': { 'function': { help: |||
+    '#withLeaseId':: { 'function': { help: |||
       Associated Vault lease ID, if one exists 
     ||| } },
     withLeaseId(value):: self {
@@ -28,7 +28,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { lease_id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrganization': { 'function': { help: |||
+    '#withOrganization':: { 'function': { help: |||
       Name of the Terraform Cloud or Enterprise organization 
     ||| } },
     withOrganization(value):: self {
@@ -44,7 +44,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRole(value):: self {
@@ -52,7 +52,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { role: value } },
       },
     },
-    '#withTeamId': { 'function': { help: |||
+    '#withTeamId':: { 'function': { help: |||
       ID of the Terraform Cloud or Enterprise team under organization (e.g., settings/teams/team-xxxxxxxxxxxxx) 
     ||| } },
     withTeamId(value):: self {
@@ -60,7 +60,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { team_id: value } },
       },
     },
-    '#withToken': { 'function': { help: |||
+    '#withToken':: { 'function': { help: |||
       Terraform Token provided by the Vault backend 
     ||| } },
     withToken(value):: self {
@@ -68,7 +68,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { token: value } },
       },
     },
-    '#withTokenId': { 'function': { help: |||
+    '#withTokenId':: { 'function': { help: |||
       ID of the Terraform Token provided 
     ||| } },
     withTokenId(value):: self {

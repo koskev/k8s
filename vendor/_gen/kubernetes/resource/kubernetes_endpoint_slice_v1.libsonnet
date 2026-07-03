@@ -6,7 +6,7 @@
         address_type: address_type,
       } },
     },
-    '#withAddressType': { 'function': { help: |||
+    '#withAddressType':: { 'function': { help: |||
       address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. 
     ||| } },
     withAddressType(value):: self {

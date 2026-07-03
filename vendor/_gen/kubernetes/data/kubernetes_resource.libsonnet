@@ -7,7 +7,7 @@
         kind: kind,
       } },
     },
-    '#withApiVersion': { 'function': { help: |||
+    '#withApiVersion':: { 'function': { help: |||
       The resource apiVersion. 
     ||| } },
     withApiVersion(value):: self {
@@ -15,7 +15,7 @@
         kubernetes_resource+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withKind': { 'function': { help: |||
+    '#withKind':: { 'function': { help: |||
       The resource kind. 
     ||| } },
     withKind(value):: self {
@@ -23,7 +23,7 @@
         kubernetes_resource+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withObject': { 'function': { help: |||
+    '#withObject':: { 'function': { help: |||
       The response from the API server. 
     ||| } },
     withObject(value):: self {

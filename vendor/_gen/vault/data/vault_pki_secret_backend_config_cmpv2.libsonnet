@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withAuditFields': { 'function': { help: |||
+    '#withAuditFields':: { 'function': { help: |||
       Fields parsed from the CSR that appear in the audit and can be used by sentinel policies 
     ||| } },
     withAuditFields(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { audit_fields: value } },
       },
     },
-    '#withAuthenticators': { 'function': { help: |||
+    '#withAuthenticators':: { 'function': { help: |||
       Lists the mount accessors CMPv2 should delegate authentication requests towards 
     ||| } },
     withAuthenticators(value):: self {
@@ -22,7 +22,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { authenticators: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Path where PKI engine is mounted 
     ||| } },
     withBackend(value):: self {
@@ -30,7 +30,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDefaultPathPolicy': { 'function': { help: |||
+    '#withDefaultPathPolicy':: { 'function': { help: |||
       Can be sign-verbatim or a role given by role:<role_name> 
     ||| } },
     withDefaultPathPolicy(value):: self {
@@ -38,7 +38,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { default_path_policy: value } },
       },
     },
-    '#withDisabledValidations': { 'function': { help: |||
+    '#withDisabledValidations':: { 'function': { help: |||
       A comma-separated list of validations not to perform on CMPv2 messages. 
     ||| } },
     withDisabledValidations(value):: self {
@@ -46,7 +46,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { disabled_validations: value } },
       },
     },
-    '#withEnableSentinelParsing': { 'function': { help: |||
+    '#withEnableSentinelParsing':: { 'function': { help: |||
       If set, parse out fields from the provided CSR making them available for Sentinel policies 
     ||| } },
     withEnableSentinelParsing(value):: self {
@@ -54,7 +54,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { enable_sentinel_parsing: value } },
       },
     },
-    '#withEnabled': { 'function': { help: |||
+    '#withEnabled':: { 'function': { help: |||
       Specifies whether CMPv2 is enabled 
     ||| } },
     withEnabled(value):: self {
@@ -67,7 +67,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLastUpdated': { 'function': { help: |||
+    '#withLastUpdated':: { 'function': { help: |||
       A read-only timestamp representing the last time the configuration was updated 
     ||| } },
     withLastUpdated(value):: self {
@@ -75,7 +75,7 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { last_updated: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

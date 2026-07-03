@@ -7,7 +7,7 @@
         values: values,
       } },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the custom header. Cannot start with `X-Vault-`. 
     ||| } },
     withName(value):: self {
@@ -15,7 +15,7 @@
         vault_config_ui_header+: { [terraformName]+: { name: value } },
       },
     },
-    '#withValues': { 'function': { help: |||
+    '#withValues':: { 'function': { help: |||
       Set of values for the header. At least one value is required. Duplicates are automatically ignored. 
     ||| } },
     withValues(value):: self {

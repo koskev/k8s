@@ -10,7 +10,7 @@
         kubernetes_nodes+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNodes': { 'function': { help: |||
+    '#withNodes':: { 'function': { help: |||
       List of nodes in a cluster. 
     ||| } },
     withNodes(value):: self {

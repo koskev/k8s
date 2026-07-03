@@ -7,7 +7,7 @@
         username: username,
       } },
     },
-    '#withGroups': { 'function': { help: |||
+    '#withGroups':: { 'function': { help: |||
       Groups within the Okta auth backend to associate with this user 
     ||| } },
     withGroups(value):: self {
@@ -20,7 +20,7 @@
         vault_okta_auth_backend_user+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -28,7 +28,7 @@
         vault_okta_auth_backend_user+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path to the Okta auth backend 
     ||| } },
     withPath(value):: self {
@@ -36,7 +36,7 @@
         vault_okta_auth_backend_user+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to associate with this user 
     ||| } },
     withPolicies(value):: self {
@@ -44,7 +44,7 @@
         vault_okta_auth_backend_user+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withUsername': { 'function': { help: |||
+    '#withUsername':: { 'function': { help: |||
       Name of the user within Okta 
     ||| } },
     withUsername(value):: self {

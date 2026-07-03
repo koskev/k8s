@@ -7,7 +7,7 @@
         org_name: org_name,
       } },
     },
-    '#withApiToken': { 'function': { help: |||
+    '#withApiToken':: { 'function': { help: |||
       Okta API token. 
     ||| } },
     withApiToken(value):: self {
@@ -15,7 +15,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { api_token: value } },
       },
     },
-    '#withBaseUrl': { 'function': { help: |||
+    '#withBaseUrl':: { 'function': { help: |||
       The base domain to use for API requests. 
     ||| } },
     withBaseUrl(value):: self {
@@ -28,7 +28,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMethodId': { 'function': { help: |||
+    '#withMethodId':: { 'function': { help: |||
       Method ID. 
     ||| } },
     withMethodId(value):: self {
@@ -36,7 +36,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { method_id: value } },
       },
     },
-    '#withMountAccessor': { 'function': { help: |||
+    '#withMountAccessor':: { 'function': { help: |||
       Mount accessor. 
     ||| } },
     withMountAccessor(value):: self {
@@ -44,7 +44,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Method name. 
     ||| } },
     withName(value):: self {
@@ -52,7 +52,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -60,7 +60,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNamespaceId': { 'function': { help: |||
+    '#withNamespaceId':: { 'function': { help: |||
       Method's namespace ID. 
     ||| } },
     withNamespaceId(value):: self {
@@ -68,7 +68,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { namespace_id: value } },
       },
     },
-    '#withNamespacePath': { 'function': { help: |||
+    '#withNamespacePath':: { 'function': { help: |||
       Method's namespace path. 
     ||| } },
     withNamespacePath(value):: self {
@@ -76,7 +76,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { namespace_path: value } },
       },
     },
-    '#withOrgName': { 'function': { help: |||
+    '#withOrgName':: { 'function': { help: |||
       Name of the organization to be used in the Okta API. 
     ||| } },
     withOrgName(value):: self {
@@ -84,7 +84,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { org_name: value } },
       },
     },
-    '#withPrimaryEmail': { 'function': { help: |||
+    '#withPrimaryEmail':: { 'function': { help: |||
       Only match the primary email for the account. 
     ||| } },
     withPrimaryEmail(value):: self {
@@ -92,7 +92,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { primary_email: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       MFA type. 
     ||| } },
     withType(value):: self {
@@ -100,7 +100,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { type: value } },
       },
     },
-    '#withUsernameFormat': { 'function': { help: |||
+    '#withUsernameFormat':: { 'function': { help: |||
       A template string for mapping Identity names to MFA methods. 
     ||| } },
     withUsernameFormat(value):: self {
@@ -108,7 +108,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { username_format: value } },
       },
     },
-    '#withUuid': { 'function': { help: |||
+    '#withUuid':: { 'function': { help: |||
       Resource UUID. 
     ||| } },
     withUuid(value):: self {

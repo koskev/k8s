@@ -7,7 +7,7 @@
         role: role,
       } },
     },
-    '#withAccessorId': { 'function': { help: |||
+    '#withAccessorId':: { 'function': { help: |||
       The public identifier for a specific token. It can be used to look up information about a token or to revoke a token. 
     ||| } },
     withAccessorId(value):: self {
@@ -15,7 +15,7 @@
         vault_nomad_access_token+: { [terraformName]+: { accessor_id: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Nomad secret backend to generate tokens from. 
     ||| } },
     withBackend(value):: self {
@@ -28,7 +28,7 @@
         vault_nomad_access_token+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_nomad_access_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRole(value):: self {
@@ -44,7 +44,7 @@
         vault_nomad_access_token+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSecretId': { 'function': { help: |||
+    '#withSecretId':: { 'function': { help: |||
       Used to make requests to Nomad and should be kept private. 
     ||| } },
     withSecretId(value):: self {

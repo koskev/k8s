@@ -5,7 +5,7 @@
       kubernetes_server_version+: { [terraformName]+: {
       } },
     },
-    '#withBuildDate': { 'function': { help: |||
+    '#withBuildDate':: { 'function': { help: |||
       Kubernetes server build date 
     ||| } },
     withBuildDate(value):: self {
@@ -13,7 +13,7 @@
         kubernetes_server_version+: { [terraformName]+: { build_date: value } },
       },
     },
-    '#withCompiler': { 'function': { help: |||
+    '#withCompiler':: { 'function': { help: |||
       Compiler used to build Kubernetes 
     ||| } },
     withCompiler(value):: self {
@@ -21,7 +21,7 @@
         kubernetes_server_version+: { [terraformName]+: { compiler: value } },
       },
     },
-    '#withGitCommit': { 'function': { help: |||
+    '#withGitCommit':: { 'function': { help: |||
       Git commit SHA 
     ||| } },
     withGitCommit(value):: self {
@@ -29,7 +29,7 @@
         kubernetes_server_version+: { [terraformName]+: { git_commit: value } },
       },
     },
-    '#withGitTreeState': { 'function': { help: |||
+    '#withGitTreeState':: { 'function': { help: |||
       Git commit tree state 
     ||| } },
     withGitTreeState(value):: self {
@@ -37,7 +37,7 @@
         kubernetes_server_version+: { [terraformName]+: { git_tree_state: value } },
       },
     },
-    '#withGitVersion': { 'function': { help: |||
+    '#withGitVersion':: { 'function': { help: |||
       Composite version and git commit sha 
     ||| } },
     withGitVersion(value):: self {
@@ -45,7 +45,7 @@
         kubernetes_server_version+: { [terraformName]+: { git_version: value } },
       },
     },
-    '#withGoVersion': { 'function': { help: |||
+    '#withGoVersion':: { 'function': { help: |||
       Go compiler version 
     ||| } },
     withGoVersion(value):: self {
@@ -58,7 +58,7 @@
         kubernetes_server_version+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMajor': { 'function': { help: |||
+    '#withMajor':: { 'function': { help: |||
       Major Kubernetes version 
     ||| } },
     withMajor(value):: self {
@@ -66,7 +66,7 @@
         kubernetes_server_version+: { [terraformName]+: { major: value } },
       },
     },
-    '#withMinor': { 'function': { help: |||
+    '#withMinor':: { 'function': { help: |||
       Minor Kubernetes version 
     ||| } },
     withMinor(value):: self {
@@ -74,7 +74,7 @@
         kubernetes_server_version+: { [terraformName]+: { minor: value } },
       },
     },
-    '#withPlatform': { 'function': { help: |||
+    '#withPlatform':: { 'function': { help: |||
       Platform 
     ||| } },
     withPlatform(value):: self {
@@ -82,7 +82,7 @@
         kubernetes_server_version+: { [terraformName]+: { platform: value } },
       },
     },
-    '#withVersion': { 'function': { help: |||
+    '#withVersion':: { 'function': { help: |||
       Composite Kubernetes server version 
     ||| } },
     withVersion(value):: self {

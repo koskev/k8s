@@ -7,7 +7,7 @@
         role: role,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       AD Secret Backend to read credentials from. 
     ||| } },
     withBackend(value):: self {
@@ -15,7 +15,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCurrentPassword': { 'function': { help: |||
+    '#withCurrentPassword':: { 'function': { help: |||
       Password for the service account. 
     ||| } },
     withCurrentPassword(value):: self {
@@ -28,7 +28,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLastPassword': { 'function': { help: |||
+    '#withLastPassword':: { 'function': { help: |||
       Last known password for the service account. 
     ||| } },
     withLastPassword(value):: self {
@@ -36,7 +36,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { last_password: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRole(value):: self {
@@ -52,7 +52,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { role: value } },
       },
     },
-    '#withUsername': { 'function': { help: |||
+    '#withUsername':: { 'function': { help: |||
       Name of the service account. 
     ||| } },
     withUsername(value):: self {

@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withAiaPath': { 'function': { help: |||
+    '#withAiaPath':: { 'function': { help: |||
       Path to the cluster's AIA distribution point. 
     ||| } },
     withAiaPath(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { aia_path: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
     withBackend(value):: self {
@@ -27,7 +27,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -35,7 +35,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path to the cluster's API mount path. 
     ||| } },
     withPath(value):: self {

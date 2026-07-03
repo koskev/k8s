@@ -7,7 +7,7 @@
         policies: policies,
       } },
     },
-    '#withExclusive': { 'function': { help: |||
+    '#withExclusive':: { 'function': { help: |||
       Should the resource manage policies exclusively? Beware of race conditions when disabling exclusive management 
     ||| } },
     withExclusive(value):: self {
@@ -15,7 +15,7 @@
         vault_identity_group_policies+: { [terraformName]+: { exclusive: value } },
       },
     },
-    '#withGroupId': { 'function': { help: |||
+    '#withGroupId':: { 'function': { help: |||
       ID of the group. 
     ||| } },
     withGroupId(value):: self {
@@ -23,7 +23,7 @@
         vault_identity_group_policies+: { [terraformName]+: { group_id: value } },
       },
     },
-    '#withGroupName': { 'function': { help: |||
+    '#withGroupName':: { 'function': { help: |||
       Name of the group. 
     ||| } },
     withGroupName(value):: self {
@@ -36,7 +36,7 @@
         vault_identity_group_policies+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_identity_group_policies+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to be tied to the group. 
     ||| } },
     withPolicies(value):: self {

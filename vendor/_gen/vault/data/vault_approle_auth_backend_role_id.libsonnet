@@ -6,7 +6,7 @@
         role_name: role_name,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
     withBackend(value):: self {
@@ -19,7 +19,7 @@
         vault_approle_auth_backend_role_id+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -27,7 +27,7 @@
         vault_approle_auth_backend_role_id+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleId': { 'function': { help: |||
+    '#withRoleId':: { 'function': { help: |||
       The RoleID of the role. 
     ||| } },
     withRoleId(value):: self {
@@ -35,7 +35,7 @@
         vault_approle_auth_backend_role_id+: { [terraformName]+: { role_id: value } },
       },
     },
-    '#withRoleName': { 'function': { help: |||
+    '#withRoleName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRoleName(value):: self {

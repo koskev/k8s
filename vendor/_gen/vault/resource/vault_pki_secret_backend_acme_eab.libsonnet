@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withAcmeDirectory': { 'function': { help: |||
+    '#withAcmeDirectory':: { 'function': { help: |||
       The ACME directory to which the key belongs 
     ||| } },
     withAcmeDirectory(value):: self {
@@ -14,7 +14,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { acme_directory: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to 
     ||| } },
     withBackend(value):: self {
@@ -22,7 +22,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCreatedOn': { 'function': { help: |||
+    '#withCreatedOn':: { 'function': { help: |||
       An RFC3339 formatted date time when the EAB token was created 
     ||| } },
     withCreatedOn(value):: self {
@@ -30,7 +30,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { created_on: value } },
       },
     },
-    '#withEabId': { 'function': { help: |||
+    '#withEabId':: { 'function': { help: |||
       The identifier of a specific ACME EAB token 
     ||| } },
     withEabId(value):: self {
@@ -43,7 +43,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuer': { 'function': { help: |||
+    '#withIssuer':: { 'function': { help: |||
       Specifies the issuer reference to use for directory path 
     ||| } },
     withIssuer(value):: self {
@@ -51,7 +51,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { issuer: value } },
       },
     },
-    '#withKey': { 'function': { help: |||
+    '#withKey':: { 'function': { help: |||
       The ACME EAB token 
     ||| } },
     withKey(value):: self {
@@ -59,7 +59,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { key: value } },
       },
     },
-    '#withKeyType': { 'function': { help: |||
+    '#withKeyType':: { 'function': { help: |||
       The key type of the EAB key 
     ||| } },
     withKeyType(value):: self {
@@ -67,7 +67,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -75,7 +75,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Specifies the role to use for directory path 
     ||| } },
     withRole(value):: self {

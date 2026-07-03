@@ -7,7 +7,7 @@
         name: name,
       } },
     },
-    '#withAccessKey': { 'function': { help: |||
+    '#withAccessKey':: { 'function': { help: |||
       AWS access key ID read from Vault. 
     ||| } },
     withAccessKey(value):: self {
@@ -15,7 +15,7 @@
         vault_aws_static_access_credentials+: { [terraformName]+: { access_key: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       AWS Secret Backend to read credentials from. 
     ||| } },
     withBackend(value):: self {
@@ -28,7 +28,7 @@
         vault_aws_static_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withName(value):: self {
@@ -36,7 +36,7 @@
         vault_aws_static_access_credentials+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_aws_static_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSecretKey': { 'function': { help: |||
+    '#withSecretKey':: { 'function': { help: |||
       AWS secret key read from Vault. 
     ||| } },
     withSecretKey(value):: self {

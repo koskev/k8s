@@ -6,7 +6,7 @@
         path: path,
       } },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       Map of strings read from Vault. 
     ||| } },
     withData(value):: self {
@@ -14,7 +14,7 @@
         vault_generic_secret+: { [terraformName]+: { data: value } },
       },
     },
-    '#withDataJson': { 'function': { help: |||
+    '#withDataJson':: { 'function': { help: |||
       JSON-encoded secret data read from Vault. 
     ||| } },
     withDataJson(value):: self {
@@ -27,7 +27,7 @@
         vault_generic_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseDuration': { 'function': { help: |||
+    '#withLeaseDuration':: { 'function': { help: |||
       Lease duration in seconds relative to the time in lease_start_time. 
     ||| } },
     withLeaseDuration(value):: self {
@@ -35,7 +35,7 @@
         vault_generic_secret+: { [terraformName]+: { lease_duration: value } },
       },
     },
-    '#withLeaseId': { 'function': { help: |||
+    '#withLeaseId':: { 'function': { help: |||
       Lease identifier assigned by vault. 
     ||| } },
     withLeaseId(value):: self {
@@ -43,7 +43,7 @@
         vault_generic_secret+: { [terraformName]+: { lease_id: value } },
       },
     },
-    '#withLeaseRenewable': { 'function': { help: |||
+    '#withLeaseRenewable':: { 'function': { help: |||
       True if the duration of this lease can be extended through renewal. 
     ||| } },
     withLeaseRenewable(value):: self {
@@ -51,7 +51,7 @@
         vault_generic_secret+: { [terraformName]+: { lease_renewable: value } },
       },
     },
-    '#withLeaseStartTime': { 'function': { help: |||
+    '#withLeaseStartTime':: { 'function': { help: |||
       Time at which the lease was read, using the clock of the system where Terraform was running 
     ||| } },
     withLeaseStartTime(value):: self {
@@ -59,7 +59,7 @@
         vault_generic_secret+: { [terraformName]+: { lease_start_time: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +67,7 @@
         vault_generic_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Full path from which a secret will be read. 
     ||| } },
     withPath(value):: self {
@@ -80,7 +80,7 @@
         vault_generic_secret+: { [terraformName]+: { version: value } },
       },
     },
-    '#withWithLeaseStartTime': { 'function': { help: |||
+    '#withWithLeaseStartTime':: { 'function': { help: |||
       If set to true, stores 'lease_start_time' in the TF state. 
     ||| } },
     withWithLeaseStartTime(value):: self {

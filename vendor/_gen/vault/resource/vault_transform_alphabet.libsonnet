@@ -7,7 +7,7 @@
         path: path,
       } },
     },
-    '#withAlphabet': { 'function': { help: |||
+    '#withAlphabet':: { 'function': { help: |||
       A string of characters that contains the alphabet set. 
     ||| } },
     withAlphabet(value):: self {
@@ -20,7 +20,7 @@
         vault_transform_alphabet+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the alphabet. 
     ||| } },
     withName(value):: self {
@@ -28,7 +28,7 @@
         vault_transform_alphabet+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_transform_alphabet+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws". 
     ||| } },
     withPath(value):: self {

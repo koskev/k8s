@@ -5,7 +5,7 @@
       vault_activation_flags+: { [terraformName]+: {
       } },
     },
-    '#withActivatedFlags': { 'function': { help: |||
+    '#withActivatedFlags':: { 'function': { help: |||
       List of activated feature flags. 
     ||| } },
     withActivatedFlags(value):: self {
@@ -13,7 +13,7 @@
         vault_activation_flags+: { [terraformName]+: { activated_flags: value } },
       },
     },
-    '#withId': { 'function': { help: |||
+    '#withId':: { 'function': { help: |||
       Unique identifier for this data source. 
     ||| } },
     withId(value):: self {
@@ -21,7 +21,7 @@
         vault_activation_flags+: { [terraformName]+: { id: value } },
       },
     },
-    '#withUnactivatedFlags': { 'function': { help: |||
+    '#withUnactivatedFlags':: { 'function': { help: |||
       List of unactivated feature flags. 
     ||| } },
     withUnactivatedFlags(value):: self {

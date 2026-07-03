@@ -7,7 +7,7 @@
         path: path,
       } },
     },
-    '#withGroupName': { 'function': { help: |||
+    '#withGroupName':: { 'function': { help: |||
       Name of the Okta group 
     ||| } },
     withGroupName(value):: self {
@@ -20,7 +20,7 @@
         vault_okta_auth_backend_group+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -28,7 +28,7 @@
         vault_okta_auth_backend_group+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path to the Okta auth backend 
     ||| } },
     withPath(value):: self {
@@ -36,7 +36,7 @@
         vault_okta_auth_backend_group+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to associate with this group 
     ||| } },
     withPolicies(value):: self {

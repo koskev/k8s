@@ -9,7 +9,7 @@
         name: name,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The path of the Database Secret Backend the role belongs to. 
     ||| } },
     withBackend(value):: self {
@@ -17,7 +17,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCreationStatements': { 'function': { help: |||
+    '#withCreationStatements':: { 'function': { help: |||
       Database statements to execute to create and configure a user. 
     ||| } },
     withCreationStatements(value):: self {
@@ -25,7 +25,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { creation_statements: value } },
       },
     },
-    '#withCredentialConfig': { 'function': { help: |||
+    '#withCredentialConfig':: { 'function': { help: |||
       Specifies the configuration for the given credential_type. 
     ||| } },
     withCredentialConfig(value):: self {
@@ -33,7 +33,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { credential_config: value } },
       },
     },
-    '#withCredentialType': { 'function': { help: |||
+    '#withCredentialType':: { 'function': { help: |||
       Specifies the type of credential that will be generated for the role. 
     ||| } },
     withCredentialType(value):: self {
@@ -41,7 +41,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { credential_type: value } },
       },
     },
-    '#withDbName': { 'function': { help: |||
+    '#withDbName':: { 'function': { help: |||
       Database connection to use for this role. 
     ||| } },
     withDbName(value):: self {
@@ -49,7 +49,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { db_name: value } },
       },
     },
-    '#withDefaultTtl': { 'function': { help: |||
+    '#withDefaultTtl':: { 'function': { help: |||
       Default TTL for leases associated with this role, in seconds. 
     ||| } },
     withDefaultTtl(value):: self {
@@ -62,7 +62,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl': { 'function': { help: |||
+    '#withMaxTtl':: { 'function': { help: |||
       Maximum TTL for leases associated with this role, in seconds. 
     ||| } },
     withMaxTtl(value):: self {
@@ -70,7 +70,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Unique name for the role. 
     ||| } },
     withName(value):: self {
@@ -78,7 +78,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -86,7 +86,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRenewStatements': { 'function': { help: |||
+    '#withRenewStatements':: { 'function': { help: |||
       Database statements to execute to renew a user. 
     ||| } },
     withRenewStatements(value):: self {
@@ -94,7 +94,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { renew_statements: value } },
       },
     },
-    '#withRevocationStatements': { 'function': { help: |||
+    '#withRevocationStatements':: { 'function': { help: |||
       Database statements to execute to revoke a user. 
     ||| } },
     withRevocationStatements(value):: self {
@@ -102,7 +102,7 @@
         vault_database_secret_backend_role+: { [terraformName]+: { revocation_statements: value } },
       },
     },
-    '#withRollbackStatements': { 'function': { help: |||
+    '#withRollbackStatements':: { 'function': { help: |||
       Database statements to execute to rollback a create operation in the event of an error. 
     ||| } },
     withRollbackStatements(value):: self {

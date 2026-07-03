@@ -6,7 +6,7 @@
         role_name: role_name,
       } },
     },
-    '#withAliasMetadata': { 'function': { help: |||
+    '#withAliasMetadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
        This should be a list or map containing the metadata in key value pairs. 
     ||| } },
@@ -15,7 +15,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
     withBackend(value):: self {
@@ -58,7 +58,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -66,7 +66,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleId': { 'function': { help: |||
+    '#withRoleId':: { 'function': { help: |||
       The RoleID of the GCP auth role. 
     ||| } },
     withRoleId(value):: self {
@@ -74,7 +74,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { role_id: value } },
       },
     },
-    '#withRoleName': { 'function': { help: |||
+    '#withRoleName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRoleName(value):: self {
@@ -82,7 +82,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withTokenBoundCidrs': { 'function': { help: |||
+    '#withTokenBoundCidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token 
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -90,7 +90,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl': { 'function': { help: |||
+    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds 
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -98,7 +98,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl': { 'function': { help: |||
+    '#withTokenMaxTtl':: { 'function': { help: |||
       The maximum lifetime of the generated token 
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -106,7 +106,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy': { 'function': { help: |||
+    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens 
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -114,7 +114,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses': { 'function': { help: |||
+    '#withTokenNumUses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited 
     ||| } },
     withTokenNumUses(value):: self {
@@ -122,7 +122,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod': { 'function': { help: |||
+    '#withTokenPeriod':: { 'function': { help: |||
       Generated Token's Period 
     ||| } },
     withTokenPeriod(value):: self {
@@ -130,7 +130,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies': { 'function': { help: |||
+    '#withTokenPolicies':: { 'function': { help: |||
       Generated Token's Policies 
     ||| } },
     withTokenPolicies(value):: self {
@@ -138,7 +138,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl': { 'function': { help: |||
+    '#withTokenTtl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds 
     ||| } },
     withTokenTtl(value):: self {
@@ -146,7 +146,7 @@
         vault_gcp_auth_backend_role+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType': { 'function': { help: |||
+    '#withTokenType':: { 'function': { help: |||
       The type of token to generate, service or batch 
     ||| } },
     withTokenType(value):: self {

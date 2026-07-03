@@ -6,7 +6,7 @@
         name: name,
       } },
     },
-    '#withClientId': { 'function': { help: |||
+    '#withClientId':: { 'function': { help: |||
       The Client ID from Vault. 
     ||| } },
     withClientId(value):: self {
@@ -14,7 +14,7 @@
         vault_identity_oidc_client_creds+: { [terraformName]+: { client_id: value } },
       },
     },
-    '#withClientSecret': { 'function': { help: |||
+    '#withClientSecret':: { 'function': { help: |||
       The Client Secret from Vault. 
     ||| } },
     withClientSecret(value):: self {
@@ -27,7 +27,7 @@
         vault_identity_oidc_client_creds+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the client. 
     ||| } },
     withName(value):: self {
@@ -35,7 +35,7 @@
         vault_identity_oidc_client_creds+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

@@ -10,7 +10,7 @@
         vault_namespaces+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -18,7 +18,7 @@
         vault_namespaces+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPaths': { 'function': { help: |||
+    '#withPaths':: { 'function': { help: |||
       Namespace paths. 
     ||| } },
     withPaths(value):: self {
@@ -26,7 +26,7 @@
         vault_namespaces+: { [terraformName]+: { paths: value } },
       },
     },
-    '#withPathsFq': { 'function': { help: |||
+    '#withPathsFq':: { 'function': { help: |||
       The fully qualified namespace paths. 
     ||| } },
     withPathsFq(value):: self {
@@ -34,7 +34,7 @@
         vault_namespaces+: { [terraformName]+: { paths_fq: value } },
       },
     },
-    '#withRecursive': { 'function': { help: |||
+    '#withRecursive':: { 'function': { help: |||
       True to fetch all child namespaces. 
     ||| } },
     withRecursive(value):: self {

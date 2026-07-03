@@ -6,7 +6,7 @@
         team: team,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Auth backend to which team mapping will be configured. 
     ||| } },
     withBackend(value):: self {
@@ -19,7 +19,7 @@
         vault_github_team+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -27,7 +27,7 @@
         vault_github_team+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to be assigned to this team. 
     ||| } },
     withPolicies(value):: self {
@@ -35,7 +35,7 @@
         vault_github_team+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withTeam': { 'function': { help: |||
+    '#withTeam':: { 'function': { help: |||
       GitHub team name in "slugified" format. 
     ||| } },
     withTeam(value):: self {

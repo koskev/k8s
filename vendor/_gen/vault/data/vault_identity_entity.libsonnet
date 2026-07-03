@@ -5,7 +5,7 @@
       vault_identity_entity+: { [terraformName]+: {
       } },
     },
-    '#withAliasId': { 'function': { help: |||
+    '#withAliasId':: { 'function': { help: |||
       ID of the alias. 
     ||| } },
     withAliasId(value):: self {
@@ -13,7 +13,7 @@
         vault_identity_entity+: { [terraformName]+: { alias_id: value } },
       },
     },
-    '#withAliasMountAccessor': { 'function': { help: |||
+    '#withAliasMountAccessor':: { 'function': { help: |||
       Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`. 
     ||| } },
     withAliasMountAccessor(value):: self {
@@ -21,7 +21,7 @@
         vault_identity_entity+: { [terraformName]+: { alias_mount_accessor: value } },
       },
     },
-    '#withAliasName': { 'function': { help: |||
+    '#withAliasName':: { 'function': { help: |||
       Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`. 
     ||| } },
     withAliasName(value):: self {
@@ -39,7 +39,7 @@
         vault_identity_entity+: { [terraformName]+: { creation_time: value } },
       },
     },
-    '#withDataJson': { 'function': { help: |||
+    '#withDataJson':: { 'function': { help: |||
       Entity data from Vault in JSON String form 
     ||| } },
     withDataJson(value):: self {
@@ -57,7 +57,7 @@
         vault_identity_entity+: { [terraformName]+: { disabled: value } },
       },
     },
-    '#withEntityId': { 'function': { help: |||
+    '#withEntityId':: { 'function': { help: |||
       ID of the entity. 
     ||| } },
     withEntityId(value):: self {
@@ -65,7 +65,7 @@
         vault_identity_entity+: { [terraformName]+: { entity_id: value } },
       },
     },
-    '#withEntityName': { 'function': { help: |||
+    '#withEntityName':: { 'function': { help: |||
       Name of the entity. 
     ||| } },
     withEntityName(value):: self {
@@ -103,7 +103,7 @@
         vault_identity_entity+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

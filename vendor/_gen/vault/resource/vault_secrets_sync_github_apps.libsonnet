@@ -8,7 +8,7 @@
         private_key: private_key,
       } },
     },
-    '#withAppId': { 'function': { help: |||
+    '#withAppId':: { 'function': { help: |||
       The GitHub application ID. 
     ||| } },
     withAppId(value):: self {
@@ -16,7 +16,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { app_id: value } },
       },
     },
-    '#withFingerprint': { 'function': { help: |||
+    '#withFingerprint':: { 'function': { help: |||
       A fingerprint of a private key. 
     ||| } },
     withFingerprint(value):: self {
@@ -29,7 +29,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The user-defined name of the GitHub App configuration. 
     ||| } },
     withName(value):: self {
@@ -37,7 +37,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -45,7 +45,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPrivateKey': { 'function': { help: |||
+    '#withPrivateKey':: { 'function': { help: |||
       The content of a PEM formatted private key generated on GitHub for the app. 
     ||| } },
     withPrivateKey(value):: self {

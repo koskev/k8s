@@ -8,7 +8,7 @@
         policy: policy,
       } },
     },
-    '#withEnforcementLevel': { 'function': { help: |||
+    '#withEnforcementLevel':: { 'function': { help: |||
       Enforcement level of Sentinel policy. Can be one of: 'advisory', 'soft-mandatory' or 'hard-mandatory' 
     ||| } },
     withEnforcementLevel(value):: self {
@@ -21,7 +21,7 @@
         vault_rgp_policy+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the policy 
     ||| } },
     withName(value):: self {
@@ -29,7 +29,7 @@
         vault_rgp_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -37,7 +37,7 @@
         vault_rgp_policy+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicy': { 'function': { help: |||
+    '#withPolicy':: { 'function': { help: |||
       The policy document 
     ||| } },
     withPolicy(value):: self {

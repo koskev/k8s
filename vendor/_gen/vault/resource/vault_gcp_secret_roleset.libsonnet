@@ -8,7 +8,7 @@
         roleset: roleset,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Path where the GCP secrets engine is mounted. 
     ||| } },
     withBackend(value):: self {
@@ -21,7 +21,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -29,7 +29,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withProject': { 'function': { help: |||
+    '#withProject':: { 'function': { help: |||
       Name of the GCP project that this roleset's service account will belong to. 
     ||| } },
     withProject(value):: self {
@@ -37,7 +37,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { project: value } },
       },
     },
-    '#withRoleset': { 'function': { help: |||
+    '#withRoleset':: { 'function': { help: |||
       Name of the RoleSet to create 
     ||| } },
     withRoleset(value):: self {
@@ -45,7 +45,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { roleset: value } },
       },
     },
-    '#withSecretType': { 'function': { help: |||
+    '#withSecretType':: { 'function': { help: |||
       Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key` 
     ||| } },
     withSecretType(value):: self {
@@ -53,7 +53,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { secret_type: value } },
       },
     },
-    '#withServiceAccountEmail': { 'function': { help: |||
+    '#withServiceAccountEmail':: { 'function': { help: |||
       Email of the service account created by Vault for this Roleset 
     ||| } },
     withServiceAccountEmail(value):: self {
@@ -61,7 +61,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { service_account_email: value } },
       },
     },
-    '#withTokenScopes': { 'function': { help: |||
+    '#withTokenScopes':: { 'function': { help: |||
       List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only)  
     ||| } },
     withTokenScopes(value):: self {

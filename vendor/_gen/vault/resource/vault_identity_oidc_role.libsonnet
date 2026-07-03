@@ -7,7 +7,7 @@
         name: name,
       } },
     },
-    '#withClientId': { 'function': { help: |||
+    '#withClientId':: { 'function': { help: |||
       The value that will be included in the `aud` field of all the OIDC identity tokens issued by this role 
     ||| } },
     withClientId(value):: self {
@@ -20,7 +20,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKey': { 'function': { help: |||
+    '#withKey':: { 'function': { help: |||
       A configured named key, the key must already exist. 
     ||| } },
     withKey(value):: self {
@@ -28,7 +28,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { key: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withName(value):: self {
@@ -36,7 +36,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTemplate': { 'function': { help: |||
+    '#withTemplate':: { 'function': { help: |||
       The template string to use for generating tokens. This may be in string-ified JSON or base64 format. 
     ||| } },
     withTemplate(value):: self {
@@ -52,7 +52,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { template: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       TTL of the tokens generated against the role in number of seconds. 
     ||| } },
     withTtl(value):: self {

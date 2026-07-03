@@ -88,7 +88,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { default_critical_options: value } },
       },
     },
-    '#withDefaultExtensions': { 'function': { help: |||
+    '#withDefaultExtensions':: { 'function': { help: |||
       Default extensions to include in SSH certificates. Only applicable for CA key type. 
     ||| } },
     withDefaultExtensions(value):: self {
@@ -96,7 +96,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { default_extensions: value } },
       },
     },
-    '#withDefaultExtensionsTemplate': { 'function': { help: |||
+    '#withDefaultExtensionsTemplate':: { 'function': { help: |||
       Specifies if the default_extensions field supports templating. Only applicable for CA key type. 
     ||| } },
     withDefaultExtensionsTemplate(value):: self {
@@ -114,7 +114,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { default_user_template: value } },
       },
     },
-    '#withExcludeCidrList': { 'function': { help: |||
+    '#withExcludeCidrList':: { 'function': { help: |||
       List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types. 
     ||| } },
     withExcludeCidrList(value):: self {
@@ -142,7 +142,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Unique name for the role. 
     ||| } },
     withName(value):: self {
@@ -150,7 +150,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -158,7 +158,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNotBeforeDuration': { 'function': { help: |||
+    '#withNotBeforeDuration':: { 'function': { help: |||
       Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings. 
     ||| } },
     withNotBeforeDuration(value):: self {
@@ -166,7 +166,7 @@
         vault_ssh_secret_backend_role+: { [terraformName]+: { not_before_duration: value } },
       },
     },
-    '#withPort': { 'function': { help: |||
+    '#withPort':: { 'function': { help: |||
       Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types. 
     ||| } },
     withPort(value):: self {

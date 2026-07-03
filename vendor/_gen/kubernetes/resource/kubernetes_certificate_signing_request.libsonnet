@@ -5,7 +5,7 @@
       kubernetes_certificate_signing_request+: { [terraformName]+: {
       } },
     },
-    '#withAutoApprove': { 'function': { help: |||
+    '#withAutoApprove':: { 'function': { help: |||
       Automatically approve the CertificateSigningRequest 
     ||| } },
     withAutoApprove(value):: self {
@@ -13,7 +13,7 @@
         kubernetes_certificate_signing_request+: { [terraformName]+: { auto_approve: value } },
       },
     },
-    '#withCertificate': { 'function': { help: |||
+    '#withCertificate':: { 'function': { help: |||
       If request was approved, the controller will place the issued certificate here. 
     ||| } },
     withCertificate(value):: self {

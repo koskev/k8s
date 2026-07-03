@@ -6,7 +6,7 @@
         feature: feature,
       } },
     },
-    '#withFeature': { 'function': { help: |||
+    '#withFeature':: { 'function': { help: |||
       Exact feature key to activate with PUT /sys/activation-flags/:feature/activate. 
     ||| } },
     withFeature(value):: self {

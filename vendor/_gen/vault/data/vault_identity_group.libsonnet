@@ -15,7 +15,7 @@
         vault_identity_group+: { [terraformName]+: { alias_creation_time: value } },
       },
     },
-    '#withAliasId': { 'function': { help: |||
+    '#withAliasId':: { 'function': { help: |||
       ID of the alias. 
     ||| } },
     withAliasId(value):: self {
@@ -38,7 +38,7 @@
         vault_identity_group+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withAliasMountAccessor': { 'function': { help: |||
+    '#withAliasMountAccessor':: { 'function': { help: |||
       Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`. 
     ||| } },
     withAliasMountAccessor(value):: self {
@@ -56,7 +56,7 @@
         vault_identity_group+: { [terraformName]+: { alias_mount_type: value } },
       },
     },
-    '#withAliasName': { 'function': { help: |||
+    '#withAliasName':: { 'function': { help: |||
       Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`. 
     ||| } },
     withAliasName(value):: self {
@@ -69,7 +69,7 @@
         vault_identity_group+: { [terraformName]+: { creation_time: value } },
       },
     },
-    '#withDataJson': { 'function': { help: |||
+    '#withDataJson':: { 'function': { help: |||
       Group data from Vault in JSON String form 
     ||| } },
     withDataJson(value):: self {
@@ -77,7 +77,7 @@
         vault_identity_group+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withGroupId': { 'function': { help: |||
+    '#withGroupId':: { 'function': { help: |||
       ID of the group. 
     ||| } },
     withGroupId(value):: self {
@@ -85,7 +85,7 @@
         vault_identity_group+: { [terraformName]+: { group_id: value } },
       },
     },
-    '#withGroupName': { 'function': { help: |||
+    '#withGroupName':: { 'function': { help: |||
       Name of the group. 
     ||| } },
     withGroupName(value):: self {
@@ -123,7 +123,7 @@
         vault_identity_group+: { [terraformName]+: { modify_index: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

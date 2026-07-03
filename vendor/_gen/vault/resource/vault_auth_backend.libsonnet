@@ -6,7 +6,7 @@
         type: type,
       } },
     },
-    '#withAccessor': { 'function': { help: |||
+    '#withAccessor':: { 'function': { help: |||
       The accessor of the auth backend 
     ||| } },
     withAccessor(value):: self {
@@ -14,7 +14,7 @@
         vault_auth_backend+: { [terraformName]+: { accessor: value } },
       },
     },
-    '#withDescription': { 'function': { help: |||
+    '#withDescription':: { 'function': { help: |||
       The description of the auth backend 
     ||| } },
     withDescription(value):: self {
@@ -22,7 +22,7 @@
         vault_auth_backend+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisableRemount': { 'function': { help: |||
+    '#withDisableRemount':: { 'function': { help: |||
       If set, opts out of mount migration on path updates. 
     ||| } },
     withDisableRemount(value):: self {
@@ -35,7 +35,7 @@
         vault_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityTokenKey': { 'function': { help: |||
+    '#withIdentityTokenKey':: { 'function': { help: |||
       The key to use for signing identity tokens. 
     ||| } },
     withIdentityTokenKey(value):: self {
@@ -43,7 +43,7 @@
         vault_auth_backend+: { [terraformName]+: { identity_token_key: value } },
       },
     },
-    '#withLocal': { 'function': { help: |||
+    '#withLocal':: { 'function': { help: |||
       Specifies if the auth method is local only 
     ||| } },
     withLocal(value):: self {
@@ -51,7 +51,7 @@
         vault_auth_backend+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -59,7 +59,7 @@
         vault_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       path to mount the backend. This defaults to the type. 
     ||| } },
     withPath(value):: self {
@@ -72,7 +72,7 @@
         vault_auth_backend+: { [terraformName]+: { tune: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Name of the auth backend 
     ||| } },
     withType(value):: self {

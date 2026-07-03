@@ -6,7 +6,7 @@
         handler: handler,
       } },
     },
-    '#withHandler': { 'function': { help: |||
+    '#withHandler':: { 'function': { help: |||
       Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class 
     ||| } },
     withHandler(value):: self {

@@ -882,11 +882,11 @@
         "recordings": "recordings"
       },
       "locked": {
-        "lastModified": 1783105031,
-        "narHash": "sha256-Q/XnjLd3E/fP4aNmsb5aEFTQ+y9D2GNQ23iuXiSM4fY=",
+        "lastModified": 1783108794,
+        "narHash": "sha256-mN6UGzVGyQSO89AgBoAjCWeu2G8gAIWXKpoIx8bP7ik=",
         "owner": "koskev",
         "repo": "terraform-jsonnet-gen",
-        "rev": "df26d1cc2e17add34956d953c64252eb71e6efca",
+        "rev": "95e93f0a2cd02cd9eeca99fe3562c36c7ed455f0",
         "type": "github"
       },
       "original": {

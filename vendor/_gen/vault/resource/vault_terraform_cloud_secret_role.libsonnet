@@ -6,7 +6,7 @@
         name: name,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The path of the Terraform Cloud Secret Backend the role belongs to. 
     ||| } },
     withBackend(value):: self {
@@ -14,7 +14,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCredentialType': { 'function': { help: |||
+    '#withCredentialType':: { 'function': { help: |||
       The type of credential to generate. Valid values are 'team', 'team_legacy', 'user', or 'organization'. 
     ||| } },
     withCredentialType(value):: self {
@@ -22,7 +22,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { credential_type: value } },
       },
     },
-    '#withDescription': { 'function': { help: |||
+    '#withDescription':: { 'function': { help: |||
       Description of the role. This is used as a prefix to help identify the token in the HCP Terraform UI. Only valid with 'team' or 'user' credential types. 
     ||| } },
     withDescription(value):: self {
@@ -35,7 +35,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl': { 'function': { help: |||
+    '#withMaxTtl':: { 'function': { help: |||
       Maximum allowed lease for generated credentials. If not set or set to 0, will use system default. 
     ||| } },
     withMaxTtl(value):: self {
@@ -43,7 +43,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of an existing role against which to create this Terraform Cloud credential 
     ||| } },
     withName(value):: self {
@@ -51,7 +51,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -59,7 +59,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrganization': { 'function': { help: |||
+    '#withOrganization':: { 'function': { help: |||
       Name of the Terraform Cloud or Enterprise organization 
     ||| } },
     withOrganization(value):: self {
@@ -67,7 +67,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withTeamId': { 'function': { help: |||
+    '#withTeamId':: { 'function': { help: |||
       ID of the Terraform Cloud or Enterprise team under organization (e.g., settings/teams/team-xxxxxxxxxxxxx) 
     ||| } },
     withTeamId(value):: self {
@@ -75,7 +75,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { team_id: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       Default lease for generated credentials. If not set or set to 0, will use system default. 
     ||| } },
     withTtl(value):: self {
@@ -83,7 +83,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withUserId': { 'function': { help: |||
+    '#withUserId':: { 'function': { help: |||
       ID of the Terraform Cloud or Enterprise user (e.g., user-xxxxxxxxxxxxxxxx) 
     ||| } },
     withUserId(value):: self {

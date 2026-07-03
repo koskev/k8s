@@ -7,7 +7,7 @@
         path: path,
       } },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       Map of strings read from Vault. 
     ||| } },
     withData(value):: self {
@@ -15,7 +15,7 @@
         vault_kv_secret+: { [terraformName]+: { data: value } },
       },
     },
-    '#withDataJson': { 'function': { help: |||
+    '#withDataJson':: { 'function': { help: |||
       JSON-encoded secret data to write. 
     ||| } },
     withDataJson(value):: self {
@@ -28,7 +28,7 @@
         vault_kv_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -36,7 +36,7 @@
         vault_kv_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Full path of the KV-V1 secret. 
     ||| } },
     withPath(value):: self {

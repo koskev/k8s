@@ -8,7 +8,7 @@
         name: name,
       } },
     },
-    '#withCanonicalId': { 'function': { help: |||
+    '#withCanonicalId':: { 'function': { help: |||
       ID of the entity to which this is an alias. 
     ||| } },
     withCanonicalId(value):: self {
@@ -16,7 +16,7 @@
         vault_identity_entity_alias+: { [terraformName]+: { canonical_id: value } },
       },
     },
-    '#withCustomMetadata': { 'function': { help: |||
+    '#withCustomMetadata':: { 'function': { help: |||
       Custom metadata to be associated with this alias. 
     ||| } },
     withCustomMetadata(value):: self {
@@ -29,7 +29,7 @@
         vault_identity_entity_alias+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountAccessor': { 'function': { help: |||
+    '#withMountAccessor':: { 'function': { help: |||
       Mount accessor to which this alias belongs toMount accessor to which this alias belongs to. 
     ||| } },
     withMountAccessor(value):: self {
@@ -37,7 +37,7 @@
         vault_identity_entity_alias+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Name of the entity alias. 
     ||| } },
     withName(value):: self {
@@ -45,7 +45,7 @@
         vault_identity_entity_alias+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

@@ -7,7 +7,7 @@
         username: username,
       } },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       Path to the RADIUS auth mount where the user will be registered. 
     ||| } },
     withMount(value):: self {
@@ -15,7 +15,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -23,7 +23,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user. 
     ||| } },
     withPolicies(value):: self {
@@ -31,7 +31,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withUsername': { 'function': { help: |||
+    '#withUsername':: { 'function': { help: |||
       The username to register with the RADIUS auth backend. 
     ||| } },
     withUsername(value):: self {

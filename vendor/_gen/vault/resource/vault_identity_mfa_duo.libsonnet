@@ -8,7 +8,7 @@
         secret_key: secret_key,
       } },
     },
-    '#withApiHostname': { 'function': { help: |||
+    '#withApiHostname':: { 'function': { help: |||
       API hostname for Duo 
     ||| } },
     withApiHostname(value):: self {
@@ -21,7 +21,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIntegrationKey': { 'function': { help: |||
+    '#withIntegrationKey':: { 'function': { help: |||
       Integration key for Duo 
     ||| } },
     withIntegrationKey(value):: self {
@@ -29,7 +29,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { integration_key: value } },
       },
     },
-    '#withMethodId': { 'function': { help: |||
+    '#withMethodId':: { 'function': { help: |||
       Method ID. 
     ||| } },
     withMethodId(value):: self {
@@ -37,7 +37,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { method_id: value } },
       },
     },
-    '#withMountAccessor': { 'function': { help: |||
+    '#withMountAccessor':: { 'function': { help: |||
       Mount accessor. 
     ||| } },
     withMountAccessor(value):: self {
@@ -45,7 +45,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Method name. 
     ||| } },
     withName(value):: self {
@@ -53,7 +53,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -61,7 +61,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNamespaceId': { 'function': { help: |||
+    '#withNamespaceId':: { 'function': { help: |||
       Method's namespace ID. 
     ||| } },
     withNamespaceId(value):: self {
@@ -69,7 +69,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { namespace_id: value } },
       },
     },
-    '#withNamespacePath': { 'function': { help: |||
+    '#withNamespacePath':: { 'function': { help: |||
       Method's namespace path. 
     ||| } },
     withNamespacePath(value):: self {
@@ -77,7 +77,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { namespace_path: value } },
       },
     },
-    '#withPushInfo': { 'function': { help: |||
+    '#withPushInfo':: { 'function': { help: |||
       Push information for Duo. 
     ||| } },
     withPushInfo(value):: self {
@@ -85,7 +85,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { push_info: value } },
       },
     },
-    '#withSecretKey': { 'function': { help: |||
+    '#withSecretKey':: { 'function': { help: |||
       Secret key for Duo 
     ||| } },
     withSecretKey(value):: self {
@@ -93,7 +93,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { secret_key: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       MFA type. 
     ||| } },
     withType(value):: self {
@@ -101,7 +101,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { type: value } },
       },
     },
-    '#withUsePasscode': { 'function': { help: |||
+    '#withUsePasscode':: { 'function': { help: |||
       Require passcode upon MFA validation. 
     ||| } },
     withUsePasscode(value):: self {
@@ -109,7 +109,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { use_passcode: value } },
       },
     },
-    '#withUsernameFormat': { 'function': { help: |||
+    '#withUsernameFormat':: { 'function': { help: |||
       A template string for mapping Identity names to MFA methods. 
     ||| } },
     withUsernameFormat(value):: self {
@@ -117,7 +117,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { username_format: value } },
       },
     },
-    '#withUuid': { 'function': { help: |||
+    '#withUuid':: { 'function': { help: |||
       Resource UUID. 
     ||| } },
     withUuid(value):: self {

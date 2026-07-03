@@ -7,7 +7,7 @@
         service_account_names: service_account_names,
       } },
     },
-    '#withDisableCheckInEnforcement': { 'function': { help: |||
+    '#withDisableCheckInEnforcement':: { 'function': { help: |||
       Disable enforcing that service accounts must be checked in by the entity or client token that checked them out. 
     ||| } },
     withDisableCheckInEnforcement(value):: self {
@@ -20,7 +20,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl': { 'function': { help: |||
+    '#withMaxTtl':: { 'function': { help: |||
       The maximum amount of time a check-out last with renewal before Vault automatically checks it back in. Defaults to 24 hours. 
     ||| } },
     withMaxTtl(value):: self {
@@ -28,7 +28,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       The path where the LDAP secrets backend is mounted. 
     ||| } },
     withMount(value):: self {
@@ -36,7 +36,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       The name of the set of service accounts. 
     ||| } },
     withName(value):: self {
@@ -44,7 +44,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -52,7 +52,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withServiceAccountNames': { 'function': { help: |||
+    '#withServiceAccountNames':: { 'function': { help: |||
       The names of all the service accounts that can be checked out from this set. 
     ||| } },
     withServiceAccountNames(value):: self {
@@ -60,7 +60,7 @@
         vault_ldap_secret_backend_library_set+: { [terraformName]+: { service_account_names: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       The maximum amount of time a single check-out lasts before Vault automatically checks it back in. Defaults to 24 hours. 
     ||| } },
     withTtl(value):: self {

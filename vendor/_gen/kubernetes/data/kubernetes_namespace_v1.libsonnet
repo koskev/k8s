@@ -10,7 +10,7 @@
         kubernetes_namespace_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withSpec': { 'function': { help: |||
+    '#withSpec':: { 'function': { help: |||
       Spec defines the behavior of the Namespace. 
     ||| } },
     withSpec(value):: self {

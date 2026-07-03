@@ -7,7 +7,7 @@
         role_name: role_name,
       } },
     },
-    '#withDistinguishedNames': { 'function': { help: |||
+    '#withDistinguishedNames':: { 'function': { help: |||
       List of the distinguished names (DN) created. 
     ||| } },
     withDistinguishedNames(value):: self {
@@ -20,7 +20,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseDuration': { 'function': { help: |||
+    '#withLeaseDuration':: { 'function': { help: |||
       Lease duration in seconds. 
     ||| } },
     withLeaseDuration(value):: self {
@@ -28,7 +28,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { lease_duration: value } },
       },
     },
-    '#withLeaseId': { 'function': { help: |||
+    '#withLeaseId':: { 'function': { help: |||
       Lease identifier assigned by Vault. 
     ||| } },
     withLeaseId(value):: self {
@@ -36,7 +36,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { lease_id: value } },
       },
     },
-    '#withLeaseRenewable': { 'function': { help: |||
+    '#withLeaseRenewable':: { 'function': { help: |||
       True if the duration of this lease can be extended through renewal. 
     ||| } },
     withLeaseRenewable(value):: self {
@@ -44,7 +44,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { lease_renewable: value } },
       },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       LDAP Secret Backend to read credentials from. 
     ||| } },
     withMount(value):: self {
@@ -52,7 +52,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -60,7 +60,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPassword': { 'function': { help: |||
+    '#withPassword':: { 'function': { help: |||
       Password for the dynamic role. 
     ||| } },
     withPassword(value):: self {
@@ -68,7 +68,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { password: value } },
       },
     },
-    '#withRoleName': { 'function': { help: |||
+    '#withRoleName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRoleName(value):: self {
@@ -76,7 +76,7 @@
         vault_ldap_dynamic_credentials+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withUsername': { 'function': { help: |||
+    '#withUsername':: { 'function': { help: |||
       Name of the dynamic role. 
     ||| } },
     withUsername(value):: self {

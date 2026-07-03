@@ -6,7 +6,7 @@
         path: path,
       } },
     },
-    '#withCustomMetadata': { 'function': { help: |||
+    '#withCustomMetadata':: { 'function': { help: |||
       Custom metadata describing this namespace. Value type is map[string]string. 
     ||| } },
     withCustomMetadata(value):: self {
@@ -19,7 +19,7 @@
         vault_namespace+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -27,7 +27,7 @@
         vault_namespace+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNamespaceId': { 'function': { help: |||
+    '#withNamespaceId':: { 'function': { help: |||
       Namespace ID. 
     ||| } },
     withNamespaceId(value):: self {
@@ -35,7 +35,7 @@
         vault_namespace+: { [terraformName]+: { namespace_id: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Namespace path. 
     ||| } },
     withPath(value):: self {
@@ -43,7 +43,7 @@
         vault_namespace+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPathFq': { 'function': { help: |||
+    '#withPathFq':: { 'function': { help: |||
       The fully qualified namespace path. 
     ||| } },
     withPathFq(value):: self {

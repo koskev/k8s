@@ -5,7 +5,7 @@
       kubernetes_secret+: { [terraformName]+: {
       } },
     },
-    '#withBinaryData': { 'function': { help: |||
+    '#withBinaryData':: { 'function': { help: |||
       A map of the secret data in base64 encoding. Use this for binary data. 
     ||| } },
     withBinaryData(value):: self {
@@ -13,7 +13,7 @@
         kubernetes_secret+: { [terraformName]+: { binary_data: value } },
       },
     },
-    '#withBinaryDataWo': { 'function': { help: |||
+    '#withBinaryDataWo':: { 'function': { help: |||
       A write-only map of the secret data in base64 encoding. Use this for binary data. 
     ||| } },
     withBinaryDataWo(value):: self {
@@ -21,7 +21,7 @@
         kubernetes_secret+: { [terraformName]+: { binary_data_wo: value } },
       },
     },
-    '#withBinaryDataWoRevision': { 'function': { help: |||
+    '#withBinaryDataWoRevision':: { 'function': { help: |||
       The current revision of the write-only "binary_data_wo" attribute. Incrementing this integer value will cause Terraform to update the write-only value. 
     ||| } },
     withBinaryDataWoRevision(value):: self {
@@ -29,7 +29,7 @@
         kubernetes_secret+: { [terraformName]+: { binary_data_wo_revision: value } },
       },
     },
-    '#withData': { 'function': { help: |||
+    '#withData':: { 'function': { help: |||
       A map of the secret data. 
     ||| } },
     withData(value):: self {
@@ -37,7 +37,7 @@
         kubernetes_secret+: { [terraformName]+: { data: value } },
       },
     },
-    '#withDataWo': { 'function': { help: |||
+    '#withDataWo':: { 'function': { help: |||
       A map write-only of the secret data. 
     ||| } },
     withDataWo(value):: self {
@@ -45,7 +45,7 @@
         kubernetes_secret+: { [terraformName]+: { data_wo: value } },
       },
     },
-    '#withDataWoRevision': { 'function': { help: |||
+    '#withDataWoRevision':: { 'function': { help: |||
       The current revision of the write-only "data_wo" attribute. Incrementing this integer value will cause Terraform to update the write-only value. 
     ||| } },
     withDataWoRevision(value):: self {
@@ -58,7 +58,7 @@
         kubernetes_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withImmutable': { 'function': { help: |||
+    '#withImmutable':: { 'function': { help: |||
       Ensures that data stored in the Secret cannot be updated (only object metadata can be modified). 
     ||| } },
     withImmutable(value):: self {
@@ -66,7 +66,7 @@
         kubernetes_secret+: { [terraformName]+: { immutable: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Type of secret 
     ||| } },
     withType(value):: self {
@@ -74,7 +74,7 @@
         kubernetes_secret+: { [terraformName]+: { type: value } },
       },
     },
-    '#withWaitForServiceAccountToken': { 'function': { help: |||
+    '#withWaitForServiceAccountToken':: { 'function': { help: |||
       Terraform will wait for the service account token to be created. 
     ||| } },
     withWaitForServiceAccountToken(value):: self {

@@ -7,7 +7,7 @@
         trust_domain: trust_domain,
       } },
     },
-    '#withBundleRefreshHint': { 'function': { help: |||
+    '#withBundleRefreshHint':: { 'function': { help: |||
       Refresh hint to use in trust bundles. 
     ||| } },
     withBundleRefreshHint(value):: self {
@@ -15,7 +15,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { bundle_refresh_hint: value } },
       },
     },
-    '#withJwtIssuerUrl': { 'function': { help: |||
+    '#withJwtIssuerUrl':: { 'function': { help: |||
       Base URL to use for JWT iss claim. 
     ||| } },
     withJwtIssuerUrl(value):: self {
@@ -23,7 +23,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { jwt_issuer_url: value } },
       },
     },
-    '#withJwtOidcCompatibilityMode': { 'function': { help: |||
+    '#withJwtOidcCompatibilityMode':: { 'function': { help: |||
       If true, SPIFFE IDs in JWT SVIDs must not exceed 255 bytes, the limit for the sub claim in OIDC. 
     ||| } },
     withJwtOidcCompatibilityMode(value):: self {
@@ -31,7 +31,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { jwt_oidc_compatibility_mode: value } },
       },
     },
-    '#withJwtSigningAlgorithm': { 'function': { help: |||
+    '#withJwtSigningAlgorithm':: { 'function': { help: |||
       Signing algorithm to use for JWTs. 
     ||| } },
     withJwtSigningAlgorithm(value):: self {
@@ -39,7 +39,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { jwt_signing_algorithm: value } },
       },
     },
-    '#withKeyLifetime': { 'function': { help: |||
+    '#withKeyLifetime':: { 'function': { help: |||
       How long a signing key will live for once it starts being used to sign. 
     ||| } },
     withKeyLifetime(value):: self {
@@ -47,7 +47,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { key_lifetime: value } },
       },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       Mount path for the SPIFFE secrets engine in Vault. 
     ||| } },
     withMount(value):: self {
@@ -55,7 +55,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -63,7 +63,7 @@
         vault_spiffe_secret_backend_config+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTrustDomain': { 'function': { help: |||
+    '#withTrustDomain':: { 'function': { help: |||
       The SPIFFE trust domain for this backend. 
     ||| } },
     withTrustDomain(value):: self {

@@ -6,7 +6,7 @@
         backend: backend,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
     withBackend(value):: self {
@@ -14,7 +14,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisablePeriodicTidy': { 'function': { help: |||
+    '#withDisablePeriodicTidy':: { 'function': { help: |||
       If true, disables the periodic tidying of the roletag blacklist entries. 
     ||| } },
     withDisablePeriodicTidy(value):: self {
@@ -27,7 +27,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -35,7 +35,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSafetyBuffer': { 'function': { help: |||
+    '#withSafetyBuffer':: { 'function': { help: |||
       The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage. 
     ||| } },
     withSafetyBuffer(value):: self {

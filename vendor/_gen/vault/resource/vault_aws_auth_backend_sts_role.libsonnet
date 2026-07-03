@@ -7,7 +7,7 @@
         sts_role: sts_role,
       } },
     },
-    '#withAccountId': { 'function': { help: |||
+    '#withAccountId':: { 'function': { help: |||
       AWS account ID to be associated with STS role. 
     ||| } },
     withAccountId(value):: self {
@@ -15,7 +15,7 @@
         vault_aws_auth_backend_sts_role+: { [terraformName]+: { account_id: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
     withBackend(value):: self {
@@ -23,7 +23,7 @@
         vault_aws_auth_backend_sts_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withExternalId': { 'function': { help: |||
+    '#withExternalId':: { 'function': { help: |||
       External ID expected by the STS role. 
     ||| } },
     withExternalId(value):: self {
@@ -36,7 +36,7 @@
         vault_aws_auth_backend_sts_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_aws_auth_backend_sts_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withStsRole': { 'function': { help: |||
+    '#withStsRole':: { 'function': { help: |||
       AWS ARN for STS role to be assumed when interacting with the account specified. 
     ||| } },
     withStsRole(value):: self {

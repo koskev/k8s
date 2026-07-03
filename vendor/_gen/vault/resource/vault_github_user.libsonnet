@@ -6,7 +6,7 @@
         user: user,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Auth backend to which user mapping will be congigured. 
     ||| } },
     withBackend(value):: self {
@@ -19,7 +19,7 @@
         vault_github_user+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -27,7 +27,7 @@
         vault_github_user+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to be assigned to this user. 
     ||| } },
     withPolicies(value):: self {
@@ -35,7 +35,7 @@
         vault_github_user+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withUser': { 'function': { help: |||
+    '#withUser':: { 'function': { help: |||
       GitHub user name. 
     ||| } },
     withUser(value):: self {

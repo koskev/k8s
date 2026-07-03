@@ -6,7 +6,7 @@
         storage_provisioner: storage_provisioner,
       } },
     },
-    '#withAllowVolumeExpansion': { 'function': { help: |||
+    '#withAllowVolumeExpansion':: { 'function': { help: |||
       Indicates whether the storage class allow volume expand 
     ||| } },
     withAllowVolumeExpansion(value):: self {
@@ -19,7 +19,7 @@
         kubernetes_storage_class+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountOptions': { 'function': { help: |||
+    '#withMountOptions':: { 'function': { help: |||
       Persistent Volumes that are dynamically created by a storage class will have the mount options specified 
     ||| } },
     withMountOptions(value):: self {
@@ -27,7 +27,7 @@
         kubernetes_storage_class+: { [terraformName]+: { mount_options: value } },
       },
     },
-    '#withParameters': { 'function': { help: |||
+    '#withParameters':: { 'function': { help: |||
       The parameters for the provisioner that should create volumes of this storage class 
     ||| } },
     withParameters(value):: self {
@@ -35,7 +35,7 @@
         kubernetes_storage_class+: { [terraformName]+: { parameters: value } },
       },
     },
-    '#withReclaimPolicy': { 'function': { help: |||
+    '#withReclaimPolicy':: { 'function': { help: |||
       Indicates the type of the reclaim policy 
     ||| } },
     withReclaimPolicy(value):: self {
@@ -43,7 +43,7 @@
         kubernetes_storage_class+: { [terraformName]+: { reclaim_policy: value } },
       },
     },
-    '#withStorageProvisioner': { 'function': { help: |||
+    '#withStorageProvisioner':: { 'function': { help: |||
       Indicates the type of the provisioner 
     ||| } },
     withStorageProvisioner(value):: self {
@@ -51,7 +51,7 @@
         kubernetes_storage_class+: { [terraformName]+: { storage_provisioner: value } },
       },
     },
-    '#withVolumeBindingMode': { 'function': { help: |||
+    '#withVolumeBindingMode':: { 'function': { help: |||
       Indicates when volume binding and dynamic provisioning should occur 
     ||| } },
     withVolumeBindingMode(value):: self {

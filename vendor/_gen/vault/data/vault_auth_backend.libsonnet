@@ -6,7 +6,7 @@
         path: path,
       } },
     },
-    '#withAccessor': { 'function': { help: |||
+    '#withAccessor':: { 'function': { help: |||
       The accessor of the auth backend. 
     ||| } },
     withAccessor(value):: self {
@@ -14,7 +14,7 @@
         vault_auth_backend+: { [terraformName]+: { accessor: value } },
       },
     },
-    '#withDefaultLeaseTtlSeconds': { 'function': { help: |||
+    '#withDefaultLeaseTtlSeconds':: { 'function': { help: |||
       Default lease duration in seconds 
     ||| } },
     withDefaultLeaseTtlSeconds(value):: self {
@@ -22,7 +22,7 @@
         vault_auth_backend+: { [terraformName]+: { default_lease_ttl_seconds: value } },
       },
     },
-    '#withDescription': { 'function': { help: |||
+    '#withDescription':: { 'function': { help: |||
       The description of the auth backend. 
     ||| } },
     withDescription(value):: self {
@@ -35,7 +35,7 @@
         vault_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withListingVisibility': { 'function': { help: |||
+    '#withListingVisibility':: { 'function': { help: |||
       Specifies whether to show this mount in the UI-specific listing endpoint. 
     ||| } },
     withListingVisibility(value):: self {
@@ -43,7 +43,7 @@
         vault_auth_backend+: { [terraformName]+: { listing_visibility: value } },
       },
     },
-    '#withLocal': { 'function': { help: |||
+    '#withLocal':: { 'function': { help: |||
       Specifies if the auth method is local only 
     ||| } },
     withLocal(value):: self {
@@ -51,7 +51,7 @@
         vault_auth_backend+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withMaxLeaseTtlSeconds': { 'function': { help: |||
+    '#withMaxLeaseTtlSeconds':: { 'function': { help: |||
       Maximum possible lease duration in seconds 
     ||| } },
     withMaxLeaseTtlSeconds(value):: self {
@@ -59,7 +59,7 @@
         vault_auth_backend+: { [terraformName]+: { max_lease_ttl_seconds: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +67,7 @@
         vault_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       The auth backend mount point. 
     ||| } },
     withPath(value):: self {
@@ -75,7 +75,7 @@
         vault_auth_backend+: { [terraformName]+: { path: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       The name of the auth backend. 
     ||| } },
     withType(value):: self {

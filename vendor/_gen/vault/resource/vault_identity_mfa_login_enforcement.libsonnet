@@ -7,7 +7,7 @@
         name: name,
       } },
     },
-    '#withAuthMethodAccessors': { 'function': { help: |||
+    '#withAuthMethodAccessors':: { 'function': { help: |||
       Set of auth method accessor IDs. 
     ||| } },
     withAuthMethodAccessors(value):: self {
@@ -15,7 +15,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { auth_method_accessors: value } },
       },
     },
-    '#withAuthMethodTypes': { 'function': { help: |||
+    '#withAuthMethodTypes':: { 'function': { help: |||
       Set of auth method types. 
     ||| } },
     withAuthMethodTypes(value):: self {
@@ -28,7 +28,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityEntityIds': { 'function': { help: |||
+    '#withIdentityEntityIds':: { 'function': { help: |||
       Set of identity entity IDs. 
     ||| } },
     withIdentityEntityIds(value):: self {
@@ -36,7 +36,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { identity_entity_ids: value } },
       },
     },
-    '#withIdentityGroupIds': { 'function': { help: |||
+    '#withIdentityGroupIds':: { 'function': { help: |||
       Set of identity group IDs. 
     ||| } },
     withIdentityGroupIds(value):: self {
@@ -44,7 +44,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { identity_group_ids: value } },
       },
     },
-    '#withMfaMethodIds': { 'function': { help: |||
+    '#withMfaMethodIds':: { 'function': { help: |||
       Set of MFA method UUIDs. 
     ||| } },
     withMfaMethodIds(value):: self {
@@ -52,7 +52,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { mfa_method_ids: value } },
       },
     },
-    '#withName': { 'function': { help: |||
+    '#withName':: { 'function': { help: |||
       Login enforcement name. 
     ||| } },
     withName(value):: self {
@@ -60,7 +60,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -68,7 +68,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNamespaceId': { 'function': { help: |||
+    '#withNamespaceId':: { 'function': { help: |||
       Method's namespace ID. 
     ||| } },
     withNamespaceId(value):: self {
@@ -76,7 +76,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { namespace_id: value } },
       },
     },
-    '#withNamespacePath': { 'function': { help: |||
+    '#withNamespacePath':: { 'function': { help: |||
       Method's namespace path. 
     ||| } },
     withNamespacePath(value):: self {
@@ -84,7 +84,7 @@
         vault_identity_mfa_login_enforcement+: { [terraformName]+: { namespace_path: value } },
       },
     },
-    '#withUuid': { 'function': { help: |||
+    '#withUuid':: { 'function': { help: |||
       Resource UUID. 
     ||| } },
     withUuid(value):: self {

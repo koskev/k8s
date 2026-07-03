@@ -7,7 +7,7 @@
         certificate: certificate,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to. 
     ||| } },
     withBackend(value):: self {
@@ -15,7 +15,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCertificate': { 'function': { help: |||
+    '#withCertificate':: { 'function': { help: |||
       The certificate. 
     ||| } },
     withCertificate(value):: self {
@@ -28,7 +28,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { id: value } },
       },
     },
-    '#withImportedIssuers': { 'function': { help: |||
+    '#withImportedIssuers':: { 'function': { help: |||
       The imported issuers. 
     ||| } },
     withImportedIssuers(value):: self {
@@ -36,7 +36,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { imported_issuers: value } },
       },
     },
-    '#withImportedKeys': { 'function': { help: |||
+    '#withImportedKeys':: { 'function': { help: |||
       The imported keys. 
     ||| } },
     withImportedKeys(value):: self {
@@ -44,7 +44,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { imported_keys: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {

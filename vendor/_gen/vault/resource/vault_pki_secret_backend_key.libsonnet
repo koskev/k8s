@@ -7,7 +7,7 @@
         type: type,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
     withBackend(value):: self {
@@ -20,7 +20,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyBits': { 'function': { help: |||
+    '#withKeyBits':: { 'function': { help: |||
       Specifies the number of bits to use for the generated keys. 
     ||| } },
     withKeyBits(value):: self {
@@ -28,7 +28,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { key_bits: value } },
       },
     },
-    '#withKeyId': { 'function': { help: |||
+    '#withKeyId':: { 'function': { help: |||
       ID of the generated key. 
     ||| } },
     withKeyId(value):: self {
@@ -36,7 +36,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { key_id: value } },
       },
     },
-    '#withKeyName': { 'function': { help: |||
+    '#withKeyName':: { 'function': { help: |||
       When a new key is created with this request, optionally specifies the name for this. 
     ||| } },
     withKeyName(value):: self {
@@ -44,7 +44,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { key_name: value } },
       },
     },
-    '#withKeyType': { 'function': { help: |||
+    '#withKeyType':: { 'function': { help: |||
       Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'. 
     ||| } },
     withKeyType(value):: self {
@@ -52,7 +52,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withManagedKeyId': { 'function': { help: |||
+    '#withManagedKeyId':: { 'function': { help: |||
       The managed key's UUID. 
     ||| } },
     withManagedKeyId(value):: self {
@@ -60,7 +60,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { managed_key_id: value } },
       },
     },
-    '#withManagedKeyName': { 'function': { help: |||
+    '#withManagedKeyName':: { 'function': { help: |||
       The managed key's configured name. 
     ||| } },
     withManagedKeyName(value):: self {
@@ -68,7 +68,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { managed_key_name: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -76,7 +76,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Specifies the type of the key to create. 
     ||| } },
     withType(value):: self {

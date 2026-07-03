@@ -7,7 +7,7 @@
         role: role,
       } },
     },
-    '#withAccessKey': { 'function': { help: |||
+    '#withAccessKey':: { 'function': { help: |||
       AWS access key ID read from Vault. 
     ||| } },
     withAccessKey(value):: self {
@@ -15,7 +15,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { access_key: value } },
       },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       AWS Secret Backend to read credentials from. 
     ||| } },
     withBackend(value):: self {
@@ -28,7 +28,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLeaseDuration': { 'function': { help: |||
+    '#withLeaseDuration':: { 'function': { help: |||
       Lease duration in seconds relative to the time in lease_start_time. 
     ||| } },
     withLeaseDuration(value):: self {
@@ -36,7 +36,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { lease_duration: value } },
       },
     },
-    '#withLeaseId': { 'function': { help: |||
+    '#withLeaseId':: { 'function': { help: |||
       Lease identifier assigned by vault. 
     ||| } },
     withLeaseId(value):: self {
@@ -44,7 +44,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { lease_id: value } },
       },
     },
-    '#withLeaseRenewable': { 'function': { help: |||
+    '#withLeaseRenewable':: { 'function': { help: |||
       True if the duration of this lease can be extended through renewal. 
     ||| } },
     withLeaseRenewable(value):: self {
@@ -52,7 +52,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { lease_renewable: value } },
       },
     },
-    '#withLeaseStartTime': { 'function': { help: |||
+    '#withLeaseStartTime':: { 'function': { help: |||
       Time at which the lease was read, using the clock of the system where Terraform was running 
     ||| } },
     withLeaseStartTime(value):: self {
@@ -60,7 +60,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { lease_start_time: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -68,7 +68,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRegion': { 'function': { help: |||
+    '#withRegion':: { 'function': { help: |||
       Region the read credentials belong to. 
     ||| } },
     withRegion(value):: self {
@@ -76,7 +76,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { region: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       AWS Secret Role to read credentials from. 
     ||| } },
     withRole(value):: self {
@@ -84,7 +84,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { role: value } },
       },
     },
-    '#withRoleArn': { 'function': { help: |||
+    '#withRoleArn':: { 'function': { help: |||
       ARN to use if multiple are available in the role. Required if the role has multiple ARNs. 
     ||| } },
     withRoleArn(value):: self {
@@ -92,7 +92,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { role_arn: value } },
       },
     },
-    '#withSecretKey': { 'function': { help: |||
+    '#withSecretKey':: { 'function': { help: |||
       AWS secret key read from Vault. 
     ||| } },
     withSecretKey(value):: self {
@@ -100,7 +100,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { secret_key: value } },
       },
     },
-    '#withSecurityToken': { 'function': { help: |||
+    '#withSecurityToken':: { 'function': { help: |||
       AWS security token read from Vault. (Only returned if type is 'sts'). 
     ||| } },
     withSecurityToken(value):: self {
@@ -108,7 +108,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { security_token: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       User specified Time-To-Live for the STS token. Uses the Role defined default_sts_ttl when not specified 
     ||| } },
     withTtl(value):: self {
@@ -116,7 +116,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withType': { 'function': { help: |||
+    '#withType':: { 'function': { help: |||
       Type of credentials to read. Must be either 'creds' for Access Key and Secret Key, or 'sts' for STS. 
     ||| } },
     withType(value):: self {

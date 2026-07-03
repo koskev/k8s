@@ -8,7 +8,7 @@
         service_account_name: service_account_name,
       } },
     },
-    '#withBackend': { 'function': { help: |||
+    '#withBackend':: { 'function': { help: |||
       The mount path for the AD backend. 
     ||| } },
     withBackend(value):: self {
@@ -21,7 +21,7 @@
         vault_ad_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLastVaultRotation': { 'function': { help: |||
+    '#withLastVaultRotation':: { 'function': { help: |||
       Last time Vault rotated this service account's password. 
     ||| } },
     withLastVaultRotation(value):: self {
@@ -29,7 +29,7 @@
         vault_ad_secret_role+: { [terraformName]+: { last_vault_rotation: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -37,7 +37,7 @@
         vault_ad_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPasswordLastSet': { 'function': { help: |||
+    '#withPasswordLastSet':: { 'function': { help: |||
       Last time Vault set this service account's password. 
     ||| } },
     withPasswordLastSet(value):: self {
@@ -45,7 +45,7 @@
         vault_ad_secret_role+: { [terraformName]+: { password_last_set: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role. 
     ||| } },
     withRole(value):: self {
@@ -53,7 +53,7 @@
         vault_ad_secret_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withServiceAccountName': { 'function': { help: |||
+    '#withServiceAccountName':: { 'function': { help: |||
       The username/logon name for the service account with which this role will be associated. 
     ||| } },
     withServiceAccountName(value):: self {
@@ -61,7 +61,7 @@
         vault_ad_secret_role+: { [terraformName]+: { service_account_name: value } },
       },
     },
-    '#withTtl': { 'function': { help: |||
+    '#withTtl':: { 'function': { help: |||
       In seconds, the default password time-to-live. 
     ||| } },
     withTtl(value):: self {

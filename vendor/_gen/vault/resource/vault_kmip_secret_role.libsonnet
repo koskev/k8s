@@ -8,7 +8,7 @@
         scope: scope,
       } },
     },
-    '#withCa': { 'function': { help: |||
+    '#withCa':: { 'function': { help: |||
       Name of the ca to use, if absent use legacy ca 
     ||| } },
     withCa(value):: self {
@@ -21,7 +21,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -29,7 +29,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOperationActivate': { 'function': { help: |||
+    '#withOperationActivate':: { 'function': { help: |||
       Grant permission to use the KMIP Activate operation 
     ||| } },
     withOperationActivate(value):: self {
@@ -37,7 +37,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_activate: value } },
       },
     },
-    '#withOperationAddAttribute': { 'function': { help: |||
+    '#withOperationAddAttribute':: { 'function': { help: |||
       Grant permission to use the KMIP Add Attribute operation 
     ||| } },
     withOperationAddAttribute(value):: self {
@@ -45,7 +45,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_add_attribute: value } },
       },
     },
-    '#withOperationAll': { 'function': { help: |||
+    '#withOperationAll':: { 'function': { help: |||
       Grant all permissions to this role. May not be specified with any other operation_* params 
     ||| } },
     withOperationAll(value):: self {
@@ -53,7 +53,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_all: value } },
       },
     },
-    '#withOperationCreate': { 'function': { help: |||
+    '#withOperationCreate':: { 'function': { help: |||
       Grant permission to use the KMIP Create operation 
     ||| } },
     withOperationCreate(value):: self {
@@ -61,7 +61,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_create: value } },
       },
     },
-    '#withOperationCreateKeyPair': { 'function': { help: |||
+    '#withOperationCreateKeyPair':: { 'function': { help: |||
       Grant permission to use the KMIP Create Key Pair operation 
     ||| } },
     withOperationCreateKeyPair(value):: self {
@@ -69,7 +69,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_create_key_pair: value } },
       },
     },
-    '#withOperationDecrypt': { 'function': { help: |||
+    '#withOperationDecrypt':: { 'function': { help: |||
       Grant permission to use the KMIP Decrypt operation 
     ||| } },
     withOperationDecrypt(value):: self {
@@ -77,7 +77,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_decrypt: value } },
       },
     },
-    '#withOperationDeleteAttribute': { 'function': { help: |||
+    '#withOperationDeleteAttribute':: { 'function': { help: |||
       Grant permission to use the KMIP Delete Attribute operation 
     ||| } },
     withOperationDeleteAttribute(value):: self {
@@ -85,7 +85,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_delete_attribute: value } },
       },
     },
-    '#withOperationDestroy': { 'function': { help: |||
+    '#withOperationDestroy':: { 'function': { help: |||
       Grant permission to use the KMIP Destroy operation 
     ||| } },
     withOperationDestroy(value):: self {
@@ -93,7 +93,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_destroy: value } },
       },
     },
-    '#withOperationDiscoverVersions': { 'function': { help: |||
+    '#withOperationDiscoverVersions':: { 'function': { help: |||
       Grant permission to use the KMIP Discover Version operation 
     ||| } },
     withOperationDiscoverVersions(value):: self {
@@ -101,7 +101,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_discover_versions: value } },
       },
     },
-    '#withOperationEncrypt': { 'function': { help: |||
+    '#withOperationEncrypt':: { 'function': { help: |||
       Grant permission to use the KMIP Encrypt operation 
     ||| } },
     withOperationEncrypt(value):: self {
@@ -109,7 +109,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_encrypt: value } },
       },
     },
-    '#withOperationGet': { 'function': { help: |||
+    '#withOperationGet':: { 'function': { help: |||
       Grant permission to use the KMIP Get operation 
     ||| } },
     withOperationGet(value):: self {
@@ -117,7 +117,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_get: value } },
       },
     },
-    '#withOperationGetAttributeList': { 'function': { help: |||
+    '#withOperationGetAttributeList':: { 'function': { help: |||
       Grant permission to use the KMIP Get Attribute List operation 
     ||| } },
     withOperationGetAttributeList(value):: self {
@@ -125,7 +125,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_get_attribute_list: value } },
       },
     },
-    '#withOperationGetAttributes': { 'function': { help: |||
+    '#withOperationGetAttributes':: { 'function': { help: |||
       Grant permission to use the KMIP Get Attributes operation 
     ||| } },
     withOperationGetAttributes(value):: self {
@@ -133,7 +133,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_get_attributes: value } },
       },
     },
-    '#withOperationImport': { 'function': { help: |||
+    '#withOperationImport':: { 'function': { help: |||
       Grant permission to use the KMIP Import operation 
     ||| } },
     withOperationImport(value):: self {
@@ -141,7 +141,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_import: value } },
       },
     },
-    '#withOperationLocate': { 'function': { help: |||
+    '#withOperationLocate':: { 'function': { help: |||
       Grant permission to use the KMIP Locate operation 
     ||| } },
     withOperationLocate(value):: self {
@@ -149,7 +149,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_locate: value } },
       },
     },
-    '#withOperationMac': { 'function': { help: |||
+    '#withOperationMac':: { 'function': { help: |||
       Grant permission to use the KMIP MAC operation 
     ||| } },
     withOperationMac(value):: self {
@@ -157,7 +157,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_mac: value } },
       },
     },
-    '#withOperationMacVerify': { 'function': { help: |||
+    '#withOperationMacVerify':: { 'function': { help: |||
       Grant permission to use the KMIP MAC Verify operation 
     ||| } },
     withOperationMacVerify(value):: self {
@@ -165,7 +165,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_mac_verify: value } },
       },
     },
-    '#withOperationModifyAttribute': { 'function': { help: |||
+    '#withOperationModifyAttribute':: { 'function': { help: |||
       Grant permission to use the KMIP Modify Attribute operation 
     ||| } },
     withOperationModifyAttribute(value):: self {
@@ -173,7 +173,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_modify_attribute: value } },
       },
     },
-    '#withOperationNone': { 'function': { help: |||
+    '#withOperationNone':: { 'function': { help: |||
       Remove all permissions from this role. May not be specified with any other operation_* params 
     ||| } },
     withOperationNone(value):: self {
@@ -181,7 +181,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_none: value } },
       },
     },
-    '#withOperationQuery': { 'function': { help: |||
+    '#withOperationQuery':: { 'function': { help: |||
       Grant permission to use the KMIP Query operation 
     ||| } },
     withOperationQuery(value):: self {
@@ -189,7 +189,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_query: value } },
       },
     },
-    '#withOperationRegister': { 'function': { help: |||
+    '#withOperationRegister':: { 'function': { help: |||
       Grant permission to use the KMIP Register operation 
     ||| } },
     withOperationRegister(value):: self {
@@ -197,7 +197,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_register: value } },
       },
     },
-    '#withOperationRekey': { 'function': { help: |||
+    '#withOperationRekey':: { 'function': { help: |||
       Grant permission to use the KMIP Rekey operation 
     ||| } },
     withOperationRekey(value):: self {
@@ -205,7 +205,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_rekey: value } },
       },
     },
-    '#withOperationRekeyKeyPair': { 'function': { help: |||
+    '#withOperationRekeyKeyPair':: { 'function': { help: |||
       Grant permission to use the KMIP Rekey Key Pair operation 
     ||| } },
     withOperationRekeyKeyPair(value):: self {
@@ -213,7 +213,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_rekey_key_pair: value } },
       },
     },
-    '#withOperationRevoke': { 'function': { help: |||
+    '#withOperationRevoke':: { 'function': { help: |||
       Grant permission to use the KMIP Revoke operation 
     ||| } },
     withOperationRevoke(value):: self {
@@ -221,7 +221,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_revoke: value } },
       },
     },
-    '#withOperationRngRetrieve': { 'function': { help: |||
+    '#withOperationRngRetrieve':: { 'function': { help: |||
       Grant permission to use the KMIP RNG Retrieve operation 
     ||| } },
     withOperationRngRetrieve(value):: self {
@@ -229,7 +229,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_rng_retrieve: value } },
       },
     },
-    '#withOperationRngSeed': { 'function': { help: |||
+    '#withOperationRngSeed':: { 'function': { help: |||
       Grant permission to use the KMIP RNG Seed operation 
     ||| } },
     withOperationRngSeed(value):: self {
@@ -237,7 +237,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_rng_seed: value } },
       },
     },
-    '#withOperationSign': { 'function': { help: |||
+    '#withOperationSign':: { 'function': { help: |||
       Grant permission to use the KMIP Sign operation 
     ||| } },
     withOperationSign(value):: self {
@@ -245,7 +245,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_sign: value } },
       },
     },
-    '#withOperationSignatureVerify': { 'function': { help: |||
+    '#withOperationSignatureVerify':: { 'function': { help: |||
       Grant permission to use the KMIP Signature Verify operation 
     ||| } },
     withOperationSignatureVerify(value):: self {
@@ -253,7 +253,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { operation_signature_verify: value } },
       },
     },
-    '#withPath': { 'function': { help: |||
+    '#withPath':: { 'function': { help: |||
       Path where KMIP backend is mounted 
     ||| } },
     withPath(value):: self {
@@ -261,7 +261,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRole': { 'function': { help: |||
+    '#withRole':: { 'function': { help: |||
       Name of the role 
     ||| } },
     withRole(value):: self {
@@ -269,7 +269,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withScope': { 'function': { help: |||
+    '#withScope':: { 'function': { help: |||
       Name of the scope 
     ||| } },
     withScope(value):: self {
@@ -277,7 +277,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { scope: value } },
       },
     },
-    '#withTlsClientKeyBits': { 'function': { help: |||
+    '#withTlsClientKeyBits':: { 'function': { help: |||
       Client certificate key bits, valid values depend on key type 
     ||| } },
     withTlsClientKeyBits(value):: self {
@@ -285,7 +285,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { tls_client_key_bits: value } },
       },
     },
-    '#withTlsClientKeyType': { 'function': { help: |||
+    '#withTlsClientKeyType':: { 'function': { help: |||
       Client certificate key type, rsa or ec 
     ||| } },
     withTlsClientKeyType(value):: self {
@@ -293,7 +293,7 @@
         vault_kmip_secret_role+: { [terraformName]+: { tls_client_key_type: value } },
       },
     },
-    '#withTlsClientTtl': { 'function': { help: |||
+    '#withTlsClientTtl':: { 'function': { help: |||
       Client certificate TTL in seconds 
     ||| } },
     withTlsClientTtl(value):: self {

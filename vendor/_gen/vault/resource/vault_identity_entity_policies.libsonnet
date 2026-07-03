@@ -7,7 +7,7 @@
         policies: policies,
       } },
     },
-    '#withEntityId': { 'function': { help: |||
+    '#withEntityId':: { 'function': { help: |||
       ID of the entity. 
     ||| } },
     withEntityId(value):: self {
@@ -15,7 +15,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { entity_id: value } },
       },
     },
-    '#withEntityName': { 'function': { help: |||
+    '#withEntityName':: { 'function': { help: |||
       Name of the entity. 
     ||| } },
     withEntityName(value):: self {
@@ -23,7 +23,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { entity_name: value } },
       },
     },
-    '#withExclusive': { 'function': { help: |||
+    '#withExclusive':: { 'function': { help: |||
       Should the resource manage policies exclusively 
     ||| } },
     withExclusive(value):: self {
@@ -36,7 +36,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +44,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies': { 'function': { help: |||
+    '#withPolicies':: { 'function': { help: |||
       Policies to be tied to the entity. 
     ||| } },
     withPolicies(value):: self {

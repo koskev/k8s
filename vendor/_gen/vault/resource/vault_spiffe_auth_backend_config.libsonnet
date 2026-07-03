@@ -8,7 +8,7 @@
         trust_domain: trust_domain,
       } },
     },
-    '#withAudience': { 'function': { help: |||
+    '#withAudience':: { 'function': { help: |||
       A list of audience values allowed to match claims in JWT-SVIDs 
     ||| } },
     withAudience(value):: self {
@@ -16,7 +16,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { audience: value } },
       },
     },
-    '#withBundle': { 'function': { help: |||
+    '#withBundle':: { 'function': { help: |||
       When profile is 'https_spiffe_bundle', the bootstrapping bundle in SPIFFE format; when profile is 'static', either a bundle in SPIFFE format or PEM-encoded CA certificate(s) 
     ||| } },
     withBundle(value):: self {
@@ -24,7 +24,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { bundle: value } },
       },
     },
-    '#withDeferBundleFetch': { 'function': { help: |||
+    '#withDeferBundleFetch':: { 'function': { help: |||
       Don't attempt to fetch a bundle immediately; only applies when profile != static 
     ||| } },
     withDeferBundleFetch(value):: self {
@@ -32,7 +32,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { defer_bundle_fetch: value } },
       },
     },
-    '#withEndpointRootCaTruststorePem': { 'function': { help: |||
+    '#withEndpointRootCaTruststorePem':: { 'function': { help: |||
       PEM-encoded CA certificate(s) to validate the server reached by 'endpoint_url', if set this will override the default TLS trust store 
     ||| } },
     withEndpointRootCaTruststorePem(value):: self {
@@ -40,7 +40,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { endpoint_root_ca_truststore_pem: value } },
       },
     },
-    '#withEndpointSpiffeId': { 'function': { help: |||
+    '#withEndpointSpiffeId':: { 'function': { help: |||
       The server's SPIFFE ID to validate when profile is 'https_spiffe_bundle' 
     ||| } },
     withEndpointSpiffeId(value):: self {
@@ -48,7 +48,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { endpoint_spiffe_id: value } },
       },
     },
-    '#withEndpointUrl': { 'function': { help: |||
+    '#withEndpointUrl':: { 'function': { help: |||
       The URI to be used when profile is 'https_web_bundle' or 'https_spiffe_bundle' 
     ||| } },
     withEndpointUrl(value):: self {
@@ -56,7 +56,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { endpoint_url: value } },
       },
     },
-    '#withMount': { 'function': { help: |||
+    '#withMount':: { 'function': { help: |||
       Mount path for the SPIFFE auth engine in Vault. 
     ||| } },
     withMount(value):: self {
@@ -64,7 +64,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace': { 'function': { help: |||
+    '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
     withNamespace(value):: self {
@@ -72,7 +72,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withProfile': { 'function': { help: |||
+    '#withProfile':: { 'function': { help: |||
       The mechanism to fetch or embed the trust bundle to use. 
     ||| } },
     withProfile(value):: self {
@@ -80,7 +80,7 @@
         vault_spiffe_auth_backend_config+: { [terraformName]+: { profile: value } },
       },
     },
-    '#withTrustDomain': { 'function': { help: |||
+    '#withTrustDomain':: { 'function': { help: |||
       The SPIFFE trust domain for this backend. 
     ||| } },
     withTrustDomain(value):: self {
