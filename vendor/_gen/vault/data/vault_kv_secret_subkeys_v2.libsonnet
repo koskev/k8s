@@ -1,28 +1,16 @@
 {
-  new(terraformName, mount, name):: {
+  new(terraformName, mount, name):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_kv_secret_subkeys_v2+: { [terraformName]+: {
-        mount: mount,
-        name: name,
-      } },
-    },
-    '#withData':: { 'function': { help: |||
-      Subkeys stored as a map of strings. 
-    ||| } },
-    withData(value):: self {
-      data+: {
-        vault_kv_secret_subkeys_v2+: { [terraformName]+: { data: value } },
+      vault_kv_secret_subkeys_v2+: {
+        [terraformName]+: {
+          mount: mount,
+          name: name,
+        },
       },
     },
-    '#withDataJson':: { 'function': { help: |||
-      Subkeys for the KV-V2 secret read from Vault. 
-    ||| } },
-    withDataJson(value):: self {
-      data+: {
-        vault_kv_secret_subkeys_v2+: { [terraformName]+: { data_json: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     '#withDepth':: { 'function': { help: |||
       Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist. 
     ||| } },
@@ -60,14 +48,6 @@
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
-      Full path where the generic secret will be written. 
-    ||| } },
-    withPath(value):: self {
-      data+: {
-        vault_kv_secret_subkeys_v2+: { [terraformName]+: { path: value } },
-      },
-    },
     '#withVersion':: { 'function': { help: |||
       Specifies the version to return. If not set the latest version is returned. 
     ||| } },
@@ -75,6 +55,45 @@
       data+: {
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { version: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_kv_secret_subkeys_v2.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#data':: { 'function': { help: |||
+        Subkeys stored as a map of strings. 
+      ||| } },
+      data(suffix=''):: refSelf.plain('.data%s' % suffix),
+      '#data_json':: { 'function': { help: |||
+        Subkeys for the KV-V2 secret read from Vault. 
+      ||| } },
+      data_json(suffix=''):: refSelf.plain('.data_json%s' % suffix),
+      '#depth':: { 'function': { help: |||
+        Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist. 
+      ||| } },
+      depth(suffix=''):: refSelf.plain('.depth%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        Path where KV-V2 engine is mounted 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Full path where the generic secret will be written. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      '#version':: { 'function': { help: |||
+        Specifies the version to return. If not set the latest version is returned. 
+      ||| } },
+      version(suffix=''):: refSelf.plain('.version%s' % suffix),
     },
   },
 }

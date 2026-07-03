@@ -1,20 +1,16 @@
 {
-  new(terraformName, backend, role):: {
+  new(terraformName, backend, role):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_nomad_access_token+: { [terraformName]+: {
-        backend: backend,
-        role: role,
-      } },
-    },
-    '#withAccessorId':: { 'function': { help: |||
-      The public identifier for a specific token. It can be used to look up information about a token or to revoke a token. 
-    ||| } },
-    withAccessorId(value):: self {
-      data+: {
-        vault_nomad_access_token+: { [terraformName]+: { accessor_id: value } },
+      vault_nomad_access_token+: {
+        [terraformName]+: {
+          backend: backend,
+          role: role,
+        },
       },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Nomad secret backend to generate tokens from. 
     ||| } },
@@ -44,13 +40,32 @@
         vault_nomad_access_token+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSecretId':: { 'function': { help: |||
-      Used to make requests to Nomad and should be kept private. 
-    ||| } },
-    withSecretId(value):: self {
-      data+: {
-        vault_nomad_access_token+: { [terraformName]+: { secret_id: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_nomad_access_token.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#accessor_id':: { 'function': { help: |||
+        The public identifier for a specific token. It can be used to look up information about a token or to revoke a token. 
+      ||| } },
+      accessor_id(suffix=''):: refSelf.plain('.accessor_id%s' % suffix),
+      '#backend':: { 'function': { help: |||
+        Nomad secret backend to generate tokens from. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#role':: { 'function': { help: |||
+        Name of the role. 
+      ||| } },
+      role(suffix=''):: refSelf.plain('.role%s' % suffix),
+      '#secret_id':: { 'function': { help: |||
+        Used to make requests to Nomad and should be kept private. 
+      ||| } },
+      secret_id(suffix=''):: refSelf.plain('.secret_id%s' % suffix),
     },
   },
 }

@@ -1,11 +1,15 @@
 {
-  new(terraformName, backend):: {
+  new(terraformName, backend):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_pki_secret_backend_config_cluster+: { [terraformName]+: {
-        backend: backend,
-      } },
+      vault_pki_secret_backend_config_cluster+: {
+        [terraformName]+: {
+          backend: backend,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withAiaPath':: { 'function': { help: |||
       Path to the cluster's AIA distribution point. 
     ||| } },
@@ -42,6 +46,29 @@
       resource+: {
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { path: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_pki_secret_backend_config_cluster.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#aia_path':: { 'function': { help: |||
+        Path to the cluster's AIA distribution point. 
+      ||| } },
+      aia_path(suffix=''):: refSelf.plain('.aia_path%s' % suffix),
+      '#backend':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Path to the cluster's API mount path. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
     },
   },
 }

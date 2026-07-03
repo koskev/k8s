@@ -1,11 +1,15 @@
 {
-  new(terraformName, name):: {
+  new(terraformName, name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_terraform_cloud_secret_role+: { [terraformName]+: {
-        name: name,
-      } },
+      vault_terraform_cloud_secret_role+: {
+        [terraformName]+: {
+          name: name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       The path of the Terraform Cloud Secret Backend the role belongs to. 
     ||| } },
@@ -90,6 +94,53 @@
       resource+: {
         vault_terraform_cloud_secret_role+: { [terraformName]+: { user_id: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_terraform_cloud_secret_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        The path of the Terraform Cloud Secret Backend the role belongs to. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#credential_type':: { 'function': { help: |||
+        The type of credential to generate. Valid values are 'team', 'team_legacy', 'user', or 'organization'. 
+      ||| } },
+      credential_type(suffix=''):: refSelf.plain('.credential_type%s' % suffix),
+      '#description':: { 'function': { help: |||
+        Description of the role. This is used as a prefix to help identify the token in the HCP Terraform UI. Only valid with 'team' or 'user' credential types. 
+      ||| } },
+      description(suffix=''):: refSelf.plain('.description%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#max_ttl':: { 'function': { help: |||
+        Maximum allowed lease for generated credentials. If not set or set to 0, will use system default. 
+      ||| } },
+      max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
+      '#name':: { 'function': { help: |||
+        The name of an existing role against which to create this Terraform Cloud credential 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#organization':: { 'function': { help: |||
+        Name of the Terraform Cloud or Enterprise organization 
+      ||| } },
+      organization(suffix=''):: refSelf.plain('.organization%s' % suffix),
+      '#team_id':: { 'function': { help: |||
+        ID of the Terraform Cloud or Enterprise team under organization (e.g., settings/teams/team-xxxxxxxxxxxxx) 
+      ||| } },
+      team_id(suffix=''):: refSelf.plain('.team_id%s' % suffix),
+      '#ttl':: { 'function': { help: |||
+        Default lease for generated credentials. If not set or set to 0, will use system default. 
+      ||| } },
+      ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
+      '#user_id':: { 'function': { help: |||
+        ID of the Terraform Cloud or Enterprise user (e.g., user-xxxxxxxxxxxxxxxx) 
+      ||| } },
+      user_id(suffix=''):: refSelf.plain('.user_id%s' % suffix),
     },
   },
 }

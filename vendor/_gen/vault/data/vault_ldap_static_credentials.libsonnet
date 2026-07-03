@@ -1,39 +1,19 @@
 {
-  new(terraformName, mount, role_name):: {
+  new(terraformName, mount, role_name):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_ldap_static_credentials+: { [terraformName]+: {
-        mount: mount,
-        role_name: role_name,
-      } },
-    },
-    '#withDn':: { 'function': { help: |||
-      Distinguished name (DN) of the existing LDAP entry to manage password rotation for. 
-    ||| } },
-    withDn(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { dn: value } },
+      vault_ldap_static_credentials+: {
+        [terraformName]+: {
+          mount: mount,
+          role_name: role_name,
+        },
       },
     },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       data+: {
         vault_ldap_static_credentials+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#withLastPassword':: { 'function': { help: |||
-      Last known password for the static role. 
-    ||| } },
-    withLastPassword(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { last_password: value } },
-      },
-    },
-    '#withLastVaultRotation':: { 'function': { help: |||
-      Last time Vault rotated this static role's password. 
-    ||| } },
-    withLastVaultRotation(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { last_vault_rotation: value } },
       },
     },
     '#withMount':: { 'function': { help: |||
@@ -52,14 +32,6 @@
         vault_ldap_static_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPassword':: { 'function': { help: |||
-      Password for the static role. 
-    ||| } },
-    withPassword(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { password: value } },
-      },
-    },
     '#withRoleName':: { 'function': { help: |||
       Name of the role. 
     ||| } },
@@ -68,29 +40,52 @@
         vault_ldap_static_credentials+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
-      How often Vault should rotate the password of the user entry. 
-    ||| } },
-    withRotationPeriod(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { rotation_period: value } },
-      },
-    },
-    '#withTtl':: { 'function': { help: |||
-      Duration in seconds after which the issued credential should expire. 
-    ||| } },
-    withTtl(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { ttl: value } },
-      },
-    },
-    '#withUsername':: { 'function': { help: |||
-      Name of the static role. 
-    ||| } },
-    withUsername(value):: self {
-      data+: {
-        vault_ldap_static_credentials+: { [terraformName]+: { username: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_ldap_static_credentials.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#dn':: { 'function': { help: |||
+        Distinguished name (DN) of the existing LDAP entry to manage password rotation for. 
+      ||| } },
+      dn(suffix=''):: refSelf.plain('.dn%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#last_password':: { 'function': { help: |||
+        Last known password for the static role. 
+      ||| } },
+      last_password(suffix=''):: refSelf.plain('.last_password%s' % suffix),
+      '#last_vault_rotation':: { 'function': { help: |||
+        Last time Vault rotated this static role's password. 
+      ||| } },
+      last_vault_rotation(suffix=''):: refSelf.plain('.last_vault_rotation%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        LDAP Secret Backend to read credentials from. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#password':: { 'function': { help: |||
+        Password for the static role. 
+      ||| } },
+      password(suffix=''):: refSelf.plain('.password%s' % suffix),
+      '#role_name':: { 'function': { help: |||
+        Name of the role. 
+      ||| } },
+      role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
+      '#rotation_period':: { 'function': { help: |||
+        How often Vault should rotate the password of the user entry. 
+      ||| } },
+      rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
+      '#ttl':: { 'function': { help: |||
+        Duration in seconds after which the issued credential should expire. 
+      ||| } },
+      ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
+      '#username':: { 'function': { help: |||
+        Name of the static role. 
+      ||| } },
+      username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },
   },
 }

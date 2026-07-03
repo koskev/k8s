@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      kubernetes_pod+: { [terraformName]+: {
-      } },
+      kubernetes_pod+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       resource+: {
         kubernetes_pod+: { [terraformName]+: { id: value } },
@@ -17,6 +21,17 @@
       resource+: {
         kubernetes_pod+: { [terraformName]+: { target_state: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ kubernetes_pod.%s%s }' % [terraformName, suffix],
+    fields:: {
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#target_state':: { 'function': { help: |||
+        A list of the pod phases that indicate whether it was successfully created. Options: "Pending", "Running", "Succeeded", "Failed", "Unknown". Default: "Running". More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase 
+      ||| } },
+      target_state(suffix=''):: refSelf.plain('.target_state%s' % suffix),
     },
   },
 }

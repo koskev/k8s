@@ -1,12 +1,16 @@
 {
-  new(terraformName, name, values):: {
+  new(terraformName, name, values):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_config_ui_header+: { [terraformName]+: {
-        name: name,
-        values: values,
-      } },
+      vault_config_ui_header+: {
+        [terraformName]+: {
+          name: name,
+          values: values,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withName':: { 'function': { help: |||
       The name of the custom header. Cannot start with `X-Vault-`. 
     ||| } },
@@ -22,6 +26,20 @@
       resource+: {
         vault_config_ui_header+: { [terraformName]+: { values: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_config_ui_header.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#name':: { 'function': { help: |||
+        The name of the custom header. Cannot start with `X-Vault-`. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#values':: { 'function': { help: |||
+        Set of values for the header. At least one value is required. Duplicates are automatically ignored. 
+      ||| } },
+      values(suffix=''):: refSelf.plain('.values%s' % suffix),
     },
   },
 }

@@ -1,33 +1,31 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_activation_flags+: { [terraformName]+: {
-      } },
-    },
-    '#withActivatedFlags':: { 'function': { help: |||
-      List of activated feature flags. 
-    ||| } },
-    withActivatedFlags(value):: self {
-      data+: {
-        vault_activation_flags+: { [terraformName]+: { activated_flags: value } },
+      vault_activation_flags+: {
+        [terraformName]+: {
+        },
       },
     },
-    '#withId':: { 'function': { help: |||
-      Unique identifier for this data source. 
-    ||| } },
-    withId(value):: self {
-      data+: {
-        vault_activation_flags+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#withUnactivatedFlags':: { 'function': { help: |||
-      List of unactivated feature flags. 
-    ||| } },
-    withUnactivatedFlags(value):: self {
-      data+: {
-        vault_activation_flags+: { [terraformName]+: { unactivated_flags: value } },
-      },
+  },
+  functions(terraformName):: {
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_activation_flags.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#activated_flags':: { 'function': { help: |||
+        List of activated feature flags. 
+      ||| } },
+      activated_flags(suffix=''):: refSelf.plain('.activated_flags%s' % suffix),
+      '#id':: { 'function': { help: |||
+        Unique identifier for this data source. 
+      ||| } },
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#unactivated_flags':: { 'function': { help: |||
+        List of unactivated feature flags. 
+      ||| } },
+      unactivated_flags(suffix=''):: refSelf.plain('.unactivated_flags%s' % suffix),
     },
   },
 }

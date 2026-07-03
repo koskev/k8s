@@ -1,94 +1,65 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      kubernetes_server_version+: { [terraformName]+: {
-      } },
-    },
-    '#withBuildDate':: { 'function': { help: |||
-      Kubernetes server build date 
-    ||| } },
-    withBuildDate(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { build_date: value } },
+      kubernetes_server_version+: {
+        [terraformName]+: {
+        },
       },
     },
-    '#withCompiler':: { 'function': { help: |||
-      Compiler used to build Kubernetes 
-    ||| } },
-    withCompiler(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { compiler: value } },
-      },
-    },
-    '#withGitCommit':: { 'function': { help: |||
-      Git commit SHA 
-    ||| } },
-    withGitCommit(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { git_commit: value } },
-      },
-    },
-    '#withGitTreeState':: { 'function': { help: |||
-      Git commit tree state 
-    ||| } },
-    withGitTreeState(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { git_tree_state: value } },
-      },
-    },
-    '#withGitVersion':: { 'function': { help: |||
-      Composite version and git commit sha 
-    ||| } },
-    withGitVersion(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { git_version: value } },
-      },
-    },
-    '#withGoVersion':: { 'function': { help: |||
-      Go compiler version 
-    ||| } },
-    withGoVersion(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { go_version: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       data+: {
         kubernetes_server_version+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMajor':: { 'function': { help: |||
-      Major Kubernetes version 
-    ||| } },
-    withMajor(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { major: value } },
-      },
-    },
-    '#withMinor':: { 'function': { help: |||
-      Minor Kubernetes version 
-    ||| } },
-    withMinor(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { minor: value } },
-      },
-    },
-    '#withPlatform':: { 'function': { help: |||
-      Platform 
-    ||| } },
-    withPlatform(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { platform: value } },
-      },
-    },
-    '#withVersion':: { 'function': { help: |||
-      Composite Kubernetes server version 
-    ||| } },
-    withVersion(value):: self {
-      data+: {
-        kubernetes_server_version+: { [terraformName]+: { version: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.kubernetes_server_version.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#build_date':: { 'function': { help: |||
+        Kubernetes server build date 
+      ||| } },
+      build_date(suffix=''):: refSelf.plain('.build_date%s' % suffix),
+      '#compiler':: { 'function': { help: |||
+        Compiler used to build Kubernetes 
+      ||| } },
+      compiler(suffix=''):: refSelf.plain('.compiler%s' % suffix),
+      '#git_commit':: { 'function': { help: |||
+        Git commit SHA 
+      ||| } },
+      git_commit(suffix=''):: refSelf.plain('.git_commit%s' % suffix),
+      '#git_tree_state':: { 'function': { help: |||
+        Git commit tree state 
+      ||| } },
+      git_tree_state(suffix=''):: refSelf.plain('.git_tree_state%s' % suffix),
+      '#git_version':: { 'function': { help: |||
+        Composite version and git commit sha 
+      ||| } },
+      git_version(suffix=''):: refSelf.plain('.git_version%s' % suffix),
+      '#go_version':: { 'function': { help: |||
+        Go compiler version 
+      ||| } },
+      go_version(suffix=''):: refSelf.plain('.go_version%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#major':: { 'function': { help: |||
+        Major Kubernetes version 
+      ||| } },
+      major(suffix=''):: refSelf.plain('.major%s' % suffix),
+      '#minor':: { 'function': { help: |||
+        Minor Kubernetes version 
+      ||| } },
+      minor(suffix=''):: refSelf.plain('.minor%s' % suffix),
+      '#platform':: { 'function': { help: |||
+        Platform 
+      ||| } },
+      platform(suffix=''):: refSelf.plain('.platform%s' % suffix),
+      '#version':: { 'function': { help: |||
+        Composite Kubernetes server version 
+      ||| } },
+      version(suffix=''):: refSelf.plain('.version%s' % suffix),
     },
   },
 }

@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_namespaces+: { [terraformName]+: {
-      } },
+      vault_namespaces+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       data+: {
         vault_namespaces+: { [terraformName]+: { id: value } },
@@ -18,22 +22,6 @@
         vault_namespaces+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPaths':: { 'function': { help: |||
-      Namespace paths. 
-    ||| } },
-    withPaths(value):: self {
-      data+: {
-        vault_namespaces+: { [terraformName]+: { paths: value } },
-      },
-    },
-    '#withPathsFq':: { 'function': { help: |||
-      The fully qualified namespace paths. 
-    ||| } },
-    withPathsFq(value):: self {
-      data+: {
-        vault_namespaces+: { [terraformName]+: { paths_fq: value } },
-      },
-    },
     '#withRecursive':: { 'function': { help: |||
       True to fetch all child namespaces. 
     ||| } },
@@ -41,6 +29,29 @@
       data+: {
         vault_namespaces+: { [terraformName]+: { recursive: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_namespaces.%s%s }' % [terraformName, suffix],
+    fields:: {
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#paths':: { 'function': { help: |||
+        Namespace paths. 
+      ||| } },
+      paths(suffix=''):: refSelf.plain('.paths%s' % suffix),
+      '#paths_fq':: { 'function': { help: |||
+        The fully qualified namespace paths. 
+      ||| } },
+      paths_fq(suffix=''):: refSelf.plain('.paths_fq%s' % suffix),
+      '#recursive':: { 'function': { help: |||
+        True to fetch all child namespaces. 
+      ||| } },
+      recursive(suffix=''):: refSelf.plain('.recursive%s' % suffix),
     },
   },
 }

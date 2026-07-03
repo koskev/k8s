@@ -1,12 +1,16 @@
 {
-  new(terraformName, name, type):: {
+  new(terraformName, name, type):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_plugin_runtime+: { [terraformName]+: {
-        name: name,
-        type: type,
-      } },
+      vault_plugin_runtime+: {
+        [terraformName]+: {
+          name: name,
+          type: type,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withCgroupParent':: { 'function': { help: |||
       Specifies the parent cgroup to set for each container. 
     ||| } },
@@ -21,11 +25,6 @@
     withCpuNanos(value):: self {
       resource+: {
         vault_plugin_runtime+: { [terraformName]+: { cpu_nanos: value } },
-      },
-    },
-    withId(value):: self {
-      resource+: {
-        vault_plugin_runtime+: { [terraformName]+: { id: value } },
       },
     },
     '#withMemoryBytes':: { 'function': { help: |||
@@ -75,6 +74,45 @@
       resource+: {
         vault_plugin_runtime+: { [terraformName]+: { type: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_plugin_runtime.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#cgroup_parent':: { 'function': { help: |||
+        Specifies the parent cgroup to set for each container. 
+      ||| } },
+      cgroup_parent(suffix=''):: refSelf.plain('.cgroup_parent%s' % suffix),
+      '#cpu_nanos':: { 'function': { help: |||
+        Specifies CPU limit to set per container in billionths of a CPU. 
+      ||| } },
+      cpu_nanos(suffix=''):: refSelf.plain('.cpu_nanos%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#memory_bytes':: { 'function': { help: |||
+        Specifies memory limit to set per container in bytes. 
+      ||| } },
+      memory_bytes(suffix=''):: refSelf.plain('.memory_bytes%s' % suffix),
+      '#name':: { 'function': { help: |||
+        The name of the plugin runtime. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#oci_runtime':: { 'function': { help: |||
+        Specifies OCI-compliant container runtime to use. 
+      ||| } },
+      oci_runtime(suffix=''):: refSelf.plain('.oci_runtime%s' % suffix),
+      '#rootless':: { 'function': { help: |||
+        Whether the container runtime is running as a non-privileged user. 
+      ||| } },
+      rootless(suffix=''):: refSelf.plain('.rootless%s' % suffix),
+      '#type':: { 'function': { help: |||
+        Specifies the plugin runtime type. Currently only `container` is supported. 
+      ||| } },
+      type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },
   },
 }

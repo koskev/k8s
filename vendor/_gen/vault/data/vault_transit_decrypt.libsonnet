@@ -1,13 +1,17 @@
 {
-  new(terraformName, backend, ciphertext, key):: {
+  new(terraformName, backend, ciphertext, key):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_transit_decrypt+: { [terraformName]+: {
-        backend: backend,
-        ciphertext: ciphertext,
-        key: key,
-      } },
+      vault_transit_decrypt+: {
+        [terraformName]+: {
+          backend: backend,
+          ciphertext: ciphertext,
+          key: key,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       The Transit secret backend the key belongs to. 
     ||| } },
@@ -53,13 +57,36 @@
         vault_transit_decrypt+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPlaintext':: { 'function': { help: |||
-      Decrypted plain text 
-    ||| } },
-    withPlaintext(value):: self {
-      data+: {
-        vault_transit_decrypt+: { [terraformName]+: { plaintext: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_transit_decrypt.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        The Transit secret backend the key belongs to. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#ciphertext':: { 'function': { help: |||
+        Transit encrypted cipher text. 
+      ||| } },
+      ciphertext(suffix=''):: refSelf.plain('.ciphertext%s' % suffix),
+      '#context':: { 'function': { help: |||
+        Specifies the context for key derivation 
+      ||| } },
+      context(suffix=''):: refSelf.plain('.context%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#key':: { 'function': { help: |||
+        Name of the decryption key to use. 
+      ||| } },
+      key(suffix=''):: refSelf.plain('.key%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#plaintext':: { 'function': { help: |||
+        Decrypted plain text 
+      ||| } },
+      plaintext(suffix=''):: refSelf.plain('.plaintext%s' % suffix),
     },
   },
 }

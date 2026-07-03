@@ -1,12 +1,16 @@
 {
-  new(terraformName, mount, name):: {
+  new(terraformName, mount, name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_alicloud_secret_backend_role+: { [terraformName]+: {
-        mount: mount,
-        name: name,
-      } },
+      vault_alicloud_secret_backend_role+: {
+        [terraformName]+: {
+          mount: mount,
+          name: name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withMaxTtl':: { 'function': { help: |||
       The maximum allowed lifetime of credentials issued using this role. 
     ||| } },
@@ -54,6 +58,36 @@
       resource+: {
         vault_alicloud_secret_backend_role+: { [terraformName]+: { ttl: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_alicloud_secret_backend_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#max_ttl':: { 'function': { help: |||
+        The maximum allowed lifetime of credentials issued using this role. 
+      ||| } },
+      max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        Path of the AliCloud Secret Backend the role belongs to. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Name of the role. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#role_arn':: { 'function': { help: |||
+        ARN of the RAM role to assume. If provided, inline_policies and remote_policies should be blank. The trusted principal of the role must be configured to allow assumption by the access key and secret configured in the backend. 
+      ||| } },
+      role_arn(suffix=''):: refSelf.plain('.role_arn%s' % suffix),
+      '#ttl':: { 'function': { help: |||
+        Duration in seconds after which the issued credentials should expire. Defaults to 0, in which case the value will fallback to the system/mount defaults. 
+      ||| } },
+      ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
     },
   },
 }

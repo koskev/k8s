@@ -1,41 +1,21 @@
 {
-  new(terraformName, backend):: {
+  new(terraformName, backend):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: {
-        backend: backend,
-      } },
-    },
-    '#withAuditFields':: { 'function': { help: |||
-      Fields parsed from the CSR that appear in the audit and can be used by sentinel policies 
-    ||| } },
-    withAuditFields(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { audit_fields: value } },
+      vault_pki_secret_backend_config_cmpv2+: {
+        [terraformName]+: {
+          backend: backend,
+        },
       },
     },
-    '#withAuthenticators':: { 'function': { help: |||
-      Lists the mount accessors CMPv2 should delegate authentication requests towards 
-    ||| } },
-    withAuthenticators(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { authenticators: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Path where PKI engine is mounted 
     ||| } },
     withBackend(value):: self {
       data+: {
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { backend: value } },
-      },
-    },
-    '#withDefaultPathPolicy':: { 'function': { help: |||
-      Can be sign-verbatim or a role given by role:<role_name> 
-    ||| } },
-    withDefaultPathPolicy(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { default_path_policy: value } },
       },
     },
     '#withDisabledValidations':: { 'function': { help: |||
@@ -46,33 +26,9 @@
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { disabled_validations: value } },
       },
     },
-    '#withEnableSentinelParsing':: { 'function': { help: |||
-      If set, parse out fields from the provided CSR making them available for Sentinel policies 
-    ||| } },
-    withEnableSentinelParsing(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { enable_sentinel_parsing: value } },
-      },
-    },
-    '#withEnabled':: { 'function': { help: |||
-      Specifies whether CMPv2 is enabled 
-    ||| } },
-    withEnabled(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { enabled: value } },
-      },
-    },
     withId(value):: self {
       data+: {
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#withLastUpdated':: { 'function': { help: |||
-      A read-only timestamp representing the last time the configuration was updated 
-    ||| } },
-    withLastUpdated(value):: self {
-      data+: {
-        vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { last_updated: value } },
       },
     },
     '#withNamespace':: { 'function': { help: |||
@@ -82,6 +38,49 @@
       data+: {
         vault_pki_secret_backend_config_cmpv2+: { [terraformName]+: { namespace: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_pki_secret_backend_config_cmpv2.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#audit_fields':: { 'function': { help: |||
+        Fields parsed from the CSR that appear in the audit and can be used by sentinel policies 
+      ||| } },
+      audit_fields(suffix=''):: refSelf.plain('.audit_fields%s' % suffix),
+      '#authenticators':: { 'function': { help: |||
+        Lists the mount accessors CMPv2 should delegate authentication requests towards 
+      ||| } },
+      authenticators(suffix=''):: refSelf.plain('.authenticators%s' % suffix),
+      '#backend':: { 'function': { help: |||
+        Path where PKI engine is mounted 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#default_path_policy':: { 'function': { help: |||
+        Can be sign-verbatim or a role given by role:<role_name> 
+      ||| } },
+      default_path_policy(suffix=''):: refSelf.plain('.default_path_policy%s' % suffix),
+      '#disabled_validations':: { 'function': { help: |||
+        A comma-separated list of validations not to perform on CMPv2 messages. 
+      ||| } },
+      disabled_validations(suffix=''):: refSelf.plain('.disabled_validations%s' % suffix),
+      '#enable_sentinel_parsing':: { 'function': { help: |||
+        If set, parse out fields from the provided CSR making them available for Sentinel policies 
+      ||| } },
+      enable_sentinel_parsing(suffix=''):: refSelf.plain('.enable_sentinel_parsing%s' % suffix),
+      '#enabled':: { 'function': { help: |||
+        Specifies whether CMPv2 is enabled 
+      ||| } },
+      enabled(suffix=''):: refSelf.plain('.enabled%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#last_updated':: { 'function': { help: |||
+        A read-only timestamp representing the last time the configuration was updated 
+      ||| } },
+      last_updated(suffix=''):: refSelf.plain('.last_updated%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },
   },
 }

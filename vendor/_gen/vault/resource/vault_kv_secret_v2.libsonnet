@@ -1,26 +1,22 @@
 {
-  new(terraformName, mount, name):: {
+  new(terraformName, mount, name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_kv_secret_v2+: { [terraformName]+: {
-        mount: mount,
-        name: name,
-      } },
+      vault_kv_secret_v2+: {
+        [terraformName]+: {
+          mount: mount,
+          name: name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withCas':: { 'function': { help: |||
       This flag is required if cas_required is set to true on either the secret or the engine's config. In order for a write to be successful, cas must be set to the current version of the secret. 
     ||| } },
     withCas(value):: self {
       resource+: {
         vault_kv_secret_v2+: { [terraformName]+: { cas: value } },
-      },
-    },
-    '#withData':: { 'function': { help: |||
-      Map of strings read from Vault. 
-    ||| } },
-    withData(value):: self {
-      resource+: {
-        vault_kv_secret_v2+: { [terraformName]+: { data: value } },
       },
     },
     '#withDataJson':: { 'function': { help: |||
@@ -68,14 +64,6 @@
         vault_kv_secret_v2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
-      Metadata associated with this secret read from Vault. 
-    ||| } },
-    withMetadata(value):: self {
-      resource+: {
-        vault_kv_secret_v2+: { [terraformName]+: { metadata: value } },
-      },
-    },
     '#withMount':: { 'function': { help: |||
       Path where KV-V2 engine is mounted. 
     ||| } },
@@ -108,13 +96,64 @@
         vault_kv_secret_v2+: { [terraformName]+: { options: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
-      Full path where the KV-V2 secret will be written. 
-    ||| } },
-    withPath(value):: self {
-      resource+: {
-        vault_kv_secret_v2+: { [terraformName]+: { path: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_kv_secret_v2.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#cas':: { 'function': { help: |||
+        This flag is required if cas_required is set to true on either the secret or the engine's config. In order for a write to be successful, cas must be set to the current version of the secret. 
+      ||| } },
+      cas(suffix=''):: refSelf.plain('.cas%s' % suffix),
+      '#data':: { 'function': { help: |||
+        Map of strings read from Vault. 
+      ||| } },
+      data(suffix=''):: refSelf.plain('.data%s' % suffix),
+      '#data_json':: { 'function': { help: |||
+        JSON-encoded secret data to write. 
+      ||| } },
+      data_json(suffix=''):: refSelf.plain('.data_json%s' % suffix),
+      '#data_json_wo':: { 'function': { help: |||
+        Write-Only JSON-encoded secret data to write. 
+      ||| } },
+      data_json_wo(suffix=''):: refSelf.plain('.data_json_wo%s' % suffix),
+      '#data_json_wo_version':: { 'function': { help: |||
+        Version counter for write-only secret data. 
+      ||| } },
+      data_json_wo_version(suffix=''):: refSelf.plain('.data_json_wo_version%s' % suffix),
+      '#delete_all_versions':: { 'function': { help: |||
+        If set to true, permanently deletes all versions for the specified key. 
+      ||| } },
+      delete_all_versions(suffix=''):: refSelf.plain('.delete_all_versions%s' % suffix),
+      '#disable_read':: { 'function': { help: |||
+        If set to true, disables reading secret from Vault; note: drift won't be detected. 
+      ||| } },
+      disable_read(suffix=''):: refSelf.plain('.disable_read%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#metadata':: { 'function': { help: |||
+        Metadata associated with this secret read from Vault. 
+      ||| } },
+      metadata(suffix=''):: refSelf.plain('.metadata%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        Path where KV-V2 engine is mounted. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#options':: { 'function': { help: |||
+        An object that holds option settings. 
+      ||| } },
+      options(suffix=''):: refSelf.plain('.options%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Full path where the KV-V2 secret will be written. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
     },
   },
 }

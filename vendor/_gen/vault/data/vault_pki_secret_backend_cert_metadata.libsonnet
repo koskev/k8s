@@ -1,39 +1,19 @@
 {
-  new(terraformName, path, serial):: {
+  new(terraformName, path, serial):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_pki_secret_backend_cert_metadata+: { [terraformName]+: {
-        path: path,
-        serial: serial,
-      } },
-    },
-    '#withCertMetadata':: { 'function': { help: |||
-      The metadata returned from Vault 
-    ||| } },
-    withCertMetadata(value):: self {
-      data+: {
-        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { cert_metadata: value } },
+      vault_pki_secret_backend_cert_metadata+: {
+        [terraformName]+: {
+          path: path,
+          serial: serial,
+        },
       },
     },
-    '#withExpiration':: { 'function': { help: |||
-      The certificate expiration as a Unix-style timestamp. 
-    ||| } },
-    withExpiration(value):: self {
-      data+: {
-        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { expiration: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       data+: {
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#withIssuerId':: { 'function': { help: |||
-      ID of the issuer. 
-    ||| } },
-    withIssuerId(value):: self {
-      data+: {
-        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { issuer_id: value } },
       },
     },
     '#withNamespace':: { 'function': { help: |||
@@ -52,14 +32,6 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
-      The role that issued the certificate 
-    ||| } },
-    withRole(value):: self {
-      data+: {
-        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { role: value } },
-      },
-    },
     '#withSerial':: { 'function': { help: |||
       Specifies the serial of the certificate whose metadata to read. 
     ||| } },
@@ -68,13 +40,44 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { serial: value } },
       },
     },
-    '#withSerialNumber':: { 'function': { help: |||
-      The certificate serial number 
-    ||| } },
-    withSerialNumber(value):: self {
-      data+: {
-        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { serial_number: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_pki_secret_backend_cert_metadata.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#cert_metadata':: { 'function': { help: |||
+        The metadata returned from Vault 
+      ||| } },
+      cert_metadata(suffix=''):: refSelf.plain('.cert_metadata%s' % suffix),
+      '#expiration':: { 'function': { help: |||
+        The certificate expiration as a Unix-style timestamp. 
+      ||| } },
+      expiration(suffix=''):: refSelf.plain('.expiration%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#issuer_id':: { 'function': { help: |||
+        ID of the issuer. 
+      ||| } },
+      issuer_id(suffix=''):: refSelf.plain('.issuer_id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      '#role':: { 'function': { help: |||
+        The role that issued the certificate 
+      ||| } },
+      role(suffix=''):: refSelf.plain('.role%s' % suffix),
+      '#serial':: { 'function': { help: |||
+        Specifies the serial of the certificate whose metadata to read. 
+      ||| } },
+      serial(suffix=''):: refSelf.plain('.serial%s' % suffix),
+      '#serial_number':: { 'function': { help: |||
+        The certificate serial number 
+      ||| } },
+      serial_number(suffix=''):: refSelf.plain('.serial_number%s' % suffix),
     },
   },
 }

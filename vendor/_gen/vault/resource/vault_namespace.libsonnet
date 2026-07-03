@@ -1,11 +1,15 @@
 {
-  new(terraformName, path):: {
+  new(terraformName, path):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_namespace+: { [terraformName]+: {
-        path: path,
-      } },
+      vault_namespace+: {
+        [terraformName]+: {
+          path: path,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withCustomMetadata':: { 'function': { help: |||
       Custom metadata describing this namespace. Value type is map[string]string. 
     ||| } },
@@ -27,14 +31,6 @@
         vault_namespace+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNamespaceId':: { 'function': { help: |||
-      Namespace ID. 
-    ||| } },
-    withNamespaceId(value):: self {
-      resource+: {
-        vault_namespace+: { [terraformName]+: { namespace_id: value } },
-      },
-    },
     '#withPath':: { 'function': { help: |||
       Namespace path. 
     ||| } },
@@ -50,6 +46,33 @@
       resource+: {
         vault_namespace+: { [terraformName]+: { path_fq: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_namespace.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#custom_metadata':: { 'function': { help: |||
+        Custom metadata describing this namespace. Value type is map[string]string. 
+      ||| } },
+      custom_metadata(suffix=''):: refSelf.plain('.custom_metadata%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#namespace_id':: { 'function': { help: |||
+        Namespace ID. 
+      ||| } },
+      namespace_id(suffix=''):: refSelf.plain('.namespace_id%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Namespace path. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      '#path_fq':: { 'function': { help: |||
+        The fully qualified namespace path. 
+      ||| } },
+      path_fq(suffix=''):: refSelf.plain('.path_fq%s' % suffix),
     },
   },
 }

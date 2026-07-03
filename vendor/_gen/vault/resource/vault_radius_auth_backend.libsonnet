@@ -1,14 +1,18 @@
 {
-  new(terraformName, host, mount, secret_wo, secret_wo_version):: {
+  new(terraformName, host, mount, secret_wo, secret_wo_version):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_radius_auth_backend+: { [terraformName]+: {
-        host: host,
-        mount: mount,
-        secret_wo: secret_wo,
-        secret_wo_version: secret_wo_version,
-      } },
+      vault_radius_auth_backend+: {
+        [terraformName]+: {
+          host: host,
+          mount: mount,
+          secret_wo: secret_wo,
+          secret_wo_version: secret_wo_version,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withAliasMetadata':: { 'function': { help: |||
       A map of string to string that will be set as metadata on the identity alias 
     ||| } },
@@ -47,14 +51,6 @@
     withNamespace(value):: self {
       resource+: {
         vault_radius_auth_backend+: { [terraformName]+: { namespace: value } },
-      },
-    },
-    '#withNasIdentifier':: { 'function': { help: |||
-      The NAS-Identifier attribute of the RADIUS request. This is a read-only field returned by Vault. 
-    ||| } },
-    withNasIdentifier(value):: self {
-      resource+: {
-        vault_radius_auth_backend+: { [terraformName]+: { nas_identifier: value } },
       },
     },
     '#withNasPort':: { 'function': { help: |||
@@ -176,6 +172,96 @@
       resource+: {
         vault_radius_auth_backend+: { [terraformName]+: { unregistered_user_policies: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_radius_auth_backend.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#alias_metadata':: { 'function': { help: |||
+        A map of string to string that will be set as metadata on the identity alias 
+      ||| } },
+      alias_metadata(suffix=''):: refSelf.plain('.alias_metadata%s' % suffix),
+      '#dial_timeout':: { 'function': { help: |||
+        Number of seconds to wait for a backend connection before timing out. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
+      ||| } },
+      dial_timeout(suffix=''):: refSelf.plain('.dial_timeout%s' % suffix),
+      '#host':: { 'function': { help: |||
+        The RADIUS server to connect to. Examples: `radius.myorg.com`, `127.0.0.1`. 
+      ||| } },
+      host(suffix=''):: refSelf.plain('.host%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        Path of the enabled RADIUS auth backend mount to configure. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#nas_identifier':: { 'function': { help: |||
+        The NAS-Identifier attribute of the RADIUS request. This is a read-only field returned by Vault. 
+      ||| } },
+      nas_identifier(suffix=''):: refSelf.plain('.nas_identifier%s' % suffix),
+      '#nas_port':: { 'function': { help: |||
+        The NAS-Port attribute of the RADIUS request. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
+      ||| } },
+      nas_port(suffix=''):: refSelf.plain('.nas_port%s' % suffix),
+      '#port':: { 'function': { help: |||
+        The UDP port where the RADIUS server is listening on. Defaults to `1812`. 
+      ||| } },
+      port(suffix=''):: refSelf.plain('.port%s' % suffix),
+      '#read_timeout':: { 'function': { help: |||
+        Number of seconds to wait for a response from the RADIUS server. Defaults to `10`. If removed from configuration after being set, Vault retains the previously stored value. 
+      ||| } },
+      read_timeout(suffix=''):: refSelf.plain('.read_timeout%s' % suffix),
+      '#secret_wo':: { 'function': { help: |||
+        The RADIUS shared secret. This is a write-only field and will not be read back from Vault. 
+      ||| } },
+      secret_wo(suffix=''):: refSelf.plain('.secret_wo%s' % suffix),
+      '#secret_wo_version':: { 'function': { help: |||
+        Version counter for the write-only `secret_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the secret changes. Increment this value whenever you update `secret_wo` so Terraform detects the change and applies an update. 
+      ||| } },
+      secret_wo_version(suffix=''):: refSelf.plain('.secret_wo_version%s' % suffix),
+      '#token_bound_cidrs':: { 'function': { help: |||
+        Specifies the blocks of IP addresses which are allowed to use the generated token 
+      ||| } },
+      token_bound_cidrs(suffix=''):: refSelf.plain('.token_bound_cidrs%s' % suffix),
+      '#token_explicit_max_ttl':: { 'function': { help: |||
+        Generated Token's Explicit Maximum TTL in seconds 
+      ||| } },
+      token_explicit_max_ttl(suffix=''):: refSelf.plain('.token_explicit_max_ttl%s' % suffix),
+      '#token_max_ttl':: { 'function': { help: |||
+        The maximum lifetime of the generated token 
+      ||| } },
+      token_max_ttl(suffix=''):: refSelf.plain('.token_max_ttl%s' % suffix),
+      '#token_no_default_policy':: { 'function': { help: |||
+        If true, the 'default' policy will not automatically be added to generated tokens 
+      ||| } },
+      token_no_default_policy(suffix=''):: refSelf.plain('.token_no_default_policy%s' % suffix),
+      '#token_num_uses':: { 'function': { help: |||
+        The maximum number of times a token may be used, a value of zero means unlimited 
+      ||| } },
+      token_num_uses(suffix=''):: refSelf.plain('.token_num_uses%s' % suffix),
+      '#token_period':: { 'function': { help: |||
+        Generated Token's Period 
+      ||| } },
+      token_period(suffix=''):: refSelf.plain('.token_period%s' % suffix),
+      '#token_policies':: { 'function': { help: |||
+        Generated Token's Policies 
+      ||| } },
+      token_policies(suffix=''):: refSelf.plain('.token_policies%s' % suffix),
+      '#token_ttl':: { 'function': { help: |||
+        The initial ttl of the token to generate in seconds 
+      ||| } },
+      token_ttl(suffix=''):: refSelf.plain('.token_ttl%s' % suffix),
+      '#token_type':: { 'function': { help: |||
+        The type of token to generate, service or batch 
+      ||| } },
+      token_type(suffix=''):: refSelf.plain('.token_type%s' % suffix),
+      '#unregistered_user_policies':: { 'function': { help: |||
+        A set of policies to be granted to unregistered users. 
+      ||| } },
+      unregistered_user_policies(suffix=''):: refSelf.plain('.unregistered_user_policies%s' % suffix),
     },
   },
 }

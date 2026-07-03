@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      kubernetes_job_v1+: { [terraformName]+: {
-      } },
+      kubernetes_job_v1+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       resource+: {
         kubernetes_job_v1+: { [terraformName]+: { id: value } },
@@ -14,6 +18,14 @@
       resource+: {
         kubernetes_job_v1+: { [terraformName]+: { wait_for_completion: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ kubernetes_job_v1.%s%s }' % [terraformName, suffix],
+    fields:: {
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      wait_for_completion(suffix=''):: refSelf.plain('.wait_for_completion%s' % suffix),
     },
   },
 }

@@ -1,28 +1,16 @@
 {
-  new(terraformName, mount, role_name):: {
+  new(terraformName, mount, role_name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_pki_external_ca_secret_backend_order+: { [terraformName]+: {
-        mount: mount,
-        role_name: role_name,
-      } },
-    },
-    '#withChallenges':: { 'function': { help: |||
-      Map of identifiers to their ACME challenges. 
-    ||| } },
-    withChallenges(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { challenges: value } },
+      vault_pki_external_ca_secret_backend_order+: {
+        [terraformName]+: {
+          mount: mount,
+          role_name: role_name,
+        },
       },
     },
-    '#withCreationDate':: { 'function': { help: |||
-      The date and time the order was created in RFC3339 format. 
-    ||| } },
-    withCreationDate(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { creation_date: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     '#withCsr':: { 'function': { help: |||
       PEM-encoded Certificate Signing Request containing identifiers. Required if `identifiers` is not provided. Mutually exclusive with `identifiers`. 
     ||| } },
@@ -31,36 +19,12 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { csr: value } },
       },
     },
-    '#withExpires':: { 'function': { help: |||
-      The expiration date of the order in RFC3339 format. 
-    ||| } },
-    withExpires(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { expires: value } },
-      },
-    },
     '#withIdentifiers':: { 'function': { help: |||
       List of identifiers (domain names) for the certificate order. Required if `csr` is not provided. Mutually exclusive with `csr`. 
     ||| } },
     withIdentifiers(value):: self {
       resource+: {
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { identifiers: value } },
-      },
-    },
-    '#withLastError':: { 'function': { help: |||
-      The last error message encountered during order processing. 
-    ||| } },
-    withLastError(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { last_error: value } },
-      },
-    },
-    '#withLastUpdate':: { 'function': { help: |||
-      The date and time the order was last updated in RFC3339 format. 
-    ||| } },
-    withLastUpdate(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { last_update: value } },
       },
     },
     '#withMount':: { 'function': { help: |||
@@ -79,30 +43,6 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNextWorkDate':: { 'function': { help: |||
-      The next scheduled work date for this order in RFC3339 format. 
-    ||| } },
-    withNextWorkDate(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { next_work_date: value } },
-      },
-    },
-    '#withOrderId':: { 'function': { help: |||
-      The unique identifier for this ACME order. 
-    ||| } },
-    withOrderId(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { order_id: value } },
-      },
-    },
-    '#withOrderStatus':: { 'function': { help: |||
-      Current status of the order (e.g., new, submitted, completed, error). 
-    ||| } },
-    withOrderStatus(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { order_status: value } },
-      },
-    },
     '#withRoleName':: { 'function': { help: |||
       Name of the role to create the order for. 
     ||| } },
@@ -111,13 +51,67 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withSerialNumber':: { 'function': { help: |||
-      The serial number of the issued certificate (available when order is completed). 
-    ||| } },
-    withSerialNumber(value):: self {
-      resource+: {
-        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { serial_number: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_pki_external_ca_secret_backend_order.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#challenges':: { 'function': { help: |||
+        Map of identifiers to their ACME challenges. 
+      ||| } },
+      challenges(suffix=''):: refSelf.plain('.challenges%s' % suffix),
+      '#creation_date':: { 'function': { help: |||
+        The date and time the order was created in RFC3339 format. 
+      ||| } },
+      creation_date(suffix=''):: refSelf.plain('.creation_date%s' % suffix),
+      '#csr':: { 'function': { help: |||
+        PEM-encoded Certificate Signing Request containing identifiers. Required if `identifiers` is not provided. Mutually exclusive with `identifiers`. 
+      ||| } },
+      csr(suffix=''):: refSelf.plain('.csr%s' % suffix),
+      '#expires':: { 'function': { help: |||
+        The expiration date of the order in RFC3339 format. 
+      ||| } },
+      expires(suffix=''):: refSelf.plain('.expires%s' % suffix),
+      '#identifiers':: { 'function': { help: |||
+        List of identifiers (domain names) for the certificate order. Required if `csr` is not provided. Mutually exclusive with `csr`. 
+      ||| } },
+      identifiers(suffix=''):: refSelf.plain('.identifiers%s' % suffix),
+      '#last_error':: { 'function': { help: |||
+        The last error message encountered during order processing. 
+      ||| } },
+      last_error(suffix=''):: refSelf.plain('.last_error%s' % suffix),
+      '#last_update':: { 'function': { help: |||
+        The date and time the order was last updated in RFC3339 format. 
+      ||| } },
+      last_update(suffix=''):: refSelf.plain('.last_update%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        The path where the PKI External CA secret backend is mounted. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#next_work_date':: { 'function': { help: |||
+        The next scheduled work date for this order in RFC3339 format. 
+      ||| } },
+      next_work_date(suffix=''):: refSelf.plain('.next_work_date%s' % suffix),
+      '#order_id':: { 'function': { help: |||
+        The unique identifier for this ACME order. 
+      ||| } },
+      order_id(suffix=''):: refSelf.plain('.order_id%s' % suffix),
+      '#order_status':: { 'function': { help: |||
+        Current status of the order (e.g., new, submitted, completed, error). 
+      ||| } },
+      order_status(suffix=''):: refSelf.plain('.order_status%s' % suffix),
+      '#role_name':: { 'function': { help: |||
+        Name of the role to create the order for. 
+      ||| } },
+      role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
+      '#serial_number':: { 'function': { help: |||
+        The serial number of the issued certificate (available when order is completed). 
+      ||| } },
+      serial_number(suffix=''):: refSelf.plain('.serial_number%s' % suffix),
     },
   },
 }

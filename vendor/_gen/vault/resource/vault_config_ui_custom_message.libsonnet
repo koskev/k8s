@@ -1,13 +1,17 @@
 {
-  new(terraformName, message_base64, start_time, title):: {
+  new(terraformName, message_base64, start_time, title):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_config_ui_custom_message+: { [terraformName]+: {
-        message_base64: message_base64,
-        start_time: start_time,
-        title: title,
-      } },
+      vault_config_ui_custom_message+: {
+        [terraformName]+: {
+          message_base64: message_base64,
+          start_time: start_time,
+          title: title,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withAuthenticated':: { 'function': { help: |||
       A flag indicating whether the custom message is displayed pre-login (false) or post-login (true) 
     ||| } },
@@ -22,14 +26,6 @@
     withEndTime(value):: self {
       resource+: {
         vault_config_ui_custom_message+: { [terraformName]+: { end_time: value } },
-      },
-    },
-    '#withId':: { 'function': { help: |||
-      The unique ID for the custom message 
-    ||| } },
-    withId(value):: self {
-      resource+: {
-        vault_config_ui_custom_message+: { [terraformName]+: { id: value } },
       },
     },
     '#withMessageBase64':: { 'function': { help: |||
@@ -79,6 +75,48 @@
       resource+: {
         vault_config_ui_custom_message+: { [terraformName]+: { type: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_config_ui_custom_message.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#authenticated':: { 'function': { help: |||
+        A flag indicating whether the custom message is displayed pre-login (false) or post-login (true) 
+      ||| } },
+      authenticated(suffix=''):: refSelf.plain('.authenticated%s' % suffix),
+      '#end_time':: { 'function': { help: |||
+        The ending time of the active period of the custom message. Can be omitted for non-expiring message 
+      ||| } },
+      end_time(suffix=''):: refSelf.plain('.end_time%s' % suffix),
+      '#id':: { 'function': { help: |||
+        The unique ID for the custom message 
+      ||| } },
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#message_base64':: { 'function': { help: |||
+        The base64-encoded content of the custom message 
+      ||| } },
+      message_base64(suffix=''):: refSelf.plain('.message_base64%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#options':: { 'function': { help: |||
+        A map containing additional options for the custom message 
+      ||| } },
+      options(suffix=''):: refSelf.plain('.options%s' % suffix),
+      '#start_time':: { 'function': { help: |||
+        The starting time of the active period of the custom message 
+      ||| } },
+      start_time(suffix=''):: refSelf.plain('.start_time%s' % suffix),
+      '#title':: { 'function': { help: |||
+        The title of the custom message 
+      ||| } },
+      title(suffix=''):: refSelf.plain('.title%s' % suffix),
+      '#type':: { 'function': { help: |||
+        The display type of custom message. Allowed values are banner and modal 
+      ||| } },
+      type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },
   },
 }

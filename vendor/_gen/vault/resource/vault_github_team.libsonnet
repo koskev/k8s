@@ -1,11 +1,15 @@
 {
-  new(terraformName, team):: {
+  new(terraformName, team):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_github_team+: { [terraformName]+: {
-        team: team,
-      } },
+      vault_github_team+: {
+        [terraformName]+: {
+          team: team,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Auth backend to which team mapping will be configured. 
     ||| } },
@@ -42,6 +46,29 @@
       resource+: {
         vault_github_team+: { [terraformName]+: { team: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_github_team.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Auth backend to which team mapping will be configured. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#policies':: { 'function': { help: |||
+        Policies to be assigned to this team. 
+      ||| } },
+      policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
+      '#team':: { 'function': { help: |||
+        GitHub team name in "slugified" format. 
+      ||| } },
+      team(suffix=''):: refSelf.plain('.team%s' % suffix),
     },
   },
 }

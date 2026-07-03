@@ -1,12 +1,16 @@
 {
-  new(terraformName, name, type):: {
+  new(terraformName, name, type):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_plugin+: { [terraformName]+: {
-        name: name,
-        type: type,
-      } },
+      vault_plugin+: {
+        [terraformName]+: {
+          name: name,
+          type: type,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withArgs':: { 'function': { help: |||
       List of additional arguments to pass to the plugin. 
     ||| } },
@@ -83,6 +87,49 @@
       resource+: {
         vault_plugin+: { [terraformName]+: { version: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_plugin.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#args':: { 'function': { help: |||
+        List of additional arguments to pass to the plugin. 
+      ||| } },
+      args(suffix=''):: refSelf.plain('.args%s' % suffix),
+      '#command':: { 'function': { help: |||
+        Command to execute the plugin, relative to the plugin_directory. 
+      ||| } },
+      command(suffix=''):: refSelf.plain('.command%s' % suffix),
+      '#env':: { 'function': { help: |||
+        List of additional environment variables to run the plugin with in KEY=VALUE form. 
+      ||| } },
+      env(suffix=''):: refSelf.plain('.env%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Name of the plugin. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#oci_image':: { 'function': { help: |||
+        OCI image to run. If specified, setting command, args, and env will update the container's entrypoint, args, and environment variables (append-only) respectively. 
+      ||| } },
+      oci_image(suffix=''):: refSelf.plain('.oci_image%s' % suffix),
+      '#runtime':: { 'function': { help: |||
+        Vault plugin runtime to use if oci_image is specified. 
+      ||| } },
+      runtime(suffix=''):: refSelf.plain('.runtime%s' % suffix),
+      '#sha256':: { 'function': { help: |||
+        SHA256 sum of the plugin binary. 
+      ||| } },
+      sha256(suffix=''):: refSelf.plain('.sha256%s' % suffix),
+      '#type':: { 'function': { help: |||
+        Type of plugin; one of "auth", "secret", or "database". 
+      ||| } },
+      type(suffix=''):: refSelf.plain('.type%s' % suffix),
+      '#version':: { 'function': { help: |||
+        Semantic version of the plugin. 
+      ||| } },
+      version(suffix=''):: refSelf.plain('.version%s' % suffix),
     },
   },
 }

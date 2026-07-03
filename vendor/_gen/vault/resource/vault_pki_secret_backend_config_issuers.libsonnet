@@ -1,11 +1,15 @@
 {
-  new(terraformName, backend):: {
+  new(terraformName, backend):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_pki_secret_backend_config_issuers+: { [terraformName]+: {
-        backend: backend,
-      } },
+      vault_pki_secret_backend_config_issuers+: {
+        [terraformName]+: {
+          backend: backend,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
@@ -42,6 +46,29 @@
       resource+: {
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { namespace: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_pki_secret_backend_config_issuers.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#default':: { 'function': { help: |||
+        Specifies the default issuer by ID. 
+      ||| } },
+      default(suffix=''):: refSelf.plain('.default%s' % suffix),
+      '#default_follows_latest_issuer':: { 'function': { help: |||
+        Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer. 
+      ||| } },
+      default_follows_latest_issuer(suffix=''):: refSelf.plain('.default_follows_latest_issuer%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },
   },
 }

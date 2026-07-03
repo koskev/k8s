@@ -1,11 +1,15 @@
 {
-  new(terraformName, value):: {
+  new(terraformName, value):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      kubernetes_priority_class_v1+: { [terraformName]+: {
-        value: value,
-      } },
+      kubernetes_priority_class_v1+: {
+        [terraformName]+: {
+          value: value,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withDescription':: { 'function': { help: |||
       An arbitrary string that usually provides guidelines on when this priority class should be used. 
     ||| } },
@@ -42,6 +46,29 @@
       resource+: {
         kubernetes_priority_class_v1+: { [terraformName]+: { value: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ kubernetes_priority_class_v1.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#description':: { 'function': { help: |||
+        An arbitrary string that usually provides guidelines on when this priority class should be used. 
+      ||| } },
+      description(suffix=''):: refSelf.plain('.description%s' % suffix),
+      '#global_default':: { 'function': { help: |||
+        Specifies whether this PriorityClass should be considered as the default priority for pods that do not have any priority class. Only one PriorityClass can be marked as `globalDefault`. However, if more than one PriorityClasses exists with their `globalDefault` field set to true, the smallest value of such global default PriorityClasses will be used as the default priority. 
+      ||| } },
+      global_default(suffix=''):: refSelf.plain('.global_default%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#preemption_policy':: { 'function': { help: |||
+        PreemptionPolicy is the Policy for preempting pods with lower priority. One of Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. 
+      ||| } },
+      preemption_policy(suffix=''):: refSelf.plain('.preemption_policy%s' % suffix),
+      '#value':: { 'function': { help: |||
+        The value of this priority class. This is the actual priority that pods receive when they have the name of this class in their pod spec. 
+      ||| } },
+      value(suffix=''):: refSelf.plain('.value%s' % suffix),
     },
   },
 }

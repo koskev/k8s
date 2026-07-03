@@ -1,14 +1,18 @@
 {
-  new(terraformName, api_token, mount_accessor, name, org_name):: {
+  new(terraformName, api_token, mount_accessor, name, org_name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_mfa_okta+: { [terraformName]+: {
-        api_token: api_token,
-        mount_accessor: mount_accessor,
-        name: name,
-        org_name: org_name,
-      } },
+      vault_mfa_okta+: {
+        [terraformName]+: {
+          api_token: api_token,
+          mount_accessor: mount_accessor,
+          name: name,
+          org_name: org_name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withApiToken':: { 'function': { help: |||
       Okta API key. 
     ||| } },
@@ -80,6 +84,48 @@
       resource+: {
         vault_mfa_okta+: { [terraformName]+: { username_format: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_mfa_okta.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#api_token':: { 'function': { help: |||
+        Okta API key. 
+      ||| } },
+      api_token(suffix=''):: refSelf.plain('.api_token%s' % suffix),
+      '#base_url':: { 'function': { help: |||
+        If set, will be used as the base domain for API requests. 
+      ||| } },
+      base_url(suffix=''):: refSelf.plain('.base_url%s' % suffix),
+      '#id':: { 'function': { help: |||
+        ID computed by Vault. 
+      ||| } },
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#mount_accessor':: { 'function': { help: |||
+        The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping. 
+      ||| } },
+      mount_accessor(suffix=''):: refSelf.plain('.mount_accessor%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Name of the MFA method. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#org_name':: { 'function': { help: |||
+        Name of the organization to be used in the Okta API. 
+      ||| } },
+      org_name(suffix=''):: refSelf.plain('.org_name%s' % suffix),
+      '#primary_email':: { 'function': { help: |||
+        If set to true, the username will only match the primary email for the account. 
+      ||| } },
+      primary_email(suffix=''):: refSelf.plain('.primary_email%s' % suffix),
+      '#username_format':: { 'function': { help: |||
+        A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`. 
+      ||| } },
+      username_format(suffix=''):: refSelf.plain('.username_format%s' % suffix),
     },
   },
 }

@@ -1,11 +1,15 @@
 {
-  new(terraformName, user):: {
+  new(terraformName, user):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_github_user+: { [terraformName]+: {
-        user: user,
-      } },
+      vault_github_user+: {
+        [terraformName]+: {
+          user: user,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Auth backend to which user mapping will be congigured. 
     ||| } },
@@ -42,6 +46,29 @@
       resource+: {
         vault_github_user+: { [terraformName]+: { user: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_github_user.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Auth backend to which user mapping will be congigured. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#policies':: { 'function': { help: |||
+        Policies to be assigned to this user. 
+      ||| } },
+      policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
+      '#user':: { 'function': { help: |||
+        GitHub user name. 
+      ||| } },
+      user(suffix=''):: refSelf.plain('.user%s' % suffix),
     },
   },
 }

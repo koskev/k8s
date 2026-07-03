@@ -1,10 +1,12 @@
 {
-new(terraformName, name):: {
+new(terraformName, name):: self.functions(terraformName) {
 _type:: 'tf',
 resource+: {
 vault_consul_secret_backend_role+: { [terraformName]+: {
 'name': name,
+},
 }}},
+functions(terraformName):: {
 '#withBackend':: { 'function': { help: |||
  The path of the Consul Secret Backend the role belongs to. 
 ||| } },
@@ -115,6 +117,67 @@ withTtl(value):: self {
 resource+: {
             vault_consul_secret_backend_role+: { [terraformName]+: { 'ttl': value } },
         },
+},
+},
+ref(terraformName):: {
+local refSelf = self,
+plain(suffix=''):: '${ vault_consul_secret_backend_role.%s%s }' % [terraformName, suffix],
+fields:: {
+'#backend':: { 'function': { help: |||
+ The path of the Consul Secret Backend the role belongs to. 
+||| } },
+'backend'(suffix=''):: refSelf.plain('.backend%s' % suffix),
+'#consul_namespace':: { 'function': { help: |||
+ The Consul namespace that the token will be created in. Applicable for Vault 1.10+ and Consul 1.7+ 
+||| } },
+'consul_namespace'(suffix=''):: refSelf.plain('.consul_namespace%s' % suffix),
+'#consul_policies':: { 'function': { help: |||
+ List of Consul policies to associate with this role 
+||| } },
+'consul_policies'(suffix=''):: refSelf.plain('.consul_policies%s' % suffix),
+'#consul_roles':: { 'function': { help: |||
+ Set of Consul roles to attach to the token. Applicable for Vault 1.10+ with Consul 1.5+ 
+||| } },
+'consul_roles'(suffix=''):: refSelf.plain('.consul_roles%s' % suffix),
+'id'(suffix=''):: refSelf.plain('.id%s' % suffix),
+'#local':: { 'function': { help: |||
+ Indicates that the token should not be replicated globally and instead be local to the current datacenter. 
+||| } },
+'local'(suffix=''):: refSelf.plain('.local%s' % suffix),
+'#max_ttl':: { 'function': { help: |||
+ Maximum TTL for leases associated with this role, in seconds. 
+||| } },
+'max_ttl'(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
+'#name':: { 'function': { help: |||
+ The name of an existing role against which to create this Consul credential 
+||| } },
+'name'(suffix=''):: refSelf.plain('.name%s' % suffix),
+'#namespace':: { 'function': { help: |||
+ Target namespace. (requires Enterprise) 
+||| } },
+'namespace'(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+'#node_identities':: { 'function': { help: |||
+ Set of Consul node identities to attach to
+				the token. Applicable for Vault 1.11+ with Consul 1.8+ 
+||| } },
+'node_identities'(suffix=''):: refSelf.plain('.node_identities%s' % suffix),
+'#partition':: { 'function': { help: |||
+ The Consul admin partition that the token will be created in. Applicable for Vault 1.10+ and Consul 1.11+ 
+||| } },
+'partition'(suffix=''):: refSelf.plain('.partition%s' % suffix),
+'#policies':: { 'function': { help: |||
+ List of Consul policies to associate with this role 
+||| } },
+'policies'(suffix=''):: refSelf.plain('.policies%s' % suffix),
+'#service_identities':: { 'function': { help: |||
+ Set of Consul service identities to attach to
+				the token. Applicable for Vault 1.11+ with Consul 1.5+ 
+||| } },
+'service_identities'(suffix=''):: refSelf.plain('.service_identities%s' % suffix),
+'#ttl':: { 'function': { help: |||
+ Specifies the TTL for this role. 
+||| } },
+'ttl'(suffix=''):: refSelf.plain('.ttl%s' % suffix),
 },
 },
 }

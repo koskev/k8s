@@ -1,19 +1,15 @@
 {
-  new(terraformName, type):: {
+  new(terraformName, type):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_auth_backend+: { [terraformName]+: {
-        type: type,
-      } },
-    },
-    '#withAccessor':: { 'function': { help: |||
-      The accessor of the auth backend 
-    ||| } },
-    withAccessor(value):: self {
-      resource+: {
-        vault_auth_backend+: { [terraformName]+: { accessor: value } },
+      vault_auth_backend+: {
+        [terraformName]+: {
+          type: type,
+        },
       },
     },
+  },
+  functions(terraformName):: {
     '#withDescription':: { 'function': { help: |||
       The description of the auth backend 
     ||| } },
@@ -79,6 +75,46 @@
       resource+: {
         vault_auth_backend+: { [terraformName]+: { type: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_auth_backend.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#accessor':: { 'function': { help: |||
+        The accessor of the auth backend 
+      ||| } },
+      accessor(suffix=''):: refSelf.plain('.accessor%s' % suffix),
+      '#description':: { 'function': { help: |||
+        The description of the auth backend 
+      ||| } },
+      description(suffix=''):: refSelf.plain('.description%s' % suffix),
+      '#disable_remount':: { 'function': { help: |||
+        If set, opts out of mount migration on path updates. 
+      ||| } },
+      disable_remount(suffix=''):: refSelf.plain('.disable_remount%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#identity_token_key':: { 'function': { help: |||
+        The key to use for signing identity tokens. 
+      ||| } },
+      identity_token_key(suffix=''):: refSelf.plain('.identity_token_key%s' % suffix),
+      '#local':: { 'function': { help: |||
+        Specifies if the auth method is local only 
+      ||| } },
+      'local'(suffix=''):: refSelf.plain('.local%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#path':: { 'function': { help: |||
+        path to mount the backend. This defaults to the type. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      tune(suffix=''):: refSelf.plain('.tune%s' % suffix),
+      '#type':: { 'function': { help: |||
+        Name of the auth backend 
+      ||| } },
+      type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },
   },
 }

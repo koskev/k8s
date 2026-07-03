@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      kubernetes_persistent_volume_claim_v1+: { [terraformName]+: {
-      } },
+      kubernetes_persistent_volume_claim_v1+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       resource+: {
         kubernetes_persistent_volume_claim_v1+: { [terraformName]+: { id: value } },
@@ -17,6 +21,17 @@
       resource+: {
         kubernetes_persistent_volume_claim_v1+: { [terraformName]+: { wait_until_bound: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ kubernetes_persistent_volume_claim_v1.%s%s }' % [terraformName, suffix],
+    fields:: {
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#wait_until_bound':: { 'function': { help: |||
+        Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space) 
+      ||| } },
+      wait_until_bound(suffix=''):: refSelf.plain('.wait_until_bound%s' % suffix),
     },
   },
 }

@@ -1,12 +1,16 @@
 {
-  new(terraformName, api_version, kind):: {
+  new(terraformName, api_version, kind):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      kubernetes_resources+: { [terraformName]+: {
-        api_version: api_version,
-        kind: kind,
-      } },
+      kubernetes_resources+: {
+        [terraformName]+: {
+          api_version: api_version,
+          kind: kind,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withApiVersion':: { 'function': { help: |||
       The resource apiVersion. 
     ||| } },
@@ -62,6 +66,40 @@
       data+: {
         kubernetes_resources+: { [terraformName]+: { objects: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.kubernetes_resources.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#api_version':: { 'function': { help: |||
+        The resource apiVersion. 
+      ||| } },
+      api_version(suffix=''):: refSelf.plain('.api_version%s' % suffix),
+      '#field_selector':: { 'function': { help: |||
+        A selector to restrict the list of returned objects by their fields. 
+      ||| } },
+      field_selector(suffix=''):: refSelf.plain('.field_selector%s' % suffix),
+      '#kind':: { 'function': { help: |||
+        The resource kind. 
+      ||| } },
+      kind(suffix=''):: refSelf.plain('.kind%s' % suffix),
+      '#label_selector':: { 'function': { help: |||
+        A selector to restrict the list of returned objects by their labels. 
+      ||| } },
+      label_selector(suffix=''):: refSelf.plain('.label_selector%s' % suffix),
+      '#limit':: { 'function': { help: |||
+        Limit is a maximum number of responses to return for a list call. 
+      ||| } },
+      limit(suffix=''):: refSelf.plain('.limit%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        The resource namespace. 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#objects':: { 'function': { help: |||
+        The response from the API server. 
+      ||| } },
+      objects(suffix=''):: refSelf.plain('.objects%s' % suffix),
     },
   },
 }

@@ -1,9 +1,11 @@
 {
-new(terraformName):: {
+new(terraformName):: self.functions(terraformName) {
 _type:: 'tf',
 resource+: {
 kubernetes_certificate_signing_request_v1+: { [terraformName]+: {
+},
 }}},
+functions(terraformName):: {
 '#withAutoApprove':: { 'function': { help: |||
  Automatically approve the CertificateSigningRequest 
 ||| } },
@@ -12,7 +14,21 @@ resource+: {
             kubernetes_certificate_signing_request_v1+: { [terraformName]+: { 'auto_approve': value } },
         },
 },
-'#withCertificate':: { 'function': { help: |||
+withId(value):: self {
+resource+: {
+            kubernetes_certificate_signing_request_v1+: { [terraformName]+: { 'id': value } },
+        },
+},
+},
+ref(terraformName):: {
+local refSelf = self,
+plain(suffix=''):: '${ kubernetes_certificate_signing_request_v1.%s%s }' % [terraformName, suffix],
+fields:: {
+'#auto_approve':: { 'function': { help: |||
+ Automatically approve the CertificateSigningRequest 
+||| } },
+'auto_approve'(suffix=''):: refSelf.plain('.auto_approve%s' % suffix),
+'#certificate':: { 'function': { help: |||
  certificate is populated with an issued certificate by the signer after an Approved condition is present. This field is set via the /status subresource. Once populated, this field is immutable.
 
 If the certificate signing request is denied, a condition of type "Denied" is added and this field remains empty. If the signer cannot issue the certificate, a condition of type "Failed" is added and this field remains empty.
@@ -32,15 +48,8 @@ When serialized as JSON or YAML, the data is additionally base64-encoded, so it 
 
     base64( 
 ||| } },
-withCertificate(value):: self {
-resource+: {
-            kubernetes_certificate_signing_request_v1+: { [terraformName]+: { 'certificate': value } },
-        },
-},
-withId(value):: self {
-resource+: {
-            kubernetes_certificate_signing_request_v1+: { [terraformName]+: { 'id': value } },
-        },
+'certificate'(suffix=''):: refSelf.plain('.certificate%s' % suffix),
+'id'(suffix=''):: refSelf.plain('.id%s' % suffix),
 },
 },
 }

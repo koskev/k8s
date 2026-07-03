@@ -1,12 +1,16 @@
 {
-  new(terraformName, role_name, user_claim):: {
+  new(terraformName, role_name, user_claim):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_jwt_auth_backend_role+: { [terraformName]+: {
-        role_name: role_name,
-        user_claim: user_claim,
-      } },
+      vault_jwt_auth_backend_role+: {
+        [terraformName]+: {
+          role_name: role_name,
+          user_claim: user_claim,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withAliasMetadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
        This should be a list or map containing the metadata in key value pairs. 
@@ -252,6 +256,134 @@
       resource+: {
         vault_jwt_auth_backend_role+: { [terraformName]+: { verbose_oidc_logging: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_jwt_auth_backend_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#alias_metadata':: { 'function': { help: |||
+        The metadata to be tied to generated entity alias.
+         This should be a list or map containing the metadata in key value pairs. 
+      ||| } },
+      alias_metadata(suffix=''):: refSelf.plain('.alias_metadata%s' % suffix),
+      '#allowed_redirect_uris':: { 'function': { help: |||
+        The list of allowed values for redirect_uri during OIDC logins. 
+      ||| } },
+      allowed_redirect_uris(suffix=''):: refSelf.plain('.allowed_redirect_uris%s' % suffix),
+      '#backend':: { 'function': { help: |||
+        Unique name of the auth backend to configure. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#bound_audiences':: { 'function': { help: |||
+        List of aud claims to match against. Any match is sufficient. 
+      ||| } },
+      bound_audiences(suffix=''):: refSelf.plain('.bound_audiences%s' % suffix),
+      '#bound_claims':: { 'function': { help: |||
+        Map of claims/values to match against. The expected value may be a single string or a comma-separated string list. 
+      ||| } },
+      bound_claims(suffix=''):: refSelf.plain('.bound_claims%s' % suffix),
+      '#bound_claims_type':: { 'function': { help: |||
+        How to interpret values in the claims/values map: can be either "string" (exact match) or "glob" (wildcard match). 
+      ||| } },
+      bound_claims_type(suffix=''):: refSelf.plain('.bound_claims_type%s' % suffix),
+      '#bound_subject':: { 'function': { help: |||
+        If set, requires that the sub claim matches this value. 
+      ||| } },
+      bound_subject(suffix=''):: refSelf.plain('.bound_subject%s' % suffix),
+      '#claim_mappings':: { 'function': { help: |||
+        Map of claims (keys) to be copied to specified metadata fields (values). 
+      ||| } },
+      claim_mappings(suffix=''):: refSelf.plain('.claim_mappings%s' % suffix),
+      '#clock_skew_leeway':: { 'function': { help: |||
+        The amount of leeway to add to all claims to account for clock skew, in seconds. Defaults to 60 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles. 
+      ||| } },
+      clock_skew_leeway(suffix=''):: refSelf.plain('.clock_skew_leeway%s' % suffix),
+      '#disable_bound_claims_parsing':: { 'function': { help: |||
+        Disable bound claim value parsing. Useful when values contain commas. 
+      ||| } },
+      disable_bound_claims_parsing(suffix=''):: refSelf.plain('.disable_bound_claims_parsing%s' % suffix),
+      '#expiration_leeway':: { 'function': { help: |||
+        The amount of leeway to add to expiration (exp) claims to account for clock skew, in seconds. Defaults to 150 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles. 
+      ||| } },
+      expiration_leeway(suffix=''):: refSelf.plain('.expiration_leeway%s' % suffix),
+      '#groups_claim':: { 'function': { help: |||
+        The claim to use to uniquely identify the set of groups to which the user belongs; this will be used as the names for the Identity group aliases created due to a successful login. The claim value must be a list of strings. 
+      ||| } },
+      groups_claim(suffix=''):: refSelf.plain('.groups_claim%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#max_age':: { 'function': { help: |||
+        Specifies the allowable elapsed time in seconds since the last time the user was actively authenticated. 
+      ||| } },
+      max_age(suffix=''):: refSelf.plain('.max_age%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#not_before_leeway':: { 'function': { help: |||
+        The amount of leeway to add to not before (nbf) claims to account for clock skew, in seconds. Defaults to 150 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles.  
+      ||| } },
+      not_before_leeway(suffix=''):: refSelf.plain('.not_before_leeway%s' % suffix),
+      '#oidc_scopes':: { 'function': { help: |||
+        List of OIDC scopes to be used with an OIDC role. The standard scope "openid" is automatically included and need not be specified. 
+      ||| } },
+      oidc_scopes(suffix=''):: refSelf.plain('.oidc_scopes%s' % suffix),
+      '#role_name':: { 'function': { help: |||
+        Name of the role. 
+      ||| } },
+      role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
+      '#role_type':: { 'function': { help: |||
+        Type of role, either "oidc" (default) or "jwt" 
+      ||| } },
+      role_type(suffix=''):: refSelf.plain('.role_type%s' % suffix),
+      '#token_bound_cidrs':: { 'function': { help: |||
+        Specifies the blocks of IP addresses which are allowed to use the generated token 
+      ||| } },
+      token_bound_cidrs(suffix=''):: refSelf.plain('.token_bound_cidrs%s' % suffix),
+      '#token_explicit_max_ttl':: { 'function': { help: |||
+        Generated Token's Explicit Maximum TTL in seconds 
+      ||| } },
+      token_explicit_max_ttl(suffix=''):: refSelf.plain('.token_explicit_max_ttl%s' % suffix),
+      '#token_max_ttl':: { 'function': { help: |||
+        The maximum lifetime of the generated token 
+      ||| } },
+      token_max_ttl(suffix=''):: refSelf.plain('.token_max_ttl%s' % suffix),
+      '#token_no_default_policy':: { 'function': { help: |||
+        If true, the 'default' policy will not automatically be added to generated tokens 
+      ||| } },
+      token_no_default_policy(suffix=''):: refSelf.plain('.token_no_default_policy%s' % suffix),
+      '#token_num_uses':: { 'function': { help: |||
+        The maximum number of times a token may be used, a value of zero means unlimited 
+      ||| } },
+      token_num_uses(suffix=''):: refSelf.plain('.token_num_uses%s' % suffix),
+      '#token_period':: { 'function': { help: |||
+        Generated Token's Period 
+      ||| } },
+      token_period(suffix=''):: refSelf.plain('.token_period%s' % suffix),
+      '#token_policies':: { 'function': { help: |||
+        Generated Token's Policies 
+      ||| } },
+      token_policies(suffix=''):: refSelf.plain('.token_policies%s' % suffix),
+      '#token_ttl':: { 'function': { help: |||
+        The initial ttl of the token to generate in seconds 
+      ||| } },
+      token_ttl(suffix=''):: refSelf.plain('.token_ttl%s' % suffix),
+      '#token_type':: { 'function': { help: |||
+        The type of token to generate, service or batch 
+      ||| } },
+      token_type(suffix=''):: refSelf.plain('.token_type%s' % suffix),
+      '#user_claim':: { 'function': { help: |||
+        The claim to use to uniquely identify the user; this will be used as the name for the Identity entity alias created due to a successful login. 
+      ||| } },
+      user_claim(suffix=''):: refSelf.plain('.user_claim%s' % suffix),
+      '#user_claim_json_pointer':: { 'function': { help: |||
+        Specifies if the user_claim value uses JSON pointer syntax for referencing claims. By default, the user_claim value will not use JSON pointer. 
+      ||| } },
+      user_claim_json_pointer(suffix=''):: refSelf.plain('.user_claim_json_pointer%s' % suffix),
+      '#verbose_oidc_logging':: { 'function': { help: |||
+        Log received OIDC tokens and claims when debug-level logging is active. Not recommended in production since sensitive information may be present in OIDC responses. 
+      ||| } },
+      verbose_oidc_logging(suffix=''):: refSelf.plain('.verbose_oidc_logging%s' % suffix),
     },
   },
 }

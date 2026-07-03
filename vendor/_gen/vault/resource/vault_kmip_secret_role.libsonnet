@@ -1,13 +1,17 @@
 {
-  new(terraformName, path, role, scope):: {
+  new(terraformName, path, role, scope):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_kmip_secret_role+: { [terraformName]+: {
-        path: path,
-        role: role,
-        scope: scope,
-      } },
+      vault_kmip_secret_role+: {
+        [terraformName]+: {
+          path: path,
+          role: role,
+          scope: scope,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withCa':: { 'function': { help: |||
       Name of the ca to use, if absent use legacy ca 
     ||| } },
@@ -300,6 +304,157 @@
       resource+: {
         vault_kmip_secret_role+: { [terraformName]+: { tls_client_ttl: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_kmip_secret_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#ca':: { 'function': { help: |||
+        Name of the ca to use, if absent use legacy ca 
+      ||| } },
+      ca(suffix=''):: refSelf.plain('.ca%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#operation_activate':: { 'function': { help: |||
+        Grant permission to use the KMIP Activate operation 
+      ||| } },
+      operation_activate(suffix=''):: refSelf.plain('.operation_activate%s' % suffix),
+      '#operation_add_attribute':: { 'function': { help: |||
+        Grant permission to use the KMIP Add Attribute operation 
+      ||| } },
+      operation_add_attribute(suffix=''):: refSelf.plain('.operation_add_attribute%s' % suffix),
+      '#operation_all':: { 'function': { help: |||
+        Grant all permissions to this role. May not be specified with any other operation_* params 
+      ||| } },
+      operation_all(suffix=''):: refSelf.plain('.operation_all%s' % suffix),
+      '#operation_create':: { 'function': { help: |||
+        Grant permission to use the KMIP Create operation 
+      ||| } },
+      operation_create(suffix=''):: refSelf.plain('.operation_create%s' % suffix),
+      '#operation_create_key_pair':: { 'function': { help: |||
+        Grant permission to use the KMIP Create Key Pair operation 
+      ||| } },
+      operation_create_key_pair(suffix=''):: refSelf.plain('.operation_create_key_pair%s' % suffix),
+      '#operation_decrypt':: { 'function': { help: |||
+        Grant permission to use the KMIP Decrypt operation 
+      ||| } },
+      operation_decrypt(suffix=''):: refSelf.plain('.operation_decrypt%s' % suffix),
+      '#operation_delete_attribute':: { 'function': { help: |||
+        Grant permission to use the KMIP Delete Attribute operation 
+      ||| } },
+      operation_delete_attribute(suffix=''):: refSelf.plain('.operation_delete_attribute%s' % suffix),
+      '#operation_destroy':: { 'function': { help: |||
+        Grant permission to use the KMIP Destroy operation 
+      ||| } },
+      operation_destroy(suffix=''):: refSelf.plain('.operation_destroy%s' % suffix),
+      '#operation_discover_versions':: { 'function': { help: |||
+        Grant permission to use the KMIP Discover Version operation 
+      ||| } },
+      operation_discover_versions(suffix=''):: refSelf.plain('.operation_discover_versions%s' % suffix),
+      '#operation_encrypt':: { 'function': { help: |||
+        Grant permission to use the KMIP Encrypt operation 
+      ||| } },
+      operation_encrypt(suffix=''):: refSelf.plain('.operation_encrypt%s' % suffix),
+      '#operation_get':: { 'function': { help: |||
+        Grant permission to use the KMIP Get operation 
+      ||| } },
+      operation_get(suffix=''):: refSelf.plain('.operation_get%s' % suffix),
+      '#operation_get_attribute_list':: { 'function': { help: |||
+        Grant permission to use the KMIP Get Attribute List operation 
+      ||| } },
+      operation_get_attribute_list(suffix=''):: refSelf.plain('.operation_get_attribute_list%s' % suffix),
+      '#operation_get_attributes':: { 'function': { help: |||
+        Grant permission to use the KMIP Get Attributes operation 
+      ||| } },
+      operation_get_attributes(suffix=''):: refSelf.plain('.operation_get_attributes%s' % suffix),
+      '#operation_import':: { 'function': { help: |||
+        Grant permission to use the KMIP Import operation 
+      ||| } },
+      operation_import(suffix=''):: refSelf.plain('.operation_import%s' % suffix),
+      '#operation_locate':: { 'function': { help: |||
+        Grant permission to use the KMIP Locate operation 
+      ||| } },
+      operation_locate(suffix=''):: refSelf.plain('.operation_locate%s' % suffix),
+      '#operation_mac':: { 'function': { help: |||
+        Grant permission to use the KMIP MAC operation 
+      ||| } },
+      operation_mac(suffix=''):: refSelf.plain('.operation_mac%s' % suffix),
+      '#operation_mac_verify':: { 'function': { help: |||
+        Grant permission to use the KMIP MAC Verify operation 
+      ||| } },
+      operation_mac_verify(suffix=''):: refSelf.plain('.operation_mac_verify%s' % suffix),
+      '#operation_modify_attribute':: { 'function': { help: |||
+        Grant permission to use the KMIP Modify Attribute operation 
+      ||| } },
+      operation_modify_attribute(suffix=''):: refSelf.plain('.operation_modify_attribute%s' % suffix),
+      '#operation_none':: { 'function': { help: |||
+        Remove all permissions from this role. May not be specified with any other operation_* params 
+      ||| } },
+      operation_none(suffix=''):: refSelf.plain('.operation_none%s' % suffix),
+      '#operation_query':: { 'function': { help: |||
+        Grant permission to use the KMIP Query operation 
+      ||| } },
+      operation_query(suffix=''):: refSelf.plain('.operation_query%s' % suffix),
+      '#operation_register':: { 'function': { help: |||
+        Grant permission to use the KMIP Register operation 
+      ||| } },
+      operation_register(suffix=''):: refSelf.plain('.operation_register%s' % suffix),
+      '#operation_rekey':: { 'function': { help: |||
+        Grant permission to use the KMIP Rekey operation 
+      ||| } },
+      operation_rekey(suffix=''):: refSelf.plain('.operation_rekey%s' % suffix),
+      '#operation_rekey_key_pair':: { 'function': { help: |||
+        Grant permission to use the KMIP Rekey Key Pair operation 
+      ||| } },
+      operation_rekey_key_pair(suffix=''):: refSelf.plain('.operation_rekey_key_pair%s' % suffix),
+      '#operation_revoke':: { 'function': { help: |||
+        Grant permission to use the KMIP Revoke operation 
+      ||| } },
+      operation_revoke(suffix=''):: refSelf.plain('.operation_revoke%s' % suffix),
+      '#operation_rng_retrieve':: { 'function': { help: |||
+        Grant permission to use the KMIP RNG Retrieve operation 
+      ||| } },
+      operation_rng_retrieve(suffix=''):: refSelf.plain('.operation_rng_retrieve%s' % suffix),
+      '#operation_rng_seed':: { 'function': { help: |||
+        Grant permission to use the KMIP RNG Seed operation 
+      ||| } },
+      operation_rng_seed(suffix=''):: refSelf.plain('.operation_rng_seed%s' % suffix),
+      '#operation_sign':: { 'function': { help: |||
+        Grant permission to use the KMIP Sign operation 
+      ||| } },
+      operation_sign(suffix=''):: refSelf.plain('.operation_sign%s' % suffix),
+      '#operation_signature_verify':: { 'function': { help: |||
+        Grant permission to use the KMIP Signature Verify operation 
+      ||| } },
+      operation_signature_verify(suffix=''):: refSelf.plain('.operation_signature_verify%s' % suffix),
+      '#path':: { 'function': { help: |||
+        Path where KMIP backend is mounted 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      '#role':: { 'function': { help: |||
+        Name of the role 
+      ||| } },
+      role(suffix=''):: refSelf.plain('.role%s' % suffix),
+      '#scope':: { 'function': { help: |||
+        Name of the scope 
+      ||| } },
+      scope(suffix=''):: refSelf.plain('.scope%s' % suffix),
+      '#tls_client_key_bits':: { 'function': { help: |||
+        Client certificate key bits, valid values depend on key type 
+      ||| } },
+      tls_client_key_bits(suffix=''):: refSelf.plain('.tls_client_key_bits%s' % suffix),
+      '#tls_client_key_type':: { 'function': { help: |||
+        Client certificate key type, rsa or ec 
+      ||| } },
+      tls_client_key_type(suffix=''):: refSelf.plain('.tls_client_key_type%s' % suffix),
+      '#tls_client_ttl':: { 'function': { help: |||
+        Client certificate TTL in seconds 
+      ||| } },
+      tls_client_ttl(suffix=''):: refSelf.plain('.tls_client_ttl%s' % suffix),
     },
   },
 }

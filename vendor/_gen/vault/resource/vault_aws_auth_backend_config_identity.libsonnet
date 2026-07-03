@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_aws_auth_backend_config_identity+: { [terraformName]+: {
-      } },
+      vault_aws_auth_backend_config_identity+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Unique name of the auth backend to configure. 
     ||| } },
@@ -57,6 +61,37 @@
       resource+: {
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { namespace: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_aws_auth_backend_config_identity.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Unique name of the auth backend to configure. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#ec2_alias':: { 'function': { help: |||
+        Configures how to generate the identity alias when using the ec2 auth method. 
+      ||| } },
+      ec2_alias(suffix=''):: refSelf.plain('.ec2_alias%s' % suffix),
+      '#ec2_metadata':: { 'function': { help: |||
+        The metadata to include on the token returned by the login endpoint. 
+      ||| } },
+      ec2_metadata(suffix=''):: refSelf.plain('.ec2_metadata%s' % suffix),
+      '#iam_alias':: { 'function': { help: |||
+        How to generate the identity alias when using the iam auth method. 
+      ||| } },
+      iam_alias(suffix=''):: refSelf.plain('.iam_alias%s' % suffix),
+      '#iam_metadata':: { 'function': { help: |||
+        The metadata to include on the token returned by the login endpoint. 
+      ||| } },
+      iam_metadata(suffix=''):: refSelf.plain('.iam_metadata%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },
   },
 }

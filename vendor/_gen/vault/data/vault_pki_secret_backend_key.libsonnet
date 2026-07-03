@@ -1,12 +1,16 @@
 {
-  new(terraformName, backend, key_ref):: {
+  new(terraformName, backend, key_ref):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_pki_secret_backend_key+: { [terraformName]+: {
-        backend: backend,
-        key_ref: key_ref,
-      } },
+      vault_pki_secret_backend_key+: {
+        [terraformName]+: {
+          backend: backend,
+          key_ref: key_ref,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
@@ -20,36 +24,12 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyId':: { 'function': { help: |||
-      ID of the key used. 
-    ||| } },
-    withKeyId(value):: self {
-      data+: {
-        vault_pki_secret_backend_key+: { [terraformName]+: { key_id: value } },
-      },
-    },
-    '#withKeyName':: { 'function': { help: |||
-      Name of the key. 
-    ||| } },
-    withKeyName(value):: self {
-      data+: {
-        vault_pki_secret_backend_key+: { [terraformName]+: { key_name: value } },
-      },
-    },
     '#withKeyRef':: { 'function': { help: |||
       Reference to an existing key. 
     ||| } },
     withKeyRef(value):: self {
       data+: {
         vault_pki_secret_backend_key+: { [terraformName]+: { key_ref: value } },
-      },
-    },
-    '#withKeyType':: { 'function': { help: |||
-      Type of the key. 
-    ||| } },
-    withKeyType(value):: self {
-      data+: {
-        vault_pki_secret_backend_key+: { [terraformName]+: { key_type: value } },
       },
     },
     '#withNamespace':: { 'function': { help: |||
@@ -59,6 +39,37 @@
       data+: {
         vault_pki_secret_backend_key+: { [terraformName]+: { namespace: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_pki_secret_backend_key.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#key_id':: { 'function': { help: |||
+        ID of the key used. 
+      ||| } },
+      key_id(suffix=''):: refSelf.plain('.key_id%s' % suffix),
+      '#key_name':: { 'function': { help: |||
+        Name of the key. 
+      ||| } },
+      key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
+      '#key_ref':: { 'function': { help: |||
+        Reference to an existing key. 
+      ||| } },
+      key_ref(suffix=''):: refSelf.plain('.key_ref%s' % suffix),
+      '#key_type':: { 'function': { help: |||
+        Type of the key. 
+      ||| } },
+      key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },
   },
 }

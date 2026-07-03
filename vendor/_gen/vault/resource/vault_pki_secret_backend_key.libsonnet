@@ -1,12 +1,16 @@
 {
-  new(terraformName, backend, type):: {
+  new(terraformName, backend, type):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_pki_secret_backend_key+: { [terraformName]+: {
-        backend: backend,
-        type: type,
-      } },
+      vault_pki_secret_backend_key+: {
+        [terraformName]+: {
+          backend: backend,
+          type: type,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
@@ -26,14 +30,6 @@
     withKeyBits(value):: self {
       resource+: {
         vault_pki_secret_backend_key+: { [terraformName]+: { key_bits: value } },
-      },
-    },
-    '#withKeyId':: { 'function': { help: |||
-      ID of the generated key. 
-    ||| } },
-    withKeyId(value):: self {
-      resource+: {
-        vault_pki_secret_backend_key+: { [terraformName]+: { key_id: value } },
       },
     },
     '#withKeyName':: { 'function': { help: |||
@@ -83,6 +79,49 @@
       resource+: {
         vault_pki_secret_backend_key+: { [terraformName]+: { type: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_pki_secret_backend_key.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#key_bits':: { 'function': { help: |||
+        Specifies the number of bits to use for the generated keys. 
+      ||| } },
+      key_bits(suffix=''):: refSelf.plain('.key_bits%s' % suffix),
+      '#key_id':: { 'function': { help: |||
+        ID of the generated key. 
+      ||| } },
+      key_id(suffix=''):: refSelf.plain('.key_id%s' % suffix),
+      '#key_name':: { 'function': { help: |||
+        When a new key is created with this request, optionally specifies the name for this. 
+      ||| } },
+      key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
+      '#key_type':: { 'function': { help: |||
+        Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'. 
+      ||| } },
+      key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
+      '#managed_key_id':: { 'function': { help: |||
+        The managed key's UUID. 
+      ||| } },
+      managed_key_id(suffix=''):: refSelf.plain('.managed_key_id%s' % suffix),
+      '#managed_key_name':: { 'function': { help: |||
+        The managed key's configured name. 
+      ||| } },
+      managed_key_name(suffix=''):: refSelf.plain('.managed_key_name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#type':: { 'function': { help: |||
+        Specifies the type of the key to create. 
+      ||| } },
+      type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },
   },
 }

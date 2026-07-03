@@ -1,12 +1,16 @@
 {
-  new(terraformName, role_name, username):: {
+  new(terraformName, role_name, username):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_ldap_secret_backend_static_role+: { [terraformName]+: {
-        role_name: role_name,
-        username: username,
-      } },
+      vault_ldap_secret_backend_static_role+: {
+        [terraformName]+: {
+          role_name: role_name,
+          username: username,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withDisableAutomatedRotation':: { 'function': { help: |||
       Stops rotation of the root credential until set to false. 
     ||| } },
@@ -115,6 +119,65 @@
       resource+: {
         vault_ldap_secret_backend_static_role+: { [terraformName]+: { username: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_ldap_secret_backend_static_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#disable_automated_rotation':: { 'function': { help: |||
+        Stops rotation of the root credential until set to false. 
+      ||| } },
+      disable_automated_rotation(suffix=''):: refSelf.plain('.disable_automated_rotation%s' % suffix),
+      '#dn':: { 'function': { help: |||
+        Distinguished name (DN) of the existing LDAP entry to manage password rotation for. 
+      ||| } },
+      dn(suffix=''):: refSelf.plain('.dn%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        The path where the LDAP secrets backend is mounted. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#password_wo':: { 'function': { help: |||
+        Password for the static role. This is required for Vault to manage an existing account and enable rotation. 
+      ||| } },
+      password_wo(suffix=''):: refSelf.plain('.password_wo%s' % suffix),
+      '#password_wo_version':: { 'function': { help: |||
+        Version counter for write-only password. 
+      ||| } },
+      password_wo_version(suffix=''):: refSelf.plain('.password_wo_version%s' % suffix),
+      '#role_name':: { 'function': { help: |||
+        Name of the role. 
+      ||| } },
+      role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
+      '#rotation_period':: { 'function': { help: |||
+        The period of time in seconds between each rotation of the root credential. Cannot be used with rotation_schedule. 
+      ||| } },
+      rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
+      '#rotation_policy':: { 'function': { help: |||
+        The rotation policy to use for this credential. 
+      ||| } },
+      rotation_policy(suffix=''):: refSelf.plain('.rotation_policy%s' % suffix),
+      '#rotation_schedule':: { 'function': { help: |||
+        The cron-style schedule for the root credential to be rotated on. Cannot be used with rotation_period. 
+      ||| } },
+      rotation_schedule(suffix=''):: refSelf.plain('.rotation_schedule%s' % suffix),
+      '#rotation_window':: { 'function': { help: |||
+        The maximum amount of time in seconds Vault is allowed to complete a rotation once a scheduled rotation is triggered. Can only be used with rotation_schedule. 
+      ||| } },
+      rotation_window(suffix=''):: refSelf.plain('.rotation_window%s' % suffix),
+      '#skip_import_rotation':: { 'function': { help: |||
+        Skip rotation of the password on import. 
+      ||| } },
+      skip_import_rotation(suffix=''):: refSelf.plain('.skip_import_rotation%s' % suffix),
+      '#username':: { 'function': { help: |||
+        The username of the existing LDAP entry to manage password rotation for. 
+      ||| } },
+      username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },
   },
 }

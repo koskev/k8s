@@ -1,19 +1,15 @@
 {
-  new(terraformName, binddn):: {
+  new(terraformName, binddn):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_ldap_secret_backend+: { [terraformName]+: {
-        binddn: binddn,
-      } },
-    },
-    '#withAccessor':: { 'function': { help: |||
-      Accessor of the mount 
-    ||| } },
-    withAccessor(value):: self {
-      resource+: {
-        vault_ldap_secret_backend+: { [terraformName]+: { accessor: value } },
+      vault_ldap_secret_backend+: {
+        [terraformName]+: {
+          binddn: binddn,
+        },
       },
     },
+  },
+  functions(terraformName):: {
     '#withAllowedManagedKeys':: { 'function': { help: |||
       List of managed key registry entry names that the mount in question is allowed to access 
     ||| } },
@@ -370,6 +366,193 @@
       resource+: {
         vault_ldap_secret_backend+: { [terraformName]+: { userdn: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_ldap_secret_backend.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#accessor':: { 'function': { help: |||
+        Accessor of the mount 
+      ||| } },
+      accessor(suffix=''):: refSelf.plain('.accessor%s' % suffix),
+      '#allowed_managed_keys':: { 'function': { help: |||
+        List of managed key registry entry names that the mount in question is allowed to access 
+      ||| } },
+      allowed_managed_keys(suffix=''):: refSelf.plain('.allowed_managed_keys%s' % suffix),
+      '#allowed_response_headers':: { 'function': { help: |||
+        List of headers to allow and pass from the request to the plugin 
+      ||| } },
+      allowed_response_headers(suffix=''):: refSelf.plain('.allowed_response_headers%s' % suffix),
+      '#audit_non_hmac_request_keys':: { 'function': { help: |||
+        Specifies the list of keys that will not be HMAC'd by audit devices in the request data object. 
+      ||| } },
+      audit_non_hmac_request_keys(suffix=''):: refSelf.plain('.audit_non_hmac_request_keys%s' % suffix),
+      '#audit_non_hmac_response_keys':: { 'function': { help: |||
+        Specifies the list of keys that will not be HMAC'd by audit devices in the response data object. 
+      ||| } },
+      audit_non_hmac_response_keys(suffix=''):: refSelf.plain('.audit_non_hmac_response_keys%s' % suffix),
+      '#binddn':: { 'function': { help: |||
+        Distinguished name of object to bind when performing user and group search. 
+      ||| } },
+      binddn(suffix=''):: refSelf.plain('.binddn%s' % suffix),
+      '#bindpass':: { 'function': { help: |||
+        LDAP password for searching for the user DN. 
+      ||| } },
+      bindpass(suffix=''):: refSelf.plain('.bindpass%s' % suffix),
+      '#bindpass_wo':: { 'function': { help: |||
+        Write-only LDAP password for searching for the user DN. 
+      ||| } },
+      bindpass_wo(suffix=''):: refSelf.plain('.bindpass_wo%s' % suffix),
+      '#bindpass_wo_version':: { 'function': { help: |||
+        Version counter for write-only bind password. 
+      ||| } },
+      bindpass_wo_version(suffix=''):: refSelf.plain('.bindpass_wo_version%s' % suffix),
+      '#certificate':: { 'function': { help: |||
+        CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded. 
+      ||| } },
+      certificate(suffix=''):: refSelf.plain('.certificate%s' % suffix),
+      '#client_tls_cert':: { 'function': { help: |||
+        Client certificate to provide to the LDAP server, must be x509 PEM encoded. 
+      ||| } },
+      client_tls_cert(suffix=''):: refSelf.plain('.client_tls_cert%s' % suffix),
+      '#client_tls_key':: { 'function': { help: |||
+        Client certificate key to provide to the LDAP server, must be x509 PEM encoded. 
+      ||| } },
+      client_tls_key(suffix=''):: refSelf.plain('.client_tls_key%s' % suffix),
+      '#connection_timeout':: { 'function': { help: |||
+        Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration. 
+      ||| } },
+      connection_timeout(suffix=''):: refSelf.plain('.connection_timeout%s' % suffix),
+      '#credential_type':: { 'function': { help: |||
+        The type of credential to manage. Options include: 'password', 'phrase'. Defaults to 'password'. 
+      ||| } },
+      credential_type(suffix=''):: refSelf.plain('.credential_type%s' % suffix),
+      '#default_lease_ttl_seconds':: { 'function': { help: |||
+        Default lease duration for tokens and secrets in seconds 
+      ||| } },
+      default_lease_ttl_seconds(suffix=''):: refSelf.plain('.default_lease_ttl_seconds%s' % suffix),
+      '#delegated_auth_accessors':: { 'function': { help: |||
+        List of headers to allow and pass from the request to the plugin 
+      ||| } },
+      delegated_auth_accessors(suffix=''):: refSelf.plain('.delegated_auth_accessors%s' % suffix),
+      '#description':: { 'function': { help: |||
+        Human-friendly description of the mount 
+      ||| } },
+      description(suffix=''):: refSelf.plain('.description%s' % suffix),
+      '#disable_automated_rotation':: { 'function': { help: |||
+        Stops rotation of the root credential until set to false. 
+      ||| } },
+      disable_automated_rotation(suffix=''):: refSelf.plain('.disable_automated_rotation%s' % suffix),
+      '#disable_remount':: { 'function': { help: |||
+        If set, opts out of mount migration on path updates. 
+      ||| } },
+      disable_remount(suffix=''):: refSelf.plain('.disable_remount%s' % suffix),
+      '#external_entropy_access':: { 'function': { help: |||
+        Enable the secrets engine to access Vault's external entropy source 
+      ||| } },
+      external_entropy_access(suffix=''):: refSelf.plain('.external_entropy_access%s' % suffix),
+      '#force_no_cache':: { 'function': { help: |||
+        If set to true, disables caching. 
+      ||| } },
+      force_no_cache(suffix=''):: refSelf.plain('.force_no_cache%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#identity_token_key':: { 'function': { help: |||
+        The key to use for signing plugin workload identity tokens 
+      ||| } },
+      identity_token_key(suffix=''):: refSelf.plain('.identity_token_key%s' % suffix),
+      '#insecure_tls':: { 'function': { help: |||
+        Skip LDAP server SSL Certificate verification - insecure and not recommended for production use. 
+      ||| } },
+      insecure_tls(suffix=''):: refSelf.plain('.insecure_tls%s' % suffix),
+      '#listing_visibility':: { 'function': { help: |||
+        Specifies whether to show this mount in the UI-specific listing endpoint 
+      ||| } },
+      listing_visibility(suffix=''):: refSelf.plain('.listing_visibility%s' % suffix),
+      '#local':: { 'function': { help: |||
+        Local mount flag that can be explicitly set to true to enforce local mount in HA environment 
+      ||| } },
+      'local'(suffix=''):: refSelf.plain('.local%s' % suffix),
+      '#max_lease_ttl_seconds':: { 'function': { help: |||
+        Maximum possible lease duration for tokens and secrets in seconds 
+      ||| } },
+      max_lease_ttl_seconds(suffix=''):: refSelf.plain('.max_lease_ttl_seconds%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#options':: { 'function': { help: |||
+        Specifies mount type specific options that are passed to the backend 
+      ||| } },
+      options(suffix=''):: refSelf.plain('.options%s' % suffix),
+      '#passthrough_request_headers':: { 'function': { help: |||
+        List of headers to allow and pass from the request to the plugin 
+      ||| } },
+      passthrough_request_headers(suffix=''):: refSelf.plain('.passthrough_request_headers%s' % suffix),
+      '#password_policy':: { 'function': { help: |||
+        Name of the password policy to use to generate passwords. 
+      ||| } },
+      password_policy(suffix=''):: refSelf.plain('.password_policy%s' % suffix),
+      '#path':: { 'function': { help: |||
+        The path where the LDAP secrets backend is mounted. 
+      ||| } },
+      path(suffix=''):: refSelf.plain('.path%s' % suffix),
+      '#plugin_version':: { 'function': { help: |||
+        Specifies the semantic version of the plugin to use, e.g. 'v1.0.0' 
+      ||| } },
+      plugin_version(suffix=''):: refSelf.plain('.plugin_version%s' % suffix),
+      '#request_timeout':: { 'function': { help: |||
+        Timeout, in seconds, for the connection when making requests against the server before returning back an error. 
+      ||| } },
+      request_timeout(suffix=''):: refSelf.plain('.request_timeout%s' % suffix),
+      '#rotation_period':: { 'function': { help: |||
+        The period of time in seconds between each rotation of the root credential. Cannot be used with rotation_schedule. 
+      ||| } },
+      rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
+      '#rotation_schedule':: { 'function': { help: |||
+        The cron-style schedule for the root credential to be rotated on. Cannot be used with rotation_period. 
+      ||| } },
+      rotation_schedule(suffix=''):: refSelf.plain('.rotation_schedule%s' % suffix),
+      '#rotation_window':: { 'function': { help: |||
+        The maximum amount of time in seconds Vault is allowed to complete a rotation once a scheduled rotation is triggered. Can only be used with rotation_schedule. 
+      ||| } },
+      rotation_window(suffix=''):: refSelf.plain('.rotation_window%s' % suffix),
+      '#schema':: { 'function': { help: |||
+        The LDAP schema to use when storing entry passwords. Valid schemas include openldap, ad, and racf. 
+      ||| } },
+      schema(suffix=''):: refSelf.plain('.schema%s' % suffix),
+      '#seal_wrap':: { 'function': { help: |||
+        Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability 
+      ||| } },
+      seal_wrap(suffix=''):: refSelf.plain('.seal_wrap%s' % suffix),
+      '#self_managed':: { 'function': { help: |||
+        If true, Vault performs rotations by authenticating as this account using its current password (no privileged bind DN). Immutable after creation. Requires password on create. 
+      ||| } },
+      self_managed(suffix=''):: refSelf.plain('.self_managed%s' % suffix),
+      '#skip_static_role_import_rotation':: { 'function': { help: |||
+        Skip rotation of static role secrets on import. 
+      ||| } },
+      skip_static_role_import_rotation(suffix=''):: refSelf.plain('.skip_static_role_import_rotation%s' % suffix),
+      '#starttls':: { 'function': { help: |||
+        Issue a StartTLS command after establishing unencrypted connection. 
+      ||| } },
+      starttls(suffix=''):: refSelf.plain('.starttls%s' % suffix),
+      '#upndomain':: { 'function': { help: |||
+        Enables userPrincipalDomain login with [username]@UPNDomain. 
+      ||| } },
+      upndomain(suffix=''):: refSelf.plain('.upndomain%s' % suffix),
+      '#url':: { 'function': { help: |||
+        LDAP URL to connect to (default: ldap://127.0.0.1). Multiple URLs can be specified by concatenating them with commas; they will be tried in-order. 
+      ||| } },
+      url(suffix=''):: refSelf.plain('.url%s' % suffix),
+      '#userattr':: { 'function': { help: |||
+        Attribute used for users (default: cn) 
+      ||| } },
+      userattr(suffix=''):: refSelf.plain('.userattr%s' % suffix),
+      '#userdn':: { 'function': { help: |||
+        LDAP domain to use for users (eg: ou=People,dc=example,dc=org) 
+      ||| } },
+      userdn(suffix=''):: refSelf.plain('.userdn%s' % suffix),
     },
   },
 }

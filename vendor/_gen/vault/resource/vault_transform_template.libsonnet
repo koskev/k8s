@@ -1,11 +1,13 @@
 {
-new(terraformName, name, path):: {
+new(terraformName, name, path):: self.functions(terraformName) {
 _type:: 'tf',
 resource+: {
 vault_transform_template+: { [terraformName]+: {
 'name': name,
 'path': path,
+},
 }}},
+functions(terraformName):: {
 '#withAlphabet':: { 'function': { help: |||
  The alphabet to use for this template. This is only used during FPE transformations. 
 ||| } },
@@ -76,6 +78,47 @@ withType(value):: self {
 resource+: {
             vault_transform_template+: { [terraformName]+: { 'type': value } },
         },
+},
+},
+ref(terraformName):: {
+local refSelf = self,
+plain(suffix=''):: '${ vault_transform_template.%s%s }' % [terraformName, suffix],
+fields:: {
+'#alphabet':: { 'function': { help: |||
+ The alphabet to use for this template. This is only used during FPE transformations. 
+||| } },
+'alphabet'(suffix=''):: refSelf.plain('.alphabet%s' % suffix),
+'#decode_formats':: { 'function': { help: |||
+ The map of regular expression templates used to customize decoded outputs.
+Only applicable to FPE transformations. 
+||| } },
+'decode_formats'(suffix=''):: refSelf.plain('.decode_formats%s' % suffix),
+'#encode_format':: { 'function': { help: |||
+ The regular expression template used for encoding values.
+Only applicable to FPE transformations. 
+||| } },
+'encode_format'(suffix=''):: refSelf.plain('.encode_format%s' % suffix),
+'id'(suffix=''):: refSelf.plain('.id%s' % suffix),
+'#name':: { 'function': { help: |||
+ The name of the template. 
+||| } },
+'name'(suffix=''):: refSelf.plain('.name%s' % suffix),
+'#namespace':: { 'function': { help: |||
+ Target namespace. (requires Enterprise) 
+||| } },
+'namespace'(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+'#path':: { 'function': { help: |||
+ The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws". 
+||| } },
+'path'(suffix=''):: refSelf.plain('.path%s' % suffix),
+'#pattern':: { 'function': { help: |||
+ The pattern used for matching. Currently, only regular expression pattern is supported. 
+||| } },
+'pattern'(suffix=''):: refSelf.plain('.pattern%s' % suffix),
+'#type':: { 'function': { help: |||
+ The pattern type to use for match detection. Currently, only regex is supported. 
+||| } },
+'type'(suffix=''):: refSelf.plain('.type%s' % suffix),
 },
 },
 }

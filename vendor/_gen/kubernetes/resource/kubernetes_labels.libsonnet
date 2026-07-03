@@ -1,13 +1,17 @@
 {
-  new(terraformName, api_version, kind, labels):: {
+  new(terraformName, api_version, kind, labels):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      kubernetes_labels+: { [terraformName]+: {
-        api_version: api_version,
-        kind: kind,
-        labels: labels,
-      } },
+      kubernetes_labels+: {
+        [terraformName]+: {
+          api_version: api_version,
+          kind: kind,
+          labels: labels,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withApiVersion':: { 'function': { help: |||
       The apiVersion of the resource to label. 
     ||| } },
@@ -52,6 +56,33 @@
       resource+: {
         kubernetes_labels+: { [terraformName]+: { labels: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ kubernetes_labels.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#api_version':: { 'function': { help: |||
+        The apiVersion of the resource to label. 
+      ||| } },
+      api_version(suffix=''):: refSelf.plain('.api_version%s' % suffix),
+      '#field_manager':: { 'function': { help: |||
+        Set the name of the field manager for the specified labels. 
+      ||| } },
+      field_manager(suffix=''):: refSelf.plain('.field_manager%s' % suffix),
+      '#force':: { 'function': { help: |||
+        Force overwriting labels that were created or edited outside of Terraform. 
+      ||| } },
+      force(suffix=''):: refSelf.plain('.force%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#kind':: { 'function': { help: |||
+        The kind of the resource to label. 
+      ||| } },
+      kind(suffix=''):: refSelf.plain('.kind%s' % suffix),
+      '#labels':: { 'function': { help: |||
+        A map of labels to apply to the resource. 
+      ||| } },
+      labels(suffix=''):: refSelf.plain('.labels%s' % suffix),
     },
   },
 }

@@ -1,38 +1,37 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      kubernetes_endpoint_slice_v1+: { [terraformName]+: {
-      } },
-    },
-    '#withAddressType':: { 'function': { help: |||
-      address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. 
-    ||| } },
-    withAddressType(value):: self {
-      data+: {
-        kubernetes_endpoint_slice_v1+: { [terraformName]+: { address_type: value } },
+      kubernetes_endpoint_slice_v1+: {
+        [terraformName]+: {
+        },
       },
     },
-    '#withEndpoint':: { 'function': { help: |||
-      endpoint is a list of unique endpoints in this slice. Each slice may include a maximum of 1000 endpoints. 
-    ||| } },
-    withEndpoint(value):: self {
-      data+: {
-        kubernetes_endpoint_slice_v1+: { [terraformName]+: { endpoint: value } },
-      },
-    },
+  },
+  functions(terraformName):: {
     withId(value):: self {
       data+: {
         kubernetes_endpoint_slice_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withPort':: { 'function': { help: |||
-      port specifies the list of network ports exposed by each endpoint in this slice. Each port must have a unique name. Each slice may include a maximum of 100 ports. 
-    ||| } },
-    withPort(value):: self {
-      data+: {
-        kubernetes_endpoint_slice_v1+: { [terraformName]+: { port: value } },
-      },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.kubernetes_endpoint_slice_v1.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#address_type':: { 'function': { help: |||
+        address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. 
+      ||| } },
+      address_type(suffix=''):: refSelf.plain('.address_type%s' % suffix),
+      '#endpoint':: { 'function': { help: |||
+        endpoint is a list of unique endpoints in this slice. Each slice may include a maximum of 1000 endpoints. 
+      ||| } },
+      endpoint(suffix=''):: refSelf.plain('.endpoint%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#port':: { 'function': { help: |||
+        port specifies the list of network ports exposed by each endpoint in this slice. Each port must have a unique name. Each slice may include a maximum of 100 ports. 
+      ||| } },
+      port(suffix=''):: refSelf.plain('.port%s' % suffix),
     },
   },
 }

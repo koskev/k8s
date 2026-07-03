@@ -1,11 +1,15 @@
 {
-  new(terraformName, backend):: {
+  new(terraformName, backend):: self.functions(terraformName) {
     _type:: 'tf',
     data+: {
-      vault_pki_secret_backend_issuers+: { [terraformName]+: {
-        backend: backend,
-      } },
+      vault_pki_secret_backend_issuers+: {
+        [terraformName]+: {
+          backend: backend,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       Full path where PKI backend is mounted. 
     ||| } },
@@ -19,30 +23,6 @@
         vault_pki_secret_backend_issuers+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyInfo':: { 'function': { help: |||
-      Map of issuer strings read from Vault. 
-    ||| } },
-    withKeyInfo(value):: self {
-      data+: {
-        vault_pki_secret_backend_issuers+: { [terraformName]+: { key_info: value } },
-      },
-    },
-    '#withKeyInfoJson':: { 'function': { help: |||
-      JSON-encoded key info data read from Vault. 
-    ||| } },
-    withKeyInfoJson(value):: self {
-      data+: {
-        vault_pki_secret_backend_issuers+: { [terraformName]+: { key_info_json: value } },
-      },
-    },
-    '#withKeys':: { 'function': { help: |||
-      Keys used by issuers under the backend path. 
-    ||| } },
-    withKeys(value):: self {
-      data+: {
-        vault_pki_secret_backend_issuers+: { [terraformName]+: { keys: value } },
-      },
-    },
     '#withNamespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise) 
     ||| } },
@@ -50,6 +30,33 @@
       data+: {
         vault_pki_secret_backend_issuers+: { [terraformName]+: { namespace: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ data.vault_pki_secret_backend_issuers.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        Full path where PKI backend is mounted. 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#key_info':: { 'function': { help: |||
+        Map of issuer strings read from Vault. 
+      ||| } },
+      key_info(suffix=''):: refSelf.plain('.key_info%s' % suffix),
+      '#key_info_json':: { 'function': { help: |||
+        JSON-encoded key info data read from Vault. 
+      ||| } },
+      key_info_json(suffix=''):: refSelf.plain('.key_info_json%s' % suffix),
+      '#keys':: { 'function': { help: |||
+        Keys used by issuers under the backend path. 
+      ||| } },
+      keys(suffix=''):: refSelf.plain('.keys%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },
   },
 }

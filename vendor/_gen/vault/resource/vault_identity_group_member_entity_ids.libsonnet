@@ -1,10 +1,12 @@
 {
-new(terraformName, group_id):: {
+new(terraformName, group_id):: self.functions(terraformName) {
 _type:: 'tf',
 resource+: {
 vault_identity_group_member_entity_ids+: { [terraformName]+: {
 'group_id': group_id,
+},
 }}},
+functions(terraformName):: {
 '#withExclusive':: { 'function': { help: |||
  If set to true, allows the resource to manage member entity ids
 exclusively. Beware of race conditions when disabling exclusive management 
@@ -42,6 +44,30 @@ withNamespace(value):: self {
 resource+: {
             vault_identity_group_member_entity_ids+: { [terraformName]+: { 'namespace': value } },
         },
+},
+},
+ref(terraformName):: {
+local refSelf = self,
+plain(suffix=''):: '${ vault_identity_group_member_entity_ids.%s%s }' % [terraformName, suffix],
+fields:: {
+'#exclusive':: { 'function': { help: |||
+ If set to true, allows the resource to manage member entity ids
+exclusively. Beware of race conditions when disabling exclusive management 
+||| } },
+'exclusive'(suffix=''):: refSelf.plain('.exclusive%s' % suffix),
+'#group_id':: { 'function': { help: |||
+ ID of the group. 
+||| } },
+'group_id'(suffix=''):: refSelf.plain('.group_id%s' % suffix),
+'id'(suffix=''):: refSelf.plain('.id%s' % suffix),
+'#member_entity_ids':: { 'function': { help: |||
+ Entity IDs to be assigned as group members. 
+||| } },
+'member_entity_ids'(suffix=''):: refSelf.plain('.member_entity_ids%s' % suffix),
+'#namespace':: { 'function': { help: |||
+ Target namespace. (requires Enterprise) 
+||| } },
+'namespace'(suffix=''):: refSelf.plain('.namespace%s' % suffix),
 },
 },
 }

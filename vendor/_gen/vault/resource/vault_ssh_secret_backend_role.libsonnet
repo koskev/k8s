@@ -1,13 +1,17 @@
 {
-  new(terraformName, backend, key_type, name):: {
+  new(terraformName, backend, key_type, name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_ssh_secret_backend_role+: { [terraformName]+: {
-        backend: backend,
-        key_type: key_type,
-        name: name,
-      } },
+      vault_ssh_secret_backend_role+: {
+        [terraformName]+: {
+          backend: backend,
+          key_type: key_type,
+          name: name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     withAlgorithmSigner(value):: self {
       resource+: {
         vault_ssh_secret_backend_role+: { [terraformName]+: { algorithm_signer: value } },
@@ -178,6 +182,63 @@
       resource+: {
         vault_ssh_secret_backend_role+: { [terraformName]+: { ttl: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_ssh_secret_backend_role.%s%s }' % [terraformName, suffix],
+    fields:: {
+      algorithm_signer(suffix=''):: refSelf.plain('.algorithm_signer%s' % suffix),
+      allow_bare_domains(suffix=''):: refSelf.plain('.allow_bare_domains%s' % suffix),
+      allow_empty_principals(suffix=''):: refSelf.plain('.allow_empty_principals%s' % suffix),
+      allow_host_certificates(suffix=''):: refSelf.plain('.allow_host_certificates%s' % suffix),
+      allow_subdomains(suffix=''):: refSelf.plain('.allow_subdomains%s' % suffix),
+      allow_user_certificates(suffix=''):: refSelf.plain('.allow_user_certificates%s' % suffix),
+      allow_user_key_ids(suffix=''):: refSelf.plain('.allow_user_key_ids%s' % suffix),
+      allowed_critical_options(suffix=''):: refSelf.plain('.allowed_critical_options%s' % suffix),
+      allowed_domains(suffix=''):: refSelf.plain('.allowed_domains%s' % suffix),
+      allowed_domains_template(suffix=''):: refSelf.plain('.allowed_domains_template%s' % suffix),
+      allowed_extensions(suffix=''):: refSelf.plain('.allowed_extensions%s' % suffix),
+      allowed_users(suffix=''):: refSelf.plain('.allowed_users%s' % suffix),
+      allowed_users_template(suffix=''):: refSelf.plain('.allowed_users_template%s' % suffix),
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      cidr_list(suffix=''):: refSelf.plain('.cidr_list%s' % suffix),
+      default_critical_options(suffix=''):: refSelf.plain('.default_critical_options%s' % suffix),
+      '#default_extensions':: { 'function': { help: |||
+        Default extensions to include in SSH certificates. Only applicable for CA key type. 
+      ||| } },
+      default_extensions(suffix=''):: refSelf.plain('.default_extensions%s' % suffix),
+      '#default_extensions_template':: { 'function': { help: |||
+        Specifies if the default_extensions field supports templating. Only applicable for CA key type. 
+      ||| } },
+      default_extensions_template(suffix=''):: refSelf.plain('.default_extensions_template%s' % suffix),
+      default_user(suffix=''):: refSelf.plain('.default_user%s' % suffix),
+      default_user_template(suffix=''):: refSelf.plain('.default_user_template%s' % suffix),
+      '#exclude_cidr_list':: { 'function': { help: |||
+        List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types. 
+      ||| } },
+      exclude_cidr_list(suffix=''):: refSelf.plain('.exclude_cidr_list%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      key_id_format(suffix=''):: refSelf.plain('.key_id_format%s' % suffix),
+      key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
+      max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Unique name for the role. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#not_before_duration':: { 'function': { help: |||
+        Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings. 
+      ||| } },
+      not_before_duration(suffix=''):: refSelf.plain('.not_before_duration%s' % suffix),
+      '#port':: { 'function': { help: |||
+        Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types. 
+      ||| } },
+      port(suffix=''):: refSelf.plain('.port%s' % suffix),
+      ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
     },
   },
 }

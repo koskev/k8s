@@ -1,10 +1,14 @@
 {
-  new(terraformName):: {
+  new(terraformName):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_ssh_secret_backend_ca+: { [terraformName]+: {
-      } },
+      vault_ssh_secret_backend_ca+: {
+        [terraformName]+: {
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
       The path of the SSH Secret Backend where the CA should be configured 
     ||| } },
@@ -81,6 +85,49 @@
       resource+: {
         vault_ssh_secret_backend_ca+: { [terraformName]+: { public_key: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_ssh_secret_backend_ca.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#backend':: { 'function': { help: |||
+        The path of the SSH Secret Backend where the CA should be configured 
+      ||| } },
+      backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
+      '#generate_signing_key':: { 'function': { help: |||
+        Whether Vault should generate the signing key pair internally. 
+      ||| } },
+      generate_signing_key(suffix=''):: refSelf.plain('.generate_signing_key%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#key_bits':: { 'function': { help: |||
+        Specifies the desired key bits for the generated SSH CA key when `generate_signing_key` is set to `true`. 
+      ||| } },
+      key_bits(suffix=''):: refSelf.plain('.key_bits%s' % suffix),
+      '#key_type':: { 'function': { help: |||
+        Specifies the desired key type for the generated SSH CA key when `generate_signing_key` is set to `true`. 
+      ||| } },
+      key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
+      '#managed_key_id':: { 'function': { help: |||
+        The id of the managed key to use. When using a managed key, this field or managed_key_name is required. 
+      ||| } },
+      managed_key_id(suffix=''):: refSelf.plain('.managed_key_id%s' % suffix),
+      '#managed_key_name':: { 'function': { help: |||
+        The name of the managed key to use. When using a managed key, this field or managed_key_id is required. 
+      ||| } },
+      managed_key_name(suffix=''):: refSelf.plain('.managed_key_name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#private_key':: { 'function': { help: |||
+        Private key part the SSH CA key pair; required if generate_signing_key is false. 
+      ||| } },
+      private_key(suffix=''):: refSelf.plain('.private_key%s' % suffix),
+      '#public_key':: { 'function': { help: |||
+        Public key part the SSH CA key pair; required if generate_signing_key is false. 
+      ||| } },
+      public_key(suffix=''):: refSelf.plain('.public_key%s' % suffix),
     },
   },
 }

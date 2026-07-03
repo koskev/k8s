@@ -1,12 +1,16 @@
 {
-  new(terraformName, group_id, policies):: {
+  new(terraformName, group_id, policies):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_identity_group_policies+: { [terraformName]+: {
-        group_id: group_id,
-        policies: policies,
-      } },
+      vault_identity_group_policies+: {
+        [terraformName]+: {
+          group_id: group_id,
+          policies: policies,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withExclusive':: { 'function': { help: |||
       Should the resource manage policies exclusively? Beware of race conditions when disabling exclusive management 
     ||| } },
@@ -21,14 +25,6 @@
     withGroupId(value):: self {
       resource+: {
         vault_identity_group_policies+: { [terraformName]+: { group_id: value } },
-      },
-    },
-    '#withGroupName':: { 'function': { help: |||
-      Name of the group. 
-    ||| } },
-    withGroupName(value):: self {
-      resource+: {
-        vault_identity_group_policies+: { [terraformName]+: { group_name: value } },
       },
     },
     withId(value):: self {
@@ -51,6 +47,33 @@
       resource+: {
         vault_identity_group_policies+: { [terraformName]+: { policies: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_identity_group_policies.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#exclusive':: { 'function': { help: |||
+        Should the resource manage policies exclusively? Beware of race conditions when disabling exclusive management 
+      ||| } },
+      exclusive(suffix=''):: refSelf.plain('.exclusive%s' % suffix),
+      '#group_id':: { 'function': { help: |||
+        ID of the group. 
+      ||| } },
+      group_id(suffix=''):: refSelf.plain('.group_id%s' % suffix),
+      '#group_name':: { 'function': { help: |||
+        Name of the group. 
+      ||| } },
+      group_name(suffix=''):: refSelf.plain('.group_name%s' % suffix),
+      id(suffix=''):: refSelf.plain('.id%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#policies':: { 'function': { help: |||
+        Policies to be tied to the group. 
+      ||| } },
+      policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
     },
   },
 }

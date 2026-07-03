@@ -1,13 +1,17 @@
 {
-  new(terraformName, address, mount, name):: {
+  new(terraformName, address, mount, name):: self.functions(terraformName) {
     _type:: 'tf',
     resource+: {
-      vault_os_secret_backend_host+: { [terraformName]+: {
-        address: address,
-        mount: mount,
-        name: name,
-      } },
+      vault_os_secret_backend_host+: {
+        [terraformName]+: {
+          address: address,
+          mount: mount,
+          name: name,
+        },
+      },
     },
+  },
+  functions(terraformName):: {
     '#withAddress':: { 'function': { help: |||
       Address of the host (hostname or IP). 
     ||| } },
@@ -103,6 +107,60 @@
       resource+: {
         vault_os_secret_backend_host+: { [terraformName]+: { ssh_host_key: value } },
       },
+    },
+  },
+  ref(terraformName):: {
+    local refSelf = self,
+    plain(suffix=''):: '${ vault_os_secret_backend_host.%s%s }' % [terraformName, suffix],
+    fields:: {
+      '#address':: { 'function': { help: |||
+        Address of the host (hostname or IP). 
+      ||| } },
+      address(suffix=''):: refSelf.plain('.address%s' % suffix),
+      '#custom_metadata':: { 'function': { help: |||
+        Custom metadata for the host. 
+      ||| } },
+      custom_metadata(suffix=''):: refSelf.plain('.custom_metadata%s' % suffix),
+      '#disable_automated_rotation':: { 'function': { help: |||
+        Disable automated password rotation. 
+      ||| } },
+      disable_automated_rotation(suffix=''):: refSelf.plain('.disable_automated_rotation%s' % suffix),
+      '#mount':: { 'function': { help: |||
+        Path where the OS secrets backend is mounted. 
+      ||| } },
+      mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
+      '#name':: { 'function': { help: |||
+        Name of the host. 
+      ||| } },
+      name(suffix=''):: refSelf.plain('.name%s' % suffix),
+      '#namespace':: { 'function': { help: |||
+        Target namespace. (requires Enterprise) 
+      ||| } },
+      namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+      '#password_policy':: { 'function': { help: |||
+        Name of the password policy to use for password generation. 
+      ||| } },
+      password_policy(suffix=''):: refSelf.plain('.password_policy%s' % suffix),
+      '#port':: { 'function': { help: |||
+        Port to connect to on the host. 
+      ||| } },
+      port(suffix=''):: refSelf.plain('.port%s' % suffix),
+      '#rotation_period':: { 'function': { help: |||
+        How often to rotate passwords, in seconds. Mutually exclusive with rotation_schedule. 
+      ||| } },
+      rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
+      '#rotation_schedule':: { 'function': { help: |||
+        Cron schedule for password rotation. Mutually exclusive with rotation_period. 
+      ||| } },
+      rotation_schedule(suffix=''):: refSelf.plain('.rotation_schedule%s' % suffix),
+      '#rotation_window':: { 'function': { help: |||
+        Window of time for password rotation, in seconds. 
+      ||| } },
+      rotation_window(suffix=''):: refSelf.plain('.rotation_window%s' % suffix),
+      '#ssh_host_key':: { 'function': { help: |||
+        SSH host key for the host. 
+      ||| } },
+      ssh_host_key(suffix=''):: refSelf.plain('.ssh_host_key%s' % suffix),
     },
   },
 }
