@@ -9,12 +9,6 @@ data "sops_file" "openbao_secrets" {
 }
 
 
-data "sops_file" "system" {
-  for_each = fileset(path.module, "system/*.{json,yaml}")
-  source_file = each.value
-}
-
-
 resource "vault_mount" "secrets" {
   path        = "secrets"
   type        = "kv"
@@ -36,18 +30,4 @@ resource "kubernetes_secret_v1" "secrets" {
     namespace = dirname(each.key)
   }
   data = each.value.data
-}
-
-resource "vault_mount" "system" {
-  path        = "system"
-  type        = "kv"
-  options     = { version = "2" }
-  description = "Luks encryption keys"
-}
-
-resource "vault_kv_secret_v2" "system" {
-  for_each = data.sops_file.system
-  mount                      = vault_mount.system.path
-  name                       = split(".", basename(each.key))[0]
-  data_json                  =  jsonencode(each.value.data)
 }

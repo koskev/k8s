@@ -5,6 +5,7 @@ function(type=compiler.types.argocd)
     (import 'openbao.libsonnet')
     + (import 'pki/pki.libsonnet')
     + (import 'luks/luks.libsonnet')
+    + (import 'system/system.libsonnet')
     ,
     compiler.types.argocd
   )
