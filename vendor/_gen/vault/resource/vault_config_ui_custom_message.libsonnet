@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAuthenticated':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_config_ui_custom_message+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#authenticated':: { 'function': { help: |||
       A flag indicating whether the custom message is displayed pre-login (false) or post-login (true)
     ||| } },
     withAuthenticated(value):: self {
@@ -22,7 +52,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { authenticated: value } },
       },
     },
-    '#withEndTime':: { 'function': { help: |||
+    '#end_time':: { 'function': { help: |||
       The ending time of the active period of the custom message. Can be omitted for non-expiring message
     ||| } },
     withEndTime(value):: self {
@@ -30,7 +60,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { end_time: value } },
       },
     },
-    '#withMessageBase64':: { 'function': { help: |||
+    '#message_base64':: { 'function': { help: |||
       The base64-encoded content of the custom message
     ||| } },
     withMessageBase64(value):: self {
@@ -38,7 +68,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { message_base64: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -46,7 +76,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOptions':: { 'function': { help: |||
+    '#options':: { 'function': { help: |||
       A map containing additional options for the custom message
     ||| } },
     withOptions(value):: self {
@@ -54,7 +84,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { options: value } },
       },
     },
-    '#withStartTime':: { 'function': { help: |||
+    '#start_time':: { 'function': { help: |||
       The starting time of the active period of the custom message
     ||| } },
     withStartTime(value):: self {
@@ -62,7 +92,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { start_time: value } },
       },
     },
-    '#withTitle':: { 'function': { help: |||
+    '#title':: { 'function': { help: |||
       The title of the custom message
     ||| } },
     withTitle(value):: self {
@@ -70,7 +100,7 @@
         vault_config_ui_custom_message+: { [terraformName]+: { title: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       The display type of custom message. Allowed values are banner and modal
     ||| } },
     withType(value):: self {

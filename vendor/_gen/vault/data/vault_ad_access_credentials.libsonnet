@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_ad_access_credentials+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       AD Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_ad_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRole(value):: self {

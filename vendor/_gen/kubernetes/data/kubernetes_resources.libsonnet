@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiVersion':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        kubernetes_resources+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_version':: { 'function': { help: |||
       The resource apiVersion.
     ||| } },
     withApiVersion(value):: self {
@@ -21,7 +51,7 @@
         kubernetes_resources+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withFieldSelector':: { 'function': { help: |||
+    '#field_selector':: { 'function': { help: |||
       A selector to restrict the list of returned objects by their fields.
     ||| } },
     withFieldSelector(value):: self {
@@ -29,7 +59,7 @@
         kubernetes_resources+: { [terraformName]+: { field_selector: value } },
       },
     },
-    '#withKind':: { 'function': { help: |||
+    '#kind':: { 'function': { help: |||
       The resource kind.
     ||| } },
     withKind(value):: self {
@@ -37,7 +67,7 @@
         kubernetes_resources+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withLabelSelector':: { 'function': { help: |||
+    '#label_selector':: { 'function': { help: |||
       A selector to restrict the list of returned objects by their labels.
     ||| } },
     withLabelSelector(value):: self {
@@ -45,7 +75,7 @@
         kubernetes_resources+: { [terraformName]+: { label_selector: value } },
       },
     },
-    '#withLimit':: { 'function': { help: |||
+    '#limit':: { 'function': { help: |||
       Limit is a maximum number of responses to return for a list call.
     ||| } },
     withLimit(value):: self {
@@ -53,7 +83,7 @@
         kubernetes_resources+: { [terraformName]+: { limit: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       The resource namespace.
     ||| } },
     withNamespace(value):: self {
@@ -61,7 +91,7 @@
         kubernetes_resources+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withObjects':: { 'function': { help: |||
+    '#objects':: { 'function': { help: |||
       The response from the API server.
     ||| } },
     withObjects(value):: self {

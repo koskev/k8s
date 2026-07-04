@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withEntityId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_entity_policies+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#entity_id':: { 'function': { help: |||
       ID of the entity.
     ||| } },
     withEntityId(value):: self {
@@ -21,7 +51,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { entity_id: value } },
       },
     },
-    '#withExclusive':: { 'function': { help: |||
+    '#exclusive':: { 'function': { help: |||
       Should the resource manage policies exclusively
     ||| } },
     withExclusive(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_identity_entity_policies+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be tied to the entity.
     ||| } },
     withPolicies(value):: self {

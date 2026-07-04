@@ -14,6 +14,36 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_replication_controller+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_replication_controller+: { [terraformName]+: { id: value } },

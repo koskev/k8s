@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAiaPath':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_cluster+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#aia_path':: { 'function': { help: |||
       Path to the cluster's AIA distribution point.
     ||| } },
     withAiaPath(value):: self {
@@ -20,7 +50,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { aia_path: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
@@ -33,7 +63,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -41,7 +71,7 @@
         vault_pki_secret_backend_config_cluster+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path to the cluster's API mount path.
     ||| } },
     withPath(value):: self {

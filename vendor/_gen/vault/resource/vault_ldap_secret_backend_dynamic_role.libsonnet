@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCreationLdif':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#creation_ldif':: { 'function': { help: |||
       A templatized LDIF string used to create a user account. May contain multiple entries.
     ||| } },
     withCreationLdif(value):: self {
@@ -22,7 +52,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { creation_ldif: value } },
       },
     },
-    '#withDefaultTtl':: { 'function': { help: |||
+    '#default_ttl':: { 'function': { help: |||
       Specifies the TTL for the leases associated with this role.
     ||| } },
     withDefaultTtl(value):: self {
@@ -30,7 +60,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { default_ttl: value } },
       },
     },
-    '#withDeletionLdif':: { 'function': { help: |||
+    '#deletion_ldif':: { 'function': { help: |||
       A templatized LDIF string used to delete the user account once its TTL has expired. This may contain multiple LDIF entries.
     ||| } },
     withDeletionLdif(value):: self {
@@ -43,7 +73,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       Specifies the maximum TTL for the leases associated with this role.
     ||| } },
     withMaxTtl(value):: self {
@@ -51,7 +81,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       The path where the LDAP secrets backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -59,7 +89,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +97,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRoleName(value):: self {
@@ -75,7 +105,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withRollbackLdif':: { 'function': { help: |||
+    '#rollback_ldif':: { 'function': { help: |||
       A templatized LDIF string used to attempt to rollback any changes in the event that execution of the creation_ldif results in an error. This may contain multiple LDIF entries.
     ||| } },
     withRollbackLdif(value):: self {
@@ -83,7 +113,7 @@
         vault_ldap_secret_backend_dynamic_role+: { [terraformName]+: { rollback_ldif: value } },
       },
     },
-    '#withUsernameTemplate':: { 'function': { help: |||
+    '#username_template':: { 'function': { help: |||
       A template used to generate a dynamic username. This will be used to fill in the .Username field within the creation_ldif string.
     ||| } },
     withUsernameTemplate(value):: self {

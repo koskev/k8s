@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBatchInput':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_transform_decode+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#batch_input':: { 'function': { help: |||
       Specifies a list of items to be decoded in a single batch. If this parameter is set, the top-level parameters 'value', 'transformation' and 'tweak' will be ignored. Each batch item within the list can specify these parameters instead.
     ||| } },
     withBatchInput(value):: self {
@@ -21,7 +51,7 @@
         vault_transform_decode+: { [terraformName]+: { batch_input: value } },
       },
     },
-    '#withBatchResults':: { 'function': { help: |||
+    '#batch_results':: { 'function': { help: |||
       The result of decoding batch_input.
     ||| } },
     withBatchResults(value):: self {
@@ -29,7 +59,7 @@
         vault_transform_decode+: { [terraformName]+: { batch_results: value } },
       },
     },
-    '#withDecodedValue':: { 'function': { help: |||
+    '#decoded_value':: { 'function': { help: |||
       The result of decoding a value.
     ||| } },
     withDecodedValue(value):: self {
@@ -42,7 +72,7 @@
         vault_transform_decode+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_transform_decode+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path to backend from which to retrieve data.
     ||| } },
     withPath(value):: self {
@@ -58,7 +88,7 @@
         vault_transform_decode+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       The name of the role.
     ||| } },
     withRoleName(value):: self {
@@ -66,7 +96,7 @@
         vault_transform_decode+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withTransformation':: { 'function': { help: |||
+    '#transformation':: { 'function': { help: |||
       The transformation to perform. If no value is provided and the role contains a single transformation, this value will be inferred from the role.
     ||| } },
     withTransformation(value):: self {
@@ -74,7 +104,7 @@
         vault_transform_decode+: { [terraformName]+: { transformation: value } },
       },
     },
-    '#withTweak':: { 'function': { help: |||
+    '#tweak':: { 'function': { help: |||
       The tweak value to use. Only applicable for FPE transformations
     ||| } },
     withTweak(value):: self {
@@ -82,7 +112,7 @@
         vault_transform_decode+: { [terraformName]+: { tweak: value } },
       },
     },
-    '#withValue':: { 'function': { help: |||
+    '#value':: { 'function': { help: |||
       The value in which to decode.
     ||| } },
     withValue(value):: self {

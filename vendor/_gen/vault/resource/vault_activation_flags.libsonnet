@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withFeature':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_activation_flags+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#feature':: { 'function': { help: |||
       Exact feature key to activate with PUT /sys/activation-flags/:feature/activate.
     ||| } },
     withFeature(value):: self {

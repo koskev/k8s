@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_keymgmt_key_rotate+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
     ||| } },
     withMount(value):: self {
@@ -24,7 +54,7 @@
         vault_keymgmt_key_rotate+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Specifies the name of the key to rotate.
     ||| } },
     withName(value):: self {
@@ -32,7 +62,7 @@
         vault_keymgmt_key_rotate+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

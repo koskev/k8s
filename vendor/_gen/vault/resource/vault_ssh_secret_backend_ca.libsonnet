@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_ssh_secret_backend_ca+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The path of the SSH Secret Backend where the CA should be configured
     ||| } },
     withBackend(value):: self {
@@ -19,7 +49,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withGenerateSigningKey':: { 'function': { help: |||
+    '#generate_signing_key':: { 'function': { help: |||
       Whether Vault should generate the signing key pair internally.
     ||| } },
     withGenerateSigningKey(value):: self {
@@ -32,7 +62,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyBits':: { 'function': { help: |||
+    '#key_bits':: { 'function': { help: |||
       Specifies the desired key bits for the generated SSH CA key when `generate_signing_key` is set to `true`.
     ||| } },
     withKeyBits(value):: self {
@@ -40,7 +70,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { key_bits: value } },
       },
     },
-    '#withKeyType':: { 'function': { help: |||
+    '#key_type':: { 'function': { help: |||
       Specifies the desired key type for the generated SSH CA key when `generate_signing_key` is set to `true`.
     ||| } },
     withKeyType(value):: self {
@@ -48,7 +78,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withManagedKeyId':: { 'function': { help: |||
+    '#managed_key_id':: { 'function': { help: |||
       The id of the managed key to use. When using a managed key, this field or managed_key_name is required.
     ||| } },
     withManagedKeyId(value):: self {
@@ -56,7 +86,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { managed_key_id: value } },
       },
     },
-    '#withManagedKeyName':: { 'function': { help: |||
+    '#managed_key_name':: { 'function': { help: |||
       The name of the managed key to use. When using a managed key, this field or managed_key_id is required.
     ||| } },
     withManagedKeyName(value):: self {
@@ -64,7 +94,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { managed_key_name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -72,7 +102,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPrivateKey':: { 'function': { help: |||
+    '#private_key':: { 'function': { help: |||
       Private key part the SSH CA key pair; required if generate_signing_key is false.
     ||| } },
     withPrivateKey(value):: self {
@@ -80,7 +110,7 @@
         vault_ssh_secret_backend_ca+: { [terraformName]+: { private_key: value } },
       },
     },
-    '#withPublicKey':: { 'function': { help: |||
+    '#public_key':: { 'function': { help: |||
       Public key part the SSH CA key pair; required if generate_signing_key is false.
     ||| } },
     withPublicKey(value):: self {

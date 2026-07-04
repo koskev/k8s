@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAltNames':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alt_names':: { 'function': { help: |||
       List of alternative names.
     ||| } },
     withAltNames(value):: self {
@@ -22,7 +52,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { alt_names: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
@@ -30,7 +60,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCommonName':: { 'function': { help: |||
+    '#common_name':: { 'function': { help: |||
       CN of intermediate to create.
     ||| } },
     withCommonName(value):: self {
@@ -38,7 +68,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { common_name: value } },
       },
     },
-    '#withCountry':: { 'function': { help: |||
+    '#country':: { 'function': { help: |||
       The country.
     ||| } },
     withCountry(value):: self {
@@ -46,7 +76,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { country: value } },
       },
     },
-    '#withCsr':: { 'function': { help: |||
+    '#csr':: { 'function': { help: |||
       The CSR.
     ||| } },
     withCsr(value):: self {
@@ -54,7 +84,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { csr: value } },
       },
     },
-    '#withExcludeCnFromSans':: { 'function': { help: |||
+    '#exclude_cn_from_sans':: { 'function': { help: |||
       Flag to exclude CN from SANs.
     ||| } },
     withExcludeCnFromSans(value):: self {
@@ -62,7 +92,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { exclude_cn_from_sans: value } },
       },
     },
-    '#withExcludedDnsDomains':: { 'function': { help: |||
+    '#excluded_dns_domains':: { 'function': { help: |||
       List of domains for which certificates are not allowed to be issued.
     ||| } },
     withExcludedDnsDomains(value):: self {
@@ -70,7 +100,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { excluded_dns_domains: value } },
       },
     },
-    '#withExcludedEmailAddresses':: { 'function': { help: |||
+    '#excluded_email_addresses':: { 'function': { help: |||
       List of email addresses for which certificates are not allowed to be issued.
     ||| } },
     withExcludedEmailAddresses(value):: self {
@@ -78,7 +108,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { excluded_email_addresses: value } },
       },
     },
-    '#withExcludedIpRanges':: { 'function': { help: |||
+    '#excluded_ip_ranges':: { 'function': { help: |||
       List of IP ranges for which certificates are NOT allowed to be issued.
     ||| } },
     withExcludedIpRanges(value):: self {
@@ -86,7 +116,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { excluded_ip_ranges: value } },
       },
     },
-    '#withExcludedUriDomains':: { 'function': { help: |||
+    '#excluded_uri_domains':: { 'function': { help: |||
       List of URI domains for which certificates are not allowed to be issued.
     ||| } },
     withExcludedUriDomains(value):: self {
@@ -94,7 +124,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { excluded_uri_domains: value } },
       },
     },
-    '#withFormat':: { 'function': { help: |||
+    '#format':: { 'function': { help: |||
       The format of data.
     ||| } },
     withFormat(value):: self {
@@ -107,7 +137,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIpSans':: { 'function': { help: |||
+    '#ip_sans':: { 'function': { help: |||
       List of alternative IPs.
     ||| } },
     withIpSans(value):: self {
@@ -115,7 +145,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { ip_sans: value } },
       },
     },
-    '#withIssuerRef':: { 'function': { help: |||
+    '#issuer_ref':: { 'function': { help: |||
       Specifies the default issuer of this request.
     ||| } },
     withIssuerRef(value):: self {
@@ -123,7 +153,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { issuer_ref: value } },
       },
     },
-    '#withKeyUsage':: { 'function': { help: |||
+    '#key_usage':: { 'function': { help: |||
       Specify the key usages to be added to the existing set of key usages ("CRL", "CertSign") on the generated certificate.
     ||| } },
     withKeyUsage(value):: self {
@@ -131,7 +161,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { key_usage: value } },
       },
     },
-    '#withLocality':: { 'function': { help: |||
+    '#locality':: { 'function': { help: |||
       The locality.
     ||| } },
     withLocality(value):: self {
@@ -139,7 +169,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { locality: value } },
       },
     },
-    '#withMaxPathLength':: { 'function': { help: |||
+    '#max_path_length':: { 'function': { help: |||
       The maximum path length to encode in the generated certificate.
     ||| } },
     withMaxPathLength(value):: self {
@@ -147,7 +177,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { max_path_length: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -155,7 +185,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNotAfter':: { 'function': { help: |||
+    '#not_after':: { 'function': { help: |||
       Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z.
     ||| } },
     withNotAfter(value):: self {
@@ -163,7 +193,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { not_after: value } },
       },
     },
-    '#withNotBeforeDuration':: { 'function': { help: |||
+    '#not_before_duration':: { 'function': { help: |||
       Specifies the duration by which to backdate the NotBefore property.
     ||| } },
     withNotBeforeDuration(value):: self {
@@ -171,7 +201,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { not_before_duration: value } },
       },
     },
-    '#withOrganization':: { 'function': { help: |||
+    '#organization':: { 'function': { help: |||
       The organization.
     ||| } },
     withOrganization(value):: self {
@@ -179,7 +209,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withOtherSans':: { 'function': { help: |||
+    '#other_sans':: { 'function': { help: |||
       List of other SANs.
     ||| } },
     withOtherSans(value):: self {
@@ -187,7 +217,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { other_sans: value } },
       },
     },
-    '#withOu':: { 'function': { help: |||
+    '#ou':: { 'function': { help: |||
       The organization unit.
     ||| } },
     withOu(value):: self {
@@ -195,7 +225,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { ou: value } },
       },
     },
-    '#withPermittedDnsDomains':: { 'function': { help: |||
+    '#permitted_dns_domains':: { 'function': { help: |||
       List of domains for which certificates are allowed to be issued.
     ||| } },
     withPermittedDnsDomains(value):: self {
@@ -203,7 +233,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { permitted_dns_domains: value } },
       },
     },
-    '#withPermittedEmailAddresses':: { 'function': { help: |||
+    '#permitted_email_addresses':: { 'function': { help: |||
       List of email addresses for which certificates are allowed to be issued.
     ||| } },
     withPermittedEmailAddresses(value):: self {
@@ -211,7 +241,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { permitted_email_addresses: value } },
       },
     },
-    '#withPermittedIpRanges':: { 'function': { help: |||
+    '#permitted_ip_ranges':: { 'function': { help: |||
       List of IP ranges for which certificates are allowed to be issued.
     ||| } },
     withPermittedIpRanges(value):: self {
@@ -219,7 +249,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { permitted_ip_ranges: value } },
       },
     },
-    '#withPermittedUriDomains':: { 'function': { help: |||
+    '#permitted_uri_domains':: { 'function': { help: |||
       List of URI domains for which certificates are allowed to be issued.
     ||| } },
     withPermittedUriDomains(value):: self {
@@ -227,7 +257,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { permitted_uri_domains: value } },
       },
     },
-    '#withPostalCode':: { 'function': { help: |||
+    '#postal_code':: { 'function': { help: |||
       The postal code.
     ||| } },
     withPostalCode(value):: self {
@@ -235,7 +265,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { postal_code: value } },
       },
     },
-    '#withProvince':: { 'function': { help: |||
+    '#province':: { 'function': { help: |||
       The province.
     ||| } },
     withProvince(value):: self {
@@ -243,7 +273,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { province: value } },
       },
     },
-    '#withRevoke':: { 'function': { help: |||
+    '#revoke':: { 'function': { help: |||
       Revoke the certificate upon resource destruction.
     ||| } },
     withRevoke(value):: self {
@@ -251,7 +281,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { revoke: value } },
       },
     },
-    '#withSignatureBits':: { 'function': { help: |||
+    '#signature_bits':: { 'function': { help: |||
       The number of bits to use in the signature algorithm.
     ||| } },
     withSignatureBits(value):: self {
@@ -259,7 +289,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { signature_bits: value } },
       },
     },
-    '#withSkid':: { 'function': { help: |||
+    '#skid':: { 'function': { help: |||
       Value for the Subject Key Identifier field
         (RFC 5280 Section 4.2.1.2). Specified as a string in hex format.
     ||| } },
@@ -268,7 +298,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { skid: value } },
       },
     },
-    '#withStreetAddress':: { 'function': { help: |||
+    '#street_address':: { 'function': { help: |||
       The street address.
     ||| } },
     withStreetAddress(value):: self {
@@ -276,7 +306,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { street_address: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Time to live.
     ||| } },
     withTtl(value):: self {
@@ -284,7 +314,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withUriSans':: { 'function': { help: |||
+    '#uri_sans':: { 'function': { help: |||
       List of alternative URIs.
     ||| } },
     withUriSans(value):: self {
@@ -292,7 +322,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { uri_sans: value } },
       },
     },
-    '#withUseCsrValues':: { 'function': { help: |||
+    '#use_csr_values':: { 'function': { help: |||
       Preserve CSR values.
     ||| } },
     withUseCsrValues(value):: self {
@@ -300,7 +330,7 @@
         vault_pki_secret_backend_root_sign_intermediate+: { [terraformName]+: { use_csr_values: value } },
       },
     },
-    '#withUsePss':: { 'function': { help: |||
+    '#use_pss':: { 'function': { help: |||
       Specifies whether or not to use PSS signatures
         over PKCS#1v1.5 signatures when a RSA-type issuer is used.
     ||| } },

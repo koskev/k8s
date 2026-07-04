@@ -12,12 +12,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_kv_secrets_list_v2+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       data+: {
         vault_kv_secrets_list_v2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where KV-V2 engine is mounted
     ||| } },
     withMount(value):: self {
@@ -25,7 +55,7 @@
         vault_kv_secrets_list_v2+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Full named path of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
     ||| } },
     withName(value):: self {
@@ -33,7 +63,7 @@
         vault_kv_secrets_list_v2+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

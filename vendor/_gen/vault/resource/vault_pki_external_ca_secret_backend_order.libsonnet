@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCsr':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#csr':: { 'function': { help: |||
       PEM-encoded Certificate Signing Request containing identifiers. Required if `identifiers` is not provided. Mutually exclusive with `identifiers`.
     ||| } },
     withCsr(value):: self {
@@ -24,7 +54,7 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { csr: value } },
       },
     },
-    '#withIdentifiers':: { 'function': { help: |||
+    '#identifiers':: { 'function': { help: |||
       List of identifiers (domain names) for the certificate order. Required if `csr` is not provided. Mutually exclusive with `csr`.
     ||| } },
     withIdentifiers(value):: self {
@@ -32,7 +62,7 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { identifiers: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       The path where the PKI External CA secret backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -40,7 +70,7 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -48,7 +78,7 @@
         vault_pki_external_ca_secret_backend_order+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role to create the order for.
     ||| } },
     withRoleName(value):: self {

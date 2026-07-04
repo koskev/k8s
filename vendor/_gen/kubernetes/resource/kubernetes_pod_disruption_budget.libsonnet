@@ -14,6 +14,36 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_pod_disruption_budget+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_pod_disruption_budget+: { [terraformName]+: { id: value } },

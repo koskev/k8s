@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withExclusive':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_group_member_group_ids+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#exclusive':: { 'function': { help: |||
       If set to true, allows the resource to manage member group ids
       exclusively. Beware of race conditions when disabling exclusive management
     ||| } },
@@ -21,7 +51,7 @@
         vault_identity_group_member_group_ids+: { [terraformName]+: { exclusive: value } },
       },
     },
-    '#withGroupId':: { 'function': { help: |||
+    '#group_id':: { 'function': { help: |||
       ID of the group.
     ||| } },
     withGroupId(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_group_member_group_ids+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMemberGroupIds':: { 'function': { help: |||
+    '#member_group_ids':: { 'function': { help: |||
       Group IDs to be assigned as group members.
     ||| } },
     withMemberGroupIds(value):: self {
@@ -42,7 +72,7 @@
         vault_identity_group_member_group_ids+: { [terraformName]+: { member_group_ids: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

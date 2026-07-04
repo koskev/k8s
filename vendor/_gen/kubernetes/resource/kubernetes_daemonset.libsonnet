@@ -14,12 +14,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_daemonset+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_daemonset+: { [terraformName]+: { id: value } },
       },
     },
-    '#withWaitForRollout':: { 'function': { help: |||
+    '#wait_for_rollout':: { 'function': { help: |||
       Wait for the rollout of the deployment to complete. Defaults to true.
     ||| } },
     withWaitForRollout(value):: self {

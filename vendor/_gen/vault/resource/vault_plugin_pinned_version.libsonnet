@@ -14,12 +14,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_plugin_pinned_version+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         vault_plugin_pinned_version+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the plugin.
     ||| } },
     withName(value):: self {
@@ -27,7 +57,7 @@
         vault_plugin_pinned_version+: { [terraformName]+: { name: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of plugin; one of "auth", "secret", or "database".
     ||| } },
     withType(value):: self {
@@ -35,7 +65,7 @@
         vault_plugin_pinned_version+: { [terraformName]+: { type: value } },
       },
     },
-    '#withVersion':: { 'function': { help: |||
+    '#version':: { 'function': { help: |||
       Semantic pinned plugin version.
     ||| } },
     withVersion(value):: self {

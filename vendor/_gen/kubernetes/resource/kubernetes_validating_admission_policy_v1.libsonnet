@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_validating_admission_policy_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#id':: { 'function': { help: |||
       The unique ID for this terraform resource
     ||| } },
     withId(value):: self {
@@ -23,7 +53,7 @@
         kubernetes_validating_admission_policy_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
     ||| } },
     withMetadata(value):: self {
@@ -31,7 +61,7 @@
         kubernetes_validating_admission_policy_v1+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withSpec':: { 'function': { help: |||
+    '#spec':: { 'function': { help: |||
       Rule defining a set of permissions for the role
     ||| } },
     withSpec(value):: self {

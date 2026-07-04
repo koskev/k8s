@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDisplayName':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_token+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#display_name':: { 'function': { help: |||
       The display name of the token.
     ||| } },
     withDisplayName(value):: self {
@@ -22,7 +52,7 @@
         vault_token+: { [terraformName]+: { display_name: value } },
       },
     },
-    '#withEntityAlias':: { 'function': { help: |||
+    '#entity_alias':: { 'function': { help: |||
       Name of the entity alias to associate with during token creation.
     ||| } },
     withEntityAlias(value):: self {
@@ -30,7 +60,7 @@
         vault_token+: { [terraformName]+: { entity_alias: value } },
       },
     },
-    '#withExplicitMaxTtl':: { 'function': { help: |||
+    '#explicit_max_ttl':: { 'function': { help: |||
       The explicit max TTL of the token.
     ||| } },
     withExplicitMaxTtl(value):: self {
@@ -38,7 +68,7 @@
         vault_token+: { [terraformName]+: { explicit_max_ttl: value } },
       },
     },
-    '#withId':: { 'function': { help: |||
+    '#id':: { 'function': { help: |||
       The ID of the client token. This is an input field, not a resource identifier. Can only be specified by a root token. The ID provided may not contain a '.' character and should not start with the 's.' prefix.
     ||| } },
     withId(value):: self {
@@ -46,7 +76,7 @@
         vault_token+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       Metadata to be associated with the token.
     ||| } },
     withMetadata(value):: self {
@@ -54,7 +84,7 @@
         vault_token+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -62,7 +92,7 @@
         vault_token+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -70,7 +100,7 @@
         vault_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNoDefaultPolicy':: { 'function': { help: |||
+    '#no_default_policy':: { 'function': { help: |||
       Flag to disable the default policy.
     ||| } },
     withNoDefaultPolicy(value):: self {
@@ -78,7 +108,7 @@
         vault_token+: { [terraformName]+: { no_default_policy: value } },
       },
     },
-    '#withNoParent':: { 'function': { help: |||
+    '#no_parent':: { 'function': { help: |||
       Flag to create a token without parent.
     ||| } },
     withNoParent(value):: self {
@@ -86,7 +116,7 @@
         vault_token+: { [terraformName]+: { no_parent: value } },
       },
     },
-    '#withNumUses':: { 'function': { help: |||
+    '#num_uses':: { 'function': { help: |||
       The number of allowed uses of the token.
     ||| } },
     withNumUses(value):: self {
@@ -94,7 +124,7 @@
         vault_token+: { [terraformName]+: { num_uses: value } },
       },
     },
-    '#withPeriod':: { 'function': { help: |||
+    '#period':: { 'function': { help: |||
       The period of the token for periodic tokens.
     ||| } },
     withPeriod(value):: self {
@@ -102,7 +132,7 @@
         vault_token+: { [terraformName]+: { period: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       List of policies to attach to the token.
     ||| } },
     withPolicies(value):: self {
@@ -110,7 +140,7 @@
         vault_token+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withRenewable':: { 'function': { help: |||
+    '#renewable':: { 'function': { help: |||
       Flag to allow the token to be renewed.
     ||| } },
     withRenewable(value):: self {
@@ -118,7 +148,7 @@
         vault_token+: { [terraformName]+: { renewable: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       The token role name.
     ||| } },
     withRoleName(value):: self {
@@ -126,7 +156,7 @@
         vault_token+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       The TTL period of the token.
     ||| } },
     withTtl(value):: self {
@@ -134,7 +164,7 @@
         vault_token+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       The token type. Can be 'batch' or 'service'.
     ||| } },
     withType(value):: self {
@@ -142,7 +172,7 @@
         vault_token+: { [terraformName]+: { type: value } },
       },
     },
-    '#withWrappingTtl':: { 'function': { help: |||
+    '#wrapping_ttl':: { 'function': { help: |||
       The TTL period of the wrapped token.
     ||| } },
     withWrappingTtl(value):: self {

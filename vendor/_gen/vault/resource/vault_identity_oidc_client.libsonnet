@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAccessTokenTtl':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_client+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#access_token_ttl':: { 'function': { help: |||
       The time-to-live for access tokens obtained by the client.
     ||| } },
     withAccessTokenTtl(value):: self {
@@ -20,7 +50,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { access_token_ttl: value } },
       },
     },
-    '#withAssignments':: { 'function': { help: |||
+    '#assignments':: { 'function': { help: |||
       A list of assignment resources associated with the client.
     ||| } },
     withAssignments(value):: self {
@@ -28,7 +58,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { assignments: value } },
       },
     },
-    '#withClientType':: { 'function': { help: |||
+    '#client_type':: { 'function': { help: |||
       The client type based on its ability to maintain confidentiality of credentials.Defaults to 'confidential'.
     ||| } },
     withClientType(value):: self {
@@ -41,7 +71,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdTokenTtl':: { 'function': { help: |||
+    '#id_token_ttl':: { 'function': { help: |||
       The time-to-live for ID tokens obtained by the client. The value should be less than the verification_ttl on the key.
     ||| } },
     withIdTokenTtl(value):: self {
@@ -49,7 +79,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { id_token_ttl: value } },
       },
     },
-    '#withKey':: { 'function': { help: |||
+    '#key':: { 'function': { help: |||
       A reference to a named key resource in Vault. This cannot be modified after creation.
     ||| } },
     withKey(value):: self {
@@ -57,7 +87,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { key: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the client.
     ||| } },
     withName(value):: self {
@@ -65,7 +95,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -73,7 +103,7 @@
         vault_identity_oidc_client+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRedirectUris':: { 'function': { help: |||
+    '#redirect_uris':: { 'function': { help: |||
       Redirection URI values used by the client. One of these values must exactly match the redirect_uri parameter value used in each authentication request.
     ||| } },
     withRedirectUris(value):: self {

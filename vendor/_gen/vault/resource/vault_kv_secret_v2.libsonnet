@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCas':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kv_secret_v2+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cas':: { 'function': { help: |||
       This flag is required if cas_required is set to true on either the secret or the engine's config. In order for a write to be successful, cas must be set to the current version of the secret.
     ||| } },
     withCas(value):: self {
@@ -21,7 +51,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { cas: value } },
       },
     },
-    '#withDataJson':: { 'function': { help: |||
+    '#data_json':: { 'function': { help: |||
       JSON-encoded secret data to write.
     ||| } },
     withDataJson(value):: self {
@@ -29,7 +59,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withDataJsonWo':: { 'function': { help: |||
+    '#data_json_wo':: { 'function': { help: |||
       Write-Only JSON-encoded secret data to write.
     ||| } },
     withDataJsonWo(value):: self {
@@ -37,7 +67,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { data_json_wo: value } },
       },
     },
-    '#withDataJsonWoVersion':: { 'function': { help: |||
+    '#data_json_wo_version':: { 'function': { help: |||
       Version counter for write-only secret data.
     ||| } },
     withDataJsonWoVersion(value):: self {
@@ -45,7 +75,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { data_json_wo_version: value } },
       },
     },
-    '#withDeleteAllVersions':: { 'function': { help: |||
+    '#delete_all_versions':: { 'function': { help: |||
       If set to true, permanently deletes all versions for the specified key.
     ||| } },
     withDeleteAllVersions(value):: self {
@@ -53,7 +83,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { delete_all_versions: value } },
       },
     },
-    '#withDisableRead':: { 'function': { help: |||
+    '#disable_read':: { 'function': { help: |||
       If set to true, disables reading secret from Vault; note: drift won't be detected.
     ||| } },
     withDisableRead(value):: self {
@@ -66,7 +96,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where KV-V2 engine is mounted.
     ||| } },
     withMount(value):: self {
@@ -74,7 +104,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
     ||| } },
     withName(value):: self {
@@ -82,7 +112,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -90,7 +120,7 @@
         vault_kv_secret_v2+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOptions':: { 'function': { help: |||
+    '#options':: { 'function': { help: |||
       An object that holds option settings.
     ||| } },
     withOptions(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDepth':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_kv_secret_subkeys_v2+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#depth':: { 'function': { help: |||
       Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist.
     ||| } },
     withDepth(value):: self {
@@ -26,7 +56,7 @@
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where KV-V2 engine is mounted
     ||| } },
     withMount(value):: self {
@@ -34,7 +64,7 @@
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
     ||| } },
     withName(value):: self {
@@ -42,7 +72,7 @@
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_kv_secret_subkeys_v2+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withVersion':: { 'function': { help: |||
+    '#version':: { 'function': { help: |||
       Specifies the version to return. If not set the latest version is returned.
     ||| } },
     withVersion(value):: self {

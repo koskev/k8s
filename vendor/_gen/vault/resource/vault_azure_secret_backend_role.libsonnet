@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApplicationObjectId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_azure_secret_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#application_object_id':: { 'function': { help: |||
       Application Object ID for an existing service principal that will be used instead of creating dynamic service principals.
     ||| } },
     withApplicationObjectId(value):: self {
@@ -20,7 +50,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { application_object_id: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -28,7 +58,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       Human-friendly description of the mount for the backend.
     ||| } },
     withDescription(value):: self {
@@ -36,7 +66,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { description: value } },
       },
     },
-    '#withExplicitMaxTtl':: { 'function': { help: |||
+    '#explicit_max_ttl':: { 'function': { help: |||
       Specifies the explicit maximum lifetime of the lease and service principal.
     ||| } },
     withExplicitMaxTtl(value):: self {
@@ -49,7 +79,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       Specifies the maximum TTL for service principals generated using this role.
     ||| } },
     withMaxTtl(value):: self {
@@ -57,7 +87,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       A map of string key/value pairs that will be stored as metadata on the secret.
     ||| } },
     withMetadata(value):: self {
@@ -65,7 +95,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -73,7 +103,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPermanentlyDelete':: { 'function': { help: |||
+    '#permanently_delete':: { 'function': { help: |||
       Indicates whether the applications and service principals created by Vault will be permanently deleted when the corresponding leases expire.
     ||| } },
     withPermanentlyDelete(value):: self {
@@ -81,7 +111,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { permanently_delete: value } },
       },
     },
-    '#withPersistApp':: { 'function': { help: |||
+    '#persist_app':: { 'function': { help: |||
       If true, persists the created service principal and application for the lifetime of the role.
     ||| } },
     withPersistApp(value):: self {
@@ -89,7 +119,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { persist_app: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role to create
     ||| } },
     withRole(value):: self {
@@ -97,7 +127,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSignInAudience':: { 'function': { help: |||
+    '#sign_in_audience':: { 'function': { help: |||
       Specifies the security principal types that are allowed to sign in to the application. Valid values are: AzureADMyOrg, AzureADMultipleOrgs, AzureADandPersonalMicrosoftAccount, PersonalMicrosoftAccount
     ||| } },
     withSignInAudience(value):: self {
@@ -105,7 +135,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { sign_in_audience: value } },
       },
     },
-    '#withTags':: { 'function': { help: |||
+    '#tags':: { 'function': { help: |||
       Comma-separated strings of Azure tags to attach to an application.
     ||| } },
     withTags(value):: self {
@@ -113,7 +143,7 @@
         vault_azure_secret_backend_role+: { [terraformName]+: { tags: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Specifies the default TTL for service principals generated using this role.
     ||| } },
     withTtl(value):: self {

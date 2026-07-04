@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withEntityIds':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_assignment+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#entity_ids':: { 'function': { help: |||
       A list of Vault entity IDs.
     ||| } },
     withEntityIds(value):: self {
@@ -20,7 +50,7 @@
         vault_identity_oidc_assignment+: { [terraformName]+: { entity_ids: value } },
       },
     },
-    '#withGroupIds':: { 'function': { help: |||
+    '#group_ids':: { 'function': { help: |||
       A list of Vault group IDs.
     ||| } },
     withGroupIds(value):: self {
@@ -33,7 +63,7 @@
         vault_identity_oidc_assignment+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the assignment.
     ||| } },
     withName(value):: self {
@@ -41,7 +71,7 @@
         vault_identity_oidc_assignment+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

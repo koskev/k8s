@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withHmac':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_audit_request_header+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#hmac':: { 'function': { help: |||
       Whether this header's value should be HMAC'd in the audit logs.
     ||| } },
     withHmac(value):: self {
@@ -25,7 +55,7 @@
         vault_audit_request_header+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the request header to audit.
     ||| } },
     withName(value):: self {
@@ -33,7 +63,7 @@
         vault_audit_request_header+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

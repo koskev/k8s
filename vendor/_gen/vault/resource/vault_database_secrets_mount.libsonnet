@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowedManagedKeys':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_database_secrets_mount+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allowed_managed_keys':: { 'function': { help: |||
       List of managed key registry entry names that the mount in question is allowed to access
     ||| } },
     withAllowedManagedKeys(value):: self {
@@ -20,7 +50,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { allowed_managed_keys: value } },
       },
     },
-    '#withAllowedResponseHeaders':: { 'function': { help: |||
+    '#allowed_response_headers':: { 'function': { help: |||
       List of headers to allow and pass from the request to the plugin
     ||| } },
     withAllowedResponseHeaders(value):: self {
@@ -28,7 +58,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { allowed_response_headers: value } },
       },
     },
-    '#withAuditNonHmacRequestKeys':: { 'function': { help: |||
+    '#audit_non_hmac_request_keys':: { 'function': { help: |||
       Specifies the list of keys that will not be HMAC'd by audit devices in the request data object.
     ||| } },
     withAuditNonHmacRequestKeys(value):: self {
@@ -36,7 +66,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { audit_non_hmac_request_keys: value } },
       },
     },
-    '#withAuditNonHmacResponseKeys':: { 'function': { help: |||
+    '#audit_non_hmac_response_keys':: { 'function': { help: |||
       Specifies the list of keys that will not be HMAC'd by audit devices in the response data object.
     ||| } },
     withAuditNonHmacResponseKeys(value):: self {
@@ -44,7 +74,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { audit_non_hmac_response_keys: value } },
       },
     },
-    '#withDefaultLeaseTtlSeconds':: { 'function': { help: |||
+    '#default_lease_ttl_seconds':: { 'function': { help: |||
       Default lease duration for tokens and secrets in seconds
     ||| } },
     withDefaultLeaseTtlSeconds(value):: self {
@@ -52,7 +82,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { default_lease_ttl_seconds: value } },
       },
     },
-    '#withDelegatedAuthAccessors':: { 'function': { help: |||
+    '#delegated_auth_accessors':: { 'function': { help: |||
       List of headers to allow and pass from the request to the plugin
     ||| } },
     withDelegatedAuthAccessors(value):: self {
@@ -60,7 +90,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { delegated_auth_accessors: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       Human-friendly description of the mount
     ||| } },
     withDescription(value):: self {
@@ -68,7 +98,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { description: value } },
       },
     },
-    '#withExternalEntropyAccess':: { 'function': { help: |||
+    '#external_entropy_access':: { 'function': { help: |||
       Enable the secrets engine to access Vault's external entropy source
     ||| } },
     withExternalEntropyAccess(value):: self {
@@ -76,7 +106,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { external_entropy_access: value } },
       },
     },
-    '#withForceNoCache':: { 'function': { help: |||
+    '#force_no_cache':: { 'function': { help: |||
       If set to true, disables caching.
     ||| } },
     withForceNoCache(value):: self {
@@ -89,7 +119,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityTokenKey':: { 'function': { help: |||
+    '#identity_token_key':: { 'function': { help: |||
       The key to use for signing plugin workload identity tokens
     ||| } },
     withIdentityTokenKey(value):: self {
@@ -97,7 +127,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { identity_token_key: value } },
       },
     },
-    '#withListingVisibility':: { 'function': { help: |||
+    '#listing_visibility':: { 'function': { help: |||
       Specifies whether to show this mount in the UI-specific listing endpoint
     ||| } },
     withListingVisibility(value):: self {
@@ -105,7 +135,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { listing_visibility: value } },
       },
     },
-    '#withLocal':: { 'function': { help: |||
+    '#local':: { 'function': { help: |||
       Local mount flag that can be explicitly set to true to enforce local mount in HA environment
     ||| } },
     withLocal(value):: self {
@@ -113,7 +143,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withMaxLeaseTtlSeconds':: { 'function': { help: |||
+    '#max_lease_ttl_seconds':: { 'function': { help: |||
       Maximum possible lease duration for tokens and secrets in seconds
     ||| } },
     withMaxLeaseTtlSeconds(value):: self {
@@ -121,7 +151,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { max_lease_ttl_seconds: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -129,7 +159,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOptions':: { 'function': { help: |||
+    '#options':: { 'function': { help: |||
       Specifies mount type specific options that are passed to the backend
     ||| } },
     withOptions(value):: self {
@@ -137,7 +167,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { options: value } },
       },
     },
-    '#withPassthroughRequestHeaders':: { 'function': { help: |||
+    '#passthrough_request_headers':: { 'function': { help: |||
       List of headers to allow and pass from the request to the plugin
     ||| } },
     withPassthroughRequestHeaders(value):: self {
@@ -145,7 +175,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { passthrough_request_headers: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Where the secret backend will be mounted
     ||| } },
     withPath(value):: self {
@@ -153,7 +183,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPluginVersion':: { 'function': { help: |||
+    '#plugin_version':: { 'function': { help: |||
       Specifies the semantic version of the plugin to use, e.g. 'v1.0.0'
     ||| } },
     withPluginVersion(value):: self {
@@ -161,7 +191,7 @@
         vault_database_secrets_mount+: { [terraformName]+: { plugin_version: value } },
       },
     },
-    '#withSealWrap':: { 'function': { help: |||
+    '#seal_wrap':: { 'function': { help: |||
       Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability
     ||| } },
     withSealWrap(value):: self {

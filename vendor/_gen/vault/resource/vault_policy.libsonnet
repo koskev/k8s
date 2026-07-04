@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowOverwrite':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_policy+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allow_overwrite':: { 'function': { help: |||
       Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes.
     ||| } },
     withAllowOverwrite(value):: self {
@@ -26,7 +56,7 @@
         vault_policy+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the policy
     ||| } },
     withName(value):: self {
@@ -34,7 +64,7 @@
         vault_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_policy+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicy':: { 'function': { help: |||
+    '#policy':: { 'function': { help: |||
       The policy document
     ||| } },
     withPolicy(value):: self {

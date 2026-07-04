@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCleanupDeadServers':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_raft_autopilot+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cleanup_dead_servers':: { 'function': { help: |||
       Specifies whether to remove dead server nodes periodically or when a new server joins. This requires that min-quorum is also set.
     ||| } },
     withCleanupDeadServers(value):: self {
@@ -19,7 +49,7 @@
         vault_raft_autopilot+: { [terraformName]+: { cleanup_dead_servers: value } },
       },
     },
-    '#withDeadServerLastContactThreshold':: { 'function': { help: |||
+    '#dead_server_last_contact_threshold':: { 'function': { help: |||
       Limit the amount of time a server can go without leader contact before being considered failed. This only takes effect when cleanup_dead_servers is set.
     ||| } },
     withDeadServerLastContactThreshold(value):: self {
@@ -27,7 +57,7 @@
         vault_raft_autopilot+: { [terraformName]+: { dead_server_last_contact_threshold: value } },
       },
     },
-    '#withDisableUpgradeMigration':: { 'function': { help: |||
+    '#disable_upgrade_migration':: { 'function': { help: |||
       Disables automatically upgrading Vault using autopilot. (Enterprise-only)
     ||| } },
     withDisableUpgradeMigration(value):: self {
@@ -40,7 +70,7 @@
         vault_raft_autopilot+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLastContactThreshold':: { 'function': { help: |||
+    '#last_contact_threshold':: { 'function': { help: |||
       Limit the amount of time a server can go without leader contact before being considered unhealthy.
     ||| } },
     withLastContactThreshold(value):: self {
@@ -48,7 +78,7 @@
         vault_raft_autopilot+: { [terraformName]+: { last_contact_threshold: value } },
       },
     },
-    '#withMaxTrailingLogs':: { 'function': { help: |||
+    '#max_trailing_logs':: { 'function': { help: |||
       Maximum number of log entries in the Raft log that a server can be behind its leader before being considered unhealthy.
     ||| } },
     withMaxTrailingLogs(value):: self {
@@ -56,7 +86,7 @@
         vault_raft_autopilot+: { [terraformName]+: { max_trailing_logs: value } },
       },
     },
-    '#withMinQuorum':: { 'function': { help: |||
+    '#min_quorum':: { 'function': { help: |||
       Minimum number of servers allowed in a cluster before autopilot can prune dead servers. This should at least be 3. Applicable only for voting nodes.
     ||| } },
     withMinQuorum(value):: self {
@@ -64,7 +94,7 @@
         vault_raft_autopilot+: { [terraformName]+: { min_quorum: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -72,7 +102,7 @@
         vault_raft_autopilot+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withServerStabilizationTime':: { 'function': { help: |||
+    '#server_stabilization_time':: { 'function': { help: |||
       Minimum amount of time a server must be stable in the 'healthy' state before being added to the cluster.
     ||| } },
     withServerStabilizationTime(value):: self {

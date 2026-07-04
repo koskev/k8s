@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_pki_secret_backend_key+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyRef':: { 'function': { help: |||
+    '#key_ref':: { 'function': { help: |||
       Reference to an existing key.
     ||| } },
     withKeyRef(value):: self {
@@ -34,7 +64,7 @@
         vault_pki_secret_backend_key+: { [terraformName]+: { key_ref: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

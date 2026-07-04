@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAutomountServiceAccountToken':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_default_service_account+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#automount_service_account_token':: { 'function': { help: |||
       Enable automatic mounting of the service account token
     ||| } },
     withAutomountServiceAccountToken(value):: self {

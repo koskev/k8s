@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiVersion':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_labels+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_version':: { 'function': { help: |||
       The apiVersion of the resource to label.
     ||| } },
     withApiVersion(value):: self {
@@ -25,7 +55,7 @@
         kubernetes_labels+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withFieldManager':: { 'function': { help: |||
+    '#field_manager':: { 'function': { help: |||
       Set the name of the field manager for the specified labels.
     ||| } },
     withFieldManager(value):: self {
@@ -33,7 +63,7 @@
         kubernetes_labels+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force overwriting labels that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {
@@ -46,7 +76,7 @@
         kubernetes_labels+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKind':: { 'function': { help: |||
+    '#kind':: { 'function': { help: |||
       The kind of the resource to label.
     ||| } },
     withKind(value):: self {
@@ -54,7 +84,7 @@
         kubernetes_labels+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withLabels':: { 'function': { help: |||
+    '#labels':: { 'function': { help: |||
       A map of labels to apply to the resource.
     ||| } },
     withLabels(value):: self {

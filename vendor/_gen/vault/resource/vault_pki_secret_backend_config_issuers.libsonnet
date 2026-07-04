@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_issuers+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
@@ -20,7 +50,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDefault':: { 'function': { help: |||
+    '#default':: { 'function': { help: |||
       Specifies the default issuer by ID.
     ||| } },
     withDefault(value):: self {
@@ -28,7 +58,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { default: value } },
       },
     },
-    '#withDefaultFollowsLatestIssuer':: { 'function': { help: |||
+    '#default_follows_latest_issuer':: { 'function': { help: |||
       Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer.
     ||| } },
     withDefaultFollowsLatestIssuer(value):: self {
@@ -41,7 +71,7 @@
         vault_pki_secret_backend_config_issuers+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

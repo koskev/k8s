@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withHandler':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_runtime_class_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#handler':: { 'function': { help: |||
       Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class
     ||| } },
     withHandler(value):: self {

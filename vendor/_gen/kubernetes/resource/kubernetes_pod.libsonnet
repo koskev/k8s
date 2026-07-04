@@ -14,12 +14,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_pod+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_pod+: { [terraformName]+: { id: value } },
       },
     },
-    '#withTargetState':: { 'function': { help: |||
+    '#target_state':: { 'function': { help: |||
       A list of the pod phases that indicate whether it was successfully created. Options: "Pending", "Running", "Succeeded", "Failed", "Unknown". Default: "Running". More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase
     ||| } },
     withTargetState(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAlphabet':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_transform_template+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alphabet':: { 'function': { help: |||
       The alphabet to use for this template. This is only used during FPE transformations.
     ||| } },
     withAlphabet(value):: self {
@@ -21,7 +51,7 @@
         vault_transform_template+: { [terraformName]+: { alphabet: value } },
       },
     },
-    '#withDecodeFormats':: { 'function': { help: |||
+    '#decode_formats':: { 'function': { help: |||
       The map of regular expression templates used to customize decoded outputs.
       Only applicable to FPE transformations.
     ||| } },
@@ -30,7 +60,7 @@
         vault_transform_template+: { [terraformName]+: { decode_formats: value } },
       },
     },
-    '#withEncodeFormat':: { 'function': { help: |||
+    '#encode_format':: { 'function': { help: |||
       The regular expression template used for encoding values.
       Only applicable to FPE transformations.
     ||| } },
@@ -44,7 +74,7 @@
         vault_transform_template+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the template.
     ||| } },
     withName(value):: self {
@@ -52,7 +82,7 @@
         vault_transform_template+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -60,7 +90,7 @@
         vault_transform_template+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws".
     ||| } },
     withPath(value):: self {
@@ -68,7 +98,7 @@
         vault_transform_template+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPattern':: { 'function': { help: |||
+    '#pattern':: { 'function': { help: |||
       The pattern used for matching. Currently, only regular expression pattern is supported.
     ||| } },
     withPattern(value):: self {
@@ -76,7 +106,7 @@
         vault_transform_template+: { [terraformName]+: { pattern: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       The pattern type to use for match detection. Currently, only regex is supported.
     ||| } },
     withType(value):: self {

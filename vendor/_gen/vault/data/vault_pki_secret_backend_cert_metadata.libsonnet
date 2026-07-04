@@ -13,12 +13,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       data+: {
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -26,7 +56,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path where PKI backend is mounted.
     ||| } },
     withPath(value):: self {
@@ -34,7 +64,7 @@
         vault_pki_secret_backend_cert_metadata+: { [terraformName]+: { path: value } },
       },
     },
-    '#withSerial':: { 'function': { help: |||
+    '#serial':: { 'function': { help: |||
       Specifies the serial of the certificate whose metadata to read.
     ||| } },
     withSerial(value):: self {

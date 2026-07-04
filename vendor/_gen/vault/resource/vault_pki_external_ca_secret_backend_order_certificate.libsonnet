@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       The path where the PKI External CA secret backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -25,7 +55,7 @@
         vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -33,7 +63,7 @@
         vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrderId':: { 'function': { help: |||
+    '#order_id':: { 'function': { help: |||
       The unique identifier for the ACME order.
     ||| } },
     withOrderId(value):: self {
@@ -41,7 +71,7 @@
         vault_pki_external_ca_secret_backend_order_certificate+: { [terraformName]+: { order_id: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role associated with the order.
     ||| } },
     withRoleName(value):: self {

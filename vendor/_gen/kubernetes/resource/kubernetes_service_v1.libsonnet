@@ -14,12 +14,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_service_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_service_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withWaitForLoadBalancer':: { 'function': { help: |||
+    '#wait_for_load_balancer':: { 'function': { help: |||
       Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created.
     ||| } },
     withWaitForLoadBalancer(value):: self {

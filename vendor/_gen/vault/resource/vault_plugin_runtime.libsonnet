@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCgroupParent':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_plugin_runtime+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cgroup_parent':: { 'function': { help: |||
       Specifies the parent cgroup to set for each container.
     ||| } },
     withCgroupParent(value):: self {
@@ -24,7 +54,7 @@
         vault_plugin_runtime+: { [terraformName]+: { cgroup_parent: value } },
       },
     },
-    '#withCpuNanos':: { 'function': { help: |||
+    '#cpu_nanos':: { 'function': { help: |||
       Specifies CPU limit to set per container in billionths of a CPU.
     ||| } },
     withCpuNanos(value):: self {
@@ -32,7 +62,7 @@
         vault_plugin_runtime+: { [terraformName]+: { cpu_nanos: value } },
       },
     },
-    '#withMemoryBytes':: { 'function': { help: |||
+    '#memory_bytes':: { 'function': { help: |||
       Specifies memory limit to set per container in bytes.
     ||| } },
     withMemoryBytes(value):: self {
@@ -40,7 +70,7 @@
         vault_plugin_runtime+: { [terraformName]+: { memory_bytes: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the plugin runtime.
     ||| } },
     withName(value):: self {
@@ -48,7 +78,7 @@
         vault_plugin_runtime+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -56,7 +86,7 @@
         vault_plugin_runtime+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOciRuntime':: { 'function': { help: |||
+    '#oci_runtime':: { 'function': { help: |||
       Specifies OCI-compliant container runtime to use.
     ||| } },
     withOciRuntime(value):: self {
@@ -64,7 +94,7 @@
         vault_plugin_runtime+: { [terraformName]+: { oci_runtime: value } },
       },
     },
-    '#withRootless':: { 'function': { help: |||
+    '#rootless':: { 'function': { help: |||
       Whether the container runtime is running as a non-privileged user.
     ||| } },
     withRootless(value):: self {
@@ -72,7 +102,7 @@
         vault_plugin_runtime+: { [terraformName]+: { rootless: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Specifies the plugin runtime type. Currently only `container` is supported.
     ||| } },
     withType(value):: self {

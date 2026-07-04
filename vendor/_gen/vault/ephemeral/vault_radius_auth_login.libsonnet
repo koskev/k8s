@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_radius_auth_login+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       Unique name of the auth backend to login to.
     ||| } },
     withMount(value):: self {
@@ -25,7 +55,7 @@
         vault_radius_auth_login+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -33,7 +63,7 @@
         vault_radius_auth_login+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -41,7 +71,7 @@
         vault_radius_auth_login+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPassword':: { 'function': { help: |||
+    '#password':: { 'function': { help: |||
       RADIUS password for the user.
     ||| } },
     withPassword(value):: self {
@@ -49,7 +79,7 @@
         vault_radius_auth_login+: { [terraformName]+: { password: value } },
       },
     },
-    '#withUsername':: { 'function': { help: |||
+    '#username':: { 'function': { help: |||
       RADIUS username to authenticate.
     ||| } },
     withUsername(value):: self {

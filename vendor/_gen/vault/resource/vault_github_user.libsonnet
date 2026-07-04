@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_github_user+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Auth backend to which user mapping will be congigured.
     ||| } },
     withBackend(value):: self {
@@ -25,7 +55,7 @@
         vault_github_user+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -33,7 +63,7 @@
         vault_github_user+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be assigned to this user.
     ||| } },
     withPolicies(value):: self {
@@ -41,7 +71,7 @@
         vault_github_user+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withUser':: { 'function': { help: |||
+    '#user':: { 'function': { help: |||
       GitHub user name.
     ||| } },
     withUser(value):: self {

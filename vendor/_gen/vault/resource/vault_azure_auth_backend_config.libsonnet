@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_azure_auth_backend_config+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -21,7 +51,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withClientId':: { 'function': { help: |||
+    '#client_id':: { 'function': { help: |||
       The client id for credentials to query the Azure APIs. Currently read permissions to query compute resources are required.
     ||| } },
     withClientId(value):: self {
@@ -29,7 +59,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { client_id: value } },
       },
     },
-    '#withClientSecret':: { 'function': { help: |||
+    '#client_secret':: { 'function': { help: |||
       The client secret for credentials to query the Azure APIs. Mutually exclusive with 'client_secret_wo'.
     ||| } },
     withClientSecret(value):: self {
@@ -37,7 +67,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { client_secret: value } },
       },
     },
-    '#withClientSecretWo':: { 'function': { help: |||
+    '#client_secret_wo':: { 'function': { help: |||
       The client secret for credentials to query the Azure APIs. This field is write-only and will never be stored in state. Mutually exclusive with 'client_secret'. Requires 'client_secret_wo_version' to trigger updates.
     ||| } },
     withClientSecretWo(value):: self {
@@ -45,7 +75,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { client_secret_wo: value } },
       },
     },
-    '#withClientSecretWoVersion':: { 'function': { help: |||
+    '#client_secret_wo_version':: { 'function': { help: |||
       Version counter for the write-only client secret. Increment this value to trigger rotation of the client secret. Required when using 'client_secret_wo'.
     ||| } },
     withClientSecretWoVersion(value):: self {
@@ -53,7 +83,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { client_secret_wo_version: value } },
       },
     },
-    '#withDisableAutomatedRotation':: { 'function': { help: |||
+    '#disable_automated_rotation':: { 'function': { help: |||
       Stops rotation of the root credential until set to false.
     ||| } },
     withDisableAutomatedRotation(value):: self {
@@ -61,7 +91,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { disable_automated_rotation: value } },
       },
     },
-    '#withEnvironment':: { 'function': { help: |||
+    '#environment':: { 'function': { help: |||
       The Azure cloud environment. Valid values: AzurePublicCloud, AzureUSGovernmentCloud, AzureChinaCloud, AzureGermanCloud.
     ||| } },
     withEnvironment(value):: self {
@@ -74,7 +104,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityTokenAudience':: { 'function': { help: |||
+    '#identity_token_audience':: { 'function': { help: |||
       The audience claim value.
     ||| } },
     withIdentityTokenAudience(value):: self {
@@ -82,7 +112,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { identity_token_audience: value } },
       },
     },
-    '#withIdentityTokenTtl':: { 'function': { help: |||
+    '#identity_token_ttl':: { 'function': { help: |||
       The TTL of generated identity tokens in seconds.
     ||| } },
     withIdentityTokenTtl(value):: self {
@@ -90,7 +120,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { identity_token_ttl: value } },
       },
     },
-    '#withMaxRetries':: { 'function': { help: |||
+    '#max_retries':: { 'function': { help: |||
       Maximum number of retries for Azure API requests. Defaults to 3.
     ||| } },
     withMaxRetries(value):: self {
@@ -98,7 +128,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { max_retries: value } },
       },
     },
-    '#withMaxRetryDelay':: { 'function': { help: |||
+    '#max_retry_delay':: { 'function': { help: |||
       The maximum delay in seconds between retries for Azure API requests. Defaults to 60.
     ||| } },
     withMaxRetryDelay(value):: self {
@@ -106,7 +136,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { max_retry_delay: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -114,7 +144,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withResource':: { 'function': { help: |||
+    '#resource':: { 'function': { help: |||
       The configured URL for the application registered in Azure Active Directory.
     ||| } },
     withResource(value):: self {
@@ -122,7 +152,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { resource: value } },
       },
     },
-    '#withRetryDelay':: { 'function': { help: |||
+    '#retry_delay':: { 'function': { help: |||
       The initial delay in seconds between retries for Azure API requests. Defaults to 4.
     ||| } },
     withRetryDelay(value):: self {
@@ -130,7 +160,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { retry_delay: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
+    '#rotation_period':: { 'function': { help: |||
       The period of time in seconds between each rotation of the root credential. Cannot be used with rotation_schedule.
     ||| } },
     withRotationPeriod(value):: self {
@@ -138,7 +168,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { rotation_period: value } },
       },
     },
-    '#withRotationSchedule':: { 'function': { help: |||
+    '#rotation_schedule':: { 'function': { help: |||
       The cron-style schedule for the root credential to be rotated on. Cannot be used with rotation_period.
     ||| } },
     withRotationSchedule(value):: self {
@@ -146,7 +176,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { rotation_schedule: value } },
       },
     },
-    '#withRotationWindow':: { 'function': { help: |||
+    '#rotation_window':: { 'function': { help: |||
       The maximum amount of time in seconds Vault is allowed to complete a rotation once a scheduled rotation is triggered. Can only be used with rotation_schedule.
     ||| } },
     withRotationWindow(value):: self {
@@ -154,7 +184,7 @@
         vault_azure_auth_backend_config+: { [terraformName]+: { rotation_window: value } },
       },
     },
-    '#withTenantId':: { 'function': { help: |||
+    '#tenant_id':: { 'function': { help: |||
       The tenant id for the Azure Active Directory organization.
     ||| } },
     withTenantId(value):: self {

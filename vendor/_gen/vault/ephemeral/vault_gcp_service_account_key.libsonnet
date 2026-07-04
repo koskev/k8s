@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withKeyAlgorithm':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_gcp_service_account_key+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#key_algorithm':: { 'function': { help: |||
       Key algorithm used to generate key. Defaults to 2k RSA key. Accepted values: `KEY_ALG_UNSPECIFIED`, `KEY_ALG_RSA_1024`, `KEY_ALG_RSA_2048`.
     ||| } },
     withKeyAlgorithm(value):: self {
@@ -23,7 +53,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { key_algorithm: value } },
       },
     },
-    '#withKeyType':: { 'function': { help: |||
+    '#key_type':: { 'function': { help: |||
       Private key type to generate. Defaults to JSON credentials file. Accepted values: `TYPE_UNSPECIFIED`, `TYPE_PKCS12_FILE`, `TYPE_GOOGLE_CREDENTIALS_FILE`.
     ||| } },
     withKeyType(value):: self {
@@ -31,7 +61,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Mount path for the GCP Secret Backend to read credentials from.
     ||| } },
     withMount(value):: self {
@@ -39,7 +69,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -47,7 +77,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -55,7 +85,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleset':: { 'function': { help: |||
+    '#roleset':: { 'function': { help: |||
       GCP Secret Roleset to generate credentials for. Mutually exclusive with `static_account`.
     ||| } },
     withRoleset(value):: self {
@@ -63,7 +93,7 @@
         vault_gcp_service_account_key+: { [terraformName]+: { roleset: value } },
       },
     },
-    '#withStaticAccount':: { 'function': { help: |||
+    '#static_account':: { 'function': { help: |||
       GCP Secret Static Account to generate credentials for. Mutually exclusive with `roleset`.
     ||| } },
     withStaticAccount(value):: self {

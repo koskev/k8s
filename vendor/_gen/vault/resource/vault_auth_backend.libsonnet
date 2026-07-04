@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDescription':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_auth_backend+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#description':: { 'function': { help: |||
       The description of the auth backend
     ||| } },
     withDescription(value):: self {
@@ -20,7 +50,7 @@
         vault_auth_backend+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisableRemount':: { 'function': { help: |||
+    '#disable_remount':: { 'function': { help: |||
       If set, opts out of mount migration on path updates.
     ||| } },
     withDisableRemount(value):: self {
@@ -33,7 +63,7 @@
         vault_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityTokenKey':: { 'function': { help: |||
+    '#identity_token_key':: { 'function': { help: |||
       The key to use for signing identity tokens.
     ||| } },
     withIdentityTokenKey(value):: self {
@@ -41,7 +71,7 @@
         vault_auth_backend+: { [terraformName]+: { identity_token_key: value } },
       },
     },
-    '#withLocal':: { 'function': { help: |||
+    '#local':: { 'function': { help: |||
       Specifies if the auth method is local only
     ||| } },
     withLocal(value):: self {
@@ -49,7 +79,7 @@
         vault_auth_backend+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -57,7 +87,7 @@
         vault_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       path to mount the backend. This defaults to the type.
     ||| } },
     withPath(value):: self {
@@ -70,7 +100,7 @@
         vault_auth_backend+: { [terraformName]+: { tune: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Name of the auth backend
     ||| } },
     withType(value):: self {

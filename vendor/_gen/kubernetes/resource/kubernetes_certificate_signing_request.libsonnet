@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAutoApprove':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_certificate_signing_request+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#auto_approve':: { 'function': { help: |||
       Automatically approve the CertificateSigningRequest
     ||| } },
     withAutoApprove(value):: self {

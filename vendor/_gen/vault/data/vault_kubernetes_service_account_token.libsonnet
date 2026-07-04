@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_kubernetes_service_account_token+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The Kubernetes secret backend to generate service account tokens from.
     ||| } },
     withBackend(value):: self {
@@ -22,7 +52,7 @@
         vault_kubernetes_service_account_token+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withClusterRoleBinding':: { 'function': { help: |||
+    '#cluster_role_binding':: { 'function': { help: |||
       If true, generate a ClusterRoleBinding to grant permissions across the whole cluster instead of within a namespace.
     ||| } },
     withClusterRoleBinding(value):: self {
@@ -35,7 +65,7 @@
         vault_kubernetes_service_account_token+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKubernetesNamespace':: { 'function': { help: |||
+    '#kubernetes_namespace':: { 'function': { help: |||
       The name of the Kubernetes namespace in which to generate the credentials.
     ||| } },
     withKubernetesNamespace(value):: self {
@@ -43,7 +73,7 @@
         vault_kubernetes_service_account_token+: { [terraformName]+: { kubernetes_namespace: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -51,7 +81,7 @@
         vault_kubernetes_service_account_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       The name of the role.
     ||| } },
     withRole(value):: self {
@@ -59,7 +89,7 @@
         vault_kubernetes_service_account_token+: { [terraformName]+: { role: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       The TTL of the generated Kubernetes service account token, specified in seconds or as a Go duration format string
     ||| } },
     withTtl(value):: self {

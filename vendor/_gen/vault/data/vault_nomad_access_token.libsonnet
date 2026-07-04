@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_nomad_access_token+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Nomad secret backend to generate tokens from.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_nomad_access_token+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_nomad_access_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRole(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withClientId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#client_id':: { 'function': { help: |||
       The value that will be included in the `aud` field of all the OIDC identity tokens issued by this role
     ||| } },
     withClientId(value):: self {
@@ -26,7 +56,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKey':: { 'function': { help: |||
+    '#key':: { 'function': { help: |||
       A configured named key, the key must already exist.
     ||| } },
     withKey(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { key: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withName(value):: self {
@@ -42,7 +72,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTemplate':: { 'function': { help: |||
+    '#template':: { 'function': { help: |||
       The template string to use for generating tokens. This may be in string-ified JSON or base64 format.
     ||| } },
     withTemplate(value):: self {
@@ -58,7 +88,7 @@
         vault_identity_oidc_role+: { [terraformName]+: { template: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       TTL of the tokens generated against the role in number of seconds.
     ||| } },
     withTtl(value):: self {

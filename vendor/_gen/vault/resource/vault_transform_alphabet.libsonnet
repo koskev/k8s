@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAlphabet':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_transform_alphabet+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alphabet':: { 'function': { help: |||
       A string of characters that contains the alphabet set.
     ||| } },
     withAlphabet(value):: self {
@@ -26,7 +56,7 @@
         vault_transform_alphabet+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the alphabet.
     ||| } },
     withName(value):: self {
@@ -34,7 +64,7 @@
         vault_transform_alphabet+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_transform_alphabet+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws".
     ||| } },
     withPath(value):: self {

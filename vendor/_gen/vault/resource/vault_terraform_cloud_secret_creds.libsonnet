@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_creds+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Terraform Cloud secret backend to generate tokens from
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_terraform_cloud_secret_creds+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRole(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowedClientId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allowed_client_id':: { 'function': { help: |||
       Role Client ID allowed to use the key for signing.
     ||| } },
     withAllowedClientId(value):: self {
@@ -26,7 +56,7 @@
         vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyName':: { 'function': { help: |||
+    '#key_name':: { 'function': { help: |||
       Name of the key.
     ||| } },
     withKeyName(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_oidc_key_allowed_client_id+: { [terraformName]+: { key_name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

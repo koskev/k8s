@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAliasMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_jwt_auth_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alias_metadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
         This should be a list or map containing the metadata in key value pairs.
     ||| } },
@@ -22,7 +52,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withAllowedRedirectUris':: { 'function': { help: |||
+    '#allowed_redirect_uris':: { 'function': { help: |||
       The list of allowed values for redirect_uri during OIDC logins.
     ||| } },
     withAllowedRedirectUris(value):: self {
@@ -30,7 +60,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { allowed_redirect_uris: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -38,7 +68,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withBoundAudiences':: { 'function': { help: |||
+    '#bound_audiences':: { 'function': { help: |||
       List of aud claims to match against. Any match is sufficient.
     ||| } },
     withBoundAudiences(value):: self {
@@ -46,7 +76,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { bound_audiences: value } },
       },
     },
-    '#withBoundClaims':: { 'function': { help: |||
+    '#bound_claims':: { 'function': { help: |||
       Map of claims/values to match against. The expected value may be a single string or a comma-separated string list.
     ||| } },
     withBoundClaims(value):: self {
@@ -54,7 +84,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { bound_claims: value } },
       },
     },
-    '#withBoundClaimsType':: { 'function': { help: |||
+    '#bound_claims_type':: { 'function': { help: |||
       How to interpret values in the claims/values map: can be either "string" (exact match) or "glob" (wildcard match).
     ||| } },
     withBoundClaimsType(value):: self {
@@ -62,7 +92,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { bound_claims_type: value } },
       },
     },
-    '#withBoundSubject':: { 'function': { help: |||
+    '#bound_subject':: { 'function': { help: |||
       If set, requires that the sub claim matches this value.
     ||| } },
     withBoundSubject(value):: self {
@@ -70,7 +100,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { bound_subject: value } },
       },
     },
-    '#withClaimMappings':: { 'function': { help: |||
+    '#claim_mappings':: { 'function': { help: |||
       Map of claims (keys) to be copied to specified metadata fields (values).
     ||| } },
     withClaimMappings(value):: self {
@@ -78,7 +108,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { claim_mappings: value } },
       },
     },
-    '#withClockSkewLeeway':: { 'function': { help: |||
+    '#clock_skew_leeway':: { 'function': { help: |||
       The amount of leeway to add to all claims to account for clock skew, in seconds. Defaults to 60 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles.
     ||| } },
     withClockSkewLeeway(value):: self {
@@ -86,7 +116,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { clock_skew_leeway: value } },
       },
     },
-    '#withDisableBoundClaimsParsing':: { 'function': { help: |||
+    '#disable_bound_claims_parsing':: { 'function': { help: |||
       Disable bound claim value parsing. Useful when values contain commas.
     ||| } },
     withDisableBoundClaimsParsing(value):: self {
@@ -94,7 +124,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { disable_bound_claims_parsing: value } },
       },
     },
-    '#withExpirationLeeway':: { 'function': { help: |||
+    '#expiration_leeway':: { 'function': { help: |||
       The amount of leeway to add to expiration (exp) claims to account for clock skew, in seconds. Defaults to 150 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles.
     ||| } },
     withExpirationLeeway(value):: self {
@@ -102,7 +132,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { expiration_leeway: value } },
       },
     },
-    '#withGroupsClaim':: { 'function': { help: |||
+    '#groups_claim':: { 'function': { help: |||
       The claim to use to uniquely identify the set of groups to which the user belongs; this will be used as the names for the Identity group aliases created due to a successful login. The claim value must be a list of strings.
     ||| } },
     withGroupsClaim(value):: self {
@@ -115,7 +145,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxAge':: { 'function': { help: |||
+    '#max_age':: { 'function': { help: |||
       Specifies the allowable elapsed time in seconds since the last time the user was actively authenticated.
     ||| } },
     withMaxAge(value):: self {
@@ -123,7 +153,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { max_age: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -131,7 +161,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNotBeforeLeeway':: { 'function': { help: |||
+    '#not_before_leeway':: { 'function': { help: |||
       The amount of leeway to add to not before (nbf) claims to account for clock skew, in seconds. Defaults to 150 seconds if set to 0 and can be disabled if set to -1. Only applicable with 'jwt' roles. 
     ||| } },
     withNotBeforeLeeway(value):: self {
@@ -139,7 +169,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { not_before_leeway: value } },
       },
     },
-    '#withOidcScopes':: { 'function': { help: |||
+    '#oidc_scopes':: { 'function': { help: |||
       List of OIDC scopes to be used with an OIDC role. The standard scope "openid" is automatically included and need not be specified.
     ||| } },
     withOidcScopes(value):: self {
@@ -147,7 +177,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { oidc_scopes: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRoleName(value):: self {
@@ -155,7 +185,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withRoleType':: { 'function': { help: |||
+    '#role_type':: { 'function': { help: |||
       Type of role, either "oidc" (default) or "jwt"
     ||| } },
     withRoleType(value):: self {
@@ -163,7 +193,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { role_type: value } },
       },
     },
-    '#withTokenBoundCidrs':: { 'function': { help: |||
+    '#token_bound_cidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -171,7 +201,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
+    '#token_explicit_max_ttl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -179,7 +209,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl':: { 'function': { help: |||
+    '#token_max_ttl':: { 'function': { help: |||
       The maximum lifetime of the generated token
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -187,7 +217,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
+    '#token_no_default_policy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -195,7 +225,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses':: { 'function': { help: |||
+    '#token_num_uses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited
     ||| } },
     withTokenNumUses(value):: self {
@@ -203,7 +233,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod':: { 'function': { help: |||
+    '#token_period':: { 'function': { help: |||
       Generated Token's Period
     ||| } },
     withTokenPeriod(value):: self {
@@ -211,7 +241,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies':: { 'function': { help: |||
+    '#token_policies':: { 'function': { help: |||
       Generated Token's Policies
     ||| } },
     withTokenPolicies(value):: self {
@@ -219,7 +249,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl':: { 'function': { help: |||
+    '#token_ttl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds
     ||| } },
     withTokenTtl(value):: self {
@@ -227,7 +257,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType':: { 'function': { help: |||
+    '#token_type':: { 'function': { help: |||
       The type of token to generate, service or batch
     ||| } },
     withTokenType(value):: self {
@@ -235,7 +265,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { token_type: value } },
       },
     },
-    '#withUserClaim':: { 'function': { help: |||
+    '#user_claim':: { 'function': { help: |||
       The claim to use to uniquely identify the user; this will be used as the name for the Identity entity alias created due to a successful login.
     ||| } },
     withUserClaim(value):: self {
@@ -243,7 +273,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { user_claim: value } },
       },
     },
-    '#withUserClaimJsonPointer':: { 'function': { help: |||
+    '#user_claim_json_pointer':: { 'function': { help: |||
       Specifies if the user_claim value uses JSON pointer syntax for referencing claims. By default, the user_claim value will not use JSON pointer.
     ||| } },
     withUserClaimJsonPointer(value):: self {
@@ -251,7 +281,7 @@
         vault_jwt_auth_backend_role+: { [terraformName]+: { user_claim_json_pointer: value } },
       },
     },
-    '#withVerboseOidcLogging':: { 'function': { help: |||
+    '#verbose_oidc_logging':: { 'function': { help: |||
       Log received OIDC tokens and claims when debug-level logging is active. Not recommended in production since sensitive information may be present in OIDC responses.
     ||| } },
     withVerboseOidcLogging(value):: self {

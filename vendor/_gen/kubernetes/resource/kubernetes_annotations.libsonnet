@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAnnotations':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_annotations+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#annotations':: { 'function': { help: |||
       A map of annotations to apply to the resource.
     ||| } },
     withAnnotations(value):: self {
@@ -24,7 +54,7 @@
         kubernetes_annotations+: { [terraformName]+: { annotations: value } },
       },
     },
-    '#withApiVersion':: { 'function': { help: |||
+    '#api_version':: { 'function': { help: |||
       The apiVersion of the resource to annotate.
     ||| } },
     withApiVersion(value):: self {
@@ -32,7 +62,7 @@
         kubernetes_annotations+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withFieldManager':: { 'function': { help: |||
+    '#field_manager':: { 'function': { help: |||
       Set the name of the field manager for the specified labels.
     ||| } },
     withFieldManager(value):: self {
@@ -40,7 +70,7 @@
         kubernetes_annotations+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force overwriting annotations that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {
@@ -53,7 +83,7 @@
         kubernetes_annotations+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKind':: { 'function': { help: |||
+    '#kind':: { 'function': { help: |||
       The kind of the resource to annotate.
     ||| } },
     withKind(value):: self {
@@ -61,7 +91,7 @@
         kubernetes_annotations+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withTemplateAnnotations':: { 'function': { help: |||
+    '#template_annotations':: { 'function': { help: |||
       A map of annotations to apply to the resource template.
     ||| } },
     withTemplateAnnotations(value):: self {

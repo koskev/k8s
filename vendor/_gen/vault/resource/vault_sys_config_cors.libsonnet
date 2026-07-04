@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowedHeaders':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_sys_config_cors+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allowed_headers':: { 'function': { help: |||
       Set of additional custom headers allowed on cross-origin requests. Vault automatically includes standard headers (Content-Type, X-Requested-With, X-Vault-AWS-IAM-Server-ID, X-Vault-MFA, X-Vault-No-Request-Forwarding, X-Vault-Wrap-Format, X-Vault-Wrap-TTL, X-Vault-Policy-Override, Authorization, X-Vault-Token), so only specify custom headers here.
     ||| } },
     withAllowedHeaders(value):: self {
@@ -23,7 +53,7 @@
         vault_sys_config_cors+: { [terraformName]+: { allowed_headers: value } },
       },
     },
-    '#withAllowedOrigins':: { 'function': { help: |||
+    '#allowed_origins':: { 'function': { help: |||
       Set of origins permitted to make cross-origin requests. Use `*` as the only value to allow all origins.
     ||| } },
     withAllowedOrigins(value):: self {

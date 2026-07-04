@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowedClientIds':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_provider+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allowed_client_ids':: { 'function': { help: |||
       The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed.
     ||| } },
     withAllowedClientIds(value):: self {
@@ -20,7 +50,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { allowed_client_ids: value } },
       },
     },
-    '#withHttpsEnabled':: { 'function': { help: |||
+    '#https_enabled':: { 'function': { help: |||
       Set to true if the issuer endpoint uses HTTPS.
     ||| } },
     withHttpsEnabled(value):: self {
@@ -33,7 +63,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuerHost':: { 'function': { help: |||
+    '#issuer_host':: { 'function': { help: |||
       The host for the issuer. Can be either host or host:port.
     ||| } },
     withIssuerHost(value):: self {
@@ -41,7 +71,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { issuer_host: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the provider.
     ||| } },
     withName(value):: self {
@@ -49,7 +79,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -57,7 +87,7 @@
         vault_identity_oidc_provider+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withScopesSupported':: { 'function': { help: |||
+    '#scopes_supported':: { 'function': { help: |||
       The scopes available for requesting on the provider.
     ||| } },
     withScopesSupported(value):: self {

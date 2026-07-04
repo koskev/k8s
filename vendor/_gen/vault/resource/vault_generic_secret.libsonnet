@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDataJson':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_generic_secret+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#data_json':: { 'function': { help: |||
       JSON-encoded secret data to write.
     ||| } },
     withDataJson(value):: self {
@@ -21,7 +51,7 @@
         vault_generic_secret+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withDeleteAllVersions':: { 'function': { help: |||
+    '#delete_all_versions':: { 'function': { help: |||
       Only applicable for kv-v2 stores. If set, permanently deletes all versions for the specified key.
     ||| } },
     withDeleteAllVersions(value):: self {
@@ -29,7 +59,7 @@
         vault_generic_secret+: { [terraformName]+: { delete_all_versions: value } },
       },
     },
-    '#withDisableRead':: { 'function': { help: |||
+    '#disable_read':: { 'function': { help: |||
       Don't attempt to read the token from Vault if true; drift won't be detected.
     ||| } },
     withDisableRead(value):: self {
@@ -42,7 +72,7 @@
         vault_generic_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_generic_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path where the generic secret will be written.
     ||| } },
     withPath(value):: self {

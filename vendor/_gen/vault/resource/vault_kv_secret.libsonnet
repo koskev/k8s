@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDataJson':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kv_secret+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#data_json':: { 'function': { help: |||
       JSON-encoded secret data to write.
     ||| } },
     withDataJson(value):: self {
@@ -26,7 +56,7 @@
         vault_kv_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_kv_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path of the KV-V1 secret.
     ||| } },
     withPath(value):: self {

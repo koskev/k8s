@@ -18,7 +18,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAdditionalClientCas':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kmip_secret_listener+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#additional_client_cas':: { 'function': { help: |||
       Names of additional TLS CAs to use to verify client certificates.
     ||| } },
     withAdditionalClientCas(value):: self {
@@ -26,7 +56,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { additional_client_cas: value } },
       },
     },
-    '#withAddress':: { 'function': { help: |||
+    '#address':: { 'function': { help: |||
       Host:port address to listen on.
     ||| } },
     withAddress(value):: self {
@@ -34,7 +64,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { address: value } },
       },
     },
-    '#withAlsoUseLegacyCa':: { 'function': { help: |||
+    '#also_use_legacy_ca':: { 'function': { help: |||
       Use the legacy unnamed CA for verifying client certificates as well.
     ||| } },
     withAlsoUseLegacyCa(value):: self {
@@ -42,7 +72,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { also_use_legacy_ca: value } },
       },
     },
-    '#withCa':: { 'function': { help: |||
+    '#ca':: { 'function': { help: |||
       Name of the CA to use to generate the server certificate and verify client certificates.
     ||| } },
     withCa(value):: self {
@@ -50,7 +80,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { ca: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Unique name for the listener.
     ||| } },
     withName(value):: self {
@@ -58,7 +88,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -66,7 +96,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path where KMIP backend is mounted.
     ||| } },
     withPath(value):: self {
@@ -74,7 +104,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { path: value } },
       },
     },
-    '#withServerHostnames':: { 'function': { help: |||
+    '#server_hostnames':: { 'function': { help: |||
       DNS SANs to include in listener certificate.
     ||| } },
     withServerHostnames(value):: self {
@@ -82,7 +112,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { server_hostnames: value } },
       },
     },
-    '#withServerIps':: { 'function': { help: |||
+    '#server_ips':: { 'function': { help: |||
       IP SANs to include in listener certificate.
     ||| } },
     withServerIps(value):: self {
@@ -90,7 +120,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { server_ips: value } },
       },
     },
-    '#withTlsCipherSuites':: { 'function': { help: |||
+    '#tls_cipher_suites':: { 'function': { help: |||
       TLS cipher suites to allow (does not apply to tls13+).
     ||| } },
     withTlsCipherSuites(value):: self {
@@ -98,7 +128,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { tls_cipher_suites: value } },
       },
     },
-    '#withTlsMaxVersion':: { 'function': { help: |||
+    '#tls_max_version':: { 'function': { help: |||
       Maximum TLS version to accept (tls12 or tls13).
     ||| } },
     withTlsMaxVersion(value):: self {
@@ -106,7 +136,7 @@
         vault_kmip_secret_listener+: { [terraformName]+: { tls_max_version: value } },
       },
     },
-    '#withTlsMinVersion':: { 'function': { help: |||
+    '#tls_min_version':: { 'function': { help: |||
       Minimum TLS version to accept (tls12 or tls13).
     ||| } },
     withTlsMinVersion(value):: self {

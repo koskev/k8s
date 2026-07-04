@@ -18,7 +18,37 @@
     },
   },
   functions(terraformName):: {
-    '#withKeyBits':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_generated+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#key_bits':: { 'function': { help: |||
       CA key bits. Valid values depend on key_type: For rsa: 2048, 3072, 4096. For ec: 224, 256, 384, 521.
     ||| } },
     withKeyBits(value):: self {
@@ -26,7 +56,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { key_bits: value } },
       },
     },
-    '#withKeyType':: { 'function': { help: |||
+    '#key_type':: { 'function': { help: |||
       CA key type (rsa or ec).
     ||| } },
     withKeyType(value):: self {
@@ -34,7 +64,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name to identify the CA.
     ||| } },
     withName(value):: self {
@@ -42,7 +72,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path where KMIP backend is mounted.
     ||| } },
     withPath(value):: self {
@@ -58,7 +88,7 @@
         vault_kmip_secret_ca_generated+: { [terraformName]+: { path: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       CA TTL in seconds. Defaults to 365 days.
     ||| } },
     withTtl(value):: self {

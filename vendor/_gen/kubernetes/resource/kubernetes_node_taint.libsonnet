@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withFieldManager':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_node_taint+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#field_manager':: { 'function': { help: |||
       Set the name of the field manager for the node taint
     ||| } },
     withFieldManager(value):: self {
@@ -22,7 +52,7 @@
         kubernetes_node_taint+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force overwriting annotations that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {

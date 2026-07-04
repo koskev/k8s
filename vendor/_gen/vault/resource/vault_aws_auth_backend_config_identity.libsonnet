@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_config_identity+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -19,7 +49,7 @@
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withEc2Alias':: { 'function': { help: |||
+    '#ec2_alias':: { 'function': { help: |||
       Configures how to generate the identity alias when using the ec2 auth method.
     ||| } },
     withEc2Alias(value):: self {
@@ -27,7 +57,7 @@
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { ec2_alias: value } },
       },
     },
-    '#withEc2Metadata':: { 'function': { help: |||
+    '#ec2_metadata':: { 'function': { help: |||
       The metadata to include on the token returned by the login endpoint.
     ||| } },
     withEc2Metadata(value):: self {
@@ -35,7 +65,7 @@
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { ec2_metadata: value } },
       },
     },
-    '#withIamAlias':: { 'function': { help: |||
+    '#iam_alias':: { 'function': { help: |||
       How to generate the identity alias when using the iam auth method.
     ||| } },
     withIamAlias(value):: self {
@@ -43,7 +73,7 @@
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { iam_alias: value } },
       },
     },
-    '#withIamMetadata':: { 'function': { help: |||
+    '#iam_metadata':: { 'function': { help: |||
       The metadata to include on the token returned by the login endpoint.
     ||| } },
     withIamMetadata(value):: self {
@@ -56,7 +86,7 @@
         vault_aws_auth_backend_config_identity+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

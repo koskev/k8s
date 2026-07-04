@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMaxRetriesPerCycle':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_rotation_policy+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#max_retries_per_cycle':: { 'function': { help: |||
       Maximum retries per cycle for this rotation policy.
     ||| } },
     withMaxRetriesPerCycle(value):: self {
@@ -25,7 +55,7 @@
         vault_rotation_policy+: { [terraformName]+: { max_retries_per_cycle: value } },
       },
     },
-    '#withMaxRetryCycles':: { 'function': { help: |||
+    '#max_retry_cycles':: { 'function': { help: |||
       Maximum retry cycles for this rotation policy.
     ||| } },
     withMaxRetryCycles(value):: self {
@@ -33,7 +63,7 @@
         vault_rotation_policy+: { [terraformName]+: { max_retry_cycles: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the rotation policy.
     ||| } },
     withName(value):: self {
@@ -41,7 +71,7 @@
         vault_rotation_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

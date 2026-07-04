@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowVolumeExpansion':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        kubernetes_storage_class+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allow_volume_expansion':: { 'function': { help: |||
       Indicates whether the storage class allow volume expand
     ||| } },
     withAllowVolumeExpansion(value):: self {
@@ -27,7 +57,7 @@
         kubernetes_storage_class+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountOptions':: { 'function': { help: |||
+    '#mount_options':: { 'function': { help: |||
       Persistent Volumes that are dynamically created by a storage class will have the mount options specified
     ||| } },
     withMountOptions(value):: self {
@@ -35,7 +65,7 @@
         kubernetes_storage_class+: { [terraformName]+: { mount_options: value } },
       },
     },
-    '#withParameters':: { 'function': { help: |||
+    '#parameters':: { 'function': { help: |||
       The parameters for the provisioner that should create volumes of this storage class
     ||| } },
     withParameters(value):: self {
@@ -43,7 +73,7 @@
         kubernetes_storage_class+: { [terraformName]+: { parameters: value } },
       },
     },
-    '#withReclaimPolicy':: { 'function': { help: |||
+    '#reclaim_policy':: { 'function': { help: |||
       Indicates the type of the reclaim policy
     ||| } },
     withReclaimPolicy(value):: self {
@@ -51,7 +81,7 @@
         kubernetes_storage_class+: { [terraformName]+: { reclaim_policy: value } },
       },
     },
-    '#withVolumeBindingMode':: { 'function': { help: |||
+    '#volume_binding_mode':: { 'function': { help: |||
       Indicates when volume binding and dynamic provisioning should occur
     ||| } },
     withVolumeBindingMode(value):: self {

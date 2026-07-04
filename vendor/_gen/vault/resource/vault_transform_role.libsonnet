@@ -13,12 +13,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_transform_role+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         vault_transform_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the role.
     ||| } },
     withName(value):: self {
@@ -26,7 +56,7 @@
         vault_transform_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_transform_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws".
     ||| } },
     withPath(value):: self {
@@ -42,7 +72,7 @@
         vault_transform_role+: { [terraformName]+: { path: value } },
       },
     },
-    '#withTransformations':: { 'function': { help: |||
+    '#transformations':: { 'function': { help: |||
       A comma separated string or slice of transformations to use.
     ||| } },
     withTransformations(value):: self {

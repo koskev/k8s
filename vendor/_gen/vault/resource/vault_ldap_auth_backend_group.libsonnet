@@ -12,6 +12,36 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_ldap_auth_backend_group+: { [terraformName]+: { providers: value } },
+      },
+    },
     withBackend(value):: self {
       resource+: {
         vault_ldap_auth_backend_group+: { [terraformName]+: { backend: value } },
@@ -27,7 +57,7 @@
         vault_ldap_auth_backend_group+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_pki_secret_backend_config_scep+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Path where PKI engine is mounted
     ||| } },
     withBackend(value):: self {
@@ -28,7 +58,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLogLevel':: { 'function': { help: |||
+    '#log_level':: { 'function': { help: |||
       The level of logging verbosity, affects only SCEP logs on this mount
     ||| } },
     withLogLevel(value):: self {
@@ -36,7 +66,7 @@
         vault_pki_secret_backend_config_scep+: { [terraformName]+: { log_level: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_acme_eab+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to
     ||| } },
     withBackend(value):: self {
@@ -28,7 +58,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuer':: { 'function': { help: |||
+    '#issuer':: { 'function': { help: |||
       Specifies the issuer reference to use for directory path
     ||| } },
     withIssuer(value):: self {
@@ -36,7 +66,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { issuer: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +74,7 @@
         vault_pki_secret_backend_acme_eab+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Specifies the role to use for directory path
     ||| } },
     withRole(value):: self {

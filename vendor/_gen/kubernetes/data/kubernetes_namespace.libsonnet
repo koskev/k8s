@@ -14,6 +14,36 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        kubernetes_namespace+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       data+: {
         kubernetes_namespace+: { [terraformName]+: { id: value } },

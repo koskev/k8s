@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAppId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_secrets_sync_github_apps+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#app_id':: { 'function': { help: |||
       The GitHub application ID.
     ||| } },
     withAppId(value):: self {
@@ -27,7 +57,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The user-defined name of the GitHub App configuration.
     ||| } },
     withName(value):: self {
@@ -35,7 +65,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -43,7 +73,7 @@
         vault_secrets_sync_github_apps+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPrivateKey':: { 'function': { help: |||
+    '#private_key':: { 'function': { help: |||
       The content of a PEM formatted private key generated on GitHub for the app.
     ||| } },
     withPrivateKey(value):: self {

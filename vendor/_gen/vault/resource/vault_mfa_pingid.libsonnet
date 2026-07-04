@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_mfa_pingid+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#id':: { 'function': { help: |||
       ID computed by Vault.
     ||| } },
     withId(value):: self {
@@ -22,7 +52,7 @@
         vault_mfa_pingid+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountAccessor':: { 'function': { help: |||
+    '#mount_accessor':: { 'function': { help: |||
       The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping.
     ||| } },
     withMountAccessor(value):: self {
@@ -30,7 +60,7 @@
         vault_mfa_pingid+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the MFA method.
     ||| } },
     withName(value):: self {
@@ -38,7 +68,7 @@
         vault_mfa_pingid+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -46,7 +76,7 @@
         vault_mfa_pingid+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSettingsFileBase64':: { 'function': { help: |||
+    '#settings_file_base64':: { 'function': { help: |||
       A base64-encoded third-party settings file retrieved from PingID's configuration page.
     ||| } },
     withSettingsFileBase64(value):: self {
@@ -54,7 +84,7 @@
         vault_mfa_pingid+: { [terraformName]+: { settings_file_base64: value } },
       },
     },
-    '#withUsernameFormat':: { 'function': { help: |||
+    '#username_format':: { 'function': { help: |||
       A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`.
     ||| } },
     withUsernameFormat(value):: self {

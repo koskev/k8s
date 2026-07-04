@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMaxTtl':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_config_control_group+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#max_ttl':: { 'function': { help: |||
       The maximum ttl for a control group wrapping token. This can be provided in seconds or duration (for example, 2h).
     ||| } },
     withMaxTtl(value):: self {
@@ -20,7 +50,7 @@
         vault_config_control_group+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

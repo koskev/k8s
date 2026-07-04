@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCanonicalId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_group_alias+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#canonical_id':: { 'function': { help: |||
       ID of the group to which this is an alias.
     ||| } },
     withCanonicalId(value):: self {
@@ -27,7 +57,7 @@
         vault_identity_group_alias+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountAccessor':: { 'function': { help: |||
+    '#mount_accessor':: { 'function': { help: |||
       Mount accessor to which this alias belongs to.
     ||| } },
     withMountAccessor(value):: self {
@@ -35,7 +65,7 @@
         vault_identity_group_alias+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the group alias.
     ||| } },
     withName(value):: self {
@@ -43,7 +73,7 @@
         vault_identity_group_alias+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

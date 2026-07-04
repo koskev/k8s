@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApplicationObjectId':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_azure_secret_backend_static_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#application_object_id':: { 'function': { help: |||
       Application object ID for an existing service principal that is managed by the static role.
     ||| } },
     withApplicationObjectId(value):: self {
@@ -25,7 +55,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { application_object_id: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The path where the Azure secrets backend is mounted.
     ||| } },
     withBackend(value):: self {
@@ -33,7 +63,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withClientSecret':: { 'function': { help: |||
+    '#client_secret':: { 'function': { help: |||
       The plaintext secret value of the credential you want to import.
     ||| } },
     withClientSecret(value):: self {
@@ -41,7 +71,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { client_secret: value } },
       },
     },
-    '#withDeferInitialCreds':: { 'function': { help: |||
+    '#defer_initial_creds':: { 'function': { help: |||
       If true, the initial creation of credentials will be deferred until first static-creds read.
     ||| } },
     withDeferInitialCreds(value):: self {
@@ -49,7 +79,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { defer_initial_creds: value } },
       },
     },
-    '#withExpiration':: { 'function': { help: |||
+    '#expiration':: { 'function': { help: |||
       A future expiration time for the imported credential, in RFC3339 format.
     ||| } },
     withExpiration(value):: self {
@@ -57,7 +87,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { expiration: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       A map of string key/value pairs that will be stored as metadata on the secret.
     ||| } },
     withMetadata(value):: self {
@@ -65,7 +95,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -73,7 +103,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the static role to create.
     ||| } },
     withRole(value):: self {
@@ -81,7 +111,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSecretId':: { 'function': { help: |||
+    '#secret_id':: { 'function': { help: |||
       The secret ID of the Azure password credential you want to import.
     ||| } },
     withSecretId(value):: self {
@@ -89,7 +119,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { secret_id: value } },
       },
     },
-    '#withSkipImportRotation':: { 'function': { help: |||
+    '#skip_import_rotation':: { 'function': { help: |||
       If true, skip rotation of the client secret on import.
     ||| } },
     withSkipImportRotation(value):: self {
@@ -97,7 +127,7 @@
         vault_azure_secret_backend_static_role+: { [terraformName]+: { skip_import_rotation: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Timespan of 1 month or more during which the role credentials are valid.
     ||| } },
     withTtl(value):: self {

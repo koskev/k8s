@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withExpirationTimestamp':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        kubernetes_token_request_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#expiration_timestamp':: { 'function': { help: |||
       ExpirationTimestamp is the time of expiration of the returned token.
     ||| } },
     withExpirationTimestamp(value):: self {
@@ -22,7 +52,7 @@
         kubernetes_token_request_v1+: { [terraformName]+: { expiration_timestamp: value } },
       },
     },
-    '#withToken':: { 'function': { help: |||
+    '#token':: { 'function': { help: |||
       Token is the opaque bearer token.
     ||| } },
     withToken(value):: self {

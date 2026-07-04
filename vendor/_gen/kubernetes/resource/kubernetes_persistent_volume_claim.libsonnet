@@ -14,12 +14,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_persistent_volume_claim+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         kubernetes_persistent_volume_claim+: { [terraformName]+: { id: value } },
       },
     },
-    '#withWaitUntilBound':: { 'function': { help: |||
+    '#wait_until_bound':: { 'function': { help: |||
       Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space)
     ||| } },
     withWaitUntilBound(value):: self {

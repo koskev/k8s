@@ -19,7 +19,37 @@
     },
   },
   functions(terraformName):: {
-    '#withChallengeType':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#challenge_type':: { 'function': { help: |||
       The type of ACME challenge to retrieve. Valid values are `http-01`, `dns-01`, `tls-alpn-01`.
     ||| } },
     withChallengeType(value):: self {
@@ -27,7 +57,7 @@
         vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { challenge_type: value } },
       },
     },
-    '#withIdentifier':: { 'function': { help: |||
+    '#identifier':: { 'function': { help: |||
       The identifier (domain name) for which to retrieve the challenge.
     ||| } },
     withIdentifier(value):: self {
@@ -35,7 +65,7 @@
         vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { identifier: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       The path where the PKI External CA secret backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -43,7 +73,7 @@
         vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -51,7 +81,7 @@
         vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrderId':: { 'function': { help: |||
+    '#order_id':: { 'function': { help: |||
       The unique identifier for the ACME order.
     ||| } },
     withOrderId(value):: self {
@@ -59,7 +89,7 @@
         vault_pki_external_ca_secret_backend_order_challenge+: { [terraformName]+: { order_id: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role associated with the order.
     ||| } },
     withRoleName(value):: self {

@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_transit_decrypt+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The Transit secret backend the key belongs to.
     ||| } },
     withBackend(value):: self {
@@ -22,7 +52,7 @@
         vault_transit_decrypt+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCiphertext':: { 'function': { help: |||
+    '#ciphertext':: { 'function': { help: |||
       Transit encrypted cipher text.
     ||| } },
     withCiphertext(value):: self {
@@ -30,7 +60,7 @@
         vault_transit_decrypt+: { [terraformName]+: { ciphertext: value } },
       },
     },
-    '#withContext':: { 'function': { help: |||
+    '#context':: { 'function': { help: |||
       Specifies the context for key derivation
     ||| } },
     withContext(value):: self {
@@ -43,7 +73,7 @@
         vault_transit_decrypt+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKey':: { 'function': { help: |||
+    '#key':: { 'function': { help: |||
       Name of the decryption key to use.
     ||| } },
     withKey(value):: self {
@@ -51,7 +81,7 @@
         vault_transit_decrypt+: { [terraformName]+: { key: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDisabled':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_secrets_sync_config+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#disabled':: { 'function': { help: |||
       Disables the syncing process between Vault and external destinations.
     ||| } },
     withDisabled(value):: self {
@@ -24,7 +54,7 @@
         vault_secrets_sync_config+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -32,7 +62,7 @@
         vault_secrets_sync_config+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withQueueCapacity':: { 'function': { help: |||
+    '#queue_capacity':: { 'function': { help: |||
       Maximum number of pending sync operations allowed on the queue.
     ||| } },
     withQueueCapacity(value):: self {

@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiHostname':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_mfa_duo+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_hostname':: { 'function': { help: |||
       API hostname for Duo.
     ||| } },
     withApiHostname(value):: self {
@@ -29,7 +59,7 @@
         vault_mfa_duo+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIntegrationKey':: { 'function': { help: |||
+    '#integration_key':: { 'function': { help: |||
       Integration key for Duo.
     ||| } },
     withIntegrationKey(value):: self {
@@ -37,7 +67,7 @@
         vault_mfa_duo+: { [terraformName]+: { integration_key: value } },
       },
     },
-    '#withMountAccessor':: { 'function': { help: |||
+    '#mount_accessor':: { 'function': { help: |||
       The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping.
     ||| } },
     withMountAccessor(value):: self {
@@ -45,7 +75,7 @@
         vault_mfa_duo+: { [terraformName]+: { mount_accessor: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the MFA method.
     ||| } },
     withName(value):: self {
@@ -53,7 +83,7 @@
         vault_mfa_duo+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -61,7 +91,7 @@
         vault_mfa_duo+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPushInfo':: { 'function': { help: |||
+    '#push_info':: { 'function': { help: |||
       Push information for Duo.
     ||| } },
     withPushInfo(value):: self {
@@ -69,7 +99,7 @@
         vault_mfa_duo+: { [terraformName]+: { push_info: value } },
       },
     },
-    '#withSecretKey':: { 'function': { help: |||
+    '#secret_key':: { 'function': { help: |||
       Secret key for Duo.
     ||| } },
     withSecretKey(value):: self {
@@ -77,7 +107,7 @@
         vault_mfa_duo+: { [terraformName]+: { secret_key: value } },
       },
     },
-    '#withUsernameFormat':: { 'function': { help: |||
+    '#username_format':: { 'function': { help: |||
       A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`.
     ||| } },
     withUsernameFormat(value):: self {

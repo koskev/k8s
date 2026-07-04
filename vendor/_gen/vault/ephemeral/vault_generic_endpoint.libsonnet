@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDataJson':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_generic_endpoint+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#data_json':: { 'function': { help: |||
       JSON-encoded data to write.
     ||| } },
     withDataJson(value):: self {
@@ -24,7 +54,7 @@
         vault_generic_endpoint+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -32,7 +62,7 @@
         vault_generic_endpoint+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -40,7 +70,7 @@
         vault_generic_endpoint+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path to the Vault endpoint that will be written
     ||| } },
     withPath(value):: self {
@@ -48,7 +78,7 @@
         vault_generic_endpoint+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPathWrapTtl':: { 'function': { help: |||
+    '#path_wrap_ttl':: { 'function': { help: |||
       The TTL for the wrapped response.
     ||| } },
     withPathWrapTtl(value):: self {
@@ -56,7 +86,7 @@
         vault_generic_endpoint+: { [terraformName]+: { path_wrap_ttl: value } },
       },
     },
-    '#withWriteFields':: { 'function': { help: |||
+    '#write_fields':: { 'function': { help: |||
       Top-level fields returned by the write operation to extract and expose via write_data/write_data_json
     ||| } },
     withWriteFields(value):: self {

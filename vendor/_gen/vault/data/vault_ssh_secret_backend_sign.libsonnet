@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCertType':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_ssh_secret_backend_sign+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cert_type':: { 'function': { help: |||
       Specifies the type of certificate to be created; either "user" or "host".
     ||| } },
     withCertType(value):: self {
@@ -22,7 +52,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { cert_type: value } },
       },
     },
-    '#withCriticalOptions':: { 'function': { help: |||
+    '#critical_options':: { 'function': { help: |||
       Specifies a map of the critical options that the certificate should be signed for. Defaults to none.
     ||| } },
     withCriticalOptions(value):: self {
@@ -30,7 +60,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { critical_options: value } },
       },
     },
-    '#withExtensions':: { 'function': { help: |||
+    '#extensions':: { 'function': { help: |||
       Specifies a map of the extensions that the certificate should be signed for. Defaults to none.
     ||| } },
     withExtensions(value):: self {
@@ -43,7 +73,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKeyId':: { 'function': { help: |||
+    '#key_id':: { 'function': { help: |||
       Specifies the key id that the created certificate should have. If not specified, the display name of the token will be used.
     ||| } },
     withKeyId(value):: self {
@@ -51,7 +81,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { key_id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Specifies the name of the role to sign.
     ||| } },
     withName(value):: self {
@@ -59,7 +89,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +97,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path where SSH backend is mounted.
     ||| } },
     withPath(value):: self {
@@ -75,7 +105,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPublicKey':: { 'function': { help: |||
+    '#public_key':: { 'function': { help: |||
       Specifies the SSH public key that should be signed.
     ||| } },
     withPublicKey(value):: self {
@@ -83,7 +113,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { public_key: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Specifies the Requested Time To Live. Cannot be greater than the role's max_ttl value. If not provided, the role's ttl value will be used. Note that the role values default to system values if not explicitly set.
     ||| } },
     withTtl(value):: self {
@@ -91,7 +121,7 @@
         vault_ssh_secret_backend_sign+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withValidPrincipals':: { 'function': { help: |||
+    '#valid_principals':: { 'function': { help: |||
       Specifies valid principals, either usernames or hostnames, that the certificate should be signed for. Required unless the role has specified allow_empty_principals or a value has been set for either the default_user or default_user_template role parameters.
     ||| } },
     withValidPrincipals(value):: self {

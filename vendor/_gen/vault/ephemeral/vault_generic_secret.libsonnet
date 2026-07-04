@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMountId':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_generic_secret+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -23,7 +53,7 @@
         vault_generic_secret+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -31,7 +61,7 @@
         vault_generic_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path from which a secret will be read.
     ||| } },
     withPath(value):: self {
@@ -39,7 +69,7 @@
         vault_generic_secret+: { [terraformName]+: { path: value } },
       },
     },
-    '#withVersion':: { 'function': { help: |||
+    '#version':: { 'function': { help: |||
       Version of the secret to retrieve. Use -1 for latest version.
     ||| } },
     withVersion(value):: self {
@@ -47,7 +77,7 @@
         vault_generic_secret+: { [terraformName]+: { version: value } },
       },
     },
-    '#withWithLeaseStartTime':: { 'function': { help: |||
+    '#with_lease_start_time':: { 'function': { help: |||
       If set to true, stores 'lease_start_time' in the result.
     ||| } },
     withWithLeaseStartTime(value):: self {

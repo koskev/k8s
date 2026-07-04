@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withExclusive':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_group_policies+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#exclusive':: { 'function': { help: |||
       Should the resource manage policies exclusively? Beware of race conditions when disabling exclusive management
     ||| } },
     withExclusive(value):: self {
@@ -21,7 +51,7 @@
         vault_identity_group_policies+: { [terraformName]+: { exclusive: value } },
       },
     },
-    '#withGroupId':: { 'function': { help: |||
+    '#group_id':: { 'function': { help: |||
       ID of the group.
     ||| } },
     withGroupId(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_group_policies+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_identity_group_policies+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be tied to the group.
     ||| } },
     withPolicies(value):: self {

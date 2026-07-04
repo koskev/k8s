@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAliasId':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_identity_entity+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alias_id':: { 'function': { help: |||
       ID of the alias.
     ||| } },
     withAliasId(value):: self {
@@ -19,7 +49,7 @@
         vault_identity_entity+: { [terraformName]+: { alias_id: value } },
       },
     },
-    '#withAliasMountAccessor':: { 'function': { help: |||
+    '#alias_mount_accessor':: { 'function': { help: |||
       Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`.
     ||| } },
     withAliasMountAccessor(value):: self {
@@ -27,7 +57,7 @@
         vault_identity_entity+: { [terraformName]+: { alias_mount_accessor: value } },
       },
     },
-    '#withAliasName':: { 'function': { help: |||
+    '#alias_name':: { 'function': { help: |||
       Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`.
     ||| } },
     withAliasName(value):: self {
@@ -35,7 +65,7 @@
         vault_identity_entity+: { [terraformName]+: { alias_name: value } },
       },
     },
-    '#withEntityId':: { 'function': { help: |||
+    '#entity_id':: { 'function': { help: |||
       ID of the entity.
     ||| } },
     withEntityId(value):: self {
@@ -43,7 +73,7 @@
         vault_identity_entity+: { [terraformName]+: { entity_id: value } },
       },
     },
-    '#withEntityName':: { 'function': { help: |||
+    '#entity_name':: { 'function': { help: |||
       Name of the entity.
     ||| } },
     withEntityName(value):: self {
@@ -56,7 +86,7 @@
         vault_identity_entity+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

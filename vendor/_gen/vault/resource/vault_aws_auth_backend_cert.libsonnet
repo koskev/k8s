@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAwsPublicCert':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_cert+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#aws_public_cert':: { 'function': { help: |||
       Base64 encoded AWS Public key required to verify PKCS7 signature of the EC2 instance metadata.
     ||| } },
     withAwsPublicCert(value):: self {
@@ -21,7 +51,7 @@
         vault_aws_auth_backend_cert+: { [terraformName]+: { aws_public_cert: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -29,7 +59,7 @@
         vault_aws_auth_backend_cert+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCertName':: { 'function': { help: |||
+    '#cert_name':: { 'function': { help: |||
       Name of the certificate to configure.
     ||| } },
     withCertName(value):: self {
@@ -42,7 +72,7 @@
         vault_aws_auth_backend_cert+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_aws_auth_backend_cert+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       The type of document that can be verified using the certificate. Must be either "pkcs7" or "identity".
     ||| } },
     withType(value):: self {

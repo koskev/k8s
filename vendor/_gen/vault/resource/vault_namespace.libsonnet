@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCustomMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_namespace+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#custom_metadata':: { 'function': { help: |||
       Custom metadata describing this namespace. Value type is map[string]string.
     ||| } },
     withCustomMetadata(value):: self {
@@ -25,7 +55,7 @@
         vault_namespace+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -33,7 +63,7 @@
         vault_namespace+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Namespace path.
     ||| } },
     withPath(value):: self {
@@ -41,7 +71,7 @@
         vault_namespace+: { [terraformName]+: { path: value } },
       },
     },
-    '#withPathFq':: { 'function': { help: |||
+    '#path_fq':: { 'function': { help: |||
       The fully qualified namespace path.
     ||| } },
     withPathFq(value):: self {

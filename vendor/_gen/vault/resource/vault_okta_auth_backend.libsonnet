@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAliasMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_okta_auth_backend+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alias_metadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
         This should be a list or map containing the metadata in key value pairs.
     ||| } },
@@ -20,7 +50,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withApiToken':: { 'function': { help: |||
+    '#api_token':: { 'function': { help: |||
       The Okta API token. This is required to query Okta for user group membership. If this is not supplied only locally configured groups will be enabled.
     ||| } },
     withApiToken(value):: self {
@@ -28,7 +58,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { api_token: value } },
       },
     },
-    '#withApiTokenWo':: { 'function': { help: |||
+    '#api_token_wo':: { 'function': { help: |||
       Write-only Okta API token. This is required to query Okta for user group membership. If this is not supplied only locally configured groups will be enabled.
     ||| } },
     withApiTokenWo(value):: self {
@@ -36,7 +66,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { api_token_wo: value } },
       },
     },
-    '#withApiTokenWoVersion':: { 'function': { help: |||
+    '#api_token_wo_version':: { 'function': { help: |||
       Version counter for write-only api_token.
     ||| } },
     withApiTokenWoVersion(value):: self {
@@ -44,7 +74,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { api_token_wo_version: value } },
       },
     },
-    '#withBaseUrl':: { 'function': { help: |||
+    '#base_url':: { 'function': { help: |||
       The Okta url. Examples: oktapreview.com, okta.com (default)
     ||| } },
     withBaseUrl(value):: self {
@@ -52,7 +82,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { base_url: value } },
       },
     },
-    '#withBypassOktaMfa':: { 'function': { help: |||
+    '#bypass_okta_mfa':: { 'function': { help: |||
       When true, requests by Okta for a MFA check will be bypassed. This also disallows certain status checks on the account, such as whether the password is expired.
     ||| } },
     withBypassOktaMfa(value):: self {
@@ -60,7 +90,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { bypass_okta_mfa: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       The description of the auth backend
     ||| } },
     withDescription(value):: self {
@@ -68,7 +98,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisableRemount':: { 'function': { help: |||
+    '#disable_remount':: { 'function': { help: |||
       If set, opts out of mount migration on path updates.
     ||| } },
     withDisableRemount(value):: self {
@@ -86,7 +116,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -94,7 +124,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrgName':: { 'function': { help: |||
+    '#org_name':: { 'function': { help: |||
       The Okta organization. This will be the first part of the url https://XXX.okta.com.
     ||| } },
     withOrgName(value):: self {
@@ -102,7 +132,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { org_name: value } },
       },
     },
-    '#withOrganization':: { 'function': { help: |||
+    '#organization':: { 'function': { help: |||
       The Okta organization. This will be the first part of the url https://XXX.okta.com. Use org_name instead.
     ||| } },
     withOrganization(value):: self {
@@ -110,7 +140,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       path to mount the backend
     ||| } },
     withPath(value):: self {
@@ -118,7 +148,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { path: value } },
       },
     },
-    '#withToken':: { 'function': { help: |||
+    '#token':: { 'function': { help: |||
       The Okta API token. This is required to query Okta for user group membership. If this is not supplied only locally configured groups will be enabled. Use api_token instead.
     ||| } },
     withToken(value):: self {
@@ -126,7 +156,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token: value } },
       },
     },
-    '#withTokenBoundCidrs':: { 'function': { help: |||
+    '#token_bound_cidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -134,7 +164,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
+    '#token_explicit_max_ttl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -142,7 +172,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl':: { 'function': { help: |||
+    '#token_max_ttl':: { 'function': { help: |||
       The maximum lifetime of the generated token
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -150,7 +180,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
+    '#token_no_default_policy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -158,7 +188,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses':: { 'function': { help: |||
+    '#token_num_uses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited
     ||| } },
     withTokenNumUses(value):: self {
@@ -166,7 +196,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod':: { 'function': { help: |||
+    '#token_period':: { 'function': { help: |||
       Generated Token's Period
     ||| } },
     withTokenPeriod(value):: self {
@@ -174,7 +204,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies':: { 'function': { help: |||
+    '#token_policies':: { 'function': { help: |||
       Generated Token's Policies
     ||| } },
     withTokenPolicies(value):: self {
@@ -182,7 +212,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl':: { 'function': { help: |||
+    '#token_ttl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds
     ||| } },
     withTokenTtl(value):: self {
@@ -190,7 +220,7 @@
         vault_okta_auth_backend+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType':: { 'function': { help: |||
+    '#token_type':: { 'function': { help: |||
       The type of token to generate, service or batch
     ||| } },
     withTokenType(value):: self {

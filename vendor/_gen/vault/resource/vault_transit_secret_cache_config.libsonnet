@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_transit_secret_cache_config+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The Transit secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_transit_secret_cache_config+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_transit_secret_cache_config+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSize':: { 'function': { help: |||
+    '#size':: { 'function': { help: |||
       Number of cache entries. A size of 0 mean unlimited.
     ||| } },
     withSize(value):: self {

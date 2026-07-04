@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAddBasicConstraints':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#add_basic_constraints':: { 'function': { help: |||
       Set 'CA: true' in a Basic Constraints extension. Only needed as
       a workaround in some compatibility scenarios with Active Directory Certificate Services.
     ||| } },
@@ -23,7 +53,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { add_basic_constraints: value } },
       },
     },
-    '#withAltNames':: { 'function': { help: |||
+    '#alt_names':: { 'function': { help: |||
       List of alternative names.
     ||| } },
     withAltNames(value):: self {
@@ -31,7 +61,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { alt_names: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
@@ -39,7 +69,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCommonName':: { 'function': { help: |||
+    '#common_name':: { 'function': { help: |||
       CN of intermediate to create.
     ||| } },
     withCommonName(value):: self {
@@ -47,7 +77,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { common_name: value } },
       },
     },
-    '#withCountry':: { 'function': { help: |||
+    '#country':: { 'function': { help: |||
       The country.
     ||| } },
     withCountry(value):: self {
@@ -55,7 +85,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { country: value } },
       },
     },
-    '#withExcludeCnFromSans':: { 'function': { help: |||
+    '#exclude_cn_from_sans':: { 'function': { help: |||
       Flag to exclude CN from SANs.
     ||| } },
     withExcludeCnFromSans(value):: self {
@@ -63,7 +93,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { exclude_cn_from_sans: value } },
       },
     },
-    '#withFormat':: { 'function': { help: |||
+    '#format':: { 'function': { help: |||
       The format of data.
     ||| } },
     withFormat(value):: self {
@@ -76,7 +106,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIpSans':: { 'function': { help: |||
+    '#ip_sans':: { 'function': { help: |||
       List of alternative IPs.
     ||| } },
     withIpSans(value):: self {
@@ -84,7 +114,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { ip_sans: value } },
       },
     },
-    '#withKeyBits':: { 'function': { help: |||
+    '#key_bits':: { 'function': { help: |||
       The number of bits to use.
     ||| } },
     withKeyBits(value):: self {
@@ -92,7 +122,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { key_bits: value } },
       },
     },
-    '#withKeyName':: { 'function': { help: |||
+    '#key_name':: { 'function': { help: |||
       When a new key is created with this request, optionally specifies the name for this.
     ||| } },
     withKeyName(value):: self {
@@ -100,7 +130,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { key_name: value } },
       },
     },
-    '#withKeyRef':: { 'function': { help: |||
+    '#key_ref':: { 'function': { help: |||
       Specifies the key to use for generating this request.
     ||| } },
     withKeyRef(value):: self {
@@ -108,7 +138,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { key_ref: value } },
       },
     },
-    '#withKeyType':: { 'function': { help: |||
+    '#key_type':: { 'function': { help: |||
       The desired key type.
     ||| } },
     withKeyType(value):: self {
@@ -116,7 +146,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withKeyUsage':: { 'function': { help: |||
+    '#key_usage':: { 'function': { help: |||
       Specify the key usages to encode in the generated certificate.
     ||| } },
     withKeyUsage(value):: self {
@@ -124,7 +154,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { key_usage: value } },
       },
     },
-    '#withLocality':: { 'function': { help: |||
+    '#locality':: { 'function': { help: |||
       The locality.
     ||| } },
     withLocality(value):: self {
@@ -132,7 +162,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { locality: value } },
       },
     },
-    '#withManagedKeyId':: { 'function': { help: |||
+    '#managed_key_id':: { 'function': { help: |||
       The ID of the previously configured managed key.
     ||| } },
     withManagedKeyId(value):: self {
@@ -140,7 +170,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { managed_key_id: value } },
       },
     },
-    '#withManagedKeyName':: { 'function': { help: |||
+    '#managed_key_name':: { 'function': { help: |||
       The name of the previously configured managed key.
     ||| } },
     withManagedKeyName(value):: self {
@@ -148,7 +178,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { managed_key_name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -156,7 +186,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrganization':: { 'function': { help: |||
+    '#organization':: { 'function': { help: |||
       The organization.
     ||| } },
     withOrganization(value):: self {
@@ -164,7 +194,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withOtherSans':: { 'function': { help: |||
+    '#other_sans':: { 'function': { help: |||
       List of other SANs.
     ||| } },
     withOtherSans(value):: self {
@@ -172,7 +202,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { other_sans: value } },
       },
     },
-    '#withOu':: { 'function': { help: |||
+    '#ou':: { 'function': { help: |||
       The organization unit.
     ||| } },
     withOu(value):: self {
@@ -180,7 +210,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { ou: value } },
       },
     },
-    '#withPostalCode':: { 'function': { help: |||
+    '#postal_code':: { 'function': { help: |||
       The postal code.
     ||| } },
     withPostalCode(value):: self {
@@ -188,7 +218,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { postal_code: value } },
       },
     },
-    '#withPrivateKeyFormat':: { 'function': { help: |||
+    '#private_key_format':: { 'function': { help: |||
       The private key format.
     ||| } },
     withPrivateKeyFormat(value):: self {
@@ -196,7 +226,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { private_key_format: value } },
       },
     },
-    '#withProvince':: { 'function': { help: |||
+    '#province':: { 'function': { help: |||
       The province.
     ||| } },
     withProvince(value):: self {
@@ -204,7 +234,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { province: value } },
       },
     },
-    '#withSerialNumber':: { 'function': { help: |||
+    '#serial_number':: { 'function': { help: |||
       The requested Subject's named serial number.
     ||| } },
     withSerialNumber(value):: self {
@@ -212,7 +242,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { serial_number: value } },
       },
     },
-    '#withSignatureBits':: { 'function': { help: |||
+    '#signature_bits':: { 'function': { help: |||
       The number of bits to use in the signature algorithm.
     ||| } },
     withSignatureBits(value):: self {
@@ -220,7 +250,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { signature_bits: value } },
       },
     },
-    '#withStreetAddress':: { 'function': { help: |||
+    '#street_address':: { 'function': { help: |||
       The street address.
     ||| } },
     withStreetAddress(value):: self {
@@ -228,7 +258,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { street_address: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of intermediate to create. Must be either "existing", "exported", "internal" or "kms"
     ||| } },
     withType(value):: self {
@@ -236,7 +266,7 @@
         vault_pki_secret_backend_intermediate_cert_request+: { [terraformName]+: { type: value } },
       },
     },
-    '#withUriSans':: { 'function': { help: |||
+    '#uri_sans':: { 'function': { help: |||
       List of alternative URIs.
     ||| } },
     withUriSans(value):: self {

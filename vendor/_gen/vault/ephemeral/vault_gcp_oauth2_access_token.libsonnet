@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withImpersonatedAccount':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_gcp_oauth2_access_token+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#impersonated_account':: { 'function': { help: |||
       GCP Secret Impersonated Account to generate OAuth2 access token for. Mutually exclusive with `roleset` and `static_account`.
     ||| } },
     withImpersonatedAccount(value):: self {
@@ -23,7 +53,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { impersonated_account: value } },
       },
     },
-    '#withMaxRetries':: { 'function': { help: |||
+    '#max_retries':: { 'function': { help: |||
       Maximum number of retries when the GCP service account or key is not yet ready. Each retry waits 1 second. Defaults to 10.
     ||| } },
     withMaxRetries(value):: self {
@@ -31,7 +61,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { max_retries: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Mount path for the GCP Secret Backend to read credentials from.
     ||| } },
     withMount(value):: self {
@@ -39,7 +69,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -47,7 +77,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -55,7 +85,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleset':: { 'function': { help: |||
+    '#roleset':: { 'function': { help: |||
       GCP Secret Roleset to generate OAuth2 access token for. Mutually exclusive with `static_account` and `impersonated_account`.
     ||| } },
     withRoleset(value):: self {
@@ -63,7 +93,7 @@
         vault_gcp_oauth2_access_token+: { [terraformName]+: { roleset: value } },
       },
     },
-    '#withStaticAccount':: { 'function': { help: |||
+    '#static_account':: { 'function': { help: |||
       GCP Secret Static Account to generate OAuth2 access token for. Mutually exclusive with `roleset` and `impersonated_account`.
     ||| } },
     withStaticAccount(value):: self {

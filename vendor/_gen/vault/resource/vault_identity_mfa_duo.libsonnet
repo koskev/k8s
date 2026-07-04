@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiHostname':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_mfa_duo+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_hostname':: { 'function': { help: |||
       API hostname for Duo
     ||| } },
     withApiHostname(value):: self {
@@ -27,7 +57,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIntegrationKey':: { 'function': { help: |||
+    '#integration_key':: { 'function': { help: |||
       Integration key for Duo
     ||| } },
     withIntegrationKey(value):: self {
@@ -35,7 +65,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { integration_key: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -43,7 +73,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPushInfo':: { 'function': { help: |||
+    '#push_info':: { 'function': { help: |||
       Push information for Duo.
     ||| } },
     withPushInfo(value):: self {
@@ -51,7 +81,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { push_info: value } },
       },
     },
-    '#withSecretKey':: { 'function': { help: |||
+    '#secret_key':: { 'function': { help: |||
       Secret key for Duo
     ||| } },
     withSecretKey(value):: self {
@@ -59,7 +89,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { secret_key: value } },
       },
     },
-    '#withUsePasscode':: { 'function': { help: |||
+    '#use_passcode':: { 'function': { help: |||
       Require passcode upon MFA validation.
     ||| } },
     withUsePasscode(value):: self {
@@ -67,7 +97,7 @@
         vault_identity_mfa_duo+: { [terraformName]+: { use_passcode: value } },
       },
     },
-    '#withUsernameFormat':: { 'function': { help: |||
+    '#username_format':: { 'function': { help: |||
       A template string for mapping Identity names to MFA methods.
     ||| } },
     withUsernameFormat(value):: self {

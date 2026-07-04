@@ -12,12 +12,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_identity_oidc_client_creds+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       data+: {
         vault_identity_oidc_client_creds+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the client.
     ||| } },
     withName(value):: self {
@@ -25,7 +55,7 @@
         vault_identity_oidc_client_creds+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

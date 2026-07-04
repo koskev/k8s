@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCasRequired':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kv_secret_backend_v2+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cas_required':: { 'function': { help: |||
       If true, all keys will require the cas parameter to be set on all write requests.
     ||| } },
     withCasRequired(value):: self {
@@ -20,7 +50,7 @@
         vault_kv_secret_backend_v2+: { [terraformName]+: { cas_required: value } },
       },
     },
-    '#withDeleteVersionAfter':: { 'function': { help: |||
+    '#delete_version_after':: { 'function': { help: |||
       If set, specifies the length of time before a version is deleted
     ||| } },
     withDeleteVersionAfter(value):: self {
@@ -33,7 +63,7 @@
         vault_kv_secret_backend_v2+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxVersions':: { 'function': { help: |||
+    '#max_versions':: { 'function': { help: |||
       The number of versions to keep per key.
     ||| } },
     withMaxVersions(value):: self {
@@ -41,7 +71,7 @@
         vault_kv_secret_backend_v2+: { [terraformName]+: { max_versions: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where KV-V2 engine is mounted.
     ||| } },
     withMount(value):: self {
@@ -49,7 +79,7 @@
         vault_kv_secret_backend_v2+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

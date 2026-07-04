@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_alicloud_access_credentials+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       Mount path for the AliCloud secret engine in Vault.
     ||| } },
     withMount(value):: self {
@@ -24,7 +54,7 @@
         vault_alicloud_access_credentials+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -32,7 +62,7 @@
         vault_alicloud_access_credentials+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -40,7 +70,7 @@
         vault_alicloud_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       AliCloud Secret Role to read credentials from.
     ||| } },
     withRole(value):: self {

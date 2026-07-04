@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_consul_secret_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The path of the Consul Secret Backend the role belongs to.
     ||| } },
     withBackend(value):: self {
@@ -20,7 +50,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withConsulNamespace':: { 'function': { help: |||
+    '#consul_namespace':: { 'function': { help: |||
       The Consul namespace that the token will be created in. Applicable for Vault 1.10+ and Consul 1.7+
     ||| } },
     withConsulNamespace(value):: self {
@@ -28,7 +58,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { consul_namespace: value } },
       },
     },
-    '#withConsulPolicies':: { 'function': { help: |||
+    '#consul_policies':: { 'function': { help: |||
       List of Consul policies to associate with this role
     ||| } },
     withConsulPolicies(value):: self {
@@ -36,7 +66,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { consul_policies: value } },
       },
     },
-    '#withConsulRoles':: { 'function': { help: |||
+    '#consul_roles':: { 'function': { help: |||
       Set of Consul roles to attach to the token. Applicable for Vault 1.10+ with Consul 1.5+
     ||| } },
     withConsulRoles(value):: self {
@@ -49,7 +79,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLocal':: { 'function': { help: |||
+    '#local':: { 'function': { help: |||
       Indicates that the token should not be replicated globally and instead be local to the current datacenter.
     ||| } },
     withLocal(value):: self {
@@ -57,7 +87,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       Maximum TTL for leases associated with this role, in seconds.
     ||| } },
     withMaxTtl(value):: self {
@@ -65,7 +95,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of an existing role against which to create this Consul credential
     ||| } },
     withName(value):: self {
@@ -73,7 +103,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -81,7 +111,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNodeIdentities':: { 'function': { help: |||
+    '#node_identities':: { 'function': { help: |||
       Set of Consul node identities to attach to
       				the token. Applicable for Vault 1.11+ with Consul 1.8+
     ||| } },
@@ -90,7 +120,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { node_identities: value } },
       },
     },
-    '#withPartition':: { 'function': { help: |||
+    '#partition':: { 'function': { help: |||
       The Consul admin partition that the token will be created in. Applicable for Vault 1.10+ and Consul 1.11+
     ||| } },
     withPartition(value):: self {
@@ -98,7 +128,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { partition: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       List of Consul policies to associate with this role
     ||| } },
     withPolicies(value):: self {
@@ -106,7 +136,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withServiceIdentities':: { 'function': { help: |||
+    '#service_identities':: { 'function': { help: |||
       Set of Consul service identities to attach to
       				the token. Applicable for Vault 1.11+ with Consul 1.5+
     ||| } },
@@ -115,7 +145,7 @@
         vault_consul_secret_backend_role+: { [terraformName]+: { service_identities: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Specifies the TTL for this role.
     ||| } },
     withTtl(value):: self {

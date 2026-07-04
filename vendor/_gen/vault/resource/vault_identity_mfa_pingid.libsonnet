@@ -12,12 +12,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_mfa_pingid+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         vault_identity_mfa_pingid+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -25,7 +55,7 @@
         vault_identity_mfa_pingid+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSettingsFileBase64':: { 'function': { help: |||
+    '#settings_file_base64':: { 'function': { help: |||
       A base64-encoded third-party settings contents as retrieved from PingID's configuration page.
     ||| } },
     withSettingsFileBase64(value):: self {
@@ -33,7 +63,7 @@
         vault_identity_mfa_pingid+: { [terraformName]+: { settings_file_base64: value } },
       },
     },
-    '#withUsernameFormat':: { 'function': { help: |||
+    '#username_format':: { 'function': { help: |||
       A template string for mapping Identity names to MFA methods.
     ||| } },
     withUsernameFormat(value):: self {

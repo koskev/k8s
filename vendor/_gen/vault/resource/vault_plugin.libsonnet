@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withArgs':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_plugin+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#args':: { 'function': { help: |||
       List of additional arguments to pass to the plugin.
     ||| } },
     withArgs(value):: self {
@@ -21,7 +51,7 @@
         vault_plugin+: { [terraformName]+: { args: value } },
       },
     },
-    '#withCommand':: { 'function': { help: |||
+    '#command':: { 'function': { help: |||
       Command to execute the plugin, relative to the plugin_directory.
     ||| } },
     withCommand(value):: self {
@@ -29,7 +59,7 @@
         vault_plugin+: { [terraformName]+: { command: value } },
       },
     },
-    '#withEnv':: { 'function': { help: |||
+    '#env':: { 'function': { help: |||
       List of additional environment variables to run the plugin with in KEY=VALUE form.
     ||| } },
     withEnv(value):: self {
@@ -42,7 +72,7 @@
         vault_plugin+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the plugin.
     ||| } },
     withName(value):: self {
@@ -50,7 +80,7 @@
         vault_plugin+: { [terraformName]+: { name: value } },
       },
     },
-    '#withOciImage':: { 'function': { help: |||
+    '#oci_image':: { 'function': { help: |||
       OCI image to run. If specified, setting command, args, and env will update the container's entrypoint, args, and environment variables (append-only) respectively.
     ||| } },
     withOciImage(value):: self {
@@ -58,7 +88,7 @@
         vault_plugin+: { [terraformName]+: { oci_image: value } },
       },
     },
-    '#withRuntime':: { 'function': { help: |||
+    '#runtime':: { 'function': { help: |||
       Vault plugin runtime to use if oci_image is specified.
     ||| } },
     withRuntime(value):: self {
@@ -66,7 +96,7 @@
         vault_plugin+: { [terraformName]+: { runtime: value } },
       },
     },
-    '#withSha256':: { 'function': { help: |||
+    '#sha256':: { 'function': { help: |||
       SHA256 sum of the plugin binary.
     ||| } },
     withSha256(value):: self {
@@ -74,7 +104,7 @@
         vault_plugin+: { [terraformName]+: { sha256: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of plugin; one of "auth", "secret", or "database".
     ||| } },
     withType(value):: self {
@@ -82,7 +112,7 @@
         vault_plugin+: { [terraformName]+: { type: value } },
       },
     },
-    '#withVersion':: { 'function': { help: |||
+    '#version':: { 'function': { help: |||
       Semantic version of the plugin.
     ||| } },
     withVersion(value):: self {

@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withData':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_config_map_v1_data+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#data':: { 'function': { help: |||
       The data we want to add to the ConfigMap.
     ||| } },
     withData(value):: self {
@@ -23,7 +53,7 @@
         kubernetes_config_map_v1_data+: { [terraformName]+: { data: value } },
       },
     },
-    '#withFieldManager':: { 'function': { help: |||
+    '#field_manager':: { 'function': { help: |||
       Set the name of the field manager for the specified labels.
     ||| } },
     withFieldManager(value):: self {
@@ -31,7 +61,7 @@
         kubernetes_config_map_v1_data+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force overwriting data that is managed outside of Terraform.
     ||| } },
     withForce(value):: self {

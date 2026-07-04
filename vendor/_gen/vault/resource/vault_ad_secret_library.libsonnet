@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_ad_secret_library+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The mount path for the AD backend.
     ||| } },
     withBackend(value):: self {
@@ -22,7 +52,7 @@
         vault_ad_secret_library+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisableCheckInEnforcement':: { 'function': { help: |||
+    '#disable_check_in_enforcement':: { 'function': { help: |||
       Disable enforcing that service accounts must be checked in by the entity or client token that checked them out.
     ||| } },
     withDisableCheckInEnforcement(value):: self {
@@ -35,7 +65,7 @@
         vault_ad_secret_library+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       The maximum amount of time, in seconds, a check-out last with renewal before Vault automatically checks it back in.
     ||| } },
     withMaxTtl(value):: self {
@@ -43,7 +73,7 @@
         vault_ad_secret_library+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the set of service accounts.
     ||| } },
     withName(value):: self {
@@ -51,7 +81,7 @@
         vault_ad_secret_library+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -59,7 +89,7 @@
         vault_ad_secret_library+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withServiceAccountNames':: { 'function': { help: |||
+    '#service_account_names':: { 'function': { help: |||
       The names of all the service accounts that can be checked out from this set. These service accounts must already exist in Active Directory.
     ||| } },
     withServiceAccountNames(value):: self {
@@ -67,7 +97,7 @@
         vault_ad_secret_library+: { [terraformName]+: { service_account_names: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       The amount of time, in seconds, a single check-out lasts before Vault automatically checks it back in.
     ||| } },
     withTtl(value):: self {

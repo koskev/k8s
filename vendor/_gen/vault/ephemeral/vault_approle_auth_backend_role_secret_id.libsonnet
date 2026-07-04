@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -23,7 +53,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCidrList':: { 'function': { help: |||
+    '#cidr_list':: { 'function': { help: |||
       List of CIDR blocks that can log in using the SecretID.
     ||| } },
     withCidrList(value):: self {
@@ -31,7 +61,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { cidr_list: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       JSON-encoded secret data.
     ||| } },
     withMetadata(value):: self {
@@ -39,7 +69,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -47,7 +77,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -55,7 +85,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNumUses':: { 'function': { help: |||
+    '#num_uses':: { 'function': { help: |||
       The number of uses for the secret-id.
     ||| } },
     withNumUses(value):: self {
@@ -63,7 +93,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { num_uses: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRoleName(value):: self {
@@ -71,7 +101,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       The TTL duration of the SecretID in seconds.
     ||| } },
     withTtl(value):: self {

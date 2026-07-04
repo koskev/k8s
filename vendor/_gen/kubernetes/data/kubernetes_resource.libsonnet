@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiVersion':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        kubernetes_resource+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_version':: { 'function': { help: |||
       The resource apiVersion.
     ||| } },
     withApiVersion(value):: self {
@@ -21,7 +51,7 @@
         kubernetes_resource+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withKind':: { 'function': { help: |||
+    '#kind':: { 'function': { help: |||
       The resource kind.
     ||| } },
     withKind(value):: self {
@@ -29,7 +59,7 @@
         kubernetes_resource+: { [terraformName]+: { kind: value } },
       },
     },
-    '#withObject':: { 'function': { help: |||
+    '#object':: { 'function': { help: |||
       The response from the API server.
     ||| } },
     withObject(value):: self {

@@ -12,12 +12,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_generic_secret+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       data+: {
         vault_generic_secret+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -25,7 +55,7 @@
         vault_generic_secret+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path from which a secret will be read.
     ||| } },
     withPath(value):: self {
@@ -38,7 +68,7 @@
         vault_generic_secret+: { [terraformName]+: { version: value } },
       },
     },
-    '#withWithLeaseStartTime':: { 'function': { help: |||
+    '#with_lease_start_time':: { 'function': { help: |||
       If set to true, stores 'lease_start_time' in the TF state.
     ||| } },
     withWithLeaseStartTime(value):: self {

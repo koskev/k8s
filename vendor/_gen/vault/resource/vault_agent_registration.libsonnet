@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCeilingPolicies':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_agent_registration+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#ceiling_policies':: { 'function': { help: |||
       List of policy identifiers that define the authorization ceiling for this agent. Cannot include 'root' policy. Note: Vault automatically adds default policies (['default', 'default-ceiling']) unless no_default_ceiling_policy is true, but these are filtered out when reading the state to match your configuration.
     ||| } },
     withCeilingPolicies(value):: self {
@@ -24,7 +54,7 @@
         vault_agent_registration+: { [terraformName]+: { ceiling_policies: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       Detailed description of the agent's purpose.
     ||| } },
     withDescription(value):: self {
@@ -32,7 +62,7 @@
         vault_agent_registration+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisplayName':: { 'function': { help: |||
+    '#display_name':: { 'function': { help: |||
       Human-readable name for the agent registration.
     ||| } },
     withDisplayName(value):: self {
@@ -40,7 +70,7 @@
         vault_agent_registration+: { [terraformName]+: { display_name: value } },
       },
     },
-    '#withEntityId':: { 'function': { help: |||
+    '#entity_id':: { 'function': { help: |||
       Entity ID representing this agent. Each entity can only have one registration.
     ||| } },
     withEntityId(value):: self {
@@ -48,7 +78,7 @@
         vault_agent_registration+: { [terraformName]+: { entity_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -56,7 +86,7 @@
         vault_agent_registration+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNoDefaultCeilingPolicy':: { 'function': { help: |||
+    '#no_default_ceiling_policy':: { 'function': { help: |||
       If true, opts out of automatically adding the default-ceiling policy to this agent registration.
     ||| } },
     withNoDefaultCeilingPolicy(value):: self {
@@ -64,7 +94,7 @@
         vault_agent_registration+: { [terraformName]+: { no_default_ceiling_policy: value } },
       },
     },
-    '#withOptionalAuthorizationDetails':: { 'function': { help: |||
+    '#optional_authorization_details':: { 'function': { help: |||
       When false, RAR (Rich Authorization Requests) is mandatory and authorization_details must be present in the token. When set to true, authorization_details in the JWT token are optional for this agent. This setting works in conjunction with the OAuth Resource Server profile's optional_authorization_details setting - RAR is optional if EITHER is true. Defaults to false.
     ||| } },
     withOptionalAuthorizationDetails(value):: self {
@@ -72,7 +102,7 @@
         vault_agent_registration+: { [terraformName]+: { optional_authorization_details: value } },
       },
     },
-    '#withOwner':: { 'function': { help: |||
+    '#owner':: { 'function': { help: |||
       Owner of the agent registration.
     ||| } },
     withOwner(value):: self {

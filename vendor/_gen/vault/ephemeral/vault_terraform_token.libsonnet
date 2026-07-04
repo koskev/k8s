@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_terraform_token+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       Mount path for the Terraform engine in Vault. Default is `terraform`.
     ||| } },
     withMount(value):: self {
@@ -23,7 +53,7 @@
         vault_terraform_token+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -31,7 +61,7 @@
         vault_terraform_token+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -39,7 +69,7 @@
         vault_terraform_token+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Specifies the name of the role to create credentials against.
     ||| } },
     withRoleName(value):: self {

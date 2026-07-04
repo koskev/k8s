@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDataJson':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_generic_endpoint+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#data_json':: { 'function': { help: |||
       JSON-encoded data to write.
     ||| } },
     withDataJson(value):: self {
@@ -21,7 +51,7 @@
         vault_generic_endpoint+: { [terraformName]+: { data_json: value } },
       },
     },
-    '#withDisableDelete':: { 'function': { help: |||
+    '#disable_delete':: { 'function': { help: |||
       Don't attempt to delete the path from Vault if true
     ||| } },
     withDisableDelete(value):: self {
@@ -29,7 +59,7 @@
         vault_generic_endpoint+: { [terraformName]+: { disable_delete: value } },
       },
     },
-    '#withDisableRead':: { 'function': { help: |||
+    '#disable_read':: { 'function': { help: |||
       Don't attempt to read the path from Vault if true; drift won't be detected
     ||| } },
     withDisableRead(value):: self {
@@ -42,7 +72,7 @@
         vault_generic_endpoint+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIgnoreAbsentFields':: { 'function': { help: |||
+    '#ignore_absent_fields':: { 'function': { help: |||
       When reading, disregard fields not present in data_json
     ||| } },
     withIgnoreAbsentFields(value):: self {
@@ -50,7 +80,7 @@
         vault_generic_endpoint+: { [terraformName]+: { ignore_absent_fields: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -58,7 +88,7 @@
         vault_generic_endpoint+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Full path where to the endpoint that will be written
     ||| } },
     withPath(value):: self {
@@ -66,7 +96,7 @@
         vault_generic_endpoint+: { [terraformName]+: { path: value } },
       },
     },
-    '#withWriteFields':: { 'function': { help: |||
+    '#write_fields':: { 'function': { help: |||
       Top-level fields returned by write to persist in state
     ||| } },
     withWriteFields(value):: self {

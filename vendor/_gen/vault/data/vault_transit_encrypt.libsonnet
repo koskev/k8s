@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_transit_encrypt+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The Transit secret backend the key belongs to.
     ||| } },
     withBackend(value):: self {
@@ -22,7 +52,7 @@
         vault_transit_encrypt+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withContext':: { 'function': { help: |||
+    '#context':: { 'function': { help: |||
       Specifies the context for key derivation
     ||| } },
     withContext(value):: self {
@@ -35,7 +65,7 @@
         vault_transit_encrypt+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKey':: { 'function': { help: |||
+    '#key':: { 'function': { help: |||
       Name of the encryption key to use.
     ||| } },
     withKey(value):: self {
@@ -43,7 +73,7 @@
         vault_transit_encrypt+: { [terraformName]+: { key: value } },
       },
     },
-    '#withKeyVersion':: { 'function': { help: |||
+    '#key_version':: { 'function': { help: |||
       The version of the key to use for encryption
     ||| } },
     withKeyVersion(value):: self {
@@ -51,7 +81,7 @@
         vault_transit_encrypt+: { [terraformName]+: { key_version: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -59,7 +89,7 @@
         vault_transit_encrypt+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPlaintext':: { 'function': { help: |||
+    '#plaintext':: { 'function': { help: |||
       Map of strings read from Vault.
     ||| } },
     withPlaintext(value):: self {

@@ -18,7 +18,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDirectoryUrl':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#directory_url':: { 'function': { help: |||
       ACME Directory URL.
     ||| } },
     withDirectoryUrl(value):: self {
@@ -26,7 +56,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { directory_url: value } },
       },
     },
-    '#withEabKey':: { 'function': { help: |||
+    '#eab_key':: { 'function': { help: |||
       An url base64 encoded external binding token to create the initial account.
     ||| } },
     withEabKey(value):: self {
@@ -34,7 +64,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { eab_key: value } },
       },
     },
-    '#withEabKid':: { 'function': { help: |||
+    '#eab_kid':: { 'function': { help: |||
       The external binding key ID to create the initial account.
     ||| } },
     withEabKid(value):: self {
@@ -42,7 +72,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { eab_kid: value } },
       },
     },
-    '#withEmailContacts':: { 'function': { help: |||
+    '#email_contacts':: { 'function': { help: |||
       Email addresses for the ACME account.
     ||| } },
     withEmailContacts(value):: self {
@@ -50,7 +80,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { email_contacts: value } },
       },
     },
-    '#withKeyType':: { 'function': { help: |||
+    '#key_type':: { 'function': { help: |||
       Key type to generate for the account key. Valid values are `ec-256`, `ec-384`, `ec-521`, `rsa-2048`, `rsa-4096`, `rsa-8192`.
     ||| } },
     withKeyType(value):: self {
@@ -58,7 +88,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { key_type: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       The path where the PKI secret backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -66,7 +96,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the ACME account.
     ||| } },
     withName(value):: self {
@@ -74,7 +104,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -82,7 +112,7 @@
         vault_pki_external_ca_secret_backend_acme_account+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTrustedCa':: { 'function': { help: |||
+    '#trusted_ca':: { 'function': { help: |||
       Trusted CA certificates for the ACME server.
     ||| } },
     withTrustedCa(value):: self {

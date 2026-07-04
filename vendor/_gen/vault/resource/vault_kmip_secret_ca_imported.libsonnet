@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCaPem':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kmip_secret_ca_imported+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#ca_pem':: { 'function': { help: |||
       CA certificate in PEM format.
     ||| } },
     withCaPem(value):: self {
@@ -25,7 +55,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { ca_pem: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name to identify the CA.
     ||| } },
     withName(value):: self {
@@ -33,7 +63,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -41,7 +71,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path where KMIP backend is mounted.
     ||| } },
     withPath(value):: self {
@@ -49,7 +79,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRoleField':: { 'function': { help: |||
+    '#role_field':: { 'function': { help: |||
       The field in the certificate to use for the role (CN, O, OU, or UID). Must specify exactly one of role_name or role_field.
     ||| } },
     withRoleField(value):: self {
@@ -57,7 +87,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { role_field: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       The role name to associate with this CA. Must specify exactly one of role_name or role_field.
     ||| } },
     withRoleName(value):: self {
@@ -65,7 +95,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withScopeField':: { 'function': { help: |||
+    '#scope_field':: { 'function': { help: |||
       The field in the certificate to use for the scope (CN, O, OU, or UID). Must specify exactly one of scope_name or scope_field.
     ||| } },
     withScopeField(value):: self {
@@ -73,7 +103,7 @@
         vault_kmip_secret_ca_imported+: { [terraformName]+: { scope_field: value } },
       },
     },
-    '#withScopeName':: { 'function': { help: |||
+    '#scope_name':: { 'function': { help: |||
       The scope name to associate with this CA. Must specify exactly one of scope_name or scope_field.
     ||| } },
     withScopeName(value):: self {

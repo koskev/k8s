@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBatchInput':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_transit_cmac+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#batch_input':: { 'function': { help: |||
       Specifies a list of items for processing. When this parameter is set, any supplied 'input' or 'context' parameters will be ignored. Responses are returned in the 'batch_results' array component of the 'data' element of the response. Any batch output will preserve the order of the batch input. If the input data value of an item is invalid, the corresponding item in the 'batch_results' will have the key 'error' with a value describing the error.
     ||| } },
     withBatchInput(value):: self {
@@ -21,7 +51,7 @@
         vault_transit_cmac+: { [terraformName]+: { batch_input: value } },
       },
     },
-    '#withBatchResults':: { 'function': { help: |||
+    '#batch_results':: { 'function': { help: |||
       The results returned from Vault if using batch_input
     ||| } },
     withBatchResults(value):: self {
@@ -29,7 +59,7 @@
         vault_transit_cmac+: { [terraformName]+: { batch_results: value } },
       },
     },
-    '#withCmac':: { 'function': { help: |||
+    '#cmac':: { 'function': { help: |||
       The CMAC returned from Vault if using input
     ||| } },
     withCmac(value):: self {
@@ -42,7 +72,7 @@
         vault_transit_cmac+: { [terraformName]+: { id: value } },
       },
     },
-    '#withInput':: { 'function': { help: |||
+    '#input':: { 'function': { help: |||
       Specifies the base64 encoded input data. One of input or batch_input must be supplied.
     ||| } },
     withInput(value):: self {
@@ -50,7 +80,7 @@
         vault_transit_cmac+: { [terraformName]+: { input: value } },
       },
     },
-    '#withKeyVersion':: { 'function': { help: |||
+    '#key_version':: { 'function': { help: |||
       The version of the key to use
     ||| } },
     withKeyVersion(value):: self {
@@ -58,7 +88,7 @@
         vault_transit_cmac+: { [terraformName]+: { key_version: value } },
       },
     },
-    '#withMacLength':: { 'function': { help: |||
+    '#mac_length':: { 'function': { help: |||
       Specifies the MAC length to use (POST body parameter). The mac_length cannot be larger than the cipher's block size.
     ||| } },
     withMacLength(value):: self {
@@ -66,7 +96,7 @@
         vault_transit_cmac+: { [terraformName]+: { mac_length: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the CMAC key to use.
     ||| } },
     withName(value):: self {
@@ -74,7 +104,7 @@
         vault_transit_cmac+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -82,7 +112,7 @@
         vault_transit_cmac+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       The Transit secret backend the key belongs to.
     ||| } },
     withPath(value):: self {
@@ -90,7 +120,7 @@
         vault_transit_cmac+: { [terraformName]+: { path: value } },
       },
     },
-    '#withUrlMacLength':: { 'function': { help: |||
+    '#url_mac_length':: { 'function': { help: |||
       Specifies the MAC length to use (URL parameter). If provided, this value overrides mac_length. The url_mac_length cannot be larger than the cipher's block size.
     ||| } },
     withUrlMacLength(value):: self {

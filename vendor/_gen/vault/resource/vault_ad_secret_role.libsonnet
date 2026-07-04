@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_ad_secret_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The mount path for the AD backend.
     ||| } },
     withBackend(value):: self {
@@ -27,7 +57,7 @@
         vault_ad_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -35,7 +65,7 @@
         vault_ad_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRole(value):: self {
@@ -43,7 +73,7 @@
         vault_ad_secret_role+: { [terraformName]+: { role: value } },
       },
     },
-    '#withServiceAccountName':: { 'function': { help: |||
+    '#service_account_name':: { 'function': { help: |||
       The username/logon name for the service account with which this role will be associated.
     ||| } },
     withServiceAccountName(value):: self {
@@ -51,7 +81,7 @@
         vault_ad_secret_role+: { [terraformName]+: { service_account_name: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       In seconds, the default password time-to-live.
     ||| } },
     withTtl(value):: self {

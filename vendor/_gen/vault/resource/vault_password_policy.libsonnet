@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withEntropySource':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_password_policy+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#entropy_source':: { 'function': { help: |||
       Specifies an override to the default source of entropy (randomness) used to generate the passwords. Must be one of: '', 'platform', or 'seal'. Requires Vault 1.21+.
     ||| } },
     withEntropySource(value):: self {
@@ -24,7 +54,7 @@
         vault_password_policy+: { [terraformName]+: { entropy_source: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the password policy.
     ||| } },
     withName(value):: self {
@@ -32,7 +62,7 @@
         vault_password_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -40,7 +70,7 @@
         vault_password_policy+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicy':: { 'function': { help: |||
+    '#policy':: { 'function': { help: |||
       The password policy document
     ||| } },
     withPolicy(value):: self {

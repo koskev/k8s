@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDescription':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_audit+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#description':: { 'function': { help: |||
       Human-friendly description of the audit device.
     ||| } },
     withDescription(value):: self {
@@ -26,7 +56,7 @@
         vault_audit+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLocal':: { 'function': { help: |||
+    '#local':: { 'function': { help: |||
       Specifies if the audit device is a local only. Local audit devices are not replicated nor (if a secondary) removed by replication.
     ||| } },
     withLocal(value):: self {
@@ -34,7 +64,7 @@
         vault_audit+: { [terraformName]+: { 'local': value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_audit+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOptions':: { 'function': { help: |||
+    '#options':: { 'function': { help: |||
       Configuration options to pass to the audit device itself.
     ||| } },
     withOptions(value):: self {
@@ -50,7 +80,7 @@
         vault_audit+: { [terraformName]+: { options: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path in which to enable the audit device.
     ||| } },
     withPath(value):: self {
@@ -58,7 +88,7 @@
         vault_audit+: { [terraformName]+: { path: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of the audit device, such as 'file'.
     ||| } },
     withType(value):: self {

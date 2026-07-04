@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -20,7 +50,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCidrList':: { 'function': { help: |||
+    '#cidr_list':: { 'function': { help: |||
       List of CIDR blocks that can log in using the SecretID.
     ||| } },
     withCidrList(value):: self {
@@ -33,7 +63,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       JSON-encoded secret data to write.
     ||| } },
     withMetadata(value):: self {
@@ -41,7 +71,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -49,7 +79,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNumUses':: { 'function': { help: |||
+    '#num_uses':: { 'function': { help: |||
       The number of uses for the secret-id.
     ||| } },
     withNumUses(value):: self {
@@ -57,7 +87,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { num_uses: value } },
       },
     },
-    '#withRoleName':: { 'function': { help: |||
+    '#role_name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRoleName(value):: self {
@@ -65,7 +95,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { role_name: value } },
       },
     },
-    '#withSecretId':: { 'function': { help: |||
+    '#secret_id':: { 'function': { help: |||
       The SecretID to be managed. If not specified, Vault auto-generates one.
     ||| } },
     withSecretId(value):: self {
@@ -73,7 +103,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { secret_id: value } },
       },
     },
-    '#withTokenBoundCidrs':: { 'function': { help: |||
+    '#token_bound_cidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token.
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -81,7 +111,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       The TTL duration of the SecretID.
     ||| } },
     withTtl(value):: self {
@@ -89,7 +119,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withWithWrappedAccessor':: { 'function': { help: |||
+    '#with_wrapped_accessor':: { 'function': { help: |||
       Use the wrapped secret-id accessor as the id of this resource. If false, a fresh secret-id will be regenerated whenever the wrapping token is expired or invalidated through unwrapping.
     ||| } },
     withWithWrappedAccessor(value):: self {
@@ -97,7 +127,7 @@
         vault_approle_auth_backend_role_secret_id+: { [terraformName]+: { with_wrapped_accessor: value } },
       },
     },
-    '#withWrappingTtl':: { 'function': { help: |||
+    '#wrapping_ttl':: { 'function': { help: |||
       The TTL duration of the wrapped SecretID.
     ||| } },
     withWrappingTtl(value):: self {

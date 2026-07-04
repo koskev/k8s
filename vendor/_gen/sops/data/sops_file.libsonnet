@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withInputType':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        sops_file+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#input_type':: { 'function': { help: |||
       The provider will use the file extension to determine how to unmarshal the data. If your file does not have the usual extension, set this argument to `yaml`, `json`, `dotenv` (`.env`), `ini` accordingly, or `raw` if the encrypted data is encoded differently.
     ||| } },
     withInputType(value):: self {
@@ -23,7 +53,7 @@
         sops_file+: { [terraformName]+: { input_type: value } },
       },
     },
-    '#withSourceFile':: { 'function': { help: |||
+    '#source_file':: { 'function': { help: |||
       Path to the encrypted file.
     ||| } },
     withSourceFile(value):: self {

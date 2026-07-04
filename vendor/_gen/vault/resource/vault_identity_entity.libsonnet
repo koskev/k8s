@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDisabled':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_entity+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#disabled':: { 'function': { help: |||
       Whether the entity is disabled. Disabled entities' associated tokens cannot be used, but are not revoked.
     ||| } },
     withDisabled(value):: self {
@@ -19,7 +49,7 @@
         vault_identity_entity+: { [terraformName]+: { disabled: value } },
       },
     },
-    '#withExternalPolicies':: { 'function': { help: |||
+    '#external_policies':: { 'function': { help: |||
       Manage policies externally through `vault_identity_entity_policies`.
     ||| } },
     withExternalPolicies(value):: self {
@@ -32,7 +62,7 @@
         vault_identity_entity+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMetadata':: { 'function': { help: |||
+    '#metadata':: { 'function': { help: |||
       Metadata to be associated with the entity.
     ||| } },
     withMetadata(value):: self {
@@ -40,7 +70,7 @@
         vault_identity_entity+: { [terraformName]+: { metadata: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the entity.
     ||| } },
     withName(value):: self {
@@ -48,7 +78,7 @@
         vault_identity_entity+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -56,7 +86,7 @@
         vault_identity_entity+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be tied to the entity.
     ||| } },
     withPolicies(value):: self {

@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_github_team+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Auth backend to which team mapping will be configured.
     ||| } },
     withBackend(value):: self {
@@ -25,7 +55,7 @@
         vault_github_team+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -33,7 +63,7 @@
         vault_github_team+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be assigned to this team.
     ||| } },
     withPolicies(value):: self {
@@ -41,7 +71,7 @@
         vault_github_team+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withTeam':: { 'function': { help: |||
+    '#team':: { 'function': { help: |||
       GitHub team name in "slugified" format.
     ||| } },
     withTeam(value):: self {

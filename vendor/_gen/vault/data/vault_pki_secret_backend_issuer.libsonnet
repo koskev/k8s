@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_pki_secret_backend_issuer+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
@@ -21,7 +51,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisableCriticalExtensionChecks':: { 'function': { help: |||
+    '#disable_critical_extension_checks':: { 'function': { help: |||
       This determines whether this issuer is able to issue certificates where the chain of trust (including the issued certificate) contain critical extensions not processed by Vault.
     ||| } },
     withDisableCriticalExtensionChecks(value):: self {
@@ -29,7 +59,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { disable_critical_extension_checks: value } },
       },
     },
-    '#withDisableNameChecks':: { 'function': { help: |||
+    '#disable_name_checks':: { 'function': { help: |||
       This determines whether this issuer is able to issue certificates where the chain of trust (including the final issued certificate) contains a link in which the subject of the issuing certificate does not match the named issuer of the certificate it signed.
     ||| } },
     withDisableNameChecks(value):: self {
@@ -37,7 +67,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { disable_name_checks: value } },
       },
     },
-    '#withDisableNameConstraintChecks':: { 'function': { help: |||
+    '#disable_name_constraint_checks':: { 'function': { help: |||
       This determines whether this issuer is able to issue certificates where the chain of trust (including the final issued certificate) violates the name constraints critical extension of one of the issuer certificates in the chain
     ||| } },
     withDisableNameConstraintChecks(value):: self {
@@ -45,7 +75,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { disable_name_constraint_checks: value } },
       },
     },
-    '#withDisablePathLengthChecks':: { 'function': { help: |||
+    '#disable_path_length_checks':: { 'function': { help: |||
       This determines whether this issuer is able to issue certificates where the chain of trust (including the final issued certificate) is longer than allowed by a certificate authority in that chain.
     ||| } },
     withDisablePathLengthChecks(value):: self {
@@ -58,7 +88,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuerRef':: { 'function': { help: |||
+    '#issuer_ref':: { 'function': { help: |||
       Reference to an existing issuer.
     ||| } },
     withIssuerRef(value):: self {
@@ -66,7 +96,7 @@
         vault_pki_secret_backend_issuer+: { [terraformName]+: { issuer_ref: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

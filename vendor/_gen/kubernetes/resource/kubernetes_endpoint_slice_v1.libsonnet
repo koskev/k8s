@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAddressType':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_endpoint_slice_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#address_type':: { 'function': { help: |||
       address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation.
     ||| } },
     withAddressType(value):: self {

@@ -12,12 +12,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_oci_auth_backend+: { [terraformName]+: { providers: value } },
+      },
+    },
     withDescription(value):: self {
       resource+: {
         vault_oci_auth_backend+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisableAutomatedRotation':: { 'function': { help: |||
+    '#disable_automated_rotation':: { 'function': { help: |||
       Stops rotation of the root credential until set to false.
     ||| } },
     withDisableAutomatedRotation(value):: self {
@@ -25,7 +55,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { disable_automated_rotation: value } },
       },
     },
-    '#withDisableRemount':: { 'function': { help: |||
+    '#disable_remount':: { 'function': { help: |||
       If set, opts out of mount migration on path updates.
     ||| } },
     withDisableRemount(value):: self {
@@ -33,7 +63,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { disable_remount: value } },
       },
     },
-    '#withHomeTenancyId':: { 'function': { help: |||
+    '#home_tenancy_id':: { 'function': { help: |||
       The Tenancy OCID of your OCI account.
     ||| } },
     withHomeTenancyId(value):: self {
@@ -46,7 +76,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -54,7 +84,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withPath(value):: self {
@@ -62,7 +92,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { path: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
+    '#rotation_period':: { 'function': { help: |||
       The period of time in seconds between each rotation of the root credential. Cannot be used with rotation_schedule.
     ||| } },
     withRotationPeriod(value):: self {
@@ -70,7 +100,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { rotation_period: value } },
       },
     },
-    '#withRotationSchedule':: { 'function': { help: |||
+    '#rotation_schedule':: { 'function': { help: |||
       The cron-style schedule for the root credential to be rotated on. Cannot be used with rotation_period.
     ||| } },
     withRotationSchedule(value):: self {
@@ -78,7 +108,7 @@
         vault_oci_auth_backend+: { [terraformName]+: { rotation_schedule: value } },
       },
     },
-    '#withRotationWindow':: { 'function': { help: |||
+    '#rotation_window':: { 'function': { help: |||
       The maximum amount of time in seconds Vault is allowed to complete a rotation once a scheduled rotation is triggered. Can only be used with rotation_schedule.
     ||| } },
     withRotationWindow(value):: self {

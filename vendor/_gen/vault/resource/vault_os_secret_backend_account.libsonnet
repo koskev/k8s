@@ -19,7 +19,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCustomMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_os_secret_backend_account+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#custom_metadata':: { 'function': { help: |||
       Custom metadata for the account.
     ||| } },
     withCustomMetadata(value):: self {
@@ -27,7 +57,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { custom_metadata: value } },
       },
     },
-    '#withDisableAutomatedRotation':: { 'function': { help: |||
+    '#disable_automated_rotation':: { 'function': { help: |||
       Disable automated password rotation.
     ||| } },
     withDisableAutomatedRotation(value):: self {
@@ -35,7 +65,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { disable_automated_rotation: value } },
       },
     },
-    '#withHost':: { 'function': { help: |||
+    '#host':: { 'function': { help: |||
       Name of the host this account belongs to.
     ||| } },
     withHost(value):: self {
@@ -43,7 +73,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { host: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where the OS secrets backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -51,7 +81,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the account.
     ||| } },
     withName(value):: self {
@@ -59,7 +89,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -67,7 +97,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withParentAccountRef':: { 'function': { help: |||
+    '#parent_account_ref':: { 'function': { help: |||
       Reference to a parent account for rotation management.
     ||| } },
     withParentAccountRef(value):: self {
@@ -75,7 +105,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { parent_account_ref: value } },
       },
     },
-    '#withPasswordPolicy':: { 'function': { help: |||
+    '#password_policy':: { 'function': { help: |||
       Name of the password policy to use for password generation.
     ||| } },
     withPasswordPolicy(value):: self {
@@ -83,7 +113,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { password_policy: value } },
       },
     },
-    '#withPasswordWo':: { 'function': { help: |||
+    '#password_wo':: { 'function': { help: |||
       Password for the account. This is write-only, will not be read back from Vault,
       	and can only be set during resource creation. To update the password after creation, use the Vault CLI
       	or API to call the reset endpoint directly.
@@ -93,7 +123,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { password_wo: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
+    '#rotation_period':: { 'function': { help: |||
       How often to rotate passwords, in seconds. Mutually exclusive with rotation_schedule.
     ||| } },
     withRotationPeriod(value):: self {
@@ -101,7 +131,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { rotation_period: value } },
       },
     },
-    '#withRotationSchedule':: { 'function': { help: |||
+    '#rotation_schedule':: { 'function': { help: |||
       Cron schedule for password rotation. Mutually exclusive with rotation_period.
     ||| } },
     withRotationSchedule(value):: self {
@@ -109,7 +139,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { rotation_schedule: value } },
       },
     },
-    '#withRotationWindow':: { 'function': { help: |||
+    '#rotation_window':: { 'function': { help: |||
       Window of time for password rotation, in seconds.
     ||| } },
     withRotationWindow(value):: self {
@@ -117,7 +147,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { rotation_window: value } },
       },
     },
-    '#withUsername':: { 'function': { help: |||
+    '#username':: { 'function': { help: |||
       Username for the account.
     ||| } },
     withUsername(value):: self {
@@ -125,7 +155,7 @@
         vault_os_secret_backend_account+: { [terraformName]+: { username: value } },
       },
     },
-    '#withVerifyConnection':: { 'function': { help: |||
+    '#verify_connection':: { 'function': { help: |||
       Verify the connection to the host with the provided credentials.
     ||| } },
     withVerifyConnection(value):: self {

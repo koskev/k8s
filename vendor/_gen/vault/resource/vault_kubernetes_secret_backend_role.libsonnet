@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowedKubernetesNamespaceSelector':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kubernetes_secret_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allowed_kubernetes_namespace_selector':: { 'function': { help: |||
       A label selector for Kubernetes namespaces in which credentials can begenerated. Accepts either a JSON or YAML object. The value should be of typeLabelSelector. If set with `allowed_kubernetes_namespace`, the conditions are `OR`ed.
     ||| } },
     withAllowedKubernetesNamespaceSelector(value):: self {
@@ -21,7 +51,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { allowed_kubernetes_namespace_selector: value } },
       },
     },
-    '#withAllowedKubernetesNamespaces':: { 'function': { help: |||
+    '#allowed_kubernetes_namespaces':: { 'function': { help: |||
       The list of Kubernetes namespaces this role can generate credentials for. If set to '*' all namespaces are allowed. If set with`allowed_kubernetes_namespace_selector`, the conditions are `OR`ed.
     ||| } },
     withAllowedKubernetesNamespaces(value):: self {
@@ -29,7 +59,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { allowed_kubernetes_namespaces: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The mount path for the Kubernetes secrets engine.
     ||| } },
     withBackend(value):: self {
@@ -37,7 +67,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withExtraAnnotations':: { 'function': { help: |||
+    '#extra_annotations':: { 'function': { help: |||
       Additional annotations to apply to all generated Kubernetes objects.
     ||| } },
     withExtraAnnotations(value):: self {
@@ -45,7 +75,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { extra_annotations: value } },
       },
     },
-    '#withExtraLabels':: { 'function': { help: |||
+    '#extra_labels':: { 'function': { help: |||
       Additional labels to apply to all generated Kubernetes objects.
     ||| } },
     withExtraLabels(value):: self {
@@ -53,7 +83,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { extra_labels: value } },
       },
     },
-    '#withGeneratedRoleRules':: { 'function': { help: |||
+    '#generated_role_rules':: { 'function': { help: |||
       The Role or ClusterRole rules to use when generating a role. Accepts either JSON or YAML formatted rules. Mutually exclusive with 'service_account_name' and 'kubernetes_role_name'. If set, the entire chain of Kubernetes objects will be generated when credentials are requested.
     ||| } },
     withGeneratedRoleRules(value):: self {
@@ -66,7 +96,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withKubernetesRoleName':: { 'function': { help: |||
+    '#kubernetes_role_name':: { 'function': { help: |||
       The pre-existing Role or ClusterRole to bind a generated service account to. Mutually exclusive with 'service_account_name' and 'generated_role_rules'. If set, Kubernetes token, service account, and role binding objects will be created when credentials are requested.
     ||| } },
     withKubernetesRoleName(value):: self {
@@ -74,7 +104,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { kubernetes_role_name: value } },
       },
     },
-    '#withKubernetesRoleType':: { 'function': { help: |||
+    '#kubernetes_role_type':: { 'function': { help: |||
       Specifies whether the Kubernetes role is a Role or ClusterRole.
     ||| } },
     withKubernetesRoleType(value):: self {
@@ -82,7 +112,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { kubernetes_role_type: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the role.
     ||| } },
     withName(value):: self {
@@ -90,7 +120,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNameTemplate':: { 'function': { help: |||
+    '#name_template':: { 'function': { help: |||
       The name template to use when generating service accounts, roles and role bindings. If unset, a default template is used.
     ||| } },
     withNameTemplate(value):: self {
@@ -98,7 +128,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { name_template: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -106,7 +136,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withServiceAccountName':: { 'function': { help: |||
+    '#service_account_name':: { 'function': { help: |||
       The pre-existing service account to generate tokens for. Mutually exclusive with 'kubernetes_role_name' and 'generated_role_rules'. If set, only a Kubernetes token will be created when credentials are requested.
     ||| } },
     withServiceAccountName(value):: self {
@@ -114,7 +144,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { service_account_name: value } },
       },
     },
-    '#withTokenDefaultAudiences':: { 'function': { help: |||
+    '#token_default_audiences':: { 'function': { help: |||
       The default audiences for generated Kubernetes tokens. If not set, defaults to the Kubernetes cluster's default audiences. Requires Vault 1.15+.
     ||| } },
     withTokenDefaultAudiences(value):: self {
@@ -122,7 +152,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { token_default_audiences: value } },
       },
     },
-    '#withTokenDefaultTtl':: { 'function': { help: |||
+    '#token_default_ttl':: { 'function': { help: |||
       The default TTL for generated Kubernetes tokens in seconds.
     ||| } },
     withTokenDefaultTtl(value):: self {
@@ -130,7 +160,7 @@
         vault_kubernetes_secret_backend_role+: { [terraformName]+: { token_default_ttl: value } },
       },
     },
-    '#withTokenMaxTtl':: { 'function': { help: |||
+    '#token_max_ttl':: { 'function': { help: |||
       The maximum TTL for generated Kubernetes tokens in seconds.
     ||| } },
     withTokenMaxTtl(value):: self {

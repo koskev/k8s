@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAccessKey':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_client+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#access_key':: { 'function': { help: |||
       AWS Access key with permissions to query AWS APIs.
     ||| } },
     withAccessKey(value):: self {
@@ -19,7 +49,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { access_key: value } },
       },
     },
-    '#withAllowedStsHeaderValues':: { 'function': { help: |||
+    '#allowed_sts_header_values':: { 'function': { help: |||
       List of additional headers that are allowed to be in STS request headers.
     ||| } },
     withAllowedStsHeaderValues(value):: self {
@@ -27,7 +57,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { allowed_sts_header_values: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -35,7 +65,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisableAutomatedRotation':: { 'function': { help: |||
+    '#disable_automated_rotation':: { 'function': { help: |||
       Stops rotation of the root credential until set to false.
     ||| } },
     withDisableAutomatedRotation(value):: self {
@@ -43,7 +73,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { disable_automated_rotation: value } },
       },
     },
-    '#withEc2Endpoint':: { 'function': { help: |||
+    '#ec2_endpoint':: { 'function': { help: |||
       URL to override the default generated endpoint for making AWS EC2 API calls.
     ||| } },
     withEc2Endpoint(value):: self {
@@ -51,7 +81,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { ec2_endpoint: value } },
       },
     },
-    '#withIamEndpoint':: { 'function': { help: |||
+    '#iam_endpoint':: { 'function': { help: |||
       URL to override the default generated endpoint for making AWS IAM API calls.
     ||| } },
     withIamEndpoint(value):: self {
@@ -59,7 +89,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { iam_endpoint: value } },
       },
     },
-    '#withIamServerIdHeaderValue':: { 'function': { help: |||
+    '#iam_server_id_header_value':: { 'function': { help: |||
       The value to require in the X-Vault-AWS-IAM-Server-ID header as part of GetCallerIdentity requests that are used in the iam auth method.
     ||| } },
     withIamServerIdHeaderValue(value):: self {
@@ -72,7 +102,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentityTokenAudience':: { 'function': { help: |||
+    '#identity_token_audience':: { 'function': { help: |||
       The audience claim value.
     ||| } },
     withIdentityTokenAudience(value):: self {
@@ -80,7 +110,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { identity_token_audience: value } },
       },
     },
-    '#withIdentityTokenTtl':: { 'function': { help: |||
+    '#identity_token_ttl':: { 'function': { help: |||
       The TTL of generated identity tokens in seconds.
     ||| } },
     withIdentityTokenTtl(value):: self {
@@ -88,7 +118,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { identity_token_ttl: value } },
       },
     },
-    '#withMaxRetries':: { 'function': { help: |||
+    '#max_retries':: { 'function': { help: |||
       Number of max retries the client should use for recoverable errors.
     ||| } },
     withMaxRetries(value):: self {
@@ -96,7 +126,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { max_retries: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -104,7 +134,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleArn':: { 'function': { help: |||
+    '#role_arn':: { 'function': { help: |||
       Role ARN to assume for plugin identity token federation.
     ||| } },
     withRoleArn(value):: self {
@@ -112,7 +142,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { role_arn: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
+    '#rotation_period':: { 'function': { help: |||
       The period of time in seconds between each rotation of the root credential. Cannot be used with rotation_schedule.
     ||| } },
     withRotationPeriod(value):: self {
@@ -120,7 +150,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { rotation_period: value } },
       },
     },
-    '#withRotationSchedule':: { 'function': { help: |||
+    '#rotation_schedule':: { 'function': { help: |||
       The cron-style schedule for the root credential to be rotated on. Cannot be used with rotation_period.
     ||| } },
     withRotationSchedule(value):: self {
@@ -128,7 +158,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { rotation_schedule: value } },
       },
     },
-    '#withRotationWindow':: { 'function': { help: |||
+    '#rotation_window':: { 'function': { help: |||
       The maximum amount of time in seconds Vault is allowed to complete a rotation once a scheduled rotation is triggered. Can only be used with rotation_schedule.
     ||| } },
     withRotationWindow(value):: self {
@@ -136,7 +166,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { rotation_window: value } },
       },
     },
-    '#withSecretKey':: { 'function': { help: |||
+    '#secret_key':: { 'function': { help: |||
       AWS Secret key with permissions to query AWS APIs.
     ||| } },
     withSecretKey(value):: self {
@@ -144,7 +174,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { secret_key: value } },
       },
     },
-    '#withSecretKeyWo':: { 'function': { help: |||
+    '#secret_key_wo':: { 'function': { help: |||
       Write-only AWS Secret key with permissions to query AWS APIs. This field is recommended over secret_key for enhanced security.
     ||| } },
     withSecretKeyWo(value):: self {
@@ -152,7 +182,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { secret_key_wo: value } },
       },
     },
-    '#withSecretKeyWoVersion':: { 'function': { help: |||
+    '#secret_key_wo_version':: { 'function': { help: |||
       Version counter for write-only secret_key field. Increment this value to force update of the secret.
     ||| } },
     withSecretKeyWoVersion(value):: self {
@@ -160,7 +190,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { secret_key_wo_version: value } },
       },
     },
-    '#withStsEndpoint':: { 'function': { help: |||
+    '#sts_endpoint':: { 'function': { help: |||
       URL to override the default generated endpoint for making AWS STS API calls.
     ||| } },
     withStsEndpoint(value):: self {
@@ -168,7 +198,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { sts_endpoint: value } },
       },
     },
-    '#withStsRegion':: { 'function': { help: |||
+    '#sts_region':: { 'function': { help: |||
       Region to override the default region for making AWS STS API calls.
     ||| } },
     withStsRegion(value):: self {
@@ -176,7 +206,7 @@
         vault_aws_auth_backend_client+: { [terraformName]+: { sts_region: value } },
       },
     },
-    '#withUseStsRegionFromClient':: { 'function': { help: |||
+    '#use_sts_region_from_client':: { 'function': { help: |||
       If set, will override sts_region and use the region from the client request's header
     ||| } },
     withUseStsRegionFromClient(value):: self {

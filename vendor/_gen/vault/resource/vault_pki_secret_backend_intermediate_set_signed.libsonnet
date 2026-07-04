@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
@@ -21,7 +51,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCertificate':: { 'function': { help: |||
+    '#certificate':: { 'function': { help: |||
       The certificate.
     ||| } },
     withCertificate(value):: self {
@@ -34,7 +64,7 @@
         vault_pki_secret_backend_intermediate_set_signed+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

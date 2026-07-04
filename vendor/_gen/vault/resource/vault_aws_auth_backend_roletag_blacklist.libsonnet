@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -20,7 +50,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisablePeriodicTidy':: { 'function': { help: |||
+    '#disable_periodic_tidy':: { 'function': { help: |||
       If true, disables the periodic tidying of the roletag blacklist entries.
     ||| } },
     withDisablePeriodicTidy(value):: self {
@@ -33,7 +63,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -41,7 +71,7 @@
         vault_aws_auth_backend_roletag_blacklist+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSafetyBuffer':: { 'function': { help: |||
+    '#safety_buffer':: { 'function': { help: |||
       The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage.
     ||| } },
     withSafetyBuffer(value):: self {

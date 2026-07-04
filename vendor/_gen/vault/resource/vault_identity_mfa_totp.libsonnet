@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAlgorithm':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_mfa_totp+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#algorithm':: { 'function': { help: |||
       Specifies the hashing algorithm used to generate the TOTP code. Options include SHA1, SHA256, SHA512.
     ||| } },
     withAlgorithm(value):: self {
@@ -20,7 +50,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { algorithm: value } },
       },
     },
-    '#withDigits':: { 'function': { help: |||
+    '#digits':: { 'function': { help: |||
       The number of digits in the generated TOTP token. This value can either be 6 or 8
     ||| } },
     withDigits(value):: self {
@@ -33,7 +63,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIssuer':: { 'function': { help: |||
+    '#issuer':: { 'function': { help: |||
       The name of the key's issuing organization.
     ||| } },
     withIssuer(value):: self {
@@ -41,7 +71,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { issuer: value } },
       },
     },
-    '#withKeySize':: { 'function': { help: |||
+    '#key_size':: { 'function': { help: |||
       Specifies the size in bytes of the generated key.
     ||| } },
     withKeySize(value):: self {
@@ -49,7 +79,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { key_size: value } },
       },
     },
-    '#withMaxValidationAttempts':: { 'function': { help: |||
+    '#max_validation_attempts':: { 'function': { help: |||
       The maximum number of consecutive failed validation attempts allowed.
     ||| } },
     withMaxValidationAttempts(value):: self {
@@ -57,7 +87,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { max_validation_attempts: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -65,7 +95,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPeriod':: { 'function': { help: |||
+    '#period':: { 'function': { help: |||
       The length of time in seconds used to generate a counter for the TOTP token calculation.
     ||| } },
     withPeriod(value):: self {
@@ -73,7 +103,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { period: value } },
       },
     },
-    '#withQrSize':: { 'function': { help: |||
+    '#qr_size':: { 'function': { help: |||
       The pixel size of the generated square QR code.
     ||| } },
     withQrSize(value):: self {
@@ -81,7 +111,7 @@
         vault_identity_mfa_totp+: { [terraformName]+: { qr_size: value } },
       },
     },
-    '#withSkew':: { 'function': { help: |||
+    '#skew':: { 'function': { help: |||
       The number of delay periods that are allowed when validating a TOTP token. This value can either be 0 or 1.
     ||| } },
     withSkew(value):: self {

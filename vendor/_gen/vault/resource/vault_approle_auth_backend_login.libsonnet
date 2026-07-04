@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_approle_auth_backend_login+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
@@ -25,7 +55,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -33,7 +63,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRoleId':: { 'function': { help: |||
+    '#role_id':: { 'function': { help: |||
       The RoleID to log in with.
     ||| } },
     withRoleId(value):: self {
@@ -41,7 +71,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { role_id: value } },
       },
     },
-    '#withSecretId':: { 'function': { help: |||
+    '#secret_id':: { 'function': { help: |||
       The SecretID to log in with. Required unless `bind_secret_id` is set to false on the role.
     ||| } },
     withSecretId(value):: self {
@@ -49,7 +79,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { secret_id: value } },
       },
     },
-    '#withSecretIdWo':: { 'function': { help: |||
+    '#secret_id_wo':: { 'function': { help: |||
       The SecretID to log in with. Write-only attribute that can accept ephemeral values. Required unless `bind_secret_id` is set to false on the role.
     ||| } },
     withSecretIdWo(value):: self {
@@ -57,7 +87,7 @@
         vault_approle_auth_backend_login+: { [terraformName]+: { secret_id_wo: value } },
       },
     },
-    '#withSecretIdWoVersion':: { 'function': { help: |||
+    '#secret_id_wo_version':: { 'function': { help: |||
       Version counter for the write-only secret_id field. Increment this to trigger re-authentication with a new SecretID.
     ||| } },
     withSecretIdWoVersion(value):: self {

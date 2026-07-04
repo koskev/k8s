@@ -11,7 +11,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_login+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       AWS Auth Backend to read the token from.
     ||| } },
     withBackend(value):: self {
@@ -19,7 +49,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withIamHttpRequestMethod':: { 'function': { help: |||
+    '#iam_http_request_method':: { 'function': { help: |||
       The HTTP method used in the signed request.
     ||| } },
     withIamHttpRequestMethod(value):: self {
@@ -27,7 +57,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { iam_http_request_method: value } },
       },
     },
-    '#withIamRequestBody':: { 'function': { help: |||
+    '#iam_request_body':: { 'function': { help: |||
       The Base64-encoded body of the signed request.
     ||| } },
     withIamRequestBody(value):: self {
@@ -35,7 +65,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { iam_request_body: value } },
       },
     },
-    '#withIamRequestHeaders':: { 'function': { help: |||
+    '#iam_request_headers':: { 'function': { help: |||
       The Base64-encoded, JSON serialized representation of the sts:GetCallerIdentity HTTP request headers.
     ||| } },
     withIamRequestHeaders(value):: self {
@@ -43,7 +73,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { iam_request_headers: value } },
       },
     },
-    '#withIamRequestUrl':: { 'function': { help: |||
+    '#iam_request_url':: { 'function': { help: |||
       The Base64-encoded HTTP URL used in the signed request.
     ||| } },
     withIamRequestUrl(value):: self {
@@ -56,7 +86,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIdentity':: { 'function': { help: |||
+    '#identity':: { 'function': { help: |||
       Base64-encoded EC2 instance identity document to authenticate with.
     ||| } },
     withIdentity(value):: self {
@@ -64,7 +94,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { identity: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -72,7 +102,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNonce':: { 'function': { help: |||
+    '#nonce':: { 'function': { help: |||
       The nonce to be used for subsequent login requests.
     ||| } },
     withNonce(value):: self {
@@ -80,7 +110,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { nonce: value } },
       },
     },
-    '#withPkcs7':: { 'function': { help: |||
+    '#pkcs7':: { 'function': { help: |||
       PKCS7 signature of the identity document to authenticate with, with all newline characters removed.
     ||| } },
     withPkcs7(value):: self {
@@ -88,7 +118,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { pkcs7: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       AWS Auth Role to read the token from.
     ||| } },
     withRole(value):: self {
@@ -96,7 +126,7 @@
         vault_aws_auth_backend_login+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSignature':: { 'function': { help: |||
+    '#signature':: { 'function': { help: |||
       Base64-encoded SHA256 RSA signature of the instance identtiy document to authenticate with.
     ||| } },
     withSignature(value):: self {

@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAuditFields':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_config_est+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#audit_fields':: { 'function': { help: |||
       Fields parsed from the CSR that appear in the audit and can be used by sentinel policies
     ||| } },
     withAuditFields(value):: self {
@@ -23,7 +53,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { audit_fields: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to
     ||| } },
     withBackend(value):: self {
@@ -31,7 +61,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDefaultMount':: { 'function': { help: |||
+    '#default_mount':: { 'function': { help: |||
       If set, this mount will register the default `.well-known/est` URL path. Only a single mount can enable this across a Vault cluster
     ||| } },
     withDefaultMount(value):: self {
@@ -39,7 +69,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { default_mount: value } },
       },
     },
-    '#withDefaultPathPolicy':: { 'function': { help: |||
+    '#default_path_policy':: { 'function': { help: |||
       Required to be set if default_mount is enabled. Specifies the behavior for requests using the default EST label. Can be sign-verbatim or a role given by role:<role_name>
     ||| } },
     withDefaultPathPolicy(value):: self {
@@ -47,7 +77,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { default_path_policy: value } },
       },
     },
-    '#withEnableSentinelParsing':: { 'function': { help: |||
+    '#enable_sentinel_parsing':: { 'function': { help: |||
       If set, parse out fields from the provided CSR making them available for Sentinel policies
     ||| } },
     withEnableSentinelParsing(value):: self {
@@ -55,7 +85,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { enable_sentinel_parsing: value } },
       },
     },
-    '#withEnabled':: { 'function': { help: |||
+    '#enabled':: { 'function': { help: |||
       Specifies whether EST is enabled
     ||| } },
     withEnabled(value):: self {
@@ -68,7 +98,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { id: value } },
       },
     },
-    '#withLabelToPathPolicy':: { 'function': { help: |||
+    '#label_to_path_policy':: { 'function': { help: |||
       Configures a pairing of an EST label with the redirected behavior for requests hitting that role. The path policy can be sign-verbatim or a role given by role:<role_name>. Labels must be unique across Vault cluster, and will register .well-known/est/<label> URL paths
     ||| } },
     withLabelToPathPolicy(value):: self {
@@ -76,7 +106,7 @@
         vault_pki_secret_backend_config_est+: { [terraformName]+: { label_to_path_policy: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

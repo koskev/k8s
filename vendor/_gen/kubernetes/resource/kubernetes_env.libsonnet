@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiVersion':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_env+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_version':: { 'function': { help: |||
       Resource API version
     ||| } },
     withApiVersion(value):: self {
@@ -24,7 +54,7 @@
         kubernetes_env+: { [terraformName]+: { api_version: value } },
       },
     },
-    '#withContainer':: { 'function': { help: |||
+    '#container':: { 'function': { help: |||
       Name of the container for which we are updating the environment variables.
     ||| } },
     withContainer(value):: self {
@@ -32,7 +62,7 @@
         kubernetes_env+: { [terraformName]+: { container: value } },
       },
     },
-    '#withFieldManager':: { 'function': { help: |||
+    '#field_manager':: { 'function': { help: |||
       Set the name of the field manager for the specified environment variables.
     ||| } },
     withFieldManager(value):: self {
@@ -40,7 +70,7 @@
         kubernetes_env+: { [terraformName]+: { field_manager: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force overwriting environments that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {
@@ -53,7 +83,7 @@
         kubernetes_env+: { [terraformName]+: { id: value } },
       },
     },
-    '#withInitContainer':: { 'function': { help: |||
+    '#init_container':: { 'function': { help: |||
       Name of the initContainer for which we are updating the environment variables.
     ||| } },
     withInitContainer(value):: self {
@@ -61,7 +91,7 @@
         kubernetes_env+: { [terraformName]+: { init_container: value } },
       },
     },
-    '#withKind':: { 'function': { help: |||
+    '#kind':: { 'function': { help: |||
       Resource Kind
     ||| } },
     withKind(value):: self {

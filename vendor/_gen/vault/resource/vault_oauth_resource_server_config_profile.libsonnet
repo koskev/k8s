@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAudiences':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_oauth_resource_server_config_profile+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#audiences':: { 'function': { help: |||
       List of allowed audiences (aud claim) to validate in JWTs.
     ||| } },
     withAudiences(value):: self {
@@ -24,7 +54,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { audiences: value } },
       },
     },
-    '#withClockSkewLeeway':: { 'function': { help: |||
+    '#clock_skew_leeway':: { 'function': { help: |||
       Leeway for clock skew in seconds when validating time-based claims. Defaults to 0.
     ||| } },
     withClockSkewLeeway(value):: self {
@@ -32,7 +62,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { clock_skew_leeway: value } },
       },
     },
-    '#withEnabled':: { 'function': { help: |||
+    '#enabled':: { 'function': { help: |||
       Whether this profile is enabled for JWT validation. Disabled profiles are ignored. Defaults to true.
     ||| } },
     withEnabled(value):: self {
@@ -40,7 +70,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { enabled: value } },
       },
     },
-    '#withIssuerId':: { 'function': { help: |||
+    '#issuer_id':: { 'function': { help: |||
       The issuer ID (iss claim) to validate against in incoming JWTs.
     ||| } },
     withIssuerId(value):: self {
@@ -48,7 +78,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { issuer_id: value } },
       },
     },
-    '#withJwksCaPem':: { 'function': { help: |||
+    '#jwks_ca_pem':: { 'function': { help: |||
       Optional CA certificate (PEM format) for JWKS URI TLS validation.
     ||| } },
     withJwksCaPem(value):: self {
@@ -56,7 +86,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { jwks_ca_pem: value } },
       },
     },
-    '#withJwksUri':: { 'function': { help: |||
+    '#jwks_uri':: { 'function': { help: |||
       The JWKS URI to fetch public keys from. Required when use_jwks=true.
     ||| } },
     withJwksUri(value):: self {
@@ -64,7 +94,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { jwks_uri: value } },
       },
     },
-    '#withJwtType':: { 'function': { help: |||
+    '#jwt_type':: { 'function': { help: |||
       The JWT type: 'access_token' or 'transaction_token'. Defaults to 'access_token'.
     ||| } },
     withJwtType(value):: self {
@@ -72,7 +102,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { jwt_type: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -80,7 +110,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNoDefaultPolicy':: { 'function': { help: |||
+    '#no_default_policy':: { 'function': { help: |||
       If true, JWT-authenticated tokens omit the default policy unless added elsewhere. Defaults to false.
     ||| } },
     withNoDefaultPolicy(value):: self {
@@ -88,7 +118,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { no_default_policy: value } },
       },
     },
-    '#withOptionalAuthorizationDetails':: { 'function': { help: |||
+    '#optional_authorization_details':: { 'function': { help: |||
       When false, RAR (Rich Authorization Requests) is mandatory and authorization_details must be present in the token. When set to true, authorization_details in the JWT token are optional. Defaults to false.
     ||| } },
     withOptionalAuthorizationDetails(value):: self {
@@ -96,7 +126,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { optional_authorization_details: value } },
       },
     },
-    '#withProfileName':: { 'function': { help: |||
+    '#profile_name':: { 'function': { help: |||
       The name of the OAuth Resource Server Configuration profile. Must be unique within the namespace.
     ||| } },
     withProfileName(value):: self {
@@ -104,7 +134,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { profile_name: value } },
       },
     },
-    '#withSupportedAlgorithms':: { 'function': { help: |||
+    '#supported_algorithms':: { 'function': { help: |||
       List of supported signing algorithms (e.g., RS256, ES256). Defaults to all supported algorithms.
     ||| } },
     withSupportedAlgorithms(value):: self {
@@ -112,7 +142,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { supported_algorithms: value } },
       },
     },
-    '#withUseJwks':: { 'function': { help: |||
+    '#use_jwks':: { 'function': { help: |||
       If true, use JWKS URI for key validation; if false, use static public keys. Defaults to true.
     ||| } },
     withUseJwks(value):: self {
@@ -120,7 +150,7 @@
         vault_oauth_resource_server_config_profile+: { [terraformName]+: { use_jwks: value } },
       },
     },
-    '#withUserClaim':: { 'function': { help: |||
+    '#user_claim':: { 'function': { help: |||
       The claim to use as the user identifier. Defaults to 'sub'.
     ||| } },
     withUserClaim(value):: self {

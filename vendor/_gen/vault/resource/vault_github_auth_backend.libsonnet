@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAliasMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_github_auth_backend+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alias_metadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
         This should be a list or map containing the metadata in key value pairs.
     ||| } },
@@ -21,7 +51,7 @@
         vault_github_auth_backend+: { [terraformName]+: { alias_metadata: value } },
       },
     },
-    '#withBaseUrl':: { 'function': { help: |||
+    '#base_url':: { 'function': { help: |||
       The API endpoint to use. Useful if you are running GitHub Enterprise or an API-compatible authentication server.
     ||| } },
     withBaseUrl(value):: self {
@@ -29,7 +59,7 @@
         vault_github_auth_backend+: { [terraformName]+: { base_url: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       Specifies the description of the mount. This overrides the current stored value, if any.
     ||| } },
     withDescription(value):: self {
@@ -37,7 +67,7 @@
         vault_github_auth_backend+: { [terraformName]+: { description: value } },
       },
     },
-    '#withDisableRemount':: { 'function': { help: |||
+    '#disable_remount':: { 'function': { help: |||
       If set, opts out of mount migration on path updates.
     ||| } },
     withDisableRemount(value):: self {
@@ -50,7 +80,7 @@
         vault_github_auth_backend+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -58,7 +88,7 @@
         vault_github_auth_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrganization':: { 'function': { help: |||
+    '#organization':: { 'function': { help: |||
       The organization users must be part of.
     ||| } },
     withOrganization(value):: self {
@@ -66,7 +96,7 @@
         vault_github_auth_backend+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withOrganizationId':: { 'function': { help: |||
+    '#organization_id':: { 'function': { help: |||
       The ID of the organization users must be part of. Vault will attempt to fetch and set this value if it is not provided (vault-1.10+)
     ||| } },
     withOrganizationId(value):: self {
@@ -74,7 +104,7 @@
         vault_github_auth_backend+: { [terraformName]+: { organization_id: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path where the auth backend is mounted
     ||| } },
     withPath(value):: self {
@@ -82,7 +112,7 @@
         vault_github_auth_backend+: { [terraformName]+: { path: value } },
       },
     },
-    '#withTokenBoundCidrs':: { 'function': { help: |||
+    '#token_bound_cidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -90,7 +120,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
+    '#token_explicit_max_ttl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -98,7 +128,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl':: { 'function': { help: |||
+    '#token_max_ttl':: { 'function': { help: |||
       The maximum lifetime of the generated token
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -106,7 +136,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
+    '#token_no_default_policy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -114,7 +144,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses':: { 'function': { help: |||
+    '#token_num_uses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited
     ||| } },
     withTokenNumUses(value):: self {
@@ -122,7 +152,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod':: { 'function': { help: |||
+    '#token_period':: { 'function': { help: |||
       Generated Token's Period
     ||| } },
     withTokenPeriod(value):: self {
@@ -130,7 +160,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies':: { 'function': { help: |||
+    '#token_policies':: { 'function': { help: |||
       Generated Token's Policies
     ||| } },
     withTokenPolicies(value):: self {
@@ -138,7 +168,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl':: { 'function': { help: |||
+    '#token_ttl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds
     ||| } },
     withTokenTtl(value):: self {
@@ -146,7 +176,7 @@
         vault_github_auth_backend+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType':: { 'function': { help: |||
+    '#token_type':: { 'function': { help: |||
       The type of token to generate, service or batch
     ||| } },
     withTokenType(value):: self {

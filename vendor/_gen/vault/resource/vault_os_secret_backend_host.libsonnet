@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAddress':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_os_secret_backend_host+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#address':: { 'function': { help: |||
       Address of the host (hostname or IP).
     ||| } },
     withAddress(value):: self {
@@ -25,7 +55,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { address: value } },
       },
     },
-    '#withCustomMetadata':: { 'function': { help: |||
+    '#custom_metadata':: { 'function': { help: |||
       Custom metadata for the host.
     ||| } },
     withCustomMetadata(value):: self {
@@ -33,7 +63,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { custom_metadata: value } },
       },
     },
-    '#withDisableAutomatedRotation':: { 'function': { help: |||
+    '#disable_automated_rotation':: { 'function': { help: |||
       Disable automated password rotation.
     ||| } },
     withDisableAutomatedRotation(value):: self {
@@ -41,7 +71,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { disable_automated_rotation: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where the OS secrets backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -49,7 +79,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the host.
     ||| } },
     withName(value):: self {
@@ -57,7 +87,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -65,7 +95,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPasswordPolicy':: { 'function': { help: |||
+    '#password_policy':: { 'function': { help: |||
       Name of the password policy to use for password generation.
     ||| } },
     withPasswordPolicy(value):: self {
@@ -73,7 +103,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { password_policy: value } },
       },
     },
-    '#withPort':: { 'function': { help: |||
+    '#port':: { 'function': { help: |||
       Port to connect to on the host.
     ||| } },
     withPort(value):: self {
@@ -81,7 +111,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { port: value } },
       },
     },
-    '#withRotationPeriod':: { 'function': { help: |||
+    '#rotation_period':: { 'function': { help: |||
       How often to rotate passwords, in seconds. Mutually exclusive with rotation_schedule.
     ||| } },
     withRotationPeriod(value):: self {
@@ -89,7 +119,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { rotation_period: value } },
       },
     },
-    '#withRotationSchedule':: { 'function': { help: |||
+    '#rotation_schedule':: { 'function': { help: |||
       Cron schedule for password rotation. Mutually exclusive with rotation_period.
     ||| } },
     withRotationSchedule(value):: self {
@@ -97,7 +127,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { rotation_schedule: value } },
       },
     },
-    '#withRotationWindow':: { 'function': { help: |||
+    '#rotation_window':: { 'function': { help: |||
       Window of time for password rotation, in seconds.
     ||| } },
     withRotationWindow(value):: self {
@@ -105,7 +135,7 @@
         vault_os_secret_backend_host+: { [terraformName]+: { rotation_window: value } },
       },
     },
-    '#withSshHostKey':: { 'function': { help: |||
+    '#ssh_host_key':: { 'function': { help: |||
       SSH host key for the host.
     ||| } },
     withSshHostKey(value):: self {

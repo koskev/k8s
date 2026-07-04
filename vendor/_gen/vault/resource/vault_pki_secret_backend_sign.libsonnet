@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAltNames':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_secret_backend_sign+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alt_names':: { 'function': { help: |||
       List of alternative names.
     ||| } },
     withAltNames(value):: self {
@@ -23,7 +53,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { alt_names: value } },
       },
     },
-    '#withAutoRenew':: { 'function': { help: |||
+    '#auto_renew':: { 'function': { help: |||
       If enabled, a new certificate will be generated if the expiration is within min_seconds_remaining
     ||| } },
     withAutoRenew(value):: self {
@@ -31,7 +61,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { auto_renew: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
@@ -39,7 +69,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCertMetadata':: { 'function': { help: |||
+    '#cert_metadata':: { 'function': { help: |||
       A base 64 encoded value or an empty string to associate with the certificate's serial number. The role's no_store_metadata must be set to false, otherwise an error is returned when specified.
     ||| } },
     withCertMetadata(value):: self {
@@ -47,7 +77,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { cert_metadata: value } },
       },
     },
-    '#withCommonName':: { 'function': { help: |||
+    '#common_name':: { 'function': { help: |||
       CN of intermediate to create.
     ||| } },
     withCommonName(value):: self {
@@ -55,7 +85,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { common_name: value } },
       },
     },
-    '#withCsr':: { 'function': { help: |||
+    '#csr':: { 'function': { help: |||
       The CSR.
     ||| } },
     withCsr(value):: self {
@@ -63,7 +93,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { csr: value } },
       },
     },
-    '#withExcludeCnFromSans':: { 'function': { help: |||
+    '#exclude_cn_from_sans':: { 'function': { help: |||
       Flag to exclude CN from SANs.
     ||| } },
     withExcludeCnFromSans(value):: self {
@@ -71,7 +101,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { exclude_cn_from_sans: value } },
       },
     },
-    '#withFormat':: { 'function': { help: |||
+    '#format':: { 'function': { help: |||
       The format of data.
     ||| } },
     withFormat(value):: self {
@@ -84,7 +114,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { id: value } },
       },
     },
-    '#withIpSans':: { 'function': { help: |||
+    '#ip_sans':: { 'function': { help: |||
       List of alternative IPs.
     ||| } },
     withIpSans(value):: self {
@@ -92,7 +122,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { ip_sans: value } },
       },
     },
-    '#withIssuerRef':: { 'function': { help: |||
+    '#issuer_ref':: { 'function': { help: |||
       Specifies the default issuer of this request.
     ||| } },
     withIssuerRef(value):: self {
@@ -100,7 +130,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { issuer_ref: value } },
       },
     },
-    '#withMinSecondsRemaining':: { 'function': { help: |||
+    '#min_seconds_remaining':: { 'function': { help: |||
       Generate a new certificate when the expiration is within this number of seconds
     ||| } },
     withMinSecondsRemaining(value):: self {
@@ -108,7 +138,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { min_seconds_remaining: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the role to create the certificate against.
     ||| } },
     withName(value):: self {
@@ -116,7 +146,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -124,7 +154,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNotAfter':: { 'function': { help: |||
+    '#not_after':: { 'function': { help: |||
       Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z.
     ||| } },
     withNotAfter(value):: self {
@@ -132,7 +162,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { not_after: value } },
       },
     },
-    '#withOtherSans':: { 'function': { help: |||
+    '#other_sans':: { 'function': { help: |||
       List of other SANs.
     ||| } },
     withOtherSans(value):: self {
@@ -140,7 +170,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { other_sans: value } },
       },
     },
-    '#withRemoveRootsFromChain':: { 'function': { help: |||
+    '#remove_roots_from_chain':: { 'function': { help: |||
       If true, the returned ca_chain field will not include any self-signed CA certificates. Useful if end-users already have the root CA in their trust store.
     ||| } },
     withRemoveRootsFromChain(value):: self {
@@ -148,7 +178,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { remove_roots_from_chain: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Time to live.
     ||| } },
     withTtl(value):: self {
@@ -156,7 +186,7 @@
         vault_pki_secret_backend_sign+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withUriSans':: { 'function': { help: |||
+    '#uri_sans':: { 'function': { help: |||
       List of alternative URIs.
     ||| } },
     withUriSans(value):: self {

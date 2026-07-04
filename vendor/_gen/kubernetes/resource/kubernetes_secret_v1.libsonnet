@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBinaryData':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_secret_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#binary_data':: { 'function': { help: |||
       A map of the secret data in base64 encoding. Use this for binary data.
     ||| } },
     withBinaryData(value):: self {
@@ -22,7 +52,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { binary_data: value } },
       },
     },
-    '#withBinaryDataWo':: { 'function': { help: |||
+    '#binary_data_wo':: { 'function': { help: |||
       A write-only map of the secret data in base64 encoding. Use this for binary data.
     ||| } },
     withBinaryDataWo(value):: self {
@@ -30,7 +60,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { binary_data_wo: value } },
       },
     },
-    '#withBinaryDataWoRevision':: { 'function': { help: |||
+    '#binary_data_wo_revision':: { 'function': { help: |||
       The current revision of the write-only "binary_data_wo" attribute. Incrementing this integer value will cause Terraform to update the write-only value.
     ||| } },
     withBinaryDataWoRevision(value):: self {
@@ -38,7 +68,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { binary_data_wo_revision: value } },
       },
     },
-    '#withData':: { 'function': { help: |||
+    '#data':: { 'function': { help: |||
       A map of the secret data.
     ||| } },
     withData(value):: self {
@@ -46,7 +76,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { data: value } },
       },
     },
-    '#withDataWo':: { 'function': { help: |||
+    '#data_wo':: { 'function': { help: |||
       A map write-only of the secret data.
     ||| } },
     withDataWo(value):: self {
@@ -54,7 +84,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { data_wo: value } },
       },
     },
-    '#withDataWoRevision':: { 'function': { help: |||
+    '#data_wo_revision':: { 'function': { help: |||
       The current revision of the write-only "data_wo" attribute. Incrementing this integer value will cause Terraform to update the write-only value.
     ||| } },
     withDataWoRevision(value):: self {
@@ -67,7 +97,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withImmutable':: { 'function': { help: |||
+    '#immutable':: { 'function': { help: |||
       Ensures that data stored in the Secret cannot be updated (only object metadata can be modified).
     ||| } },
     withImmutable(value):: self {
@@ -75,7 +105,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { immutable: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of secret
     ||| } },
     withType(value):: self {
@@ -83,7 +113,7 @@
         kubernetes_secret_v1+: { [terraformName]+: { type: value } },
       },
     },
-    '#withWaitForServiceAccountToken':: { 'function': { help: |||
+    '#wait_for_service_account_token':: { 'function': { help: |||
       Terraform will wait for the service account token to be created.
     ||| } },
     withWaitForServiceAccountToken(value):: self {

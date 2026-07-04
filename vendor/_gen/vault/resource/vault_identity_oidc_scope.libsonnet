@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withDescription':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_oidc_scope+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#description':: { 'function': { help: |||
       The scope's description.
     ||| } },
     withDescription(value):: self {
@@ -25,7 +55,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of the scope. The openid scope name is reserved.
     ||| } },
     withName(value):: self {
@@ -33,7 +63,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -41,7 +71,7 @@
         vault_identity_oidc_scope+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTemplate':: { 'function': { help: |||
+    '#template':: { 'function': { help: |||
       The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON.
     ||| } },
     withTemplate(value):: self {

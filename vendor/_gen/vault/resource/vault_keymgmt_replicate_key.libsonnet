@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withKeyName':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_keymgmt_replicate_key+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#key_name':: { 'function': { help: |||
       Specifies the name of the key to replicate.
     ||| } },
     withKeyName(value):: self {
@@ -25,7 +55,7 @@
         vault_keymgmt_replicate_key+: { [terraformName]+: { key_name: value } },
       },
     },
-    '#withKmsName':: { 'function': { help: |||
+    '#kms_name':: { 'function': { help: |||
       Specifies the name of the AWS KMS provider.
     ||| } },
     withKmsName(value):: self {
@@ -33,7 +63,7 @@
         vault_keymgmt_replicate_key+: { [terraformName]+: { kms_name: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
     ||| } },
     withMount(value):: self {
@@ -41,7 +71,7 @@
         vault_keymgmt_replicate_key+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMount':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_radius_auth_backend_user+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#mount':: { 'function': { help: |||
       Path to the RADIUS auth mount where the user will be registered.
     ||| } },
     withMount(value):: self {
@@ -24,7 +54,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -32,7 +62,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user.
     ||| } },
     withPolicies(value):: self {
@@ -40,7 +70,7 @@
         vault_radius_auth_backend_user+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withUsername':: { 'function': { help: |||
+    '#username':: { 'function': { help: |||
       The username to register with the RADIUS auth backend.
     ||| } },
     withUsername(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_aws_access_credentials+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       AWS Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRegion':: { 'function': { help: |||
+    '#region':: { 'function': { help: |||
       Region the read credentials belong to.
     ||| } },
     withRegion(value):: self {
@@ -42,7 +72,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { region: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       AWS Secret Role to read credentials from.
     ||| } },
     withRole(value):: self {
@@ -50,7 +80,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { role: value } },
       },
     },
-    '#withRoleArn':: { 'function': { help: |||
+    '#role_arn':: { 'function': { help: |||
       ARN to use if multiple are available in the role. Required if the role has multiple ARNs.
     ||| } },
     withRoleArn(value):: self {
@@ -58,7 +88,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { role_arn: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       User specified Time-To-Live for the STS token. Uses the Role defined default_sts_ttl when not specified
     ||| } },
     withTtl(value):: self {
@@ -66,7 +96,7 @@
         vault_aws_access_credentials+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of credentials to read. Must be either 'creds' for Access Key and Secret Key, or 'sts' for STS.
     ||| } },
     withType(value):: self {

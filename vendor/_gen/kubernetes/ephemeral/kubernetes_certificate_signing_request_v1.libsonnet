@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAutoApprove':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        kubernetes_certificate_signing_request_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#auto_approve':: { 'function': { help: |||
       Automatically approve the Certificate Signing Request
     ||| } },
     withAutoApprove(value):: self {
@@ -22,7 +52,7 @@
         kubernetes_certificate_signing_request_v1+: { [terraformName]+: { auto_approve: value } },
       },
     },
-    '#withCertificate':: { 'function': { help: |||
+    '#certificate':: { 'function': { help: |||
       certificate is populated with an issued certificate by the signer after an Approved condition is present. This field is set via the /status subresource. Once populated, this field is immutable.
 
       If the certificate signing request is denied, a condition of type "Denied" is added and this field remains empty. If the signer cannot issue the certificate, a condition of type "Failed" is added and this field remains empty.

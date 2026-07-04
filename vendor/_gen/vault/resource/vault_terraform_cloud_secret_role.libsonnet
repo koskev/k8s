@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_terraform_cloud_secret_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The path of the Terraform Cloud Secret Backend the role belongs to.
     ||| } },
     withBackend(value):: self {
@@ -20,7 +50,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withCredentialType':: { 'function': { help: |||
+    '#credential_type':: { 'function': { help: |||
       The type of credential to generate. Valid values are 'team', 'team_legacy', 'user', or 'organization'.
     ||| } },
     withCredentialType(value):: self {
@@ -28,7 +58,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { credential_type: value } },
       },
     },
-    '#withDescription':: { 'function': { help: |||
+    '#description':: { 'function': { help: |||
       Description of the role. This is used as a prefix to help identify the token in the HCP Terraform UI. Only valid with 'team' or 'user' credential types.
     ||| } },
     withDescription(value):: self {
@@ -41,7 +71,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       Maximum allowed lease for generated credentials. If not set or set to 0, will use system default.
     ||| } },
     withMaxTtl(value):: self {
@@ -49,7 +79,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       The name of an existing role against which to create this Terraform Cloud credential
     ||| } },
     withName(value):: self {
@@ -57,7 +87,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -65,7 +95,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrganization':: { 'function': { help: |||
+    '#organization':: { 'function': { help: |||
       Name of the Terraform Cloud or Enterprise organization
     ||| } },
     withOrganization(value):: self {
@@ -73,7 +103,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { organization: value } },
       },
     },
-    '#withTeamId':: { 'function': { help: |||
+    '#team_id':: { 'function': { help: |||
       ID of the Terraform Cloud or Enterprise team under organization (e.g., settings/teams/team-xxxxxxxxxxxxx)
     ||| } },
     withTeamId(value):: self {
@@ -81,7 +111,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { team_id: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Default lease for generated credentials. If not set or set to 0, will use system default.
     ||| } },
     withTtl(value):: self {
@@ -89,7 +119,7 @@
         vault_terraform_cloud_secret_role+: { [terraformName]+: { ttl: value } },
       },
     },
-    '#withUserId':: { 'function': { help: |||
+    '#user_id':: { 'function': { help: |||
       ID of the Terraform Cloud or Enterprise user (e.g., user-xxxxxxxxxxxxxxxx)
     ||| } },
     withUserId(value):: self {

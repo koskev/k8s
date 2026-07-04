@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withMaxVersions':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_os_secret_backend+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#max_versions':: { 'function': { help: |||
       Maximum number of versions to keep for secrets.
     ||| } },
     withMaxVersions(value):: self {
@@ -23,7 +53,7 @@
         vault_os_secret_backend+: { [terraformName]+: { max_versions: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Path where the OS secrets backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -31,7 +61,7 @@
         vault_os_secret_backend+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -39,7 +69,7 @@
         vault_os_secret_backend+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSshHostKeyTrustOnFirstUse':: { 'function': { help: |||
+    '#ssh_host_key_trust_on_first_use':: { 'function': { help: |||
       Trust SSH host keys on first use.
     ||| } },
     withSshHostKeyTrustOnFirstUse(value):: self {

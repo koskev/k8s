@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAccessToken':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_secrets_sync_vercel_destination+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#access_token':: { 'function': { help: |||
       Vercel API access token with the permissions to manage environment variables.
     ||| } },
     withAccessToken(value):: self {
@@ -23,7 +53,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { access_token: value } },
       },
     },
-    '#withAllowedIpv4Addresses':: { 'function': { help: |||
+    '#allowed_ipv4_addresses':: { 'function': { help: |||
       Set of allowed IPv4 addresses in CIDR notation (e.g., 192.168.1.1/32) for outbound connections from Vault to the destination. If not set, all IPv4 addresses are allowed.
     ||| } },
     withAllowedIpv4Addresses(value):: self {
@@ -31,7 +61,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ipv4_addresses: value } },
       },
     },
-    '#withAllowedIpv6Addresses':: { 'function': { help: |||
+    '#allowed_ipv6_addresses':: { 'function': { help: |||
       Set of allowed IPv6 addresses in CIDR notation (e.g., 2001:db8::1/128) for outbound connections from Vault to the destination. If not set, all IPv6 addresses are allowed.
     ||| } },
     withAllowedIpv6Addresses(value):: self {
@@ -39,7 +69,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ipv6_addresses: value } },
       },
     },
-    '#withAllowedPorts':: { 'function': { help: |||
+    '#allowed_ports':: { 'function': { help: |||
       Set of allowed ports for outbound connections from Vault to the destination. If not set, all ports are allowed.
     ||| } },
     withAllowedPorts(value):: self {
@@ -47,7 +77,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { allowed_ports: value } },
       },
     },
-    '#withDeploymentEnvironments':: { 'function': { help: |||
+    '#deployment_environments':: { 'function': { help: |||
       Deployment environments where the environment variables are available. Accepts 'development', 'preview' & 'production'.
     ||| } },
     withDeploymentEnvironments(value):: self {
@@ -55,7 +85,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { deployment_environments: value } },
       },
     },
-    '#withDisableStrictNetworking':: { 'function': { help: |||
+    '#disable_strict_networking':: { 'function': { help: |||
       If set to true, disables strict networking enforcement for this destination. When disabled, Vault will not enforce allowed IP addresses and ports.
     ||| } },
     withDisableStrictNetworking(value):: self {
@@ -63,7 +93,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { disable_strict_networking: value } },
       },
     },
-    '#withGranularity':: { 'function': { help: |||
+    '#granularity':: { 'function': { help: |||
       Determines what level of information is synced as a distinct resource at the destination. Can be 'secret-path' or 'secret-key'
     ||| } },
     withGranularity(value):: self {
@@ -76,7 +106,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Unique name of the Vercel destination.
     ||| } },
     withName(value):: self {
@@ -84,7 +114,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -92,7 +122,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withProjectId':: { 'function': { help: |||
+    '#project_id':: { 'function': { help: |||
       Project ID where to manage environment variables.
     ||| } },
     withProjectId(value):: self {
@@ -100,7 +130,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { project_id: value } },
       },
     },
-    '#withSecretNameTemplate':: { 'function': { help: |||
+    '#secret_name_template':: { 'function': { help: |||
       Template describing how to generate external secret names.
     ||| } },
     withSecretNameTemplate(value):: self {
@@ -108,7 +138,7 @@
         vault_secrets_sync_vercel_destination+: { [terraformName]+: { secret_name_template: value } },
       },
     },
-    '#withTeamId':: { 'function': { help: |||
+    '#team_id':: { 'function': { help: |||
       Team ID the project belongs to.
     ||| } },
     withTeamId(value):: self {

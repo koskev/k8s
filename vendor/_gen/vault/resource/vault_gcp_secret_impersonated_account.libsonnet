@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_gcp_secret_impersonated_account+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Path where the GCP secrets engine is mounted.
     ||| } },
     withBackend(value):: self {
@@ -27,7 +57,7 @@
         vault_gcp_secret_impersonated_account+: { [terraformName]+: { id: value } },
       },
     },
-    '#withImpersonatedAccount':: { 'function': { help: |||
+    '#impersonated_account':: { 'function': { help: |||
       Name of the Impersonated Account to create
     ||| } },
     withImpersonatedAccount(value):: self {
@@ -35,7 +65,7 @@
         vault_gcp_secret_impersonated_account+: { [terraformName]+: { impersonated_account: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -43,7 +73,7 @@
         vault_gcp_secret_impersonated_account+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withServiceAccountEmail':: { 'function': { help: |||
+    '#service_account_email':: { 'function': { help: |||
       Email of the GCP service account.
     ||| } },
     withServiceAccountEmail(value):: self {
@@ -51,7 +81,7 @@
         vault_gcp_secret_impersonated_account+: { [terraformName]+: { service_account_email: value } },
       },
     },
-    '#withTokenScopes':: { 'function': { help: |||
+    '#token_scopes':: { 'function': { help: |||
       List of OAuth scopes to assign to `access_token` secrets generated under this impersonated account (`access_token` impersonated accounts only) 
     ||| } },
     withTokenScopes(value):: self {
@@ -59,7 +89,7 @@
         vault_gcp_secret_impersonated_account+: { [terraformName]+: { token_scopes: value } },
       },
     },
-    '#withTtl':: { 'function': { help: |||
+    '#ttl':: { 'function': { help: |||
       Time to live.
     ||| } },
     withTtl(value):: self {

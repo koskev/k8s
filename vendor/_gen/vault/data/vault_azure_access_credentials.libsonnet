@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_azure_access_credentials+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Azure Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
@@ -21,7 +51,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withEnvironment':: { 'function': { help: |||
+    '#environment':: { 'function': { help: |||
       The Azure environment to use during credential validation.
       Defaults to the Azure Public Cloud.
       Some possible values: AzurePublicCloud, AzureUSGovernmentCloud
@@ -36,7 +66,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMaxCredValidationSeconds':: { 'function': { help: |||
+    '#max_cred_validation_seconds':: { 'function': { help: |||
       If 'validate_creds' is true, the number of seconds after which to give up validating credentials.
     ||| } },
     withMaxCredValidationSeconds(value):: self {
@@ -44,7 +74,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { max_cred_validation_seconds: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -52,7 +82,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withNumSecondsBetweenTests':: { 'function': { help: |||
+    '#num_seconds_between_tests':: { 'function': { help: |||
       If 'validate_creds' is true, the number of seconds to wait between each test of generated credentials.
     ||| } },
     withNumSecondsBetweenTests(value):: self {
@@ -60,7 +90,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { num_seconds_between_tests: value } },
       },
     },
-    '#withNumSequentialSuccesses':: { 'function': { help: |||
+    '#num_sequential_successes':: { 'function': { help: |||
       If 'validate_creds' is true, the number of sequential successes required to validate generated credentials.
     ||| } },
     withNumSequentialSuccesses(value):: self {
@@ -68,7 +98,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { num_sequential_successes: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Azure Secret Role to read credentials from.
     ||| } },
     withRole(value):: self {
@@ -76,7 +106,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSubscriptionId':: { 'function': { help: |||
+    '#subscription_id':: { 'function': { help: |||
       The subscription ID to use during credential validation. Defaults to the subscription ID configured in the Vault backend
     ||| } },
     withSubscriptionId(value):: self {
@@ -84,7 +114,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { subscription_id: value } },
       },
     },
-    '#withTenantId':: { 'function': { help: |||
+    '#tenant_id':: { 'function': { help: |||
       The tenant ID to use during credential validation. Defaults to the tenant ID configured in the Vault backend
     ||| } },
     withTenantId(value):: self {
@@ -92,7 +122,7 @@
         vault_azure_access_credentials+: { [terraformName]+: { tenant_id: value } },
       },
     },
-    '#withValidateCreds':: { 'function': { help: |||
+    '#validate_creds':: { 'function': { help: |||
       Whether generated credentials should be validated before being returned.
     ||| } },
     withValidateCreds(value):: self {

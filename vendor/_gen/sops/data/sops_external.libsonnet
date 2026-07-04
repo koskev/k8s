@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withInputType':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        sops_external+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#input_type':: { 'function': { help: |||
       `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data.
     ||| } },
     withInputType(value):: self {
@@ -23,7 +53,7 @@
         sops_external+: { [terraformName]+: { input_type: value } },
       },
     },
-    '#withSource':: { 'function': { help: |||
+    '#source':: { 'function': { help: |||
       A string with sops-encrypted data
     ||| } },
     withSource(value):: self {

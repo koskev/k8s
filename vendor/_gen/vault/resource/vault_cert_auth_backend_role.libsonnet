@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAliasMetadata':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_cert_auth_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#alias_metadata':: { 'function': { help: |||
       The metadata to be tied to generated entity alias.
         This should be a list or map containing the metadata in key value pairs.
     ||| } },
@@ -77,7 +107,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -85,7 +115,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOcspCaCertificates':: { 'function': { help: |||
+    '#ocsp_ca_certificates':: { 'function': { help: |||
       Any additional CA certificates needed to verify OCSP responses. Provided as base64 encoded PEM data.
     ||| } },
     withOcspCaCertificates(value):: self {
@@ -93,7 +123,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_ca_certificates: value } },
       },
     },
-    '#withOcspEnabled':: { 'function': { help: |||
+    '#ocsp_enabled':: { 'function': { help: |||
       If enabled, validate certificates' revocation status using OCSP.
     ||| } },
     withOcspEnabled(value):: self {
@@ -101,7 +131,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_enabled: value } },
       },
     },
-    '#withOcspFailOpen':: { 'function': { help: |||
+    '#ocsp_fail_open':: { 'function': { help: |||
       If true and an OCSP response cannot be fetched or is of an unknown status, the login will proceed as if the certificate has not been revoked.
     ||| } },
     withOcspFailOpen(value):: self {
@@ -109,7 +139,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_fail_open: value } },
       },
     },
-    '#withOcspMaxRetries':: { 'function': { help: |||
+    '#ocsp_max_retries':: { 'function': { help: |||
       The number of retries to attempt when connecting to an OCSP server. Defaults to 4 retries. Must be a non-negative value.
     ||| } },
     withOcspMaxRetries(value):: self {
@@ -117,7 +147,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_max_retries: value } },
       },
     },
-    '#withOcspQueryAllServers':: { 'function': { help: |||
+    '#ocsp_query_all_servers':: { 'function': { help: |||
       If set to true, rather than accepting the first successful OCSP response, query all servers and consider the certificate valid only if all servers agree.
     ||| } },
     withOcspQueryAllServers(value):: self {
@@ -125,7 +155,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_query_all_servers: value } },
       },
     },
-    '#withOcspServersOverride':: { 'function': { help: |||
+    '#ocsp_servers_override':: { 'function': { help: |||
       A comma-separated list of OCSP server addresses. If unset, the OCSP server is determined from the AuthorityInformationAccess extension on the certificate being inspected.
     ||| } },
     withOcspServersOverride(value):: self {
@@ -133,7 +163,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { ocsp_servers_override: value } },
       },
     },
-    '#withOcspThisUpdateMaxAge':: { 'function': { help: |||
+    '#ocsp_this_update_max_age':: { 'function': { help: |||
       The maximum age in seconds of the 'thisUpdate' field in an OCSP response before it is considered too old. Defaults to 0 (disabled). Must be a non-negative value.
     ||| } },
     withOcspThisUpdateMaxAge(value):: self {
@@ -146,7 +176,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { required_extensions: value } },
       },
     },
-    '#withTokenBoundCidrs':: { 'function': { help: |||
+    '#token_bound_cidrs':: { 'function': { help: |||
       Specifies the blocks of IP addresses which are allowed to use the generated token
     ||| } },
     withTokenBoundCidrs(value):: self {
@@ -154,7 +184,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_bound_cidrs: value } },
       },
     },
-    '#withTokenExplicitMaxTtl':: { 'function': { help: |||
+    '#token_explicit_max_ttl':: { 'function': { help: |||
       Generated Token's Explicit Maximum TTL in seconds
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
@@ -162,7 +192,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_explicit_max_ttl: value } },
       },
     },
-    '#withTokenMaxTtl':: { 'function': { help: |||
+    '#token_max_ttl':: { 'function': { help: |||
       The maximum lifetime of the generated token
     ||| } },
     withTokenMaxTtl(value):: self {
@@ -170,7 +200,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_max_ttl: value } },
       },
     },
-    '#withTokenNoDefaultPolicy':: { 'function': { help: |||
+    '#token_no_default_policy':: { 'function': { help: |||
       If true, the 'default' policy will not automatically be added to generated tokens
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
@@ -178,7 +208,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_no_default_policy: value } },
       },
     },
-    '#withTokenNumUses':: { 'function': { help: |||
+    '#token_num_uses':: { 'function': { help: |||
       The maximum number of times a token may be used, a value of zero means unlimited
     ||| } },
     withTokenNumUses(value):: self {
@@ -186,7 +216,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_num_uses: value } },
       },
     },
-    '#withTokenPeriod':: { 'function': { help: |||
+    '#token_period':: { 'function': { help: |||
       Generated Token's Period
     ||| } },
     withTokenPeriod(value):: self {
@@ -194,7 +224,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_period: value } },
       },
     },
-    '#withTokenPolicies':: { 'function': { help: |||
+    '#token_policies':: { 'function': { help: |||
       Generated Token's Policies
     ||| } },
     withTokenPolicies(value):: self {
@@ -202,7 +232,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_policies: value } },
       },
     },
-    '#withTokenTtl':: { 'function': { help: |||
+    '#token_ttl':: { 'function': { help: |||
       The initial ttl of the token to generate in seconds
     ||| } },
     withTokenTtl(value):: self {
@@ -210,7 +240,7 @@
         vault_cert_auth_backend_role+: { [terraformName]+: { token_ttl: value } },
       },
     },
-    '#withTokenType':: { 'function': { help: |||
+    '#token_type':: { 'function': { help: |||
       The type of token to generate, service or batch
     ||| } },
     withTokenType(value):: self {

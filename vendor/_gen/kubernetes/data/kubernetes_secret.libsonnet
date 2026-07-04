@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBinaryData':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        kubernetes_secret+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#binary_data':: { 'function': { help: |||
       A map of the secret data with values encoded in base64 format
     ||| } },
     withBinaryData(value):: self {

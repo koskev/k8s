@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withApiToken':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_identity_mfa_okta+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#api_token':: { 'function': { help: |||
       Okta API token.
     ||| } },
     withApiToken(value):: self {
@@ -21,7 +51,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { api_token: value } },
       },
     },
-    '#withBaseUrl':: { 'function': { help: |||
+    '#base_url':: { 'function': { help: |||
       The base domain to use for API requests.
     ||| } },
     withBaseUrl(value):: self {
@@ -34,7 +64,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withOrgName':: { 'function': { help: |||
+    '#org_name':: { 'function': { help: |||
       Name of the organization to be used in the Okta API.
     ||| } },
     withOrgName(value):: self {
@@ -50,7 +80,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { org_name: value } },
       },
     },
-    '#withPrimaryEmail':: { 'function': { help: |||
+    '#primary_email':: { 'function': { help: |||
       Only match the primary email for the account.
     ||| } },
     withPrimaryEmail(value):: self {
@@ -58,7 +88,7 @@
         vault_identity_mfa_okta+: { [terraformName]+: { primary_email: value } },
       },
     },
-    '#withUsernameFormat':: { 'function': { help: |||
+    '#username_format':: { 'function': { help: |||
       A template string for mapping Identity names to MFA methods.
     ||| } },
     withUsernameFormat(value):: self {

@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_gcp_secret_roleset+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Path where the GCP secrets engine is mounted.
     ||| } },
     withBackend(value):: self {
@@ -27,7 +57,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -35,7 +65,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withProject':: { 'function': { help: |||
+    '#project':: { 'function': { help: |||
       Name of the GCP project that this roleset's service account will belong to.
     ||| } },
     withProject(value):: self {
@@ -43,7 +73,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { project: value } },
       },
     },
-    '#withRoleset':: { 'function': { help: |||
+    '#roleset':: { 'function': { help: |||
       Name of the RoleSet to create
     ||| } },
     withRoleset(value):: self {
@@ -51,7 +81,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { roleset: value } },
       },
     },
-    '#withSecretType':: { 'function': { help: |||
+    '#secret_type':: { 'function': { help: |||
       Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key`
     ||| } },
     withSecretType(value):: self {
@@ -59,7 +89,7 @@
         vault_gcp_secret_roleset+: { [terraformName]+: { secret_type: value } },
       },
     },
-    '#withTokenScopes':: { 'function': { help: |||
+    '#token_scopes':: { 'function': { help: |||
       List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only) 
     ||| } },
     withTokenScopes(value):: self {

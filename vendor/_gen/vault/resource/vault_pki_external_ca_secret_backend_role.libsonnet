@@ -17,7 +17,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAcmeAccountName':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#acme_account_name':: { 'function': { help: |||
       The ACME account to use when validating certificates.
     ||| } },
     withAcmeAccountName(value):: self {
@@ -25,7 +55,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { acme_account_name: value } },
       },
     },
-    '#withAllowedChallengeTypes':: { 'function': { help: |||
+    '#allowed_challenge_types':: { 'function': { help: |||
       The list of challenge types that are allowed to be used. Valid values are: `http-01`, `dns-01`, `tls-alpn-01`. Defaults to all challenge types.
     ||| } },
     withAllowedChallengeTypes(value):: self {
@@ -33,7 +63,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { allowed_challenge_types: value } },
       },
     },
-    '#withAllowedDomainOptions':: { 'function': { help: |||
+    '#allowed_domain_options':: { 'function': { help: |||
       A list of keyword options that influence how values within allowed_domains are interpreted against the requested set of identifiers from the client. Valid values are: `bare_domains`, `subdomains`, `wildcards`, `globs`.
     ||| } },
     withAllowedDomainOptions(value):: self {
@@ -41,7 +71,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { allowed_domain_options: value } },
       },
     },
-    '#withAllowedDomains':: { 'function': { help: |||
+    '#allowed_domains':: { 'function': { help: |||
       A list of domains the role will accept certificates for. May contain templates, as with ACL Path Templating.
     ||| } },
     withAllowedDomains(value):: self {
@@ -49,7 +79,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { allowed_domains: value } },
       },
     },
-    '#withCsrGenerateKeyType':: { 'function': { help: |||
+    '#csr_generate_key_type':: { 'function': { help: |||
       The key type and size/parameters to use when generating a new key if running in the identifier workflow. Valid values are: `ec-256`, `ec-384`, `ec-521`, `rsa-2048`, `rsa-4096`.
     ||| } },
     withCsrGenerateKeyType(value):: self {
@@ -57,7 +87,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { csr_generate_key_type: value } },
       },
     },
-    '#withCsrIdentifierPopulation':: { 'function': { help: |||
+    '#csr_identifier_population':: { 'function': { help: |||
       The technique used to populate a CSR from the provided identifiers in the identifier workflow. Valid values are: `cn_first`, `sans_only`.
     ||| } },
     withCsrIdentifierPopulation(value):: self {
@@ -65,7 +95,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { csr_identifier_population: value } },
       },
     },
-    '#withForce':: { 'function': { help: |||
+    '#force':: { 'function': { help: |||
       Force deletion even when active orders exist.
     ||| } },
     withForce(value):: self {
@@ -73,7 +103,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { force: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       The path where the PKI External CA secret backend is mounted.
     ||| } },
     withMount(value):: self {
@@ -81,7 +111,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withName(value):: self {
@@ -89,7 +119,7 @@
         vault_pki_external_ca_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {

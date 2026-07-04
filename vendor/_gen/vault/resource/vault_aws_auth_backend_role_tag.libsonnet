@@ -12,7 +12,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowInstanceMigration':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_aws_auth_backend_role_tag+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allow_instance_migration':: { 'function': { help: |||
       Allows migration of the underlying instance where the client resides.
     ||| } },
     withAllowInstanceMigration(value):: self {
@@ -20,7 +50,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { allow_instance_migration: value } },
       },
     },
-    '#withBackend':: { 'function': { help: |||
+    '#backend':: { 'function': { help: |||
       AWS auth backend to read tags from.
     ||| } },
     withBackend(value):: self {
@@ -28,7 +58,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withDisallowReauthentication':: { 'function': { help: |||
+    '#disallow_reauthentication':: { 'function': { help: |||
       Only allow a single token to be granted per instance ID.
     ||| } },
     withDisallowReauthentication(value):: self {
@@ -41,7 +71,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { id: value } },
       },
     },
-    '#withInstanceId':: { 'function': { help: |||
+    '#instance_id':: { 'function': { help: |||
       Instance ID for which this tag is intended. The created tag can only be used by the instance with the given ID.
     ||| } },
     withInstanceId(value):: self {
@@ -49,7 +79,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { instance_id: value } },
       },
     },
-    '#withMaxTtl':: { 'function': { help: |||
+    '#max_ttl':: { 'function': { help: |||
       The maximum allowed lifetime of tokens issued using this role.
     ||| } },
     withMaxTtl(value):: self {
@@ -57,7 +87,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { max_ttl: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -65,7 +95,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPolicies':: { 'function': { help: |||
+    '#policies':: { 'function': { help: |||
       Policies to be associated with the tag.
     ||| } },
     withPolicies(value):: self {
@@ -73,7 +103,7 @@
         vault_aws_auth_backend_role_tag+: { [terraformName]+: { policies: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the role.
     ||| } },
     withRole(value):: self {

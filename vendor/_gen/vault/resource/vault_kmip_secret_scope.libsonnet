@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withForce':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_kmip_secret_scope+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#force':: { 'function': { help: |||
       Force deletion even if there are managed objects in the scope
     ||| } },
     withForce(value):: self {
@@ -26,7 +56,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -34,7 +64,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPath':: { 'function': { help: |||
+    '#path':: { 'function': { help: |||
       Path where KMIP backend is mounted
     ||| } },
     withPath(value):: self {
@@ -42,7 +72,7 @@
         vault_kmip_secret_scope+: { [terraformName]+: { path: value } },
       },
     },
-    '#withScope':: { 'function': { help: |||
+    '#scope':: { 'function': { help: |||
       Name of the scope
     ||| } },
     withScope(value):: self {

@@ -13,7 +13,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_rabbitmq_secret_backend_role+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       The path of the Rabbitmq Secret Backend the role belongs to.
     ||| } },
     withBackend(value):: self {
@@ -26,7 +56,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Unique name for the role.
     ||| } },
     withName(value):: self {
@@ -34,7 +64,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -42,7 +72,7 @@
         vault_rabbitmq_secret_backend_role+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withTags':: { 'function': { help: |||
+    '#tags':: { 'function': { help: |||
       Specifies a comma-separated RabbitMQ management tags.
     ||| } },
     withTags(value):: self {

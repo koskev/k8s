@@ -16,7 +16,37 @@
     },
   },
   functions(terraformName):: {
-    '#withBackend':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_azure_static_credentials+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#backend':: { 'function': { help: |||
       Azure Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
@@ -24,7 +54,7 @@
         vault_azure_static_credentials+: { [terraformName]+: { backend: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -32,7 +62,7 @@
         vault_azure_static_credentials+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -40,7 +70,7 @@
         vault_azure_static_credentials+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRequestMetadata':: { 'function': { help: |||
+    '#request_metadata':: { 'function': { help: |||
       Input metadata to send with the request to Vault.
     ||| } },
     withRequestMetadata(value):: self {
@@ -48,7 +78,7 @@
         vault_azure_static_credentials+: { [terraformName]+: { request_metadata: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Static role name to fetch credentials for.
     ||| } },
     withRole(value):: self {

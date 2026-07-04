@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withAllowVolumeExpansion':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        kubernetes_storage_class_v1+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#allow_volume_expansion':: { 'function': { help: |||
       Indicates whether the storage class allow volume expand
     ||| } },
     withAllowVolumeExpansion(value):: self {
@@ -28,7 +58,7 @@
         kubernetes_storage_class_v1+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMountOptions':: { 'function': { help: |||
+    '#mount_options':: { 'function': { help: |||
       Persistent Volumes that are dynamically created by a storage class will have the mount options specified
     ||| } },
     withMountOptions(value):: self {
@@ -36,7 +66,7 @@
         kubernetes_storage_class_v1+: { [terraformName]+: { mount_options: value } },
       },
     },
-    '#withParameters':: { 'function': { help: |||
+    '#parameters':: { 'function': { help: |||
       The parameters for the provisioner that should create volumes of this storage class
     ||| } },
     withParameters(value):: self {
@@ -44,7 +74,7 @@
         kubernetes_storage_class_v1+: { [terraformName]+: { parameters: value } },
       },
     },
-    '#withReclaimPolicy':: { 'function': { help: |||
+    '#reclaim_policy':: { 'function': { help: |||
       Indicates the type of the reclaim policy
     ||| } },
     withReclaimPolicy(value):: self {
@@ -52,7 +82,7 @@
         kubernetes_storage_class_v1+: { [terraformName]+: { reclaim_policy: value } },
       },
     },
-    '#withStorageProvisioner':: { 'function': { help: |||
+    '#storage_provisioner':: { 'function': { help: |||
       Indicates the type of the provisioner
     ||| } },
     withStorageProvisioner(value):: self {
@@ -60,7 +90,7 @@
         kubernetes_storage_class_v1+: { [terraformName]+: { storage_provisioner: value } },
       },
     },
-    '#withVolumeBindingMode':: { 'function': { help: |||
+    '#volume_binding_mode':: { 'function': { help: |||
       Indicates when volume binding and dynamic provisioning should occur
     ||| } },
     withVolumeBindingMode(value):: self {

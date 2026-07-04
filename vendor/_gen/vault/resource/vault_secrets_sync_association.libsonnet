@@ -15,12 +15,42 @@
     },
   },
   functions(terraformName):: {
+    withForEach(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_secrets_sync_association+: { [terraformName]+: { providers: value } },
+      },
+    },
     withId(value):: self {
       resource+: {
         vault_secrets_sync_association+: { [terraformName]+: { id: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Specifies the mount where the secret is located.
     ||| } },
     withMount(value):: self {
@@ -28,7 +58,7 @@
         vault_secrets_sync_association+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the destination.
     ||| } },
     withName(value):: self {
@@ -36,7 +66,7 @@
         vault_secrets_sync_association+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +74,7 @@
         vault_secrets_sync_association+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withSecretName':: { 'function': { help: |||
+    '#secret_name':: { 'function': { help: |||
       Specifies the name of the secret to synchronize.
     ||| } },
     withSecretName(value):: self {
@@ -52,7 +82,7 @@
         vault_secrets_sync_association+: { [terraformName]+: { secret_name: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Type of sync destination.
     ||| } },
     withType(value):: self {

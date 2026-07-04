@@ -14,7 +14,37 @@
     },
   },
   functions(terraformName):: {
-    '#withNamespace':: { 'function': { help: |||
+    withForEach(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      data+: {
+        vault_plugin_runtimes+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -22,7 +52,7 @@
         vault_plugin_runtimes+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withType':: { 'function': { help: |||
+    '#type':: { 'function': { help: |||
       Specifies the plugin runtime type to list. Currently only `container` is supported.
     ||| } },
     withType(value):: self {

@@ -15,7 +15,37 @@
     },
   },
   functions(terraformName):: {
-    '#withEnforcementLevel':: { 'function': { help: |||
+    withForEach(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      resource+: {
+        vault_egp_policy+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#enforcement_level':: { 'function': { help: |||
       Enforcement level of Sentinel policy. Can be one of: 'advisory', 'soft-mandatory' or 'hard-mandatory'
     ||| } },
     withEnforcementLevel(value):: self {
@@ -28,7 +58,7 @@
         vault_egp_policy+: { [terraformName]+: { id: value } },
       },
     },
-    '#withName':: { 'function': { help: |||
+    '#name':: { 'function': { help: |||
       Name of the policy
     ||| } },
     withName(value):: self {
@@ -36,7 +66,7 @@
         vault_egp_policy+: { [terraformName]+: { name: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -44,7 +74,7 @@
         vault_egp_policy+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withPaths':: { 'function': { help: |||
+    '#paths':: { 'function': { help: |||
       List of paths to which the policy will be applied
     ||| } },
     withPaths(value):: self {
@@ -52,7 +82,7 @@
         vault_egp_policy+: { [terraformName]+: { paths: value } },
       },
     },
-    '#withPolicy':: { 'function': { help: |||
+    '#policy':: { 'function': { help: |||
       The policy document
     ||| } },
     withPolicy(value):: self {

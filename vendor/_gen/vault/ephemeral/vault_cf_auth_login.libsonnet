@@ -18,7 +18,37 @@
     },
   },
   functions(terraformName):: {
-    '#withCfInstanceCert':: { 'function': { help: |||
+    withForEach(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { for_each: value } },
+      },
+    },
+    withDependsOn(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { depends_on: value } },
+      },
+    },
+    withCount(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { count: value } },
+      },
+    },
+    withLifecycle(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { lifecycle: value } },
+      },
+    },
+    withProvider(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { provider: value } },
+      },
+    },
+    withProviders(value):: self {
+      ephemeral+: {
+        vault_cf_auth_login+: { [terraformName]+: { providers: value } },
+      },
+    },
+    '#cf_instance_cert':: { 'function': { help: |||
       The full body of the file available at the path denoted by `CF_INSTANCE_CERT`.
     ||| } },
     withCfInstanceCert(value):: self {
@@ -26,7 +56,7 @@
         vault_cf_auth_login+: { [terraformName]+: { cf_instance_cert: value } },
       },
     },
-    '#withMount':: { 'function': { help: |||
+    '#mount':: { 'function': { help: |||
       Mount path for the CF auth engine in Vault.
     ||| } },
     withMount(value):: self {
@@ -34,7 +64,7 @@
         vault_cf_auth_login+: { [terraformName]+: { mount: value } },
       },
     },
-    '#withMountId':: { 'function': { help: |||
+    '#mount_id':: { 'function': { help: |||
       Terraform ID of the mount resource. Used to defer the provisioning of the ephemeral resource till the apply stage.
     ||| } },
     withMountId(value):: self {
@@ -42,7 +72,7 @@
         vault_cf_auth_login+: { [terraformName]+: { mount_id: value } },
       },
     },
-    '#withNamespace':: { 'function': { help: |||
+    '#namespace':: { 'function': { help: |||
       Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
@@ -50,7 +80,7 @@
         vault_cf_auth_login+: { [terraformName]+: { namespace: value } },
       },
     },
-    '#withRole':: { 'function': { help: |||
+    '#role':: { 'function': { help: |||
       Name of the CF auth role to log in with.
     ||| } },
     withRole(value):: self {
@@ -58,7 +88,7 @@
         vault_cf_auth_login+: { [terraformName]+: { role: value } },
       },
     },
-    '#withSignature':: { 'function': { help: |||
+    '#signature':: { 'function': { help: |||
       The RSA-PSS/SHA256 signature generated using `CF_INSTANCE_KEY` over the concatenation of signing_time, cf_instance_cert, and role.
     ||| } },
     withSignature(value):: self {
@@ -66,7 +96,7 @@
         vault_cf_auth_login+: { [terraformName]+: { signature: value } },
       },
     },
-    '#withSigningTime':: { 'function': { help: |||
+    '#signing_time':: { 'function': { help: |||
       The date and time used to construct the signature (e.g. `2006-01-02T15:04:05Z`).
     ||| } },
     withSigningTime(value):: self {
