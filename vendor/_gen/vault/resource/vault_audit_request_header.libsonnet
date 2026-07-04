@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_audit_request_header+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withHmac':: { 'function': { help: |||
-      Whether this header's value should be HMAC'd in the audit logs. 
+      Whether this header's value should be HMAC'd in the audit logs.
     ||| } },
     withHmac(value):: self {
       resource+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the request header to audit. 
+      The name of the request header to audit.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -45,16 +47,16 @@
     plain(suffix=''):: '${ vault_audit_request_header.%s%s }' % [terraformName, suffix],
     fields:: {
       '#hmac':: { 'function': { help: |||
-        Whether this header's value should be HMAC'd in the audit logs. 
+        Whether this header's value should be HMAC'd in the audit logs.
       ||| } },
       hmac(suffix=''):: refSelf.plain('.hmac%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the request header to audit. 
+        The name of the request header to audit.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

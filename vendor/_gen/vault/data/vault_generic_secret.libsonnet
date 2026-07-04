@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, path):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_generic_secret+: {
@@ -16,7 +18,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Full path from which a secret will be read. 
+      Full path from which a secret will be read.
     ||| } },
     withPath(value):: self {
       data+: {
@@ -37,7 +39,7 @@
       },
     },
     '#withWithLeaseStartTime':: { 'function': { help: |||
-      If set to true, stores 'lease_start_time' in the TF state. 
+      If set to true, stores 'lease_start_time' in the TF state.
     ||| } },
     withWithLeaseStartTime(value):: self {
       data+: {
@@ -50,41 +52,41 @@
     plain(suffix=''):: '${ data.vault_generic_secret.%s%s }' % [terraformName, suffix],
     fields:: {
       '#data':: { 'function': { help: |||
-        Map of strings read from Vault. 
+        Map of strings read from Vault.
       ||| } },
       data(suffix=''):: refSelf.plain('.data%s' % suffix),
       '#data_json':: { 'function': { help: |||
-        JSON-encoded secret data read from Vault. 
+        JSON-encoded secret data read from Vault.
       ||| } },
       data_json(suffix=''):: refSelf.plain('.data_json%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#lease_duration':: { 'function': { help: |||
-        Lease duration in seconds relative to the time in lease_start_time. 
+        Lease duration in seconds relative to the time in lease_start_time.
       ||| } },
       lease_duration(suffix=''):: refSelf.plain('.lease_duration%s' % suffix),
       '#lease_id':: { 'function': { help: |||
-        Lease identifier assigned by vault. 
+        Lease identifier assigned by vault.
       ||| } },
       lease_id(suffix=''):: refSelf.plain('.lease_id%s' % suffix),
       '#lease_renewable':: { 'function': { help: |||
-        True if the duration of this lease can be extended through renewal. 
+        True if the duration of this lease can be extended through renewal.
       ||| } },
       lease_renewable(suffix=''):: refSelf.plain('.lease_renewable%s' % suffix),
       '#lease_start_time':: { 'function': { help: |||
-        Time at which the lease was read, using the clock of the system where Terraform was running 
+        Time at which the lease was read, using the clock of the system where Terraform was running
       ||| } },
       lease_start_time(suffix=''):: refSelf.plain('.lease_start_time%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Full path from which a secret will be read. 
+        Full path from which a secret will be read.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       version(suffix=''):: refSelf.plain('.version%s' % suffix),
       '#with_lease_start_time':: { 'function': { help: |||
-        If set to true, stores 'lease_start_time' in the TF state. 
+        If set to true, stores 'lease_start_time' in the TF state.
       ||| } },
       with_lease_start_time(suffix=''):: refSelf.plain('.with_lease_start_time%s' % suffix),
     },

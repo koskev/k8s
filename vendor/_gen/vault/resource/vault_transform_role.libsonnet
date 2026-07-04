@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name, path):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_transform_role+: {
@@ -17,7 +19,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the role. 
+      The name of the role.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws". 
+      The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws".
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withTransformations':: { 'function': { help: |||
-      A comma separated string or slice of transformations to use. 
+      A comma separated string or slice of transformations to use.
     ||| } },
     withTransformations(value):: self {
       resource+: {
@@ -55,19 +57,19 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the role. 
+        The name of the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws". 
+        The mount path for a back-end, for example, the path given in "$ vault auth enable -path=my-aws aws".
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#transformations':: { 'function': { help: |||
-        A comma separated string or slice of transformations to use. 
+        A comma separated string or slice of transformations to use.
       ||| } },
       transformations(suffix=''):: refSelf.plain('.transformations%s' % suffix),
     },

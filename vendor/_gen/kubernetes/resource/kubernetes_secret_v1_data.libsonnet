@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, data):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_secret_v1_data+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withData':: { 'function': { help: |||
-      Data to be stored in the Kubernetes Secret. 
+      Data to be stored in the Kubernetes Secret.
     ||| } },
     withData(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withFieldManager':: { 'function': { help: |||
-      Set the name of the field manager for the specified labels 
+      Set the name of the field manager for the specified labels
     ||| } },
     withFieldManager(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withForce':: { 'function': { help: |||
-      Flag to force updates to the Kubernetes Secret. 
+      Flag to force updates to the Kubernetes Secret.
     ||| } },
     withForce(value):: self {
       resource+: {
@@ -45,15 +47,15 @@
     plain(suffix=''):: '${ kubernetes_secret_v1_data.%s%s }' % [terraformName, suffix],
     fields:: {
       '#data':: { 'function': { help: |||
-        Data to be stored in the Kubernetes Secret. 
+        Data to be stored in the Kubernetes Secret.
       ||| } },
       data(suffix=''):: refSelf.plain('.data%s' % suffix),
       '#field_manager':: { 'function': { help: |||
-        Set the name of the field manager for the specified labels 
+        Set the name of the field manager for the specified labels
       ||| } },
       field_manager(suffix=''):: refSelf.plain('.field_manager%s' % suffix),
       '#force':: { 'function': { help: |||
-        Flag to force updates to the Kubernetes Secret. 
+        Flag to force updates to the Kubernetes Secret.
       ||| } },
       force(suffix=''):: refSelf.plain('.force%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),

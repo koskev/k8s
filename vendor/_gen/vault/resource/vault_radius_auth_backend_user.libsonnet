@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Manages a RADIUS user registered with a RADIUS Auth Backend in Vault.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, mount, username):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_radius_auth_backend_user+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withMount':: { 'function': { help: |||
-      Path to the RADIUS auth mount where the user will be registered. 
+      Path to the RADIUS auth mount where the user will be registered.
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withPolicies':: { 'function': { help: |||
-      A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user. 
+      A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user.
     ||| } },
     withPolicies(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withUsername':: { 'function': { help: |||
-      The username to register with the RADIUS auth backend. 
+      The username to register with the RADIUS auth backend.
     ||| } },
     withUsername(value):: self {
       resource+: {
@@ -49,19 +54,19 @@
     plain(suffix=''):: '${ vault_radius_auth_backend_user.%s%s }' % [terraformName, suffix],
     fields:: {
       '#mount':: { 'function': { help: |||
-        Path to the RADIUS auth mount where the user will be registered. 
+        Path to the RADIUS auth mount where the user will be registered.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#policies':: { 'function': { help: |||
-        A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user. 
+        A set of Vault policies to associate with this user. If not set, only the `default` policy will be applicable to the user.
       ||| } },
       policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
       '#username':: { 'function': { help: |||
-        The username to register with the RADIUS auth backend. 
+        The username to register with the RADIUS auth backend.
       ||| } },
       username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },

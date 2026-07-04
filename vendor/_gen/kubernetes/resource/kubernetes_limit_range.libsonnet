@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Limit Range sets resource usage limits (e.g. memory, cpu, storage) for supported kinds of resources in a namespace. Read more in [the official docs](https://kubernetes.io/docs/concepts/policy/limit-range/).
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_limit_range+: {

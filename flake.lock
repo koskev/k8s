@@ -104,26 +104,18 @@
         "type": "github"
       }
     },
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "terraform-jsonnet-gen",
-          "naersk",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
+    "crane": {
       "locked": {
-        "lastModified": 1752475459,
-        "narHash": "sha256-z6QEu4ZFuHiqdOPbYss4/Q8B0BFhacR8ts6jO/F/aOU=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "bf0d6f70f4c9a9cf8845f992105652173f4b617f",
+        "lastModified": 1783102699,
+        "narHash": "sha256-7inE9/GtbWf3MkV6wj2lRr0RixOpWBZboAKTPAnRDxY=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "7605d0ca1a69331596d4ec0f2577fc566d17b3ad",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
+        "owner": "ipetkov",
+        "repo": "crane",
         "type": "github"
       }
     },
@@ -569,29 +561,6 @@
         "type": "github"
       }
     },
-    "naersk": {
-      "inputs": {
-        "fenix": "fenix",
-        "nixpkgs": [
-          "terraform-jsonnet-gen",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780913594,
-        "narHash": "sha256-xOp+zJ1P/ze1RkS8Ha6ny1RptkPqTZzIYYiFcAaK+ns=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "5b891af157718c285fe2f2d776d6a6c6af6f48cf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "pull/391/head",
-        "repo": "naersk",
-        "type": "github"
-      }
-    },
     "nix-actions": {
       "inputs": {
         "actions-nix": "actions-nix_2",
@@ -820,23 +789,6 @@
         "terraform-jsonnet-gen": "terraform-jsonnet-gen"
       }
     },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1752428706,
-        "narHash": "sha256-EJcdxw3aXfP8Ex1Nm3s0awyH9egQvB2Gu+QEnJn2Sfg=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "591e3b7624be97e4443ea7b5542c191311aa141d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -870,10 +822,10 @@
     "terraform-jsonnet-gen": {
       "inputs": {
         "actions-nix": "actions-nix_3",
+        "crane": "crane",
         "flake-parts": "flake-parts_3",
         "gomod2nix": "gomod2nix",
         "import-tree": "import-tree_3",
-        "naersk": "naersk",
         "nix-actions": "nix-actions_2",
         "nix2container": "nix2container",
         "nixpkgs": [
@@ -882,11 +834,11 @@
         "recordings": "recordings"
       },
       "locked": {
-        "lastModified": 1783114876,
-        "narHash": "sha256-XcIX/7vY4g7oytRHDbXMcylF4BFnK8LWYKkCiJ3igqc=",
+        "lastModified": 1783153526,
+        "narHash": "sha256-z9pgy3U9q6vAjXjiMgoW/DpbAxbYHqm0fLbVwnZvJt0=",
         "owner": "koskev",
         "repo": "terraform-jsonnet-gen",
-        "rev": "ab8bedba3d6720189cb50185e5c76fc6d69bec7b",
+        "rev": "7117199354717a95640a1145f03a92a36c161acb",
         "type": "github"
       },
       "original": {

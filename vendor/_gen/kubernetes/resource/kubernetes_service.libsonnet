@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    A Service is an abstraction which defines a logical set of pods and a policy by which to access them - sometimes called a micro-service.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_service+: {
@@ -15,7 +20,7 @@
       },
     },
     '#withWaitForLoadBalancer':: { 'function': { help: |||
-      Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created. 
+      Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created.
     ||| } },
     withWaitForLoadBalancer(value):: self {
       resource+: {
@@ -30,7 +35,7 @@
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       status(suffix=''):: refSelf.plain('.status%s' % suffix),
       '#wait_for_load_balancer':: { 'function': { help: |||
-        Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created. 
+        Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created.
       ||| } },
       wait_for_load_balancer(suffix=''):: refSelf.plain('.wait_for_load_balancer%s' % suffix),
     },

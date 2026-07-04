@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_identity_oidc_public_keys+: {
@@ -16,7 +18,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the provider. 
+      The name of the provider.
     ||| } },
     withName(value):: self {
       data+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -38,15 +40,15 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#keys':: { 'function': { help: |||
-        The public portion of keys for an OIDC provider. Clients can use them to validate the authenticity of an identity token. 
+        The public portion of keys for an OIDC provider. Clients can use them to validate the authenticity of an identity token.
       ||| } },
       keys(suffix=''):: refSelf.plain('.keys%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the provider. 
+        The name of the provider.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

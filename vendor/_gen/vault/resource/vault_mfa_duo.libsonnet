@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, api_hostname, integration_key, mount_accessor, name, secret_key):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_mfa_duo+: {
@@ -15,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withApiHostname':: { 'function': { help: |||
-      API hostname for Duo. 
+      API hostname for Duo.
     ||| } },
     withApiHostname(value):: self {
       resource+: {
@@ -28,7 +30,7 @@
       },
     },
     '#withIntegrationKey':: { 'function': { help: |||
-      Integration key for Duo. 
+      Integration key for Duo.
     ||| } },
     withIntegrationKey(value):: self {
       resource+: {
@@ -36,7 +38,7 @@
       },
     },
     '#withMountAccessor':: { 'function': { help: |||
-      The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping. 
+      The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping.
     ||| } },
     withMountAccessor(value):: self {
       resource+: {
@@ -44,7 +46,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the MFA method. 
+      Name of the MFA method.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -52,7 +54,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -60,7 +62,7 @@
       },
     },
     '#withPushInfo':: { 'function': { help: |||
-      Push information for Duo. 
+      Push information for Duo.
     ||| } },
     withPushInfo(value):: self {
       resource+: {
@@ -68,7 +70,7 @@
       },
     },
     '#withSecretKey':: { 'function': { help: |||
-      Secret key for Duo. 
+      Secret key for Duo.
     ||| } },
     withSecretKey(value):: self {
       resource+: {
@@ -76,7 +78,7 @@
       },
     },
     '#withUsernameFormat':: { 'function': { help: |||
-      A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`. 
+      A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`.
     ||| } },
     withUsernameFormat(value):: self {
       resource+: {
@@ -89,36 +91,36 @@
     plain(suffix=''):: '${ vault_mfa_duo.%s%s }' % [terraformName, suffix],
     fields:: {
       '#api_hostname':: { 'function': { help: |||
-        API hostname for Duo. 
+        API hostname for Duo.
       ||| } },
       api_hostname(suffix=''):: refSelf.plain('.api_hostname%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#integration_key':: { 'function': { help: |||
-        Integration key for Duo. 
+        Integration key for Duo.
       ||| } },
       integration_key(suffix=''):: refSelf.plain('.integration_key%s' % suffix),
       '#mount_accessor':: { 'function': { help: |||
-        The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping. 
+        The mount to tie this method to for use in automatic mappings. The mapping will use the Name field of Aliases associated with this mount as the username in the mapping.
       ||| } },
       mount_accessor(suffix=''):: refSelf.plain('.mount_accessor%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the MFA method. 
+        Name of the MFA method.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#push_info':: { 'function': { help: |||
-        Push information for Duo. 
+        Push information for Duo.
       ||| } },
       push_info(suffix=''):: refSelf.plain('.push_info%s' % suffix),
       '#secret_key':: { 'function': { help: |||
-        Secret key for Duo. 
+        Secret key for Duo.
       ||| } },
       secret_key(suffix=''):: refSelf.plain('.secret_key%s' % suffix),
       '#username_format':: { 'function': { help: |||
-        A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`. 
+        A format string for mapping Identity names to MFA method names. Values to substitute should be placed in `{{}}`.
       ||| } },
       username_format(suffix=''):: refSelf.plain('.username_format%s' % suffix),
     },

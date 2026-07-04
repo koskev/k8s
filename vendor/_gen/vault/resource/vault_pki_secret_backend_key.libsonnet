@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, type):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_key+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Full path where PKI backend is mounted. 
+      Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withKeyBits':: { 'function': { help: |||
-      Specifies the number of bits to use for the generated keys. 
+      Specifies the number of bits to use for the generated keys.
     ||| } },
     withKeyBits(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withKeyName':: { 'function': { help: |||
-      When a new key is created with this request, optionally specifies the name for this. 
+      When a new key is created with this request, optionally specifies the name for this.
     ||| } },
     withKeyName(value):: self {
       resource+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withKeyType':: { 'function': { help: |||
-      Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'. 
+      Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'.
     ||| } },
     withKeyType(value):: self {
       resource+: {
@@ -49,7 +51,7 @@
       },
     },
     '#withManagedKeyId':: { 'function': { help: |||
-      The managed key's UUID. 
+      The managed key's UUID.
     ||| } },
     withManagedKeyId(value):: self {
       resource+: {
@@ -57,7 +59,7 @@
       },
     },
     '#withManagedKeyName':: { 'function': { help: |||
-      The managed key's configured name. 
+      The managed key's configured name.
     ||| } },
     withManagedKeyName(value):: self {
       resource+: {
@@ -65,7 +67,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -73,7 +75,7 @@
       },
     },
     '#withType':: { 'function': { help: |||
-      Specifies the type of the key to create. 
+      Specifies the type of the key to create.
     ||| } },
     withType(value):: self {
       resource+: {
@@ -86,40 +88,40 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_key.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Full path where PKI backend is mounted. 
+        Full path where PKI backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#key_bits':: { 'function': { help: |||
-        Specifies the number of bits to use for the generated keys. 
+        Specifies the number of bits to use for the generated keys.
       ||| } },
       key_bits(suffix=''):: refSelf.plain('.key_bits%s' % suffix),
       '#key_id':: { 'function': { help: |||
-        ID of the generated key. 
+        ID of the generated key.
       ||| } },
       key_id(suffix=''):: refSelf.plain('.key_id%s' % suffix),
       '#key_name':: { 'function': { help: |||
-        When a new key is created with this request, optionally specifies the name for this. 
+        When a new key is created with this request, optionally specifies the name for this.
       ||| } },
       key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
       '#key_type':: { 'function': { help: |||
-        Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'. 
+        Specifies the desired key type; must be 'rsa', 'ed25519' or 'ec'.
       ||| } },
       key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
       '#managed_key_id':: { 'function': { help: |||
-        The managed key's UUID. 
+        The managed key's UUID.
       ||| } },
       managed_key_id(suffix=''):: refSelf.plain('.managed_key_id%s' % suffix),
       '#managed_key_name':: { 'function': { help: |||
-        The managed key's configured name. 
+        The managed key's configured name.
       ||| } },
       managed_key_name(suffix=''):: refSelf.plain('.managed_key_name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#type':: { 'function': { help: |||
-        Specifies the type of the key to create. 
+        Specifies the type of the key to create.
       ||| } },
       type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },

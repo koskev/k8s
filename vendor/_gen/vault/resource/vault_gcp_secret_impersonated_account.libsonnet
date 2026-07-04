@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, impersonated_account, service_account_email):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_gcp_secret_impersonated_account+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Path where the GCP secrets engine is mounted. 
+      Path where the GCP secrets engine is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withImpersonatedAccount':: { 'function': { help: |||
-      Name of the Impersonated Account to create 
+      Name of the Impersonated Account to create
     ||| } },
     withImpersonatedAccount(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withServiceAccountEmail':: { 'function': { help: |||
-      Email of the GCP service account. 
+      Email of the GCP service account.
     ||| } },
     withServiceAccountEmail(value):: self {
       resource+: {
@@ -50,7 +52,7 @@
       },
     },
     '#withTokenScopes':: { 'function': { help: |||
-      List of OAuth scopes to assign to `access_token` secrets generated under this impersonated account (`access_token` impersonated accounts only)  
+      List of OAuth scopes to assign to `access_token` secrets generated under this impersonated account (`access_token` impersonated accounts only) 
     ||| } },
     withTokenScopes(value):: self {
       resource+: {
@@ -58,7 +60,7 @@
       },
     },
     '#withTtl':: { 'function': { help: |||
-      Time to live. 
+      Time to live.
     ||| } },
     withTtl(value):: self {
       resource+: {
@@ -71,32 +73,32 @@
     plain(suffix=''):: '${ vault_gcp_secret_impersonated_account.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Path where the GCP secrets engine is mounted. 
+        Path where the GCP secrets engine is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#impersonated_account':: { 'function': { help: |||
-        Name of the Impersonated Account to create 
+        Name of the Impersonated Account to create
       ||| } },
       impersonated_account(suffix=''):: refSelf.plain('.impersonated_account%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#service_account_email':: { 'function': { help: |||
-        Email of the GCP service account. 
+        Email of the GCP service account.
       ||| } },
       service_account_email(suffix=''):: refSelf.plain('.service_account_email%s' % suffix),
       '#service_account_project':: { 'function': { help: |||
-        Project of the GCP Service Account managed by this impersonated account 
+        Project of the GCP Service Account managed by this impersonated account
       ||| } },
       service_account_project(suffix=''):: refSelf.plain('.service_account_project%s' % suffix),
       '#token_scopes':: { 'function': { help: |||
-        List of OAuth scopes to assign to `access_token` secrets generated under this impersonated account (`access_token` impersonated accounts only)  
+        List of OAuth scopes to assign to `access_token` secrets generated under this impersonated account (`access_token` impersonated accounts only) 
       ||| } },
       token_scopes(suffix=''):: refSelf.plain('.token_scopes%s' % suffix),
       '#ttl':: { 'function': { help: |||
-        Time to live. 
+        Time to live.
       ||| } },
       ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
     },

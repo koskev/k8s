@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_namespaces+: {
@@ -15,7 +17,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -23,7 +25,7 @@
       },
     },
     '#withRecursive':: { 'function': { help: |||
-      True to fetch all child namespaces. 
+      True to fetch all child namespaces.
     ||| } },
     withRecursive(value):: self {
       data+: {
@@ -37,19 +39,19 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#paths':: { 'function': { help: |||
-        Namespace paths. 
+        Namespace paths.
       ||| } },
       paths(suffix=''):: refSelf.plain('.paths%s' % suffix),
       '#paths_fq':: { 'function': { help: |||
-        The fully qualified namespace paths. 
+        The fully qualified namespace paths.
       ||| } },
       paths_fq(suffix=''):: refSelf.plain('.paths_fq%s' % suffix),
       '#recursive':: { 'function': { help: |||
-        True to fetch all child namespaces. 
+        True to fetch all child namespaces.
       ||| } },
       recursive(suffix=''):: refSelf.plain('.recursive%s' % suffix),
     },

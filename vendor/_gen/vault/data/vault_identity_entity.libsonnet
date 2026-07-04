@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_identity_entity+: {
@@ -10,7 +12,7 @@
   },
   functions(terraformName):: {
     '#withAliasId':: { 'function': { help: |||
-      ID of the alias. 
+      ID of the alias.
     ||| } },
     withAliasId(value):: self {
       data+: {
@@ -18,7 +20,7 @@
       },
     },
     '#withAliasMountAccessor':: { 'function': { help: |||
-      Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`. 
+      Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`.
     ||| } },
     withAliasMountAccessor(value):: self {
       data+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withAliasName':: { 'function': { help: |||
-      Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`. 
+      Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`.
     ||| } },
     withAliasName(value):: self {
       data+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withEntityId':: { 'function': { help: |||
-      ID of the entity. 
+      ID of the entity.
     ||| } },
     withEntityId(value):: self {
       data+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withEntityName':: { 'function': { help: |||
-      Name of the entity. 
+      Name of the entity.
     ||| } },
     withEntityName(value):: self {
       data+: {
@@ -55,7 +57,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -68,31 +70,31 @@
     plain(suffix=''):: '${ data.vault_identity_entity.%s%s }' % [terraformName, suffix],
     fields:: {
       '#alias_id':: { 'function': { help: |||
-        ID of the alias. 
+        ID of the alias.
       ||| } },
       alias_id(suffix=''):: refSelf.plain('.alias_id%s' % suffix),
       '#alias_mount_accessor':: { 'function': { help: |||
-        Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`. 
+        Accessor of the mount to which the alias belongs to. This should be supplied in conjunction with `alias_name`.
       ||| } },
       alias_mount_accessor(suffix=''):: refSelf.plain('.alias_mount_accessor%s' % suffix),
       '#alias_name':: { 'function': { help: |||
-        Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`. 
+        Name of the alias. This should be supplied in conjunction with `alias_mount_accessor`.
       ||| } },
       alias_name(suffix=''):: refSelf.plain('.alias_name%s' % suffix),
       aliases(suffix=''):: refSelf.plain('.aliases%s' % suffix),
       creation_time(suffix=''):: refSelf.plain('.creation_time%s' % suffix),
       '#data_json':: { 'function': { help: |||
-        Entity data from Vault in JSON String form 
+        Entity data from Vault in JSON String form
       ||| } },
       data_json(suffix=''):: refSelf.plain('.data_json%s' % suffix),
       direct_group_ids(suffix=''):: refSelf.plain('.direct_group_ids%s' % suffix),
       disabled(suffix=''):: refSelf.plain('.disabled%s' % suffix),
       '#entity_id':: { 'function': { help: |||
-        ID of the entity. 
+        ID of the entity.
       ||| } },
       entity_id(suffix=''):: refSelf.plain('.entity_id%s' % suffix),
       '#entity_name':: { 'function': { help: |||
-        Name of the entity. 
+        Name of the entity.
       ||| } },
       entity_name(suffix=''):: refSelf.plain('.entity_name%s' % suffix),
       group_ids(suffix=''):: refSelf.plain('.group_ids%s' % suffix),
@@ -102,7 +104,7 @@
       merged_entity_ids(suffix=''):: refSelf.plain('.merged_entity_ids%s' % suffix),
       metadata(suffix=''):: refSelf.plain('.metadata%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       namespace_id(suffix=''):: refSelf.plain('.namespace_id%s' % suffix),

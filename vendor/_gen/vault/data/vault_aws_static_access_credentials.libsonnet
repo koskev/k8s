@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_aws_static_access_credentials+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      AWS Secret Backend to read credentials from. 
+      AWS Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
       data+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withName(value):: self {
       data+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -46,24 +48,24 @@
     plain(suffix=''):: '${ data.vault_aws_static_access_credentials.%s%s }' % [terraformName, suffix],
     fields:: {
       '#access_key':: { 'function': { help: |||
-        AWS access key ID read from Vault. 
+        AWS access key ID read from Vault.
       ||| } },
       access_key(suffix=''):: refSelf.plain('.access_key%s' % suffix),
       '#backend':: { 'function': { help: |||
-        AWS Secret Backend to read credentials from. 
+        AWS Secret Backend to read credentials from.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#secret_key':: { 'function': { help: |||
-        AWS secret key read from Vault. 
+        AWS secret key read from Vault.
       ||| } },
       secret_key(suffix=''):: refSelf.plain('.secret_key%s' % suffix),
     },

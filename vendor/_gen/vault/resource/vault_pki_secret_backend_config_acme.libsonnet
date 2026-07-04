@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, enabled):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_config_acme+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withAllowRoleExtKeyUsage':: { 'function': { help: |||
-      Specifies whether the ExtKeyUsage field from a role is used. 
+      Specifies whether the ExtKeyUsage field from a role is used.
     ||| } },
     withAllowRoleExtKeyUsage(value):: self {
       resource+: {
@@ -20,7 +22,7 @@
       },
     },
     '#withAllowedIssuers':: { 'function': { help: |||
-      Specifies which issuers are allowed for use with ACME. 
+      Specifies which issuers are allowed for use with ACME.
     ||| } },
     withAllowedIssuers(value):: self {
       resource+: {
@@ -28,7 +30,7 @@
       },
     },
     '#withAllowedRoles':: { 'function': { help: |||
-      Specifies which roles are allowed for use with ACME. 
+      Specifies which roles are allowed for use with ACME.
     ||| } },
     withAllowedRoles(value):: self {
       resource+: {
@@ -36,7 +38,7 @@
       },
     },
     '#withBackend':: { 'function': { help: |||
-      Full path where PKI backend is mounted. 
+      Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -44,7 +46,7 @@
       },
     },
     '#withChallengeExcludedIpRanges':: { 'function': { help: |||
-      Specifies the excluded IP ranges for ACME challenge workers to connect. 
+      Specifies the excluded IP ranges for ACME challenge workers to connect.
     ||| } },
     withChallengeExcludedIpRanges(value):: self {
       resource+: {
@@ -52,7 +54,7 @@
       },
     },
     '#withChallengePermittedIpRanges':: { 'function': { help: |||
-      Specifies the permitted IP ranges for ACME challenge workers to connect. 
+      Specifies the permitted IP ranges for ACME challenge workers to connect.
     ||| } },
     withChallengePermittedIpRanges(value):: self {
       resource+: {
@@ -60,7 +62,7 @@
       },
     },
     '#withDefaultDirectoryPolicy':: { 'function': { help: |||
-      Specifies the policy to be used for non-role-qualified ACME requests. 
+      Specifies the policy to be used for non-role-qualified ACME requests.
     ||| } },
     withDefaultDirectoryPolicy(value):: self {
       resource+: {
@@ -68,7 +70,7 @@
       },
     },
     '#withDnsResolver':: { 'function': { help: |||
-      DNS resolver to use for domain resolution on this mount. Must be in the format <host>:<port>, with both parts mandatory. 
+      DNS resolver to use for domain resolution on this mount. Must be in the format <host>:<port>, with both parts mandatory.
     ||| } },
     withDnsResolver(value):: self {
       resource+: {
@@ -76,7 +78,7 @@
       },
     },
     '#withEabPolicy':: { 'function': { help: |||
-      Specifies the policy to use for external account binding behaviour. 
+      Specifies the policy to use for external account binding behaviour.
     ||| } },
     withEabPolicy(value):: self {
       resource+: {
@@ -84,7 +86,7 @@
       },
     },
     '#withEnabled':: { 'function': { help: |||
-      Specifies whether ACME is enabled. 
+      Specifies whether ACME is enabled.
     ||| } },
     withEnabled(value):: self {
       resource+: {
@@ -97,7 +99,7 @@
       },
     },
     '#withMaxTtl':: { 'function': { help: |||
-      Specifies the maximum TTL in seconds for certificates issued by ACME. 
+      Specifies the maximum TTL in seconds for certificates issued by ACME.
     ||| } },
     withMaxTtl(value):: self {
       resource+: {
@@ -105,7 +107,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -118,52 +120,52 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_config_acme.%s%s }' % [terraformName, suffix],
     fields:: {
       '#allow_role_ext_key_usage':: { 'function': { help: |||
-        Specifies whether the ExtKeyUsage field from a role is used. 
+        Specifies whether the ExtKeyUsage field from a role is used.
       ||| } },
       allow_role_ext_key_usage(suffix=''):: refSelf.plain('.allow_role_ext_key_usage%s' % suffix),
       '#allowed_issuers':: { 'function': { help: |||
-        Specifies which issuers are allowed for use with ACME. 
+        Specifies which issuers are allowed for use with ACME.
       ||| } },
       allowed_issuers(suffix=''):: refSelf.plain('.allowed_issuers%s' % suffix),
       '#allowed_roles':: { 'function': { help: |||
-        Specifies which roles are allowed for use with ACME. 
+        Specifies which roles are allowed for use with ACME.
       ||| } },
       allowed_roles(suffix=''):: refSelf.plain('.allowed_roles%s' % suffix),
       '#backend':: { 'function': { help: |||
-        Full path where PKI backend is mounted. 
+        Full path where PKI backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#challenge_excluded_ip_ranges':: { 'function': { help: |||
-        Specifies the excluded IP ranges for ACME challenge workers to connect. 
+        Specifies the excluded IP ranges for ACME challenge workers to connect.
       ||| } },
       challenge_excluded_ip_ranges(suffix=''):: refSelf.plain('.challenge_excluded_ip_ranges%s' % suffix),
       '#challenge_permitted_ip_ranges':: { 'function': { help: |||
-        Specifies the permitted IP ranges for ACME challenge workers to connect. 
+        Specifies the permitted IP ranges for ACME challenge workers to connect.
       ||| } },
       challenge_permitted_ip_ranges(suffix=''):: refSelf.plain('.challenge_permitted_ip_ranges%s' % suffix),
       '#default_directory_policy':: { 'function': { help: |||
-        Specifies the policy to be used for non-role-qualified ACME requests. 
+        Specifies the policy to be used for non-role-qualified ACME requests.
       ||| } },
       default_directory_policy(suffix=''):: refSelf.plain('.default_directory_policy%s' % suffix),
       '#dns_resolver':: { 'function': { help: |||
-        DNS resolver to use for domain resolution on this mount. Must be in the format <host>:<port>, with both parts mandatory. 
+        DNS resolver to use for domain resolution on this mount. Must be in the format <host>:<port>, with both parts mandatory.
       ||| } },
       dns_resolver(suffix=''):: refSelf.plain('.dns_resolver%s' % suffix),
       '#eab_policy':: { 'function': { help: |||
-        Specifies the policy to use for external account binding behaviour. 
+        Specifies the policy to use for external account binding behaviour.
       ||| } },
       eab_policy(suffix=''):: refSelf.plain('.eab_policy%s' % suffix),
       '#enabled':: { 'function': { help: |||
-        Specifies whether ACME is enabled. 
+        Specifies whether ACME is enabled.
       ||| } },
       enabled(suffix=''):: refSelf.plain('.enabled%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#max_ttl':: { 'function': { help: |||
-        Specifies the maximum TTL in seconds for certificates issued by ACME. 
+        Specifies the maximum TTL in seconds for certificates issued by ACME.
       ||| } },
       max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

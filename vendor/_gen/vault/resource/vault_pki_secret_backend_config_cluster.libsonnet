@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_config_cluster+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withAiaPath':: { 'function': { help: |||
-      Path to the cluster's AIA distribution point. 
+      Path to the cluster's AIA distribution point.
     ||| } },
     withAiaPath(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withBackend':: { 'function': { help: |||
-      Full path where PKI backend is mounted. 
+      Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Path to the cluster's API mount path. 
+      Path to the cluster's API mount path.
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -53,20 +55,20 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_config_cluster.%s%s }' % [terraformName, suffix],
     fields:: {
       '#aia_path':: { 'function': { help: |||
-        Path to the cluster's AIA distribution point. 
+        Path to the cluster's AIA distribution point.
       ||| } },
       aia_path(suffix=''):: refSelf.plain('.aia_path%s' % suffix),
       '#backend':: { 'function': { help: |||
-        Full path where PKI backend is mounted. 
+        Full path where PKI backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Path to the cluster's API mount path. 
+        Path to the cluster's API mount path.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
     },

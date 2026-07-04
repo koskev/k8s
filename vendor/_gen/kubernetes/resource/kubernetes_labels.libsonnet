@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    This resource allows Terraform to manage the labels for a resource that already exists. This resource uses [field management](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) and [server-side apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/) to manage only the labels that are defined in the Terraform configuration. Existing labels not specified in the configuration will be ignored. If a label specified in the config and is already managed by another client it will cause a conflict which can be overridden by setting `force` to true.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, api_version, kind, labels):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_labels+: {
@@ -13,7 +18,7 @@
   },
   functions(terraformName):: {
     '#withApiVersion':: { 'function': { help: |||
-      The apiVersion of the resource to label. 
+      The apiVersion of the resource to label.
     ||| } },
     withApiVersion(value):: self {
       resource+: {
@@ -21,7 +26,7 @@
       },
     },
     '#withFieldManager':: { 'function': { help: |||
-      Set the name of the field manager for the specified labels. 
+      Set the name of the field manager for the specified labels.
     ||| } },
     withFieldManager(value):: self {
       resource+: {
@@ -29,7 +34,7 @@
       },
     },
     '#withForce':: { 'function': { help: |||
-      Force overwriting labels that were created or edited outside of Terraform. 
+      Force overwriting labels that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {
       resource+: {
@@ -42,7 +47,7 @@
       },
     },
     '#withKind':: { 'function': { help: |||
-      The kind of the resource to label. 
+      The kind of the resource to label.
     ||| } },
     withKind(value):: self {
       resource+: {
@@ -50,7 +55,7 @@
       },
     },
     '#withLabels':: { 'function': { help: |||
-      A map of labels to apply to the resource. 
+      A map of labels to apply to the resource.
     ||| } },
     withLabels(value):: self {
       resource+: {
@@ -63,24 +68,24 @@
     plain(suffix=''):: '${ kubernetes_labels.%s%s }' % [terraformName, suffix],
     fields:: {
       '#api_version':: { 'function': { help: |||
-        The apiVersion of the resource to label. 
+        The apiVersion of the resource to label.
       ||| } },
       api_version(suffix=''):: refSelf.plain('.api_version%s' % suffix),
       '#field_manager':: { 'function': { help: |||
-        Set the name of the field manager for the specified labels. 
+        Set the name of the field manager for the specified labels.
       ||| } },
       field_manager(suffix=''):: refSelf.plain('.field_manager%s' % suffix),
       '#force':: { 'function': { help: |||
-        Force overwriting labels that were created or edited outside of Terraform. 
+        Force overwriting labels that were created or edited outside of Terraform.
       ||| } },
       force(suffix=''):: refSelf.plain('.force%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#kind':: { 'function': { help: |||
-        The kind of the resource to label. 
+        The kind of the resource to label.
       ||| } },
       kind(suffix=''):: refSelf.plain('.kind%s' % suffix),
       '#labels':: { 'function': { help: |||
-        A map of labels to apply to the resource. 
+        A map of labels to apply to the resource.
       ||| } },
       labels(suffix=''):: refSelf.plain('.labels%s' % suffix),
     },

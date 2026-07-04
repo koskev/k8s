@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Distributes a Key Management key to a KMS provider
+  ||| } },
+  local outerSelf = self,
   new(terraformName, key_name, kms_name, mount, purpose):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_keymgmt_distribute_key+: {
@@ -14,7 +19,7 @@
   },
   functions(terraformName):: {
     '#withKeyName':: { 'function': { help: |||
-      Specifies the name of the key to distribute to the given KMS provider. 
+      Specifies the name of the key to distribute to the given KMS provider.
     ||| } },
     withKeyName(value):: self {
       resource+: {
@@ -22,7 +27,7 @@
       },
     },
     '#withKmsName':: { 'function': { help: |||
-      Specifies the name of the KMS provider to distribute the given key to. 
+      Specifies the name of the KMS provider to distribute the given key to.
     ||| } },
     withKmsName(value):: self {
       resource+: {
@@ -30,7 +35,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here. 
+      Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -38,7 +43,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -46,7 +51,7 @@
       },
     },
     '#withProtection':: { 'function': { help: |||
-      Specifies the protection of the key. The protection defines where cryptographic operations are performed with the key in the KMS provider. The following values are supported: hsm, software. Defaults to `hsm`. 
+      Specifies the protection of the key. The protection defines where cryptographic operations are performed with the key in the KMS provider. The following values are supported: hsm, software. Defaults to `hsm`.
     ||| } },
     withProtection(value):: self {
       resource+: {
@@ -54,7 +59,7 @@
       },
     },
     '#withPurpose':: { 'function': { help: |||
-      Specifies the purpose of the key. The purpose defines a set of cryptographic capabilities that the key will have in the KMS provider. A key must have at least one of the supported purposes. The following values are supported : encrypt, decrypt, sign, verify, wrap, unwrap. 
+      Specifies the purpose of the key. The purpose defines a set of cryptographic capabilities that the key will have in the KMS provider. A key must have at least one of the supported purposes. The following values are supported : encrypt, decrypt, sign, verify, wrap, unwrap.
     ||| } },
     withPurpose(value):: self {
       resource+: {
@@ -67,31 +72,31 @@
     plain(suffix=''):: '${ vault_keymgmt_distribute_key.%s%s }' % [terraformName, suffix],
     fields:: {
       '#key_name':: { 'function': { help: |||
-        Specifies the name of the key to distribute to the given KMS provider. 
+        Specifies the name of the key to distribute to the given KMS provider.
       ||| } },
       key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
       '#kms_name':: { 'function': { help: |||
-        Specifies the name of the KMS provider to distribute the given key to. 
+        Specifies the name of the KMS provider to distribute the given key to.
       ||| } },
       kms_name(suffix=''):: refSelf.plain('.kms_name%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here. 
+        Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#protection':: { 'function': { help: |||
-        Specifies the protection of the key. The protection defines where cryptographic operations are performed with the key in the KMS provider. The following values are supported: hsm, software. Defaults to `hsm`. 
+        Specifies the protection of the key. The protection defines where cryptographic operations are performed with the key in the KMS provider. The following values are supported: hsm, software. Defaults to `hsm`.
       ||| } },
       protection(suffix=''):: refSelf.plain('.protection%s' % suffix),
       '#purpose':: { 'function': { help: |||
-        Specifies the purpose of the key. The purpose defines a set of cryptographic capabilities that the key will have in the KMS provider. A key must have at least one of the supported purposes. The following values are supported : encrypt, decrypt, sign, verify, wrap, unwrap. 
+        Specifies the purpose of the key. The purpose defines a set of cryptographic capabilities that the key will have in the KMS provider. A key must have at least one of the supported purposes. The following values are supported : encrypt, decrypt, sign, verify, wrap, unwrap.
       ||| } },
       purpose(suffix=''):: refSelf.plain('.purpose%s' % suffix),
       '#versions':: { 'function': { help: |||
-        Map of distributed key versions to their identifiers in the KMS provider. 
+        Map of distributed key versions to their identifiers in the KMS provider.
       ||| } },
       versions(suffix=''):: refSelf.plain('.versions%s' % suffix),
     },

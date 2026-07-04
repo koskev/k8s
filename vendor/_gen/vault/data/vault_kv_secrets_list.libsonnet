@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, path):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_kv_secrets_list+: {
@@ -16,7 +18,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Full KV-V1 path where secrets will be listed. 
+      Full KV-V1 path where secrets will be listed.
     ||| } },
     withPath(value):: self {
       data+: {
@@ -38,15 +40,15 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#names':: { 'function': { help: |||
-        List of all secret names. 
+        List of all secret names.
       ||| } },
       names(suffix=''):: refSelf.plain('.names%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Full KV-V1 path where secrets will be listed. 
+        Full KV-V1 path where secrets will be listed.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
     },

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    This resource allows Terraform to manage data within a pre-existing ConfigMap. This resource uses [field management](https://kubernetes.io/docs/reference/using-api/server-side-apply/#field-management) and [server-side apply](https://kubernetes.io/docs/reference/using-api/server-side-apply/) to manage only the data that is defined in the Terraform configuration. Existing data not specified in the configuration will be ignored. If data specified in the config and is already managed by another client it will cause a conflict which can be overridden by setting `force` to true.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, data):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_config_map_v1_data+: {
@@ -11,7 +16,7 @@
   },
   functions(terraformName):: {
     '#withData':: { 'function': { help: |||
-      The data we want to add to the ConfigMap. 
+      The data we want to add to the ConfigMap.
     ||| } },
     withData(value):: self {
       resource+: {
@@ -19,7 +24,7 @@
       },
     },
     '#withFieldManager':: { 'function': { help: |||
-      Set the name of the field manager for the specified labels. 
+      Set the name of the field manager for the specified labels.
     ||| } },
     withFieldManager(value):: self {
       resource+: {
@@ -27,7 +32,7 @@
       },
     },
     '#withForce':: { 'function': { help: |||
-      Force overwriting data that is managed outside of Terraform. 
+      Force overwriting data that is managed outside of Terraform.
     ||| } },
     withForce(value):: self {
       resource+: {
@@ -45,15 +50,15 @@
     plain(suffix=''):: '${ kubernetes_config_map_v1_data.%s%s }' % [terraformName, suffix],
     fields:: {
       '#data':: { 'function': { help: |||
-        The data we want to add to the ConfigMap. 
+        The data we want to add to the ConfigMap.
       ||| } },
       data(suffix=''):: refSelf.plain('.data%s' % suffix),
       '#field_manager':: { 'function': { help: |||
-        Set the name of the field manager for the specified labels. 
+        Set the name of the field manager for the specified labels.
       ||| } },
       field_manager(suffix=''):: refSelf.plain('.field_manager%s' % suffix),
       '#force':: { 'function': { help: |||
-        Force overwriting data that is managed outside of Terraform. 
+        Force overwriting data that is managed outside of Terraform.
       ||| } },
       force(suffix=''):: refSelf.plain('.force%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, common_name, csr):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_root_sign_intermediate+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withAltNames':: { 'function': { help: |||
-      List of alternative names. 
+      List of alternative names.
     ||| } },
     withAltNames(value):: self {
       resource+: {
@@ -21,7 +23,7 @@
       },
     },
     '#withBackend':: { 'function': { help: |||
-      The PKI secret backend the resource belongs to. 
+      The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -29,7 +31,7 @@
       },
     },
     '#withCommonName':: { 'function': { help: |||
-      CN of intermediate to create. 
+      CN of intermediate to create.
     ||| } },
     withCommonName(value):: self {
       resource+: {
@@ -37,7 +39,7 @@
       },
     },
     '#withCountry':: { 'function': { help: |||
-      The country. 
+      The country.
     ||| } },
     withCountry(value):: self {
       resource+: {
@@ -45,7 +47,7 @@
       },
     },
     '#withCsr':: { 'function': { help: |||
-      The CSR. 
+      The CSR.
     ||| } },
     withCsr(value):: self {
       resource+: {
@@ -53,7 +55,7 @@
       },
     },
     '#withExcludeCnFromSans':: { 'function': { help: |||
-      Flag to exclude CN from SANs. 
+      Flag to exclude CN from SANs.
     ||| } },
     withExcludeCnFromSans(value):: self {
       resource+: {
@@ -61,7 +63,7 @@
       },
     },
     '#withExcludedDnsDomains':: { 'function': { help: |||
-      List of domains for which certificates are not allowed to be issued. 
+      List of domains for which certificates are not allowed to be issued.
     ||| } },
     withExcludedDnsDomains(value):: self {
       resource+: {
@@ -69,7 +71,7 @@
       },
     },
     '#withExcludedEmailAddresses':: { 'function': { help: |||
-      List of email addresses for which certificates are not allowed to be issued. 
+      List of email addresses for which certificates are not allowed to be issued.
     ||| } },
     withExcludedEmailAddresses(value):: self {
       resource+: {
@@ -77,7 +79,7 @@
       },
     },
     '#withExcludedIpRanges':: { 'function': { help: |||
-      List of IP ranges for which certificates are NOT allowed to be issued. 
+      List of IP ranges for which certificates are NOT allowed to be issued.
     ||| } },
     withExcludedIpRanges(value):: self {
       resource+: {
@@ -85,7 +87,7 @@
       },
     },
     '#withExcludedUriDomains':: { 'function': { help: |||
-      List of URI domains for which certificates are not allowed to be issued. 
+      List of URI domains for which certificates are not allowed to be issued.
     ||| } },
     withExcludedUriDomains(value):: self {
       resource+: {
@@ -93,7 +95,7 @@
       },
     },
     '#withFormat':: { 'function': { help: |||
-      The format of data. 
+      The format of data.
     ||| } },
     withFormat(value):: self {
       resource+: {
@@ -106,7 +108,7 @@
       },
     },
     '#withIpSans':: { 'function': { help: |||
-      List of alternative IPs. 
+      List of alternative IPs.
     ||| } },
     withIpSans(value):: self {
       resource+: {
@@ -114,7 +116,7 @@
       },
     },
     '#withIssuerRef':: { 'function': { help: |||
-      Specifies the default issuer of this request. 
+      Specifies the default issuer of this request.
     ||| } },
     withIssuerRef(value):: self {
       resource+: {
@@ -122,7 +124,7 @@
       },
     },
     '#withKeyUsage':: { 'function': { help: |||
-      Specify the key usages to be added to the existing set of key usages ("CRL", "CertSign") on the generated certificate. 
+      Specify the key usages to be added to the existing set of key usages ("CRL", "CertSign") on the generated certificate.
     ||| } },
     withKeyUsage(value):: self {
       resource+: {
@@ -130,7 +132,7 @@
       },
     },
     '#withLocality':: { 'function': { help: |||
-      The locality. 
+      The locality.
     ||| } },
     withLocality(value):: self {
       resource+: {
@@ -138,7 +140,7 @@
       },
     },
     '#withMaxPathLength':: { 'function': { help: |||
-      The maximum path length to encode in the generated certificate. 
+      The maximum path length to encode in the generated certificate.
     ||| } },
     withMaxPathLength(value):: self {
       resource+: {
@@ -146,7 +148,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -154,7 +156,7 @@
       },
     },
     '#withNotAfter':: { 'function': { help: |||
-      Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z. 
+      Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z.
     ||| } },
     withNotAfter(value):: self {
       resource+: {
@@ -162,7 +164,7 @@
       },
     },
     '#withNotBeforeDuration':: { 'function': { help: |||
-      Specifies the duration by which to backdate the NotBefore property. 
+      Specifies the duration by which to backdate the NotBefore property.
     ||| } },
     withNotBeforeDuration(value):: self {
       resource+: {
@@ -170,7 +172,7 @@
       },
     },
     '#withOrganization':: { 'function': { help: |||
-      The organization. 
+      The organization.
     ||| } },
     withOrganization(value):: self {
       resource+: {
@@ -178,7 +180,7 @@
       },
     },
     '#withOtherSans':: { 'function': { help: |||
-      List of other SANs. 
+      List of other SANs.
     ||| } },
     withOtherSans(value):: self {
       resource+: {
@@ -186,7 +188,7 @@
       },
     },
     '#withOu':: { 'function': { help: |||
-      The organization unit. 
+      The organization unit.
     ||| } },
     withOu(value):: self {
       resource+: {
@@ -194,7 +196,7 @@
       },
     },
     '#withPermittedDnsDomains':: { 'function': { help: |||
-      List of domains for which certificates are allowed to be issued. 
+      List of domains for which certificates are allowed to be issued.
     ||| } },
     withPermittedDnsDomains(value):: self {
       resource+: {
@@ -202,7 +204,7 @@
       },
     },
     '#withPermittedEmailAddresses':: { 'function': { help: |||
-      List of email addresses for which certificates are allowed to be issued. 
+      List of email addresses for which certificates are allowed to be issued.
     ||| } },
     withPermittedEmailAddresses(value):: self {
       resource+: {
@@ -210,7 +212,7 @@
       },
     },
     '#withPermittedIpRanges':: { 'function': { help: |||
-      List of IP ranges for which certificates are allowed to be issued. 
+      List of IP ranges for which certificates are allowed to be issued.
     ||| } },
     withPermittedIpRanges(value):: self {
       resource+: {
@@ -218,7 +220,7 @@
       },
     },
     '#withPermittedUriDomains':: { 'function': { help: |||
-      List of URI domains for which certificates are allowed to be issued. 
+      List of URI domains for which certificates are allowed to be issued.
     ||| } },
     withPermittedUriDomains(value):: self {
       resource+: {
@@ -226,7 +228,7 @@
       },
     },
     '#withPostalCode':: { 'function': { help: |||
-      The postal code. 
+      The postal code.
     ||| } },
     withPostalCode(value):: self {
       resource+: {
@@ -234,7 +236,7 @@
       },
     },
     '#withProvince':: { 'function': { help: |||
-      The province. 
+      The province.
     ||| } },
     withProvince(value):: self {
       resource+: {
@@ -242,7 +244,7 @@
       },
     },
     '#withRevoke':: { 'function': { help: |||
-      Revoke the certificate upon resource destruction. 
+      Revoke the certificate upon resource destruction.
     ||| } },
     withRevoke(value):: self {
       resource+: {
@@ -250,7 +252,7 @@
       },
     },
     '#withSignatureBits':: { 'function': { help: |||
-      The number of bits to use in the signature algorithm. 
+      The number of bits to use in the signature algorithm.
     ||| } },
     withSignatureBits(value):: self {
       resource+: {
@@ -259,7 +261,7 @@
     },
     '#withSkid':: { 'function': { help: |||
       Value for the Subject Key Identifier field
-       (RFC 5280 Section 4.2.1.2). Specified as a string in hex format. 
+        (RFC 5280 Section 4.2.1.2). Specified as a string in hex format.
     ||| } },
     withSkid(value):: self {
       resource+: {
@@ -267,7 +269,7 @@
       },
     },
     '#withStreetAddress':: { 'function': { help: |||
-      The street address. 
+      The street address.
     ||| } },
     withStreetAddress(value):: self {
       resource+: {
@@ -275,7 +277,7 @@
       },
     },
     '#withTtl':: { 'function': { help: |||
-      Time to live. 
+      Time to live.
     ||| } },
     withTtl(value):: self {
       resource+: {
@@ -283,7 +285,7 @@
       },
     },
     '#withUriSans':: { 'function': { help: |||
-      List of alternative URIs. 
+      List of alternative URIs.
     ||| } },
     withUriSans(value):: self {
       resource+: {
@@ -291,7 +293,7 @@
       },
     },
     '#withUseCsrValues':: { 'function': { help: |||
-      Preserve CSR values. 
+      Preserve CSR values.
     ||| } },
     withUseCsrValues(value):: self {
       resource+: {
@@ -300,7 +302,7 @@
     },
     '#withUsePss':: { 'function': { help: |||
       Specifies whether or not to use PSS signatures
-       over PKCS#1v1.5 signatures when a RSA-type issuer is used. 
+        over PKCS#1v1.5 signatures when a RSA-type issuer is used.
     ||| } },
     withUsePss(value):: self {
       resource+: {
@@ -313,170 +315,170 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_root_sign_intermediate.%s%s }' % [terraformName, suffix],
     fields:: {
       '#alt_names':: { 'function': { help: |||
-        List of alternative names. 
+        List of alternative names.
       ||| } },
       alt_names(suffix=''):: refSelf.plain('.alt_names%s' % suffix),
       '#backend':: { 'function': { help: |||
-        The PKI secret backend the resource belongs to. 
+        The PKI secret backend the resource belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#ca_chain':: { 'function': { help: |||
-        The CA chain as a list of format specific certificates 
+        The CA chain as a list of format specific certificates
       ||| } },
       ca_chain(suffix=''):: refSelf.plain('.ca_chain%s' % suffix),
       '#certificate':: { 'function': { help: |||
-        The signed intermediate CA certificate. 
+        The signed intermediate CA certificate.
       ||| } },
       certificate(suffix=''):: refSelf.plain('.certificate%s' % suffix),
       '#certificate_bundle':: { 'function': { help: |||
-        The concatenation of the intermediate and issuing CA certificates (PEM encoded). Requires the format to be set to any of: pem, pem_bundle. The value will be empty for all other formats. 
+        The concatenation of the intermediate and issuing CA certificates (PEM encoded). Requires the format to be set to any of: pem, pem_bundle. The value will be empty for all other formats.
       ||| } },
       certificate_bundle(suffix=''):: refSelf.plain('.certificate_bundle%s' % suffix),
       '#common_name':: { 'function': { help: |||
-        CN of intermediate to create. 
+        CN of intermediate to create.
       ||| } },
       common_name(suffix=''):: refSelf.plain('.common_name%s' % suffix),
       '#country':: { 'function': { help: |||
-        The country. 
+        The country.
       ||| } },
       country(suffix=''):: refSelf.plain('.country%s' % suffix),
       '#csr':: { 'function': { help: |||
-        The CSR. 
+        The CSR.
       ||| } },
       csr(suffix=''):: refSelf.plain('.csr%s' % suffix),
       '#exclude_cn_from_sans':: { 'function': { help: |||
-        Flag to exclude CN from SANs. 
+        Flag to exclude CN from SANs.
       ||| } },
       exclude_cn_from_sans(suffix=''):: refSelf.plain('.exclude_cn_from_sans%s' % suffix),
       '#excluded_dns_domains':: { 'function': { help: |||
-        List of domains for which certificates are not allowed to be issued. 
+        List of domains for which certificates are not allowed to be issued.
       ||| } },
       excluded_dns_domains(suffix=''):: refSelf.plain('.excluded_dns_domains%s' % suffix),
       '#excluded_email_addresses':: { 'function': { help: |||
-        List of email addresses for which certificates are not allowed to be issued. 
+        List of email addresses for which certificates are not allowed to be issued.
       ||| } },
       excluded_email_addresses(suffix=''):: refSelf.plain('.excluded_email_addresses%s' % suffix),
       '#excluded_ip_ranges':: { 'function': { help: |||
-        List of IP ranges for which certificates are NOT allowed to be issued. 
+        List of IP ranges for which certificates are NOT allowed to be issued.
       ||| } },
       excluded_ip_ranges(suffix=''):: refSelf.plain('.excluded_ip_ranges%s' % suffix),
       '#excluded_uri_domains':: { 'function': { help: |||
-        List of URI domains for which certificates are not allowed to be issued. 
+        List of URI domains for which certificates are not allowed to be issued.
       ||| } },
       excluded_uri_domains(suffix=''):: refSelf.plain('.excluded_uri_domains%s' % suffix),
       '#format':: { 'function': { help: |||
-        The format of data. 
+        The format of data.
       ||| } },
       format(suffix=''):: refSelf.plain('.format%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#ip_sans':: { 'function': { help: |||
-        List of alternative IPs. 
+        List of alternative IPs.
       ||| } },
       ip_sans(suffix=''):: refSelf.plain('.ip_sans%s' % suffix),
       '#issuer_ref':: { 'function': { help: |||
-        Specifies the default issuer of this request. 
+        Specifies the default issuer of this request.
       ||| } },
       issuer_ref(suffix=''):: refSelf.plain('.issuer_ref%s' % suffix),
       '#issuing_ca':: { 'function': { help: |||
-        The issuing CA certificate. 
+        The issuing CA certificate.
       ||| } },
       issuing_ca(suffix=''):: refSelf.plain('.issuing_ca%s' % suffix),
       '#key_usage':: { 'function': { help: |||
-        Specify the key usages to be added to the existing set of key usages ("CRL", "CertSign") on the generated certificate. 
+        Specify the key usages to be added to the existing set of key usages ("CRL", "CertSign") on the generated certificate.
       ||| } },
       key_usage(suffix=''):: refSelf.plain('.key_usage%s' % suffix),
       '#locality':: { 'function': { help: |||
-        The locality. 
+        The locality.
       ||| } },
       locality(suffix=''):: refSelf.plain('.locality%s' % suffix),
       '#max_path_length':: { 'function': { help: |||
-        The maximum path length to encode in the generated certificate. 
+        The maximum path length to encode in the generated certificate.
       ||| } },
       max_path_length(suffix=''):: refSelf.plain('.max_path_length%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#not_after':: { 'function': { help: |||
-        Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z. 
+        Set the Not After field of the certificate with specified date value. The value format should be given in UTC format YYYY-MM-ddTHH:MM:SSZ. Supports the Y10K end date for IEEE 802.1AR-2018 standard devices, 9999-12-31T23:59:59Z.
       ||| } },
       not_after(suffix=''):: refSelf.plain('.not_after%s' % suffix),
       '#not_before_duration':: { 'function': { help: |||
-        Specifies the duration by which to backdate the NotBefore property. 
+        Specifies the duration by which to backdate the NotBefore property.
       ||| } },
       not_before_duration(suffix=''):: refSelf.plain('.not_before_duration%s' % suffix),
       '#organization':: { 'function': { help: |||
-        The organization. 
+        The organization.
       ||| } },
       organization(suffix=''):: refSelf.plain('.organization%s' % suffix),
       '#other_sans':: { 'function': { help: |||
-        List of other SANs. 
+        List of other SANs.
       ||| } },
       other_sans(suffix=''):: refSelf.plain('.other_sans%s' % suffix),
       '#ou':: { 'function': { help: |||
-        The organization unit. 
+        The organization unit.
       ||| } },
       ou(suffix=''):: refSelf.plain('.ou%s' % suffix),
       '#permitted_dns_domains':: { 'function': { help: |||
-        List of domains for which certificates are allowed to be issued. 
+        List of domains for which certificates are allowed to be issued.
       ||| } },
       permitted_dns_domains(suffix=''):: refSelf.plain('.permitted_dns_domains%s' % suffix),
       '#permitted_email_addresses':: { 'function': { help: |||
-        List of email addresses for which certificates are allowed to be issued. 
+        List of email addresses for which certificates are allowed to be issued.
       ||| } },
       permitted_email_addresses(suffix=''):: refSelf.plain('.permitted_email_addresses%s' % suffix),
       '#permitted_ip_ranges':: { 'function': { help: |||
-        List of IP ranges for which certificates are allowed to be issued. 
+        List of IP ranges for which certificates are allowed to be issued.
       ||| } },
       permitted_ip_ranges(suffix=''):: refSelf.plain('.permitted_ip_ranges%s' % suffix),
       '#permitted_uri_domains':: { 'function': { help: |||
-        List of URI domains for which certificates are allowed to be issued. 
+        List of URI domains for which certificates are allowed to be issued.
       ||| } },
       permitted_uri_domains(suffix=''):: refSelf.plain('.permitted_uri_domains%s' % suffix),
       '#postal_code':: { 'function': { help: |||
-        The postal code. 
+        The postal code.
       ||| } },
       postal_code(suffix=''):: refSelf.plain('.postal_code%s' % suffix),
       '#province':: { 'function': { help: |||
-        The province. 
+        The province.
       ||| } },
       province(suffix=''):: refSelf.plain('.province%s' % suffix),
       '#revoke':: { 'function': { help: |||
-        Revoke the certificate upon resource destruction. 
+        Revoke the certificate upon resource destruction.
       ||| } },
       revoke(suffix=''):: refSelf.plain('.revoke%s' % suffix),
       '#serial_number':: { 'function': { help: |||
-        The certificate's serial number, hex formatted. 
+        The certificate's serial number, hex formatted.
       ||| } },
       serial_number(suffix=''):: refSelf.plain('.serial_number%s' % suffix),
       '#signature_bits':: { 'function': { help: |||
-        The number of bits to use in the signature algorithm. 
+        The number of bits to use in the signature algorithm.
       ||| } },
       signature_bits(suffix=''):: refSelf.plain('.signature_bits%s' % suffix),
       '#skid':: { 'function': { help: |||
         Value for the Subject Key Identifier field
-         (RFC 5280 Section 4.2.1.2). Specified as a string in hex format. 
+          (RFC 5280 Section 4.2.1.2). Specified as a string in hex format.
       ||| } },
       skid(suffix=''):: refSelf.plain('.skid%s' % suffix),
       '#street_address':: { 'function': { help: |||
-        The street address. 
+        The street address.
       ||| } },
       street_address(suffix=''):: refSelf.plain('.street_address%s' % suffix),
       '#ttl':: { 'function': { help: |||
-        Time to live. 
+        Time to live.
       ||| } },
       ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
       '#uri_sans':: { 'function': { help: |||
-        List of alternative URIs. 
+        List of alternative URIs.
       ||| } },
       uri_sans(suffix=''):: refSelf.plain('.uri_sans%s' % suffix),
       '#use_csr_values':: { 'function': { help: |||
-        Preserve CSR values. 
+        Preserve CSR values.
       ||| } },
       use_csr_values(suffix=''):: refSelf.plain('.use_csr_values%s' % suffix),
       '#use_pss':: { 'function': { help: |||
         Specifies whether or not to use PSS signatures
-         over PKCS#1v1.5 signatures when a RSA-type issuer is used. 
+          over PKCS#1v1.5 signatures when a RSA-type issuer is used.
       ||| } },
       use_pss(suffix=''):: refSelf.plain('.use_pss%s' % suffix),
     },

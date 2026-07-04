@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_aws_auth_backend_roletag_blacklist+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Unique name of the auth backend to configure. 
+      Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withDisablePeriodicTidy':: { 'function': { help: |||
-      If true, disables the periodic tidying of the roletag blacklist entries. 
+      If true, disables the periodic tidying of the roletag blacklist entries.
     ||| } },
     withDisablePeriodicTidy(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withSafetyBuffer':: { 'function': { help: |||
-      The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage. 
+      The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage.
     ||| } },
     withSafetyBuffer(value):: self {
       resource+: {
@@ -53,20 +55,20 @@
     plain(suffix=''):: '${ vault_aws_auth_backend_roletag_blacklist.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Unique name of the auth backend to configure. 
+        Unique name of the auth backend to configure.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#disable_periodic_tidy':: { 'function': { help: |||
-        If true, disables the periodic tidying of the roletag blacklist entries. 
+        If true, disables the periodic tidying of the roletag blacklist entries.
       ||| } },
       disable_periodic_tidy(suffix=''):: refSelf.plain('.disable_periodic_tidy%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#safety_buffer':: { 'function': { help: |||
-        The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage. 
+        The amount of extra time that must have passed beyond the roletag expiration, before it's removed from backend storage.
       ||| } },
       safety_buffer(suffix=''):: refSelf.plain('.safety_buffer%s' % suffix),
     },

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    TokenRequest requests a token for a given service account.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_token_request_v1+: {
@@ -21,7 +26,7 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#token':: { 'function': { help: |||
-        Token is the opaque bearer token. 
+        Token is the opaque bearer token.
       ||| } },
       token(suffix=''):: refSelf.plain('.token%s' % suffix),
     },

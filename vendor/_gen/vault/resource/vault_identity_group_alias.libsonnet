@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, canonical_id, mount_accessor, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_identity_group_alias+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withCanonicalId':: { 'function': { help: |||
-      ID of the group to which this is an alias. 
+      ID of the group to which this is an alias.
     ||| } },
     withCanonicalId(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withMountAccessor':: { 'function': { help: |||
-      Mount accessor to which this alias belongs to. 
+      Mount accessor to which this alias belongs to.
     ||| } },
     withMountAccessor(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the group alias. 
+      Name of the group alias.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -55,20 +57,20 @@
     plain(suffix=''):: '${ vault_identity_group_alias.%s%s }' % [terraformName, suffix],
     fields:: {
       '#canonical_id':: { 'function': { help: |||
-        ID of the group to which this is an alias. 
+        ID of the group to which this is an alias.
       ||| } },
       canonical_id(suffix=''):: refSelf.plain('.canonical_id%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#mount_accessor':: { 'function': { help: |||
-        Mount accessor to which this alias belongs to. 
+        Mount accessor to which this alias belongs to.
       ||| } },
       mount_accessor(suffix=''):: refSelf.plain('.mount_accessor%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the group alias. 
+        Name of the group alias.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

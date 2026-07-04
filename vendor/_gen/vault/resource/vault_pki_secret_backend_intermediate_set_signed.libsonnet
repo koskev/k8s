@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, certificate):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_intermediate_set_signed+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      The PKI secret backend the resource belongs to. 
+      The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -20,7 +22,7 @@
       },
     },
     '#withCertificate':: { 'function': { help: |||
-      The certificate. 
+      The certificate.
     ||| } },
     withCertificate(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -46,24 +48,24 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_intermediate_set_signed.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        The PKI secret backend the resource belongs to. 
+        The PKI secret backend the resource belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#certificate':: { 'function': { help: |||
-        The certificate. 
+        The certificate.
       ||| } },
       certificate(suffix=''):: refSelf.plain('.certificate%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#imported_issuers':: { 'function': { help: |||
-        The imported issuers. 
+        The imported issuers.
       ||| } },
       imported_issuers(suffix=''):: refSelf.plain('.imported_issuers%s' % suffix),
       '#imported_keys':: { 'function': { help: |||
-        The imported keys. 
+        The imported keys.
       ||| } },
       imported_keys(suffix=''):: refSelf.plain('.imported_keys%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

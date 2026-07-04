@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_config_urls+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      The path of the PKI secret backend the resource belongs to. 
+      The path of the PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withCrlDistributionPoints':: { 'function': { help: |||
-      Specifies the URL values for the CRL Distribution Points field. 
+      Specifies the URL values for the CRL Distribution Points field.
     ||| } },
     withCrlDistributionPoints(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withEnableTemplating':: { 'function': { help: |||
-      Specifies that templating of AIA fields is allowed. 
+      Specifies that templating of AIA fields is allowed.
     ||| } },
     withEnableTemplating(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withIssuingCertificates':: { 'function': { help: |||
-      Specifies the URL values for the Issuing Certificate field. 
+      Specifies the URL values for the Issuing Certificate field.
     ||| } },
     withIssuingCertificates(value):: self {
       resource+: {
@@ -48,7 +50,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -56,7 +58,7 @@
       },
     },
     '#withOcspServers':: { 'function': { help: |||
-      Specifies the URL values for the OCSP Servers field. 
+      Specifies the URL values for the OCSP Servers field.
     ||| } },
     withOcspServers(value):: self {
       resource+: {
@@ -69,28 +71,28 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_config_urls.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        The path of the PKI secret backend the resource belongs to. 
+        The path of the PKI secret backend the resource belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#crl_distribution_points':: { 'function': { help: |||
-        Specifies the URL values for the CRL Distribution Points field. 
+        Specifies the URL values for the CRL Distribution Points field.
       ||| } },
       crl_distribution_points(suffix=''):: refSelf.plain('.crl_distribution_points%s' % suffix),
       '#enable_templating':: { 'function': { help: |||
-        Specifies that templating of AIA fields is allowed. 
+        Specifies that templating of AIA fields is allowed.
       ||| } },
       enable_templating(suffix=''):: refSelf.plain('.enable_templating%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#issuing_certificates':: { 'function': { help: |||
-        Specifies the URL values for the Issuing Certificate field. 
+        Specifies the URL values for the Issuing Certificate field.
       ||| } },
       issuing_certificates(suffix=''):: refSelf.plain('.issuing_certificates%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#ocsp_servers':: { 'function': { help: |||
-        Specifies the URL values for the OCSP Servers field. 
+        Specifies the URL values for the OCSP Servers field.
       ||| } },
       ocsp_servers(suffix=''):: refSelf.plain('.ocsp_servers%s' % suffix),
     },

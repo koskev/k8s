@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_identity_oidc_provider+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withAllowedClientIds':: { 'function': { help: |||
-      The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed. 
+      The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed.
     ||| } },
     withAllowedClientIds(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withHttpsEnabled':: { 'function': { help: |||
-      Set to true if the issuer endpoint uses HTTPS. 
+      Set to true if the issuer endpoint uses HTTPS.
     ||| } },
     withHttpsEnabled(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withIssuerHost':: { 'function': { help: |||
-      The host for the issuer. Can be either host or host:port. 
+      The host for the issuer. Can be either host or host:port.
     ||| } },
     withIssuerHost(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the provider. 
+      The name of the provider.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -48,7 +50,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -56,7 +58,7 @@
       },
     },
     '#withScopesSupported':: { 'function': { help: |||
-      The scopes available for requesting on the provider. 
+      The scopes available for requesting on the provider.
     ||| } },
     withScopesSupported(value):: self {
       resource+: {
@@ -69,32 +71,32 @@
     plain(suffix=''):: '${ vault_identity_oidc_provider.%s%s }' % [terraformName, suffix],
     fields:: {
       '#allowed_client_ids':: { 'function': { help: |||
-        The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed. 
+        The client IDs that are permitted to use the provider. If empty, no clients are allowed. If "*", all clients are allowed.
       ||| } },
       allowed_client_ids(suffix=''):: refSelf.plain('.allowed_client_ids%s' % suffix),
       '#https_enabled':: { 'function': { help: |||
-        Set to true if the issuer endpoint uses HTTPS. 
+        Set to true if the issuer endpoint uses HTTPS.
       ||| } },
       https_enabled(suffix=''):: refSelf.plain('.https_enabled%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#issuer':: { 'function': { help: |||
-        Specifies what will be used as the 'scheme://host:port' component for the 'iss' claim of ID tokens.This value is computed using the issuer_host and https_enabled fields. 
+        Specifies what will be used as the 'scheme://host:port' component for the 'iss' claim of ID tokens.This value is computed using the issuer_host and https_enabled fields.
       ||| } },
       issuer(suffix=''):: refSelf.plain('.issuer%s' % suffix),
       '#issuer_host':: { 'function': { help: |||
-        The host for the issuer. Can be either host or host:port. 
+        The host for the issuer. Can be either host or host:port.
       ||| } },
       issuer_host(suffix=''):: refSelf.plain('.issuer_host%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the provider. 
+        The name of the provider.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#scopes_supported':: { 'function': { help: |||
-        The scopes available for requesting on the provider. 
+        The scopes available for requesting on the provider.
       ||| } },
       scopes_supported(suffix=''):: refSelf.plain('.scopes_supported%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, username):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_ldap_auth_backend_user+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -52,7 +54,7 @@
       groups(suffix=''):: refSelf.plain('.groups%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       policies(suffix=''):: refSelf.plain('.policies%s' % suffix),

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_namespace+: {
@@ -15,7 +20,7 @@
       },
     },
     '#withWaitForDefaultServiceAccount':: { 'function': { help: |||
-      Terraform will wait for the default service account to be created. 
+      Terraform will wait for the default service account to be created.
     ||| } },
     withWaitForDefaultServiceAccount(value):: self {
       resource+: {
@@ -29,7 +34,7 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#wait_for_default_service_account':: { 'function': { help: |||
-        Terraform will wait for the default service account to be created. 
+        Terraform will wait for the default service account to be created.
       ||| } },
       wait_for_default_service_account(suffix=''):: refSelf.plain('.wait_for_default_service_account%s' % suffix),
     },

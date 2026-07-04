@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, app_id, name, private_key):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_secrets_sync_github_apps+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withAppId':: { 'function': { help: |||
-      The GitHub application ID. 
+      The GitHub application ID.
     ||| } },
     withAppId(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The user-defined name of the GitHub App configuration. 
+      The user-defined name of the GitHub App configuration.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withPrivateKey':: { 'function': { help: |||
-      The content of a PEM formatted private key generated on GitHub for the app. 
+      The content of a PEM formatted private key generated on GitHub for the app.
     ||| } },
     withPrivateKey(value):: self {
       resource+: {
@@ -55,24 +57,24 @@
     plain(suffix=''):: '${ vault_secrets_sync_github_apps.%s%s }' % [terraformName, suffix],
     fields:: {
       '#app_id':: { 'function': { help: |||
-        The GitHub application ID. 
+        The GitHub application ID.
       ||| } },
       app_id(suffix=''):: refSelf.plain('.app_id%s' % suffix),
       '#fingerprint':: { 'function': { help: |||
-        A fingerprint of a private key. 
+        A fingerprint of a private key.
       ||| } },
       fingerprint(suffix=''):: refSelf.plain('.fingerprint%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        The user-defined name of the GitHub App configuration. 
+        The user-defined name of the GitHub App configuration.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#private_key':: { 'function': { help: |||
-        The content of a PEM formatted private key generated on GitHub for the app. 
+        The content of a PEM formatted private key generated on GitHub for the app.
       ||| } },
       private_key(suffix=''):: refSelf.plain('.private_key%s' % suffix),
     },

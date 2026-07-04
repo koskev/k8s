@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, path):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_namespace+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withCustomMetadata':: { 'function': { help: |||
-      Custom metadata describing this namespace. Value type is map[string]string. 
+      Custom metadata describing this namespace. Value type is map[string]string.
     ||| } },
     withCustomMetadata(value):: self {
       resource+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Namespace path. 
+      Namespace path.
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withPathFq':: { 'function': { help: |||
-      The fully qualified namespace path. 
+      The fully qualified namespace path.
     ||| } },
     withPathFq(value):: self {
       resource+: {
@@ -53,24 +55,24 @@
     plain(suffix=''):: '${ vault_namespace.%s%s }' % [terraformName, suffix],
     fields:: {
       '#custom_metadata':: { 'function': { help: |||
-        Custom metadata describing this namespace. Value type is map[string]string. 
+        Custom metadata describing this namespace. Value type is map[string]string.
       ||| } },
       custom_metadata(suffix=''):: refSelf.plain('.custom_metadata%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#namespace_id':: { 'function': { help: |||
-        Namespace ID. 
+        Namespace ID.
       ||| } },
       namespace_id(suffix=''):: refSelf.plain('.namespace_id%s' % suffix),
       '#path':: { 'function': { help: |||
-        Namespace path. 
+        Namespace path.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#path_fq':: { 'function': { help: |||
-        The fully qualified namespace path. 
+        The fully qualified namespace path.
       ||| } },
       path_fq(suffix=''):: refSelf.plain('.path_fq%s' % suffix),
     },

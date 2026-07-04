@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, role):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_aws_auth_backend_role_tag+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withAllowInstanceMigration':: { 'function': { help: |||
-      Allows migration of the underlying instance where the client resides. 
+      Allows migration of the underlying instance where the client resides.
     ||| } },
     withAllowInstanceMigration(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withBackend':: { 'function': { help: |||
-      AWS auth backend to read tags from. 
+      AWS auth backend to read tags from.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withDisallowReauthentication':: { 'function': { help: |||
-      Only allow a single token to be granted per instance ID. 
+      Only allow a single token to be granted per instance ID.
     ||| } },
     withDisallowReauthentication(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withInstanceId':: { 'function': { help: |||
-      Instance ID for which this tag is intended. The created tag can only be used by the instance with the given ID. 
+      Instance ID for which this tag is intended. The created tag can only be used by the instance with the given ID.
     ||| } },
     withInstanceId(value):: self {
       resource+: {
@@ -48,7 +50,7 @@
       },
     },
     '#withMaxTtl':: { 'function': { help: |||
-      The maximum allowed lifetime of tokens issued using this role. 
+      The maximum allowed lifetime of tokens issued using this role.
     ||| } },
     withMaxTtl(value):: self {
       resource+: {
@@ -56,7 +58,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -64,7 +66,7 @@
       },
     },
     '#withPolicies':: { 'function': { help: |||
-      Policies to be associated with the tag. 
+      Policies to be associated with the tag.
     ||| } },
     withPolicies(value):: self {
       resource+: {
@@ -72,7 +74,7 @@
       },
     },
     '#withRole':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withRole(value):: self {
       resource+: {
@@ -85,36 +87,36 @@
     plain(suffix=''):: '${ vault_aws_auth_backend_role_tag.%s%s }' % [terraformName, suffix],
     fields:: {
       '#allow_instance_migration':: { 'function': { help: |||
-        Allows migration of the underlying instance where the client resides. 
+        Allows migration of the underlying instance where the client resides.
       ||| } },
       allow_instance_migration(suffix=''):: refSelf.plain('.allow_instance_migration%s' % suffix),
       '#backend':: { 'function': { help: |||
-        AWS auth backend to read tags from. 
+        AWS auth backend to read tags from.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#disallow_reauthentication':: { 'function': { help: |||
-        Only allow a single token to be granted per instance ID. 
+        Only allow a single token to be granted per instance ID.
       ||| } },
       disallow_reauthentication(suffix=''):: refSelf.plain('.disallow_reauthentication%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#instance_id':: { 'function': { help: |||
-        Instance ID for which this tag is intended. The created tag can only be used by the instance with the given ID. 
+        Instance ID for which this tag is intended. The created tag can only be used by the instance with the given ID.
       ||| } },
       instance_id(suffix=''):: refSelf.plain('.instance_id%s' % suffix),
       '#max_ttl':: { 'function': { help: |||
-        The maximum allowed lifetime of tokens issued using this role. 
+        The maximum allowed lifetime of tokens issued using this role.
       ||| } },
       max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#policies':: { 'function': { help: |||
-        Policies to be associated with the tag. 
+        Policies to be associated with the tag.
       ||| } },
       policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
       '#role':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       role(suffix=''):: refSelf.plain('.role%s' % suffix),
       tag_key(suffix=''):: refSelf.plain('.tag_key%s' % suffix),

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, mount, public_key):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_mongodbatlas_secret_backend+: {
@@ -17,7 +19,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path where MongoDB Atlas secret backend is mounted 
+      Path where MongoDB Atlas secret backend is mounted
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withPrivateKey':: { 'function': { help: |||
-      The Private Programmatic API Key used to connect with MongoDB Atlas API 
+      The Private Programmatic API Key used to connect with MongoDB Atlas API
     ||| } },
     withPrivateKey(value):: self {
       resource+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withPrivateKeyWo':: { 'function': { help: |||
-      The Private Programmatic API Key used to connect with MongoDB Atlas API. This is a write-only field that is not stored in state. 
+      The Private Programmatic API Key used to connect with MongoDB Atlas API. This is a write-only field that is not stored in state.
     ||| } },
     withPrivateKeyWo(value):: self {
       resource+: {
@@ -49,7 +51,7 @@
       },
     },
     '#withPrivateKeyWoVersion':: { 'function': { help: |||
-      Incrementing version counter for the private_key_wo field. Increment to force an update to the private key. 
+      Incrementing version counter for the private_key_wo field. Increment to force an update to the private key.
     ||| } },
     withPrivateKeyWoVersion(value):: self {
       resource+: {
@@ -57,7 +59,7 @@
       },
     },
     '#withPublicKey':: { 'function': { help: |||
-      The Public Programmatic API Key used to authenticate with the MongoDB Atlas API 
+      The Public Programmatic API Key used to authenticate with the MongoDB Atlas API
     ||| } },
     withPublicKey(value):: self {
       resource+: {
@@ -71,31 +73,31 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path where MongoDB Atlas secret backend is mounted 
+        Path where MongoDB Atlas secret backend is mounted
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Path where MongoDB Atlas configuration is located 
+        Path where MongoDB Atlas configuration is located
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#private_key':: { 'function': { help: |||
-        The Private Programmatic API Key used to connect with MongoDB Atlas API 
+        The Private Programmatic API Key used to connect with MongoDB Atlas API
       ||| } },
       private_key(suffix=''):: refSelf.plain('.private_key%s' % suffix),
       '#private_key_wo':: { 'function': { help: |||
-        The Private Programmatic API Key used to connect with MongoDB Atlas API. This is a write-only field that is not stored in state. 
+        The Private Programmatic API Key used to connect with MongoDB Atlas API. This is a write-only field that is not stored in state.
       ||| } },
       private_key_wo(suffix=''):: refSelf.plain('.private_key_wo%s' % suffix),
       '#private_key_wo_version':: { 'function': { help: |||
-        Incrementing version counter for the private_key_wo field. Increment to force an update to the private key. 
+        Incrementing version counter for the private_key_wo field. Increment to force an update to the private key.
       ||| } },
       private_key_wo_version(suffix=''):: refSelf.plain('.private_key_wo_version%s' % suffix),
       '#public_key':: { 'function': { help: |||
-        The Public Programmatic API Key used to authenticate with the MongoDB Atlas API 
+        The Public Programmatic API Key used to authenticate with the MongoDB Atlas API
       ||| } },
       public_key(suffix=''):: refSelf.plain('.public_key%s' % suffix),
     },

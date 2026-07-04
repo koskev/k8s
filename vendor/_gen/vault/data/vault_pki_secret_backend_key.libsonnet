@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, key_ref):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_pki_secret_backend_key+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Full path where PKI backend is mounted. 
+      Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
       data+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withKeyRef':: { 'function': { help: |||
-      Reference to an existing key. 
+      Reference to an existing key.
     ||| } },
     withKeyRef(value):: self {
       data+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -46,28 +48,28 @@
     plain(suffix=''):: '${ data.vault_pki_secret_backend_key.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Full path where PKI backend is mounted. 
+        Full path where PKI backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#key_id':: { 'function': { help: |||
-        ID of the key used. 
+        ID of the key used.
       ||| } },
       key_id(suffix=''):: refSelf.plain('.key_id%s' % suffix),
       '#key_name':: { 'function': { help: |||
-        Name of the key. 
+        Name of the key.
       ||| } },
       key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
       '#key_ref':: { 'function': { help: |||
-        Reference to an existing key. 
+        Reference to an existing key.
       ||| } },
       key_ref(suffix=''):: refSelf.plain('.key_ref%s' % suffix),
       '#key_type':: { 'function': { help: |||
-        Type of the key. 
+        Type of the key.
       ||| } },
       key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

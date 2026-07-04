@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name, rotation_period, username):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_aws_secret_backend_static_role+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withAssumeRoleArn':: { 'function': { help: |||
-      The ARN of the role to assume when managing the static role. This is required for cross-account role management.  
+      The ARN of the role to assume when managing the static role. This is required for cross-account role management. 
     ||| } },
     withAssumeRoleArn(value):: self {
       resource+: {
@@ -21,7 +23,7 @@
       },
     },
     '#withAssumeRoleSessionName':: { 'function': { help: |||
-      Session name to use when assuming the role. 
+      Session name to use when assuming the role.
     ||| } },
     withAssumeRoleSessionName(value):: self {
       resource+: {
@@ -29,7 +31,7 @@
       },
     },
     '#withBackend':: { 'function': { help: |||
-      The path where the AWS secrets backend is mounted. 
+      The path where the AWS secrets backend is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -37,7 +39,7 @@
       },
     },
     '#withExternalId':: { 'function': { help: |||
-      External ID to use when assuming the role. 
+      External ID to use when assuming the role.
     ||| } },
     withExternalId(value):: self {
       resource+: {
@@ -50,7 +52,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -58,7 +60,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -66,7 +68,7 @@
       },
     },
     '#withRotationPeriod':: { 'function': { help: |||
-      How often Vault should rotate the password of the user entry. 
+      How often Vault should rotate the password of the user entry.
     ||| } },
     withRotationPeriod(value):: self {
       resource+: {
@@ -74,7 +76,7 @@
       },
     },
     '#withUsername':: { 'function': { help: |||
-      The username of the existing AWS IAM user to manage password rotation for. 
+      The username of the existing AWS IAM user to manage password rotation for.
     ||| } },
     withUsername(value):: self {
       resource+: {
@@ -87,36 +89,36 @@
     plain(suffix=''):: '${ vault_aws_secret_backend_static_role.%s%s }' % [terraformName, suffix],
     fields:: {
       '#assume_role_arn':: { 'function': { help: |||
-        The ARN of the role to assume when managing the static role. This is required for cross-account role management.  
+        The ARN of the role to assume when managing the static role. This is required for cross-account role management. 
       ||| } },
       assume_role_arn(suffix=''):: refSelf.plain('.assume_role_arn%s' % suffix),
       '#assume_role_session_name':: { 'function': { help: |||
-        Session name to use when assuming the role. 
+        Session name to use when assuming the role.
       ||| } },
       assume_role_session_name(suffix=''):: refSelf.plain('.assume_role_session_name%s' % suffix),
       '#backend':: { 'function': { help: |||
-        The path where the AWS secrets backend is mounted. 
+        The path where the AWS secrets backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#external_id':: { 'function': { help: |||
-        External ID to use when assuming the role. 
+        External ID to use when assuming the role.
       ||| } },
       external_id(suffix=''):: refSelf.plain('.external_id%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#rotation_period':: { 'function': { help: |||
-        How often Vault should rotate the password of the user entry. 
+        How often Vault should rotate the password of the user entry.
       ||| } },
       rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
       '#username':: { 'function': { help: |||
-        The username of the existing AWS IAM user to manage password rotation for. 
+        The username of the existing AWS IAM user to manage password rotation for.
       ||| } },
       username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, allowed_client_id, key_name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_identity_oidc_key_allowed_client_id+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withAllowedClientId':: { 'function': { help: |||
-      Role Client ID allowed to use the key for signing. 
+      Role Client ID allowed to use the key for signing.
     ||| } },
     withAllowedClientId(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withKeyName':: { 'function': { help: |||
-      Name of the key. 
+      Name of the key.
     ||| } },
     withKeyName(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -46,16 +48,16 @@
     plain(suffix=''):: '${ vault_identity_oidc_key_allowed_client_id.%s%s }' % [terraformName, suffix],
     fields:: {
       '#allowed_client_id':: { 'function': { help: |||
-        Role Client ID allowed to use the key for signing. 
+        Role Client ID allowed to use the key for signing.
       ||| } },
       allowed_client_id(suffix=''):: refSelf.plain('.allowed_client_id%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#key_name':: { 'function': { help: |||
-        Name of the key. 
+        Name of the key.
       ||| } },
       key_name(suffix=''):: refSelf.plain('.key_name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, path, role, scope):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_kmip_secret_role+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withCa':: { 'function': { help: |||
-      Name of the ca to use, if absent use legacy ca 
+      Name of the ca to use, if absent use legacy ca
     ||| } },
     withCa(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withOperationActivate':: { 'function': { help: |||
-      Grant permission to use the KMIP Activate operation 
+      Grant permission to use the KMIP Activate operation
     ||| } },
     withOperationActivate(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withOperationAddAttribute':: { 'function': { help: |||
-      Grant permission to use the KMIP Add Attribute operation 
+      Grant permission to use the KMIP Add Attribute operation
     ||| } },
     withOperationAddAttribute(value):: self {
       resource+: {
@@ -50,7 +52,7 @@
       },
     },
     '#withOperationAll':: { 'function': { help: |||
-      Grant all permissions to this role. May not be specified with any other operation_* params 
+      Grant all permissions to this role. May not be specified with any other operation_* params
     ||| } },
     withOperationAll(value):: self {
       resource+: {
@@ -58,7 +60,7 @@
       },
     },
     '#withOperationCreate':: { 'function': { help: |||
-      Grant permission to use the KMIP Create operation 
+      Grant permission to use the KMIP Create operation
     ||| } },
     withOperationCreate(value):: self {
       resource+: {
@@ -66,7 +68,7 @@
       },
     },
     '#withOperationCreateKeyPair':: { 'function': { help: |||
-      Grant permission to use the KMIP Create Key Pair operation 
+      Grant permission to use the KMIP Create Key Pair operation
     ||| } },
     withOperationCreateKeyPair(value):: self {
       resource+: {
@@ -74,7 +76,7 @@
       },
     },
     '#withOperationDecrypt':: { 'function': { help: |||
-      Grant permission to use the KMIP Decrypt operation 
+      Grant permission to use the KMIP Decrypt operation
     ||| } },
     withOperationDecrypt(value):: self {
       resource+: {
@@ -82,7 +84,7 @@
       },
     },
     '#withOperationDeleteAttribute':: { 'function': { help: |||
-      Grant permission to use the KMIP Delete Attribute operation 
+      Grant permission to use the KMIP Delete Attribute operation
     ||| } },
     withOperationDeleteAttribute(value):: self {
       resource+: {
@@ -90,7 +92,7 @@
       },
     },
     '#withOperationDestroy':: { 'function': { help: |||
-      Grant permission to use the KMIP Destroy operation 
+      Grant permission to use the KMIP Destroy operation
     ||| } },
     withOperationDestroy(value):: self {
       resource+: {
@@ -98,7 +100,7 @@
       },
     },
     '#withOperationDiscoverVersions':: { 'function': { help: |||
-      Grant permission to use the KMIP Discover Version operation 
+      Grant permission to use the KMIP Discover Version operation
     ||| } },
     withOperationDiscoverVersions(value):: self {
       resource+: {
@@ -106,7 +108,7 @@
       },
     },
     '#withOperationEncrypt':: { 'function': { help: |||
-      Grant permission to use the KMIP Encrypt operation 
+      Grant permission to use the KMIP Encrypt operation
     ||| } },
     withOperationEncrypt(value):: self {
       resource+: {
@@ -114,7 +116,7 @@
       },
     },
     '#withOperationGet':: { 'function': { help: |||
-      Grant permission to use the KMIP Get operation 
+      Grant permission to use the KMIP Get operation
     ||| } },
     withOperationGet(value):: self {
       resource+: {
@@ -122,7 +124,7 @@
       },
     },
     '#withOperationGetAttributeList':: { 'function': { help: |||
-      Grant permission to use the KMIP Get Attribute List operation 
+      Grant permission to use the KMIP Get Attribute List operation
     ||| } },
     withOperationGetAttributeList(value):: self {
       resource+: {
@@ -130,7 +132,7 @@
       },
     },
     '#withOperationGetAttributes':: { 'function': { help: |||
-      Grant permission to use the KMIP Get Attributes operation 
+      Grant permission to use the KMIP Get Attributes operation
     ||| } },
     withOperationGetAttributes(value):: self {
       resource+: {
@@ -138,7 +140,7 @@
       },
     },
     '#withOperationImport':: { 'function': { help: |||
-      Grant permission to use the KMIP Import operation 
+      Grant permission to use the KMIP Import operation
     ||| } },
     withOperationImport(value):: self {
       resource+: {
@@ -146,7 +148,7 @@
       },
     },
     '#withOperationLocate':: { 'function': { help: |||
-      Grant permission to use the KMIP Locate operation 
+      Grant permission to use the KMIP Locate operation
     ||| } },
     withOperationLocate(value):: self {
       resource+: {
@@ -154,7 +156,7 @@
       },
     },
     '#withOperationMac':: { 'function': { help: |||
-      Grant permission to use the KMIP MAC operation 
+      Grant permission to use the KMIP MAC operation
     ||| } },
     withOperationMac(value):: self {
       resource+: {
@@ -162,7 +164,7 @@
       },
     },
     '#withOperationMacVerify':: { 'function': { help: |||
-      Grant permission to use the KMIP MAC Verify operation 
+      Grant permission to use the KMIP MAC Verify operation
     ||| } },
     withOperationMacVerify(value):: self {
       resource+: {
@@ -170,7 +172,7 @@
       },
     },
     '#withOperationModifyAttribute':: { 'function': { help: |||
-      Grant permission to use the KMIP Modify Attribute operation 
+      Grant permission to use the KMIP Modify Attribute operation
     ||| } },
     withOperationModifyAttribute(value):: self {
       resource+: {
@@ -178,7 +180,7 @@
       },
     },
     '#withOperationNone':: { 'function': { help: |||
-      Remove all permissions from this role. May not be specified with any other operation_* params 
+      Remove all permissions from this role. May not be specified with any other operation_* params
     ||| } },
     withOperationNone(value):: self {
       resource+: {
@@ -186,7 +188,7 @@
       },
     },
     '#withOperationQuery':: { 'function': { help: |||
-      Grant permission to use the KMIP Query operation 
+      Grant permission to use the KMIP Query operation
     ||| } },
     withOperationQuery(value):: self {
       resource+: {
@@ -194,7 +196,7 @@
       },
     },
     '#withOperationRegister':: { 'function': { help: |||
-      Grant permission to use the KMIP Register operation 
+      Grant permission to use the KMIP Register operation
     ||| } },
     withOperationRegister(value):: self {
       resource+: {
@@ -202,7 +204,7 @@
       },
     },
     '#withOperationRekey':: { 'function': { help: |||
-      Grant permission to use the KMIP Rekey operation 
+      Grant permission to use the KMIP Rekey operation
     ||| } },
     withOperationRekey(value):: self {
       resource+: {
@@ -210,7 +212,7 @@
       },
     },
     '#withOperationRekeyKeyPair':: { 'function': { help: |||
-      Grant permission to use the KMIP Rekey Key Pair operation 
+      Grant permission to use the KMIP Rekey Key Pair operation
     ||| } },
     withOperationRekeyKeyPair(value):: self {
       resource+: {
@@ -218,7 +220,7 @@
       },
     },
     '#withOperationRevoke':: { 'function': { help: |||
-      Grant permission to use the KMIP Revoke operation 
+      Grant permission to use the KMIP Revoke operation
     ||| } },
     withOperationRevoke(value):: self {
       resource+: {
@@ -226,7 +228,7 @@
       },
     },
     '#withOperationRngRetrieve':: { 'function': { help: |||
-      Grant permission to use the KMIP RNG Retrieve operation 
+      Grant permission to use the KMIP RNG Retrieve operation
     ||| } },
     withOperationRngRetrieve(value):: self {
       resource+: {
@@ -234,7 +236,7 @@
       },
     },
     '#withOperationRngSeed':: { 'function': { help: |||
-      Grant permission to use the KMIP RNG Seed operation 
+      Grant permission to use the KMIP RNG Seed operation
     ||| } },
     withOperationRngSeed(value):: self {
       resource+: {
@@ -242,7 +244,7 @@
       },
     },
     '#withOperationSign':: { 'function': { help: |||
-      Grant permission to use the KMIP Sign operation 
+      Grant permission to use the KMIP Sign operation
     ||| } },
     withOperationSign(value):: self {
       resource+: {
@@ -250,7 +252,7 @@
       },
     },
     '#withOperationSignatureVerify':: { 'function': { help: |||
-      Grant permission to use the KMIP Signature Verify operation 
+      Grant permission to use the KMIP Signature Verify operation
     ||| } },
     withOperationSignatureVerify(value):: self {
       resource+: {
@@ -258,7 +260,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Path where KMIP backend is mounted 
+      Path where KMIP backend is mounted
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -266,7 +268,7 @@
       },
     },
     '#withRole':: { 'function': { help: |||
-      Name of the role 
+      Name of the role
     ||| } },
     withRole(value):: self {
       resource+: {
@@ -274,7 +276,7 @@
       },
     },
     '#withScope':: { 'function': { help: |||
-      Name of the scope 
+      Name of the scope
     ||| } },
     withScope(value):: self {
       resource+: {
@@ -282,7 +284,7 @@
       },
     },
     '#withTlsClientKeyBits':: { 'function': { help: |||
-      Client certificate key bits, valid values depend on key type 
+      Client certificate key bits, valid values depend on key type
     ||| } },
     withTlsClientKeyBits(value):: self {
       resource+: {
@@ -290,7 +292,7 @@
       },
     },
     '#withTlsClientKeyType':: { 'function': { help: |||
-      Client certificate key type, rsa or ec 
+      Client certificate key type, rsa or ec
     ||| } },
     withTlsClientKeyType(value):: self {
       resource+: {
@@ -298,7 +300,7 @@
       },
     },
     '#withTlsClientTtl':: { 'function': { help: |||
-      Client certificate TTL in seconds 
+      Client certificate TTL in seconds
     ||| } },
     withTlsClientTtl(value):: self {
       resource+: {
@@ -311,148 +313,148 @@
     plain(suffix=''):: '${ vault_kmip_secret_role.%s%s }' % [terraformName, suffix],
     fields:: {
       '#ca':: { 'function': { help: |||
-        Name of the ca to use, if absent use legacy ca 
+        Name of the ca to use, if absent use legacy ca
       ||| } },
       ca(suffix=''):: refSelf.plain('.ca%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#operation_activate':: { 'function': { help: |||
-        Grant permission to use the KMIP Activate operation 
+        Grant permission to use the KMIP Activate operation
       ||| } },
       operation_activate(suffix=''):: refSelf.plain('.operation_activate%s' % suffix),
       '#operation_add_attribute':: { 'function': { help: |||
-        Grant permission to use the KMIP Add Attribute operation 
+        Grant permission to use the KMIP Add Attribute operation
       ||| } },
       operation_add_attribute(suffix=''):: refSelf.plain('.operation_add_attribute%s' % suffix),
       '#operation_all':: { 'function': { help: |||
-        Grant all permissions to this role. May not be specified with any other operation_* params 
+        Grant all permissions to this role. May not be specified with any other operation_* params
       ||| } },
       operation_all(suffix=''):: refSelf.plain('.operation_all%s' % suffix),
       '#operation_create':: { 'function': { help: |||
-        Grant permission to use the KMIP Create operation 
+        Grant permission to use the KMIP Create operation
       ||| } },
       operation_create(suffix=''):: refSelf.plain('.operation_create%s' % suffix),
       '#operation_create_key_pair':: { 'function': { help: |||
-        Grant permission to use the KMIP Create Key Pair operation 
+        Grant permission to use the KMIP Create Key Pair operation
       ||| } },
       operation_create_key_pair(suffix=''):: refSelf.plain('.operation_create_key_pair%s' % suffix),
       '#operation_decrypt':: { 'function': { help: |||
-        Grant permission to use the KMIP Decrypt operation 
+        Grant permission to use the KMIP Decrypt operation
       ||| } },
       operation_decrypt(suffix=''):: refSelf.plain('.operation_decrypt%s' % suffix),
       '#operation_delete_attribute':: { 'function': { help: |||
-        Grant permission to use the KMIP Delete Attribute operation 
+        Grant permission to use the KMIP Delete Attribute operation
       ||| } },
       operation_delete_attribute(suffix=''):: refSelf.plain('.operation_delete_attribute%s' % suffix),
       '#operation_destroy':: { 'function': { help: |||
-        Grant permission to use the KMIP Destroy operation 
+        Grant permission to use the KMIP Destroy operation
       ||| } },
       operation_destroy(suffix=''):: refSelf.plain('.operation_destroy%s' % suffix),
       '#operation_discover_versions':: { 'function': { help: |||
-        Grant permission to use the KMIP Discover Version operation 
+        Grant permission to use the KMIP Discover Version operation
       ||| } },
       operation_discover_versions(suffix=''):: refSelf.plain('.operation_discover_versions%s' % suffix),
       '#operation_encrypt':: { 'function': { help: |||
-        Grant permission to use the KMIP Encrypt operation 
+        Grant permission to use the KMIP Encrypt operation
       ||| } },
       operation_encrypt(suffix=''):: refSelf.plain('.operation_encrypt%s' % suffix),
       '#operation_get':: { 'function': { help: |||
-        Grant permission to use the KMIP Get operation 
+        Grant permission to use the KMIP Get operation
       ||| } },
       operation_get(suffix=''):: refSelf.plain('.operation_get%s' % suffix),
       '#operation_get_attribute_list':: { 'function': { help: |||
-        Grant permission to use the KMIP Get Attribute List operation 
+        Grant permission to use the KMIP Get Attribute List operation
       ||| } },
       operation_get_attribute_list(suffix=''):: refSelf.plain('.operation_get_attribute_list%s' % suffix),
       '#operation_get_attributes':: { 'function': { help: |||
-        Grant permission to use the KMIP Get Attributes operation 
+        Grant permission to use the KMIP Get Attributes operation
       ||| } },
       operation_get_attributes(suffix=''):: refSelf.plain('.operation_get_attributes%s' % suffix),
       '#operation_import':: { 'function': { help: |||
-        Grant permission to use the KMIP Import operation 
+        Grant permission to use the KMIP Import operation
       ||| } },
       operation_import(suffix=''):: refSelf.plain('.operation_import%s' % suffix),
       '#operation_locate':: { 'function': { help: |||
-        Grant permission to use the KMIP Locate operation 
+        Grant permission to use the KMIP Locate operation
       ||| } },
       operation_locate(suffix=''):: refSelf.plain('.operation_locate%s' % suffix),
       '#operation_mac':: { 'function': { help: |||
-        Grant permission to use the KMIP MAC operation 
+        Grant permission to use the KMIP MAC operation
       ||| } },
       operation_mac(suffix=''):: refSelf.plain('.operation_mac%s' % suffix),
       '#operation_mac_verify':: { 'function': { help: |||
-        Grant permission to use the KMIP MAC Verify operation 
+        Grant permission to use the KMIP MAC Verify operation
       ||| } },
       operation_mac_verify(suffix=''):: refSelf.plain('.operation_mac_verify%s' % suffix),
       '#operation_modify_attribute':: { 'function': { help: |||
-        Grant permission to use the KMIP Modify Attribute operation 
+        Grant permission to use the KMIP Modify Attribute operation
       ||| } },
       operation_modify_attribute(suffix=''):: refSelf.plain('.operation_modify_attribute%s' % suffix),
       '#operation_none':: { 'function': { help: |||
-        Remove all permissions from this role. May not be specified with any other operation_* params 
+        Remove all permissions from this role. May not be specified with any other operation_* params
       ||| } },
       operation_none(suffix=''):: refSelf.plain('.operation_none%s' % suffix),
       '#operation_query':: { 'function': { help: |||
-        Grant permission to use the KMIP Query operation 
+        Grant permission to use the KMIP Query operation
       ||| } },
       operation_query(suffix=''):: refSelf.plain('.operation_query%s' % suffix),
       '#operation_register':: { 'function': { help: |||
-        Grant permission to use the KMIP Register operation 
+        Grant permission to use the KMIP Register operation
       ||| } },
       operation_register(suffix=''):: refSelf.plain('.operation_register%s' % suffix),
       '#operation_rekey':: { 'function': { help: |||
-        Grant permission to use the KMIP Rekey operation 
+        Grant permission to use the KMIP Rekey operation
       ||| } },
       operation_rekey(suffix=''):: refSelf.plain('.operation_rekey%s' % suffix),
       '#operation_rekey_key_pair':: { 'function': { help: |||
-        Grant permission to use the KMIP Rekey Key Pair operation 
+        Grant permission to use the KMIP Rekey Key Pair operation
       ||| } },
       operation_rekey_key_pair(suffix=''):: refSelf.plain('.operation_rekey_key_pair%s' % suffix),
       '#operation_revoke':: { 'function': { help: |||
-        Grant permission to use the KMIP Revoke operation 
+        Grant permission to use the KMIP Revoke operation
       ||| } },
       operation_revoke(suffix=''):: refSelf.plain('.operation_revoke%s' % suffix),
       '#operation_rng_retrieve':: { 'function': { help: |||
-        Grant permission to use the KMIP RNG Retrieve operation 
+        Grant permission to use the KMIP RNG Retrieve operation
       ||| } },
       operation_rng_retrieve(suffix=''):: refSelf.plain('.operation_rng_retrieve%s' % suffix),
       '#operation_rng_seed':: { 'function': { help: |||
-        Grant permission to use the KMIP RNG Seed operation 
+        Grant permission to use the KMIP RNG Seed operation
       ||| } },
       operation_rng_seed(suffix=''):: refSelf.plain('.operation_rng_seed%s' % suffix),
       '#operation_sign':: { 'function': { help: |||
-        Grant permission to use the KMIP Sign operation 
+        Grant permission to use the KMIP Sign operation
       ||| } },
       operation_sign(suffix=''):: refSelf.plain('.operation_sign%s' % suffix),
       '#operation_signature_verify':: { 'function': { help: |||
-        Grant permission to use the KMIP Signature Verify operation 
+        Grant permission to use the KMIP Signature Verify operation
       ||| } },
       operation_signature_verify(suffix=''):: refSelf.plain('.operation_signature_verify%s' % suffix),
       '#path':: { 'function': { help: |||
-        Path where KMIP backend is mounted 
+        Path where KMIP backend is mounted
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#role':: { 'function': { help: |||
-        Name of the role 
+        Name of the role
       ||| } },
       role(suffix=''):: refSelf.plain('.role%s' % suffix),
       '#scope':: { 'function': { help: |||
-        Name of the scope 
+        Name of the scope
       ||| } },
       scope(suffix=''):: refSelf.plain('.scope%s' % suffix),
       '#tls_client_key_bits':: { 'function': { help: |||
-        Client certificate key bits, valid values depend on key type 
+        Client certificate key bits, valid values depend on key type
       ||| } },
       tls_client_key_bits(suffix=''):: refSelf.plain('.tls_client_key_bits%s' % suffix),
       '#tls_client_key_type':: { 'function': { help: |||
-        Client certificate key type, rsa or ec 
+        Client certificate key type, rsa or ec
       ||| } },
       tls_client_key_type(suffix=''):: refSelf.plain('.tls_client_key_type%s' % suffix),
       '#tls_client_ttl':: { 'function': { help: |||
-        Client certificate TTL in seconds 
+        Client certificate TTL in seconds
       ||| } },
       tls_client_ttl(suffix=''):: refSelf.plain('.tls_client_ttl%s' % suffix),
     },

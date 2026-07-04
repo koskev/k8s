@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Manages a Key Management key in Vault
+  ||| } },
+  local outerSelf = self,
   new(terraformName, mount, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_keymgmt_key+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withDeletionAllowed':: { 'function': { help: |||
-      Specifies if the key is allowed to be deleted. 
+      Specifies if the key is allowed to be deleted.
     ||| } },
     withDeletionAllowed(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withMinEnabledVersion':: { 'function': { help: |||
-      Specifies the minimum enabled version of the key. All versions of the key less than the specified version will be disabled for cryptographic operations in the KMS provider that the key has been distributed to. Setting this value to 0 means that all versions will be enabled. 
+      Specifies the minimum enabled version of the key. All versions of the key less than the specified version will be disabled for cryptographic operations in the KMS provider that the key has been distributed to. Setting this value to 0 means that all versions will be enabled.
     ||| } },
     withMinEnabledVersion(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here. 
+      Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Specifies the name of the key to create. 
+      Specifies the name of the key to create.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -44,7 +49,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -52,7 +57,7 @@
       },
     },
     '#withReplicaRegions':: { 'function': { help: |||
-      Specifies the regions in which the key should be replicated. Supported only for AWS KMS. 
+      Specifies the regions in which the key should be replicated. Supported only for AWS KMS.
     ||| } },
     withReplicaRegions(value):: self {
       resource+: {
@@ -60,7 +65,7 @@
       },
     },
     '#withType':: { 'function': { help: |||
-      Specifies the type of cryptographic key to create. aes256-gcm96, rsa-2048, rsa-3072, rsa-4096, ecdsa-p256, ecdsa-p384, ecdsa-p521 key types are supported. Defaults to `rsa-2048`. 
+      Specifies the type of cryptographic key to create. aes256-gcm96, rsa-2048, rsa-3072, rsa-4096, ecdsa-p256, ecdsa-p384, ecdsa-p521 key types are supported. Defaults to `rsa-2048`.
     ||| } },
     withType(value):: self {
       resource+: {
@@ -73,35 +78,35 @@
     plain(suffix=''):: '${ vault_keymgmt_key.%s%s }' % [terraformName, suffix],
     fields:: {
       '#deletion_allowed':: { 'function': { help: |||
-        Specifies if the key is allowed to be deleted. 
+        Specifies if the key is allowed to be deleted.
       ||| } },
       deletion_allowed(suffix=''):: refSelf.plain('.deletion_allowed%s' % suffix),
       '#latest_version':: { 'function': { help: |||
-        Specifies the latest version of the key. 
+        Specifies the latest version of the key.
       ||| } },
       latest_version(suffix=''):: refSelf.plain('.latest_version%s' % suffix),
       '#min_enabled_version':: { 'function': { help: |||
-        Specifies the minimum enabled version of the key. All versions of the key less than the specified version will be disabled for cryptographic operations in the KMS provider that the key has been distributed to. Setting this value to 0 means that all versions will be enabled. 
+        Specifies the minimum enabled version of the key. All versions of the key less than the specified version will be disabled for cryptographic operations in the KMS provider that the key has been distributed to. Setting this value to 0 means that all versions will be enabled.
       ||| } },
       min_enabled_version(suffix=''):: refSelf.plain('.min_enabled_version%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here. 
+        Path of the Key Management secrets engine mount. Must match the `path` of a `vault_mount` resource with `type = "keymgmt"`. Use `vault_mount.keymgmt.path` here.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#name':: { 'function': { help: |||
-        Specifies the name of the key to create. 
+        Specifies the name of the key to create.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#replica_regions':: { 'function': { help: |||
-        Specifies the regions in which the key should be replicated. Supported only for AWS KMS. 
+        Specifies the regions in which the key should be replicated. Supported only for AWS KMS.
       ||| } },
       replica_regions(suffix=''):: refSelf.plain('.replica_regions%s' % suffix),
       '#type':: { 'function': { help: |||
-        Specifies the type of cryptographic key to create. aes256-gcm96, rsa-2048, rsa-3072, rsa-4096, ecdsa-p256, ecdsa-p384, ecdsa-p521 key types are supported. Defaults to `rsa-2048`. 
+        Specifies the type of cryptographic key to create. aes256-gcm96, rsa-2048, rsa-3072, rsa-4096, ecdsa-p256, ecdsa-p384, ecdsa-p521 key types are supported. Defaults to `rsa-2048`.
       ||| } },
       type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, ciphertext, key):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_transit_decrypt+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      The Transit secret backend the key belongs to. 
+      The Transit secret backend the key belongs to.
     ||| } },
     withBackend(value):: self {
       data+: {
@@ -21,7 +23,7 @@
       },
     },
     '#withCiphertext':: { 'function': { help: |||
-      Transit encrypted cipher text. 
+      Transit encrypted cipher text.
     ||| } },
     withCiphertext(value):: self {
       data+: {
@@ -29,7 +31,7 @@
       },
     },
     '#withContext':: { 'function': { help: |||
-      Specifies the context for key derivation 
+      Specifies the context for key derivation
     ||| } },
     withContext(value):: self {
       data+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withKey':: { 'function': { help: |||
-      Name of the decryption key to use. 
+      Name of the decryption key to use.
     ||| } },
     withKey(value):: self {
       data+: {
@@ -50,7 +52,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -63,28 +65,28 @@
     plain(suffix=''):: '${ data.vault_transit_decrypt.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        The Transit secret backend the key belongs to. 
+        The Transit secret backend the key belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#ciphertext':: { 'function': { help: |||
-        Transit encrypted cipher text. 
+        Transit encrypted cipher text.
       ||| } },
       ciphertext(suffix=''):: refSelf.plain('.ciphertext%s' % suffix),
       '#context':: { 'function': { help: |||
-        Specifies the context for key derivation 
+        Specifies the context for key derivation
       ||| } },
       context(suffix=''):: refSelf.plain('.context%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#key':: { 'function': { help: |||
-        Name of the decryption key to use. 
+        Name of the decryption key to use.
       ||| } },
       key(suffix=''):: refSelf.plain('.key%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#plaintext':: { 'function': { help: |||
-        Decrypted plain text 
+        Decrypted plain text
       ||| } },
       plaintext(suffix=''):: refSelf.plain('.plaintext%s' % suffix),
     },

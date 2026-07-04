@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_policy_document+: {
@@ -15,7 +17,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -28,12 +30,12 @@
     plain(suffix=''):: '${ data.vault_policy_document.%s%s }' % [terraformName, suffix],
     fields:: {
       '#hcl':: { 'function': { help: |||
-        The above arguments serialized as a standard Vault HCL policy document. 
+        The above arguments serialized as a standard Vault HCL policy document.
       ||| } },
       hcl(suffix=''):: refSelf.plain('.hcl%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

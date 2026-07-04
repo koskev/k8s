@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, role):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_ad_access_credentials+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      AD Secret Backend to read credentials from. 
+      AD Secret Backend to read credentials from.
     ||| } },
     withBackend(value):: self {
       data+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withRole':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withRole(value):: self {
       data+: {
@@ -46,28 +48,28 @@
     plain(suffix=''):: '${ data.vault_ad_access_credentials.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        AD Secret Backend to read credentials from. 
+        AD Secret Backend to read credentials from.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#current_password':: { 'function': { help: |||
-        Password for the service account. 
+        Password for the service account.
       ||| } },
       current_password(suffix=''):: refSelf.plain('.current_password%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#last_password':: { 'function': { help: |||
-        Last known password for the service account. 
+        Last known password for the service account.
       ||| } },
       last_password(suffix=''):: refSelf.plain('.last_password%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#role':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       role(suffix=''):: refSelf.plain('.role%s' % suffix),
       '#username':: { 'function': { help: |||
-        Name of the service account. 
+        Name of the service account.
       ||| } },
       username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },

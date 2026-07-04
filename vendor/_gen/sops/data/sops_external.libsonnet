@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Read data from a sops-encrypted string. Useful if the data does not reside on disk locally (otherwise use `sops_file`).
+  ||| } },
+  local outerSelf = self,
   new(terraformName, source):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       sops_external+: {
@@ -11,7 +16,7 @@
   },
   functions(terraformName):: {
     '#withInputType':: { 'function': { help: |||
-      `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data. 
+      `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data.
     ||| } },
     withInputType(value):: self {
       data+: {
@@ -19,7 +24,7 @@
       },
     },
     '#withSource':: { 'function': { help: |||
-      A string with sops-encrypted data 
+      A string with sops-encrypted data
     ||| } },
     withSource(value):: self {
       data+: {
@@ -32,23 +37,23 @@
     plain(suffix=''):: '${ data.sops_external.%s%s }' % [terraformName, suffix],
     fields:: {
       '#data':: { 'function': { help: |||
-        Decrypted data 
+        Decrypted data
       ||| } },
       data(suffix=''):: refSelf.plain('.data%s' % suffix),
       '#id':: { 'function': { help: |||
-        Unique identifier for this data source 
+        Unique identifier for this data source
       ||| } },
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#input_type':: { 'function': { help: |||
-        `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data. 
+        `yaml`, `json` `dotenv` (`.env`), `ini` or `raw`, depending on the structure of the un-encrypted data.
       ||| } },
       input_type(suffix=''):: refSelf.plain('.input_type%s' % suffix),
       '#raw':: { 'function': { help: |||
-        Raw decrypted content 
+        Raw decrypted content
       ||| } },
       raw(suffix=''):: refSelf.plain('.raw%s' % suffix),
       '#source':: { 'function': { help: |||
-        A string with sops-encrypted data 
+        A string with sops-encrypted data
       ||| } },
       source(suffix=''):: refSelf.plain('.source%s' % suffix),
     },

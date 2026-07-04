@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_identity_oidc_assignment+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withEntityIds':: { 'function': { help: |||
-      A list of Vault entity IDs. 
+      A list of Vault entity IDs.
     ||| } },
     withEntityIds(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withGroupIds':: { 'function': { help: |||
-      A list of Vault group IDs. 
+      A list of Vault group IDs.
     ||| } },
     withGroupIds(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the assignment. 
+      The name of the assignment.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -53,20 +55,20 @@
     plain(suffix=''):: '${ vault_identity_oidc_assignment.%s%s }' % [terraformName, suffix],
     fields:: {
       '#entity_ids':: { 'function': { help: |||
-        A list of Vault entity IDs. 
+        A list of Vault entity IDs.
       ||| } },
       entity_ids(suffix=''):: refSelf.plain('.entity_ids%s' % suffix),
       '#group_ids':: { 'function': { help: |||
-        A list of Vault group IDs. 
+        A list of Vault group IDs.
       ||| } },
       group_ids(suffix=''):: refSelf.plain('.group_ids%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the assignment. 
+        The name of the assignment.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

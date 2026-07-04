@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, api_version, kind):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       kubernetes_resources+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withApiVersion':: { 'function': { help: |||
-      The resource apiVersion. 
+      The resource apiVersion.
     ||| } },
     withApiVersion(value):: self {
       data+: {
@@ -20,7 +22,7 @@
       },
     },
     '#withFieldSelector':: { 'function': { help: |||
-      A selector to restrict the list of returned objects by their fields. 
+      A selector to restrict the list of returned objects by their fields.
     ||| } },
     withFieldSelector(value):: self {
       data+: {
@@ -28,7 +30,7 @@
       },
     },
     '#withKind':: { 'function': { help: |||
-      The resource kind. 
+      The resource kind.
     ||| } },
     withKind(value):: self {
       data+: {
@@ -36,7 +38,7 @@
       },
     },
     '#withLabelSelector':: { 'function': { help: |||
-      A selector to restrict the list of returned objects by their labels. 
+      A selector to restrict the list of returned objects by their labels.
     ||| } },
     withLabelSelector(value):: self {
       data+: {
@@ -44,7 +46,7 @@
       },
     },
     '#withLimit':: { 'function': { help: |||
-      Limit is a maximum number of responses to return for a list call. 
+      Limit is a maximum number of responses to return for a list call.
     ||| } },
     withLimit(value):: self {
       data+: {
@@ -52,7 +54,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      The resource namespace. 
+      The resource namespace.
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -60,7 +62,7 @@
       },
     },
     '#withObjects':: { 'function': { help: |||
-      The response from the API server. 
+      The response from the API server.
     ||| } },
     withObjects(value):: self {
       data+: {
@@ -73,31 +75,31 @@
     plain(suffix=''):: '${ data.kubernetes_resources.%s%s }' % [terraformName, suffix],
     fields:: {
       '#api_version':: { 'function': { help: |||
-        The resource apiVersion. 
+        The resource apiVersion.
       ||| } },
       api_version(suffix=''):: refSelf.plain('.api_version%s' % suffix),
       '#field_selector':: { 'function': { help: |||
-        A selector to restrict the list of returned objects by their fields. 
+        A selector to restrict the list of returned objects by their fields.
       ||| } },
       field_selector(suffix=''):: refSelf.plain('.field_selector%s' % suffix),
       '#kind':: { 'function': { help: |||
-        The resource kind. 
+        The resource kind.
       ||| } },
       kind(suffix=''):: refSelf.plain('.kind%s' % suffix),
       '#label_selector':: { 'function': { help: |||
-        A selector to restrict the list of returned objects by their labels. 
+        A selector to restrict the list of returned objects by their labels.
       ||| } },
       label_selector(suffix=''):: refSelf.plain('.label_selector%s' % suffix),
       '#limit':: { 'function': { help: |||
-        Limit is a maximum number of responses to return for a list call. 
+        Limit is a maximum number of responses to return for a list call.
       ||| } },
       limit(suffix=''):: refSelf.plain('.limit%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        The resource namespace. 
+        The resource namespace.
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#objects':: { 'function': { help: |||
-        The response from the API server. 
+        The response from the API server.
       ||| } },
       objects(suffix=''):: refSelf.plain('.objects%s' % suffix),
     },

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    A PersistentVolumeClaim (PVC) is a request for storage by a user. This data source retrieves information about the specified PVC.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       kubernetes_persistent_volume_claim+: {

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    An Endpoints resource is an abstraction, linked to a Service, which defines the list of endpoints that actually implement the service.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_endpoints_v1+: {

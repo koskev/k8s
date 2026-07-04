@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, group_name, path):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_okta_auth_backend_group+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withGroupName':: { 'function': { help: |||
-      Name of the Okta group 
+      Name of the Okta group
     ||| } },
     withGroupName(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Path to the Okta auth backend 
+      Path to the Okta auth backend
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withPolicies':: { 'function': { help: |||
-      Policies to associate with this group 
+      Policies to associate with this group
     ||| } },
     withPolicies(value):: self {
       resource+: {
@@ -54,20 +56,20 @@
     plain(suffix=''):: '${ vault_okta_auth_backend_group.%s%s }' % [terraformName, suffix],
     fields:: {
       '#group_name':: { 'function': { help: |||
-        Name of the Okta group 
+        Name of the Okta group
       ||| } },
       group_name(suffix=''):: refSelf.plain('.group_name%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Path to the Okta auth backend 
+        Path to the Okta auth backend
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#policies':: { 'function': { help: |||
-        Policies to associate with this group 
+        Policies to associate with this group
       ||| } },
       policies(suffix=''):: refSelf.plain('.policies%s' % suffix),
     },

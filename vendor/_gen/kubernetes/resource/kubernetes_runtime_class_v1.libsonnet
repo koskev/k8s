@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    A runtime class is used to determine which container runtime is used to run all containers in a pod.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, handler):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_runtime_class_v1+: {
@@ -11,7 +16,7 @@
   },
   functions(terraformName):: {
     '#withHandler':: { 'function': { help: |||
-      Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class 
+      Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class
     ||| } },
     withHandler(value):: self {
       resource+: {
@@ -29,7 +34,7 @@
     plain(suffix=''):: '${ kubernetes_runtime_class_v1.%s%s }' % [terraformName, suffix],
     fields:: {
       '#handler':: { 'function': { help: |||
-        Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class 
+        Specifies the underlying runtime and configuration that the CRI implementation will use to handle pods of this class
       ||| } },
       handler(suffix=''):: refSelf.plain('.handler%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),

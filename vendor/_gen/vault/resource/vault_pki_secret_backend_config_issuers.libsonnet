@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_config_issuers+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Full path where PKI backend is mounted. 
+      Full path where PKI backend is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withDefault':: { 'function': { help: |||
-      Specifies the default issuer by ID. 
+      Specifies the default issuer by ID.
     ||| } },
     withDefault(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withDefaultFollowsLatestIssuer':: { 'function': { help: |||
-      Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer. 
+      Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer.
     ||| } },
     withDefaultFollowsLatestIssuer(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -53,20 +55,20 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_config_issuers.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Full path where PKI backend is mounted. 
+        Full path where PKI backend is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#default':: { 'function': { help: |||
-        Specifies the default issuer by ID. 
+        Specifies the default issuer by ID.
       ||| } },
       default(suffix=''):: refSelf.plain('.default%s' % suffix),
       '#default_follows_latest_issuer':: { 'function': { help: |||
-        Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer. 
+        Specifies whether a root creation or an issuer import operation updates the default issuer to the newly added issuer.
       ||| } },
       default_follows_latest_issuer(suffix=''):: refSelf.plain('.default_follows_latest_issuer%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

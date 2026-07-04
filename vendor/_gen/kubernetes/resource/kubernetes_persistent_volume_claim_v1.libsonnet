@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    This resource allows the user to request for and claim to a persistent volume.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_persistent_volume_claim_v1+: {
@@ -15,7 +20,7 @@
       },
     },
     '#withWaitUntilBound':: { 'function': { help: |||
-      Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space) 
+      Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space)
     ||| } },
     withWaitUntilBound(value):: self {
       resource+: {
@@ -29,7 +34,7 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#wait_until_bound':: { 'function': { help: |||
-        Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space) 
+        Whether to wait for the claim to reach `Bound` state (to find volume in which to claim the space)
       ||| } },
       wait_until_bound(suffix=''):: refSelf.plain('.wait_until_bound%s' % suffix),
     },

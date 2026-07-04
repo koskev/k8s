@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    An EndpointSlice contains references to a set of network endpoints. This data source allows you to pull data about such endpoint slice.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       kubernetes_endpoint_slice_v1+: {
@@ -20,16 +25,16 @@
     plain(suffix=''):: '${ data.kubernetes_endpoint_slice_v1.%s%s }' % [terraformName, suffix],
     fields:: {
       '#address_type':: { 'function': { help: |||
-        address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. 
+        address_type specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation.
       ||| } },
       address_type(suffix=''):: refSelf.plain('.address_type%s' % suffix),
       '#endpoint':: { 'function': { help: |||
-        endpoint is a list of unique endpoints in this slice. Each slice may include a maximum of 1000 endpoints. 
+        endpoint is a list of unique endpoints in this slice. Each slice may include a maximum of 1000 endpoints.
       ||| } },
       endpoint(suffix=''):: refSelf.plain('.endpoint%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#port':: { 'function': { help: |||
-        port specifies the list of network ports exposed by each endpoint in this slice. Each port must have a unique name. Each slice may include a maximum of 100 ports. 
+        port specifies the list of network ports exposed by each endpoint in this slice. Each port must have a unique name. Each slice may include a maximum of 100 ports.
       ||| } },
       port(suffix=''):: refSelf.plain('.port%s' % suffix),
     },

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    An API Service is an abstraction which defines for locating and communicating with servers.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_api_service+: {

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_identity_oidc_scope+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withDescription':: { 'function': { help: |||
-      The scope's description. 
+      The scope's description.
     ||| } },
     withDescription(value):: self {
       resource+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the scope. The openid scope name is reserved. 
+      The name of the scope. The openid scope name is reserved.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -40,7 +42,7 @@
       },
     },
     '#withTemplate':: { 'function': { help: |||
-      The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON. 
+      The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON.
     ||| } },
     withTemplate(value):: self {
       resource+: {
@@ -53,20 +55,20 @@
     plain(suffix=''):: '${ vault_identity_oidc_scope.%s%s }' % [terraformName, suffix],
     fields:: {
       '#description':: { 'function': { help: |||
-        The scope's description. 
+        The scope's description.
       ||| } },
       description(suffix=''):: refSelf.plain('.description%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the scope. The openid scope name is reserved. 
+        The name of the scope. The openid scope name is reserved.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#template':: { 'function': { help: |||
-        The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON. 
+        The template string for the scope. This may be provided as escaped JSON or base64 encoded JSON.
       ||| } },
       template(suffix=''):: refSelf.plain('.template%s' % suffix),
     },

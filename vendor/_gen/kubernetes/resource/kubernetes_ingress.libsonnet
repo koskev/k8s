@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_ingress+: {
@@ -15,7 +17,7 @@
       },
     },
     '#withWaitForLoadBalancer':: { 'function': { help: |||
-      Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created. 
+      Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created.
     ||| } },
     withWaitForLoadBalancer(value):: self {
       resource+: {
@@ -30,7 +32,7 @@
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       status(suffix=''):: refSelf.plain('.status%s' % suffix),
       '#wait_for_load_balancer':: { 'function': { help: |||
-        Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created. 
+        Terraform will wait for the load balancer to have at least 1 endpoint before considering the resource created.
       ||| } },
       wait_for_load_balancer(suffix=''):: refSelf.plain('.wait_for_load_balancer%s' % suffix),
     },

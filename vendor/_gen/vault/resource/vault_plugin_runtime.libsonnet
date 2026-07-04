@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Manages a plugin runtime in Vault's plugin runtimes catalog.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, name, type):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_plugin_runtime+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withCgroupParent':: { 'function': { help: |||
-      Specifies the parent cgroup to set for each container. 
+      Specifies the parent cgroup to set for each container.
     ||| } },
     withCgroupParent(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withCpuNanos':: { 'function': { help: |||
-      Specifies CPU limit to set per container in billionths of a CPU. 
+      Specifies CPU limit to set per container in billionths of a CPU.
     ||| } },
     withCpuNanos(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withMemoryBytes':: { 'function': { help: |||
-      Specifies memory limit to set per container in bytes. 
+      Specifies memory limit to set per container in bytes.
     ||| } },
     withMemoryBytes(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      The name of the plugin runtime. 
+      The name of the plugin runtime.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -44,7 +49,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -52,7 +57,7 @@
       },
     },
     '#withOciRuntime':: { 'function': { help: |||
-      Specifies OCI-compliant container runtime to use. 
+      Specifies OCI-compliant container runtime to use.
     ||| } },
     withOciRuntime(value):: self {
       resource+: {
@@ -60,7 +65,7 @@
       },
     },
     '#withRootless':: { 'function': { help: |||
-      Whether the container runtime is running as a non-privileged user. 
+      Whether the container runtime is running as a non-privileged user.
     ||| } },
     withRootless(value):: self {
       resource+: {
@@ -68,7 +73,7 @@
       },
     },
     '#withType':: { 'function': { help: |||
-      Specifies the plugin runtime type. Currently only `container` is supported. 
+      Specifies the plugin runtime type. Currently only `container` is supported.
     ||| } },
     withType(value):: self {
       resource+: {
@@ -81,36 +86,36 @@
     plain(suffix=''):: '${ vault_plugin_runtime.%s%s }' % [terraformName, suffix],
     fields:: {
       '#cgroup_parent':: { 'function': { help: |||
-        Specifies the parent cgroup to set for each container. 
+        Specifies the parent cgroup to set for each container.
       ||| } },
       cgroup_parent(suffix=''):: refSelf.plain('.cgroup_parent%s' % suffix),
       '#cpu_nanos':: { 'function': { help: |||
-        Specifies CPU limit to set per container in billionths of a CPU. 
+        Specifies CPU limit to set per container in billionths of a CPU.
       ||| } },
       cpu_nanos(suffix=''):: refSelf.plain('.cpu_nanos%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#memory_bytes':: { 'function': { help: |||
-        Specifies memory limit to set per container in bytes. 
+        Specifies memory limit to set per container in bytes.
       ||| } },
       memory_bytes(suffix=''):: refSelf.plain('.memory_bytes%s' % suffix),
       '#name':: { 'function': { help: |||
-        The name of the plugin runtime. 
+        The name of the plugin runtime.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#oci_runtime':: { 'function': { help: |||
-        Specifies OCI-compliant container runtime to use. 
+        Specifies OCI-compliant container runtime to use.
       ||| } },
       oci_runtime(suffix=''):: refSelf.plain('.oci_runtime%s' % suffix),
       '#rootless':: { 'function': { help: |||
-        Whether the container runtime is running as a non-privileged user. 
+        Whether the container runtime is running as a non-privileged user.
       ||| } },
       rootless(suffix=''):: refSelf.plain('.rootless%s' % suffix),
       '#type':: { 'function': { help: |||
-        Specifies the plugin runtime type. Currently only `container` is supported. 
+        Specifies the plugin runtime type. Currently only `container` is supported.
       ||| } },
       type(suffix=''):: refSelf.plain('.type%s' % suffix),
     },

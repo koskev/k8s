@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, mount):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_kv_secrets_list_v2+: {
@@ -16,7 +18,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path where KV-V2 engine is mounted 
+      Path where KV-V2 engine is mounted
     ||| } },
     withMount(value):: self {
       data+: {
@@ -24,7 +26,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Full named path of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+      Full named path of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
     ||| } },
     withName(value):: self {
       data+: {
@@ -32,7 +34,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -46,23 +48,23 @@
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path where KV-V2 engine is mounted 
+        Path where KV-V2 engine is mounted
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#name':: { 'function': { help: |||
-        Full named path of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+        Full named path of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#names':: { 'function': { help: |||
-        List of all secret names. 
+        List of all secret names.
       ||| } },
       names(suffix=''):: refSelf.plain('.names%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Full path where the KV-V2 secrets are listed. 
+        Full path where the KV-V2 secrets are listed.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, pem_bundle):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_pki_secret_backend_config_ca+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      The PKI secret backend the resource belongs to. 
+      The PKI secret backend the resource belongs to.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withPemBundle':: { 'function': { help: |||
-      The key and certificate PEM bundle. 
+      The key and certificate PEM bundle.
     ||| } },
     withPemBundle(value):: self {
       resource+: {
@@ -46,16 +48,16 @@
     plain(suffix=''):: '${ vault_pki_secret_backend_config_ca.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        The PKI secret backend the resource belongs to. 
+        The PKI secret backend the resource belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#pem_bundle':: { 'function': { help: |||
-        The key and certificate PEM bundle. 
+        The key and certificate PEM bundle.
       ||| } },
       pem_bundle(suffix=''):: refSelf.plain('.pem_bundle%s' % suffix),
     },

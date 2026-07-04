@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, address):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_consul_secret_backend+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withAddress':: { 'function': { help: |||
-      Specifies the address of the Consul instance, provided as "host:port" like "127.0.0.1:8500". 
+      Specifies the address of the Consul instance, provided as "host:port" like "127.0.0.1:8500".
     ||| } },
     withAddress(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withAllowedManagedKeys':: { 'function': { help: |||
-      List of managed key registry entry names that the mount in question is allowed to access 
+      List of managed key registry entry names that the mount in question is allowed to access
     ||| } },
     withAllowedManagedKeys(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withAllowedResponseHeaders':: { 'function': { help: |||
-      List of headers to allow and pass from the request to the plugin 
+      List of headers to allow and pass from the request to the plugin
     ||| } },
     withAllowedResponseHeaders(value):: self {
       resource+: {
@@ -35,7 +37,7 @@
       },
     },
     '#withAuditNonHmacRequestKeys':: { 'function': { help: |||
-      Specifies the list of keys that will not be HMAC'd by audit devices in the request data object. 
+      Specifies the list of keys that will not be HMAC'd by audit devices in the request data object.
     ||| } },
     withAuditNonHmacRequestKeys(value):: self {
       resource+: {
@@ -43,7 +45,7 @@
       },
     },
     '#withAuditNonHmacResponseKeys':: { 'function': { help: |||
-      Specifies the list of keys that will not be HMAC'd by audit devices in the response data object. 
+      Specifies the list of keys that will not be HMAC'd by audit devices in the response data object.
     ||| } },
     withAuditNonHmacResponseKeys(value):: self {
       resource+: {
@@ -51,7 +53,7 @@
       },
     },
     '#withBootstrap':: { 'function': { help: |||
-      Denotes a backend resource that is used to bootstrap the Consul ACL system. Only one resource may be used to bootstrap. 
+      Denotes a backend resource that is used to bootstrap the Consul ACL system. Only one resource may be used to bootstrap.
     ||| } },
     withBootstrap(value):: self {
       resource+: {
@@ -59,7 +61,7 @@
       },
     },
     '#withCaCert':: { 'function': { help: |||
-      CA certificate to use when verifying Consul server certificate, must be x509 PEM encoded. 
+      CA certificate to use when verifying Consul server certificate, must be x509 PEM encoded.
     ||| } },
     withCaCert(value):: self {
       resource+: {
@@ -67,7 +69,7 @@
       },
     },
     '#withClientCert':: { 'function': { help: |||
-      Client certificate used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_key. 
+      Client certificate used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_key.
     ||| } },
     withClientCert(value):: self {
       resource+: {
@@ -75,7 +77,7 @@
       },
     },
     '#withClientKey':: { 'function': { help: |||
-      Client key used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_cert. Mutually exclusive with 'client_key_wo'. 
+      Client key used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_cert. Mutually exclusive with 'client_key_wo'.
     ||| } },
     withClientKey(value):: self {
       resource+: {
@@ -83,7 +85,7 @@
       },
     },
     '#withClientKeyWo':: { 'function': { help: |||
-      Client key used for Consul's TLS communication, must be x509 PEM encoded. This field is write-only and will never be stored in state. Mutually exclusive with 'client_key'. Requires 'client_key_wo_version' to trigger updates. 
+      Client key used for Consul's TLS communication, must be x509 PEM encoded. This field is write-only and will never be stored in state. Mutually exclusive with 'client_key'. Requires 'client_key_wo_version' to trigger updates.
     ||| } },
     withClientKeyWo(value):: self {
       resource+: {
@@ -91,7 +93,7 @@
       },
     },
     '#withClientKeyWoVersion':: { 'function': { help: |||
-      Version counter for the write-only client key. Increment this value to trigger rotation of the client key. Required when using 'client_key_wo'. 
+      Version counter for the write-only client key. Increment this value to trigger rotation of the client key. Required when using 'client_key_wo'.
     ||| } },
     withClientKeyWoVersion(value):: self {
       resource+: {
@@ -99,7 +101,7 @@
       },
     },
     '#withDefaultLeaseTtlSeconds':: { 'function': { help: |||
-      Default lease duration for secrets in seconds 
+      Default lease duration for secrets in seconds
     ||| } },
     withDefaultLeaseTtlSeconds(value):: self {
       resource+: {
@@ -107,7 +109,7 @@
       },
     },
     '#withDelegatedAuthAccessors':: { 'function': { help: |||
-      List of headers to allow and pass from the request to the plugin 
+      List of headers to allow and pass from the request to the plugin
     ||| } },
     withDelegatedAuthAccessors(value):: self {
       resource+: {
@@ -115,7 +117,7 @@
       },
     },
     '#withDescription':: { 'function': { help: |||
-      Human-friendly description of the mount for the backend. 
+      Human-friendly description of the mount for the backend.
     ||| } },
     withDescription(value):: self {
       resource+: {
@@ -123,7 +125,7 @@
       },
     },
     '#withDisableRemount':: { 'function': { help: |||
-      If set, opts out of mount migration on path updates. 
+      If set, opts out of mount migration on path updates.
     ||| } },
     withDisableRemount(value):: self {
       resource+: {
@@ -131,7 +133,7 @@
       },
     },
     '#withExternalEntropyAccess':: { 'function': { help: |||
-      Enable the secrets engine to access Vault's external entropy source 
+      Enable the secrets engine to access Vault's external entropy source
     ||| } },
     withExternalEntropyAccess(value):: self {
       resource+: {
@@ -139,7 +141,7 @@
       },
     },
     '#withForceNoCache':: { 'function': { help: |||
-      If set to true, disables caching. 
+      If set to true, disables caching.
     ||| } },
     withForceNoCache(value):: self {
       resource+: {
@@ -152,7 +154,7 @@
       },
     },
     '#withIdentityTokenKey':: { 'function': { help: |||
-      The key to use for signing plugin workload identity tokens 
+      The key to use for signing plugin workload identity tokens
     ||| } },
     withIdentityTokenKey(value):: self {
       resource+: {
@@ -160,7 +162,7 @@
       },
     },
     '#withListingVisibility':: { 'function': { help: |||
-      Specifies whether to show this mount in the UI-specific listing endpoint 
+      Specifies whether to show this mount in the UI-specific listing endpoint
     ||| } },
     withListingVisibility(value):: self {
       resource+: {
@@ -168,7 +170,7 @@
       },
     },
     '#withLocal':: { 'function': { help: |||
-      Specifies if the secret backend is local only 
+      Specifies if the secret backend is local only
     ||| } },
     withLocal(value):: self {
       resource+: {
@@ -176,7 +178,7 @@
       },
     },
     '#withMaxLeaseTtlSeconds':: { 'function': { help: |||
-      Maximum possible lease duration for secrets in seconds 
+      Maximum possible lease duration for secrets in seconds
     ||| } },
     withMaxLeaseTtlSeconds(value):: self {
       resource+: {
@@ -184,7 +186,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -192,7 +194,7 @@
       },
     },
     '#withOptions':: { 'function': { help: |||
-      Specifies mount type specific options that are passed to the backend 
+      Specifies mount type specific options that are passed to the backend
     ||| } },
     withOptions(value):: self {
       resource+: {
@@ -200,7 +202,7 @@
       },
     },
     '#withPassthroughRequestHeaders':: { 'function': { help: |||
-      List of headers to allow and pass from the request to the plugin 
+      List of headers to allow and pass from the request to the plugin
     ||| } },
     withPassthroughRequestHeaders(value):: self {
       resource+: {
@@ -208,7 +210,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Unique name of the Vault Consul mount to configure 
+      Unique name of the Vault Consul mount to configure
     ||| } },
     withPath(value):: self {
       resource+: {
@@ -216,7 +218,7 @@
       },
     },
     '#withPluginVersion':: { 'function': { help: |||
-      Specifies the semantic version of the plugin to use, e.g. 'v1.0.0' 
+      Specifies the semantic version of the plugin to use, e.g. 'v1.0.0'
     ||| } },
     withPluginVersion(value):: self {
       resource+: {
@@ -224,7 +226,7 @@
       },
     },
     '#withScheme':: { 'function': { help: |||
-      Specifies the URL scheme to use. Defaults to "http". 
+      Specifies the URL scheme to use. Defaults to "http".
     ||| } },
     withScheme(value):: self {
       resource+: {
@@ -232,7 +234,7 @@
       },
     },
     '#withSealWrap':: { 'function': { help: |||
-      Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability 
+      Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability
     ||| } },
     withSealWrap(value):: self {
       resource+: {
@@ -240,7 +242,7 @@
       },
     },
     '#withToken':: { 'function': { help: |||
-      Specifies the Consul token to use when managing or issuing new tokens. Mutually exclusive with 'token_wo'. 
+      Specifies the Consul token to use when managing or issuing new tokens. Mutually exclusive with 'token_wo'.
     ||| } },
     withToken(value):: self {
       resource+: {
@@ -248,7 +250,7 @@
       },
     },
     '#withTokenWo':: { 'function': { help: |||
-      Specifies the Consul token to use when managing or issuing new tokens. This field is write-only and will never be stored in state. Mutually exclusive with 'token'. Requires 'token_wo_version' to trigger updates. 
+      Specifies the Consul token to use when managing or issuing new tokens. This field is write-only and will never be stored in state. Mutually exclusive with 'token'. Requires 'token_wo_version' to trigger updates.
     ||| } },
     withTokenWo(value):: self {
       resource+: {
@@ -256,7 +258,7 @@
       },
     },
     '#withTokenWoVersion':: { 'function': { help: |||
-      Version counter for the write-only token. Increment this value to trigger rotation of the token. Required when using 'token_wo'. 
+      Version counter for the write-only token. Increment this value to trigger rotation of the token. Required when using 'token_wo'.
     ||| } },
     withTokenWoVersion(value):: self {
       resource+: {
@@ -269,132 +271,132 @@
     plain(suffix=''):: '${ vault_consul_secret_backend.%s%s }' % [terraformName, suffix],
     fields:: {
       '#accessor':: { 'function': { help: |||
-        Accessor of the mount 
+        Accessor of the mount
       ||| } },
       accessor(suffix=''):: refSelf.plain('.accessor%s' % suffix),
       '#address':: { 'function': { help: |||
-        Specifies the address of the Consul instance, provided as "host:port" like "127.0.0.1:8500". 
+        Specifies the address of the Consul instance, provided as "host:port" like "127.0.0.1:8500".
       ||| } },
       address(suffix=''):: refSelf.plain('.address%s' % suffix),
       '#allowed_managed_keys':: { 'function': { help: |||
-        List of managed key registry entry names that the mount in question is allowed to access 
+        List of managed key registry entry names that the mount in question is allowed to access
       ||| } },
       allowed_managed_keys(suffix=''):: refSelf.plain('.allowed_managed_keys%s' % suffix),
       '#allowed_response_headers':: { 'function': { help: |||
-        List of headers to allow and pass from the request to the plugin 
+        List of headers to allow and pass from the request to the plugin
       ||| } },
       allowed_response_headers(suffix=''):: refSelf.plain('.allowed_response_headers%s' % suffix),
       '#audit_non_hmac_request_keys':: { 'function': { help: |||
-        Specifies the list of keys that will not be HMAC'd by audit devices in the request data object. 
+        Specifies the list of keys that will not be HMAC'd by audit devices in the request data object.
       ||| } },
       audit_non_hmac_request_keys(suffix=''):: refSelf.plain('.audit_non_hmac_request_keys%s' % suffix),
       '#audit_non_hmac_response_keys':: { 'function': { help: |||
-        Specifies the list of keys that will not be HMAC'd by audit devices in the response data object. 
+        Specifies the list of keys that will not be HMAC'd by audit devices in the response data object.
       ||| } },
       audit_non_hmac_response_keys(suffix=''):: refSelf.plain('.audit_non_hmac_response_keys%s' % suffix),
       '#bootstrap':: { 'function': { help: |||
-        Denotes a backend resource that is used to bootstrap the Consul ACL system. Only one resource may be used to bootstrap. 
+        Denotes a backend resource that is used to bootstrap the Consul ACL system. Only one resource may be used to bootstrap.
       ||| } },
       bootstrap(suffix=''):: refSelf.plain('.bootstrap%s' % suffix),
       '#ca_cert':: { 'function': { help: |||
-        CA certificate to use when verifying Consul server certificate, must be x509 PEM encoded. 
+        CA certificate to use when verifying Consul server certificate, must be x509 PEM encoded.
       ||| } },
       ca_cert(suffix=''):: refSelf.plain('.ca_cert%s' % suffix),
       '#client_cert':: { 'function': { help: |||
-        Client certificate used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_key. 
+        Client certificate used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_key.
       ||| } },
       client_cert(suffix=''):: refSelf.plain('.client_cert%s' % suffix),
       '#client_key':: { 'function': { help: |||
-        Client key used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_cert. Mutually exclusive with 'client_key_wo'. 
+        Client key used for Consul's TLS communication, must be x509 PEM encoded and if this is set you need to also set client_cert. Mutually exclusive with 'client_key_wo'.
       ||| } },
       client_key(suffix=''):: refSelf.plain('.client_key%s' % suffix),
       '#client_key_wo':: { 'function': { help: |||
-        Client key used for Consul's TLS communication, must be x509 PEM encoded. This field is write-only and will never be stored in state. Mutually exclusive with 'client_key'. Requires 'client_key_wo_version' to trigger updates. 
+        Client key used for Consul's TLS communication, must be x509 PEM encoded. This field is write-only and will never be stored in state. Mutually exclusive with 'client_key'. Requires 'client_key_wo_version' to trigger updates.
       ||| } },
       client_key_wo(suffix=''):: refSelf.plain('.client_key_wo%s' % suffix),
       '#client_key_wo_version':: { 'function': { help: |||
-        Version counter for the write-only client key. Increment this value to trigger rotation of the client key. Required when using 'client_key_wo'. 
+        Version counter for the write-only client key. Increment this value to trigger rotation of the client key. Required when using 'client_key_wo'.
       ||| } },
       client_key_wo_version(suffix=''):: refSelf.plain('.client_key_wo_version%s' % suffix),
       '#default_lease_ttl_seconds':: { 'function': { help: |||
-        Default lease duration for secrets in seconds 
+        Default lease duration for secrets in seconds
       ||| } },
       default_lease_ttl_seconds(suffix=''):: refSelf.plain('.default_lease_ttl_seconds%s' % suffix),
       '#delegated_auth_accessors':: { 'function': { help: |||
-        List of headers to allow and pass from the request to the plugin 
+        List of headers to allow and pass from the request to the plugin
       ||| } },
       delegated_auth_accessors(suffix=''):: refSelf.plain('.delegated_auth_accessors%s' % suffix),
       '#description':: { 'function': { help: |||
-        Human-friendly description of the mount for the backend. 
+        Human-friendly description of the mount for the backend.
       ||| } },
       description(suffix=''):: refSelf.plain('.description%s' % suffix),
       '#disable_remount':: { 'function': { help: |||
-        If set, opts out of mount migration on path updates. 
+        If set, opts out of mount migration on path updates.
       ||| } },
       disable_remount(suffix=''):: refSelf.plain('.disable_remount%s' % suffix),
       '#external_entropy_access':: { 'function': { help: |||
-        Enable the secrets engine to access Vault's external entropy source 
+        Enable the secrets engine to access Vault's external entropy source
       ||| } },
       external_entropy_access(suffix=''):: refSelf.plain('.external_entropy_access%s' % suffix),
       '#force_no_cache':: { 'function': { help: |||
-        If set to true, disables caching. 
+        If set to true, disables caching.
       ||| } },
       force_no_cache(suffix=''):: refSelf.plain('.force_no_cache%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#identity_token_key':: { 'function': { help: |||
-        The key to use for signing plugin workload identity tokens 
+        The key to use for signing plugin workload identity tokens
       ||| } },
       identity_token_key(suffix=''):: refSelf.plain('.identity_token_key%s' % suffix),
       '#listing_visibility':: { 'function': { help: |||
-        Specifies whether to show this mount in the UI-specific listing endpoint 
+        Specifies whether to show this mount in the UI-specific listing endpoint
       ||| } },
       listing_visibility(suffix=''):: refSelf.plain('.listing_visibility%s' % suffix),
       '#local':: { 'function': { help: |||
-        Specifies if the secret backend is local only 
+        Specifies if the secret backend is local only
       ||| } },
       'local'(suffix=''):: refSelf.plain('.local%s' % suffix),
       '#max_lease_ttl_seconds':: { 'function': { help: |||
-        Maximum possible lease duration for secrets in seconds 
+        Maximum possible lease duration for secrets in seconds
       ||| } },
       max_lease_ttl_seconds(suffix=''):: refSelf.plain('.max_lease_ttl_seconds%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#options':: { 'function': { help: |||
-        Specifies mount type specific options that are passed to the backend 
+        Specifies mount type specific options that are passed to the backend
       ||| } },
       options(suffix=''):: refSelf.plain('.options%s' % suffix),
       '#passthrough_request_headers':: { 'function': { help: |||
-        List of headers to allow and pass from the request to the plugin 
+        List of headers to allow and pass from the request to the plugin
       ||| } },
       passthrough_request_headers(suffix=''):: refSelf.plain('.passthrough_request_headers%s' % suffix),
       '#path':: { 'function': { help: |||
-        Unique name of the Vault Consul mount to configure 
+        Unique name of the Vault Consul mount to configure
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#plugin_version':: { 'function': { help: |||
-        Specifies the semantic version of the plugin to use, e.g. 'v1.0.0' 
+        Specifies the semantic version of the plugin to use, e.g. 'v1.0.0'
       ||| } },
       plugin_version(suffix=''):: refSelf.plain('.plugin_version%s' % suffix),
       '#scheme':: { 'function': { help: |||
-        Specifies the URL scheme to use. Defaults to "http". 
+        Specifies the URL scheme to use. Defaults to "http".
       ||| } },
       scheme(suffix=''):: refSelf.plain('.scheme%s' % suffix),
       '#seal_wrap':: { 'function': { help: |||
-        Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability 
+        Enable seal wrapping for the mount, causing values stored by the mount to be wrapped by the seal's encryption capability
       ||| } },
       seal_wrap(suffix=''):: refSelf.plain('.seal_wrap%s' % suffix),
       '#token':: { 'function': { help: |||
-        Specifies the Consul token to use when managing or issuing new tokens. Mutually exclusive with 'token_wo'. 
+        Specifies the Consul token to use when managing or issuing new tokens. Mutually exclusive with 'token_wo'.
       ||| } },
       token(suffix=''):: refSelf.plain('.token%s' % suffix),
       '#token_wo':: { 'function': { help: |||
-        Specifies the Consul token to use when managing or issuing new tokens. This field is write-only and will never be stored in state. Mutually exclusive with 'token'. Requires 'token_wo_version' to trigger updates. 
+        Specifies the Consul token to use when managing or issuing new tokens. This field is write-only and will never be stored in state. Mutually exclusive with 'token'. Requires 'token_wo_version' to trigger updates.
       ||| } },
       token_wo(suffix=''):: refSelf.plain('.token_wo%s' % suffix),
       '#token_wo_version':: { 'function': { help: |||
-        Version counter for the write-only token. Increment this value to trigger rotation of the token. Required when using 'token_wo'. 
+        Version counter for the write-only token. Increment this value to trigger rotation of the token. Required when using 'token_wo'.
       ||| } },
       token_wo_version(suffix=''):: refSelf.plain('.token_wo_version%s' % suffix),
     },

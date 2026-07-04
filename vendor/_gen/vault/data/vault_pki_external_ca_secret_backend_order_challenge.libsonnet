@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Retrieves ACME challenge details for a specific identifier in an order.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, challenge_type, identifier, mount, order_id, role_name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_pki_external_ca_secret_backend_order_challenge+: {
@@ -15,7 +20,7 @@
   },
   functions(terraformName):: {
     '#withChallengeType':: { 'function': { help: |||
-      The type of ACME challenge to retrieve. Valid values are `http-01`, `dns-01`, `tls-alpn-01`. 
+      The type of ACME challenge to retrieve. Valid values are `http-01`, `dns-01`, `tls-alpn-01`.
     ||| } },
     withChallengeType(value):: self {
       data+: {
@@ -23,7 +28,7 @@
       },
     },
     '#withIdentifier':: { 'function': { help: |||
-      The identifier (domain name) for which to retrieve the challenge. 
+      The identifier (domain name) for which to retrieve the challenge.
     ||| } },
     withIdentifier(value):: self {
       data+: {
@@ -31,7 +36,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      The path where the PKI External CA secret backend is mounted. 
+      The path where the PKI External CA secret backend is mounted.
     ||| } },
     withMount(value):: self {
       data+: {
@@ -39,7 +44,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -47,7 +52,7 @@
       },
     },
     '#withOrderId':: { 'function': { help: |||
-      The unique identifier for the ACME order. 
+      The unique identifier for the ACME order.
     ||| } },
     withOrderId(value):: self {
       data+: {
@@ -55,7 +60,7 @@
       },
     },
     '#withRoleName':: { 'function': { help: |||
-      Name of the role associated with the order. 
+      Name of the role associated with the order.
     ||| } },
     withRoleName(value):: self {
       data+: {
@@ -68,47 +73,47 @@
     plain(suffix=''):: '${ data.vault_pki_external_ca_secret_backend_order_challenge.%s%s }' % [terraformName, suffix],
     fields:: {
       '#challenge_type':: { 'function': { help: |||
-        The type of ACME challenge to retrieve. Valid values are `http-01`, `dns-01`, `tls-alpn-01`. 
+        The type of ACME challenge to retrieve. Valid values are `http-01`, `dns-01`, `tls-alpn-01`.
       ||| } },
       challenge_type(suffix=''):: refSelf.plain('.challenge_type%s' % suffix),
       '#expires':: { 'function': { help: |||
-        Expiry time for the challenge. 
+        Expiry time for the challenge.
       ||| } },
       expires(suffix=''):: refSelf.plain('.expires%s' % suffix),
       '#id':: { 'function': { help: |||
-        Unique identifier for this data source. 
+        Unique identifier for this data source.
       ||| } },
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#identifier':: { 'function': { help: |||
-        The identifier (domain name) for which to retrieve the challenge. 
+        The identifier (domain name) for which to retrieve the challenge.
       ||| } },
       identifier(suffix=''):: refSelf.plain('.identifier%s' % suffix),
       '#key_authorization':: { 'function': { help: |||
-        The key authorization string for the challenge. 
+        The key authorization string for the challenge.
       ||| } },
       key_authorization(suffix=''):: refSelf.plain('.key_authorization%s' % suffix),
       '#mount':: { 'function': { help: |||
-        The path where the PKI External CA secret backend is mounted. 
+        The path where the PKI External CA secret backend is mounted.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#order_id':: { 'function': { help: |||
-        The unique identifier for the ACME order. 
+        The unique identifier for the ACME order.
       ||| } },
       order_id(suffix=''):: refSelf.plain('.order_id%s' % suffix),
       '#role_name':: { 'function': { help: |||
-        Name of the role associated with the order. 
+        Name of the role associated with the order.
       ||| } },
       role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
       '#status':: { 'function': { help: |||
-        The current status of the challenge (e.g., pending, valid, invalid). 
+        The current status of the challenge (e.g., pending, valid, invalid).
       ||| } },
       status(suffix=''):: refSelf.plain('.status%s' % suffix),
       '#token':: { 'function': { help: |||
-        The challenge token provided by the ACME server. 
+        The challenge token provided by the ACME server.
       ||| } },
       token(suffix=''):: refSelf.plain('.token%s' % suffix),
     },

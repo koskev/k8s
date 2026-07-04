@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, key_type, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_ssh_secret_backend_role+: {
@@ -93,7 +95,7 @@
       },
     },
     '#withDefaultExtensions':: { 'function': { help: |||
-      Default extensions to include in SSH certificates. Only applicable for CA key type. 
+      Default extensions to include in SSH certificates. Only applicable for CA key type.
     ||| } },
     withDefaultExtensions(value):: self {
       resource+: {
@@ -101,7 +103,7 @@
       },
     },
     '#withDefaultExtensionsTemplate':: { 'function': { help: |||
-      Specifies if the default_extensions field supports templating. Only applicable for CA key type. 
+      Specifies if the default_extensions field supports templating. Only applicable for CA key type.
     ||| } },
     withDefaultExtensionsTemplate(value):: self {
       resource+: {
@@ -119,7 +121,7 @@
       },
     },
     '#withExcludeCidrList':: { 'function': { help: |||
-      List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types. 
+      List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types.
     ||| } },
     withExcludeCidrList(value):: self {
       resource+: {
@@ -147,7 +149,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Unique name for the role. 
+      Unique name for the role.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -155,7 +157,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -163,7 +165,7 @@
       },
     },
     '#withNotBeforeDuration':: { 'function': { help: |||
-      Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings. 
+      Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings.
     ||| } },
     withNotBeforeDuration(value):: self {
       resource+: {
@@ -171,7 +173,7 @@
       },
     },
     '#withPort':: { 'function': { help: |||
-      Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types. 
+      Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types.
     ||| } },
     withPort(value):: self {
       resource+: {
@@ -205,17 +207,17 @@
       cidr_list(suffix=''):: refSelf.plain('.cidr_list%s' % suffix),
       default_critical_options(suffix=''):: refSelf.plain('.default_critical_options%s' % suffix),
       '#default_extensions':: { 'function': { help: |||
-        Default extensions to include in SSH certificates. Only applicable for CA key type. 
+        Default extensions to include in SSH certificates. Only applicable for CA key type.
       ||| } },
       default_extensions(suffix=''):: refSelf.plain('.default_extensions%s' % suffix),
       '#default_extensions_template':: { 'function': { help: |||
-        Specifies if the default_extensions field supports templating. Only applicable for CA key type. 
+        Specifies if the default_extensions field supports templating. Only applicable for CA key type.
       ||| } },
       default_extensions_template(suffix=''):: refSelf.plain('.default_extensions_template%s' % suffix),
       default_user(suffix=''):: refSelf.plain('.default_user%s' % suffix),
       default_user_template(suffix=''):: refSelf.plain('.default_user_template%s' % suffix),
       '#exclude_cidr_list':: { 'function': { help: |||
-        List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types. 
+        List of CIDR blocks for which credentials cannot be created. Applicable for OTP and dynamic key types.
       ||| } },
       exclude_cidr_list(suffix=''):: refSelf.plain('.exclude_cidr_list%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
@@ -223,19 +225,19 @@
       key_type(suffix=''):: refSelf.plain('.key_type%s' % suffix),
       max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
       '#name':: { 'function': { help: |||
-        Unique name for the role. 
+        Unique name for the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#not_before_duration':: { 'function': { help: |||
-        Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings. 
+        Specifies the duration by which to backdate the ValidAfter property. Uses duration format strings.
       ||| } },
       not_before_duration(suffix=''):: refSelf.plain('.not_before_duration%s' % suffix),
       '#port':: { 'function': { help: |||
-        Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types. 
+        Specifies the port number for SSH connections (default 22). Applicable for OTP and dynamic key types.
       ||| } },
       port(suffix=''):: refSelf.plain('.port%s' % suffix),
       ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),

@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    This resource provides a way to manage environment variables in resources that were created outside of Terraform. This resource provides functionality similar to the `kubectl set env` command.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, api_version, kind):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_env+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withApiVersion':: { 'function': { help: |||
-      Resource API version 
+      Resource API version
     ||| } },
     withApiVersion(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withContainer':: { 'function': { help: |||
-      Name of the container for which we are updating the environment variables. 
+      Name of the container for which we are updating the environment variables.
     ||| } },
     withContainer(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withFieldManager':: { 'function': { help: |||
-      Set the name of the field manager for the specified environment variables. 
+      Set the name of the field manager for the specified environment variables.
     ||| } },
     withFieldManager(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withForce':: { 'function': { help: |||
-      Force overwriting environments that were created or edited outside of Terraform. 
+      Force overwriting environments that were created or edited outside of Terraform.
     ||| } },
     withForce(value):: self {
       resource+: {
@@ -49,7 +54,7 @@
       },
     },
     '#withInitContainer':: { 'function': { help: |||
-      Name of the initContainer for which we are updating the environment variables. 
+      Name of the initContainer for which we are updating the environment variables.
     ||| } },
     withInitContainer(value):: self {
       resource+: {
@@ -57,7 +62,7 @@
       },
     },
     '#withKind':: { 'function': { help: |||
-      Resource Kind 
+      Resource Kind
     ||| } },
     withKind(value):: self {
       resource+: {
@@ -70,28 +75,28 @@
     plain(suffix=''):: '${ kubernetes_env.%s%s }' % [terraformName, suffix],
     fields:: {
       '#api_version':: { 'function': { help: |||
-        Resource API version 
+        Resource API version
       ||| } },
       api_version(suffix=''):: refSelf.plain('.api_version%s' % suffix),
       '#container':: { 'function': { help: |||
-        Name of the container for which we are updating the environment variables. 
+        Name of the container for which we are updating the environment variables.
       ||| } },
       container(suffix=''):: refSelf.plain('.container%s' % suffix),
       '#field_manager':: { 'function': { help: |||
-        Set the name of the field manager for the specified environment variables. 
+        Set the name of the field manager for the specified environment variables.
       ||| } },
       field_manager(suffix=''):: refSelf.plain('.field_manager%s' % suffix),
       '#force':: { 'function': { help: |||
-        Force overwriting environments that were created or edited outside of Terraform. 
+        Force overwriting environments that were created or edited outside of Terraform.
       ||| } },
       force(suffix=''):: refSelf.plain('.force%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#init_container':: { 'function': { help: |||
-        Name of the initContainer for which we are updating the environment variables. 
+        Name of the initContainer for which we are updating the environment variables.
       ||| } },
       init_container(suffix=''):: refSelf.plain('.init_container%s' % suffix),
       '#kind':: { 'function': { help: |||
-        Resource Kind 
+        Resource Kind
       ||| } },
       kind(suffix=''):: refSelf.plain('.kind%s' % suffix),
     },

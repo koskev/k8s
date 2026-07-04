@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Manages a user for the Userpass auth method in Vault.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, mount, username):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_userpass_auth_backend_user+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withAliasMetadata':: { 'function': { help: |||
-      A map of string to string that will be set as metadata on the identity alias 
+      A map of string to string that will be set as metadata on the identity alias
     ||| } },
     withAliasMetadata(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Mount path for the Userpass auth engine in Vault. 
+      Mount path for the Userpass auth engine in Vault.
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withPasswordHashWo':: { 'function': { help: |||
-      Pre-hashed password for this user in bcrypt format. Available in Vault 1.17 and later. Mutually exclusive with password_wo. 
+      Pre-hashed password for this user in bcrypt format. Available in Vault 1.17 and later. Mutually exclusive with password_wo.
     ||| } },
     withPasswordHashWo(value):: self {
       resource+: {
@@ -44,7 +49,7 @@
       },
     },
     '#withPasswordHashWoVersion':: { 'function': { help: |||
-      Version counter for the write-only `password_hash_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password hash changes. Increment this value whenever you update `password_hash_wo` to ensure the new password hash is sent to Vault. 
+      Version counter for the write-only `password_hash_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password hash changes. Increment this value whenever you update `password_hash_wo` to ensure the new password hash is sent to Vault.
     ||| } },
     withPasswordHashWoVersion(value):: self {
       resource+: {
@@ -52,7 +57,7 @@
       },
     },
     '#withPasswordWo':: { 'function': { help: |||
-      Password for this user. This is a write-only field and will not be read back from Vault. 
+      Password for this user. This is a write-only field and will not be read back from Vault.
     ||| } },
     withPasswordWo(value):: self {
       resource+: {
@@ -60,7 +65,7 @@
       },
     },
     '#withPasswordWoVersion':: { 'function': { help: |||
-      Version counter for the write-only `password_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password changes. Increment this value whenever you update `password_wo` to ensure the new password is sent to Vault. 
+      Version counter for the write-only `password_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password changes. Increment this value whenever you update `password_wo` to ensure the new password is sent to Vault.
     ||| } },
     withPasswordWoVersion(value):: self {
       resource+: {
@@ -68,7 +73,7 @@
       },
     },
     '#withTokenBoundCidrs':: { 'function': { help: |||
-      Specifies the blocks of IP addresses which are allowed to use the generated token 
+      Specifies the blocks of IP addresses which are allowed to use the generated token
     ||| } },
     withTokenBoundCidrs(value):: self {
       resource+: {
@@ -76,7 +81,7 @@
       },
     },
     '#withTokenExplicitMaxTtl':: { 'function': { help: |||
-      Generated Token's Explicit Maximum TTL in seconds 
+      Generated Token's Explicit Maximum TTL in seconds
     ||| } },
     withTokenExplicitMaxTtl(value):: self {
       resource+: {
@@ -84,7 +89,7 @@
       },
     },
     '#withTokenMaxTtl':: { 'function': { help: |||
-      The maximum lifetime of the generated token 
+      The maximum lifetime of the generated token
     ||| } },
     withTokenMaxTtl(value):: self {
       resource+: {
@@ -92,7 +97,7 @@
       },
     },
     '#withTokenNoDefaultPolicy':: { 'function': { help: |||
-      If true, the 'default' policy will not automatically be added to generated tokens 
+      If true, the 'default' policy will not automatically be added to generated tokens
     ||| } },
     withTokenNoDefaultPolicy(value):: self {
       resource+: {
@@ -100,7 +105,7 @@
       },
     },
     '#withTokenNumUses':: { 'function': { help: |||
-      The maximum number of times a token may be used, a value of zero means unlimited 
+      The maximum number of times a token may be used, a value of zero means unlimited
     ||| } },
     withTokenNumUses(value):: self {
       resource+: {
@@ -108,7 +113,7 @@
       },
     },
     '#withTokenPeriod':: { 'function': { help: |||
-      Generated Token's Period 
+      Generated Token's Period
     ||| } },
     withTokenPeriod(value):: self {
       resource+: {
@@ -116,7 +121,7 @@
       },
     },
     '#withTokenPolicies':: { 'function': { help: |||
-      Generated Token's Policies 
+      Generated Token's Policies
     ||| } },
     withTokenPolicies(value):: self {
       resource+: {
@@ -124,7 +129,7 @@
       },
     },
     '#withTokenTtl':: { 'function': { help: |||
-      The initial ttl of the token to generate in seconds 
+      The initial ttl of the token to generate in seconds
     ||| } },
     withTokenTtl(value):: self {
       resource+: {
@@ -132,7 +137,7 @@
       },
     },
     '#withTokenType':: { 'function': { help: |||
-      The type of token to generate, service or batch 
+      The type of token to generate, service or batch
     ||| } },
     withTokenType(value):: self {
       resource+: {
@@ -140,7 +145,7 @@
       },
     },
     '#withUsername':: { 'function': { help: |||
-      Username for this Userpass user. 
+      Username for this Userpass user.
     ||| } },
     withUsername(value):: self {
       resource+: {
@@ -153,71 +158,71 @@
     plain(suffix=''):: '${ vault_userpass_auth_backend_user.%s%s }' % [terraformName, suffix],
     fields:: {
       '#alias_metadata':: { 'function': { help: |||
-        A map of string to string that will be set as metadata on the identity alias 
+        A map of string to string that will be set as metadata on the identity alias
       ||| } },
       alias_metadata(suffix=''):: refSelf.plain('.alias_metadata%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Mount path for the Userpass auth engine in Vault. 
+        Mount path for the Userpass auth engine in Vault.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#password_hash_wo':: { 'function': { help: |||
-        Pre-hashed password for this user in bcrypt format. Available in Vault 1.17 and later. Mutually exclusive with password_wo. 
+        Pre-hashed password for this user in bcrypt format. Available in Vault 1.17 and later. Mutually exclusive with password_wo.
       ||| } },
       password_hash_wo(suffix=''):: refSelf.plain('.password_hash_wo%s' % suffix),
       '#password_hash_wo_version':: { 'function': { help: |||
-        Version counter for the write-only `password_hash_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password hash changes. Increment this value whenever you update `password_hash_wo` to ensure the new password hash is sent to Vault. 
+        Version counter for the write-only `password_hash_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password hash changes. Increment this value whenever you update `password_hash_wo` to ensure the new password hash is sent to Vault.
       ||| } },
       password_hash_wo_version(suffix=''):: refSelf.plain('.password_hash_wo_version%s' % suffix),
       '#password_wo':: { 'function': { help: |||
-        Password for this user. This is a write-only field and will not be read back from Vault. 
+        Password for this user. This is a write-only field and will not be read back from Vault.
       ||| } },
       password_wo(suffix=''):: refSelf.plain('.password_wo%s' % suffix),
       '#password_wo_version':: { 'function': { help: |||
-        Version counter for the write-only `password_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password changes. Increment this value whenever you update `password_wo` to ensure the new password is sent to Vault. 
+        Version counter for the write-only `password_wo` field. Since write-only values are not stored in state, Terraform cannot detect when the password changes. Increment this value whenever you update `password_wo` to ensure the new password is sent to Vault.
       ||| } },
       password_wo_version(suffix=''):: refSelf.plain('.password_wo_version%s' % suffix),
       '#token_bound_cidrs':: { 'function': { help: |||
-        Specifies the blocks of IP addresses which are allowed to use the generated token 
+        Specifies the blocks of IP addresses which are allowed to use the generated token
       ||| } },
       token_bound_cidrs(suffix=''):: refSelf.plain('.token_bound_cidrs%s' % suffix),
       '#token_explicit_max_ttl':: { 'function': { help: |||
-        Generated Token's Explicit Maximum TTL in seconds 
+        Generated Token's Explicit Maximum TTL in seconds
       ||| } },
       token_explicit_max_ttl(suffix=''):: refSelf.plain('.token_explicit_max_ttl%s' % suffix),
       '#token_max_ttl':: { 'function': { help: |||
-        The maximum lifetime of the generated token 
+        The maximum lifetime of the generated token
       ||| } },
       token_max_ttl(suffix=''):: refSelf.plain('.token_max_ttl%s' % suffix),
       '#token_no_default_policy':: { 'function': { help: |||
-        If true, the 'default' policy will not automatically be added to generated tokens 
+        If true, the 'default' policy will not automatically be added to generated tokens
       ||| } },
       token_no_default_policy(suffix=''):: refSelf.plain('.token_no_default_policy%s' % suffix),
       '#token_num_uses':: { 'function': { help: |||
-        The maximum number of times a token may be used, a value of zero means unlimited 
+        The maximum number of times a token may be used, a value of zero means unlimited
       ||| } },
       token_num_uses(suffix=''):: refSelf.plain('.token_num_uses%s' % suffix),
       '#token_period':: { 'function': { help: |||
-        Generated Token's Period 
+        Generated Token's Period
       ||| } },
       token_period(suffix=''):: refSelf.plain('.token_period%s' % suffix),
       '#token_policies':: { 'function': { help: |||
-        Generated Token's Policies 
+        Generated Token's Policies
       ||| } },
       token_policies(suffix=''):: refSelf.plain('.token_policies%s' % suffix),
       '#token_ttl':: { 'function': { help: |||
-        The initial ttl of the token to generate in seconds 
+        The initial ttl of the token to generate in seconds
       ||| } },
       token_ttl(suffix=''):: refSelf.plain('.token_ttl%s' % suffix),
       '#token_type':: { 'function': { help: |||
-        The type of token to generate, service or batch 
+        The type of token to generate, service or batch
       ||| } },
       token_type(suffix=''):: refSelf.plain('.token_type%s' % suffix),
       '#username':: { 'function': { help: |||
-        Username for this Userpass user. 
+        Username for this Userpass user.
       ||| } },
       username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },

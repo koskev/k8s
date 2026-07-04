@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, name, policy):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_policy+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withAllowOverwrite':: { 'function': { help: |||
-      Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes. 
+      Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes.
     ||| } },
     withAllowOverwrite(value):: self {
       resource+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the policy 
+      Name of the policy
     ||| } },
     withName(value):: self {
       resource+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withPolicy':: { 'function': { help: |||
-      The policy document 
+      The policy document
     ||| } },
     withPolicy(value):: self {
       resource+: {
@@ -54,20 +56,20 @@
     plain(suffix=''):: '${ vault_policy.%s%s }' % [terraformName, suffix],
     fields:: {
       '#allow_overwrite':: { 'function': { help: |||
-        Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes. 
+        Allow overwriting an existing policy. Defaults to `true` for backwards compatibility purposes.
       ||| } },
       allow_overwrite(suffix=''):: refSelf.plain('.allow_overwrite%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the policy 
+        Name of the policy
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#policy':: { 'function': { help: |||
-        The policy document 
+        The policy document
       ||| } },
       policy(suffix=''):: refSelf.plain('.policy%s' % suffix),
     },

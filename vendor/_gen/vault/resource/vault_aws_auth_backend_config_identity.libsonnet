@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_aws_auth_backend_config_identity+: {
@@ -10,7 +12,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Unique name of the auth backend to configure. 
+      Unique name of the auth backend to configure.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -18,7 +20,7 @@
       },
     },
     '#withEc2Alias':: { 'function': { help: |||
-      Configures how to generate the identity alias when using the ec2 auth method. 
+      Configures how to generate the identity alias when using the ec2 auth method.
     ||| } },
     withEc2Alias(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withEc2Metadata':: { 'function': { help: |||
-      The metadata to include on the token returned by the login endpoint. 
+      The metadata to include on the token returned by the login endpoint.
     ||| } },
     withEc2Metadata(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withIamAlias':: { 'function': { help: |||
-      How to generate the identity alias when using the iam auth method. 
+      How to generate the identity alias when using the iam auth method.
     ||| } },
     withIamAlias(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withIamMetadata':: { 'function': { help: |||
-      The metadata to include on the token returned by the login endpoint. 
+      The metadata to include on the token returned by the login endpoint.
     ||| } },
     withIamMetadata(value):: self {
       resource+: {
@@ -55,7 +57,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -68,28 +70,28 @@
     plain(suffix=''):: '${ vault_aws_auth_backend_config_identity.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Unique name of the auth backend to configure. 
+        Unique name of the auth backend to configure.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#ec2_alias':: { 'function': { help: |||
-        Configures how to generate the identity alias when using the ec2 auth method. 
+        Configures how to generate the identity alias when using the ec2 auth method.
       ||| } },
       ec2_alias(suffix=''):: refSelf.plain('.ec2_alias%s' % suffix),
       '#ec2_metadata':: { 'function': { help: |||
-        The metadata to include on the token returned by the login endpoint. 
+        The metadata to include on the token returned by the login endpoint.
       ||| } },
       ec2_metadata(suffix=''):: refSelf.plain('.ec2_metadata%s' % suffix),
       '#iam_alias':: { 'function': { help: |||
-        How to generate the identity alias when using the iam auth method. 
+        How to generate the identity alias when using the iam auth method.
       ||| } },
       iam_alias(suffix=''):: refSelf.plain('.iam_alias%s' % suffix),
       '#iam_metadata':: { 'function': { help: |||
-        The metadata to include on the token returned by the login endpoint. 
+        The metadata to include on the token returned by the login endpoint.
       ||| } },
       iam_metadata(suffix=''):: refSelf.plain('.iam_metadata%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
     },

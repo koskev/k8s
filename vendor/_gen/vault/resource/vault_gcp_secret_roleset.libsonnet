@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, project, roleset):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_gcp_secret_roleset+: {
@@ -13,7 +15,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      Path where the GCP secrets engine is mounted. 
+      Path where the GCP secrets engine is mounted.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -26,7 +28,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -34,7 +36,7 @@
       },
     },
     '#withProject':: { 'function': { help: |||
-      Name of the GCP project that this roleset's service account will belong to. 
+      Name of the GCP project that this roleset's service account will belong to.
     ||| } },
     withProject(value):: self {
       resource+: {
@@ -42,7 +44,7 @@
       },
     },
     '#withRoleset':: { 'function': { help: |||
-      Name of the RoleSet to create 
+      Name of the RoleSet to create
     ||| } },
     withRoleset(value):: self {
       resource+: {
@@ -50,7 +52,7 @@
       },
     },
     '#withSecretType':: { 'function': { help: |||
-      Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key` 
+      Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key`
     ||| } },
     withSecretType(value):: self {
       resource+: {
@@ -58,7 +60,7 @@
       },
     },
     '#withTokenScopes':: { 'function': { help: |||
-      List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only)  
+      List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only) 
     ||| } },
     withTokenScopes(value):: self {
       resource+: {
@@ -71,32 +73,32 @@
     plain(suffix=''):: '${ vault_gcp_secret_roleset.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        Path where the GCP secrets engine is mounted. 
+        Path where the GCP secrets engine is mounted.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#project':: { 'function': { help: |||
-        Name of the GCP project that this roleset's service account will belong to. 
+        Name of the GCP project that this roleset's service account will belong to.
       ||| } },
       project(suffix=''):: refSelf.plain('.project%s' % suffix),
       '#roleset':: { 'function': { help: |||
-        Name of the RoleSet to create 
+        Name of the RoleSet to create
       ||| } },
       roleset(suffix=''):: refSelf.plain('.roleset%s' % suffix),
       '#secret_type':: { 'function': { help: |||
-        Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key` 
+        Type of secret generated for this role set. Defaults to `access_token`. Accepted values: `access_token`, `service_account_key`
       ||| } },
       secret_type(suffix=''):: refSelf.plain('.secret_type%s' % suffix),
       '#service_account_email':: { 'function': { help: |||
-        Email of the service account created by Vault for this Roleset 
+        Email of the service account created by Vault for this Roleset
       ||| } },
       service_account_email(suffix=''):: refSelf.plain('.service_account_email%s' % suffix),
       '#token_scopes':: { 'function': { help: |||
-        List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only)  
+        List of OAuth scopes to assign to `access_token` secrets generated under this role set (`access_token` role sets only) 
       ||| } },
       token_scopes(suffix=''):: refSelf.plain('.token_scopes%s' % suffix),
     },

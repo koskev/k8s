@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, mount, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_kv_secret_subkeys_v2+: {
@@ -12,7 +14,7 @@
   },
   functions(terraformName):: {
     '#withDepth':: { 'function': { help: |||
-      Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist. 
+      Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist.
     ||| } },
     withDepth(value):: self {
       data+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path where KV-V2 engine is mounted 
+      Path where KV-V2 engine is mounted
     ||| } },
     withMount(value):: self {
       data+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+      Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
     ||| } },
     withName(value):: self {
       data+: {
@@ -41,7 +43,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -49,7 +51,7 @@
       },
     },
     '#withVersion':: { 'function': { help: |||
-      Specifies the version to return. If not set the latest version is returned. 
+      Specifies the version to return. If not set the latest version is returned.
     ||| } },
     withVersion(value):: self {
       data+: {
@@ -62,36 +64,36 @@
     plain(suffix=''):: '${ data.vault_kv_secret_subkeys_v2.%s%s }' % [terraformName, suffix],
     fields:: {
       '#data':: { 'function': { help: |||
-        Subkeys stored as a map of strings. 
+        Subkeys stored as a map of strings.
       ||| } },
       data(suffix=''):: refSelf.plain('.data%s' % suffix),
       '#data_json':: { 'function': { help: |||
-        Subkeys for the KV-V2 secret read from Vault. 
+        Subkeys for the KV-V2 secret read from Vault.
       ||| } },
       data_json(suffix=''):: refSelf.plain('.data_json%s' % suffix),
       '#depth':: { 'function': { help: |||
-        Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist. 
+        Specifies the deepest nesting level to provide in the output.If non-zero, keys that reside at the specified depth value will be artificially treated as leaves and will thus be 'null' even if further underlying sub-keys exist.
       ||| } },
       depth(suffix=''):: refSelf.plain('.depth%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path where KV-V2 engine is mounted 
+        Path where KV-V2 engine is mounted
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#name':: { 'function': { help: |||
-        Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz' 
+        Full name of the secret. For a nested secret, the name is the nested path excluding the mount and data prefix. For example, for a secret at 'kvv2/data/foo/bar/baz', the name is 'foo/bar/baz'
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#path':: { 'function': { help: |||
-        Full path where the generic secret will be written. 
+        Full path where the generic secret will be written.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#version':: { 'function': { help: |||
-        Specifies the version to return. If not set the latest version is returned. 
+        Specifies the version to return. If not set the latest version is returned.
       ||| } },
       version(suffix=''):: refSelf.plain('.version%s' % suffix),
     },

@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, mount, role_name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_ldap_static_credentials+: {
@@ -17,7 +19,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      LDAP Secret Backend to read credentials from. 
+      LDAP Secret Backend to read credentials from.
     ||| } },
     withMount(value):: self {
       data+: {
@@ -25,7 +27,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -33,7 +35,7 @@
       },
     },
     '#withRoleName':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withRoleName(value):: self {
       data+: {
@@ -46,44 +48,44 @@
     plain(suffix=''):: '${ data.vault_ldap_static_credentials.%s%s }' % [terraformName, suffix],
     fields:: {
       '#dn':: { 'function': { help: |||
-        Distinguished name (DN) of the existing LDAP entry to manage password rotation for. 
+        Distinguished name (DN) of the existing LDAP entry to manage password rotation for.
       ||| } },
       dn(suffix=''):: refSelf.plain('.dn%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#last_password':: { 'function': { help: |||
-        Last known password for the static role. 
+        Last known password for the static role.
       ||| } },
       last_password(suffix=''):: refSelf.plain('.last_password%s' % suffix),
       '#last_vault_rotation':: { 'function': { help: |||
-        Last time Vault rotated this static role's password. 
+        Last time Vault rotated this static role's password.
       ||| } },
       last_vault_rotation(suffix=''):: refSelf.plain('.last_vault_rotation%s' % suffix),
       '#mount':: { 'function': { help: |||
-        LDAP Secret Backend to read credentials from. 
+        LDAP Secret Backend to read credentials from.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#password':: { 'function': { help: |||
-        Password for the static role. 
+        Password for the static role.
       ||| } },
       password(suffix=''):: refSelf.plain('.password%s' % suffix),
       '#role_name':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       role_name(suffix=''):: refSelf.plain('.role_name%s' % suffix),
       '#rotation_period':: { 'function': { help: |||
-        How often Vault should rotate the password of the user entry. 
+        How often Vault should rotate the password of the user entry.
       ||| } },
       rotation_period(suffix=''):: refSelf.plain('.rotation_period%s' % suffix),
       '#ttl':: { 'function': { help: |||
-        Duration in seconds after which the issued credential should expire. 
+        Duration in seconds after which the issued credential should expire.
       ||| } },
       ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
       '#username':: { 'function': { help: |||
-        Name of the static role. 
+        Name of the static role.
       ||| } },
       username(suffix=''):: refSelf.plain('.username%s' % suffix),
     },

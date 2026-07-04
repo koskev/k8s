@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, backend, creation_statements, db_name, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_database_secret_backend_role+: {
@@ -14,7 +16,7 @@
   },
   functions(terraformName):: {
     '#withBackend':: { 'function': { help: |||
-      The path of the Database Secret Backend the role belongs to. 
+      The path of the Database Secret Backend the role belongs to.
     ||| } },
     withBackend(value):: self {
       resource+: {
@@ -22,7 +24,7 @@
       },
     },
     '#withCreationStatements':: { 'function': { help: |||
-      Database statements to execute to create and configure a user. 
+      Database statements to execute to create and configure a user.
     ||| } },
     withCreationStatements(value):: self {
       resource+: {
@@ -30,7 +32,7 @@
       },
     },
     '#withCredentialConfig':: { 'function': { help: |||
-      Specifies the configuration for the given credential_type. 
+      Specifies the configuration for the given credential_type.
     ||| } },
     withCredentialConfig(value):: self {
       resource+: {
@@ -38,7 +40,7 @@
       },
     },
     '#withCredentialType':: { 'function': { help: |||
-      Specifies the type of credential that will be generated for the role. 
+      Specifies the type of credential that will be generated for the role.
     ||| } },
     withCredentialType(value):: self {
       resource+: {
@@ -46,7 +48,7 @@
       },
     },
     '#withDbName':: { 'function': { help: |||
-      Database connection to use for this role. 
+      Database connection to use for this role.
     ||| } },
     withDbName(value):: self {
       resource+: {
@@ -54,7 +56,7 @@
       },
     },
     '#withDefaultTtl':: { 'function': { help: |||
-      Default TTL for leases associated with this role, in seconds. 
+      Default TTL for leases associated with this role, in seconds.
     ||| } },
     withDefaultTtl(value):: self {
       resource+: {
@@ -67,7 +69,7 @@
       },
     },
     '#withMaxTtl':: { 'function': { help: |||
-      Maximum TTL for leases associated with this role, in seconds. 
+      Maximum TTL for leases associated with this role, in seconds.
     ||| } },
     withMaxTtl(value):: self {
       resource+: {
@@ -75,7 +77,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Unique name for the role. 
+      Unique name for the role.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -83,7 +85,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -91,7 +93,7 @@
       },
     },
     '#withRenewStatements':: { 'function': { help: |||
-      Database statements to execute to renew a user. 
+      Database statements to execute to renew a user.
     ||| } },
     withRenewStatements(value):: self {
       resource+: {
@@ -99,7 +101,7 @@
       },
     },
     '#withRevocationStatements':: { 'function': { help: |||
-      Database statements to execute to revoke a user. 
+      Database statements to execute to revoke a user.
     ||| } },
     withRevocationStatements(value):: self {
       resource+: {
@@ -107,7 +109,7 @@
       },
     },
     '#withRollbackStatements':: { 'function': { help: |||
-      Database statements to execute to rollback a create operation in the event of an error. 
+      Database statements to execute to rollback a create operation in the event of an error.
     ||| } },
     withRollbackStatements(value):: self {
       resource+: {
@@ -120,52 +122,52 @@
     plain(suffix=''):: '${ vault_database_secret_backend_role.%s%s }' % [terraformName, suffix],
     fields:: {
       '#backend':: { 'function': { help: |||
-        The path of the Database Secret Backend the role belongs to. 
+        The path of the Database Secret Backend the role belongs to.
       ||| } },
       backend(suffix=''):: refSelf.plain('.backend%s' % suffix),
       '#creation_statements':: { 'function': { help: |||
-        Database statements to execute to create and configure a user. 
+        Database statements to execute to create and configure a user.
       ||| } },
       creation_statements(suffix=''):: refSelf.plain('.creation_statements%s' % suffix),
       '#credential_config':: { 'function': { help: |||
-        Specifies the configuration for the given credential_type. 
+        Specifies the configuration for the given credential_type.
       ||| } },
       credential_config(suffix=''):: refSelf.plain('.credential_config%s' % suffix),
       '#credential_type':: { 'function': { help: |||
-        Specifies the type of credential that will be generated for the role. 
+        Specifies the type of credential that will be generated for the role.
       ||| } },
       credential_type(suffix=''):: refSelf.plain('.credential_type%s' % suffix),
       '#db_name':: { 'function': { help: |||
-        Database connection to use for this role. 
+        Database connection to use for this role.
       ||| } },
       db_name(suffix=''):: refSelf.plain('.db_name%s' % suffix),
       '#default_ttl':: { 'function': { help: |||
-        Default TTL for leases associated with this role, in seconds. 
+        Default TTL for leases associated with this role, in seconds.
       ||| } },
       default_ttl(suffix=''):: refSelf.plain('.default_ttl%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#max_ttl':: { 'function': { help: |||
-        Maximum TTL for leases associated with this role, in seconds. 
+        Maximum TTL for leases associated with this role, in seconds.
       ||| } },
       max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
       '#name':: { 'function': { help: |||
-        Unique name for the role. 
+        Unique name for the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#renew_statements':: { 'function': { help: |||
-        Database statements to execute to renew a user. 
+        Database statements to execute to renew a user.
       ||| } },
       renew_statements(suffix=''):: refSelf.plain('.renew_statements%s' % suffix),
       '#revocation_statements':: { 'function': { help: |||
-        Database statements to execute to revoke a user. 
+        Database statements to execute to revoke a user.
       ||| } },
       revocation_statements(suffix=''):: refSelf.plain('.revocation_statements%s' % suffix),
       '#rollback_statements':: { 'function': { help: |||
-        Database statements to execute to rollback a create operation in the event of an error. 
+        Database statements to execute to rollback a create operation in the event of an error.
       ||| } },
       rollback_statements(suffix=''):: refSelf.plain('.rollback_statements%s' % suffix),
     },

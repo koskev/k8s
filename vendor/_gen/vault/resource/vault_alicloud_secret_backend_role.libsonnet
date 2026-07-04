@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Manages an AliCloud Secrets Engine role in Vault.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, mount, name):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_alicloud_secret_backend_role+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withMaxTtl':: { 'function': { help: |||
-      The maximum allowed lifetime of credentials issued using this role. 
+      The maximum allowed lifetime of credentials issued using this role.
     ||| } },
     withMaxTtl(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withMount':: { 'function': { help: |||
-      Path of the AliCloud Secret Backend the role belongs to. 
+      Path of the AliCloud Secret Backend the role belongs to.
     ||| } },
     withMount(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the role. 
+      Name of the role.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -44,7 +49,7 @@
       },
     },
     '#withRoleArn':: { 'function': { help: |||
-      ARN of the RAM role to assume. If provided, inline_policies and remote_policies should be blank. The trusted principal of the role must be configured to allow assumption by the access key and secret configured in the backend. 
+      ARN of the RAM role to assume. If provided, inline_policies and remote_policies should be blank. The trusted principal of the role must be configured to allow assumption by the access key and secret configured in the backend.
     ||| } },
     withRoleArn(value):: self {
       resource+: {
@@ -52,7 +57,7 @@
       },
     },
     '#withTtl':: { 'function': { help: |||
-      Duration in seconds after which the issued credentials should expire. Defaults to 0, in which case the value will fallback to the system/mount defaults. 
+      Duration in seconds after which the issued credentials should expire. Defaults to 0, in which case the value will fallback to the system/mount defaults.
     ||| } },
     withTtl(value):: self {
       resource+: {
@@ -65,27 +70,27 @@
     plain(suffix=''):: '${ vault_alicloud_secret_backend_role.%s%s }' % [terraformName, suffix],
     fields:: {
       '#max_ttl':: { 'function': { help: |||
-        The maximum allowed lifetime of credentials issued using this role. 
+        The maximum allowed lifetime of credentials issued using this role.
       ||| } },
       max_ttl(suffix=''):: refSelf.plain('.max_ttl%s' % suffix),
       '#mount':: { 'function': { help: |||
-        Path of the AliCloud Secret Backend the role belongs to. 
+        Path of the AliCloud Secret Backend the role belongs to.
       ||| } },
       mount(suffix=''):: refSelf.plain('.mount%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the role. 
+        Name of the role.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#role_arn':: { 'function': { help: |||
-        ARN of the RAM role to assume. If provided, inline_policies and remote_policies should be blank. The trusted principal of the role must be configured to allow assumption by the access key and secret configured in the backend. 
+        ARN of the RAM role to assume. If provided, inline_policies and remote_policies should be blank. The trusted principal of the role must be configured to allow assumption by the access key and secret configured in the backend.
       ||| } },
       role_arn(suffix=''):: refSelf.plain('.role_arn%s' % suffix),
       '#ttl':: { 'function': { help: |||
-        Duration in seconds after which the issued credentials should expire. Defaults to 0, in which case the value will fallback to the system/mount defaults. 
+        Duration in seconds after which the issued credentials should expire. Defaults to 0, in which case the value will fallback to the system/mount defaults.
       ||| } },
       ttl(suffix=''):: refSelf.plain('.ttl%s' % suffix),
     },

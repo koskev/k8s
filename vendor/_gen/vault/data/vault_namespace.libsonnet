@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_namespace+: {
@@ -15,7 +17,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       data+: {
@@ -23,7 +25,7 @@
       },
     },
     '#withPath':: { 'function': { help: |||
-      Namespace path. 
+      Namespace path.
     ||| } },
     withPath(value):: self {
       data+: {
@@ -36,24 +38,24 @@
     plain(suffix=''):: '${ data.vault_namespace.%s%s }' % [terraformName, suffix],
     fields:: {
       '#custom_metadata':: { 'function': { help: |||
-        Metadata associated with this namespace. 
+        Metadata associated with this namespace.
       ||| } },
       custom_metadata(suffix=''):: refSelf.plain('.custom_metadata%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#namespace_id':: { 'function': { help: |||
-        Namespace ID. 
+        Namespace ID.
       ||| } },
       namespace_id(suffix=''):: refSelf.plain('.namespace_id%s' % suffix),
       '#path':: { 'function': { help: |||
-        Namespace path. 
+        Namespace path.
       ||| } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
       '#path_fq':: { 'function': { help: |||
-        The fully qualified namespace path. 
+        The fully qualified namespace path.
       ||| } },
       path_fq(suffix=''):: refSelf.plain('.path_fq%s' % suffix),
     },

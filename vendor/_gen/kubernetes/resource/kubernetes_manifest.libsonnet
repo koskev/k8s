@@ -1,5 +1,7 @@
 {
+  local outerSelf = self,
   new(terraformName, manifest):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_manifest+: {
@@ -11,7 +13,7 @@
   },
   functions(terraformName):: {
     '#withComputedFields':: { 'function': { help: |||
-      List of manifest fields whose values can be altered by the API server during 'apply'. Defaults to: ["metadata.annotations", "metadata.labels"] 
+      List of manifest fields whose values can be altered by the API server during 'apply'. Defaults to: ["metadata.annotations", "metadata.labels"]
     ||| } },
     withComputedFields(value):: self {
       resource+: {
@@ -19,7 +21,7 @@
       },
     },
     '#withManifest':: { 'function': { help: |||
-      A Kubernetes manifest describing the desired state of the resource in HCL format. 
+      A Kubernetes manifest describing the desired state of the resource in HCL format.
     ||| } },
     withManifest(value):: self {
       resource+: {
@@ -27,7 +29,7 @@
       },
     },
     '#withObject':: { 'function': { help: |||
-      The resulting resource state, as returned by the API server after applying the desired state from `manifest`. 
+      The resulting resource state, as returned by the API server after applying the desired state from `manifest`.
     ||| } },
     withObject(value):: self {
       resource+: {
@@ -35,7 +37,7 @@
       },
     },
     '#withWaitFor':: { 'function': { help: |||
-      A map of attribute paths and desired patterns to be matched. After each apply the provider will wait for all attributes listed here to reach a value that matches the desired pattern. 
+      A map of attribute paths and desired patterns to be matched. After each apply the provider will wait for all attributes listed here to reach a value that matches the desired pattern.
     ||| } },
     withWaitFor(value):: self {
       resource+: {
@@ -48,19 +50,19 @@
     plain(suffix=''):: '${ kubernetes_manifest.%s%s }' % [terraformName, suffix],
     fields:: {
       '#computed_fields':: { 'function': { help: |||
-        List of manifest fields whose values can be altered by the API server during 'apply'. Defaults to: ["metadata.annotations", "metadata.labels"] 
+        List of manifest fields whose values can be altered by the API server during 'apply'. Defaults to: ["metadata.annotations", "metadata.labels"]
       ||| } },
       computed_fields(suffix=''):: refSelf.plain('.computed_fields%s' % suffix),
       '#manifest':: { 'function': { help: |||
-        A Kubernetes manifest describing the desired state of the resource in HCL format. 
+        A Kubernetes manifest describing the desired state of the resource in HCL format.
       ||| } },
       manifest(suffix=''):: refSelf.plain('.manifest%s' % suffix),
       '#object':: { 'function': { help: |||
-        The resulting resource state, as returned by the API server after applying the desired state from `manifest`. 
+        The resulting resource state, as returned by the API server after applying the desired state from `manifest`.
       ||| } },
       object(suffix=''):: refSelf.plain('.object%s' % suffix),
       '#wait_for':: { 'function': { help: |||
-        A map of attribute paths and desired patterns to be matched. After each apply the provider will wait for all attributes listed here to reach a value that matches the desired pattern. 
+        A map of attribute paths and desired patterns to be matched. After each apply the provider will wait for all attributes listed here to reach a value that matches the desired pattern.
       ||| } },
       wait_for(suffix=''):: refSelf.plain('.wait_for%s' % suffix),
     },

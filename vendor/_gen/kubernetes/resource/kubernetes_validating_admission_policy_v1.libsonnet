@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Validating Admission Policy Resource
+  ||| } },
+  local outerSelf = self,
   new(terraformName, spec):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       kubernetes_validating_admission_policy_v1+: {
@@ -11,7 +16,7 @@
   },
   functions(terraformName):: {
     '#withId':: { 'function': { help: |||
-      The unique ID for this terraform resource 
+      The unique ID for this terraform resource
     ||| } },
     withId(value):: self {
       resource+: {
@@ -19,7 +24,7 @@
       },
     },
     '#withMetadata':: { 'function': { help: |||
-      Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata 
+      Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
     ||| } },
     withMetadata(value):: self {
       resource+: {
@@ -27,7 +32,7 @@
       },
     },
     '#withSpec':: { 'function': { help: |||
-      Rule defining a set of permissions for the role 
+      Rule defining a set of permissions for the role
     ||| } },
     withSpec(value):: self {
       resource+: {
@@ -40,15 +45,15 @@
     plain(suffix=''):: '${ kubernetes_validating_admission_policy_v1.%s%s }' % [terraformName, suffix],
     fields:: {
       '#id':: { 'function': { help: |||
-        The unique ID for this terraform resource 
+        The unique ID for this terraform resource
       ||| } },
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#metadata':: { 'function': { help: |||
-        Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata 
+        Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
       ||| } },
       metadata(suffix=''):: refSelf.plain('.metadata%s' % suffix),
       '#spec':: { 'function': { help: |||
-        Rule defining a set of permissions for the role 
+        Rule defining a set of permissions for the role
       ||| } },
       spec(suffix=''):: refSelf.plain('.spec%s' % suffix),
     },

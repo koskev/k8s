@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Provides a resource to manage Password Policies.
+  ||| } },
+  local outerSelf = self,
   new(terraformName, name, policy):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     resource+: {
       vault_password_policy+: {
@@ -12,7 +17,7 @@
   },
   functions(terraformName):: {
     '#withEntropySource':: { 'function': { help: |||
-      Specifies an override to the default source of entropy (randomness) used to generate the passwords. Must be one of: '', 'platform', or 'seal'. Requires Vault 1.21+. 
+      Specifies an override to the default source of entropy (randomness) used to generate the passwords. Must be one of: '', 'platform', or 'seal'. Requires Vault 1.21+.
     ||| } },
     withEntropySource(value):: self {
       resource+: {
@@ -20,7 +25,7 @@
       },
     },
     '#withName':: { 'function': { help: |||
-      Name of the password policy. 
+      Name of the password policy.
     ||| } },
     withName(value):: self {
       resource+: {
@@ -28,7 +33,7 @@
       },
     },
     '#withNamespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise) 
+      Target namespace. (requires Enterprise)
     ||| } },
     withNamespace(value):: self {
       resource+: {
@@ -36,7 +41,7 @@
       },
     },
     '#withPolicy':: { 'function': { help: |||
-      The password policy document 
+      The password policy document
     ||| } },
     withPolicy(value):: self {
       resource+: {
@@ -49,20 +54,20 @@
     plain(suffix=''):: '${ vault_password_policy.%s%s }' % [terraformName, suffix],
     fields:: {
       '#entropy_source':: { 'function': { help: |||
-        Specifies an override to the default source of entropy (randomness) used to generate the passwords. Must be one of: '', 'platform', or 'seal'. Requires Vault 1.21+. 
+        Specifies an override to the default source of entropy (randomness) used to generate the passwords. Must be one of: '', 'platform', or 'seal'. Requires Vault 1.21+.
       ||| } },
       entropy_source(suffix=''):: refSelf.plain('.entropy_source%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#name':: { 'function': { help: |||
-        Name of the password policy. 
+        Name of the password policy.
       ||| } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
       '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise) 
+        Target namespace. (requires Enterprise)
       ||| } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
       '#policy':: { 'function': { help: |||
-        The password policy document 
+        The password policy document
       ||| } },
       policy(suffix=''):: refSelf.plain('.policy%s' % suffix),
     },

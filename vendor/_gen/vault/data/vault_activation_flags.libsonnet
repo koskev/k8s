@@ -1,5 +1,10 @@
 {
+  '#new':: { 'function': { help: |||
+    Reads activation flags from Vault.
+  ||| } },
+  local outerSelf = self,
   new(terraformName):: self.functions(terraformName) {
+    ref():: outerSelf.ref(terraformName),
     _type:: 'tf',
     data+: {
       vault_activation_flags+: {
@@ -15,15 +20,15 @@
     plain(suffix=''):: '${ data.vault_activation_flags.%s%s }' % [terraformName, suffix],
     fields:: {
       '#activated_flags':: { 'function': { help: |||
-        List of activated feature flags. 
+        List of activated feature flags.
       ||| } },
       activated_flags(suffix=''):: refSelf.plain('.activated_flags%s' % suffix),
       '#id':: { 'function': { help: |||
-        Unique identifier for this data source. 
+        Unique identifier for this data source.
       ||| } },
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       '#unactivated_flags':: { 'function': { help: |||
-        List of unactivated feature flags. 
+        List of unactivated feature flags.
       ||| } },
       unactivated_flags(suffix=''):: refSelf.plain('.unactivated_flags%s' % suffix),
     },
