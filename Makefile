@@ -43,6 +43,10 @@ login:
 lint-tf: build
 	tflint --chdir $(BUILD_DIR)
 
+.PHONY: lint-jsonnet
+lint-jsonnet: 
+	grustonnet-lint -j . -j lib argocd lib
+
 .PHONY: apply
 apply: build tf-apply
 
