@@ -4,6 +4,7 @@ local compiler = import 'utils/compile.libsonnet';
   local tf = self,
 
   providers:: (import 'vendor/_gen/modules.libsonnet'),
+  call(val):: '${ %s }' % val,
   base(type, resource, name, body):: {
     _type:: compiler.types.tf,
     [type]+: {
