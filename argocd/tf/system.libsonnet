@@ -25,6 +25,7 @@ local config_path = '~/.kube/config';
   },
   tf.provider('vault'),
   tf.provider('sops'),
+  tf.provider('desec'),
   tf.provider('kubernetes', {
     config_path: config_path,
   }),

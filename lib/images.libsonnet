@@ -302,5 +302,9 @@
       source: 'hashicorp/kubernetes',
       version: '3.2.1',
     },
+    desec: {
+      source: 'timofurrer/desec',
+      version: '0.6.2',
+    },
   },
 }
