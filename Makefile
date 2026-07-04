@@ -56,6 +56,9 @@ plan: build tf-plan
 .PHONY: init
 init: build tf-init
 
+renovate.json: renovate.jsonnet
+	jsonnet ./renovate.jsonnet > renovate.json
+
 
 .PHONY: clean
 clean:

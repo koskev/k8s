@@ -1,88 +1,101 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "prConcurrentLimit": 20,
-  "kubernetes": {
-    "fileMatch": [
-      "\\.ya?ml$"
-    ]
-  },
-  "argocd": {
-    "fileMatch": [
-      "\\.ya?ml$"
-    ]
-  },
-  "flux": {
-    "fileMatch": [
-      "\\.ya?ml$"
-    ]
-  },
-  "customManagers": [
-    {
-      "customType": "regex",
+   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+   "argocd": {
       "fileMatch": [
-        "\\.ya?ml$"
-      ],
-      "datasourceTemplate": "docker",
-      "matchStrings": [
-        "image:\\s*repository:\\s?(?<depName>.*?)\\s*tag:\\s?(?<currentValue>[\\w+\\.\\-]*)"
+         "\\.ya?ml$"
       ]
-    },
-    {
-      "description": "Helm repos for all strings that start with 'https'",
-      "customType": "regex",
+   },
+   "customManagers": [
+      {
+         "customType": "regex",
+         "datasourceTemplate": "docker",
+         "fileMatch": [
+            "\\.ya?ml$"
+         ],
+         "matchStrings": [
+            "\\s*image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',",
+            "\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',\\s*image:\\s?'(?<depName>.*?)',"
+         ]
+      },
+      {
+         "customType": "regex",
+         "datasourceTemplate": "helm",
+         "description": "Helm repos for all strings that start with 'https'",
+         "fileMatch": [
+            "images.libsonnet"
+         ],
+         "matchStrings": [
+            "\\s*chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',",
+            "\\s*chart:\\s?'(?<depName>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',",
+            "\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*chart:\\s?'(?<depName>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',",
+            "\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*chart:\\s?'(?<depName>.*?)',",
+            "\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',",
+            "\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*chart:\\s?'(?<depName>.*?)',"
+         ]
+      },
+      {
+         "customType": "regex",
+         "datasourceTemplate": "docker",
+         "description": "Helm OCI repos for all strings that do not contain a ':'",
+         "fileMatch": [
+            "images.libsonnet"
+         ],
+         "matchStrings": [
+            "\\s*chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',",
+            "\\s*chart:\\s?'(?<depName>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',",
+            "\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*chart:\\s?'(?<depName>.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',",
+            "\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*chart:\\s?'(?<depName>.*?)',",
+            "\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',",
+            "\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*chart:\\s?'(?<depName>.*?)',"
+         ],
+         "packageNameTemplate": "{{registryUrl}}/{{depName}}"
+      },
+      {
+         "customType": "regex",
+         "datasourceTemplate": "docker",
+         "description": "Matches docker images with an optional pinned hash",
+         "fileMatch": [
+            "images.libsonnet"
+         ],
+         "matchStrings": [
+            "\\s*image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',",
+            "\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',\\s*image:\\s?'(?<depName>.*?)',"
+         ]
+      },
+      {
+         "customType": "regex",
+         "datasourceTemplate": "terraform-provider",
+         "description": "Terraform dependencies",
+         "fileMatch": [
+            "images.libsonnet"
+         ],
+         "matchStrings": [
+            "\\s*source:\\s?'(?<depName>.*?)',\\s*version:\\s?'(?<currentValue>.*?)',",
+            "\\s*version:\\s?'(?<currentValue>.*?)',\\s*source:\\s?'(?<depName>.*?)',"
+         ],
+         "versioningTemplate": "hashicorp"
+      }
+   ],
+   "flux": {
       "fileMatch": [
-        "images.libsonnet"
-      ],
-      "datasourceTemplate": "helm",
-      "matchStrings": [
-        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>https.*?)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
+         "\\.ya?ml$"
       ]
-    },
-    {
-      "description": "Helm OCI repos for all strings that do not contain a ':'",
-      "customType": "regex",
+   },
+   "kubernetes": {
       "fileMatch": [
-        "images.libsonnet"
-      ],
-      "datasourceTemplate": "docker",
-      "matchStrings": [
-        "chart:\\s?'(?<depName>.*?)',\\s*repoURL:\\s?'(?<registryUrl>[^:].*)',\\s*targetRevision:\\s?'(?<currentValue>[\\w+\\.\\-]*)',"
-      ],
-      "packageNameTemplate": "{{registryUrl}}/{{depName}}"
-    },
-    {
-      "description": "Matches docker images with an optional pinned hash",
-      "customType": "regex",
-      "fileMatch": [
-        "images.libsonnet"
-      ],
-      "datasourceTemplate": "docker",
-      "matchStrings": [
-        "image:\\s?'(?<depName>.*?)',\\s*tag:\\s?'(?<currentValue>[\\w+\\.\\-]*)(?:@(?<currentDigest>sha256:[a-f0-9]+))?',"
+         "\\.ya?ml$"
       ]
-    },
-    {
-      "description": "Terraform dependencies",
-      "customType": "regex",
-      "fileMatch": [
-        "images.libsonnet"
-      ],
-      "datasourceTemplate": "terraform-provider",
-      "versioningTemplate": "hashicorp",
-      "matchStrings": [
-        "source:\\s?'(?<depName>.*?)',\\s*version:\\s?'(?<currentValue>.*?)',"
-      ]
-    }
-  ],
-  "packageRules": [
-    {
-      "matchDatasources": [
-        "terraform-provider",
-        "terraform-module"
-      ],
-      "registryUrls": [
-        "https://registry.opentofu.org"
-      ]
-    }
-  ]
+   },
+   "packageRules": [
+      {
+         "matchDatasources": [
+            "terraform-provider",
+            "terraform-module"
+         ],
+         "registryUrls": [
+            "https://registry.opentofu.org"
+         ]
+      }
+   ],
+   "prConcurrentLimit": 20
 }
