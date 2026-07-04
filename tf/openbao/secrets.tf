@@ -8,10 +8,6 @@ data "sops_file" "openbao_secrets" {
   source_file = each.value
 }
 
-data "sops_file" "luks" {
-  for_each = fileset(path.module, "luks/*.{json,yaml}")
-  source_file = each.value
-}
 
 data "sops_file" "system" {
   for_each = fileset(path.module, "system/*.{json,yaml}")
@@ -54,38 +50,4 @@ resource "vault_kv_secret_v2" "system" {
   mount                      = vault_mount.system.path
   name                       = split(".", basename(each.key))[0]
   data_json                  =  jsonencode(each.value.data)
-}
-
-resource "vault_mount" "luks" {
-  path        = "luks"
-  type        = "kv"
-  options     = { version = "2" }
-  description = "Luks encryption keys"
-}
-
-resource "vault_kv_secret_v2" "luks" {
-  for_each = data.sops_file.luks
-  mount                      = vault_mount.luks.path
-  name                       = split(".", basename(each.key))[0]
-  data_json                  =  jsonencode(each.value.data)
-}
-
-resource "vault_policy" "luks" {
-  for_each = data.sops_file.luks
-  name                       = split(".", basename(each.key))[0]
-  policy = <<EOT
-  path "luks/data/${split(".", basename(each.key))[0]}*" {
-    capabilities = ["read", "list"]
-  }
-  EOT
-}
-resource "vault_auth_backend" "approle" {
-  type = "approle"
-}
-
-resource "vault_approle_auth_backend_role" "luks" {
-  for_each = data.sops_file.luks
-  role_name= split(".", basename(each.key))[0]
-  backend         = vault_auth_backend.approle.path
-  token_policies  = [vault_policy.luks[each.key].id]
 }
