@@ -198,7 +198,7 @@
     },
     pihole: {
       image: 'pihole/pihole',
-      tag: '2026.05.0@sha256:70a9c11171ded2eee735d88c127996da209284a329d50f5ae59c06b861d401b3',
+      tag: '2026.07.2@sha256:f7d1be836e3bc608b56d82fc9904f5a831cdfbc0dc9c6d58f94e4c985c70038b',
     },
     externaldns: {
       image: 'registry.k8s.io/external-dns/external-dns',
