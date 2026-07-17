@@ -6,6 +6,7 @@ function(type=compiler.types.argocd)
     + (import 'pki/pki.libsonnet')
     + (import 'luks/luks.libsonnet')
     + (import 'system/system.libsonnet')
+    + (import 'secrets/secrets.libsonnet')
     ,
     compiler.types.argocd
   )
