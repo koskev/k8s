@@ -30,6 +30,10 @@ $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
+
+generate: argocd/tf/system/system.libsonnet $(BUILD_DIR)/argocd__tf__system__entrypoint.tf.json tf-init
+	terraform-jsonnet-gen -t build -o vendor/_gen
+
 .PHONY: build
 build: $(TF_JSON_FILES) $(SCRIPT_FILES)
 	ln -sf $$(pwd)/tf/openbao/* $(BUILD_DIR)

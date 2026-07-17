@@ -4,3 +4,4 @@ terraform.tfstate*
 *.tf.json
 build/
 *.orig
+vendor/_gen

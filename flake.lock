@@ -834,11 +834,11 @@
         "recordings": "recordings"
       },
       "locked": {
-        "lastModified": 1784278747,
-        "narHash": "sha256-7VTVQAbIlaCnRzdvZiz6OGnWV5O4Oz5CQ1HPF020JLU=",
+        "lastModified": 1784280616,
+        "narHash": "sha256-6f0D1x4npOCiXAzVcgXkYnghkk6b4GuXbZd6F+uiIb0=",
         "owner": "koskev",
         "repo": "terraform-jsonnet-gen",
-        "rev": "14ae78a2548c63bd35461b23b82b0170ff4e15cd",
+        "rev": "6b498130b96d71a17d3772e4e843c860333b295b",
         "type": "github"
       },
       "original": {
