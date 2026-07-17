@@ -1,106 +1,115 @@
 {
   local outerSelf = self,
-  new(terraformName, name):: self.functions(terraformName) {
-    ref():: outerSelf.ref(terraformName),
+  new(terraformName, name):: self.functions(terraformName) + {
     _type:: 'tf',
+    ref():: outerSelf.ref(terraformName),
     resource+: {
-      vault_identity_oidc_assignment+: {
-        [terraformName]+: {
-          name: name,
-        },
-      },
+      vault_identity_oidc_assignment+: { [terraformName]+: {
+        name: name,
+      } },
     },
-  },
+  }
+  ,
   functions(terraformName):: {
-    withForEach(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { for_each: value } },
-      },
-    },
-    withDependsOn(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { depends_on: value } },
-      },
-    },
-    withCount(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { count: value } },
-      },
-    },
-    withLifecycle(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { lifecycle: value } },
-      },
-    },
-    withProvider(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { provider: value } },
-      },
-    },
-    withProviders(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { providers: value } },
-      },
-    },
-    '#entity_ids':: { 'function': { help: |||
-      A list of Vault entity IDs.
-    ||| } },
-    withEntityIds(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { entity_ids: value } },
-      },
-    },
-    '#group_ids':: { 'function': { help: |||
-      A list of Vault group IDs.
-    ||| } },
-    withGroupIds(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { group_ids: value } },
-      },
-    },
-    withId(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#name':: { 'function': { help: |||
-      The name of the assignment.
-    ||| } },
-    withName(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { name: value } },
-      },
-    },
-    '#namespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise)
-    ||| } },
-    withNamespace(value):: self {
-      resource+: {
-        vault_identity_oidc_assignment+: { [terraformName]+: { namespace: value } },
-      },
-    },
-  },
+    withForEach(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { for_each: value } },
+    } },
+    withDependsOn(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { depends_on: value } },
+    } },
+    withCount(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { count: value } },
+    } },
+    withLifecycle(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { lifecycle: value } },
+    } },
+    withProvider(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { provider: value } },
+    } },
+    withProviders(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { providers: value } },
+    } },
+    addCustomData(name, value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { [name]: value } },
+    } },
+    '#withEntityIds':: { 'function': {
+      help:
+        |||
+          A list of Vault entity IDs.
+        |||,
+    } },
+    withEntityIds(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { entity_ids: value } },
+    } },
+    '#withGroupIds':: { 'function': {
+      help:
+        |||
+          A list of Vault group IDs.
+        |||,
+    } },
+    withGroupIds(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { group_ids: value } },
+    } },
+    withId(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { id: value } },
+    } },
+    '#withName':: { 'function': {
+      help:
+        |||
+          The name of the assignment.
+        |||,
+    } },
+    withName(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { name: value } },
+    } },
+    '#withNamespace':: { 'function': {
+      help:
+        |||
+          Target namespace. (requires Enterprise)
+        |||,
+    } },
+    withNamespace(value):: self { resource+: {
+      vault_identity_oidc_assignment+: { [terraformName]+: { namespace: value } },
+    } },
+
+  }
+  ,
   ref(terraformName):: {
     local refSelf = self,
     plain(suffix=''):: '${ vault_identity_oidc_assignment.%s%s }' % [terraformName, suffix],
     fields:: {
-      '#entity_ids':: { 'function': { help: |||
-        A list of Vault entity IDs.
-      ||| } },
+      '#entity_ids':: { 'function': {
+        help:
+          |||
+            A list of Vault entity IDs.
+          |||,
+      } },
       entity_ids(suffix=''):: refSelf.plain('.entity_ids%s' % suffix),
-      '#group_ids':: { 'function': { help: |||
-        A list of Vault group IDs.
-      ||| } },
+      '#group_ids':: { 'function': {
+        help:
+          |||
+            A list of Vault group IDs.
+          |||,
+      } },
       group_ids(suffix=''):: refSelf.plain('.group_ids%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
-      '#name':: { 'function': { help: |||
-        The name of the assignment.
-      ||| } },
+      '#name':: { 'function': {
+        help:
+          |||
+            The name of the assignment.
+          |||,
+      } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
-      '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise)
-      ||| } },
+      '#namespace':: { 'function': {
+        help:
+          |||
+            Target namespace. (requires Enterprise)
+          |||,
+      } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
+
     },
+
   },
+
 }

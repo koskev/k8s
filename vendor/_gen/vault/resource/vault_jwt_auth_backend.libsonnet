@@ -1,343 +1,429 @@
 {
   local outerSelf = self,
-  new(terraformName):: self.functions(terraformName) {
-    ref():: outerSelf.ref(terraformName),
+  new(terraformName):: self.functions(terraformName) + {
     _type:: 'tf',
+    ref():: outerSelf.ref(terraformName),
     resource+: {
-      vault_jwt_auth_backend+: {
-        [terraformName]+: {
-        },
-      },
+      vault_jwt_auth_backend+: { [terraformName]+: {
+      } },
     },
-  },
+  }
+  ,
   functions(terraformName):: {
-    withForEach(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { for_each: value } },
-      },
-    },
-    withDependsOn(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { depends_on: value } },
-      },
-    },
-    withCount(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { count: value } },
-      },
-    },
-    withLifecycle(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { lifecycle: value } },
-      },
-    },
-    withProvider(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { provider: value } },
-      },
-    },
-    withProviders(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { providers: value } },
-      },
-    },
-    '#bound_issuer':: { 'function': { help: |||
-      The value against which to match the iss claim in a JWT
-    ||| } },
-    withBoundIssuer(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { bound_issuer: value } },
-      },
-    },
-    '#default_role':: { 'function': { help: |||
-      The default role to use if none is provided during login
-    ||| } },
-    withDefaultRole(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { default_role: value } },
-      },
-    },
-    '#description':: { 'function': { help: |||
-      The description of the auth backend
-    ||| } },
-    withDescription(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { description: value } },
-      },
-    },
-    '#disable_remount':: { 'function': { help: |||
-      If set, opts out of mount migration on path updates.
-    ||| } },
-    withDisableRemount(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { disable_remount: value } },
-      },
-    },
-    withId(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { id: value } },
-      },
-    },
-    '#jwks_ca_pem':: { 'function': { help: |||
-      The CA certificate or chain of certificates, in PEM format, to use to validate connections to the JWKS URL. If not set, system certificates are used.
-    ||| } },
-    withJwksCaPem(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { jwks_ca_pem: value } },
-      },
-    },
-    '#jwks_pairs':: { 'function': { help: |||
-      List of JWKS URL and optional CA certificate pairs. Cannot be used with 'jwks_url' or 'jwks_ca_pem'. Requires Vault 1.16+.
-    ||| } },
-    withJwksPairs(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { jwks_pairs: value } },
-      },
-    },
-    '#jwks_url':: { 'function': { help: |||
-      JWKS URL to use to authenticate signatures. Cannot be used with 'oidc_discovery_url' or 'jwt_validation_pubkeys'.
-    ||| } },
-    withJwksUrl(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { jwks_url: value } },
-      },
-    },
-    '#jwt_supported_algs':: { 'function': { help: |||
-      A list of supported signing algorithms. Defaults to [RS256]
-    ||| } },
-    withJwtSupportedAlgs(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { jwt_supported_algs: value } },
-      },
-    },
-    '#jwt_validation_pubkeys':: { 'function': { help: |||
-      A list of PEM-encoded public keys to use to authenticate signatures locally. Cannot be used with 'jwks_url' or 'oidc_discovery_url'. 
-    ||| } },
-    withJwtValidationPubkeys(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { jwt_validation_pubkeys: value } },
-      },
-    },
-    '#local':: { 'function': { help: |||
-      Specifies if the auth method is local only
-    ||| } },
-    withLocal(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { 'local': value } },
-      },
-    },
-    '#namespace':: { 'function': { help: |||
-      Target namespace. (requires Enterprise)
-    ||| } },
-    withNamespace(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { namespace: value } },
-      },
-    },
-    '#namespace_in_state':: { 'function': { help: |||
-      Pass namespace in the OIDC state parameter instead of as a separate query parameter. With this setting, the allowed redirect URL(s) in Vault and on the provider side should not contain a namespace query parameter. This means only one redirect URL entry needs to be maintained on the OIDC provider side for all vault namespaces that will be authenticating against it. Defaults to true for new configs.
-    ||| } },
-    withNamespaceInState(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { namespace_in_state: value } },
-      },
-    },
-    '#oidc_client_id':: { 'function': { help: |||
-      Client ID used for OIDC
-    ||| } },
-    withOidcClientId(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_id: value } },
-      },
-    },
-    '#oidc_client_secret':: { 'function': { help: |||
-      Client Secret used for OIDC
-    ||| } },
-    withOidcClientSecret(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret: value } },
-      },
-    },
-    '#oidc_client_secret_wo':: { 'function': { help: |||
-      Write-only Client Secret used for OIDC. This field is recommended over oidc_client_secret for enhanced security.
-    ||| } },
-    withOidcClientSecretWo(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret_wo: value } },
-      },
-    },
-    '#oidc_client_secret_wo_version':: { 'function': { help: |||
-      Version counter for write-only oidc_client_secret field. Increment this value to force update of the secret.
-    ||| } },
-    withOidcClientSecretWoVersion(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret_wo_version: value } },
-      },
-    },
-    '#oidc_discovery_ca_pem':: { 'function': { help: |||
-      The CA certificate or chain of certificates, in PEM format, to use to validate connections to the OIDC Discovery URL. If not set, system certificates are used
-    ||| } },
-    withOidcDiscoveryCaPem(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_discovery_ca_pem: value } },
-      },
-    },
-    '#oidc_discovery_url':: { 'function': { help: |||
-      The OIDC Discovery URL, without any .well-known component (base path). Cannot be used with 'jwks_url' or 'jwt_validation_pubkeys'.
-    ||| } },
-    withOidcDiscoveryUrl(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_discovery_url: value } },
-      },
-    },
-    '#oidc_response_mode':: { 'function': { help: |||
-      The response mode to be used in the OAuth2 request. Allowed values are 'query' and 'form_post'. Defaults to 'query'. If using Vault namespaces, and oidc_response_mode is 'form_post', then 'namespace_in_state' should be set to false.
-    ||| } },
-    withOidcResponseMode(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_response_mode: value } },
-      },
-    },
-    '#oidc_response_types':: { 'function': { help: |||
-      The response types to request. Allowed values are 'code' and 'id_token'. Defaults to 'code'. Note: 'id_token' may only be used if 'oidc_response_mode' is set to 'form_post'.
-    ||| } },
-    withOidcResponseTypes(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { oidc_response_types: value } },
-      },
-    },
-    '#path':: { 'function': { help: |||
-      path to mount the backend
-    ||| } },
-    withPath(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { path: value } },
-      },
-    },
-    '#provider_config':: { 'function': { help: |||
-      Provider specific handling configuration
-    ||| } },
-    withProviderConfig(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { provider_config: value } },
-      },
-    },
-    withTune(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { tune: value } },
-      },
-    },
-    '#type':: { 'function': { help: |||
-      Type of backend. Can be either 'jwt' or 'oidc'
-    ||| } },
-    withType(value):: self {
-      resource+: {
-        vault_jwt_auth_backend+: { [terraformName]+: { type: value } },
-      },
-    },
-  },
+    withForEach(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { for_each: value } },
+    } },
+    withDependsOn(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { depends_on: value } },
+    } },
+    withCount(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { count: value } },
+    } },
+    withLifecycle(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { lifecycle: value } },
+    } },
+    withProvider(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { provider: value } },
+    } },
+    withProviders(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { providers: value } },
+    } },
+    addCustomData(name, value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { [name]: value } },
+    } },
+    '#withBoundIssuer':: { 'function': {
+      help:
+        |||
+          The value against which to match the iss claim in a JWT
+        |||,
+    } },
+    withBoundIssuer(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { bound_issuer: value } },
+    } },
+    '#withDefaultRole':: { 'function': {
+      help:
+        |||
+          The default role to use if none is provided during login
+        |||,
+    } },
+    withDefaultRole(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { default_role: value } },
+    } },
+    '#withDescription':: { 'function': {
+      help:
+        |||
+          The description of the auth backend
+        |||,
+    } },
+    withDescription(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { description: value } },
+    } },
+    '#withDisableRemount':: { 'function': {
+      help:
+        |||
+          If set, opts out of mount migration on path updates.
+        |||,
+    } },
+    withDisableRemount(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { disable_remount: value } },
+    } },
+    withId(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { id: value } },
+    } },
+    '#withJwksCaPem':: { 'function': {
+      help:
+        |||
+          The CA certificate or chain of certificates, in PEM format, to use to validate connections to the JWKS URL. If not set, system certificates are used.
+        |||,
+    } },
+    withJwksCaPem(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { jwks_ca_pem: value } },
+    } },
+    '#withJwksPairs':: { 'function': {
+      help:
+        |||
+          List of JWKS URL and optional CA certificate pairs. Cannot be used with 'jwks_url' or 'jwks_ca_pem'. Requires Vault 1.16+.
+        |||,
+    } },
+    withJwksPairs(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { jwks_pairs: value } },
+    } },
+    '#withJwksUrl':: { 'function': {
+      help:
+        |||
+          JWKS URL to use to authenticate signatures. Cannot be used with 'oidc_discovery_url' or 'jwt_validation_pubkeys'.
+        |||,
+    } },
+    withJwksUrl(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { jwks_url: value } },
+    } },
+    '#withJwtSupportedAlgs':: { 'function': {
+      help:
+        |||
+          A list of supported signing algorithms. Defaults to [RS256]
+        |||,
+    } },
+    withJwtSupportedAlgs(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { jwt_supported_algs: value } },
+    } },
+    '#withJwtValidationPubkeys':: { 'function': {
+      help:
+        |||
+          A list of PEM-encoded public keys to use to authenticate signatures locally. Cannot be used with 'jwks_url' or 'oidc_discovery_url'. 
+        |||,
+    } },
+    withJwtValidationPubkeys(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { jwt_validation_pubkeys: value } },
+    } },
+    '#withLocal':: { 'function': {
+      help:
+        |||
+          Specifies if the auth method is local only
+        |||,
+    } },
+    withLocal(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { 'local': value } },
+    } },
+    '#withNamespace':: { 'function': {
+      help:
+        |||
+          Target namespace. (requires Enterprise)
+        |||,
+    } },
+    withNamespace(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { namespace: value } },
+    } },
+    '#withNamespaceInState':: { 'function': {
+      help:
+        |||
+          Pass namespace in the OIDC state parameter instead of as a separate query parameter. With this setting, the allowed redirect URL(s) in Vault and on the provider side should not contain a namespace query parameter. This means only one redirect URL entry needs to be maintained on the OIDC provider side for all vault namespaces that will be authenticating against it. Defaults to true for new configs.
+        |||,
+    } },
+    withNamespaceInState(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { namespace_in_state: value } },
+    } },
+    '#withOidcClientId':: { 'function': {
+      help:
+        |||
+          Client ID used for OIDC
+        |||,
+    } },
+    withOidcClientId(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_id: value } },
+    } },
+    '#withOidcClientSecret':: { 'function': {
+      help:
+        |||
+          Client Secret used for OIDC
+        |||,
+    } },
+    withOidcClientSecret(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret: value } },
+    } },
+    '#withOidcClientSecretWo':: { 'function': {
+      help:
+        |||
+          Write-only Client Secret used for OIDC. This field is recommended over oidc_client_secret for enhanced security.
+        |||,
+    } },
+    withOidcClientSecretWo(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret_wo: value } },
+    } },
+    '#withOidcClientSecretWoVersion':: { 'function': {
+      help:
+        |||
+          Version counter for write-only oidc_client_secret field. Increment this value to force update of the secret.
+        |||,
+    } },
+    withOidcClientSecretWoVersion(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_client_secret_wo_version: value } },
+    } },
+    '#withOidcDiscoveryCaPem':: { 'function': {
+      help:
+        |||
+          The CA certificate or chain of certificates, in PEM format, to use to validate connections to the OIDC Discovery URL. If not set, system certificates are used
+        |||,
+    } },
+    withOidcDiscoveryCaPem(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_discovery_ca_pem: value } },
+    } },
+    '#withOidcDiscoveryUrl':: { 'function': {
+      help:
+        |||
+          The OIDC Discovery URL, without any .well-known component (base path). Cannot be used with 'jwks_url' or 'jwt_validation_pubkeys'.
+        |||,
+    } },
+    withOidcDiscoveryUrl(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_discovery_url: value } },
+    } },
+    '#withOidcResponseMode':: { 'function': {
+      help:
+        |||
+          The response mode to be used in the OAuth2 request. Allowed values are 'query' and 'form_post'. Defaults to 'query'. If using Vault namespaces, and oidc_response_mode is 'form_post', then 'namespace_in_state' should be set to false.
+        |||,
+    } },
+    withOidcResponseMode(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_response_mode: value } },
+    } },
+    '#withOidcResponseTypes':: { 'function': {
+      help:
+        |||
+          The response types to request. Allowed values are 'code' and 'id_token'. Defaults to 'code'. Note: 'id_token' may only be used if 'oidc_response_mode' is set to 'form_post'.
+        |||,
+    } },
+    withOidcResponseTypes(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { oidc_response_types: value } },
+    } },
+    '#withPath':: { 'function': {
+      help:
+        |||
+          path to mount the backend
+        |||,
+    } },
+    withPath(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { path: value } },
+    } },
+    '#withProviderConfig':: { 'function': {
+      help:
+        |||
+          Provider specific handling configuration
+        |||,
+    } },
+    withProviderConfig(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { provider_config: value } },
+    } },
+    withTune(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { tune: value } },
+    } },
+    '#withType':: { 'function': {
+      help:
+        |||
+          Type of backend. Can be either 'jwt' or 'oidc'
+        |||,
+    } },
+    withType(value):: self { resource+: {
+      vault_jwt_auth_backend+: { [terraformName]+: { type: value } },
+    } },
+
+  }
+  ,
   ref(terraformName):: {
     local refSelf = self,
     plain(suffix=''):: '${ vault_jwt_auth_backend.%s%s }' % [terraformName, suffix],
     fields:: {
-      '#accessor':: { 'function': { help: |||
-        The accessor of the JWT auth backend
-      ||| } },
+      '#accessor':: { 'function': {
+        help:
+          |||
+            The accessor of the JWT auth backend
+          |||,
+      } },
       accessor(suffix=''):: refSelf.plain('.accessor%s' % suffix),
-      '#bound_issuer':: { 'function': { help: |||
-        The value against which to match the iss claim in a JWT
-      ||| } },
+      '#bound_issuer':: { 'function': {
+        help:
+          |||
+            The value against which to match the iss claim in a JWT
+          |||,
+      } },
       bound_issuer(suffix=''):: refSelf.plain('.bound_issuer%s' % suffix),
-      '#default_role':: { 'function': { help: |||
-        The default role to use if none is provided during login
-      ||| } },
+      '#default_role':: { 'function': {
+        help:
+          |||
+            The default role to use if none is provided during login
+          |||,
+      } },
       default_role(suffix=''):: refSelf.plain('.default_role%s' % suffix),
-      '#description':: { 'function': { help: |||
-        The description of the auth backend
-      ||| } },
+      '#description':: { 'function': {
+        help:
+          |||
+            The description of the auth backend
+          |||,
+      } },
       description(suffix=''):: refSelf.plain('.description%s' % suffix),
-      '#disable_remount':: { 'function': { help: |||
-        If set, opts out of mount migration on path updates.
-      ||| } },
+      '#disable_remount':: { 'function': {
+        help:
+          |||
+            If set, opts out of mount migration on path updates.
+          |||,
+      } },
       disable_remount(suffix=''):: refSelf.plain('.disable_remount%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
-      '#jwks_ca_pem':: { 'function': { help: |||
-        The CA certificate or chain of certificates, in PEM format, to use to validate connections to the JWKS URL. If not set, system certificates are used.
-      ||| } },
+      '#jwks_ca_pem':: { 'function': {
+        help:
+          |||
+            The CA certificate or chain of certificates, in PEM format, to use to validate connections to the JWKS URL. If not set, system certificates are used.
+          |||,
+      } },
       jwks_ca_pem(suffix=''):: refSelf.plain('.jwks_ca_pem%s' % suffix),
-      '#jwks_pairs':: { 'function': { help: |||
-        List of JWKS URL and optional CA certificate pairs. Cannot be used with 'jwks_url' or 'jwks_ca_pem'. Requires Vault 1.16+.
-      ||| } },
+      '#jwks_pairs':: { 'function': {
+        help:
+          |||
+            List of JWKS URL and optional CA certificate pairs. Cannot be used with 'jwks_url' or 'jwks_ca_pem'. Requires Vault 1.16+.
+          |||,
+      } },
       jwks_pairs(suffix=''):: refSelf.plain('.jwks_pairs%s' % suffix),
-      '#jwks_url':: { 'function': { help: |||
-        JWKS URL to use to authenticate signatures. Cannot be used with 'oidc_discovery_url' or 'jwt_validation_pubkeys'.
-      ||| } },
+      '#jwks_url':: { 'function': {
+        help:
+          |||
+            JWKS URL to use to authenticate signatures. Cannot be used with 'oidc_discovery_url' or 'jwt_validation_pubkeys'.
+          |||,
+      } },
       jwks_url(suffix=''):: refSelf.plain('.jwks_url%s' % suffix),
-      '#jwt_supported_algs':: { 'function': { help: |||
-        A list of supported signing algorithms. Defaults to [RS256]
-      ||| } },
+      '#jwt_supported_algs':: { 'function': {
+        help:
+          |||
+            A list of supported signing algorithms. Defaults to [RS256]
+          |||,
+      } },
       jwt_supported_algs(suffix=''):: refSelf.plain('.jwt_supported_algs%s' % suffix),
-      '#jwt_validation_pubkeys':: { 'function': { help: |||
-        A list of PEM-encoded public keys to use to authenticate signatures locally. Cannot be used with 'jwks_url' or 'oidc_discovery_url'. 
-      ||| } },
+      '#jwt_validation_pubkeys':: { 'function': {
+        help:
+          |||
+            A list of PEM-encoded public keys to use to authenticate signatures locally. Cannot be used with 'jwks_url' or 'oidc_discovery_url'. 
+          |||,
+      } },
       jwt_validation_pubkeys(suffix=''):: refSelf.plain('.jwt_validation_pubkeys%s' % suffix),
-      '#local':: { 'function': { help: |||
-        Specifies if the auth method is local only
-      ||| } },
+      '#local':: { 'function': {
+        help:
+          |||
+            Specifies if the auth method is local only
+          |||,
+      } },
       'local'(suffix=''):: refSelf.plain('.local%s' % suffix),
-      '#namespace':: { 'function': { help: |||
-        Target namespace. (requires Enterprise)
-      ||| } },
+      '#namespace':: { 'function': {
+        help:
+          |||
+            Target namespace. (requires Enterprise)
+          |||,
+      } },
       namespace(suffix=''):: refSelf.plain('.namespace%s' % suffix),
-      '#namespace_in_state':: { 'function': { help: |||
-        Pass namespace in the OIDC state parameter instead of as a separate query parameter. With this setting, the allowed redirect URL(s) in Vault and on the provider side should not contain a namespace query parameter. This means only one redirect URL entry needs to be maintained on the OIDC provider side for all vault namespaces that will be authenticating against it. Defaults to true for new configs.
-      ||| } },
+      '#namespace_in_state':: { 'function': {
+        help:
+          |||
+            Pass namespace in the OIDC state parameter instead of as a separate query parameter. With this setting, the allowed redirect URL(s) in Vault and on the provider side should not contain a namespace query parameter. This means only one redirect URL entry needs to be maintained on the OIDC provider side for all vault namespaces that will be authenticating against it. Defaults to true for new configs.
+          |||,
+      } },
       namespace_in_state(suffix=''):: refSelf.plain('.namespace_in_state%s' % suffix),
-      '#oidc_client_id':: { 'function': { help: |||
-        Client ID used for OIDC
-      ||| } },
+      '#oidc_client_id':: { 'function': {
+        help:
+          |||
+            Client ID used for OIDC
+          |||,
+      } },
       oidc_client_id(suffix=''):: refSelf.plain('.oidc_client_id%s' % suffix),
-      '#oidc_client_secret':: { 'function': { help: |||
-        Client Secret used for OIDC
-      ||| } },
+      '#oidc_client_secret':: { 'function': {
+        help:
+          |||
+            Client Secret used for OIDC
+          |||,
+      } },
       oidc_client_secret(suffix=''):: refSelf.plain('.oidc_client_secret%s' % suffix),
-      '#oidc_client_secret_wo':: { 'function': { help: |||
-        Write-only Client Secret used for OIDC. This field is recommended over oidc_client_secret for enhanced security.
-      ||| } },
+      '#oidc_client_secret_wo':: { 'function': {
+        help:
+          |||
+            Write-only Client Secret used for OIDC. This field is recommended over oidc_client_secret for enhanced security.
+          |||,
+      } },
       oidc_client_secret_wo(suffix=''):: refSelf.plain('.oidc_client_secret_wo%s' % suffix),
-      '#oidc_client_secret_wo_version':: { 'function': { help: |||
-        Version counter for write-only oidc_client_secret field. Increment this value to force update of the secret.
-      ||| } },
+      '#oidc_client_secret_wo_version':: { 'function': {
+        help:
+          |||
+            Version counter for write-only oidc_client_secret field. Increment this value to force update of the secret.
+          |||,
+      } },
       oidc_client_secret_wo_version(suffix=''):: refSelf.plain('.oidc_client_secret_wo_version%s' % suffix),
-      '#oidc_discovery_ca_pem':: { 'function': { help: |||
-        The CA certificate or chain of certificates, in PEM format, to use to validate connections to the OIDC Discovery URL. If not set, system certificates are used
-      ||| } },
+      '#oidc_discovery_ca_pem':: { 'function': {
+        help:
+          |||
+            The CA certificate or chain of certificates, in PEM format, to use to validate connections to the OIDC Discovery URL. If not set, system certificates are used
+          |||,
+      } },
       oidc_discovery_ca_pem(suffix=''):: refSelf.plain('.oidc_discovery_ca_pem%s' % suffix),
-      '#oidc_discovery_url':: { 'function': { help: |||
-        The OIDC Discovery URL, without any .well-known component (base path). Cannot be used with 'jwks_url' or 'jwt_validation_pubkeys'.
-      ||| } },
+      '#oidc_discovery_url':: { 'function': {
+        help:
+          |||
+            The OIDC Discovery URL, without any .well-known component (base path). Cannot be used with 'jwks_url' or 'jwt_validation_pubkeys'.
+          |||,
+      } },
       oidc_discovery_url(suffix=''):: refSelf.plain('.oidc_discovery_url%s' % suffix),
-      '#oidc_response_mode':: { 'function': { help: |||
-        The response mode to be used in the OAuth2 request. Allowed values are 'query' and 'form_post'. Defaults to 'query'. If using Vault namespaces, and oidc_response_mode is 'form_post', then 'namespace_in_state' should be set to false.
-      ||| } },
+      '#oidc_response_mode':: { 'function': {
+        help:
+          |||
+            The response mode to be used in the OAuth2 request. Allowed values are 'query' and 'form_post'. Defaults to 'query'. If using Vault namespaces, and oidc_response_mode is 'form_post', then 'namespace_in_state' should be set to false.
+          |||,
+      } },
       oidc_response_mode(suffix=''):: refSelf.plain('.oidc_response_mode%s' % suffix),
-      '#oidc_response_types':: { 'function': { help: |||
-        The response types to request. Allowed values are 'code' and 'id_token'. Defaults to 'code'. Note: 'id_token' may only be used if 'oidc_response_mode' is set to 'form_post'.
-      ||| } },
+      '#oidc_response_types':: { 'function': {
+        help:
+          |||
+            The response types to request. Allowed values are 'code' and 'id_token'. Defaults to 'code'. Note: 'id_token' may only be used if 'oidc_response_mode' is set to 'form_post'.
+          |||,
+      } },
       oidc_response_types(suffix=''):: refSelf.plain('.oidc_response_types%s' % suffix),
-      '#path':: { 'function': { help: |||
-        path to mount the backend
-      ||| } },
+      '#path':: { 'function': {
+        help:
+          |||
+            path to mount the backend
+          |||,
+      } },
       path(suffix=''):: refSelf.plain('.path%s' % suffix),
-      '#provider_config':: { 'function': { help: |||
-        Provider specific handling configuration
-      ||| } },
+      '#provider_config':: { 'function': {
+        help:
+          |||
+            Provider specific handling configuration
+          |||,
+      } },
       provider_config(suffix=''):: refSelf.plain('.provider_config%s' % suffix),
       tune(suffix=''):: refSelf.plain('.tune%s' % suffix),
-      '#type':: { 'function': { help: |||
-        Type of backend. Can be either 'jwt' or 'oidc'
-      ||| } },
+      '#type':: { 'function': {
+        help:
+          |||
+            Type of backend. Can be either 'jwt' or 'oidc'
+          |||,
+      } },
       type(suffix=''):: refSelf.plain('.type%s' % suffix),
+
     },
+
   },
+
 }

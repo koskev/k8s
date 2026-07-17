@@ -1,80 +1,86 @@
 {
-  '#new':: { 'function': { help: |||
-    Manages custom response headers returned from the Vault UI. This resource requires `sudo` capability and must be called from the root namespace. **Warning:** Setting `Content-Security-Policy` will override Vault's secure default CSP.
-  ||| } },
   local outerSelf = self,
-  new(terraformName, name, values):: self.functions(terraformName) {
-    ref():: outerSelf.ref(terraformName),
+  '#new':: { 'function': {
+    help:
+      |||
+        Manages custom response headers returned from the Vault UI. This resource requires `sudo` capability and must be called from the root namespace. **Warning:** Setting `Content-Security-Policy` will override Vault's secure default CSP.
+      |||,
+  } },
+  new(terraformName, name, values):: self.functions(terraformName) + {
     _type:: 'tf',
+    ref():: outerSelf.ref(terraformName),
     resource+: {
-      vault_config_ui_header+: {
-        [terraformName]+: {
-          name: name,
-          values: values,
-        },
-      },
+      vault_config_ui_header+: { [terraformName]+: {
+        name: name,
+        values: values,
+      } },
     },
-  },
+  }
+  ,
   functions(terraformName):: {
-    withForEach(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { for_each: value } },
-      },
-    },
-    withDependsOn(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { depends_on: value } },
-      },
-    },
-    withCount(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { count: value } },
-      },
-    },
-    withLifecycle(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { lifecycle: value } },
-      },
-    },
-    withProvider(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { provider: value } },
-      },
-    },
-    withProviders(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { providers: value } },
-      },
-    },
-    '#name':: { 'function': { help: |||
-      The name of the custom header. Cannot start with `X-Vault-`.
-    ||| } },
-    withName(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { name: value } },
-      },
-    },
-    '#values':: { 'function': { help: |||
-      Set of values for the header. At least one value is required. Duplicates are automatically ignored.
-    ||| } },
-    withValues(value):: self {
-      resource+: {
-        vault_config_ui_header+: { [terraformName]+: { values: value } },
-      },
-    },
-  },
+    withForEach(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { for_each: value } },
+    } },
+    withDependsOn(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { depends_on: value } },
+    } },
+    withCount(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { count: value } },
+    } },
+    withLifecycle(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { lifecycle: value } },
+    } },
+    withProvider(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { provider: value } },
+    } },
+    withProviders(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { providers: value } },
+    } },
+    addCustomData(name, value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { [name]: value } },
+    } },
+    '#withName':: { 'function': {
+      help:
+        |||
+          The name of the custom header. Cannot start with `X-Vault-`.
+        |||,
+    } },
+    withName(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { name: value } },
+    } },
+    '#withValues':: { 'function': {
+      help:
+        |||
+          Set of values for the header. At least one value is required. Duplicates are automatically ignored.
+        |||,
+    } },
+    withValues(value):: self { resource+: {
+      vault_config_ui_header+: { [terraformName]+: { values: value } },
+    } },
+
+  }
+  ,
   ref(terraformName):: {
     local refSelf = self,
     plain(suffix=''):: '${ vault_config_ui_header.%s%s }' % [terraformName, suffix],
     fields:: {
-      '#name':: { 'function': { help: |||
-        The name of the custom header. Cannot start with `X-Vault-`.
-      ||| } },
+      '#name':: { 'function': {
+        help:
+          |||
+            The name of the custom header. Cannot start with `X-Vault-`.
+          |||,
+      } },
       name(suffix=''):: refSelf.plain('.name%s' % suffix),
-      '#values':: { 'function': { help: |||
-        Set of values for the header. At least one value is required. Duplicates are automatically ignored.
-      ||| } },
+      '#values':: { 'function': {
+        help:
+          |||
+            Set of values for the header. At least one value is required. Duplicates are automatically ignored.
+          |||,
+      } },
       values(suffix=''):: refSelf.plain('.values%s' % suffix),
+
     },
+
   },
+
 }

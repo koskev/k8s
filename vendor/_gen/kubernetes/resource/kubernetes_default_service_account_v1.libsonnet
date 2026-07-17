@@ -1,73 +1,73 @@
 {
-  '#new':: { 'function': { help: |||
-    A service account provides an identity for processes that run in a Pod. More info: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/.
-  ||| } },
   local outerSelf = self,
-  new(terraformName):: self.functions(terraformName) {
-    ref():: outerSelf.ref(terraformName),
+  '#new':: { 'function': {
+    help:
+      |||
+        A service account provides an identity for processes that run in a Pod. More info: https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/.
+      |||,
+  } },
+  new(terraformName):: self.functions(terraformName) + {
     _type:: 'tf',
+    ref():: outerSelf.ref(terraformName),
     resource+: {
-      kubernetes_default_service_account_v1+: {
-        [terraformName]+: {
-        },
-      },
+      kubernetes_default_service_account_v1+: { [terraformName]+: {
+      } },
     },
-  },
+  }
+  ,
   functions(terraformName):: {
-    withForEach(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { for_each: value } },
-      },
-    },
-    withDependsOn(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { depends_on: value } },
-      },
-    },
-    withCount(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { count: value } },
-      },
-    },
-    withLifecycle(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { lifecycle: value } },
-      },
-    },
-    withProvider(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { provider: value } },
-      },
-    },
-    withProviders(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { providers: value } },
-      },
-    },
-    '#automount_service_account_token':: { 'function': { help: |||
-      Enable automatic mounting of the service account token
-    ||| } },
-    withAutomountServiceAccountToken(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { automount_service_account_token: value } },
-      },
-    },
-    withId(value):: self {
-      resource+: {
-        kubernetes_default_service_account_v1+: { [terraformName]+: { id: value } },
-      },
-    },
-  },
+    withForEach(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { for_each: value } },
+    } },
+    withDependsOn(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { depends_on: value } },
+    } },
+    withCount(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { count: value } },
+    } },
+    withLifecycle(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { lifecycle: value } },
+    } },
+    withProvider(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { provider: value } },
+    } },
+    withProviders(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { providers: value } },
+    } },
+    addCustomData(name, value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { [name]: value } },
+    } },
+    '#withAutomountServiceAccountToken':: { 'function': {
+      help:
+        |||
+          Enable automatic mounting of the service account token
+        |||,
+    } },
+    withAutomountServiceAccountToken(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { automount_service_account_token: value } },
+    } },
+    withId(value):: self { resource+: {
+      kubernetes_default_service_account_v1+: { [terraformName]+: { id: value } },
+    } },
+
+  }
+  ,
   ref(terraformName):: {
     local refSelf = self,
     plain(suffix=''):: '${ kubernetes_default_service_account_v1.%s%s }' % [terraformName, suffix],
     fields:: {
-      '#automount_service_account_token':: { 'function': { help: |||
-        Enable automatic mounting of the service account token
-      ||| } },
+      '#automount_service_account_token':: { 'function': {
+        help:
+          |||
+            Enable automatic mounting of the service account token
+          |||,
+      } },
       automount_service_account_token(suffix=''):: refSelf.plain('.automount_service_account_token%s' % suffix),
       default_secret_name(suffix=''):: refSelf.plain('.default_secret_name%s' % suffix),
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
+
     },
+
   },
+
 }

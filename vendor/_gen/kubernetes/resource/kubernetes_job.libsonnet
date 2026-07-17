@@ -1,66 +1,60 @@
 {
-  '#new':: { 'function': { help: |||
-    A Job creates one or more Pods and ensures that a specified number of them successfully terminate. As pods successfully complete, the Job tracks the successful completions. When a specified number of successful completions is reached, the task (ie, Job) is complete. Deleting a Job will clean up the Pods it created. A simple case is to create one Job object in order to reliably run one Pod to completion. The Job object will start a new Pod if the first Pod fails or is deleted (for example due to a node hardware failure or a node reboot. You can also use a Job to run multiple Pods in parallel. 
-  ||| } },
   local outerSelf = self,
-  new(terraformName):: self.functions(terraformName) {
-    ref():: outerSelf.ref(terraformName),
+  '#new':: { 'function': {
+    help:
+      |||
+        A Job creates one or more Pods and ensures that a specified number of them successfully terminate. As pods successfully complete, the Job tracks the successful completions. When a specified number of successful completions is reached, the task (ie, Job) is complete. Deleting a Job will clean up the Pods it created. A simple case is to create one Job object in order to reliably run one Pod to completion. The Job object will start a new Pod if the first Pod fails or is deleted (for example due to a node hardware failure or a node reboot. You can also use a Job to run multiple Pods in parallel. 
+      |||,
+  } },
+  new(terraformName):: self.functions(terraformName) + {
     _type:: 'tf',
+    ref():: outerSelf.ref(terraformName),
     resource+: {
-      kubernetes_job+: {
-        [terraformName]+: {
-        },
-      },
+      kubernetes_job+: { [terraformName]+: {
+      } },
     },
-  },
+  }
+  ,
   functions(terraformName):: {
-    withForEach(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { for_each: value } },
-      },
-    },
-    withDependsOn(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { depends_on: value } },
-      },
-    },
-    withCount(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { count: value } },
-      },
-    },
-    withLifecycle(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { lifecycle: value } },
-      },
-    },
-    withProvider(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { provider: value } },
-      },
-    },
-    withProviders(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { providers: value } },
-      },
-    },
-    withId(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { id: value } },
-      },
-    },
-    withWaitForCompletion(value):: self {
-      resource+: {
-        kubernetes_job+: { [terraformName]+: { wait_for_completion: value } },
-      },
-    },
-  },
+    withForEach(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { for_each: value } },
+    } },
+    withDependsOn(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { depends_on: value } },
+    } },
+    withCount(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { count: value } },
+    } },
+    withLifecycle(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { lifecycle: value } },
+    } },
+    withProvider(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { provider: value } },
+    } },
+    withProviders(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { providers: value } },
+    } },
+    addCustomData(name, value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { [name]: value } },
+    } },
+    withId(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { id: value } },
+    } },
+    withWaitForCompletion(value):: self { resource+: {
+      kubernetes_job+: { [terraformName]+: { wait_for_completion: value } },
+    } },
+
+  }
+  ,
   ref(terraformName):: {
     local refSelf = self,
     plain(suffix=''):: '${ kubernetes_job.%s%s }' % [terraformName, suffix],
     fields:: {
       id(suffix=''):: refSelf.plain('.id%s' % suffix),
       wait_for_completion(suffix=''):: refSelf.plain('.wait_for_completion%s' % suffix),
+
     },
+
   },
+
 }
