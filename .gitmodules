@@ -1,0 +1,3 @@
+[submodule "vendor/_gen"]
+	path = vendor/_gen
+	url = git@github.com:koskev/k8s_bindings.git
