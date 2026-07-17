@@ -2,6 +2,10 @@
 let
   inherit (inputs.nix-actions.lib) steps;
 
+  checkoutSubmobule = steps.checkout // {
+    "with".submodules = true;
+  };
+
   container = {
     grustonnet = "docker://ghcr.io/koskev/grustonnet-ls:v0.6.3@sha256:f160447c45d184d660954b3b4e186e2d35bb1a4307321cdd043f6d83cd132d41";
   };
@@ -23,7 +27,7 @@ in
         };
         jobs = {
           build.steps = [
-            steps.checkout
+            checkoutSubmobule
             steps.installNix
             {
               run = "nix develop . --command make build";
@@ -39,14 +43,14 @@ in
         };
         jobs = {
           nix.steps = [
-            steps.checkout
+            checkoutSubmobule
             steps.installNix
             {
               run = "nix flake check";
             }
           ];
           jsonnet.steps = [
-            steps.checkout
+            checkoutSubmobule
             {
               uses = container.grustonnet;
               "with" = {
@@ -56,7 +60,7 @@ in
             }
           ];
           tflint.steps = [
-            steps.checkout
+            checkoutSubmobule
             steps.installNix
             {
               run = "nix develop . --command make lint-tf";

@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      with:
+        submodules: true
     - uses: docker://ghcr.io/koskev/grustonnet-ls:v0.6.3@sha256:f160447c45d184d660954b3b4e186e2d35bb1a4307321cdd043f6d83cd132d41
       with:
         args: -j lib argocd lib
@@ -18,6 +20,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      with:
+        submodules: true
     - name: Install nix
       uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15
       with:
@@ -28,6 +32,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+      with:
+        submodules: true
     - name: Install nix
       uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15
       with:
