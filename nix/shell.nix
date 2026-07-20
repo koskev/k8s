@@ -1,6 +1,11 @@
 _: {
   perSystem =
-    { pkgs, inputs', ... }:
+    {
+      pkgs,
+      inputs',
+      self',
+      ...
+    }:
     {
       devShells =
         let
@@ -27,6 +32,7 @@ _: {
                 inputs'.terraform-jsonnet-gen.packages.default
               ]
               ++ sharedDeps;
+            JSONNET_PATH = "${self'.packages.bindings}:.:lib";
           };
           test = pkgs.mkShell {
             nativeBuildInputs = sharedDeps;

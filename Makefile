@@ -31,8 +31,13 @@ $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	jsonnet -J . -J lib --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
 
-generate: argocd/tf/system/system.libsonnet $(BUILD_DIR)/argocd__tf__system__entrypoint.tf.json tf-init
-	terraform-jsonnet-gen -t build -o vendor/_gen
+$(BUILD_DIR)/bootstrap/providers.tf.json:
+	@mkdir -p $(dir $@)
+	echo "{terraform: {required_providers: (import 'lib/images.libsonnet').tf}}" | jsonnet - > $@
+
+generate: $(BUILD_DIR)/bootstrap/providers.tf.json
+	tofu -chdir=$(dir $<) init
+	terraform-jsonnet-gen -t $(dir $<) -o vendor/_gen
 
 .PHONY: build
 build: $(TF_JSON_FILES) $(SCRIPT_FILES)
