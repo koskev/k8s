@@ -26,6 +26,7 @@ local apps = [
   argocd.appSettings(name='borg'),
   //argocd.appSettings(name='authentik'),
   argocd.appSettings(name='authelia'),
+  argocd.appSettings(name='netbird'),
 ];
 
 argocd.addApps(apps)

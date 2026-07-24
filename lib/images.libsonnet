@@ -130,6 +130,11 @@
       repoURL: 'https://charts.authelia.com',
       targetRevision: '0.11.6',
     },
+    netbird: {
+      chart: 'netbird',
+      repoURL: 'https://charts.jaconi.io',
+      targetRevision: '0.15.1',
+    },
   },
   container: {
     renovate: {
