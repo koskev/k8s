@@ -5,6 +5,19 @@
     tf: 'tf',
     script: 'script',
   },
+
+  config():: [
+
+
+  ],
+
+
+  entrypoint(resources, resourceType=outerSelf.types.argocd)::
+    function(input=import 'defaultInput.libsonnet', type=resourceType)
+      assert (std.isArray(resources) && std.all(std.map(function(entry) std.isFunction(entry), resources))) || std.isFunction(resources) : 'Resources needs to be an array of functions or a function';
+      local resourcesArr = if std.isArray(resources) then resources else [resources];
+      outerSelf.build(type, std.map(function(res) res(input), resourcesArr), outerSelf.types.argocd),
+
   build(type=outerSelf.types.argocd, resources, fallback_type=null)::
     local array_of_types = std.prune(
       std.filter(

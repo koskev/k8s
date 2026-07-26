@@ -15,6 +15,7 @@ tf-%: login
 
 
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
+CONFIGS := $(subst ./,,$(shell find ./argocd -name 'config.libsonnet'))
 TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
 SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
 JSONNET_FILES := $(shell find ./argocd -name '*.*sonnet')
@@ -30,6 +31,8 @@ $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
+config: $(CONFIGS)
+	./scripts/build_config.py $^ > lib/defaultConfig.libsonnet
 
 $(BUILD_DIR)/bootstrap/providers.tf.json:
 	@mkdir -p $(dir $@)
@@ -76,3 +79,10 @@ clean:
 .PHONY: test
 test:
 
+
+.PHONY: reconcile-pause
+reconcile-pause:
+	kubectl -n argocd annotate secret argocd-secret argocd.argoproj.io/skip-reconcile=true
+.PHONY: reconcile-resume
+reconcile-resume:
+	kubectl -n argocd annotate secret argocd-secret argocd.argoproj.io/skip-reconcile-

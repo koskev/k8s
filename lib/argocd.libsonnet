@@ -26,7 +26,7 @@ local globals = import 'globals.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='main', recurse=false, project='gpg', autosync=true, exclude=''):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='main', recurse=false, project='gpg', autosync=true, exclude='', input={}):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
@@ -34,10 +34,17 @@ local globals = import 'globals.libsonnet';
           {
             jsonnet: {
               libs: ['lib', 'argocd', '.'],
-              extVars: [{
-                name: 'ARGOCD_BRANCH',
-                value: '$ARGOCD_APP_SOURCE_TARGET_REVISION',
-              }],
+              tlas: if input != {} then [{
+                name: 'input',
+                value: input,
+                code: true,
+              }] else [],
+              extVars: [
+                {
+                  name: 'ARGOCD_BRANCH',
+                  value: '$ARGOCD_APP_SOURCE_TARGET_REVISION',
+                },
+              ],
             },
           }
           +
