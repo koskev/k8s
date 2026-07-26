@@ -3,7 +3,6 @@ _: {
     {
       pkgs,
       inputs',
-      self',
       ...
     }:
     {
@@ -28,11 +27,13 @@ _: {
                 openbao
                 sops
                 authelia
+                kind
 
                 inputs'.terraform-jsonnet-gen.packages.default
               ]
               ++ sharedDeps;
-            JSONNET_PATH = "${self'.packages.bindings}:.:lib";
+            JSONNET_PATH = ".:lib";
+            KIND_EXPERIMENTAL_PROVIDER = "podman";
           };
           test = pkgs.mkShell {
             nativeBuildInputs = sharedDeps;
