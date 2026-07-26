@@ -1,6 +1,7 @@
 AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
 VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build
+TF_STAGE ?= kubernetes
 
 LOCKFILE_LOCATION ?= ./tf/openbao/
 
@@ -25,7 +26,7 @@ FORCE:
 
 $(BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="tf" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+	jsonnet -J . -J lib --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
 $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)

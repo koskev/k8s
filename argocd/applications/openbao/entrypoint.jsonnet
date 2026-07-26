@@ -1,12 +1,10 @@
 local compiler = import 'lib/utils/compile.libsonnet';
-function(type=compiler.types.argocd)
-  compiler.build(
-    type,
-    (import 'openbao.libsonnet')
-    + (import 'pki/pki.libsonnet')
-    + (import 'luks/luks.libsonnet')
-    + (import 'system/system.libsonnet')
-    + (import 'secrets/secrets.libsonnet')
-    ,
-    compiler.types.argocd
-  )
+compiler.entrypoint(
+  [
+    (import 'openbao.libsonnet'),
+    (import 'pki/pki.libsonnet'),
+    (import 'luks/luks.libsonnet'),
+    (import 'system/system.libsonnet'),
+    (import 'secrets/secrets.libsonnet'),
+  ]
+)

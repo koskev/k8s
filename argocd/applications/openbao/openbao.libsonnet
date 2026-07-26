@@ -1,13 +1,14 @@
-local name = 'openbao';
-local namespace = 'openbao';
-local globals = import 'globals.libsonnet';
+function(input=import 'defaultInput.libsonnet')
+  local name = 'openbao';
+  local namespace = 'openbao';
+  local globals = import 'globals.libsonnet';
 
 
-local host = 'vault.%s' % globals.domain;
+  local host = 'vault.%s' % globals.domain;
 
 
-local deployment = import './deployments.libsonnet';
+  local deployment = import './deployments.libsonnet';
 
-deployment.deplyoment(name, namespace, host, rollingUpdate=true)
-+
-(import './unsealer.libsonnet').resources(name, namespace)
+  deployment.deplyoment(name, namespace, host, rollingUpdate=true)
+  +
+  (import './unsealer.libsonnet').resources(name, namespace)
