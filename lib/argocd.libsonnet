@@ -34,11 +34,11 @@ local globals = import 'globals.libsonnet';
           {
             jsonnet: {
               libs: ['lib', 'argocd', '.'],
-              tlas: if input != {} then [{
+              [if input != {} then 'tlas']: [{
                 name: 'input',
                 value: std.toString(input),
                 code: true,
-              }] else [],
+              }],
               extVars: [
                 {
                   name: 'ARGOCD_BRANCH',
