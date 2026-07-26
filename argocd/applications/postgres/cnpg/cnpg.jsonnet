@@ -1,75 +1,72 @@
-local argocd = import 'argocd.libsonnet';
-local storage = import 'storage.libsonnet';
-local chart = (import 'images.libsonnet').helm.cnpg;
-local postgres_operator = import 'database/postgres-operator.jsonnet';
+function(input=import 'defaultInput.libsonnet')
+  local argocd = import 'argocd.libsonnet';
+  local storage = import 'storage.libsonnet';
+  local chart = (import 'images.libsonnet').helm.cnpg;
+  local postgres_operator = import 'database/postgres-operator.jsonnet';
 
-local config = import 'config.libsonnet';
+  local config = import 'config.libsonnet';
 
-local pvs = [
-  storage.localPersistentVolume('postgres-db-optiplex', config.namespace, 10, '/mnt/hdd_gluster/postgres_data', config.storageClass, 'optiplex'),
-  storage.localPersistentVolume('postgres-db-server', config.namespace, 10, '/var/lib/postgres', config.storageClass, 'rpi-server'),
-  storage.localPersistentVolume('postgres-db-server2', config.namespace, 10, '/var/lib/postgres', config.storageClass, 'rpi-server2'),
-];
-
-local cluster = {
-  apiVersion: 'postgresql.cnpg.io/v1',
-  kind: 'Cluster',
-  metadata: {
-    name: config.clusterName,
-    namespace: config.namespace,
-  },
-  spec:
-    {
-      postgresql: {
-        parameters: {
-          max_connections: '200',
-          max_slot_wal_keep_size: '10GB',
-        },
-      },
-      instances: 3,
-      storage: {
-        size: '3Gi',
-        storageClass: config.storageClass,
-      },
-      monitoring: {
-        enablePodMonitor: true,
-      },
-      managed:
-        {
-          roles:
-            [
-              {
-                name: 'admin',
-                ensure: 'present',
-                comment: 'superuser',
-                login: true,
-                superuser: true,
-                passwordSecret: {
-                  name: config.secretName,
-                },
-                // These are needed for ArgoCD 3.0
-                connectionLimit: -1,
-                inherit: true,
-              },
-            ],
-        },
+  local cluster = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'Cluster',
+    metadata: {
+      name: config.clusterName,
+      namespace: config.namespace,
     },
-};
-
-[
-  argocd.applicationHelm(
-    name='cloudnative-pg',
-    targetnamespace=config.namespace,
-    chart=chart,
-    values={
-      monitoring: {
-        podMonitorEnabled: true,
+    spec:
+      {
+        postgresql: {
+          parameters: {
+            max_connections: '200',
+            max_slot_wal_keep_size: '10GB',
+          },
+        },
+        instances: 3,
+        storage: {
+          size: '3Gi',
+          storageClass: config.storageClass,
+        },
+        monitoring: {
+          enablePodMonitor: true,
+        },
+        managed:
+          {
+            roles:
+              [
+                {
+                  name: 'admin',
+                  ensure: 'present',
+                  comment: 'superuser',
+                  login: true,
+                  superuser: true,
+                  passwordSecret: {
+                    name: config.secretName,
+                  },
+                  // These are needed for ArgoCD 3.0
+                  connectionLimit: -1,
+                  inherit: true,
+                },
+              ],
+          },
       },
-    }
-  ),
-  cluster,
-  storage.localStorageClass(config.storageClass),
-  postgres_operator.new('postgres-operator', 'cnpg-cluster-admin', ''),
-]
-+ pvs
-+ std.objectValues(config.pools)
+  };
+
+  [
+    argocd.applicationHelm(
+      name='cloudnative-pg',
+      targetnamespace=config.namespace,
+      chart=chart,
+      values={
+        monitoring: {
+          podMonitorEnabled: true,
+        },
+      }
+    ),
+    cluster,
+    storage.localStorageClass(config.storageClass),
+    postgres_operator.new('postgres-operator', 'cnpg-cluster-admin', ''),
+  ]
+  + std.map(function(pv)
+              storage.localPersistentVolume(pv.name, config.namespace, pv.sizeGB, pv.path, config.storageClass, pv.hostname),
+            input.applications.postgres.cnpg.config.localPVs)
+  + std.objectValues(config.pools)

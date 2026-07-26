@@ -11,7 +11,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='metallb-system'),
     argocd.appSettings(name='monitoring'),
     argocd.appSettings(name='openbao'),
-    argocd.appSettings(name='postgres'),
+    argocd.appSettings(name='postgres', passInput=true),
     argocd.appSettings(name='emqx'),
     argocd.appSettings(name='reloader'),
     argocd.appSettings(name='navidrome'),

@@ -1,3 +1,4 @@
+local storage = import 'storage.libsonnet';
 local pool(clusterName, poolName, namespace, type='rw', instances=3, maxConnections=1000, defaultPoolSize=10) = {
   local outerSelf = self,
   apiVersion: 'postgresql.cnpg.io/v1',
@@ -30,6 +31,26 @@ local pool(clusterName, poolName, namespace, type='rw', instances=3, maxConnecti
   namespace: 'postgres',
   storageClass: 'postgres-local',
   secretName: 'cnpg-cluster-admin',
+  localPVs: [
+    {
+      name: 'postgres-db-optiplex',
+      sizeGB: 10,
+      path: '/mnt/hdd_gluster/postgres_data',
+      hostname: 'optiplex',
+    },
+    {
+      name: 'postgres-db-server',
+      sizeGB: 10,
+      path: '/var/lib/postgres',
+      hostname: 'rpi-server',
+    },
+    {
+      name: 'postgres-db-server2',
+      sizeGB: 10,
+      path: '/var/lib/postgres',
+      hostname: 'rpi-server2',
+    },
+  ],
 
   host: {
     local getHost(type) = '%s-%s.%s' % [selfConfig.clusterName, type, selfConfig.namespace],

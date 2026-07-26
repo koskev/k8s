@@ -107,7 +107,7 @@ local globals = import 'globals.libsonnet';
       ],
     },
   },
-  appSettings(name, autosync=true, recursive=true, exclude='', input={}):: {
+  appSettings(name, autosync=true, recursive=true, exclude='', passInput=false):: {
     assert std.isString(name),
     assert std.isBoolean(autosync),
     assert std.isBoolean(recursive),
@@ -116,9 +116,9 @@ local globals = import 'globals.libsonnet';
     autosync: autosync,
     recursive: recursive,
     exclude: exclude,
-    input: input,
+    passInput: passInput,
   },
-  addApps(appSettings, folder='')::
+  addApps(appSettings, folder='', input={})::
     // nolint
     local uniqueApps = std.uniq(appSettings, keyF=function(key) key.name);
     assert std.length(appSettings) == std.length(uniqueApps) : 'Duplicate app entry';
@@ -127,7 +127,7 @@ local globals = import 'globals.libsonnet';
       assert std.objectHas(app, 'autosync');
       assert std.objectHas(app, 'recursive');
       assert std.objectHas(app, 'exclude');
-      assert std.objectHas(app, 'input');
+      assert std.objectHas(app, 'passInput');
       local basePath = 'argocd/applications';
       local path = if std.length(folder) > 0 then '%s/%s/%s' % [basePath, folder, app.name] else '%s/%s' % [basePath, app.name];
       self.applicationRepo(
@@ -137,7 +137,7 @@ local globals = import 'globals.libsonnet';
         recurse=app.recursive,
         autosync=app.autosync,
         exclude=app.exclude,
-        input=app.input,
+        input=if app.passInput then input else {},
       )
       for app in appSettings
     ],
