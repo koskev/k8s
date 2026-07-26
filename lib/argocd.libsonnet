@@ -36,7 +36,7 @@ local globals = import 'globals.libsonnet';
               libs: ['lib', 'argocd', '.'],
               tlas: if input != {} then [{
                 name: 'input',
-                value: input,
+                value: std.toString(input),
                 code: true,
               }] else [],
               extVars: [

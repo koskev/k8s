@@ -1,14 +1,29 @@
-function(input=import 'defaultInput.libsonnet', config=import 'config.libsonnet')
+function(input=import 'defaultInput.libsonnet')
   local argocd = import 'argocd.libsonnet';
   local chart = (import 'images.libsonnet').helm.argocd;
   local valkey = (import 'images.libsonnet').container.valkey;
   local k8s = import 'k8s.libsonnet';
   local globals = import 'globals.libsonnet';
+  local tf = import 'tf/tf.libsonnet';
 
 
   local name = 'argocd';
   local namespace = 'argocd';
+  local gpgProject = argocd.appProject('gpg', std.objectFields(input.argocd.config.gpg_keys));
   [
+    tf.stage('bootstrap', [
+      tf.providers.helm.resource.helmRelease.new('argocd-bootstrap', chart.chart, name)
+      .withNamespace(namespace)
+      .withRepository(chart.repoURL)
+      .withVersion(chart.targetRevision)
+      .withValues([std.toString({
+        gpg: {
+          keys: input.argocd.config.gpg_keys,
+        },
+      })])
+      ,
+      tf.providers.kubernetes.resource.kubernetesManifest.new('argocd-bootstrap-gpg', gpgProject),
+    ]),
     argocd.applicationHelm(
       name=name,
       targetnamespace=namespace,
@@ -64,7 +79,7 @@ function(input=import 'defaultInput.libsonnet', config=import 'config.libsonnet'
             'server.insecure': true,
           },
           gpg: {
-            keys: config.gpg_keys,
+            keys: input.argocd.config.gpg_keys,
           },
           secret: {
             createSecret: false,
@@ -84,7 +99,7 @@ function(input=import 'defaultInput.libsonnet', config=import 'config.libsonnet'
               'cert-manager.io/cluster-issuer': 'kokev-issuer',
             },
             extraTls: [{
-              hosts: [config.hostname],
+              hosts: [input.argocd.config.hostname],
               secretName: '%s-tls' % name,
             }],
           },
@@ -92,7 +107,7 @@ function(input=import 'defaultInput.libsonnet', config=import 'config.libsonnet'
 
       }
     ),
-    argocd.appProject('gpg', std.objectFields(config.gpg_keys)),
+    gpgProject,
     argocd.appProject('default'),
     k8s.secret.externalSecretExtract('%s-redis' % name, namespace),
     k8s.secret.externalSecretExtract('argocd-secret', namespace),

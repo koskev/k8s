@@ -1,9 +1,12 @@
 AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
+CONFIG ?= test
 VAULT_ADDR ?= "https://vault.kokev.de"
-BUILD_DIR ?= build
+BUILD_DIR ?= build/$(CONFIG)
 TF_STAGE ?= kubernetes
+TF_BUILD_DIR ?= $(BUILD_DIR)/tf/$(TF_STAGE)
 
-LOCKFILE_LOCATION ?= ./tf/openbao/
+
+LOCKFILE_LOCATION ?= ./tf/$(CONFIG)/$(TF_STAGE)
 
 .PHONY: all
 all: apply
@@ -11,20 +14,21 @@ all: apply
 # Terraform is so nice that it just blindly overrides symlinks AND hardlinks....
 # Therefore we just copy it back to have any changes in git
 tf-%: login
-	VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) tofu -chdir=$(BUILD_DIR) $*
-	cp $(BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
+	VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) tofu -chdir=$(TF_BUILD_DIR) $*
+	@mkdir -p $(LOCKFILE_LOCATION)
+	cp $(TF_BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
 
 
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
 CONFIGS := $(subst ./,,$(shell find ./argocd -name 'config.libsonnet'))
-TF_JSON_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
+TF_JSON_FILES := $(addprefix $(TF_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
 SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
 JSONNET_FILES := $(shell find ./argocd -name '*.*sonnet')
 
 .PHONY: FORCE
 FORCE:
 
-$(BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
+$(TF_BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
@@ -35,17 +39,17 @@ $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 config: $(CONFIGS)
 	./scripts/build_config.py $^ > lib/defaultConfig.libsonnet
 
-$(BUILD_DIR)/bootstrap/providers.tf.json:
+$(TF_BUILD_DIR)/bootstrap/providers.tf.json:
 	@mkdir -p $(dir $@)
 	echo "{terraform: {required_providers: (import 'lib/images.libsonnet').tf}}" | jsonnet - > $@
 
-generate: $(BUILD_DIR)/bootstrap/providers.tf.json
+generate: $(TF_BUILD_DIR)/bootstrap/providers.tf.json
 	tofu -chdir=$(dir $<) init
 	terraform-jsonnet-gen -t $(dir $<) -o vendor/_gen
 
 .PHONY: build
-build: $(TF_JSON_FILES) $(SCRIPT_FILES)
-	ln -sf $$(pwd)/tf/openbao/* $(BUILD_DIR)
+build: $(TF_JSON_FILES) $(SCRIPT_FILES) $(TF_BUILD_DIR)/$(subst /,__,argocd/clusters/$(CONFIG)/root.tf.json)
+	ln -sf $$(pwd)/tf/openbao/* $(TF_BUILD_DIR)
 	sh $(BUILD_DIR)/*.sh
 
 .PHONY: login

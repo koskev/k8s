@@ -13,12 +13,6 @@
     defaultStage: self.stages.kubernetes,
   },
 
-  config():: [
-
-
-  ],
-
-
   entrypoint(resources, resourceType=outerSelf.types.argocd)::
     function(input=import 'defaultInput.libsonnet', type=resourceType, tfStage=self.tf.defaultStage)
       assert (std.isArray(resources) && std.all(std.map(function(entry) std.isFunction(entry), resources))) || std.isFunction(resources) : 'Resources needs to be an array of functions or a function';

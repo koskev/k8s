@@ -306,5 +306,9 @@
       source: 'timofurrer/desec',
       version: '0.6.3',
     },
+    helm: {
+      source: 'hashicorp/helm',
+      version: '3.2.0',
+    },
   },
 }

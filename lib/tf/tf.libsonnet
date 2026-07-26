@@ -5,6 +5,9 @@ local compiler = import 'utils/compile.libsonnet';
 
   providers:: (import 'vendor/_gen/modules.libsonnet'),
   call(val):: '${ %s }' % val,
+  stage(stage, resources)::
+    std.map(function(res) res { _stage:: stage }, resources),
+
   base(type, resource, name, body):: {
     _type:: compiler.types.tf,
     [type]+: {
