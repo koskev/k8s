@@ -27,7 +27,7 @@ function(input=(import 'defaultInput.libsonnet') + (import 'config_home.libsonne
       rootRepo,
     ] +
     (import 'argocd/argocd/entrypoint.jsonnet')(input)
-    + (import 'argocd/applications.jsonnet')({})
+    + (import 'argocd/applications.jsonnet')(input)
     ,
     compiler.types.argocd,
     tfStage=tfStage,
