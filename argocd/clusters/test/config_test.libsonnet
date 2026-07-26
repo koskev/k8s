@@ -1,6 +1,32 @@
 local argocd = import 'argocd.libsonnet';
 {
   applications+: {
+    postgres+: {
+      cnpg+: {
+        config+: {
+          localPVs: [
+            {
+              name: 'psql1',
+              sizeGB: 10,
+              path: '/var/lib/postgres1',
+              hostname: 'kind-control-plane',
+            },
+            {
+              name: 'psql2',
+              sizeGB: 10,
+              path: '/var/lib/postgres2',
+              hostname: 'kind-control-plane',
+            },
+            {
+              name: 'psql3',
+              sizeGB: 10,
+              path: '/var/lib/postgres3',
+              hostname: 'kind-control-plane',
+            },
+          ],
+        },
+      },
+    },
     config+: {
       apps: [
         //argocd.appSettings(name='default', recursive=false),
@@ -13,7 +39,7 @@ local argocd = import 'argocd.libsonnet';
         //argocd.appSettings(name='metallb-system'),
         //argocd.appSettings(name='monitoring'),
         //argocd.appSettings(name='openbao'),
-        argocd.appSettings(name='postgres'),
+        argocd.appSettings(name='postgres', passInput=true),
         //argocd.appSettings(name='emqx'),
         argocd.appSettings(name='reloader'),
         argocd.appSettings(name='navidrome'),
