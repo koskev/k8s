@@ -2,12 +2,14 @@ local argocd = import 'argocd.libsonnet';
 local tf = import 'tf/tf.libsonnet';
 local compiler = import 'utils/compile.libsonnet';
 
-function(input=(import 'defaultInput.libsonnet') + (import 'config_test.libsonnet'), type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
+local rootInput = (import 'defaultInput.libsonnet') + (import 'config_test.libsonnet');
+function(input=rootInput, type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
   local rootRepo = argocd.applicationRepo(
     name='root',
     targetnamespace='argocd',
     path='argocd/clusters/test',
-    input=input,
+    input=rootInput,
+    autosync=false,
   );
   local kubernetesConfig = {
     config_path: '~/.kube/config',
@@ -21,12 +23,16 @@ function(input=(import 'defaultInput.libsonnet') + (import 'config_test.libsonne
           kubernetes: kubernetesConfig,
         }),
         tf.provider('kubernetes', kubernetesConfig),
-        tf.providers.kubernetes.resource.kubernetesManifest.new('bootstrap-root-repo', rootRepo),
+        tf.providers.kubernetes.resource.kubernetesManifest.new('bootstrap-root-repo', rootRepo)
+        .addCustomData('field_manager', {
+          force_conflicts: true,
+        }),
       ]),
       tf.provider('kubernetes', kubernetesConfig),
       rootRepo,
     ] +
-    (import 'argocd/argocd/entrypoint.jsonnet')(input),
+    (import 'argocd/argocd/entrypoint.jsonnet')(rootInput)
+    + (import 'argocd/applications.jsonnet')(rootInput),
     compiler.types.argocd,
     tfStage=tfStage,
   )
