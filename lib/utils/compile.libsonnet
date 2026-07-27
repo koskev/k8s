@@ -20,15 +20,14 @@
       outerSelf.build(type, std.map(function(res) res(input), resourcesArr), outerSelf.types.argocd, tfStage),
 
   build(type=outerSelf.types.argocd, resources, fallback_type=null, tfStage=self.tf.defaultStage)::
-    local array_of_types = std.prune(
+    local array_of_types =
       std.filter(
         function(res)
           std.get(res, '_type', fallback_type) == type
           && std.get(res, '_stage', outerSelf.tf.defaultStage) == tfStage
         ,
         std.flattenDeepArray(resources)
-      )
-    );
+      );
     if type == outerSelf.types.tf then
       std.foldl(function(acc, elem) std.mergePatch(acc, elem), array_of_types, {})
     else if type == outerSelf.types.script then
