@@ -3,6 +3,8 @@
 },
  cert_manager+: { config+: (import 'argocd/applications/cert-manager/config.libsonnet'),
 },
+ openbao+: { config+: (import 'argocd/applications/openbao/config.libsonnet'),
+},
  config+: (import 'argocd/applications/config.libsonnet'),
 },
  argocd+: { config+: (import 'argocd/argocd/config.libsonnet'),

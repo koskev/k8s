@@ -9,6 +9,7 @@ function(input=import 'defaultInput.libsonnet')
 
   {
     deplyoment(name, namespace, host, rollingUpdate=false, transit=null):: [
+      (import './autoInit.libsonnet')(input),
       k8s.v1.namespace(namespace),
       k8s.db.database(
         name=name,
@@ -33,6 +34,7 @@ function(input=import 'defaultInput.libsonnet')
             [if rollingUpdate then 'updateStrategyType']: 'RollingUpdate',
             // The chart changes that to OrderedReady but the field is immutable
             podManagementPolicy: 'Parallel',
+            [if input.applications.openbao.config.affinity != null then 'affinity']: input.applications.openbao.config.affinity,
             ingress: {
               enabled: true,
               annotations: {

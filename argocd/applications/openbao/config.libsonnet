@@ -1,0 +1,4 @@
+{
+  namespace: 'openbao',
+  affinity: null,
+}

@@ -6,6 +6,11 @@ local argocd = import 'argocd.libsonnet';
     },
   },
   applications+: {
+    openbao+: {
+      config+: {
+        affinity: {},
+      },
+    },
     postgres+: {
       cnpg+: {
         config+: {
