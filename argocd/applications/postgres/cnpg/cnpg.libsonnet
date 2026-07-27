@@ -3,6 +3,7 @@ function(input=import 'defaultInput.libsonnet')
   local storage = import 'storage.libsonnet';
   local chart = (import 'images.libsonnet').helm.cnpg;
   local postgres_operator = import 'database/postgres-operator.jsonnet';
+  local tf = import 'tf/tf.libsonnet';
 
   local config = import 'config.libsonnet';
 
@@ -65,6 +66,11 @@ function(input=import 'defaultInput.libsonnet')
     cluster,
     storage.localStorageClass(config.storageClass),
     postgres_operator.new('postgres-operator', 'cnpg-cluster-admin', ''),
+    tf.stage(
+      'bootstrap',
+      tf.kubernetesSecret('cnpg-cluster-admin', config.namespace, 'secrets/postgres/cnpg-cluster-admin.enc.yaml'),
+    ),
+
   ]
   + std.map(function(pv)
               storage.localPersistentVolume(pv.name, config.namespace, pv.sizeGB, pv.path, config.storageClass, pv.hostname),

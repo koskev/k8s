@@ -46,6 +46,7 @@ function(input=import 'defaultInput.libsonnet')
             required_providers: [
               {
                 helm: images.tf.helm,
+                sops: images.tf.sops,
               },
             ],
           },

@@ -4,6 +4,19 @@ local compiler = import 'utils/compile.libsonnet';
   local tf = self,
 
   providers:: (import 'vendor/_gen/modules.libsonnet'),
+  kubernetesSecret(name, namespace, file)::
+    local tfName = 'kubernetes_secret_%s' % name;
+    std.objectValues({
+      sopsFile: tf.providers.sops.data.sopsFile.new(tfName, file),
+      secret: tf.providers.kubernetes.resource.kubernetesSecretV1.new(tfName)
+              .withData(self.sopsFile.ref().fields.data())
+              .addCustomData(
+        'metadata', {
+          name: name,
+          namespace: namespace,
+        }
+      ),
+    }),
   call(val):: '${ %s }' % val,
   stage(stage, resources)::
     std.map(function(res) res { _stage:: stage }, resources),
