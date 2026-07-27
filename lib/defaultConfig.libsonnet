@@ -7,4 +7,6 @@
 },
  argocd+: { config+: (import 'argocd/argocd/config.libsonnet'),
 },
+ globals+: { config+: (import 'argocd/globals/config.libsonnet'),
+},
 }
