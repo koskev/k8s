@@ -20,8 +20,7 @@ function(input=import 'defaultInput.libsonnet')
         gpg: {
           keys: input.argocd.config.gpg_keys,
         },
-      })])
-      ,
+      })]),
       tf.providers.kubernetes.resource.kubernetesManifest.new('argocd-bootstrap-gpg', gpgProject),
     ]),
     argocd.applicationHelm(
@@ -94,7 +93,7 @@ function(input=import 'defaultInput.libsonnet')
         server: {
           ingress: {
             enabled: true,
-            ingressClassName: globals.ingress.internal.name,
+            ingressClassName: input.globals.config.ingress.internal.name,
             annotations: {
               'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
             },

@@ -40,7 +40,7 @@ function(input=import 'defaultInput.libsonnet')
               annotations: {
                 'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
               },
-              ingressClassName: globals.ingress.internal.name,
+              ingressClassName: input.globals.config.ingress.internal.name,
               hosts: [
                 {
                   host: host,
