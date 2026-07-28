@@ -12,6 +12,14 @@ local argocd = import 'argocd.libsonnet';
           name: 'cloud-provider-kind',
         },
       },
+      ips: {
+        pihole: '10.89.0.2',
+        emqx: '10.89.0.5',
+        unbound: '10.89.0.6',
+        ingress_traefik_external: '10.89.0.4',
+        ingress_traefik_internal: '10.89.0.30',
+        wireguard: '10.89.0.10',
+      },
     },
   },
   applications+: {
@@ -59,7 +67,7 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='cert-manager', passInput=true),
         argocd.appSettings(name='external-secrets', passInput=true),
         ////argocd.appSettings(name='ingress-nginx'),
-        //argocd.appSettings(name='ingress-traefik'),
+        argocd.appSettings(name='ingress-traefik', passInput=true),
         //argocd.appSettings(name='kube-flannel'),
         //argocd.appSettings(name='matrix'),
         //argocd.appSettings(name='metallb-system'),
