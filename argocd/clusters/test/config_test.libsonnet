@@ -2,7 +2,7 @@ local argocd = import 'argocd.libsonnet';
 {
   globals+: {
     config: {
-      domain: 'cluster.local',
+      domain: '127.0.0.1.nip.io',
     },
   },
   applications+: {
