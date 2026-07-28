@@ -3,12 +3,11 @@ local tf = import 'tf/tf.libsonnet';
 local compiler = import 'utils/compile.libsonnet';
 
 local rootInput = (import 'defaultInput.libsonnet') + (import 'config_home.libsonnet');
-function(input=(import 'defaultInput.libsonnet') + (import 'config_home.libsonnet'), type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
+function(type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
   local rootRepo = argocd.applicationRepo(
     name='root',
     targetnamespace='argocd',
     path='argocd/clusters/home',
-    input=rootInput,
   );
   local kubernetesConfig = {
     config_path: '~/.kube/config',
