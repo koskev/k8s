@@ -96,7 +96,7 @@ function(input=import 'defaultInput.libsonnet')
             enabled: true,
             ingressClassName: globals.ingress.internal.name,
             annotations: {
-              'cert-manager.io/cluster-issuer': 'kokev-issuer',
+              'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
             },
             extraTls: [{
               hosts: [input.argocd.config.hostname],

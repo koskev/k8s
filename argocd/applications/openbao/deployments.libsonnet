@@ -38,7 +38,7 @@ function(input=import 'defaultInput.libsonnet')
             ingress: {
               enabled: true,
               annotations: {
-                'cert-manager.io/cluster-issuer': 'kokev-issuer',
+                'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
               },
               ingressClassName: globals.ingress.internal.name,
               hosts: [
