@@ -54,7 +54,7 @@ local globals = import 'globals.libsonnet';
         ,
         path: path,
         repoURL: url,
-        targetRevision: revision,
+        targetRevision: std.extVar('ARGOCD_BRANCH'),
       },
     },
   },
