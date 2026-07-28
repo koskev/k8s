@@ -20,7 +20,7 @@ function(input=import 'defaultInput.libsonnet')
     ),
 
     // TODO: use vault?
-    k8s.builder.definition.new('cert-manager.io/v1', 'ClusterIssuer', 'private-issuer', namespace).withSpec({
+    k8s.builder.definition.new('cert-manager.io/v1', 'ClusterIssuer', 'internal-issuer', namespace).withSpec({
       selfSigned: {},
     }),
   ]

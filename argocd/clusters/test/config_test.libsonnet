@@ -3,7 +3,7 @@ local argocd = import 'argocd.libsonnet';
   globals+: {
     config+: {
       domain: '0--1.nip.io',
-      default_issuer: 'private-issuer',
+      default_issuer: 'internal-issuer',
       ingress: {
         internal: {
           name: 'cloud-provider-kind',
