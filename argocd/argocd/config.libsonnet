@@ -1,6 +1,5 @@
-local globals = import 'lib/globals.libsonnet';
 {
-  hostname: 'argocd.%s' % globals.domain,
+  subdomain: 'argocd',
   gpg_keys: {
     BE449B7420CD3C60: |||
       -----BEGIN PGP PUBLIC KEY BLOCK-----

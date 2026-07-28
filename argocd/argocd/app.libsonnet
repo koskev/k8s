@@ -9,6 +9,9 @@ function(input=import 'defaultInput.libsonnet')
 
   local name = 'argocd';
   local namespace = 'argocd';
+
+  local domain = '%s.%s' % [input.argocd.config.subdomain, input.globals.config.domain];
+
   local gpgProject = argocd.appProject('gpg', std.objectFields(input.argocd.config.gpg_keys));
   [
     tf.stage('bootstrap', [
@@ -33,7 +36,7 @@ function(input=import 'defaultInput.libsonnet')
           enabled: true,
         },
         global: {
-          domain: input.argocd.config.hostname,
+          domain: domain,
         },
         redisSecretInit: {
           // Disable and get from bao due to infinite job bug
@@ -98,7 +101,7 @@ function(input=import 'defaultInput.libsonnet')
               'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
             },
             extraTls: [{
-              hosts: [input.argocd.config.hostname],
+              hosts: [domain],
               secretName: '%s-tls' % name,
             }],
           },
