@@ -9,14 +9,6 @@
     ingress_traefik_internal: '192.168.10.30',
     wireguard: '192.168.10.10',
   },
-  ingress: {
-    internal: {
-      name: 'traefik-internal',
-    },
-    external: {
-      name: 'traefik-external',
-    },
-  },
   backup: {
     kokev: {
       knownHost: 'borg-backup.borg ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAZKpVGwlYrOwYZ+QSd89RJopO+Iv9f0aIVYgf0tYr0i',
