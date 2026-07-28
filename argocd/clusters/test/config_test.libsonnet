@@ -6,6 +6,13 @@ local argocd = import 'argocd.libsonnet';
     },
   },
   applications+: {
+    cert_manager+: {
+      desec+: {
+        config+: {
+          enabled: false,
+        },
+      },
+    },
     openbao+: {
       config+: {
         affinity: {},
@@ -40,7 +47,7 @@ local argocd = import 'argocd.libsonnet';
     config+: {
       apps: [
         //argocd.appSettings(name='default', recursive=false),
-        //argocd.appSettings(name='cert-manager'),
+        argocd.appSettings(name='cert-manager', passInput=true),
         argocd.appSettings(name='external-secrets', passInput=true),
         ////argocd.appSettings(name='ingress-nginx'),
         //argocd.appSettings(name='ingress-traefik'),
