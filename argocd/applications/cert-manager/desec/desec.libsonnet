@@ -74,6 +74,7 @@ function(input=import 'defaultInput.libsonnet')
             },
           }),
           target: 'spec',
+          valuesDecodingStrategy: 'None',
         },
       ],
       manifest={

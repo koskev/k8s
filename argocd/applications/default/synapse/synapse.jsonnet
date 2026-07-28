@@ -77,6 +77,7 @@ k8s.secret.secretStoreKubernetes(name, namespace) +
           ],
         }),
         target: 'spec',
+        valuesDecodingStrategy: 'None',
       },
     ],
     manifest={
