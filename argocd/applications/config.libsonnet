@@ -2,15 +2,15 @@ local argocd = import 'argocd.libsonnet';
 {
   apps: [
     argocd.appSettings(name='default', recursive=false),
-    argocd.appSettings(name='cert-manager'),
-    argocd.appSettings(name='external-secrets'),
+    argocd.appSettings(name='cert-manager', passInput=true),
+    argocd.appSettings(name='external-secrets', passInput=true),
     //argocd.appSettings(name='ingress-nginx'),
     argocd.appSettings(name='ingress-traefik'),
     argocd.appSettings(name='kube-flannel'),
     argocd.appSettings(name='matrix'),
     argocd.appSettings(name='metallb-system'),
     argocd.appSettings(name='monitoring'),
-    argocd.appSettings(name='openbao'),
+    argocd.appSettings(name='openbao', passInput=true),
     argocd.appSettings(name='postgres', passInput=true),
     argocd.appSettings(name='emqx'),
     argocd.appSettings(name='reloader'),
