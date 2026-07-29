@@ -4,7 +4,7 @@ VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build/$(CONFIG)
 TF_STAGE ?= kubernetes
 TF_BUILD_DIR ?= $(BUILD_DIR)/tf/$(TF_STAGE)
-
+BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 
 LOCKFILE_LOCATION ?= ./tf/$(CONFIG)/$(TF_STAGE)
 
@@ -30,11 +30,11 @@ FORCE:
 
 $(TF_BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
 $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
+	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
 config: $(CONFIGS)
 	./scripts/build_config.py $^ > lib/defaultConfig.libsonnet
