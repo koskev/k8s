@@ -1,5 +1,4 @@
 function(input=import 'defaultInput.libsonnet')
-  local globals = import 'globals.libsonnet';
   local images = import 'images.libsonnet';
   local k8s = import 'k8s.libsonnet';
   local script = import 'script.libsonnet';
@@ -15,25 +14,25 @@ function(input=import 'defaultInput.libsonnet')
   local apps = {
     argocd: {
       redirects: [
-        'https://argocd.%s/api/dex/callback' % globals.domain,
+        'https://argocd.%s/api/dex/callback' % input.globals.config.domain,
         'https://localhost:8085/auth/callback',
       ],
     },
     openbao: {
       redirects: [
-        'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % globals.domain,
-        'https://vault.%s/oidc/callback' % globals.domain,
+        'https://vault.%s/ui/vault/auth/oidc/oidc/callback' % input.globals.config.domain,
+        'https://vault.%s/oidc/callback' % input.globals.config.domain,
         'http://localhost:8250/oidc/callback',
       ],
     },
     paperless: {
       redirects: [
-        'https://paperless.%s/accounts/oidc/authelia/login/callback/' % globals.domain,
+        'https://paperless.%s/accounts/oidc/authelia/login/callback/' % input.globals.config.domain,
       ],
     },
     grafana: {
       redirects: [
-        'https://grafana.%s/login/generic_oauth' % globals.domain,
+        'https://grafana.%s/login/generic_oauth' % input.globals.config.domain,
       ],
       policy: {
         id_token: ['email', 'name', 'groups', 'preferred_username'],
@@ -228,8 +227,8 @@ function(input=import 'defaultInput.libsonnet')
         },
         session: {
           cookies: [{
-            domain: globals.domain,
-            subdomain: 'auth',
+            domain: input.globals.config.domain,
+            subdomain: input.applications.authelia.config.subdomain,
           }],
         },
         identity_providers: {
@@ -266,7 +265,7 @@ function(input=import 'defaultInput.libsonnet')
       ingress: {
         enabled: true,
         annotations: {
-          'cert-manager.io/cluster-issuer': 'kokev-issuer',
+          'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
         },
         tls: {
           enabled: true,

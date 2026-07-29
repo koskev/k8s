@@ -3,7 +3,6 @@ function(input=import 'defaultInput.libsonnet')
   local chart = (import 'images.libsonnet').helm.argocd;
   local valkey = (import 'images.libsonnet').container.valkey;
   local k8s = import 'k8s.libsonnet';
-  local globals = import 'globals.libsonnet';
   local tf = import 'tf/tf.libsonnet';
 
 
@@ -45,7 +44,7 @@ function(input=import 'defaultInput.libsonnet')
               type: 'oidc',
               id: 'authelia',
               config: {
-                issuer: globals.urls.auth,
+                issuer: 'https://%s.%s' % [input.applications.authelia.config.subdomain, input.globals.config.domain],
                 clientID: 'argocd',
                 clientSecret: '$dex.authentik.clientSecret',
                 insecureEnableGroups: true,
