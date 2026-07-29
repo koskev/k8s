@@ -1,4 +1,3 @@
-local storage = import 'storage.libsonnet';
 local pool(clusterName, poolName, namespace, type='rw', instances=3, maxConnections=1000, defaultPoolSize=10) = {
   local outerSelf = self,
   apiVersion: 'postgresql.cnpg.io/v1',
