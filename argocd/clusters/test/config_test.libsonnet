@@ -73,7 +73,7 @@ local argocd = import 'argocd.libsonnet';
         //argocd.appSettings(name='kube-flannel'),
         //argocd.appSettings(name='matrix'),
         //argocd.appSettings(name='metallb-system'),
-        //argocd.appSettings(name='monitoring'),
+        argocd.appSettings(name='monitoring'),
         argocd.appSettings(name='openbao', passInput=true),
         argocd.appSettings(name='postgres', passInput=true),
         //argocd.appSettings(name='emqx'),
