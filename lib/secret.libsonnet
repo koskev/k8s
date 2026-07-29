@@ -110,7 +110,7 @@
           [if annotations != {} then 'metadata']: {
             annotations: annotations,
           },
-        },
+        } + if labels != {} then { metadata+: { labels: labels } } else {},
         name: name,
         creationPolicy: 'Owner',
         [if manifest != null then 'manifest']: manifest,

@@ -46,7 +46,7 @@ function(input=import 'defaultInput.libsonnet')
               config: {
                 issuer: 'https://%s.%s' % [input.applications.authelia.config.subdomain, input.globals.config.domain],
                 clientID: 'argocd',
-                clientSecret: '$dex.authentik.clientSecret',
+                clientSecret: '$argocd-oidc-secret:dex.authentik.clientSecret',
                 insecureEnableGroups: true,
                 getUserInfo: true,
                 scopes: [
@@ -127,7 +127,7 @@ function(input=import 'defaultInput.libsonnet')
       templateData={
         'dex.authentik.clientSecret': '{{ .password }}',
       },
-      annotations={
+      labels={
         'app.kubernetes.io/part-of': name,
       }
     ),
