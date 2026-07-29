@@ -2,6 +2,7 @@ _: {
   perSystem =
     {
       pkgs,
+      lib,
       inputs',
       ...
     }:
@@ -15,6 +16,18 @@ _: {
             jq
             gnused
           ];
+          cloudProviderKindWithoutDocker = pkgs.writeShellApplication {
+            name = "cloud-provider-kind";
+
+            runtimeInputs = with pkgs; [
+              cloud-provider-kind
+              podman
+            ];
+            text = ''
+              export PATH=${pkgs.podman}/bin
+              KIND_EXPERIMENTAL_PROVIDER="podman" ${lib.getExe pkgs.cloud-provider-kind} "$@"
+            '';
+          };
         in
         {
           default = pkgs.mkShell {
@@ -28,6 +41,7 @@ _: {
                 sops
                 authelia
                 kind
+                cloudProviderKindWithoutDocker
 
                 inputs'.terraform-jsonnet-gen.packages.default
               ]

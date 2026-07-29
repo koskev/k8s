@@ -91,3 +91,15 @@ reconcile-pause:
 .PHONY: reconcile-resume
 reconcile-resume:
 	kubectl -n argocd annotate secret argocd-secret argocd.argoproj.io/skip-reconcile-
+
+
+.PHONY: kind
+kind:
+	kind create cluster --name kind
+	podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} mkdir /var/lib/postgres{1,2,3}
+	nohup cloud-provider-kind --enable-lb-port-mapping &
+
+.PHONY: kind-destroy
+kind-destroy:
+	killall cloud-provider-kind
+	kind delete cluster --name kind
