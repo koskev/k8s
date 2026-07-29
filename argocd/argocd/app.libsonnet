@@ -19,6 +19,87 @@ function(input=import 'defaultInput.libsonnet')
     path='argocd/clusters/%s' % input.globals.config.id,
     autosync=false,
   );
+
+  local helmValues = {
+    dex: {
+      enabled: true,
+    },
+    global: {
+      domain: domain,
+    },
+    redis: {
+      image: {
+        repository: valkey.image,
+        tag: valkey.tag,
+      },
+    },
+    configs: {
+      cm: {
+        'resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration': "jqPathExpressions:\n- '.webhooks[]?.clientConfig.caBundle'\n",
+        // In metallb crd
+        'resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition': "jqPathExpressions:\n- '.spec.conversion.webhook.clientConfig.caBundle'\n",
+        'dex.config': std.toString({
+          connectors: [
+            {
+              name: 'authelia',
+              type: 'oidc',
+              id: 'authelia',
+              config: {
+                issuer: globals.urls.auth,
+                clientID: 'argocd',
+                clientSecret: '$dex.authentik.clientSecret',
+                insecureEnableGroups: true,
+                getUserInfo: true,
+                scopes: [
+                  'openid',
+                  'email',
+                  'profile',
+                  'groups',
+                ],
+              },
+            },
+
+          ],
+        }),
+      },
+      params: {
+        'server.insecure': true,
+      },
+      rbac: {
+        'policy.csv': |||
+          g, ArgoCD Admins, role:admin
+          g, admins, role:admin
+        |||,
+      },
+      gpg: {
+        keys: input.argocd.config.gpg_keys,
+      },
+    },
+    server: {
+      ingress: {
+        enabled: true,
+        ingressClassName: input.globals.config.ingress.internal.name,
+        annotations: {
+          'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
+        },
+        extraTls: [{
+          hosts: [domain],
+          secretName: '%s-tls' % name,
+        }],
+      },
+    },
+  };
+
+
+  local argocdHelm = argocd.applicationHelm(
+    name=name,
+    targetnamespace=namespace,
+    chart=chart,
+    releaseName=name,
+    values=helmValues,
+  );
+
+
   local dependencies = ['helm_release.argocd-bootstrap', 'kubernetes_namespace_v1.argocd-namespace'];
   [
     tf.stage('bootstrap', std.objectValues({
@@ -27,11 +108,9 @@ function(input=import 'defaultInput.libsonnet')
             .withNamespace(namespace)
             .withRepository(chart.repoURL)
             .withVersion(chart.targetRevision)
-            .withValues([std.toString({
-        gpg: {
-          keys: input.argocd.config.gpg_keys,
-        },
-      })]),
+            .withValues(
+        [std.toString(helmValues)]
+      ),
       namespace: tf.providers.kubernetes.resource.kubernetesNamespaceV1.new('argocd-namespace').addCustomData('metadata', {
         name: namespace,
       }),
@@ -39,91 +118,18 @@ function(input=import 'defaultInput.libsonnet')
       root: tf.providers.kubectl.resource.kubectlManifest.new('bootstrap-root-repo', std.toString(rootRepo)).withDependsOn(dependencies),
     })),
     rootRepo,
-    argocd.applicationHelm(
-      name=name,
-      targetnamespace=namespace,
-      chart=chart,
-      releaseName=name,
-      values={
-        dex: {
-          enabled: true,
-        },
-        global: {
-          domain: domain,
-        },
-        redisSecretInit: {
-          // Disable and get from bao due to infinite job bug
-          enabled: false,
-        },
-        redis: {
-          image: {
-            repository: valkey.image,
-            tag: valkey.tag,
-          },
-        },
-        configs: {
-          cm: {
-            'resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration': "jqPathExpressions:\n- '.webhooks[]?.clientConfig.caBundle'\n",
-            // In metallb crd
-            'resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition': "jqPathExpressions:\n- '.spec.conversion.webhook.clientConfig.caBundle'\n",
-            'dex.config': std.toString({
-              connectors: [
-                {
-                  name: 'authelia',
-                  type: 'oidc',
-                  id: 'authelia',
-                  config: {
-                    issuer: globals.urls.auth,
-                    clientID: 'argocd',
-                    clientSecret: '$dex.authentik.clientSecret',
-                    insecureEnableGroups: true,
-                    getUserInfo: true,
-                    scopes: [
-                      'openid',
-                      'email',
-                      'profile',
-                      'groups',
-                    ],
-                  },
-                },
-
-              ],
-            }),
-          },
-          params: {
-            'server.insecure': true,
-          },
-          gpg: {
-            keys: input.argocd.config.gpg_keys,
-          },
-          secret: {
-            createSecret: false,
-          },
-          rbac: {
-            'policy.csv': |||
-              g, ArgoCD Admins, role:admin
-              g, admins, role:admin
-            |||,
-          },
-        },
-        server: {
-          ingress: {
-            enabled: true,
-            ingressClassName: input.globals.config.ingress.internal.name,
-            annotations: {
-              'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
-            },
-            extraTls: [{
-              hosts: [domain],
-              secretName: '%s-tls' % name,
-            }],
-          },
-        },
-
+    gpgProject,
+    argocdHelm,
+    argocd.appProject('default'),
+    k8s.secret.externalSecretExtract(
+      'argocd-oidc-secret',
+      namespace,
+      key='oidc/argocd',
+      templateData={
+        'dex.authentik.clientSecret': '{{ .password }}',
+      },
+      annotations={
+        'app.kubernetes.io/part-of': name,
       }
     ),
-    gpgProject,
-    argocd.appProject('default'),
-    k8s.secret.externalSecretExtract('%s-redis' % name, namespace),
-    k8s.secret.externalSecretExtract('argocd-secret', namespace),
   ]
