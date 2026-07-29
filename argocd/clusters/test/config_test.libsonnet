@@ -2,6 +2,7 @@ local argocd = import 'argocd.libsonnet';
 {
   globals+: {
     config+: {
+      id: 'test',
       domain: '0--1.nip.io',
       default_issuer: 'internal-issuer',
       ingress: {

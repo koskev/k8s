@@ -4,10 +4,10 @@ local compiler = import 'utils/compile.libsonnet';
   local tf = self,
 
   providers:: (import 'vendor/_gen/modules.libsonnet'),
-  kubernetesSecret(name, namespace, file)::
+  kubernetesSecret(name, namespace, file, dependencies=[])::
     local tfName = 'kubernetes_secret_%s' % name;
     std.objectValues({
-      sopsFile: tf.providers.sops.data.sopsFile.new(tfName, file),
+      sopsFile: tf.providers.sops.data.sopsFile.new(tfName, file).withDependsOn(dependencies),
       secret: tf.providers.kubernetes.resource.kubernetesSecretV1.new(tfName)
               .withData(self.sopsFile.ref().fields.data())
               .addCustomData(
@@ -15,7 +15,7 @@ local compiler = import 'utils/compile.libsonnet';
           name: name,
           namespace: namespace,
         }
-      ),
+      ).withDependsOn(dependencies),
     }),
   call(val):: '${ %s }' % val,
   stage(stage, resources)::

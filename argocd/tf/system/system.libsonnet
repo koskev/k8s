@@ -47,6 +47,7 @@ function(input=import 'defaultInput.libsonnet')
               {
                 helm: images.tf.helm,
                 sops: images.tf.sops,
+                kubectl: images.tf.kubectl,
               },
             ],
           },

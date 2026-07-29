@@ -1,4 +1,5 @@
 {
+  id: 'test',
   domain: 'kokev.de',
   default_issuer: 'kokev-issuer',
   ingress: {

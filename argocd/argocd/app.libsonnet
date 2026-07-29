@@ -13,19 +13,32 @@ function(input=import 'defaultInput.libsonnet')
   local domain = '%s.%s' % [input.argocd.config.subdomain, input.globals.config.domain];
 
   local gpgProject = argocd.appProject('gpg', std.objectFields(input.argocd.config.gpg_keys));
+  local rootRepo = argocd.applicationRepo(
+    name='root',
+    targetnamespace='argocd',
+    path='argocd/clusters/%s' % input.globals.config.id,
+    autosync=false,
+  );
+  local dependencies = ['helm_release.argocd-bootstrap', 'kubernetes_namespace_v1.argocd-namespace'];
   [
-    tf.stage('bootstrap', [
-      tf.providers.helm.resource.helmRelease.new('argocd-bootstrap', chart.chart, name)
-      .withNamespace(namespace)
-      .withRepository(chart.repoURL)
-      .withVersion(chart.targetRevision)
-      .withValues([std.toString({
+    tf.stage('bootstrap', std.objectValues({
+
+      helm: tf.providers.helm.resource.helmRelease.new('argocd-bootstrap', chart.chart, name)
+            .withNamespace(namespace)
+            .withRepository(chart.repoURL)
+            .withVersion(chart.targetRevision)
+            .withValues([std.toString({
         gpg: {
           keys: input.argocd.config.gpg_keys,
         },
       })]),
-      tf.providers.kubernetes.resource.kubernetesManifest.new('argocd-bootstrap-gpg', gpgProject),
-    ]),
+      namespace: tf.providers.kubernetes.resource.kubernetesNamespaceV1.new('argocd-namespace').addCustomData('metadata', {
+        name: namespace,
+      }),
+      project: tf.providers.kubectl.resource.kubectlManifest.new('argocd-bootstrap-gpg', std.toString(gpgProject)).withDependsOn(dependencies),
+      root: tf.providers.kubectl.resource.kubectlManifest.new('bootstrap-root-repo', std.toString(rootRepo)).withDependsOn(dependencies),
+    })),
+    rootRepo,
     argocd.applicationHelm(
       name=name,
       targetnamespace=namespace,

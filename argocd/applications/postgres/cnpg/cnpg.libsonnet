@@ -68,7 +68,12 @@ function(input=import 'defaultInput.libsonnet')
     postgres_operator.new('postgres-operator', 'cnpg-cluster-admin', ''),
     tf.stage(
       'bootstrap',
-      tf.kubernetesSecret('cnpg-cluster-admin', config.namespace, 'secrets/postgres/cnpg-cluster-admin.enc.yaml'),
+      std.flattenDeepArray([
+        tf.providers.kubernetes.resource.kubernetesNamespaceV1.new('cnpg-namespace').addCustomData('metadata', {
+          name: config.namespace,
+        }),
+        tf.kubernetesSecret('cnpg-cluster-admin', config.namespace, 'secrets/postgres/cnpg-cluster-admin.enc.yaml', ['kubernetes_namespace_v1.cnpg-namespace']),
+      ]),
     ),
 
   ]
