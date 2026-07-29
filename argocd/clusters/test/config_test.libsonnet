@@ -34,6 +34,7 @@ local argocd = import 'argocd.libsonnet';
     openbao+: {
       config+: {
         affinity: {},
+        unsealWithSecret: true,
       },
     },
     postgres+: {

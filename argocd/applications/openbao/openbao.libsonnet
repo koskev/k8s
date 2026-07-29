@@ -10,4 +10,4 @@ function(input=import 'defaultInput.libsonnet')
 
   deployment.deplyoment(name, namespace, host, rollingUpdate=true)
   +
-  (import './unsealer.libsonnet').resources(name, namespace)
+  (import './unsealer.libsonnet').resources(input, name, namespace)

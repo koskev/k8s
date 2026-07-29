@@ -4,7 +4,7 @@ local chart = (import 'images.libsonnet').helm.vault_unsealer;
 
 // XXX: Yes security and stuff, but this should be a fine in this case
 {
-  resources(name, namespace):: [
+  resources(input=import 'defaultInput.libsonnet', name, namespace):: [
     k8s.builder.argocd.helm.new(
       name='%s-unsealer' % name,
       targetnamespace=namespace,
@@ -19,13 +19,6 @@ local chart = (import 'images.libsonnet').helm.vault_unsealer;
     })
     .withAutoSync()
     ,
-    k8s.v1.secret('%s-unsealer-config' % name, namespace, data={
-      role: 'vault-unsealer',
-      mountPath: 'kubernetes',
-      secretPath: 'system/unseal-keys',
-    }, labels={
-      'vault-unsealer.bakito.net/stateful-set': name,
-    }),
     tf.resource('vault_policy', 'unsealer', {
       name: 'vault-unsealer',
       policy: |||
@@ -46,5 +39,14 @@ local chart = (import 'images.libsonnet').helm.vault_unsealer;
       token_ttl: 3600,
       token_policies: ['vault-unsealer'],
     }),
+    // TODO: Create push secret in script and the this as an externalSecret?
+    if !input.applications.openbao.config.unsealWithSecret then
+      [k8s.v1.secret('%s-unsealer-config' % name, namespace, data={
+        role: 'vault-unsealer',
+        mountPath: 'kubernetes',
+        secretPath: 'system/unseal-keys',
+      }, labels={
+        'vault-unsealer.bakito.net/stateful-set': name,
+      })] else [],
   ],
 }

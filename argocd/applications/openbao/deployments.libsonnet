@@ -2,7 +2,6 @@ function(input=import 'defaultInput.libsonnet')
   local psqlConfig = import 'argocd/applications/postgres/cnpg/config.libsonnet';
   local k8s = import 'k8s.libsonnet';
   local chart = (import 'images.libsonnet').helm.openbao;
-  local globals = import 'globals.libsonnet';
   local tf = import 'tf/tf.libsonnet';
 
   local adminUser = 'admin';
