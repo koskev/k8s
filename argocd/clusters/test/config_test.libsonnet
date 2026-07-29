@@ -6,10 +6,10 @@ local argocd = import 'argocd.libsonnet';
       default_issuer: 'internal-issuer',
       ingress: {
         internal: {
-          name: 'cloud-provider-kind',
+          name: 'traefik-internal',
         },
         external: {
-          name: 'cloud-provider-kind',
+          name: 'traefik-internal',
         },
       },
       ips: {
