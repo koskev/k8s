@@ -98,6 +98,9 @@ kind:
 	kind create cluster --name kind
 	podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} mkdir /var/lib/postgres{1,2,3}
 	nohup cloud-provider-kind --enable-lb-port-mapping &
+	kind export kubeconfig --name kind
+	kubectl apply -f ./test/coredns.yaml
+	kubectl rollout restart deployment coredns -n kube-system
 
 .PHONY: kind-destroy
 kind-destroy:
