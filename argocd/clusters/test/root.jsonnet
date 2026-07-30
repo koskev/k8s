@@ -2,7 +2,7 @@ local tf = import 'tf/tf.libsonnet';
 local compiler = import 'utils/compile.libsonnet';
 
 local rootInput = (import 'defaultInput.libsonnet') + (import 'config_test.libsonnet');
-function(type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
+function(input={}, type=compiler.types.argocd, tfStage=compiler.tf.stages.kubernetes)
   local kubernetesConfig = {
     config_path: '~/.kube/config',
     config_context: 'kind-kind',

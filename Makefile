@@ -5,6 +5,7 @@ BUILD_DIR ?= build/$(CONFIG)
 TF_STAGE ?= kubernetes
 TF_BUILD_DIR ?= $(BUILD_DIR)/tf/$(TF_STAGE)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
+MERGED_CONFIG ?= (import 'defaultInput.libsonnet') + (import 'argocd/clusters/$(CONFIG)/config_$(CONFIG).libsonnet')
 
 LOCKFILE_LOCATION ?= ./tf/$(CONFIG)/$(TF_STAGE)
 
@@ -30,7 +31,7 @@ FORCE:
 
 $(TF_BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="tf" --tla-code input="$(MERGED_CONFIG)" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
 $(BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
