@@ -73,7 +73,7 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='monitoring'),
         argocd.appSettings(name='openbao', passInput=true),
         argocd.appSettings(name='postgres', passInput=true),
-        //argocd.appSettings(name='emqx'),
+        argocd.appSettings(name='emqx', passInput=true),
         argocd.appSettings(name='reloader'),
         argocd.appSettings(name='navidrome'),
         //argocd.appSettings(name='paperless'),
