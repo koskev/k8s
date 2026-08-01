@@ -9,5 +9,5 @@ function(input=import 'defaultInput.libsonnet')
       name,
       namespace,
       input.globals.config.ips.ingress_traefik_internal,
-      input.globals.config.ingress.external.name
+      input.globals.config.ingress.internal.name
     )
