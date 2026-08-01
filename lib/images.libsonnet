@@ -254,7 +254,7 @@
     },
     fittrackee: {
       image: 'ghcr.io/samr1/fittrackee',
-      tag: 'v1.3.3@sha256:e79555c6a6cd914512c4db79e54c5e402a4ba0964ca86a44a84d53c3d23de185',
+      tag: 'v1.3.4@sha256:87ebf6879eccad561e84b257eb1ec825030030d6b0142fbaef0048c7d8cc29ba',
     },
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
