@@ -75,11 +75,6 @@
       repoURL: 'https://stakater.github.io/stakater-charts',
       targetRevision: '2.2.14',
     },
-    ingress_nginx: {
-      chart: 'ingress-nginx',
-      repoURL: 'https://kubernetes.github.io/ingress-nginx',
-      targetRevision: '4.15.1',
-    },
     trivy: {
       chart: 'trivy-operator',
       repoURL: 'https://aquasecurity.github.io/helm-charts/',
