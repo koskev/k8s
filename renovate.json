@@ -76,6 +76,7 @@
          "versioningTemplate": "hashicorp"
       }
    ],
+   "dependencyDashboard": true,
    "flux": {
       "fileMatch": [
          "\\.ya?ml$"

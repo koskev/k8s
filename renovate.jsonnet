@@ -29,6 +29,7 @@ local regexType = 'regex';
 local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutations(std.objectValues(obj)));
 {
   '$schema': 'https://docs.renovatebot.com/renovate-schema.json',
+  dependencyDashboard: true,
   prConcurrentLimit: 20,
   kubernetes: {
     fileMatch: [
