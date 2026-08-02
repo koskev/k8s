@@ -157,7 +157,7 @@
     },
     mumble: {
       image: 'mumblevoip/mumble-server',
-      tag: 'v1.6.870@sha256:6e54ae410215d0fda01c0e94ca968e35418cd237c95eaa5cd403de0e6e76cab9',
+      tag: 'v1.6.870@sha256:02fd613b6a353562e3a4e979503fd3e1320210cff4454218a72171e96fa1bf15',
     },
     unbound: {
       image: 'ghcr.io/koskev/unbound',
