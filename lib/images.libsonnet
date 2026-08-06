@@ -209,7 +209,7 @@
     },
     syncthing: {
       image: 'syncthing/syncthing',
-      tag: '2.1@sha256:4464f4161dd0251e20d46bb3aec83363db75d80cef1abdd5d5fd4054b04a004d',
+      tag: '2.1@sha256:8c8ff37ab6aa8be23b700648a90fa9412e214852e9fd6ea8477c8334792daec0',
     },
     brouter_react: {
       image: 'ghcr.io/koskev/brouter-react',
