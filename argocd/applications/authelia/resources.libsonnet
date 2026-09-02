@@ -264,6 +264,7 @@ function(input=import 'defaultInput.libsonnet')
       },
       ingress: {
         enabled: true,
+        className: input.globals.config.ingress.internal.name,
         annotations: {
           'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
         },
