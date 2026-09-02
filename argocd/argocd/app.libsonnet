@@ -16,7 +16,7 @@ function(input=import 'defaultInput.libsonnet')
     name='root',
     targetnamespace='argocd',
     path='argocd/clusters/%s' % input.globals.config.id,
-    autosync=false,
+    autosync=true,
   );
 
   local helmValues = {
