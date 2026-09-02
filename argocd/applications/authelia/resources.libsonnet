@@ -2,6 +2,7 @@ function(input=import 'defaultInput.libsonnet')
   local images = import 'images.libsonnet';
   local k8s = import 'k8s.libsonnet';
   local script = import 'script.libsonnet';
+  local globals = import 'globals.libsonnet';
 
   local name = 'authelia';
   local namespace = name;
@@ -264,6 +265,7 @@ function(input=import 'defaultInput.libsonnet')
       },
       ingress: {
         enabled: true,
+        className: globals.ingress.internal.name,
         annotations: {
           'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
         },
