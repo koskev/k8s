@@ -1,5 +1,5 @@
 AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
-CONFIG ?= test
+CONFIG ?= home
 VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build/$(CONFIG)
 TF_STAGE ?= kubernetes
@@ -16,6 +16,10 @@ tf-%-nologin:
 	VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) tofu -chdir=$(TF_BUILD_DIR) $* $$EXTRA_PARAMS
 	@mkdir -p $(LOCKFILE_LOCATION)
 	cp $(TF_BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
+
+tf-shell:
+	cd "$(TF_BUILD_DIR)" && VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) $$SHELL
+
 
 # Terraform is so nice that it just blindly overrides symlinks AND hardlinks....
 # Therefore we just copy it back to have any changes in git
@@ -107,7 +111,7 @@ kind:
 	kubectl apply -f ./test/coredns.yaml
 	kubectl rollout restart deployment coredns -n kube-system
 	VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="bootstrap" CONFIG="test" make init
-	VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="bootstrap" CONFIG="test" make tf-apply-nologin
+	EXTRA_PARAMS="-auto-approve" VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="bootstrap" CONFIG="test" make tf-apply-nologin
 	kubectl wait --for=create namespace/ingress-traefik-external --timeout=5m
 	kubectl -n ingress-traefik-external wait --for=create deployment/ingress-traefik-external --timeout=15m
 	kubectl -n ingress-traefik-external rollout status deployment/ingress-traefik-external --timeout=15m
@@ -119,13 +123,13 @@ kind:
 	VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make init
 
 	# Apply basic stuff only
-	EXTRA_PARAMS="-target=vault_kv_secret_v2.secrets -target=vault_kubernetes_auth_backend_role.external-secrets -target=vault_policy.external-secrets -target=vault_kubernetes_auth_backend_config.example" VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make apply
+	EXTRA_PARAMS="-auto-approve -target=vault_kv_secret_v2.secrets -target=vault_kubernetes_auth_backend_role.external-secrets -target=vault_policy.external-secrets -target=vault_kubernetes_auth_backend_config.example" VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make apply
 	# Restart the eso to force a reconcile
 	kubectl -n external-secrets rollout restart deployment external-secrets
 	# Make sure authelia lives for oidc
 	kubectl -n authelia rollout restart deployment authelia
 	kubectl -n authelia rollout status deployment authelia --timeout=15m
-	VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make apply
+	EXTRA_PARAMS="-auto-approve" VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make apply
 
 .PHONY: kind-destroy
 kind-destroy:
