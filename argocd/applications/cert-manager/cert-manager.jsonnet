@@ -20,7 +20,26 @@ function(input=import 'defaultInput.libsonnet')
     ),
 
     // TODO: use vault?
-    k8s.builder.definition.new('cert-manager.io/v1', 'ClusterIssuer', 'internal-issuer', namespace).withSpec({
+    k8s.builder.definition.new('cert-manager.io/v1', 'Issuer', 'self-signed-issuer', namespace).withSpec({
       selfSigned: {},
     }).withWave(1),
+    k8s.builder.definition.new('cert-manager.io/v1', 'Certificate', 'self-signed-ca', namespace).withSpec({
+      isCA: true,
+      commonName: 'self-signed-ca',
+      secretName: 'self-signed-ca',
+      privateKey: {
+        algorithm: 'ECDSA',
+        size: 256,
+      },
+      issuerRef: {
+        name: 'self-signed-issuer',
+        kind: 'Issuer',
+        group: 'cert-manager.io',
+      },
+    }).withWave(2),
+    k8s.builder.definition.new('cert-manager.io/v1', 'ClusterIssuer', 'internal-issuer', namespace).withSpec({
+      ca: {
+        secretName: 'self-signed-ca',
+      },
+    }).withWave(3),
   ]
