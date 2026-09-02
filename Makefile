@@ -100,7 +100,7 @@ reconcile-resume:
 
 .PHONY: kind
 kind:
-	kind create cluster --name kind
+	kind create cluster --name kind --config kind-config.yaml
 	@[[ $$(podman inspect kind-control-plane --format '{{.HostConfig.PidsLimit}}') > 3000 ]] || echo "PID limit of podman it too low. Increase it if you run into any errors"
 	podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} mkdir /var/lib/postgres{1,2,3}
 	nohup cloud-provider-kind --enable-lb-port-mapping &
