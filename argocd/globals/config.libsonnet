@@ -1,6 +1,7 @@
 {
   id: 'test',
   domain: 'kokev.de',
+  branch: 'main',
   default_issuer: 'kokev-issuer',
   ingress: {
     internal: {
