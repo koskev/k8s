@@ -4,7 +4,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='default', recursive=false, passInput=false),
     argocd.appSettings(name='cert-manager'),
     argocd.appSettings(name='external-secrets'),
-    argocd.appSettings(name='ingress-traefik', passInput=false),
+    argocd.appSettings(name='ingress-traefik'),
     argocd.appSettings(name='kube-flannel', passInput=false),
     argocd.appSettings(name='matrix', passInput=false),
     argocd.appSettings(name='metallb-system'),
