@@ -272,7 +272,7 @@
     },
     postgres: {
       image: 'postgres',
-      tag: '17.10-alpine@sha256:742f40ea20b9ff2ff31db5458d127452988a2164df9e17441e191f3b72252193',
+      tag: '17.11-alpine@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73',
     },
     desec_http: {
       image: 'ghcr.io/koskev/cert-manager-webhook-desec-http',
