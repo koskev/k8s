@@ -11,6 +11,8 @@
 },
  authelia+: { config+: (import 'argocd/applications/authelia/config.libsonnet'),
 },
+ renovate+: { config+: (import 'argocd/applications/renovate/config.libsonnet'),
+},
  config+: (import 'argocd/applications/config.libsonnet'),
 },
  argocd+: { config+: (import 'argocd/argocd/config.libsonnet'),

@@ -24,5 +24,6 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='immich', passInput=false),
     argocd.appSettings(name='borg'),
     argocd.appSettings(name='authelia'),
+    argocd.appSettings(name='renovate'),
   ],
 }
