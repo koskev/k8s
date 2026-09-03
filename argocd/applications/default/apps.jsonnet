@@ -2,7 +2,6 @@ local argocd = import 'argocd.libsonnet';
 
 local apps = [
   argocd.appSettings('chhoto-url'),
-  argocd.appSettings('esphome'),
   argocd.appSettings('hass'),
   argocd.appSettings('jellyfin'),
   argocd.appSettings('mumble'),

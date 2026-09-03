@@ -9,6 +9,8 @@
 },
  openbao+: { config+: (import 'argocd/applications/openbao/config.libsonnet'),
 },
+ automation+: { config+: (import 'argocd/applications/automation/config.libsonnet'),
+},
  authelia+: { config+: (import 'argocd/applications/authelia/config.libsonnet'),
 },
  renovate+: { config+: (import 'argocd/applications/renovate/config.libsonnet'),

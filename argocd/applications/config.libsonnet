@@ -17,7 +17,7 @@ local argocd = import 'argocd.libsonnet';
     // argocd.appSettings(name='trivy'),
     argocd.appSettings(name='paperless'),
     argocd.appSettings(name='forgejo'),
-    argocd.appSettings(name='automation', passInput=false),
+    argocd.appSettings(name='automation'),
     argocd.appSettings(name='grafana', exclude='dashboards/*'),
     argocd.appSettings(name='kube-system'),
     argocd.appSettings(name='fittrackee'),
