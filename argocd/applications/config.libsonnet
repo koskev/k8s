@@ -7,7 +7,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='ingress-traefik', passInput=false),
     argocd.appSettings(name='kube-flannel', passInput=false),
     argocd.appSettings(name='matrix', passInput=false),
-    argocd.appSettings(name='metallb-system', passInput=false),
+    argocd.appSettings(name='metallb-system'),
     argocd.appSettings(name='monitoring'),
     argocd.appSettings(name='openbao'),
     argocd.appSettings(name='postgres'),
