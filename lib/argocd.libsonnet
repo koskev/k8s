@@ -6,6 +6,9 @@ local globals = import 'globals.libsonnet';
     metadata: {
       name: name,
       namespace: 'argocd',
+      finalizers: [
+        'resources-finalizer.argocd.argoproj.io',
+      ],
     },
     spec: {
       destination: {
