@@ -107,7 +107,7 @@ local globals = import 'globals.libsonnet';
       ],
     },
   },
-  appSettings(name, autosync=true, recursive=true, exclude='', passInput=false):: {
+  appSettings(name, autosync=true, recursive=true, exclude='', passInput=true):: {
     assert std.isString(name),
     assert std.isBoolean(autosync),
     assert std.isBoolean(recursive),
