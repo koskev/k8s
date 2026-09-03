@@ -118,7 +118,7 @@
     authelia: {
       chart: 'authelia',
       repoURL: 'https://charts.authelia.com',
-      targetRevision: '0.11.6',
+      targetRevision: '0.11.20',
     },
   },
   container: {
