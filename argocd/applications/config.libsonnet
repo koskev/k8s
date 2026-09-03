@@ -23,7 +23,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='kube-system'),
     argocd.appSettings(name='fittrackee'),
     argocd.appSettings(name='immich'),
-    argocd.appSettings(name='borg'),
+    argocd.appSettings(name='borg', passInput=true),
     argocd.appSettings(name='authelia', passInput=true),
   ],
 }
