@@ -81,7 +81,7 @@ local argocd = import 'argocd.libsonnet';
         //argocd.appSettings(name='automation', passInput=false),
         argocd.appSettings(name='grafana', exclude='dashboards/*'),
         argocd.appSettings(name='kube-system'),
-        //argocd.appSettings(name='fittrackee'),
+        argocd.appSettings(name='fittrackee'),
         //argocd.appSettings(name='immich'),
         //argocd.appSettings(name='borg'),
         argocd.appSettings(name='authelia'),

@@ -104,7 +104,7 @@ reconcile-resume:
 kind:
 	kind create cluster --name kind --config kind-config.yaml
 	@[[ $$(podman inspect kind-control-plane --format '{{.HostConfig.PidsLimit}}') > 3000 ]] || echo "PID limit of podman it too low. Increase it if you run into any errors"
-	podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} mkdir /var/lib/postgres{1,2,3}
+	podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} bash -c "apt update && apt install acl && mkdir -p /var/lib/postgres{1,2,3} /mnt/shared_data/ && chmod 777 /mnt/shared_data && setfacl -d -m 'u::rwx,g::rwx,o::rwx' /mnt/shared_data"
 	nohup cloud-provider-kind --enable-lb-port-mapping &
 	kind export kubeconfig --name kind
 	kubectl apply -f ./test/coredns.yaml
@@ -119,6 +119,8 @@ kind:
 	kubectl -n openbao wait --for=create secret openbao-unsealer-secret --timeout=15m
 	kubectl -n openbao rollout restart deployment openbao-unsealer-vault-unsealer
 	kubectl -n openbao rollout status statefulset/openbao --timeout=15m
+	# Wait just in case
+	sleep 10
 	VAULT_TOKEN=$$(kubectl -n openbao get secret openbao-unsealer-secret -o json | jq -r '.data.root_token' | base64 -d) VAULT_SKIP_VERIFY=true VAULT_ADDR="https://vault.0--1.nip.io" TF_STAGE="kubernetes" CONFIG="test" make init
 
 	# Apply basic stuff only
