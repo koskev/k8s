@@ -248,7 +248,7 @@
     },
     anubis: {
       image: 'ghcr.io/techarohq/anubis',
-      tag: 'v1.26.0-pre2@sha256:3b9777062ba5a6e2b73b2b6e054c0327496d2b1eff80a1b4fd69a634da1dff98',
+      tag: 'v1.27.0-pre2@sha256:cd1ba0eae75d602ef1a1ec6bf65af8dffbad0db95e2dcda937b95c51c0149736',
     },
     cnpg_vectorchord: {
       image: 'ghcr.io/tensorchord/cloudnative-vectorchord',
