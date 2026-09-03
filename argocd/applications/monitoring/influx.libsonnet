@@ -2,7 +2,6 @@ function(input=import 'defaultInput.libsonnet')
   local k8s = import 'k8s.libsonnet';
   local image = (import 'images.libsonnet').container.influxdb;
   local backup = import 'utils/backup.libsonnet';
-  local globals = import 'globals.libsonnet';
 
   local config = input.applications.monitoring.config;
   local name = 'influxdb';
@@ -61,6 +60,6 @@ function(input=import 'defaultInput.libsonnet')
   +
   backup.new(name, config.namespace)
   .withInfluxDatabase('influxdb-secret')
-  .withRepository('ssh://borg@borg-backup.borg/./backups/influxdb/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
+  .withRepository('ssh://borg@borg-backup.borg/./backups/influxdb/data', 'backup-%s' % name, input.globals.config.backup.kokev.knownHost)
   .withSchedule('@daily')
   .build()

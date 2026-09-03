@@ -1,20 +1,14 @@
 {
-  local outerSelf = self,
   repository: 'https://github.com/koskev/k8s',
   ips: {
     pihole: '192.168.10.2',
-    emqx: '192.168.10.5',
     unbound: '192.168.10.6',
-    ingress_traefik_external: '192.168.10.4',
     ingress_traefik_internal: '192.168.10.30',
     wireguard: '192.168.10.10',
   },
   ingress: {
     internal: {
       name: 'traefik-internal',
-    },
-    external: {
-      name: 'traefik-external',
     },
   },
   backup: {
@@ -23,9 +17,6 @@
     },
   },
   domain: 'kokev.de',
-  urls: {
-    auth: 'https://auth.%s' % outerSelf.domain,
-  },
   // Nodes that are somehow instable and should not host stateful sets
   instable_nodes: ['rpi-server'],
 }

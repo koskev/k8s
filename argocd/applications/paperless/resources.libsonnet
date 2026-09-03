@@ -3,7 +3,6 @@ function(input=import 'defaultInput.libsonnet')
   local image = (import 'images.libsonnet').container.paperless;
   local valkeyImage = (import 'images.libsonnet').container.valkey;
   local backup = import 'utils/backup.libsonnet';
-  local globals = import 'globals.libsonnet';
 
   local name = 'paperless-ngx';
   local namespace = 'paperless';
@@ -152,7 +151,7 @@ function(input=import 'defaultInput.libsonnet')
   +
   backup.new(name, namespace)
   .withVolumes(volumes)
-  .withRepository('ssh://borg@borg-backup.borg/./backups/paperless/data', 'backup-%s' % name, globals.backup.kokev.knownHost)
+  .withRepository('ssh://borg@borg-backup.borg/./backups/paperless/data', 'backup-%s' % name, input.globals.config.backup.kokev.knownHost)
   .withDirectory('/data')
   .withDirectory('/media')
   .withExclude('*/classification_model.pickle')  // The model can be reconstructed from the other data
