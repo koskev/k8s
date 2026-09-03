@@ -32,25 +32,25 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
   dependencyDashboard: true,
   prConcurrentLimit: 20,
   kubernetes: {
-    fileMatch: [
-      '\\.ya?ml$',
+    managerFilePatterns: [
+      '/\\.ya?ml$/',
     ],
   },
   argocd: {
-    fileMatch: [
-      '\\.ya?ml$',
+    managerFilePatterns: [
+      '/\\.ya?ml$/',
     ],
   },
   flux: {
-    fileMatch: [
-      '\\.ya?ml$',
+    managerFilePatterns: [
+      '/\\.ya?ml$/',
     ],
   },
   customManagers: [
     {
       customType: regexType,
-      fileMatch: [
-        '\\.ya?ml$',
+      managerFilePatterns: [
+        '/\\.ya?ml$/',
       ],
       datasourceTemplate: 'docker',
       matchStrings: getMatchArray(regexes.docker),
@@ -58,8 +58,8 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
     {
       description: "Helm repos for all strings that start with 'https'",
       customType: regexType,
-      fileMatch: [
-        'images.libsonnet',
+      managerFilePatterns: [
+        '/images.libsonnet/',
       ],
       datasourceTemplate: 'helm',
       matchStrings: getMatchArray(regexes.helm),
@@ -67,8 +67,8 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
     {
       description: "Helm OCI repos for all strings that do not contain a ':'",
       customType: regexType,
-      fileMatch: [
-        'images.libsonnet',
+      managerFilePatterns: [
+        '/images.libsonnet/',
       ],
       datasourceTemplate: 'docker',
       matchStrings: getMatchArray(regexes.helm),
@@ -77,8 +77,8 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
     {
       description: 'Matches docker images with an optional pinned hash',
       customType: regexType,
-      fileMatch: [
-        'images.libsonnet',
+      managerFilePatterns: [
+        '/images.libsonnet/',
       ],
       datasourceTemplate: 'docker',
       matchStrings: getMatchArray(regexes.docker),
@@ -86,8 +86,8 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
     {
       description: 'Terraform dependencies',
       customType: regexType,
-      fileMatch: [
-        'images.libsonnet',
+      managerFilePatterns: [
+        '/images.libsonnet/',
       ],
       datasourceTemplate: 'terraform-provider',
       versioningTemplate: 'hashicorp',
