@@ -13,7 +13,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='openbao', passInput=true),
     argocd.appSettings(name='postgres', passInput=true),
     argocd.appSettings(name='emqx', passInput=true),
-    argocd.appSettings(name='reloader'),
+    argocd.appSettings(name='reloader', passInput=true),
     argocd.appSettings(name='navidrome', passInput=true),
     // argocd.appSettings(name='trivy'),
     argocd.appSettings(name='paperless', passInput=true),
