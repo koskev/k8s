@@ -114,6 +114,12 @@
             "patch"
          ],
          "matchUpdateTypes": "patch"
+      },
+      {
+         "addLabels": [
+            "digest"
+         ],
+         "matchUpdateTypes": "digest"
       }
    ],
    "prConcurrentLimit": 20

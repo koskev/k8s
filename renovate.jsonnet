@@ -110,5 +110,5 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
       addLabels: [
         release,
       ],
-    }, ['major', 'minor', 'patch']),
+    }, ['major', 'minor', 'patch', 'digest']),
 }
