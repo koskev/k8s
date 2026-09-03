@@ -16,7 +16,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='reloader'),
     argocd.appSettings(name='navidrome', passInput=true),
     // argocd.appSettings(name='trivy'),
-    argocd.appSettings(name='paperless'),
+    argocd.appSettings(name='paperless', passInput=true),
     argocd.appSettings(name='forgejo'),
     argocd.appSettings(name='automation'),
     argocd.appSettings(name='grafana', exclude='dashboards/*'),
