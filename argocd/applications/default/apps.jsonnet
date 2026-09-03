@@ -6,7 +6,6 @@ local apps = [
   argocd.appSettings('hass'),
   argocd.appSettings('jellyfin'),
   argocd.appSettings('mumble'),
-  // argocd.appSettings('octoprint'), # Now part of NixOS
   argocd.appSettings('signal'),
   argocd.appSettings('syncthing'),
   argocd.appSettings('whatsapp'),
