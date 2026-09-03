@@ -1,4 +1,3 @@
-AUTHENTIK_TF_FILE = tf/authentik/main.tf.json
 CONFIG ?= home
 VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build/$(CONFIG)

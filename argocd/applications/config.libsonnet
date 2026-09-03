@@ -24,7 +24,6 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='fittrackee'),
     argocd.appSettings(name='immich'),
     argocd.appSettings(name='borg'),
-    //argocd.appSettings(name='authentik'),
     argocd.appSettings(name='authelia', passInput=true),
   ],
 }
