@@ -104,5 +104,11 @@ local getMatchArray(obj) = std.map(function(elem) std.join('', elem), permutatio
         'https://registry.opentofu.org',
       ],
     },
-  ],
+  ] + std.map(function(release)
+    {
+      matchUpdateTypes: release,
+      addLabels: [
+        release,
+      ],
+    }, ['major', 'minor', 'patch']),
 }

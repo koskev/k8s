@@ -96,6 +96,24 @@
          "registryUrls": [
             "https://registry.opentofu.org"
          ]
+      },
+      {
+         "addLabels": [
+            "major"
+         ],
+         "matchUpdateTypes": "major"
+      },
+      {
+         "addLabels": [
+            "minor"
+         ],
+         "matchUpdateTypes": "minor"
+      },
+      {
+         "addLabels": [
+            "patch"
+         ],
+         "matchUpdateTypes": "patch"
       }
    ],
    "prConcurrentLimit": 20
