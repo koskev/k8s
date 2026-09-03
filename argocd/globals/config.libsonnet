@@ -1,4 +1,5 @@
 {
+  local outerSelf = self,
   id: 'test',
   domain: 'kokev.de',
   branch: 'main',
@@ -18,5 +19,8 @@
     ingress_traefik_external: '192.168.10.4',
     ingress_traefik_internal: '192.168.10.30',
     wireguard: '192.168.10.10',
+  },
+  urls: {
+    auth: 'https://auth.%s' % outerSelf.domain,
   },
 }

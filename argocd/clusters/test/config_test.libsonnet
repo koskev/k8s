@@ -70,7 +70,7 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='external-secrets', passInput=true),
         argocd.appSettings(name='ingress-traefik', passInput=true),
         //argocd.appSettings(name='matrix'),
-        argocd.appSettings(name='monitoring'),
+        argocd.appSettings(name='monitoring', passInput=true),
         argocd.appSettings(name='openbao', passInput=true),
         argocd.appSettings(name='postgres', passInput=true),
         argocd.appSettings(name='emqx', passInput=true),

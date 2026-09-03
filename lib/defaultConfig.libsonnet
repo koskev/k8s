@@ -1,4 +1,6 @@
-{ applications+: { postgres+: { cnpg+: { config+: (import 'argocd/applications/postgres/cnpg/config.libsonnet'),
+{ applications+: { monitoring+: { config+: (import 'argocd/applications/monitoring/config.libsonnet'),
+},
+ postgres+: { cnpg+: { config+: (import 'argocd/applications/postgres/cnpg/config.libsonnet'),
 },
 },
  cert_manager+: { config+: (import 'argocd/applications/cert-manager/config.libsonnet'),
