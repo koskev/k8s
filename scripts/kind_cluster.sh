@@ -17,6 +17,7 @@ DIRS=(
     "/mnt/shared_data/k8s/prometheus/prometheus_data"
     "/mnt/shared_data/k8s/influx/data"
     "/mnt/shared_data/k8s/influx/config"
+    "/mnt/ext_hdd/repos"
 )
 
 function coredns_redirect() {

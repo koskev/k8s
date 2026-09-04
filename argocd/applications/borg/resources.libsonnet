@@ -5,10 +5,11 @@ function(input=import 'defaultInput.libsonnet')
   local name = 'borg-backup';
   local namespace = 'borg';
   local sshPort = 22;
+  local host = input.applications.borg.config.host;
 
-  local storageClass = 'local-optiplex-borg-storage';
+  local storageClass = 'local-%s-borg-storage' % host;
   local mountPath = '/mnt/ext_hdd';
-  local pvcName = 'optiplex-borg-storage';
+  local pvcName = '%s-borg-storage' % host;
 
   local size = 3 * 1000;
 
@@ -28,7 +29,7 @@ function(input=import 'defaultInput.libsonnet')
   [
     k8s.v1.namespace(namespace),
     k8s.storage.localStorageClass(storageClass),
-    k8s.storage.localPersistentVolume(pvcName, namespace, size, '%s/repos' % mountPath, storageClass, 'optiplex'),
+    k8s.storage.localPersistentVolume(pvcName, namespace, size, '%s/repos' % mountPath, storageClass, host),
     k8s.storage.localPvc(pvcName, namespace, storageClass, size),
 
     k8s.v1.configmap('borg-authorized-keys', namespace, {

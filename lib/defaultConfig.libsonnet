@@ -11,6 +11,8 @@
 },
  automation+: { config+: (import 'argocd/applications/automation/config.libsonnet'),
 },
+ borg+: { config+: (import 'argocd/applications/borg/config.libsonnet'),
+},
  authelia+: { config+: (import 'argocd/applications/authelia/config.libsonnet'),
 },
  renovate+: { config+: (import 'argocd/applications/renovate/config.libsonnet'),

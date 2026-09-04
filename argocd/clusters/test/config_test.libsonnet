@@ -56,6 +56,11 @@ local argocd = import 'argocd.libsonnet';
         unsealWithSecret: true,
       },
     },
+    borg+: {
+      config+: {
+        host: 'kind-worker',
+      },
+    },
     postgres+: {
       cnpg+: {
         config+: {
