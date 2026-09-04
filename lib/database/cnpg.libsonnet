@@ -1,4 +1,5 @@
 local immich_postgres_image = (import 'images.libsonnet').container.cnpg_vectorchord;
+local postgres_image = (import 'images.libsonnet').container.postgres;
 {
   newImmichCluster(name, storageclass, adminSecretName):: self.newCluster(
     name,
@@ -15,7 +16,7 @@ local immich_postgres_image = (import 'images.libsonnet').container.cnpg_vectorc
       },
     }
   ),
-  newCluster(name, instances, size, storageclass, adminSecretName, imageOverride='', extraSpec={}):: {
+  newCluster(name, instances, size, storageclass, adminSecretName, imageOverride='%s:%s' % [postgres_image.image, postgres_image.tag], extraSpec={}):: {
     apiVersion: 'postgresql.cnpg.io/v1',
     kind: 'Cluster',
     metadata: {
@@ -28,7 +29,7 @@ local immich_postgres_image = (import 'images.libsonnet').container.cnpg_vectorc
         size: size,
         storageClass: storageclass,
       },
-      [if std.length(imageOverride) > 0 then 'imageName']: imageOverride,
+      imageName: imageOverride,
       managed:
         {
           roles:

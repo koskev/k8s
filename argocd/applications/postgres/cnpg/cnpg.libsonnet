@@ -4,53 +4,21 @@ function(input=import 'defaultInput.libsonnet')
   local chart = (import 'images.libsonnet').helm.cnpg;
   local postgres_operator = import 'database/postgres-operator.jsonnet';
   local tf = import 'tf/tf.libsonnet';
+  local cnpg = import 'database/cnpg.libsonnet';
 
   local config = import 'config.libsonnet';
 
-  local cluster = {
-    apiVersion: 'postgresql.cnpg.io/v1',
-    kind: 'Cluster',
-    metadata: {
-      name: config.clusterName,
-      namespace: config.namespace,
-    },
-    spec:
-      {
-        postgresql: {
-          parameters: {
-            max_connections: '200',
-            max_slot_wal_keep_size: '10GB',
-          },
-        },
-        instances: 3,
-        storage: {
-          size: '3Gi',
-          storageClass: config.storageClass,
-        },
-        monitoring: {
-          enablePodMonitor: true,
-        },
-        managed:
-          {
-            roles:
-              [
-                {
-                  name: 'admin',
-                  ensure: 'present',
-                  comment: 'superuser',
-                  login: true,
-                  superuser: true,
-                  passwordSecret: {
-                    name: config.secretName,
-                  },
-                  // These are needed for ArgoCD 3.0
-                  connectionLimit: -1,
-                  inherit: true,
-                },
-              ],
-          },
+  local cluster = cnpg.newCluster(config.clusterName, 3, '3Gi', config.storageClass, config.secretName, extraSpec={
+    postgresql: {
+      parameters: {
+        max_connections: '200',
+        max_slot_wal_keep_size: '10GB',
       },
-  };
+    },
+    monitoring: {
+      enablePodMonitor: true,
+    },
+  });
 
   [
     argocd.applicationHelm(

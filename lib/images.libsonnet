@@ -271,8 +271,8 @@
       tag: '2.1.7@sha256:6d039f98e58a58cea287007608c3d5993ce65f8e248ff91cd3de4246c648c123',
     },
     postgres: {
-      image: 'postgres',
-      tag: '17.11-alpine@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73',
+      image: 'ghcr.io/cloudnative-pg/postgresql',
+      tag: '17.4@sha256:3c0ba08ea353c9705a755c113e4ae395be76553e0ed68076e5410cb09b9d17d9',
     },
     desec_http: {
       image: 'ghcr.io/koskev/cert-manager-webhook-desec-http',
