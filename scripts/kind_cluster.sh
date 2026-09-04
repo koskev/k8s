@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 export VAULT_SKIP_VERIFY=true
 export VAULT_ADDR="https://vault.0--1.nip.io"
@@ -8,19 +8,36 @@ export CONFIG="test"
 
 alias kubectl="kubectl --context kind-kind"
 
-kind create cluster --name kind --config kind-config.yaml
+DIRS=("/mnt/hdd_gluster/postgres_data_immich" "/mnt/shared_data/" "/var/lib/postgres{1,2,3}")
+
+function coredns_redirect() {
+    kubectl apply -f ./test/coredns.yaml
+    kubectl rollout restart deployment coredns -n kube-system
+}
+
+function run_command() {
+    podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} bash -c "$*"
+}
+
+kind create cluster --name kind --config kind-config.yaml || kind get clusters | grep "^kind$"
 [[ $(podman inspect kind-control-plane --format '{{.HostConfig.PidsLimit}}') -gt 3000 ]] || echo "PID limit of podman it too low. Increase it if you run into any errors"
-podman ps -q --filter "label=io.x-k8s.kind.cluster=kind" | xargs -I {} podman exec {} bash -c "apt update && apt install acl && mkdir -p /var/lib/postgres{1,2,3} /mnt/shared_data/ && chmod 777 /mnt/shared_data && setfacl -d -m 'u::rwx,g::rwx,o::rwx' /mnt/shared_data"
-nohup cloud-provider-kind --enable-lb-port-mapping &
+
 kind export kubeconfig --name kind
-kubectl apply -f ./test/coredns.yaml
-kubectl rollout restart deployment coredns -n kube-system
+coredns_redirect
+for dir in "${DIRS[@]}"; do
+    run_command mkdir -p "$dir"
+    run_command chmod 777 "$dir"
+done
+
 TF_STAGE="bootstrap" make init
 EXTRA_PARAMS="-auto-approve" TF_STAGE="bootstrap" make tf-apply-nologin
+
+nohup cloud-provider-kind --enable-lb-port-mapping &
 kubectl wait --for=create namespace/ingress-traefik-external --timeout=5m
 kubectl -n ingress-traefik-external wait --for=create deployment/ingress-traefik-external --timeout=15m
 kubectl -n ingress-traefik-external rollout status deployment/ingress-traefik-external --timeout=15m
 ./scripts/nft.sh
+
 # Make sure the vault is live and initialized
 kubectl -n openbao wait --for=create secret openbao-unsealer-secret --timeout=15m
 kubectl -n openbao rollout restart deployment openbao-unsealer-vault-unsealer
@@ -38,4 +55,8 @@ kubectl -n external-secrets rollout restart deployment external-secrets
 # Make sure authelia lives for oidc
 kubectl -n authelia rollout restart deployment authelia
 kubectl -n authelia rollout status deployment authelia --timeout=15m
+
+# Dex is stupid and just checks authelia on boot
+kubectl -n argocd rollout restart deployment argocd-dex-server
+
 EXTRA_PARAMS="-auto-approve" make apply
