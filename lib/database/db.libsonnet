@@ -1,5 +1,5 @@
 {
-  database(name, namespace, dropOnDelete=false, databaseName=name, instance='')::
+  database(name, namespace, dropOnDelete=false, databaseName=name, instance='', extensions=[])::
     {
       apiVersion: 'db.movetokube.com/v1alpha1',
       kind: 'Postgres',
@@ -13,6 +13,7 @@
       spec: {
         database: databaseName,
         dropOnDelete: dropOnDelete,
+        extensions: extensions,
       },
     },
   user(name, namespace, database=name, secretTemplate=null, privileges='OWNER', secretName=name, role=name, instance='')::

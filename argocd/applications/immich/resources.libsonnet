@@ -1,5 +1,6 @@
 function(input=import 'defaultInput.libsonnet')
   local k8s = import 'k8s.libsonnet';
+  local tf = import 'tf/tf.libsonnet';
   local chart = (import 'images.libsonnet').helm.immich;
   local immich_image = (import 'images.libsonnet').container.immich;
   local immich_machine_learning_image = (import 'images.libsonnet').container.immich_machine_learning;
@@ -25,11 +26,17 @@ function(input=import 'defaultInput.libsonnet')
 
   local fixed_host = input.applications.immich.config.fixed_host;
   [
+    // We can probably move this to the vault
+    tf.stage(
+      'bootstrap',
+      std.flattenDeepArray([
+        tf.kubernetesSecret('cnpg-immich-cluster-admin', input.applications.postgres.cnpg.config.namespace, 'secrets/postgres/cnpg-immich-cluster-admin.enc.yaml', ['kubernetes_namespace_v1.cnpg-namespace']),
+      ]),
+    ),
     k8s.v1.namespace(namespace),
-    // XXX: Manually gave "immich-group" superuser
     cnpg.newImmichCluster(database_name, storageclassDB, database_admin_secret),
     postgres_operator.new('postgres-operator-%s' % name, database_admin_secret, database_name),
-    k8s.db.database(name, namespace, instance=database_name),
+    k8s.db.database(name, namespace, instance=database_name, extensions=['vector', 'vchord', 'earthdistance', 'cube']),
     k8s.db.user(name, namespace, instance=database_name, secretTemplate={
       DB_URL: 'postgresql://{{.Role}}:{{.Password}}@%s-rw.postgres/{{.Database}}?sslmode=disable' % database_name,
     }),
@@ -115,7 +122,7 @@ function(input=import 'defaultInput.libsonnet')
               ingressClassName: input.globals.config.ingress.internal.name,
               enabled: true,
               annotations: {
-                'cert-manager.io/cluster-issuer': 'kokev-issuer',
+                'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
               },
               hosts: [{
                 host: host,

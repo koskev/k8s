@@ -13,14 +13,6 @@ local immich_postgres_image = (import 'images.libsonnet').container.cnpg_vectorc
           'vchord.so',
         ],
       },
-      bootstrap: {
-        initdb: {
-          postInitApplicationSQL: [
-            'CREATE EXTENSION vchord CASCADE;',
-            'CREATE EXTENSION earthdistance CASCADE;',
-          ],
-        },
-      },
     }
   ),
   newCluster(name, instances, size, storageclass, adminSecretName, imageOverride='', extraSpec={}):: {
