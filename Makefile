@@ -36,20 +36,22 @@ SCRIPT_FILES := $(addprefix $(SH_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet
 K8S_FILES := $(addprefix $(K8S_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.k8s.json)))
 JSONNET_FILES := $(shell find ./argocd -name '*.*sonnet')
 
+BASE_JSONNET_CMD := jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-code input="$(MERGED_CONFIG)"
+
 .PHONY: FORCE
 FORCE:
 
 $(TF_BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="tf" --tla-code input="$(MERGED_CONFIG)" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+	$(BASE_JSONNET_CMD) --tla-str type="tf" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
 $(K8S_BUILD_DIR)/%.k8s.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="argocd" --tla-code input="$(MERGED_CONFIG)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+	$(BASE_JSONNET_CMD) --tla-str type="argocd" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
 $(SH_BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
-	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
+	$(BASE_JSONNET_CMD) --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
 config: $(CONFIGS)
 	./scripts/build_config.py $^ > lib/defaultConfig.libsonnet
