@@ -105,6 +105,10 @@ reconcile-resume:
 kind:
 	./scripts/kind_cluster.sh
 
+.PHONY: minikube
+minikube:
+	./scripts/minikube_cluster.sh
+
 .PHONY: kind-destroy
 kind-destroy:
 	killall cloud-provider-kind || true

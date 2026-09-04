@@ -15,22 +15,10 @@ function(input=import 'defaultInput.libsonnet')
 
   [
     k8s.builder.core.namespace.new(namespace),
-    addressPool(
-      name='auto-pool',
-      addresses=['192.168.10.100-192.168.10.254']
-    ),
-    addressPool(
-      name='manual-pool',
-      addresses=['192.168.10.2-192.168.10.99'],
-      autoAssign=false,
-    ),
     k8s.builder.definition.new('metallb.io/v1beta1', 'L2Advertisement', 'example', namespace)
     .withWave(2)
     .withSpec({
-      ipAddressPools: [
-        'auto-pool',
-        'manual-pool',
-      ],
+      ipAddressPools: std.objectFields(input.applications.metallb_system.config.pools),
     }),
     argocd.applicationHelm(
       name='metallb',
@@ -59,4 +47,4 @@ function(input=import 'defaultInput.libsonnet')
         },
       }
     ),
-  ]
+  ] + std.map(function(pool) addressPool(pool.key, pool.value.addresses, std.get(pool.value, 'autoAssign', true)), std.objectKeysValues(input.applications.metallb_system.config.pools))

@@ -28,12 +28,18 @@ _: {
               KIND_EXPERIMENTAL_PROVIDER="podman" ${lib.getExe pkgs.cloud-provider-kind} "$@"
             '';
           };
+          #fixedMinikube = pkgs.minikube.overrideAttrs (oldAttrs: {
+          #  buildPhase = ''
+          #    make
+          #  '';
+          #});
         in
         {
           default = pkgs.mkShell {
             nativeBuildInputs =
               with pkgs;
               [
+                #fixedMinikube
                 yq
                 opentofu
                 tofu-ls
