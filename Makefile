@@ -3,6 +3,8 @@ VAULT_ADDR ?= "https://vault.kokev.de"
 BUILD_DIR ?= build/$(CONFIG)
 TF_STAGE ?= kubernetes
 TF_BUILD_DIR ?= $(BUILD_DIR)/tf/$(TF_STAGE)
+SH_BUILD_DIR ?= $(BUILD_DIR)/script
+K8S_BUILD_DIR ?= $(BUILD_DIR)/k8s
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 MERGED_CONFIG ?= (import 'defaultInput.libsonnet') + (import 'argocd/clusters/$(CONFIG)/config_$(CONFIG).libsonnet')
 
@@ -30,7 +32,8 @@ tf-%: login tf-%-nologin
 ENTRYPOINTS := $(subst ./,,$(shell find ./argocd -name 'entrypoint.jsonnet'))
 CONFIGS := $(subst ./,,$(shell find ./argocd -name 'config.libsonnet'))
 TF_JSON_FILES := $(addprefix $(TF_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.tf.json)))
-SCRIPT_FILES := $(addprefix $(BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
+SCRIPT_FILES := $(addprefix $(SH_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.sh)))
+K8S_FILES := $(addprefix $(K8S_BUILD_DIR)/,$(subst /,__,$(ENTRYPOINTS:.jsonnet=.k8s.json)))
 JSONNET_FILES := $(shell find ./argocd -name '*.*sonnet')
 
 .PHONY: FORCE
@@ -40,7 +43,11 @@ $(TF_BUILD_DIR)/%.tf.json: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="tf" --tla-code input="$(MERGED_CONFIG)" --tla-str tfStage="$(TF_STAGE)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
 
-$(BUILD_DIR)/%.sh: $(JSONNET_FILES)
+$(K8S_BUILD_DIR)/%.k8s.json: $(JSONNET_FILES)
+	@mkdir -p $(dir $@)
+	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="argocd" --tla-code input="$(MERGED_CONFIG)" $$(echo $*.jsonnet | sed "s/__/\//g") > $@
+
+$(SH_BUILD_DIR)/%.sh: $(JSONNET_FILES)
 	@mkdir -p $(dir $@)
 	jsonnet -J . -J lib --ext-str ARGOCD_BRANCH="$(BRANCH)" --tla-str type="script" $$(echo $*.jsonnet | sed "s/__/\//g") | jq -r '.[]' > $@
 
@@ -56,9 +63,9 @@ generate: $(TF_BUILD_DIR)/bootstrap/providers.tf.json
 	terraform-jsonnet-gen -t $(dir $<) -o vendor/_gen
 
 .PHONY: build
-build: $(TF_JSON_FILES) $(SCRIPT_FILES) $(TF_BUILD_DIR)/$(subst /,__,argocd/clusters/$(CONFIG)/root.tf.json)
+build: $(TF_JSON_FILES) $(SCRIPT_FILES) $(K8S_FILES) $(TF_BUILD_DIR)/$(subst /,__,argocd/clusters/$(CONFIG)/root.tf.json)
 	ln -sf $$(pwd)/tf/openbao/* $(TF_BUILD_DIR)
-	sh $(BUILD_DIR)/*.sh
+	sh $(SH_BUILD_DIR)/*.sh
 
 .PHONY: login
 login:
