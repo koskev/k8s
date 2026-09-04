@@ -12,8 +12,9 @@ LOCKFILE_LOCATION ?= ./tf/$(CONFIG)/$(TF_STAGE)
 all: apply
 
 tf-%-nologin:
-	VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) tofu -chdir=$(TF_BUILD_DIR) $* $$EXTRA_PARAMS
 	@mkdir -p $(LOCKFILE_LOCATION)
+	cp $(LOCKFILE_LOCATION)/.terraform.lock.hcl $(TF_BUILD_DIR)/ || true
+	VAULT_ADDR=$(VAULT_ADDR) DESEC_API_TOKEN=$$(bao kv get -field=token system/desec-terraform) tofu -chdir=$(TF_BUILD_DIR) $* $$EXTRA_PARAMS
 	cp $(TF_BUILD_DIR)/.terraform.lock.hcl $(LOCKFILE_LOCATION)/
 
 tf-shell:
@@ -108,3 +109,8 @@ kind:
 kind-destroy:
 	killall cloud-provider-kind || true
 	kind delete cluster --name kind
+
+
+.PHONY: update-locks
+update-locks:
+	./scripts/upgrade_providers.sh
