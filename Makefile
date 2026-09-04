@@ -111,7 +111,7 @@ minikube:
 
 .PHONY: kind-destroy
 kind-destroy:
-	killall cloud-provider-kind || true
+	podman stop kind-metallb-proxy
 	kind delete cluster --name kind
 
 

@@ -25,6 +25,19 @@ local argocd = import 'argocd.libsonnet';
     },
   },
   applications+: {
+    metallb_system+: {
+      config+: {
+        pools: {
+          'auto-pool': {
+            addresses: ['10.89.0.100-10.89.0.254'],
+          },
+          'manual-pool': {
+            addresses: ['10.89.0.2-10.89.0.99'],
+            autoAssign: false,
+          },
+        },
+      },
+    },
     immich+: {
       config+: {
         fixed_host: 'kind-worker',
@@ -92,6 +105,8 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='borg'),
         argocd.appSettings(name='authelia'),
         argocd.appSettings(name='renovate'),
+
+        argocd.appSettings(name='metallb-system'),
       ],
     },
   },
