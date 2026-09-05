@@ -34,6 +34,7 @@ _: {
                 sops
                 authelia
                 kind
+                podman
 
                 inputs'.terraform-jsonnet-gen.packages.default
               ]
