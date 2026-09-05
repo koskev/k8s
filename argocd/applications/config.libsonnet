@@ -6,7 +6,7 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='external-secrets'),
     argocd.appSettings(name='ingress-traefik'),
     argocd.appSettings(name='kube-flannel'),
-    argocd.appSettings(name='matrix', passInput=false),
+    argocd.appSettings(name='matrix'),
     argocd.appSettings(name='metallb-system'),
     argocd.appSettings(name='monitoring'),
     argocd.appSettings(name='openbao'),
