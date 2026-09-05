@@ -9,6 +9,6 @@ STAGES=("bootstrap" "kubernetes")
 
 for stage in "${STAGES[@]}"; do
     for config in argocd/clusters/*; do
-	EXTRA_PARAMS="-upgrade" TF_STAGE="$stage" CONFIG="$(basename "$config")" make init
+	EXTRA_PARAMS="-upgrade" TF_STAGE="$stage" CONFIG="$(basename "$config")" make build tf-init
     done
 done

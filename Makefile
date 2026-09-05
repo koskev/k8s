@@ -88,7 +88,8 @@ apply: build tf-apply
 plan: build tf-plan
 
 .PHONY: init
-init: build tf-init-nologin
+init: build
+	EXTRA_PARAMS="-lockfile=readonly" $(MAKE) tf-init-nologin
 
 renovate.json: renovate.jsonnet
 	jsonnet ./renovate.jsonnet > renovate.json
