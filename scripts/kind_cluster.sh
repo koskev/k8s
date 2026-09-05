@@ -18,6 +18,11 @@ DIRS=(
     "/mnt/shared_data/k8s/influx/data"
     "/mnt/shared_data/k8s/influx/config"
     "/mnt/ext_hdd/repos"
+    "/mnt/shared_data/k8s/navidrome/data"
+    "/mnt/shared_data/k8s/navidrome/music"
+    "/mnt/shared_data/k8s/navidrome/backup"
+
+    "/home/borg/backups/paperless/data"
 )
 
 function coredns_redirect() {
@@ -44,6 +49,7 @@ for dir in "${DIRS[@]}"; do
     run_command mkdir -p "$dir"
     run_command chmod -R 777 "$dir"
 done
+run_command touch /mnt/shared_data/k8s/influx/data/mount
 
 TF_STAGE="bootstrap" make init
 EXTRA_PARAMS="-auto-approve" TF_STAGE="bootstrap" make tf-apply-nologin
