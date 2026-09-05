@@ -22,7 +22,7 @@ DIRS=(
     "/mnt/shared_data/k8s/navidrome/music"
     "/mnt/shared_data/k8s/navidrome/backup"
 
-    "/home/borg/backups/paperless/data"
+    "/mnt/ext_hdd/repos/paperless"
 )
 
 function coredns_redirect() {
