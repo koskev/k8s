@@ -1,0 +1,19 @@
+emqx_password: ENC[AES256_GCM,data:Hc0ubVSa9Axgxkoga1NFlTAPzGbUtsqoQJjIYz3LQew=,iv:SNxLGn+BdIFDerfymyw86sgGN+2Ymfp7NkKz1b8pHnk=,tag:JUmefs6ljnsOA1Ar7zgoVA==,type:str]
+influx_token: ENC[AES256_GCM,data:dvB4ql+mk6UO733ldOtAx8UL9zzcdG3ZKyOsSwscXB2rU69rlJP3ezu9mzIiIydL9re1CR8xa89aByWRFOBwNijT0QJwwuUsTWt9ddG7rlvQc5biAc4RsA==,iv:rjtvZ7qTrPJQs94RBN97pZxSQ7vN2vNPZxSfdfsBLHg=,tag:izcvQ9LsjFqxKLuYAvDHAA==,type:str]
+sops:
+    encrypted_regex: ^(.*)$
+    lastmodified: "2026-09-05T05:46:42Z"
+    mac: ENC[AES256_GCM,data:U5Iwc80rIadE5gdRJTVNyXaLXGadBgGe5YryC8HK4nNlFslBr85ftpX39qKKaDGR5EcR7wM08891WDhi/O3Qbx1YiWED3nquv7PST/6WaFRTZR7+cmFdP9qR8ZOZf18+w2SiPwwyxEwallajnPPnQ4b5xELgL7VL69Iedk8FD3s=,iv:wZq73BosUWTLREMghPsdeoNM656Q5FLd0HHfOovVCpM=,tag:sKgSZUcx6hgnbIonLiixXg==,type:str]
+    pgp:
+        - created_at: "2026-09-05T05:46:03Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAmHCyBwWQt5kqKSikE1AC+vQFHHZme8Luk9fff2I7nyIw
+            3KsB6stxn5nErjvZ4ORzVLTFR2WaJQL+rCBHJfZtO+LfbIZ0ynXpWYBPWBWeixb6
+            0lEB3e9UOMOZKX6uVwBGmS+Yk/x1ZdDMOH+5HU4awb2vzWCK6u9J0tx5IzN4AkiU
+            IEkDuTP/YUxgCN+I2EoROhOFSv+gQwVrKm8nB9PxUgIBxWI=
+            =PTF4
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    version: 3.13.3
