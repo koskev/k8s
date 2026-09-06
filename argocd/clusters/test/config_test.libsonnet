@@ -93,7 +93,6 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='cert-manager'),
         argocd.appSettings(name='external-secrets'),
         argocd.appSettings(name='ingress-traefik'),
-        argocd.appSettings(name='matrix'),
         argocd.appSettings(name='monitoring'),
         argocd.appSettings(name='openbao'),
         argocd.appSettings(name='postgres'),
