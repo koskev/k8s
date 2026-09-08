@@ -55,6 +55,7 @@ $(SH_BUILD_DIR)/%.sh: $(JSONNET_FILES)
 
 config: $(CONFIGS)
 	./scripts/build_config.py $^ > lib/defaultConfig.libsonnet
+	jsonnetfmt -i lib/defaultConfig.libsonnet
 
 $(TF_BUILD_DIR)/bootstrap/providers.tf.json:
 	@mkdir -p $(dir $@)
