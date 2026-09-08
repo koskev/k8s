@@ -18,7 +18,7 @@ function(input=import 'defaultInput.libsonnet')
                     .withDefaultRole(adminUser)
                     .withType('oidc')
                     +
-                    if input.globals.config.id == 'test'
+                    if input.globals.config.type == 'test'
                     then
                       tf.providers.vault.resource.vaultJwtAuthBackend.functions('oidc_config').withOidcDiscoveryCaPem(self.clusterIssuerRef.ref().fields.data('["ca.crt"]'))
                     else

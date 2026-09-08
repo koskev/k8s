@@ -32,7 +32,7 @@ function(input=import 'defaultInput.libsonnet')
             .withMaxTtl('43800h'),  // 5 Years
             tfVault.resource.vaultPkiSecretBackendConfigIssuers.new('%s-config' % tfName, self.mount.ref().fields.path())
             .withDefault(self.signedCert.ref().fields.imported_issuers('[0]')),
-          ] + lib.optional(input.globals.config.id != 'test', [
+          ] + lib.optional(input.globals.config.type != 'test', [
             tfVault.resource.vaultPkiSecretBackendConfigCa.new('glusterfs_int_ca', self.mount.ref().fields.path(), self.intCa.ref().fields.raw()),
           ]),
         },

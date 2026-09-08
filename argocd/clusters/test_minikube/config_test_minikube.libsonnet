@@ -3,6 +3,7 @@ local argocd = import 'argocd.libsonnet';
   globals+: {
     config+: {
       id: 'test_minikube',
+      type: 'test',
       branch: 'dev',
       domain: '0--1.nip.io',
       default_issuer: 'internal-issuer',

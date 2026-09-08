@@ -56,7 +56,7 @@ function(input=import 'defaultInput.libsonnet')
                   'profile',
                   'groups',
                 ],
-              } + if input.globals.config.id == 'test' then { insecureSkipVerify: true } else {},
+              } + if input.globals.config.type == 'test' then { insecureSkipVerify: true } else {},
             },
 
           ],

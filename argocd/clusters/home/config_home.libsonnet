@@ -2,6 +2,7 @@
   globals+: {
     config+: {
       id: 'home',
+      type: 'prod',
       ips: {
         pihole: '192.168.10.2',
         emqx: '192.168.10.5',
