@@ -1,30 +1,47 @@
-{ applications+: { monitoring+: { config+: (import 'argocd/applications/monitoring/config.libsonnet'),
-},
- postgres+: { cnpg+: { config+: (import 'argocd/applications/postgres/cnpg/config.libsonnet'),
-},
-},
- cert_manager+: { config+: (import 'argocd/applications/cert-manager/config.libsonnet'),
- desec+: { config+: (import 'argocd/applications/cert-manager/desec/config.libsonnet'),
-},
-},
- openbao+: { config+: (import 'argocd/applications/openbao/config.libsonnet'),
-},
- automation+: { config+: (import 'argocd/applications/automation/config.libsonnet'),
-},
- borg+: { config+: (import 'argocd/applications/borg/config.libsonnet'),
-},
- authelia+: { config+: (import 'argocd/applications/authelia/config.libsonnet'),
-},
- renovate+: { config+: (import 'argocd/applications/renovate/config.libsonnet'),
-},
- metallb_system+: { config+: (import 'argocd/applications/metallb-system/config.libsonnet'),
-},
- config+: (import 'argocd/applications/config.libsonnet'),
- immich+: { config+: (import 'argocd/applications/immich/config.libsonnet'),
-},
-},
- argocd+: { config+: (import 'argocd/argocd/config.libsonnet'),
-},
- globals+: { config+: (import 'argocd/globals/config.libsonnet'),
-},
+{
+  local outerSelf = self,
+  applications+: {
+    monitoring+: {
+      config+: (import 'argocd/applications/monitoring/config.libsonnet'),
+    },
+    postgres+: {
+      cnpg+: {
+        config+: (import 'argocd/applications/postgres/cnpg/config.libsonnet'),
+      },
+    },
+    cert_manager+: {
+      config+: (import 'argocd/applications/cert-manager/config.libsonnet'),
+      desec+: {
+        config+: (import 'argocd/applications/cert-manager/desec/config.libsonnet'),
+      },
+    },
+    openbao+: {
+      config+: (import 'argocd/applications/openbao/config.libsonnet')(outerSelf),
+    },
+    automation+: {
+      config+: (import 'argocd/applications/automation/config.libsonnet'),
+    },
+    borg+: {
+      config+: (import 'argocd/applications/borg/config.libsonnet'),
+    },
+    authelia+: {
+      config+: (import 'argocd/applications/authelia/config.libsonnet'),
+    },
+    renovate+: {
+      config+: (import 'argocd/applications/renovate/config.libsonnet'),
+    },
+    metallb_system+: {
+      config+: (import 'argocd/applications/metallb-system/config.libsonnet'),
+    },
+    immich+: {
+      config+: (import 'argocd/applications/immich/config.libsonnet'),
+    },
+    config+: (import 'argocd/applications/config.libsonnet'),
+  },
+  argocd+: {
+    config+: (import 'argocd/argocd/config.libsonnet'),
+  },
+  globals+: {
+    config+: (import 'argocd/globals/config.libsonnet'),
+  },
 }

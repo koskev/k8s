@@ -12,7 +12,7 @@ function(input=import 'defaultInput.libsonnet')
         clusterIssuerRef: tf.providers.kubernetes.data.kubernetesSecretV1.new('authelia-tls').addCustomData('metadata', { name: 'authelia-tls', namespace: 'authelia' }),
         jwtBackend: tf.providers.vault.resource.vaultJwtAuthBackend.new('oidc_config')
                     .withPath('oidc')
-                    .withOidcDiscoveryUrl('https://auth.%s' % input.globals.config.domain)
+                    .withOidcDiscoveryUrl(input.applications.openbao.config.discoveryUrl)
                     .withOidcClientId('openbao')
                     .withOidcClientSecret(tf.providers.sops.data.sopsFile.ref('openbao_secrets["openbao_secrets/oidc/openbao.enc.yaml"]').fields.data('["password"]'))
                     .withDefaultRole(adminUser)
