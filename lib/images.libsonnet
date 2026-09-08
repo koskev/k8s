@@ -216,7 +216,7 @@
     },
     telegraf: {
       image: 'telegraf',
-      tag: '1.39.3-alpine@sha256:45b80cfd354299c5c1c38e472922e0e2f0a8e8ac2b614531a1f634ab06e84297',
+      tag: '1.40.0-alpine@sha256:e2f55b0afaa32987b5610606437825c998066b3ce01a2eaa98c16beecfeb240d',
     },
     influxdb: {
       image: 'influxdb',
