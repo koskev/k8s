@@ -184,7 +184,7 @@
     },
     nodered: {
       image: 'nodered/node-red',
-      tag: '4.1.14-18@sha256:6f7685ba85206a88e7efce44e671fe9ca116a098135125827182aee35f51446c',
+      tag: '4.1.15-18@sha256:ca1ffba2706b367c23b9b5a8701433df2ac06fccf68cee5193572d4061d7bbc1',
     },
     pihole: {
       image: 'pihole/pihole',
