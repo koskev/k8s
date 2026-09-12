@@ -76,7 +76,7 @@ function(input=import 'defaultInput.libsonnet')
     )
     ,
     k8s.secret.externalSecretExtract(name, namespace, 'borg-server'),
-    k8s.v1.service(name, namespace, ports=[sshPort], type='LoadBalancer', annotations={
-      'external-dns.alpha.kubernetes.io/hostname': 'borg.%s' % input.globals.config.domain,
-    }),
+    k8s.v1.service(
+      name, namespace, ports=[sshPort], type='LoadBalancer', annotations=k8s.helper.annotations.externalDns.hostname('borg.%s' % input.globals.config.domain),
+    ),
   ]

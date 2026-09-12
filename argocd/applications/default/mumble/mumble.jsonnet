@@ -12,9 +12,7 @@ local namespace = 'default';
     app=name,
     ports=[64738],
     udpPorts=[64738],
-    annotations={
-      'external-dns.alpha.kubernetes.io/hostname': 'mumble.%s' % globals.domain,
-    },
+    annotations=k8s.helper.annotations.externalDns.hostname('mumble.%s' % globals.domain),
     type='LoadBalancer'
   ),
   k8s.apps.deployment(

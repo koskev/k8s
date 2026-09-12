@@ -7,4 +7,6 @@
   v1:: import 'v1.libsonnet',
   networking:: import 'networking.libsonnet',
   builder:: import 'builder/builder.libsonnet',
+
+  helper:: import 'utils/helper.libsonnet',
 }

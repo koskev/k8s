@@ -58,9 +58,7 @@ function(input=import 'defaultInput.libsonnet')
         service: {
           type: 'LoadBalancer',
           loadBalancerIP: input.globals.config.ips.emqx,
-          annotations: {
-            'external-dns.alpha.kubernetes.io/hostname': 'mqtt.%s' % input.globals.config.domain,
-          },
+          annotations: k8s.helper.annotations.externalDns.hostname('mqtt.%s' % input.globals.config.domain),
         },
         ssl: {
           enabled: true,

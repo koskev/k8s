@@ -14,9 +14,7 @@ local udpPorts = [24454];
     namespace=namespace,
     ports=ports,
     udpPorts=udpPorts,
-    annotations={
-      'external-dns.alpha.kubernetes.io/hostname': 'coolmcserver.mooo.com',
-    },
+    annotations=k8s.helper.annotations.externalDns.hostname('coolmcserver.mooo.com'),
     type='LoadBalancer',
   ),
   k8s.networking.ingress(
