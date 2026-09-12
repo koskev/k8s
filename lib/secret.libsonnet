@@ -1,3 +1,4 @@
+local k8s = import 'k8s.libsonnet';
 {
   secretStoreKubernetes(name, namespace, targetNamespace=namespace):: [
     {
@@ -162,4 +163,30 @@
       }],
     },
   },
+  password(name, namespace, length=64, repeat=true, additionalSpec={}):: k8s.builder.definition.new('generators.external-secrets.io/v1alpha1', 'Password', name, namespace).withSpec({
+    length: length,
+    allowRepeat: repeat,
+  } + additionalSpec),
+
+  passwordSecret(name, namespace, length, additionalPasswordSpec={}):: [
+    self.password(name, namespace, length, additionalSpec=additionalPasswordSpec),
+    k8s.builder.definition.new('external-secrets.io/v1', 'ExternalSecret', name, namespace).withSpec({
+      refreshInterval: '0',
+      target: {
+        name: name,
+        creationPolicy: 'Owner',
+      },
+      dataFrom: [
+        {
+          sourceRef: {
+            generatorRef: {
+              apiVersion: 'generators.external-secrets.io/v1alpha1',
+              kind: 'Password',
+              name: name,
+            },
+          },
+        },
+      ],
+    }),
+  ],
 }

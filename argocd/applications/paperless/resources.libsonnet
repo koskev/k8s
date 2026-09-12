@@ -13,6 +13,8 @@ function(input=import 'defaultInput.libsonnet')
   local valkeyName = '%s-valkey' % name;
   local valkeyPort = 6379;
 
+  local secretKeyName = '%s-secret-key' % name;
+
   local volumes = [
     {
       name: 'data',
@@ -31,15 +33,16 @@ function(input=import 'defaultInput.libsonnet')
     k8s.v1.namespace(namespace),
     k8s.db.database(name, namespace),
     k8s.db.user(name, namespace, secretTemplate={
-      PAPERLESS_DBENGINE: 'postgres',
+      PAPERLESS_DBENGINE: 'postgresql',
       PAPERLESS_DBHOST: '{{.Host}}',
       PAPERLESS_DBUSER: '{{.Role}}',
       PAPERLESS_DBPASS: '{{.Password}}',
       PAPERLESS_DBNAME: '{{.Database}}',
-      PAPERLESS_DBSSLMODE: 'disable',
+      PAPERLESS_DB_OPTIONS: 'sslmode=disable',
 
     }),
     k8s.v1.service(name, namespace, ports=[port]),
+    k8s.secret.passwordSecret(secretKeyName, namespace, 64),
     k8s.secret.externalSecretExtract('oidc-paperless', namespace, key='oidc/paperless', templateData={
       PAPERLESS_SOCIALACCOUNT_PROVIDERS: std.toString({
         openid_connect: {
@@ -119,6 +122,15 @@ function(input=import 'defaultInput.libsonnet')
                 secretKeyRef: {
                   name: 'oidc-paperless',
                   key: 'PAPERLESS_SOCIALACCOUNT_PROVIDERS',
+                },
+              },
+            },
+            {
+              name: 'PAPERLESS_SECRET_KEY',
+              valueFrom: {
+                secretKeyRef: {
+                  name: secretKeyName,
+                  key: 'password',
                 },
               },
             },
