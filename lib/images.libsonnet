@@ -124,7 +124,7 @@
   container: {
     renovate: {
       image: 'renovate/renovate',
-      tag: '44.82.1@sha256:cab0e54171a57b0e4720b4376cc0f3aa0a09e717467c42f8d1135f7bf5c344f4',
+      tag: '44.82.2@sha256:16bbf3c9e07504a0d0d673f7fa73d2ddb1e02bec5b24a368f4937f782bd8db39',
     },
     signal_bridge: {
       image: 'dock.mau.dev/mautrix/signal',
