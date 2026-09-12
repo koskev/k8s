@@ -272,7 +272,7 @@
     },
     postgres: {
       image: 'ghcr.io/cloudnative-pg/postgresql',
-      tag: '17.11@sha256:70664ebcfa1100361b5bdc28bbf06fdbe08db2dc4ad7bd14de33c5e05fe8ea8e',
+      tag: '18.6@sha256:899d3ed526b659d77935dde0e6bf2d69dbbf17d3d8c6486ca8cfd04bd3c18533',
     },
     desec_http: {
       image: 'ghcr.io/koskev/cert-manager-webhook-desec-http',
