@@ -35,7 +35,7 @@ function run_command() {
 }
 
 # Ask for sudo at the beginning
-sudo nft delete table ip6 nat_kind
+sudo nft delete table ip6 nat_kind || true
 sudo nft add table ip6 nat_kind
 sudo nft add chain ip6 nat_kind output \{ type nat hook output priority filter \; \}
 sudo nft add rule ip6 nat_kind output oifname "lo" tcp dport 443 redirect to :8443

@@ -122,7 +122,7 @@ minikube:
 
 .PHONY: kind-destroy
 kind-destroy:
-	podman stop kind-metallb-proxy
+	podman stop kind-metallb-proxy || true
 	kind delete cluster --name kind
 
 
