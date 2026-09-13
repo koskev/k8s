@@ -200,7 +200,7 @@
     },
     cups: {
       image: 'ydkn/cups',
-      tag: 'latest@sha256:76eb4fcc9bfce7573787938d9257cfced5dd21064559eae4ce112aa6a9d13ac2',
+      tag: 'latest@sha256:a674219145cb9a153205d632cf5e1156b7aada4c1c189037b0a6b8a25043fea1',
     },
     syncthing: {
       image: 'syncthing/syncthing',
