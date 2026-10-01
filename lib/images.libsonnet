@@ -268,7 +268,7 @@
     },
     borgmatic: {
       image: 'ghcr.io/borgmatic-collective/borgmatic',
-      tag: '2.1.8@sha256:5bd8439a648c26dd9f11fb4e3a54c6bd964babf4eabf5060bde8d58b51cdc0ee',
+      tag: '2.1.9@sha256:09e416d967ee7026baba83a1a7276572ec98d13057218e506b3c6de94c547027',
     },
     postgres: {
       image: 'ghcr.io/cloudnative-pg/postgresql',
