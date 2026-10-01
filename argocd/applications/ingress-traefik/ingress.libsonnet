@@ -12,7 +12,9 @@ local chart = (import 'images.libsonnet').helm.ingress_traefik;
       name=name,
       targetnamespace=namespace,
       chart=chart,
-      values={
+      values=
+      // grustonnetParentObject: https://raw.githubusercontent.com/traefik/traefik-helm-chart/refs/heads/master/traefik/values.yaml
+      {
         deployment: {
           replicas: 3,
         },

@@ -29,7 +29,7 @@ local globals = import 'globals.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision='main', recurse=false, project='gpg', autosync=true, exclude='', input={}):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision=null, recurse=false, project='gpg', autosync=true, exclude='', input={}):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
@@ -57,7 +57,7 @@ local globals = import 'globals.libsonnet';
         ,
         path: path,
         repoURL: url,
-        targetRevision: std.extVar('ARGOCD_BRANCH'),
+        targetRevision: if revision != null then revision else std.extVar('ARGOCD_BRANCH'),
       },
     },
   },

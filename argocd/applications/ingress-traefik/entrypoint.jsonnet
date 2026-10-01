@@ -4,5 +4,6 @@ compiler.entrypoint(
     (import 'anubis.libsonnet'),
     (import 'internal.libsonnet'),
     (import 'external.libsonnet'),
+    (import 'common.libsonnet'),
   ]
 )
