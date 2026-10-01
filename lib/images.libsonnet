@@ -278,6 +278,10 @@
       image: 'ghcr.io/koskev/cert-manager-webhook-desec-http',
       tag: 'v1.1.0@sha256:31105d46208e3ca5965078d22f6baacbf86f85f4b4b50c95d055c197c61ca20b',
     },
+    syncyomi: {
+      image: 'ghcr.io/syncyomi/syncyomi',
+      tag: 'v1.5.8@sha256:2d54fcff1d3fc5b05aee514c6fc1c8a66d6346038ff838192ed480348b2fd961',
+    },
   },
   tf: {
     sops: {
