@@ -120,6 +120,11 @@
       repoURL: 'https://charts.authelia.com',
       targetRevision: '0.11.22',
     },
+    kyverno: {
+      chart: 'kyverno',
+      repoURL: 'https://kyverno.github.io/kyverno',
+      targetRevision: '3.9.1',
+    },
   },
   container: {
     renovate: {

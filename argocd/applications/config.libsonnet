@@ -25,5 +25,6 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='authelia'),
     argocd.appSettings(name='renovate'),
     argocd.appSettings(name='syncyomi'),
+    argocd.appSettings(name='kyverno'),
   ],
 }

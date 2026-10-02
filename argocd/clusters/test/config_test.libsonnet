@@ -110,6 +110,7 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='borg'),
         argocd.appSettings(name='authelia'),
         argocd.appSettings(name='renovate'),
+        argocd.appSettings(name='kyverno'),
 
         argocd.appSettings(name='metallb-system'),
       ],
