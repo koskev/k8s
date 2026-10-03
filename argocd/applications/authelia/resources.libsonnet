@@ -38,6 +38,11 @@ function(input=import 'defaultInput.libsonnet')
         id_token: ['email', 'name', 'groups', 'preferred_username'],
       },
     },
+    bookorbit: {
+      redirects: [
+        'https://bookorbit.%s/oauth2-callback' % [input.globals.config.domain],
+      ],
+    },
   };
 
   local secret_envs = [
