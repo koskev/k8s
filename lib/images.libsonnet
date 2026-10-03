@@ -125,6 +125,11 @@
       repoURL: 'https://kyverno.github.io/kyverno',
       targetRevision: '3.9.1',
     },
+    kyvero_ui: {
+      chart: 'policy-reporter',
+      repoURL: 'ghcr.io/kyverno/charts',
+      targetRevision: '3.9.1',
+    },
   },
   container: {
     renovate: {

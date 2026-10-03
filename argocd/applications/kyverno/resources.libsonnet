@@ -4,8 +4,36 @@ function(input=import 'defaultInput.libsonnet')
 
   local name = 'kyverno';
   local namespace = 'kyverno';
+
+  local host = '%s.%s' % [name, input.globals.config.domain];
+
   [
     k8s.builder.argocd.helm.new(name, namespace, images.helm.kyverno),
+    k8s.builder.argocd.helm.new('%s-policy' % name, namespace, images.helm.kyvero_ui)
+    .withValues({
+      ui: {
+        enabled: true,
+        ingress: {
+          enabled: true,
+          className: input.globals.config.ingress.internal.name,
+          hosts: [{
+            host: host,
+            paths: [{
+              path: '/',
+              pathType: 'Prefix',
+            }],
+          }],
+          tls: [{
+            secretName: '%s-tls' % name,
+            hosts: [host],
+          }],
+          annotations: {
+            'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
+          },
+        },
+      },
+    })
+    ,
     {
       apiVersion: 'policies.kyverno.io/v1',
       kind: 'ValidatingPolicy',
