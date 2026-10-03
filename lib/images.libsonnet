@@ -296,6 +296,10 @@
       image: 'ghcr.io/bookorbit/bookorbit',
       tag: 'v3.2.0@sha256:1020eef9f004be972ac60e79dd5f416129f0d3d91491b803aa8fa656acb2b6a6',
     },
+    shelfarr: {
+      image: 'ghcr.io/pedro-revez-silva/shelfarr',
+      tag: '2026.09.28.1@sha256:942ba37d51b4ed7fe08a25a58d2f69e354bd5baa3c3b7fa6655650c7cf57d9c2',
+    },
   },
   tf: {
     sops: {
