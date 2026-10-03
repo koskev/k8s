@@ -292,6 +292,10 @@
       image: 'ghcr.io/syncyomi/syncyomi',
       tag: 'v1.5.8@sha256:2d54fcff1d3fc5b05aee514c6fc1c8a66d6346038ff838192ed480348b2fd961',
     },
+    bookorbit: {
+      image: 'ghcr.io/bookorbit/bookorbit',
+      tag: 'v3.2.0@sha256:1020eef9f004be972ac60e79dd5f416129f0d3d91491b803aa8fa656acb2b6a6',
+    },
   },
   tf: {
     sops: {

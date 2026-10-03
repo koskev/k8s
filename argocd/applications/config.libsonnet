@@ -26,5 +26,6 @@ local argocd = import 'argocd.libsonnet';
     argocd.appSettings(name='renovate'),
     argocd.appSettings(name='syncyomi'),
     argocd.appSettings(name='kyverno'),
+    argocd.appSettings(name='bookorbit'),
   ],
 }

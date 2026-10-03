@@ -111,6 +111,8 @@ local argocd = import 'argocd.libsonnet';
         argocd.appSettings(name='authelia'),
         argocd.appSettings(name='renovate'),
         argocd.appSettings(name='kyverno'),
+        argocd.appSettings(name='syncyomi'),
+        argocd.appSettings(name='bookorbit'),
 
         argocd.appSettings(name='metallb-system'),
       ],

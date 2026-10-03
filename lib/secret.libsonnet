@@ -163,13 +163,12 @@ local k8s = import 'k8s.libsonnet';
       }],
     },
   },
-  password(name, namespace, length=64, repeat=true, additionalSpec={}):: k8s.builder.definition.new('generators.external-secrets.io/v1alpha1', 'Password', name, namespace).withSpec({
+  passwordGenerator(name, namespace, length=64, repeat=true, additionalSpec={}):: k8s.builder.definition.new('generators.external-secrets.io/v1alpha1', 'Password', name, namespace).withSpec({
     length: length,
     allowRepeat: repeat,
   } + additionalSpec),
 
-  passwordSecret(name, namespace, length, additionalPasswordSpec={}):: [
-    self.password(name, namespace, length, additionalSpec=additionalPasswordSpec),
+  password(name, namespace, generatorName=name)::
     k8s.builder.definition.new('external-secrets.io/v1', 'ExternalSecret', name, namespace).withSpec({
       refreshInterval: '0',
       target: {
@@ -182,11 +181,14 @@ local k8s = import 'k8s.libsonnet';
             generatorRef: {
               apiVersion: 'generators.external-secrets.io/v1alpha1',
               kind: 'Password',
-              name: name,
+              name: generatorName,
             },
           },
         },
       ],
     }),
+  passwordSecret(name, namespace, length, additionalPasswordSpec={}):: [
+    self.passwordGenerator(name, namespace, length, additionalSpec=additionalPasswordSpec),
+    self.password(name, namespace),
   ],
 }

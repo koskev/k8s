@@ -38,6 +38,12 @@ function(input=import 'defaultInput.libsonnet')
         id_token: ['email', 'name', 'groups', 'preferred_username'],
       },
     },
+    bookorbit: {
+      redirects: [
+        'https://bookorbit.%s/oauth2-callback' % [input.globals.config.domain],
+      ],
+      auth_method: 'client_secret_post',
+    },
   };
 
   local secret_envs = [
@@ -71,7 +77,7 @@ function(input=import 'defaultInput.libsonnet')
   ]
   ;
 
-  local autheliaApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[], additionalData={}, policy=null) =
+  local autheliaApplication(name, env=std.asciiUpper('OIDC_%s' % name), redirects=[], additionalData={}, policy=null, auth_method='client_secret_basic') =
     {
       client_id: name,
       client_name: name,
@@ -95,7 +101,7 @@ function(input=import 'defaultInput.libsonnet')
       ],
       access_token_signed_response_alg: 'none',
       userinfo_signed_response_alg: 'none',
-      token_endpoint_auth_method: 'client_secret_basic',
+      token_endpoint_auth_method: auth_method,
       consent_mode: 'implicit',
       [if policy != null then 'claims_policy']: policy,
     } + additionalData
@@ -256,6 +262,7 @@ function(input=import 'defaultInput.libsonnet')
                 redirects=app.value.redirects,
                 additionalData=std.get(app.value, 'additionalData', {}),
                 policy=if std.get(app.value, 'policy') != null then app.key else null,
+                auth_method=std.get(app.value, 'auth_method', 'client_secret_basic'),
               )
               for app in std.objectKeysValues(apps)
             ],
