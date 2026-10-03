@@ -149,5 +149,82 @@ function(input=import 'defaultInput.libsonnet')
         ],
       },
     },
+    {
+      apiVersion: 'admissionregistration.k8s.io/v1',
+      kind: 'ValidatingAdmissionPolicyBinding',
+      metadata: {
+        name: 'allow-specific-images-vap-binding',
+      },
+      spec: {
+        policyName: 'require-image-pinned-by-digest-binding',
+        validationActions: [
+          'Audit',
+        ],
+        matchResources: {},
+      },
+    },
+    {
+      apiVersion: 'admissionregistration.k8s.io/v1',
+      kind: 'ValidatingAdmissionPolicy',
+      metadata: {
+        name: 'allow-specific-images-vap',
+        annotations: {
+          'policies.kyverno.io/title': 'Block unknown images',
+          'policies.kyverno.io/category': 'Best Practices',
+          'policies.kyverno.io/severity': 'High',
+        },
+      },
+      spec: {
+        matchConstraints: {
+          resourceRules: [
+            {
+              apiGroups: [
+                '',
+              ],
+              apiVersions: [
+                'v1',
+              ],
+              operations: [
+                'CREATE',
+                'UPDATE',
+              ],
+              resources: [
+                'pods',
+              ],
+            },
+          ],
+        },
+        variables: [
+          {
+            name: 'allowed_list',
+            expression: std.toString(std.map(function(image) '%s:%s' % [image.image, image.tag], std.objectValues(images.container))),
+          },
+          {
+            name: 'all_containers',
+            expression: |||
+              object.spec.?containers.orValue([]) +
+              object.spec.?initContainers.orValue([]) +
+              object.spec.?ephemeralContainers.orValue([])
+            |||,
+          },
+          {
+            name: 'invalid_images',
+            expression: |||
+              variables.all_containers
+              .filter(c, !(c.image in variables.allowed_list))
+              .map(c, c.image)
+            |||,
+          },
+        ],
+        validations: [
+          {
+            expression: 'size(variables.invalid_images) == 0',
+            messageExpression: |||
+              "Deployment rejected! The following container image(s) are not permitted on the allowlist: " +  variables.invalid_images.join(", ")
+            |||,
+          },
+        ],
+      },
+    },
 
   ]
