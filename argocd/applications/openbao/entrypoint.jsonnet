@@ -5,6 +5,6 @@ compiler.entrypoint(
     (import 'pki/pki.libsonnet'),
     (import 'luks/luks.libsonnet'),
     (import 'system/system.libsonnet'),
-    (import 'secrets/secrets.libsonnet'),
+    //    (import 'secrets/secrets.libsonnet'),
   ]
 )
