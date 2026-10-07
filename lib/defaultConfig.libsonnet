@@ -16,6 +16,9 @@
       },
     },
     openbao+: {
+      secrets+: {
+        config+: (import 'argocd/applications/openbao/secrets/config.libsonnet')(outerSelf),
+      },
       config+: (import 'argocd/applications/openbao/config.libsonnet')(outerSelf),
     },
     automation+: {

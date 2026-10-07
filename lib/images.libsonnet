@@ -322,5 +322,9 @@
       source: 'gavinbunney/kubectl',
       version: '>= 1.7.0',
     },
+    bookorbit: {
+      source: 'koskev/bookorbit',
+      version: '~> 3.0.0',
+    },
   },
 }

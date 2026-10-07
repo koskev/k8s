@@ -122,6 +122,14 @@ provider "registry.opentofu.org/hashicorp/vault" {
   ]
 }
 
+provider "registry.opentofu.org/koskev/bookorbit" {
+  version     = "3.0.0"
+  constraints = "3.0.0"
+  hashes = [
+    "h1:EH2n2cu+K02O78KsTH/uu2zW9g0j6y79GNoHfoxe2YQ=",
+  ]
+}
+
 provider "registry.opentofu.org/timofurrer/desec" {
   version     = "0.6.3"
   constraints = "0.6.3"
