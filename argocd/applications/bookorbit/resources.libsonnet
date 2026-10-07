@@ -19,7 +19,7 @@ function(input=import 'defaultInput.libsonnet')
       .withPort(port)
       .withEnvFromSecret('%s-%s' % [name, name])
       .withEnvValueFromSecret('JWT_SECRET', jwtSecretName, 'password')
-      .withEnvValueFromSecret('SETUP_BOOTSTRAP_TOKEN', initSecretName, 'password')
+      .withEnvValueFromSecret('SETUP_BOOTSTRAP_TOKEN', initSecretName, 'setup_token')
       .withEnv('HOST', '0.0.0.0')
       .withEnv('PORT', port)
       .withEnv('LIBRARY_BROWSE_ROOT', '/data')
@@ -54,7 +54,6 @@ function(input=import 'defaultInput.libsonnet')
     }),
 
     std.objectValues({
-      local values = self,
       local getBookorbitRef(name) = input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/bookorbit.enc.yaml"].data["%s"]' % name),
       local user = getBookorbitRef('username'),
       local password = getBookorbitRef('password'),
