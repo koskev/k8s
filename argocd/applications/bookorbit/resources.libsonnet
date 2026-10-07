@@ -43,7 +43,7 @@ function(input=import 'defaultInput.libsonnet')
     k8s.networking.ingress(name, namespace, host, port),
 
     k8s.secret.passwordSecret(jwtSecretName, namespace, 64),
-    k8s.secret.password(initSecretName, namespace, jwtSecretName),
+    k8s.secret.externalSecretExtract(initSecretName, namespace, 'bookorbit'),
     k8s.db.database(name, namespace, extensions=['vector']),
     k8s.db.user(name, namespace, secretTemplate={
       POSTGRES_HOST: '{{ .Hostname }}',
@@ -55,30 +55,26 @@ function(input=import 'defaultInput.libsonnet')
 
     std.objectValues({
       local values = self,
-      local getBookorbitRef(name) = input.applications.openbao.secrets.config.secrets.ref().plain('["openbao_secrets/bookorbit.enc.yaml"].data["%s"]' % name),
+      local getBookorbitRef(name) = input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/bookorbit.enc.yaml"].data["%s"]' % name),
       local user = getBookorbitRef('username'),
       local password = getBookorbitRef('password'),
       local email = getBookorbitRef('email'),
       local setup_token = getBookorbitRef('setup_token'),
       provider: tf.provider('bookorbit', {
-        // vault_kv_secret_v2.secrets["openbao_secrets/telegraf-config.enc.yaml"]
         url: 'https://bookorbit.%s' % input.globals.config.domain,
         username: user,
         password: password,
-        email: email,
-        setup_token: setup_token,
-        //username: values.adminAccount.ref().fields.data('["user"]'),
-        //password: values.adminAccount.ref().fields.data('["password"]'),
       }),
       setup: tf.providers.bookorbit.resource.bookorbitSetup.new('%s-setup' % name, email, password, setup_token, user),
-      //setup: tf.providers.bookorbit.resource.bookorbitSetup.new('%s-setup' % name, '', values.adminAccount.ref().fields.data('["password"]'), values.initSecret.ref().fields.data(), values.adminAccount.ref().fields.data('["username"]')),
-      //initSecret: tf.providers.kubernetes.data.kubernetesSecret.new('%s-init-secret' % name).addCustomData('metadata', {
-      //  name: initSecretName,
-      //  namespace: namespace,
-      //}),
-      //adminAccount: tf.providers.vault.ephemeral.vaultKvSecretV2.new('%s-oidc-secret' % name, 'secrets', 'oidc/%s' % name)
-      //             .withDependsOn(['vault_kv_secret_v2.secrets']),
-      //secret: tf.providers.vault.data.vaultKvSecretV2.new('%s-oidc-secret' % name, 'secrets', 'oidc/%s' % name),
-      //oidcProvider: tf.providers.bookorbit.resource.bookorbitOidcProvider.new('%s-oidc' % name, 'authelia', self.secret.ref().fields.data('["password"]'), input.globals.config.urls.auth, 'authelia'),
+      oidcProvider:
+        tf.providers.bookorbit.resource.bookorbitOidcProvider
+        .new(
+          '%s-oidc' % name,
+          'authelia',
+          input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/oidc/bookorbit.enc.yaml"].data["password"]'),
+          input.globals.config.urls.auth,
+          'authelia'
+        )
+        .withDependsOn(['bookorbit_setup.bookorbit-setup']),
     }),
   ]
