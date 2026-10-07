@@ -1,6 +1,7 @@
 function(input=import 'defaultInput.libsonnet')
   local k8s = import 'k8s.libsonnet';
   local images = import 'images.libsonnet';
+  local tf = import 'tf/tf.libsonnet';
 
   local name = 'bookorbit';
   local namespace = 'bookorbit';
@@ -18,7 +19,7 @@ function(input=import 'defaultInput.libsonnet')
       .withPort(port)
       .withEnvFromSecret('%s-%s' % [name, name])
       .withEnvValueFromSecret('JWT_SECRET', jwtSecretName, 'password')
-      .withEnvValueFromSecret('SETUP_BOOTSTRAP_TOKEN', initSecretName, 'password')
+      .withEnvValueFromSecret('SETUP_BOOTSTRAP_TOKEN', initSecretName, 'setup_token')
       .withEnv('HOST', '0.0.0.0')
       .withEnv('PORT', port)
       .withEnv('LIBRARY_BROWSE_ROOT', '/data')
@@ -42,7 +43,7 @@ function(input=import 'defaultInput.libsonnet')
     k8s.networking.ingress(name, namespace, host, port),
 
     k8s.secret.passwordSecret(jwtSecretName, namespace, 64),
-    k8s.secret.password(initSecretName, namespace, jwtSecretName),
+    k8s.secret.externalSecretExtract(initSecretName, namespace, 'bookorbit'),
     k8s.db.database(name, namespace, extensions=['vector']),
     k8s.db.user(name, namespace, secretTemplate={
       POSTGRES_HOST: '{{ .Hostname }}',
@@ -50,5 +51,29 @@ function(input=import 'defaultInput.libsonnet')
       POSTGRES_USER: '{{ .Role }}',
       POSTGRES_PASSWORD: '{{ .Password }}',
       POSTGRES_DB: '{{ .Database }}',
+    }),
+
+    std.objectValues({
+      local getBookorbitRef(name) = input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/bookorbit.enc.yaml"].data["%s"]' % name),
+      local user = getBookorbitRef('username'),
+      local password = getBookorbitRef('password'),
+      local email = getBookorbitRef('email'),
+      local setup_token = getBookorbitRef('setup_token'),
+      provider: tf.provider('bookorbit', {
+        url: 'https://bookorbit.%s' % input.globals.config.domain,
+        username: user,
+        password: password,
+      }),
+      setup: tf.providers.bookorbit.resource.bookorbitSetup.new('%s-setup' % name, email, password, setup_token, user),
+      oidcProvider:
+        tf.providers.bookorbit.resource.bookorbitOidcProvider
+        .new(
+          '%s-oidc' % name,
+          'authelia',
+          input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/oidc/bookorbit.enc.yaml"].data["password"]'),
+          input.globals.config.urls.auth,
+          'authelia'
+        )
+        .withDependsOn(['bookorbit_setup.bookorbit-setup']),
     }),
   ]

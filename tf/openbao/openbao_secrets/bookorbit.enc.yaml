@@ -1,0 +1,21 @@
+username: ENC[AES256_GCM,data:vL+IeeU=,iv:metcA1xHeJ9X1q4mqkiisFxvUXcLnnqSGE1cbsXcW5k=,tag:Tdk8Fv/Mdh2L8h8og6Y72g==,type:str]
+password: ENC[AES256_GCM,data:IJK9eLuXbVGAH0bFuZzQZ6r84g7gYMXrX20SoG+fRNg=,iv:OW8wLuXSaRktrzq2sTi6aki0wOaVvgc977kcIchnQKM=,tag:ZVKsAx+SEJ7ezlUuSCUNBw==,type:str]
+email: ENC[AES256_GCM,data:iQsKSdlNH8M+BQv0IFc=,iv:f9rPXItZtuuZ2ehXsqbEm3GCqKS4bIv6Dl6D/8anuSs=,tag:twAVLfc4hCtnlxuuXLXosw==,type:str]
+setup_token: ENC[AES256_GCM,data:nTyGMBCkjEpRAW6EQZ8+XC1oYXOBmiX7dc3/GSftBAs=,iv:noi6TjkUbpKdT/Qfrxz5X8w3jJWTM6yUUFgI6Z3qKZY=,tag:gVCh8AVeuI/SGSuRsWv0uA==,type:str]
+sops:
+    encrypted_regex: ^(.*)$
+    lastmodified: "2026-10-07T15:26:49Z"
+    mac: ENC[AES256_GCM,data:jzXD5DlDfhczqbDhcVjFPjSt6dSeMzo+HUJBlM9w+P+xhf2x8XSBxYBCor3kJRP40m34Ph5hF+cze2gKgTtChvd4oNIFGNdFotMUSee0Mg/fRj5ikz+kE/Z+fJVkQsBpJUnifeMMI61kelsxoKJw9nPi7LwkDcuF8Eto2UAzTHw=,iv:F6IZdSMSas9GUU0gR/KKYDxweGuvbKR3U4vxIr+DLFc=,tag:VGe8XsNGWKJGK3wrtrwDDw==,type:str]
+    pgp:
+        - created_at: "2026-10-07T15:25:51Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wV4DJK+IA+cNHtcSAQdAog3td3XKRXVqNoDEOBKmZ+RqwDFGjR8+H2+x4SNI+mcw
+            7i+c6mCqz/PHNjnecDbM3fYYVp/nxtJfFvLWbD0kcaFbO6VpaNy82px9sRrl+aMG
+            0lEBZrfELtswIoXkFhK7bv/sUaZeFmCcfgbC3AfS+b57O6C9mcyn6+ORhb1TV8A1
+            tQNOfEQS+v5sSsEfGVOC7j1bDigpju5K3x8Qb8Ly22sBJLg=
+            =E2y4
+            -----END PGP MESSAGE-----
+          fp: 7ED71373082E0FE0F90239710233D0893BBB9872
+    version: 3.13.3

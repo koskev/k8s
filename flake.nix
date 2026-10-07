@@ -11,6 +11,7 @@
       };
     };
     nix-actions.url = "github:koskev/nix-actions";
+    provider-bookorbit.url = "github:koskev/terraform-provider-bookorbit";
     terraform-jsonnet-gen = {
       url = "github:koskev/terraform-jsonnet-gen";
       inputs.nixpkgs.follows = "nixpkgs";
