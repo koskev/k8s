@@ -1,4 +1,5 @@
 local globals = import 'globals.libsonnet';
+local jsonnetHelper = import 'utils/jsonnet.libsonnet';
 {
   application(name, targetnamespace, autosync=true):: {
     apiVersion: 'argoproj.io/v1alpha1',
@@ -39,7 +40,7 @@ local globals = import 'globals.libsonnet';
               libs: ['lib', 'argocd', '.'],
               [if input != {} then 'tlas']: [{
                 name: 'input',
-                value: std.toString(input),
+                value: jsonnetHelper.manifestJsonnet(input),
                 code: true,
               }],
               extVars: [
