@@ -8,31 +8,46 @@ function(input=import 'defaultInput.libsonnet')
   local host = '%s.%s' % [name, input.globals.config.domain];
 
   [
-    k8s.builder.argocd.helm.new(name, namespace, images.helm.kyverno),
+    k8s.builder.argocd.helm.new(name, namespace, images.helm.kyverno)
+    .withValues(
+      // grustonnetParentObject: https://raw.githubusercontent.com/kyverno/kyverno/refs/heads/main/charts/kyverno/values.yaml
+      {}
+    ).withSpec({
+      ignoreDifferences: [{
+        group: 'apiextensions.k8s.io',
+        kind: 'CustomResourceDefinition',
+        jsonPointers: [
+          '/metadata/labels',
+          '/metadata/annotations',
+        ],
+      }],
+    }),
     k8s.builder.argocd.helm.new('%s-policy' % name, namespace, images.helm.kyvero_ui)
-    .withValues({
-      ui: {
-        enabled: true,
-        ingress: {
+    .withValues(
+      {
+        ui: {
           enabled: true,
-          className: input.globals.config.ingress.internal.name,
-          hosts: [{
-            host: host,
-            paths: [{
-              path: '/',
-              pathType: 'Prefix',
+          ingress: {
+            enabled: true,
+            className: input.globals.config.ingress.internal.name,
+            hosts: [{
+              host: host,
+              paths: [{
+                path: '/',
+                pathType: 'Prefix',
+              }],
             }],
-          }],
-          tls: [{
-            secretName: '%s-tls' % name,
-            hosts: [host],
-          }],
-          annotations: {
-            'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
+            tls: [{
+              secretName: '%s-tls' % name,
+              hosts: [host],
+            }],
+            annotations: {
+              'cert-manager.io/cluster-issuer': input.globals.config.default_issuer,
+            },
           },
         },
-      },
-    })
+      }
+    )
     ,
     {
       apiVersion: 'policies.kyverno.io/v1',
