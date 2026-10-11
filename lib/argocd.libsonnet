@@ -30,7 +30,7 @@ local jsonnetHelper = import 'utils/jsonnet.libsonnet';
       },
     },
   },
-  applicationRepo(name, targetnamespace, path, url=globals.repository, revision=null, recurse=false, project='gpg', autosync=true, exclude='', input={}):: self.application(name, targetnamespace, autosync) + {
+  applicationRepo(name, targetnamespace, path, url=globals.repository, revision=null, recurse=false, project='gpg', autosync=true, exclude='', input=import 'defaultInput.libsonnet'):: self.application(name, targetnamespace, autosync) + {
     spec+: {
       project: project,
       source+: {
@@ -40,7 +40,7 @@ local jsonnetHelper = import 'utils/jsonnet.libsonnet';
               libs: ['lib', 'argocd', '.'],
               [if input != {} then 'tlas']: [{
                 name: 'input',
-                value: jsonnetHelper.manifestJsonnet(input),
+                value: '(import "defaultInput.libsonnet") + (import "clusters/%(id)s/config_%(id)s.libsonnet")' % { id: input.globals.config.id },
                 code: true,
               }],
               extVars: [
