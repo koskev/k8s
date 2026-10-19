@@ -124,9 +124,9 @@ provider "registry.opentofu.org/hashicorp/vault" {
 
 provider "registry.opentofu.org/koskev/bookorbit" {
   version     = "3.0.0"
-  constraints = "3.0.0"
+  constraints = "~> 3.0.0"
   hashes = [
-    "h1:EH2n2cu+K02O78KsTH/uu2zW9g0j6y79GNoHfoxe2YQ=",
+    "h1:5tDSCi8rA1dElXr60kcps/78ehBsnwFEvpZdXJ+y70I=",
   ]
 }
 

@@ -1100,11 +1100,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1791142689,
-        "narHash": "sha256-QwdV6RYBUf4KCrfa4p/rvlLBJaUAr1Wl8pIy+tgKIwg=",
+        "lastModified": 1792421551,
+        "narHash": "sha256-2XwN6q1+T9ZLNzRek5FKdvSrGsWGOAIZaNnJdnzfQV0=",
         "owner": "koskev",
         "repo": "terraform-provider-bookorbit",
-        "rev": "c122a10965fc2e7e0afe21275ffdcaadc98a33dc",
+        "rev": "96bc2629bf62bcc2e48d2ee1aef9837ffd9a3cb0",
         "type": "github"
       },
       "original": {
