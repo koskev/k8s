@@ -230,7 +230,7 @@
     },
     influxdb: {
       image: 'influxdb',
-      tag: '2.8.0-alpine@sha256:0793da69d60d1906f925363f6fc9f013697af0412d4493d5e1cfc631b3378f56',
+      tag: '2.8.0-alpine@sha256:485e5da4746ed68442f3c5ab0b84e825f21888a9c522bae0d7c942e0cc3f133f',
     },
     octoprint: {
       image: 'octoprint/octoprint',
