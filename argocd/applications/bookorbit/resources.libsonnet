@@ -69,7 +69,7 @@ function(input=import 'defaultInput.libsonnet')
         tf.providers.bookorbit.resource.bookorbitOidcProvider
         .new(
           '%s-oidc' % name,
-          'authelia',
+          name,
           input.applications.openbao.secrets.config.openbao_secrets.ref().plain('["openbao_secrets/oidc/bookorbit.enc.yaml"].data["password"]'),
           input.globals.config.urls.auth,
           'authelia'
