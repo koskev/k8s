@@ -40,6 +40,10 @@ sudo nft add table ip6 nat_kind
 sudo nft add chain ip6 nat_kind output \{ type nat hook output priority filter \; \}
 sudo nft add rule ip6 nat_kind output oifname "lo" tcp dport 443 redirect to :8443
 
+# Otherwise openbao will fail
+sudo sysctl -w kernel.keys.maxbytes=500000
+sudo sysctl -w kernel.keys.maxkeys=20000
+
 kind create cluster --name kind --config kind-config.yaml || kind get clusters | grep "^kind$"
 [[ $(podman inspect kind-control-plane --format '{{.HostConfig.PidsLimit}}') -gt 3000 ]] || echo "PID limit of podman it too low. Increase it if you run into any errors"
 
