@@ -93,7 +93,7 @@
     flannel: {
       chart: 'flannel',
       repoURL: 'https://flannel-io.github.io/flannel',
-      targetRevision: 'v0.28.9',
+      targetRevision: 'v0.28.10',
     },
     metrics_server: {
       chart: 'metrics-server',
