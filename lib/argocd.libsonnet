@@ -1,5 +1,4 @@
 local globals = import 'globals.libsonnet';
-local jsonnetHelper = import 'utils/jsonnet.libsonnet';
 {
   application(name, targetnamespace, autosync=true):: {
     apiVersion: 'argoproj.io/v1alpha1',
