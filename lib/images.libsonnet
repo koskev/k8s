@@ -290,7 +290,7 @@
     },
     syncyomi: {
       image: 'ghcr.io/syncyomi/syncyomi',
-      tag: 'v1.7.1@sha256:bacf5e1ee3e0fac5b2670292fe35bf7a70ca1a6674c89547e9b446b989873275',
+      tag: 'v1.7.2@sha256:68edcc4c5ad527f43447f79ac76e081c1c0031861b8b103164b110e0effea439',
     },
     bookorbit: {
       image: 'ghcr.io/bookorbit/bookorbit',
