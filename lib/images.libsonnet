@@ -78,7 +78,7 @@
     trivy: {
       chart: 'trivy-operator',
       repoURL: 'https://aquasecurity.github.io/helm-charts/',
-      targetRevision: '0.37.0',
+      targetRevision: '0.38.1',
     },
     forgejo: {
       chart: 'forgejo',
