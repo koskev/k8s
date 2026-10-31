@@ -10,6 +10,12 @@ function(input=import 'defaultInput.libsonnet')
 
   local cluster = cnpg.newCluster(config.clusterName, 3, '3Gi', config.storageClass, config.secretName, extraSpec={
     postgresql: {
+      // Potential fix for synapse bug
+      synchronous: {
+        method: 'any',
+        number: 1,
+        dataDurability: 'required',
+      },
       parameters: {
         max_connections: '200',
         max_slot_wal_keep_size: '10GB',
