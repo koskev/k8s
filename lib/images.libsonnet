@@ -294,7 +294,7 @@
     },
     bookorbit: {
       image: 'ghcr.io/bookorbit/bookorbit',
-      tag: 'v3.2.0@sha256:1020eef9f004be972ac60e79dd5f416129f0d3d91491b803aa8fa656acb2b6a6',
+      tag: '3.6.0@sha256:bbb5da52e96dbbff1dd36f55454f9845e6cde264b4b3428a3ea783124a4ca62e',
     },
   },
   tf: {
