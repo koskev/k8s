@@ -190,7 +190,7 @@
     },
     chhoto: {
       image: 'sintan1729/chhoto-url',
-      tag: '7.10.5@sha256:f9c35c7bd0f7f94ea764764ea6ff8fea7a5beb387716e5714faf1cd361206252',
+      tag: '7.10.8@sha256:f0178ec1b57491dd4ad24bba3db5d990c58aa7d1af5a5fca1680fbb394d63f6e',
     },
     nodered: {
       image: 'nodered/node-red',
