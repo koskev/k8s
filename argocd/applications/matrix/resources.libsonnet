@@ -49,7 +49,7 @@ function(input=import 'defaultInput.libsonnet')
             secretName: 'kokev-matrix-tls',
             hosts: ['matrix.%s' % input.globals.config.domain],
           }],
-          className: 'traefik-external',
+          className: input.globals.config.ingress.external.name,
         },
         wellknown: {
           enabled: true,

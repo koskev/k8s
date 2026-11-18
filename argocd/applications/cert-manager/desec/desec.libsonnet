@@ -67,7 +67,7 @@ function(input=import 'defaultInput.libsonnet')
               solvers: [{
                 http01: {
                   ingress: {
-                    ingressClassName: 'traefik-external',
+                    ingressClassName: input.globals.config.ingress.external.name,
                   },
                 },
               }],
