@@ -154,7 +154,7 @@
     },
     synapse: {
       image: 'matrixdotorg/synapse',
-      tag: 'v1.164.1@sha256:fa4aa980f279bcf26d4e7ecc2a2c9a701c73f2ebe8841da9bdcf3b2fdf693d75',
+      tag: 'v1.165.0@sha256:673b4223c81a7634fd07d832b939a58f97081cfdaae7cdd2d1664cdcf7611b62',
     },
     navidrome: {
       image: 'ghcr.io/navidrome/navidrome',
