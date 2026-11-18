@@ -11,7 +11,7 @@ argocd.applicationHelm(
   values={
     ingress: {
       enabled: true,
-      ingress_class: 'traefik-external',
+      ingress_class: 'traefik-internal',
       host: 'brouter.%s' % globals.domain,
       tls: {
         enabled: true,
