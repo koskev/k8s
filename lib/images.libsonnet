@@ -150,7 +150,7 @@
     },
     nginx: {
       image: 'nginx',
-      tag: '1.25.4-alpine3.18@sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742',
+      tag: '1.31.9-alpine@sha256:90b6bd2aec278b16b98221d64deb1d6d35d164567f507ab0716e6053878315aa',
     },
     synapse: {
       image: 'matrixdotorg/synapse',
