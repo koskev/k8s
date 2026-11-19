@@ -73,7 +73,7 @@
     reloader: {
       chart: 'reloader',
       repoURL: 'https://stakater.github.io/stakater-charts',
-      targetRevision: '2.2.19',
+      targetRevision: '2.2.20',
     },
     trivy: {
       chart: 'trivy-operator',
