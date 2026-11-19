@@ -123,7 +123,7 @@
     kyverno: {
       chart: 'kyverno',
       repoURL: 'https://kyverno.github.io/kyverno',
-      targetRevision: '3.9.2',
+      targetRevision: '3.10.0',
     },
     kyvero_ui: {
       chart: 'policy-reporter',
