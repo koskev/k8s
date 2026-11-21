@@ -308,7 +308,7 @@
     },
     kubernetes: {
       source: 'hashicorp/kubernetes',
-      version: '3.4.0',
+      version: '3.5.0',
     },
     desec: {
       source: 'timofurrer/desec',
