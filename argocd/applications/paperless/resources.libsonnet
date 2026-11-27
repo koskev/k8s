@@ -105,6 +105,18 @@ function(input=import 'defaultInput.libsonnet')
           ],
           env: [
             {
+              name: 'POD_IP',
+              valueFrom: {
+                fieldRef: {
+                  fieldPath: 'status.podIP',
+                },
+              },
+            },
+            {
+              name: 'PAPERLESS_ALLOWED_HOSTS',
+              value: '$(POD_IP),%s' % hostname,
+            },
+            {
               name: 'PAPERLESS_URL',
               value: 'https://%s' % hostname,
             },
