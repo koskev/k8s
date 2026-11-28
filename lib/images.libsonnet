@@ -266,7 +266,7 @@
     },
     immich: {
       image: 'ghcr.io/immich-app/immich-server',
-      tag: 'v2.7.5@sha256:c15bff75068effb03f4355997d03dc7e0fc58720c2b54ad6f7f10d1bc57efaa5',
+      tag: 'v3.4.2@sha256:fc880c1bf665b4aab1e74c15e56ab871225989cd546536e6b77e771869af06bd',
     },
     immich_machine_learning: {
       image: 'ghcr.io/immich-app/immich-machine-learning',
